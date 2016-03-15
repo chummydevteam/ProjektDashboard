@@ -9,10 +9,13 @@
     <!-- True enables the homepage -->
     <bool name="homepage_enabled">true</bool>
     <string name="homepage_description">
-        Welcome to chummy development team\'s dashboard app!.
+        chummy development team dashboard
+    </string>
+    <string name="homepage_description_secondary">
+        welcome to the cdt dashboard experimental app containing all publicly available projects laid out tab-by-tab.
     </string>
     <!-- The large icon displayed in the home page -->
-    <drawable name="homepage_landing_icon">@drawable/ic_web</drawable>
+    <drawable name="homepage_landing_icon">@drawable/dashboard_logo</drawable>
 
     <!-- URL to JSON file containing a map of wallpapers, leave empty to disable wallpapers. -->
     <string name="wallpapers_json_url" formatted="false">

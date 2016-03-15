@@ -22,9 +22,19 @@
             android:padding="@dimen/content_inset_less">
 
             <ImageView
-                android:id="@+id/landingIcon"
+                android:id="@+id/landingIconFirst"
                 android:layout_width="@dimen/landing_page_icon_size"
                 android:layout_height="@dimen/landing_page_icon_size"
+                android:layout_marginBottom="@dimen/content_inset"
+                android:layout_marginTop="@dimen/content_inset_less"
+                android:scaleType="fitXY"
+                app:srcCompat="@drawable/homepage_icon"
+                tools:ignore="ContentDescription" />
+
+            <ImageView
+                android:id="@+id/landingIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="90dp"
                 android:layout_marginBottom="@dimen/content_inset"
                 android:layout_marginTop="@dimen/content_inset_less"
                 android:scaleType="fitXY"
@@ -40,6 +50,19 @@
                 android:gravity="center"
                 android:lineSpacingMultiplier="1.2"
                 android:text="@string/homepage_description"
+                android:textColor="?android:textColorPrimary"
+                android:textSize="@dimen/title_text_size"
+                android:textStyle="bold|italic" />
+
+            <TextView
+                android:id="@+id/landingMessageSecondary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/content_inset_less"
+                android:fontFamily="sans-serif-light"
+                android:gravity="center"
+                android:lineSpacingMultiplier="1.2"
+                android:text="@string/homepage_description_secondary"
                 android:textColor="?android:textColorPrimary"
                 android:textSize="@dimen/content_text_size" />
 
