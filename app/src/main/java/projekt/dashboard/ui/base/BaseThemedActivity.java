@@ -14,6 +14,7 @@ import android.view.WindowManager;
 
 import com.afollestad.assent.AssentActivity;
 import com.afollestad.materialdialogs.util.DialogUtils;
+
 import projekt.dashboard.R;
 import projekt.dashboard.config.Config;
 import projekt.dashboard.util.TintUtils;

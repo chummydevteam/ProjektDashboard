@@ -11,8 +11,6 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 
 import com.afollestad.assent.AssentFragment;
-import projekt.dashboard.R;
-import projekt.dashboard.util.WallpaperUtils;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.RequestListener;
@@ -20,6 +18,8 @@ import com.bumptech.glide.request.target.Target;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import projekt.dashboard.R;
+import projekt.dashboard.util.WallpaperUtils;
 
 /**
  * @author Aidan Follestad (afollestad)
@@ -35,14 +35,6 @@ public class ViewerPageFragment extends AssentFragment {
     private boolean isActive;
     private int mIndex;
 
-    public String getTitle() {
-        return mWallpaper.name;
-    }
-
-    public String getSubTitle() {
-        return mWallpaper.author;
-    }
-
     public static ViewerPageFragment create(WallpaperUtils.Wallpaper wallpaper, int index) {
         ViewerPageFragment frag = new ViewerPageFragment();
         frag.mWallpaper = wallpaper;
@@ -51,6 +43,14 @@ public class ViewerPageFragment extends AssentFragment {
         args.putInt("index", index);
         frag.setArguments(args);
         return frag;
+    }
+
+    public String getTitle() {
+        return mWallpaper.name;
+    }
+
+    public String getSubTitle() {
+        return mWallpaper.author;
     }
 
     @Override

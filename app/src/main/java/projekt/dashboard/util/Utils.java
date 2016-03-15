@@ -20,13 +20,14 @@ import android.view.ViewTreeObserver;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.afollestad.materialdialogs.util.DialogUtils;
-import projekt.dashboard.R;
-import projekt.dashboard.config.Config;
 
 import java.io.File;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
+
+import projekt.dashboard.R;
+import projekt.dashboard.config.Config;
 
 
 /**

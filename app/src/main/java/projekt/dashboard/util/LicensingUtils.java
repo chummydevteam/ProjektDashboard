@@ -9,16 +9,17 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.Toast;
 
-import projekt.dashboard.BuildConfig;
-import projekt.dashboard.R;
-import projekt.dashboard.config.Config;
-import projekt.dashboard.dialogs.ProgressDialogFragment;
 import com.google.android.vending.licensing.AESObfuscator;
 import com.google.android.vending.licensing.LicenseChecker;
 import com.google.android.vending.licensing.LicenseCheckerCallback;
 import com.google.android.vending.licensing.ServerManagedPolicy;
 
 import java.util.Random;
+
+import projekt.dashboard.BuildConfig;
+import projekt.dashboard.R;
+import projekt.dashboard.config.Config;
+import projekt.dashboard.dialogs.ProgressDialogFragment;
 
 /**
  * @author Aidan Follestad (afollestad)
@@ -27,11 +28,11 @@ public class LicensingUtils {
 
     private final static String KEY_SALT = "[licensing-salt]";
     private final static String KEY_VALID = "[license-valid]";
-
-    public interface LicensingCallback {
-        void onLicensingResult(boolean allow, int reason);
-
-        void onLicensingError(int errorCode);
+    private static byte[] mSalt;
+    private static LicenseCheckerCallback mLicenseCheckerCallback;
+    private static LicenseChecker mChecker;
+    private static ProgressDialogFragment mProgress;
+    private LicensingUtils() {
     }
 
     @SuppressWarnings("PointlessBooleanExpression")
@@ -41,14 +42,6 @@ public class LicensingUtils {
             Log.d("PolarLicensing", String.format(message, args));
         else Log.d("PolarLicensing", message);
     }
-
-    private LicensingUtils() {
-    }
-
-    private static byte[] mSalt;
-    private static LicenseCheckerCallback mLicenseCheckerCallback;
-    private static LicenseChecker mChecker;
-    private static ProgressDialogFragment mProgress;
 
     private static void generateSalt(Context context) {
         mSalt = new byte[20];
@@ -130,6 +123,12 @@ public class LicensingUtils {
         mLicenseCheckerCallback = null;
         mSalt = null;
         mLicenseCheckerCallback = null;
+    }
+
+    public interface LicensingCallback {
+        void onLicensingResult(boolean allow, int reason);
+
+        void onLicensingError(int errorCode);
     }
 
     private static class MyLicenseCheckerCallback implements LicenseCheckerCallback {

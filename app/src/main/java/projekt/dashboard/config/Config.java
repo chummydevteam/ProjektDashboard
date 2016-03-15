@@ -14,16 +14,15 @@ import projekt.dashboard.R;
  */
 public class Config implements IConfig {
 
+    private static Config mConfig;
+    private Context mContext;
+    private Resources mR;
     private Config(@Nullable Context context) {
         mR = null;
         mContext = context;
         if (context != null)
             mR = context.getResources();
     }
-
-    private static Config mConfig;
-    private Context mContext;
-    private Resources mR;
 
     public static void init(@NonNull Context context) {
         mConfig = new Config(context);
@@ -36,11 +35,6 @@ public class Config implements IConfig {
         }
     }
 
-    private void destroy() {
-        mContext = null;
-        mR = null;
-    }
-
     public static void deinit() {
         mConfig.destroy();
         mConfig = null;
@@ -51,6 +45,11 @@ public class Config implements IConfig {
         if (mConfig == null)
             return new Config(null); // shouldn't ever happen, but avoid crashes
         return mConfig;
+    }
+
+    private void destroy() {
+        mContext = null;
+        mR = null;
     }
 
     // Getters

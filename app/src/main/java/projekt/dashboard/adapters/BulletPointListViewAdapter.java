@@ -14,9 +14,8 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import projekt.dashboard.R;
-
 import butterknife.ButterKnife;
+import projekt.dashboard.R;
 
 /**
  * @author Aidan Follestad (afollestad)

@@ -14,27 +14,24 @@ import android.widget.ImageView;
  */
 public class NoDragImageView extends ImageView {
 
-    public NoDragImageView(Context context) {
-        super(context);
-    }
-
-    public NoDragImageView(Context context, AttributeSet attrs) {
-        super(context, attrs);
-    }
-
-    public NoDragImageView(Context context, AttributeSet attrs, int defStyleAttr) {
-        super(context, attrs, defStyleAttr);
-    }
-
-    @SuppressLint("NewApi")
-    public NoDragImageView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-        super(context, attrs, defStyleAttr, defStyleRes);
-    }
-
     private float mDownX;
     private float mDownY;
     private boolean isOnClick;
     private OnClickListener mListener;
+
+    public NoDragImageView(Context context) {
+        super(context);
+    }
+    public NoDragImageView(Context context, AttributeSet attrs) {
+        super(context, attrs);
+    }
+    public NoDragImageView(Context context, AttributeSet attrs, int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
+    }
+    @SuppressLint("NewApi")
+    public NoDragImageView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+        super(context, attrs, defStyleAttr, defStyleRes);
+    }
 
     @Override
     public void setOnClickListener(OnClickListener l) {

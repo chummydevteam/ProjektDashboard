@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.afollestad.materialdialogs.GravityEnum;
 import com.afollestad.materialdialogs.MaterialDialog;
+
 import projekt.dashboard.R;
 import projekt.dashboard.adapters.BulletPointListViewAdapter;
 

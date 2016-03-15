@@ -12,8 +12,8 @@ import projekt.dashboard.util.WallpaperUtils;
  */
 public class ViewerPageAdapter extends FragmentStatePagerAdapter {
 
-    public int mCurrentPage;
     private final WallpaperUtils.WallpapersHolder mWallpapers;
+    public int mCurrentPage;
 
     public ViewerPageAdapter(AppCompatActivity context, int initialOffset, WallpaperUtils.WallpapersHolder wallpapers) {
         super(context.getFragmentManager());

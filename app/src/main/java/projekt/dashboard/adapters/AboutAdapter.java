@@ -19,56 +19,23 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.afollestad.materialdialogs.util.DialogUtils;
-import projekt.dashboard.R;
-import projekt.dashboard.config.Config;
-import projekt.dashboard.util.TintUtils;
-import projekt.dashboard.views.SplitButtonsLayout;
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 
 import butterknife.ButterKnife;
+import projekt.dashboard.R;
+import projekt.dashboard.config.Config;
+import projekt.dashboard.util.TintUtils;
+import projekt.dashboard.views.SplitButtonsLayout;
 
 
 public class AboutAdapter extends RecyclerView.Adapter<AboutAdapter.MainViewHolder> implements View.OnClickListener {
 
-    public static class AboutItem {
-
-        public final String coverImage;
-        public final String profileImage;
-        public final String title;
-        public final String description;
-        public final String[] buttonNames;
-        public final String[] buttonLinks;
-
-        public AboutItem(String coverImage, String profileImage,
-                         String title, String description, String[] buttonNames, String[] buttonLinks) {
-            this.coverImage = coverImage;
-            this.profileImage = profileImage;
-            this.title = title;
-            this.description = description;
-            this.buttonNames = buttonNames;
-            this.buttonLinks = buttonLinks;
-        }
-    }
-
-    public interface OptionsClickListener {
-        void onOptionFeedback();
-
-        void onOptionDonate();
-    }
-
-    @Override
-    public void onClick(View view) {
-        if (view.getTag() instanceof String) {
-            try {
-                mContext.startActivity(new Intent(Intent.ACTION_VIEW)
-                        .setData(Uri.parse((String) view.getTag())));
-            } catch (Exception e) {
-                Toast.makeText(mContext, e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
-            }
-        }
-    }
+    private final Context mContext;
+    private final ArrayList<AboutItem> mItems;
+    private final OptionsClickListener mOptionCb;
+    private final boolean mOptionsEnabled;
 
     public AboutAdapter(Activity context, OptionsClickListener cb) {
         mContext = context;
@@ -99,50 +66,14 @@ public class AboutAdapter extends RecyclerView.Adapter<AboutAdapter.MainViewHold
         mOptionsEnabled = Config.get().feedbackEnabled() || Config.get().donationEnabled();
     }
 
-    private final Context mContext;
-    private final ArrayList<AboutItem> mItems;
-    private final OptionsClickListener mOptionCb;
-    private final boolean mOptionsEnabled;
-
-    public static class MainViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-
-        public MainViewHolder(View itemView, OptionsClickListener optionsCb) {
-            super(itemView);
-            cover = ButterKnife.findById(itemView, R.id.cover);
-            image = ButterKnife.findById(itemView, R.id.image);
-            title = ButterKnife.findById(itemView, R.id.title);
-            description = ButterKnife.findById(itemView, R.id.description);
-            buttons = ButterKnife.findById(itemView, R.id.buttonsFrame);
-
-            feedbackButton = ButterKnife.findById(itemView, R.id.feedbackButton);
-            feedbackImage = ButterKnife.findById(itemView, R.id.feedbackImage);
-            donateButton = ButterKnife.findById(itemView, R.id.donateButton);
-            donateImage = ButterKnife.findById(itemView, R.id.donateImage);
-            mOptionsCb = optionsCb;
-            if (feedbackButton != null)
-                feedbackButton.setOnClickListener(this);
-            if (donateButton != null)
-                donateButton.setOnClickListener(this);
-        }
-
-        final ImageView cover;
-        final ImageView image;
-        final TextView title;
-        final TextView description;
-        final SplitButtonsLayout buttons;
-
-        final View feedbackButton;
-        final ImageView feedbackImage;
-        final View donateButton;
-        final ImageView donateImage;
-        private final OptionsClickListener mOptionsCb;
-
-        @Override
-        public void onClick(View view) {
-            if (view.getId() == R.id.feedbackButton) {
-                mOptionsCb.onOptionFeedback();
-            } else {
-                mOptionsCb.onOptionDonate();
+    @Override
+    public void onClick(View view) {
+        if (view.getTag() instanceof String) {
+            try {
+                mContext.startActivity(new Intent(Intent.ACTION_VIEW)
+                        .setData(Uri.parse((String) view.getTag())));
+            } catch (Exception e) {
+                Toast.makeText(mContext, e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -231,5 +162,72 @@ public class AboutAdapter extends RecyclerView.Adapter<AboutAdapter.MainViewHold
         int count = mItems.size();
         if (mOptionsEnabled) count++;
         return count;
+    }
+
+    public interface OptionsClickListener {
+        void onOptionFeedback();
+
+        void onOptionDonate();
+    }
+
+    public static class AboutItem {
+
+        public final String coverImage;
+        public final String profileImage;
+        public final String title;
+        public final String description;
+        public final String[] buttonNames;
+        public final String[] buttonLinks;
+
+        public AboutItem(String coverImage, String profileImage,
+                         String title, String description, String[] buttonNames, String[] buttonLinks) {
+            this.coverImage = coverImage;
+            this.profileImage = profileImage;
+            this.title = title;
+            this.description = description;
+            this.buttonNames = buttonNames;
+            this.buttonLinks = buttonLinks;
+        }
+    }
+
+    public static class MainViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+
+        final ImageView cover;
+        final ImageView image;
+        final TextView title;
+        final TextView description;
+        final SplitButtonsLayout buttons;
+        final View feedbackButton;
+        final ImageView feedbackImage;
+        final View donateButton;
+        final ImageView donateImage;
+        private final OptionsClickListener mOptionsCb;
+        public MainViewHolder(View itemView, OptionsClickListener optionsCb) {
+            super(itemView);
+            cover = ButterKnife.findById(itemView, R.id.cover);
+            image = ButterKnife.findById(itemView, R.id.image);
+            title = ButterKnife.findById(itemView, R.id.title);
+            description = ButterKnife.findById(itemView, R.id.description);
+            buttons = ButterKnife.findById(itemView, R.id.buttonsFrame);
+
+            feedbackButton = ButterKnife.findById(itemView, R.id.feedbackButton);
+            feedbackImage = ButterKnife.findById(itemView, R.id.feedbackImage);
+            donateButton = ButterKnife.findById(itemView, R.id.donateButton);
+            donateImage = ButterKnife.findById(itemView, R.id.donateImage);
+            mOptionsCb = optionsCb;
+            if (feedbackButton != null)
+                feedbackButton.setOnClickListener(this);
+            if (donateButton != null)
+                donateButton.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+            if (view.getId() == R.id.feedbackButton) {
+                mOptionsCb.onOptionFeedback();
+            } else {
+                mOptionsCb.onOptionDonate();
+            }
+        }
     }
 }

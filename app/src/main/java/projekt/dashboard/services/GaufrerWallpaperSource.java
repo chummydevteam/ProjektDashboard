@@ -5,10 +5,11 @@ import android.net.Uri;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
-import projekt.dashboard.ui.MainActivity;
-import projekt.dashboard.util.WallpaperUtils;
 import com.google.android.apps.muzei.api.Artwork;
 import com.google.android.apps.muzei.api.RemoteMuzeiArtSource;
+
+import projekt.dashboard.ui.MainActivity;
+import projekt.dashboard.util.WallpaperUtils;
 
 
 /**
@@ -16,20 +17,20 @@ import com.google.android.apps.muzei.api.RemoteMuzeiArtSource;
  */
 public class GaufrerWallpaperSource extends RemoteMuzeiArtSource {
 
-    public GaufrerWallpaperSource() {
-        super(GaufrerWallpaperSource.class.getSimpleName());
-    }
-
     private static final int ROTATE_TIME_MILLIS = 3 * 60 * 60 * 1000; // rotate every 3 hours
 
-    private void setActiveIndex(int index) {
-        PreferenceManager.getDefaultSharedPreferences(getApplicationContext())
-                .edit().putInt("muzei_index", index).commit();
+    public GaufrerWallpaperSource() {
+        super(GaufrerWallpaperSource.class.getSimpleName());
     }
 
     private int getActiveIndex() {
         return PreferenceManager.getDefaultSharedPreferences(getApplicationContext())
                 .getInt("muzei_index", -1);
+    }
+
+    private void setActiveIndex(int index) {
+        PreferenceManager.getDefaultSharedPreferences(getApplicationContext())
+                .edit().putInt("muzei_index", index).commit();
     }
 
     @Override

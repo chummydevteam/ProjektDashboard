@@ -14,6 +14,8 @@ import projekt.dashboard.util.WallpaperUtils;
  */
 public class WallpaperBgFrame extends LinearLayout {
 
+    private WallpaperUtils.Wallpaper mWallpaper;
+
     public WallpaperBgFrame(Context context) {
         super(context);
     }
@@ -25,8 +27,6 @@ public class WallpaperBgFrame extends LinearLayout {
     public WallpaperBgFrame(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
-
-    private WallpaperUtils.Wallpaper mWallpaper;
 
     public void setWallpaper(WallpaperUtils.Wallpaper wallpaper) {
         mWallpaper = wallpaper;

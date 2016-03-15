@@ -11,6 +11,8 @@ import projekt.dashboard.util.WallpaperUtils;
  */
 public class WallpaperAuthorView extends TextView {
 
+    private WallpaperUtils.Wallpaper mWallpaper;
+
     public WallpaperAuthorView(Context context) {
         super(context);
     }
@@ -22,8 +24,6 @@ public class WallpaperAuthorView extends TextView {
     public WallpaperAuthorView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
-
-    private WallpaperUtils.Wallpaper mWallpaper;
 
     public void setWallpaper(WallpaperUtils.Wallpaper viewHolder) {
         mWallpaper = viewHolder;

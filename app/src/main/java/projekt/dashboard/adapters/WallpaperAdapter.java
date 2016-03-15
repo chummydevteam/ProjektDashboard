@@ -10,12 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
-import projekt.dashboard.R;
-import projekt.dashboard.util.WallpaperUtils;
-import projekt.dashboard.views.WallpaperAuthorView;
-import projekt.dashboard.views.WallpaperBgFrame;
-import projekt.dashboard.views.WallpaperImageView;
-import projekt.dashboard.views.WallpaperNameView;
 import com.bumptech.glide.Glide;
 import com.github.florent37.glidepalette.GlidePalette;
 
@@ -23,22 +17,22 @@ import java.util.ArrayList;
 import java.util.Locale;
 
 import butterknife.ButterKnife;
+import projekt.dashboard.R;
+import projekt.dashboard.util.WallpaperUtils;
+import projekt.dashboard.views.WallpaperAuthorView;
+import projekt.dashboard.views.WallpaperBgFrame;
+import projekt.dashboard.views.WallpaperImageView;
+import projekt.dashboard.views.WallpaperNameView;
 
 public class WallpaperAdapter extends RecyclerView.Adapter<WallpaperAdapter.WallpaperViewHolder> {
 
     public final static int SEARCH_RESULT_LIMIT = 10;
-
-    public interface ClickListener {
-        boolean onClick(View view, int index, boolean longPress);
-    }
-
-    public WallpaperAdapter(ClickListener listener) {
-        mListener = listener;
-    }
-
     private final ClickListener mListener;
     private WallpaperUtils.WallpapersHolder mWallpapers;
     private ArrayList<WallpaperUtils.Wallpaper> mFiltered;
+    public WallpaperAdapter(ClickListener listener) {
+        mListener = listener;
+    }
 
     public WallpaperUtils.WallpapersHolder getWallpapers() {
         return mWallpapers;
@@ -73,42 +67,6 @@ public class WallpaperAdapter extends RecyclerView.Adapter<WallpaperAdapter.Wall
     public void set(WallpaperUtils.WallpapersHolder holder) {
         mWallpapers = holder;
         notifyDataSetChanged();
-    }
-
-    public static class WallpaperViewHolder extends RecyclerView.ViewHolder
-            implements View.OnClickListener, View.OnLongClickListener {
-
-        public WallpaperViewHolder(View itemView, ClickListener listener) {
-            super(itemView);
-            mListener = listener;
-            card = ButterKnife.findById(itemView, R.id.card);
-            image = ButterKnife.findById(itemView, R.id.image);
-            colorFrame = ButterKnife.findById(itemView, R.id.colorFrame);
-            name = ButterKnife.findById(itemView, R.id.name);
-            author = ButterKnife.findById(itemView, R.id.author);
-            progress = ButterKnife.findById(itemView, R.id.progress);
-
-            card.setOnClickListener(this);
-            card.setOnLongClickListener(this);
-        }
-
-        final ClickListener mListener;
-        final CardView card;
-        final WallpaperImageView image;
-        final WallpaperBgFrame colorFrame;
-        final WallpaperNameView name;
-        final WallpaperAuthorView author;
-        final ProgressBar progress;
-
-        @Override
-        public void onClick(View v) {
-            mListener.onClick(v, getAdapterPosition(), false);
-        }
-
-        @Override
-        public boolean onLongClick(View v) {
-            return mListener.onClick(v, getAdapterPosition(), true);
-        }
     }
 
     @Override
@@ -150,10 +108,10 @@ public class WallpaperAdapter extends RecyclerView.Adapter<WallpaperAdapter.Wall
             Glide.with(holder.itemView.getContext())
                     .load(wallpaper.getListingImageUrl())
                     .listener(GlidePalette.with(wallpaper.getListingImageUrl())
-                            .use(GlidePalette.Profile.VIBRANT)
-                            .intoBackground(holder.colorFrame)
-                            .intoTextColor(holder.name, GlidePalette.Swatch.TITLE_TEXT_COLOR)
-                            .intoTextColor(holder.author, GlidePalette.Swatch.BODY_TEXT_COLOR)
+                                    .use(GlidePalette.Profile.VIBRANT)
+                                    .intoBackground(holder.colorFrame)
+                                    .intoTextColor(holder.name, GlidePalette.Swatch.TITLE_TEXT_COLOR)
+                                    .intoTextColor(holder.author, GlidePalette.Swatch.BODY_TEXT_COLOR)
                     ).into(holder.image);
         }
     }
@@ -163,5 +121,44 @@ public class WallpaperAdapter extends RecyclerView.Adapter<WallpaperAdapter.Wall
         if (mFiltered != null)
             return mFiltered.size();
         return mWallpapers != null ? mWallpapers.length() : 0;
+    }
+
+    public interface ClickListener {
+        boolean onClick(View view, int index, boolean longPress);
+    }
+
+    public static class WallpaperViewHolder extends RecyclerView.ViewHolder
+            implements View.OnClickListener, View.OnLongClickListener {
+
+        final ClickListener mListener;
+        final CardView card;
+        final WallpaperImageView image;
+        final WallpaperBgFrame colorFrame;
+        final WallpaperNameView name;
+        final WallpaperAuthorView author;
+        final ProgressBar progress;
+        public WallpaperViewHolder(View itemView, ClickListener listener) {
+            super(itemView);
+            mListener = listener;
+            card = ButterKnife.findById(itemView, R.id.card);
+            image = ButterKnife.findById(itemView, R.id.image);
+            colorFrame = ButterKnife.findById(itemView, R.id.colorFrame);
+            name = ButterKnife.findById(itemView, R.id.name);
+            author = ButterKnife.findById(itemView, R.id.author);
+            progress = ButterKnife.findById(itemView, R.id.progress);
+
+            card.setOnClickListener(this);
+            card.setOnLongClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            mListener.onClick(v, getAdapterPosition(), false);
+        }
+
+        @Override
+        public boolean onLongClick(View v) {
+            return mListener.onClick(v, getAdapterPosition(), true);
+        }
     }
 }

@@ -13,12 +13,12 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.afollestad.assent.AssentActivity;
-import projekt.dashboard.R;
-import projekt.dashboard.fragments.WallpapersFragment;
-import projekt.dashboard.util.WallpaperUtils;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import projekt.dashboard.R;
+import projekt.dashboard.fragments.WallpapersFragment;
+import projekt.dashboard.util.WallpaperUtils;
 
 import static projekt.dashboard.fragments.WallpapersFragment.RQ_CROPANDSETWALLPAPER;
 

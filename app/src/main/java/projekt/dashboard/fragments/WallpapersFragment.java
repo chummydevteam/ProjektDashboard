@@ -28,6 +28,11 @@ import com.afollestad.bridge.Bridge;
 import com.afollestad.bridge.BridgeException;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.afollestad.materialdialogs.util.DialogUtils;
+
+import java.net.SocketTimeoutException;
+
+import butterknife.Bind;
+import butterknife.ButterKnife;
 import projekt.dashboard.R;
 import projekt.dashboard.adapters.WallpaperAdapter;
 import projekt.dashboard.config.Config;
@@ -36,11 +41,6 @@ import projekt.dashboard.ui.MainActivity;
 import projekt.dashboard.util.TintUtils;
 import projekt.dashboard.util.WallpaperUtils;
 import projekt.dashboard.viewer.ViewerActivity;
-
-import java.net.SocketTimeoutException;
-
-import butterknife.Bind;
-import butterknife.ButterKnife;
 
 import static projekt.dashboard.viewer.ViewerActivity.STATE_CURRENT_POSITION;
 

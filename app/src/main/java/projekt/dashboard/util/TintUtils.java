@@ -27,6 +27,9 @@ import java.lang.reflect.Field;
  */
 public final class TintUtils {
 
+    private TintUtils() {
+    }
+
     public static Drawable createTintedDrawable(@NonNull Context context, @DrawableRes int drawable, @ColorInt int color) {
         return createTintedDrawable(ContextCompat.getDrawable(context, drawable), color);
     }
@@ -128,8 +131,5 @@ public final class TintUtils {
         hsv[2] *= 0.8f; // value component
         color = Color.HSVToColor(hsv);
         return color;
-    }
-
-    private TintUtils() {
     }
 }

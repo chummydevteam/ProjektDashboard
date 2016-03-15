@@ -15,6 +15,9 @@ import android.widget.ProgressBar;
  */
 public class WallpaperImageView extends SquareImageView {
 
+    @Nullable
+    private ProgressBar mProgressBar;
+
     public WallpaperImageView(Context context) {
         super(context);
     }
@@ -31,9 +34,6 @@ public class WallpaperImageView extends SquareImageView {
     public WallpaperImageView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
     }
-
-    @Nullable
-    private ProgressBar mProgressBar;
 
     @Override
     public void setImageBitmap(Bitmap bm) {

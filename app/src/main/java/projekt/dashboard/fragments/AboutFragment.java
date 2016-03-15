@@ -11,16 +11,16 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
-import projekt.dashboard.R;
-import projekt.dashboard.adapters.AboutAdapter;
-import projekt.dashboard.config.Config;
-import projekt.dashboard.fragments.base.BasePageFragment;
-import projekt.dashboard.ui.MainActivity;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
 import butterknife.ButterKnife;
+import projekt.dashboard.R;
+import projekt.dashboard.adapters.AboutAdapter;
+import projekt.dashboard.config.Config;
+import projekt.dashboard.fragments.base.BasePageFragment;
+import projekt.dashboard.ui.MainActivity;
 
 
 public class AboutFragment extends BasePageFragment implements AboutAdapter.OptionsClickListener {

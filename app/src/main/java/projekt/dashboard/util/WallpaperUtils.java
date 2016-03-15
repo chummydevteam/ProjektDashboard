@@ -32,13 +32,14 @@ import com.afollestad.inquiry.Inquiry;
 import com.afollestad.inquiry.annotations.Column;
 import com.afollestad.inquiry.callbacks.RunCallback;
 import com.afollestad.materialdialogs.MaterialDialog;
-import projekt.dashboard.BuildConfig;
-import projekt.dashboard.R;
-import projekt.dashboard.fragments.WallpapersFragment;
 
 import java.io.File;
 import java.io.Serializable;
 import java.util.Locale;
+
+import projekt.dashboard.BuildConfig;
+import projekt.dashboard.R;
+import projekt.dashboard.fragments.WallpapersFragment;
 
 /**
  * @author Aidan Follestad (afollestad)
@@ -48,95 +49,13 @@ public class WallpaperUtils {
     public static final String TABLE_NAME = "polar_wallpapers";
     public static final String DATABASE_NAME = "data_cache";
     public static final int DATABASE_VERSION = 1;
+    private static Activity mContextCache;
+    private static Wallpaper mWallpaperCache;
+    private static boolean mApplyCache;
+    private static File mFileCache;
+    private static Toast mToast;
 
-    public interface WallpapersCallback {
-        void onRetrievedWallpapers(WallpapersHolder wallpapers, Exception error, boolean cancelled);
-    }
-
-    @ContentType("application/json")
-    public static class WallpapersHolder implements Serializable {
-
-        public Wallpaper get(int index) {
-            return wallpapers[index];
-        }
-
-        public int length() {
-            return wallpapers != null ? wallpapers.length : 0;
-        }
-
-        @Body
-        public Wallpaper[] wallpapers;
-
-        public WallpapersHolder() {
-        }
-
-        public WallpapersHolder(Wallpaper[] wallpapers) {
-            this.wallpapers = wallpapers;
-        }
-    }
-
-    @ContentType("application/json")
-    public static class Wallpaper implements Serializable {
-
-        public Wallpaper() {
-        }
-
-        @Column(primaryKey = true, notNull = true, autoIncrement = true)
-        public long _id;
-        @Body
-        @Column
-        public String author;
-        @Body
-        @Column
-        public String url;
-        @Body
-        @Column
-        public String name;
-        @Body
-        @Column
-        public String thumbnail;
-
-        public String getListingImageUrl() {
-            return thumbnail != null ? thumbnail : url;
-        }
-
-        @Column
-        private int paletteNameColor;
-        @Column
-        private int paletteAuthorColor;
-        @Column
-        private int paletteBgColor;
-
-        public void setPaletteNameColor(@ColorInt int color) {
-            this.paletteNameColor = color;
-        }
-
-        @ColorInt
-        public int getPaletteNameColor() {
-            return paletteNameColor;
-        }
-
-        public void setPaletteAuthorColor(@ColorInt int color) {
-            this.paletteAuthorColor = color;
-        }
-
-        @ColorInt
-        public int getPaletteAuthorColor() {
-            return paletteAuthorColor;
-        }
-
-        public void setPaletteBgColor(@ColorInt int color) {
-            this.paletteBgColor = color;
-        }
-
-        @ColorInt
-        public int getPaletteBgColor() {
-            return paletteBgColor;
-        }
-
-        public boolean isPaletteComplete() {
-            return paletteNameColor != 0 && paletteAuthorColor != 0 && paletteBgColor != 0;
-        }
+    private WallpaperUtils() {
     }
 
     @SuppressLint("CommitPrefEdits")
@@ -278,12 +197,6 @@ public class WallpaperUtils {
                 });
     }
 
-    private static Activity mContextCache;
-    private static Wallpaper mWallpaperCache;
-    private static boolean mApplyCache;
-    private static File mFileCache;
-    private static Toast mToast;
-
     private static void showToast(Context context, @StringRes int msg) {
         showToast(context, context.getString(msg));
     }
@@ -415,6 +328,91 @@ public class WallpaperUtils {
         }
     }
 
-    private WallpaperUtils() {
+    public interface WallpapersCallback {
+        void onRetrievedWallpapers(WallpapersHolder wallpapers, Exception error, boolean cancelled);
+    }
+
+    @ContentType("application/json")
+    public static class WallpapersHolder implements Serializable {
+
+        @Body
+        public Wallpaper[] wallpapers;
+
+        public WallpapersHolder() {
+        }
+
+        public WallpapersHolder(Wallpaper[] wallpapers) {
+            this.wallpapers = wallpapers;
+        }
+
+        public Wallpaper get(int index) {
+            return wallpapers[index];
+        }
+
+        public int length() {
+            return wallpapers != null ? wallpapers.length : 0;
+        }
+    }
+
+    @ContentType("application/json")
+    public static class Wallpaper implements Serializable {
+
+        @Column(primaryKey = true, notNull = true, autoIncrement = true)
+        public long _id;
+        @Body
+        @Column
+        public String author;
+        @Body
+        @Column
+        public String url;
+        @Body
+        @Column
+        public String name;
+        @Body
+        @Column
+        public String thumbnail;
+        @Column
+        private int paletteNameColor;
+        @Column
+        private int paletteAuthorColor;
+        @Column
+        private int paletteBgColor;
+        public Wallpaper() {
+        }
+
+        public String getListingImageUrl() {
+            return thumbnail != null ? thumbnail : url;
+        }
+
+        @ColorInt
+        public int getPaletteNameColor() {
+            return paletteNameColor;
+        }
+
+        public void setPaletteNameColor(@ColorInt int color) {
+            this.paletteNameColor = color;
+        }
+
+        @ColorInt
+        public int getPaletteAuthorColor() {
+            return paletteAuthorColor;
+        }
+
+        public void setPaletteAuthorColor(@ColorInt int color) {
+            this.paletteAuthorColor = color;
+        }
+
+        @ColorInt
+        public int getPaletteBgColor() {
+            return paletteBgColor;
+        }
+
+        public void setPaletteBgColor(@ColorInt int color) {
+            this.paletteBgColor = color;
+        }
+
+        public boolean isPaletteComplete() {
+            return paletteNameColor != 0 && paletteAuthorColor != 0 && paletteBgColor != 0;
+        }
     }
 }

@@ -4,11 +4,12 @@ import android.content.Intent;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.anjlab.android.iab.v3.BillingProcessor;
+import com.anjlab.android.iab.v3.TransactionDetails;
+
 import projekt.dashboard.R;
 import projekt.dashboard.config.Config;
 import projekt.dashboard.util.Utils;
-import com.anjlab.android.iab.v3.BillingProcessor;
-import com.anjlab.android.iab.v3.TransactionDetails;
 
 /**
  * @author Aidan Follestad (afollestad)

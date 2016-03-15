@@ -5,6 +5,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 
 import com.afollestad.assent.AssentFragment;
+
 import projekt.dashboard.ui.base.BaseThemedActivity;
 
 /**

@@ -14,6 +14,8 @@ import projekt.dashboard.R;
  */
 public class SplitButtonsLayout extends LinearLayout {
 
+    private int mButtonCount;
+
     public SplitButtonsLayout(Context context) {
         super(context);
         init();
@@ -28,8 +30,6 @@ public class SplitButtonsLayout extends LinearLayout {
         super(context, attrs, defStyleAttr);
         init();
     }
-
-    private int mButtonCount;
 
     private void init() {
         setOrientation(HORIZONTAL);

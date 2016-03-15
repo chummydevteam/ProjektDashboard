@@ -1,7 +1,6 @@
 package projekt.dashboard.ui;
 
 import android.annotation.TargetApi;
-import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -34,6 +33,10 @@ import android.widget.LinearLayout;
 import com.afollestad.bridge.Bridge;
 import com.afollestad.inquiry.Inquiry;
 import com.afollestad.materialdialogs.util.DialogUtils;
+import com.google.android.vending.licensing.Policy;
+
+import butterknife.Bind;
+import butterknife.ButterKnife;
 import projekt.dashboard.BuildConfig;
 import projekt.dashboard.R;
 import projekt.dashboard.adapters.MainPagerAdapter;
@@ -55,10 +58,6 @@ import projekt.dashboard.util.TintUtils;
 import projekt.dashboard.util.Utils;
 import projekt.dashboard.util.WallpaperUtils;
 import projekt.dashboard.views.DisableableViewPager;
-import com.google.android.vending.licensing.Policy;
-
-import butterknife.Bind;
-import butterknife.ButterKnife;
 
 import static projekt.dashboard.fragments.WallpapersFragment.RQ_CROPANDSETWALLPAPER;
 import static projekt.dashboard.fragments.WallpapersFragment.RQ_VIEWWALLPAPER;

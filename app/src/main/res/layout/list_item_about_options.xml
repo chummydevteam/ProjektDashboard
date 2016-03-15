@@ -3,13 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:baselineAligned="false"
     android:orientation="horizontal"
     android:paddingBottom="@dimen/content_inset_half"
     android:paddingLeft="@dimen/content_inset_half"
     android:paddingRight="@dimen/content_inset_half"
     android:paddingTop="@dimen/content_inset_half"
-    android:weightSum="2"
-    android:baselineAligned="false">
+    android:weightSum="2">
 
     <LinearLayout
         android:id="@+id/feedbackButton"
