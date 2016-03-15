@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <bool name="changelog_enabled">true</bool>
+    <bool name="changelog_enabled">false</bool>
 
     <string-array name="changelog" translatable="false">
         <item><![CDATA[ <b>Hello, world!</b> ]]></item>
