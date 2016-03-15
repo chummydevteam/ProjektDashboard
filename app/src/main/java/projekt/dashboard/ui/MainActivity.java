@@ -46,7 +46,6 @@ import projekt.dashboard.fragments.HomeFragment;
 import projekt.dashboard.fragments.IconsFragment;
 import projekt.dashboard.fragments.RequestsFragment;
 import projekt.dashboard.fragments.WallpapersFragment;
-import projekt.dashboard.fragments.ZooperFragment;
 import projekt.dashboard.fragments.base.BasePageFragment;
 import projekt.dashboard.ui.base.BaseDonateActivity;
 import projekt.dashboard.util.DrawableXmlParser;
@@ -163,8 +162,6 @@ public class MainActivity extends BaseDonateActivity implements
         if (Config.get().iconRequestEnabled())
             mPages.add(new PagesBuilder.Page(R.id.drawer_requestIcons, R.drawable.tab_requests, R.string.request_icons, new RequestsFragment()));
         mPages.add(new PagesBuilder.Page(R.id.drawer_apply, R.drawable.tab_apply, R.string.apply, new ApplyFragment()));
-        if (Config.get().zooperEnabled())
-            mPages.add(new PagesBuilder.Page(R.id.drawer_zooper, R.drawable.tab_zooper, R.string.zooper, new ZooperFragment()));
         mPages.add(new PagesBuilder.Page(R.id.drawer_about, R.drawable.tab_about, R.string.about, new AboutFragment()));
     }
 
@@ -471,11 +468,6 @@ public class MainActivity extends BaseDonateActivity implements
     public void onBackPressed() {
         if (mPager != null) {
             FragmentManager fm = getFragmentManager();
-            Fragment current = fm.findFragmentByTag("page:" + mPager.getCurrentItem());
-            if (current != null && current instanceof RequestsFragment &&
-                    ((RequestsFragment) current).onBackPressed()) {
-                return;
-            }
         }
         super.onBackPressed();
     }

@@ -1,84 +1,56 @@
 package projekt.dashboard.fragments;
 
-import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.text.Html;
+import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.afollestad.materialdialogs.DialogAction;
-import com.afollestad.materialdialogs.MaterialDialog;
+import projekt.dashboard.BuildConfig;
 import projekt.dashboard.R;
-import projekt.dashboard.adapters.ApplyAdapter;
-import projekt.dashboard.config.Config;
 import projekt.dashboard.fragments.base.BasePageFragment;
-import projekt.dashboard.util.ApplyUtil;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
-public class ApplyFragment extends BasePageFragment implements ApplyAdapter.SelectionCallback {
+/**
+ * @author Aidan Follestad (afollestad)
+ */
+public class ApplyFragment extends BasePageFragment {
 
-    public ApplyFragment() {
+//    @Bind(R.id.fab)
+//    FloatingActionButton mFab;
+
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.fragment_homepage, container, false);
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        ButterKnife.bind(this, view);
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        ButterKnife.unbind(this);
+    }
+
+    @OnClick(R.id.fab)
+    public void onTapReview() {
+        startActivity(new Intent(Intent.ACTION_VIEW)
+                .setData(Uri.parse(String.format("https://play.google.com/store/apps/details?id=%s", BuildConfig.APPLICATION_ID))));
     }
 
     @Override
     public int getTitle() {
-        return R.string.apply;
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        final View v = inflater.inflate(R.layout.fragment_recyclerview, container, false);
-
-        final RecyclerView recyclerView = ButterKnife.findById(v, android.R.id.list);
-        final GridLayoutManager lm = new GridLayoutManager(getActivity(), Config.get().gridWidthApply());
-        lm.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
-            @Override
-            public int getSpanSize(int position) {
-                if (position == 0 && ApplyUtil.canQuickApply(getActivity()) != null)
-                    return Config.get().gridWidthApply();
-                return 1;
-            }
-        });
-
-        final ApplyAdapter mAdapter = new ApplyAdapter(getActivity(), this);
-        recyclerView.setLayoutManager(lm);
-        recyclerView.setAdapter(mAdapter);
-
-        return v;
-    }
-
-    @Override
-    public void onLauncherSelection(int index, final String title, final String pkg) {
-        ApplyUtil.apply(getActivity(), pkg, new ApplyUtil.ApplyCallback() {
-            @Override
-            public void onNotInstalled() {
-                new MaterialDialog.Builder(getActivity())
-                        .title(R.string.not_installed)
-                        .content(Html.fromHtml(getString(R.string.not_installed_prompt, title)))
-                        .positiveText(android.R.string.yes)
-                        .negativeText(android.R.string.cancel)
-                        .onPositive(new MaterialDialog.SingleButtonCallback() {
-                            @Override
-                            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                                try {
-                                    Intent intent = new Intent(Intent.ACTION_VIEW)
-                                            .setData(Uri.parse(String.format("market://details?id=%s", pkg)));
-                                    startActivity(intent);
-                                } catch (ActivityNotFoundException e) {
-                                    Intent intent = new Intent(Intent.ACTION_VIEW)
-                                            .setData(Uri.parse(String.format("http://play.google.com/store/apps/details?id=%s", pkg)));
-                                    startActivity(intent);
-                                }
-                            }
-                        }).show();
-            }
-        });
+        return R.string.home;
     }
 }

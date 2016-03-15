@@ -58,10 +58,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.IconMoreActivity"
-            android:label="@string/app_name"
-            android:theme="@style/AppTheme.Light.Translucent" />
-        <activity
             android:name=".viewer.ViewerActivity"
             android:label="@string/app_name_wallpaper"
             android:theme="@style/AppTheme.Viewer" />
