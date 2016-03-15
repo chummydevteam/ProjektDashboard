@@ -11,6 +11,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
+import android.widget.Switch;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.azeesoft.lib.colorpicker.ColorPickerDialog;
@@ -42,6 +44,7 @@ public class ColorChangerFragment extends BasePageFragment {
 
 
     public String color_picked;
+    public boolean is_autorestart_enabled;
 
     public static boolean isAppInstalled(Context context, String packageName) {
         try {
@@ -114,6 +117,19 @@ public class ColorChangerFragment extends BasePageFragment {
 
         ViewGroup inflation = (ViewGroup) inflater.inflate(R.layout.fragment_colorpicker, container, false);
 
+        Switch autorestartSystemUI = (Switch) inflation.findViewById(R.id.switch1);
+        autorestartSystemUI.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    is_autorestart_enabled = true;
+                    Log.e("Switch", "Universal variable to auto restart ENABLED.");
+                } else {
+                    is_autorestart_enabled = false;
+                    Log.e("Switch", "Universal variable to auto restart DISABLED.");
+                }
+            }
+        });
 
         CardView akzent = (CardView) inflation.findViewById(R.id.akzent);
         akzent.setOnClickListener(new View.OnClickListener() {
@@ -291,8 +307,11 @@ public class ColorChangerFragment extends BasePageFragment {
         Log.e("copyFinalizedAPK", "Successfully copied the modified resource APK into /data/resource-cache and modified the permissions!");
         cleanTempFolder();
         Log.e("cleanTempFolder", "Successfully cleaned up the whole work area!");
-        eu.chainfire.libsuperuser.Shell.SU.run("killall com.android.systemui");
-        eu.chainfire.libsuperuser.Shell.SU.run("killall com.android.settings");
+
+        if (is_autorestart_enabled){
+            eu.chainfire.libsuperuser.Shell.SU.run("killall com.android.systemui");
+            eu.chainfire.libsuperuser.Shell.SU.run("killall com.android.settings");
+        }
     }
 
     private void createTempFolder() {
