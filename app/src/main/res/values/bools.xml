@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="UnusedResources">
-
-    <bool name="translucent_nav">false</bool>
-    <bool name="translucent_nav_viewer">false</bool>
+    <bool name="translucent_nav">true</bool>
+    <bool name="translucent_nav_viewer">true</bool>
     <bool name="translucent_status">false</bool>
 
     <bool name="use_drawer_icons_bg">false</bool>

@@ -41,6 +41,13 @@ android {
     aaptOptions {
         additionalParameters "--no-version-vectors"
     }
+
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES.txt'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'LICENSE.txt'
+    }
 }
 
 repositories {
@@ -84,4 +91,19 @@ dependencies {
     compile 'com.anjlab.android.iab.v3:library:1.0.+'
 
     compile 'com.pluscubed:insets-dispatcher:0.1.3'
+
+    //Color Picker Dependencies
+    compile 'com.github.yukuku:ambilwarna:2.0.1'
+    compile 'com.azeesoft.lib.colorpicker:colorpicker:1.0.8@aar'
+
+    // IO Runtime Dependencies
+    compile 'commons-io:commons-io:2.4'
+    compile 'org.apache.commons:commons-lang3:3.4'
+
+    // Root Dependencies
+    compile 'eu.chainfire:libsuperuser:1.0.0.+'
+    compile files ('src/main/libs/RootTools.jar')
+
+    // ZIP Dependencies
+    compile files ('src/main/libs/zip4j_1.3.2.jar')
 }

@@ -60,8 +60,8 @@
 
     <color name="default_primary_darktheme">#212021</color>
     <color name="default_primarydark_darktheme">#212021</color>
-    <color name="default_accent_darktheme">#212021</color>
-    <color name="default_accentdark_darktheme">#212021</color>
+    <color name="default_accent_darktheme">#fff</color>
+    <color name="default_accentdark_darktheme">#fff</color>
     <color name="default_window_bg_cards_darktheme">#000</color>
     <color name="default_tab_indicator_color_darktheme">#fff</color>
     <color name="default_tab_icon_color_darktheme">#ffff</color>

@@ -13,8 +13,22 @@
     <dimen name="content_inset">16dp</dimen>
     <dimen name="content_inset_more">24dp</dimen>
 
-    <dimen name="fab_bottom_margin">0dp</dimen>
-    <dimen name="fab_horizontal_margin">0dp</dimen>
+    <dimen name="cards_margin">12dp</dimen>
+    <dimen name="finalcard_margin">14dp</dimen>
+    <dimen name="cards_elevation">3dp</dimen>
+    <dimen name="cards_padding">16dp</dimen>
+    <dimen name="cards_text_margin">5dp</dimen>
+    <dimen name="card_corner_radius">4dp</dimen>
+
+    <!-- Texts Sizes -->
+    <dimen name="text_big">20sp</dimen>
+    <dimen name="text_med">18sp</dimen>
+    <dimen name="text_small">16sp</dimen>
+    <dimen name="text_ultrasmall">12sp</dimen>
+
+
+    <dimen name="fab_horizontal_margin">16dp</dimen>
+    <dimen name="fab_bottom_margin">16dp</dimen>
     <dimen name="list_with_fab_bottom_margin">84dp</dimen>
 
     <dimen name="toolbar_elevation">4dp</dimen>

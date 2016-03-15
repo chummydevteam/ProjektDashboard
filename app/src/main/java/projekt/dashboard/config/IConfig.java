@@ -28,6 +28,13 @@ public interface IConfig {
 
     boolean wallpapersEnabled();
 
+
+    boolean colorChangerEnabled();
+
+    boolean themeRebuilderEnabled();
+
+    boolean aboutEnabled();
+
     boolean zooperEnabled();
 
     @Nullable

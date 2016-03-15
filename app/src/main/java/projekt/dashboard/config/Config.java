@@ -115,6 +115,23 @@ public class Config implements IConfig {
         return url != null && !url.trim().isEmpty();
     }
 
+
+    @Override
+    public boolean colorChangerEnabled() {
+        return mR != null && mR.getBoolean(R.bool.enable_icons_page);
+    }
+
+    @Override
+    public boolean themeRebuilderEnabled() {
+        return mR != null && mR.getBoolean(R.bool.enable_apply_page);
+    }
+
+    @Override
+    public boolean aboutEnabled() {
+        return mR != null && mR.getBoolean(R.bool.enable_about_page);
+    }
+
+
     @Override
     public boolean zooperEnabled() {
         return mR != null && mR.getBoolean(R.bool.enable_zooper_page);

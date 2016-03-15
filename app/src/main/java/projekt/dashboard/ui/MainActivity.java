@@ -44,9 +44,9 @@ import projekt.dashboard.config.Config;
 import projekt.dashboard.dialogs.ChangelogDialog;
 import projekt.dashboard.dialogs.InvalidLicenseDialog;
 import projekt.dashboard.fragments.AboutFragment;
-import projekt.dashboard.fragments.ApplyFragment;
+import projekt.dashboard.fragments.ThemeRebuilderFragment;
 import projekt.dashboard.fragments.HomeFragment;
-import projekt.dashboard.fragments.IconsFragment;
+import projekt.dashboard.fragments.ColorChangerFragment;
 import projekt.dashboard.fragments.RequestsFragment;
 import projekt.dashboard.fragments.WallpapersFragment;
 import projekt.dashboard.fragments.base.BasePageFragment;
@@ -152,16 +152,23 @@ public class MainActivity extends BaseDonateActivity implements
     }
 
     private void setupPages() {
-        mPages = new PagesBuilder(7);
+        mPages = new PagesBuilder(6);
         if (Config.get().homepageEnabled())
-            mPages.add(new PagesBuilder.Page(R.id.drawer_home, R.drawable.tab_home, R.string.home, new HomeFragment()));
-        mPages.add(new PagesBuilder.Page(R.id.drawer_icons, R.drawable.tab_icons, R.string.icons, new IconsFragment()));
-        if (Config.get().wallpapersEnabled())
-            mPages.add(new PagesBuilder.Page(R.id.drawer_wallpapers, R.drawable.tab_wallpapers, R.string.wallpapers, new WallpapersFragment()));
+            mPages.add(new PagesBuilder.Page(R.id.drawer_home, R.drawable.tab_home, R.string.home_tab_one, new HomeFragment()));
+        if (Config.get().colorChangerEnabled())
+            mPages.add(new PagesBuilder.Page(R.id.drawer_icons, R.drawable.tab_palette, R.string.home_tab_two, new ColorChangerFragment()));
+        if (Config.get().themeRebuilderEnabled())
+            mPages.add(new PagesBuilder.Page(R.id.drawer_apply, R.drawable.tab_rebuild, R.string.home_tab_three, new ThemeRebuilderFragment()));
+
+
         if (Config.get().iconRequestEnabled())
             mPages.add(new PagesBuilder.Page(R.id.drawer_requestIcons, R.drawable.tab_requests, R.string.request_icons, new RequestsFragment()));
-        mPages.add(new PagesBuilder.Page(R.id.drawer_apply, R.drawable.tab_apply, R.string.apply, new ApplyFragment()));
-        mPages.add(new PagesBuilder.Page(R.id.drawer_about, R.drawable.tab_about, R.string.about, new AboutFragment()));
+        if (Config.get().wallpapersEnabled())
+            mPages.add(new PagesBuilder.Page(R.id.drawer_wallpapers, R.drawable.tab_wallpapers, R.string.wallpapers, new WallpapersFragment()));
+
+
+        if (Config.get().aboutEnabled())
+            mPages.add(new PagesBuilder.Page(R.id.drawer_about, R.drawable.tab_about, R.string.about, new AboutFragment()));
     }
 
     public boolean retryLicenseCheck() {

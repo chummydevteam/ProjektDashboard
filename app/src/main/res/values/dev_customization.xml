@@ -7,23 +7,48 @@
     <bool name="allow_nav_drawer_mode_switch">false</bool>
 
     <!-- True enables the homepage -->
+    <bool name="enable_icons_page">true</bool>
+    <bool name="enable_apply_page">true</bool>
+    <bool name="enable_about_page">false</bool>
+
+
+    <string name="home_tab_one">Home</string>
+    <string name="home_tab_two">Color Picker</string>
+    <string name="home_tab_three">Theme Rebuilder</string>
+
+
+
+
+    <drawable name="homepage_landing_icon">@drawable/dashboard_logo</drawable>
     <bool name="homepage_enabled">true</bool>
     <string name="homepage_description">
-        chummy development team dashboard
+        cyanogenmod theming, evolved.
     </string>
     <string name="homepage_description_secondary">
         welcome to the cdt dashboard experimental app containing all publicly available projects laid out tab-by-tab.
     </string>
-    <!-- The large icon displayed in the home page -->
-    <drawable name="homepage_landing_icon">@drawable/dashboard_logo</drawable>
+
+
+
+    <string name="colorpicker_description">welcome to the color picker!</string>
+    <string name="colorpicker_description_secondary">this is a highly experimental feature to hotswap your accent colors in akzent and blakzent at runtime (meaning no reboot necessary)\n\nif you\'re experiencing any force closes, please contact Nicholas.\n\n</string>
+
+    <string name="akzent_title">dark material // akZent</string>
+    <string name="akzent_description">click here to change colors for akZent</string>
+
+    <string name="blakzent_title">blacked out // blakZent</string>
+    <string name="blakzent_description">click here to change colors for blakZent</string>
+
+    <string name="projektklar_title">projekt // klar</string>
+    <string name="projektklar_description">click here to change colors for projekt // klar</string>
+
+
 
     <!-- URL to JSON file containing a map of wallpapers, leave empty to disable wallpapers. -->
-    <string name="wallpapers_json_url" formatted="false">
-        https://raw.githubusercontent.com/afollestad/polar_json/master/wallpapers.json
-    </string>
+    <string name="wallpapers_json_url" formatted="false"></string>
 
     <!-- Email used to send icon requests, leave empty to disable this feature. -->
-    <string name="icon_request_email">fake-email@fake-website.com</string>
+    <string name="icon_request_email"></string>
 
     <!-- Max number of icons that can be sent per request. -1 disables max count. -->
     <integer name="icon_request_maxcount">-1</integer>

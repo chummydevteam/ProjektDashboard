@@ -70,14 +70,4 @@
 
     </ScrollView>
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center|bottom"
-        android:layout_marginBottom="@dimen/content_inset"
-        app:layout_windowInsets="bottom"
-        app:layout_windowInsetsUseMargin="true"
-        app:srcCompat="@drawable/ic_action_star" />
-
 </com.pluscubed.insetsdispatcher.view.InsetsDispatcherFrameLayout>

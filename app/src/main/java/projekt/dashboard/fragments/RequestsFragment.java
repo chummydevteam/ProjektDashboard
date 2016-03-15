@@ -40,12 +40,6 @@ public class RequestsFragment extends BasePageFragment {
         ButterKnife.unbind(this);
     }
 
-    @OnClick(R.id.fab)
-    public void onTapReview() {
-        startActivity(new Intent(Intent.ACTION_VIEW)
-                .setData(Uri.parse(String.format("https://play.google.com/store/apps/details?id=%s", BuildConfig.APPLICATION_ID))));
-    }
-
     @Override
     public int getTitle() {
         return R.string.home;

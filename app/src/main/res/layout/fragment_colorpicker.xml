@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.pluscubed.insetsdispatcher.view.InsetsDispatcherFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clipToPadding="false">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clipToPadding="false"
+        android:paddingBottom="@dimen/list_with_fab_bottom_margin"
+        app:layout_windowInsets="bottom">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clipToPadding="false"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="@dimen/content_inset_less"
+            android:weightSum="1">
+
+            <TextView
+                android:id="@+id/landingMessage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/content_inset_less"
+                android:fontFamily="sans-serif-light"
+                android:gravity="center"
+                android:lineSpacingMultiplier="1.2"
+                android:text="@string/colorpicker_description"
+                android:textColor="?android:textColorPrimary"
+                android:textSize="@dimen/title_text_size"
+                android:textStyle="bold|italic" />
+
+            <TextView
+                android:id="@+id/landingMessageSecondary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/content_inset_less"
+                android:layout_weight="0.92"
+                android:fontFamily="sans-serif-light"
+                android:gravity="center"
+                android:lineSpacingMultiplier="1.2"
+                android:text="@string/colorpicker_description_secondary"
+                android:textColor="?android:textColorPrimary"
+                android:textSize="@dimen/content_text_size" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/akzent"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/cards_margin"
+                    android:clickable="true"
+                    android:foreground="?android:selectableItemBackground"
+                    card_view:cardBackgroundColor="@color/cardsbg"
+                    card_view:cardCornerRadius="@dimen/card_corner_radius"
+                    card_view:cardElevation="@dimen/cards_elevation">
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:contentDescription="@null"
+                            android:minWidth="100dp"
+                            android:scaleType="fitCenter"
+                            android:src="@drawable/akzent" />
+
+                        <LinearLayout
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:paddingBottom="8dp"
+                                android:paddingLeft="16dp"
+                                android:paddingRight="16dp"
+                                android:paddingTop="16dp"
+                                android:text="@string/akzent_title"
+                                android:textColor="@android:color/white"
+                                android:textSize="@dimen/text_med" />
+
+                            <TextView
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:lineSpacingMultiplier="1.2"
+                                android:paddingBottom="@dimen/cards_padding"
+                                android:paddingLeft="@dimen/cards_padding"
+                                android:paddingRight="@dimen/cards_padding"
+                                android:text="@string/akzent_description"
+                                android:textColor="@android:color/white"
+                                android:textSize="@dimen/text_ultrasmall" />
+
+                            <View
+                                android:layout_width="fill_parent"
+                                android:layout_height="1px"
+                                android:background="#777777"
+                                android:visibility="invisible" />
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentRight="true"
+                                android:orientation="horizontal" />
+
+                        </LinearLayout>
+                    </LinearLayout>
+
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/blakzent"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/akzent"
+                    android:layout_margin="@dimen/cards_margin"
+                    android:clickable="true"
+                    android:foreground="?android:selectableItemBackground"
+                    card_view:cardBackgroundColor="@color/cardsbg"
+                    card_view:cardCornerRadius="@dimen/card_corner_radius"
+                    card_view:cardElevation="@dimen/cards_elevation">
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:contentDescription="@null"
+                            android:minWidth="100dp"
+                            android:scaleType="fitCenter"
+                            android:src="@drawable/blakzent" />
+
+                        <LinearLayout
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:paddingBottom="8dp"
+                                android:paddingLeft="16dp"
+                                android:paddingRight="16dp"
+                                android:paddingTop="16dp"
+                                android:text="@string/blakzent_title"
+                                android:textColor="@android:color/white"
+                                android:textSize="@dimen/text_med" />
+
+                            <TextView
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:lineSpacingMultiplier="1.2"
+                                android:paddingBottom="@dimen/cards_padding"
+                                android:paddingLeft="@dimen/cards_padding"
+                                android:paddingRight="@dimen/cards_padding"
+                                android:text="@string/blakzent_description"
+                                android:textColor="@android:color/white"
+                                android:textSize="@dimen/text_ultrasmall" />
+
+                            <View
+                                android:layout_width="fill_parent"
+                                android:layout_height="1px"
+                                android:background="#777777"
+                                android:visibility="invisible" />
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentRight="true"
+                                android:orientation="horizontal" />
+
+                        </LinearLayout>
+                    </LinearLayout>
+
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/projektklar"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/blakzent"
+                    android:layout_margin="@dimen/cards_margin"
+                    android:clickable="true"
+                    android:foreground="?android:selectableItemBackground"
+                    card_view:cardBackgroundColor="@color/cardsbg"
+                    card_view:cardCornerRadius="@dimen/card_corner_radius"
+                    card_view:cardElevation="@dimen/cards_elevation">
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:contentDescription="@null"
+                            android:minWidth="100dp"
+                            android:scaleType="fitCenter"
+                            android:src="@drawable/projektklar" />
+
+                        <LinearLayout
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:paddingBottom="8dp"
+                                android:paddingLeft="16dp"
+                                android:paddingRight="16dp"
+                                android:paddingTop="16dp"
+                                android:text="@string/projektklar_title"
+                                android:textColor="@android:color/white"
+                                android:textSize="@dimen/text_med" />
+
+                            <TextView
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:lineSpacingMultiplier="1.2"
+                                android:paddingBottom="@dimen/cards_padding"
+                                android:paddingLeft="@dimen/cards_padding"
+                                android:paddingRight="@dimen/cards_padding"
+                                android:text="@string/projektklar_description"
+                                android:textColor="@android:color/white"
+                                android:textSize="@dimen/text_ultrasmall" />
+
+                            <View
+                                android:layout_width="fill_parent"
+                                android:layout_height="1px"
+                                android:background="#777777"
+                                android:visibility="invisible" />
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentRight="true"
+                                android:orientation="horizontal" />
+
+                        </LinearLayout>
+                    </LinearLayout>
+
+                </android.support.v7.widget.CardView>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</com.pluscubed.insetsdispatcher.view.InsetsDispatcherFrameLayout>
