@@ -4,8 +4,8 @@
     <!-- OPTIONS -->
 
     <!-- When allow_theme_switching is true, users can switch between the light and dark theme from the overflow menu -->
-    <bool name="allow_theme_switching">true</bool>
-    <bool name="dark_theme_default">false</bool>
+    <bool name="allow_theme_switching">false</bool>
+    <bool name="dark_theme_default">true</bool>
 
     <!-- LIGHT THEME -->
 
@@ -58,14 +58,14 @@
     <color name="default_toolbar_title_color_lighttheme">#fff</color>
     <color name="default_toolbar_icons_color_lighttheme">#fff</color>
 
-    <color name="default_primary_darktheme">#607D8B</color>
-    <color name="default_primarydark_darktheme">#546E7A</color>
-    <color name="default_accent_darktheme">#4DB6AC</color>
-    <color name="default_accentdark_darktheme">#009688</color>
-    <color name="default_window_bg_cards_darktheme">#546E7A</color>
-    <color name="default_tab_indicator_color_darktheme">#F5F5F5</color>
-    <color name="default_tab_icon_color_darktheme">#F5F5F5</color>
-    <color name="default_card_background_darktheme">#607D8B</color>
+    <color name="default_primary_darktheme">#212021</color>
+    <color name="default_primarydark_darktheme">#212021</color>
+    <color name="default_accent_darktheme">#212021</color>
+    <color name="default_accentdark_darktheme">#212021</color>
+    <color name="default_window_bg_cards_darktheme">#000</color>
+    <color name="default_tab_indicator_color_darktheme">#fff</color>
+    <color name="default_tab_icon_color_darktheme">#ffff</color>
+    <color name="default_card_background_darktheme">#1e1e1e</color>
     <color name="default_toolbar_title_color_darktheme">#fff</color>
     <color name="default_toolbar_icons_color_darktheme">#fff</color>
 

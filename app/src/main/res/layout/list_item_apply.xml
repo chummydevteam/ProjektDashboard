@@ -17,7 +17,7 @@
             android:orientation="vertical"
             tools:background="#2a3238">
 
-            <com.afollestad.polar.views.SquareImageView
+            <projekt.dashboard.views.SquareImageView
                 android:id="@+id/icon"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

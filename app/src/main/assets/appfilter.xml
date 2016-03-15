@@ -7,7 +7,7 @@
 
     <!-- Polar -->
     <item
-        component="ComponentInfo{com.afollestad.polar/com.afollestad.polar.ui.MainActivity}"
+        component="ComponentInfo{projekt.dashboard/projekt.dashboard.ui.MainActivity}"
         drawable="polar" />
 
 
