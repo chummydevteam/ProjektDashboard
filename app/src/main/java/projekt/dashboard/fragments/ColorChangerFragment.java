@@ -291,6 +291,8 @@ public class ColorChangerFragment extends BasePageFragment {
         Log.e("copyFinalizedAPK", "Successfully copied the modified resource APK into /data/resource-cache and modified the permissions!");
         cleanTempFolder();
         Log.e("cleanTempFolder", "Successfully cleaned up the whole work area!");
+        eu.chainfire.libsuperuser.Shell.SU.run("killall com.android.systemui");
+        eu.chainfire.libsuperuser.Shell.SU.run("killall com.android.settings");
     }
 
     private void createTempFolder() {
