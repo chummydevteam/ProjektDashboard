@@ -103,6 +103,50 @@
                 android:lineSpacingMultiplier="1.2"
                 android:text=""
                 android:textColor="?android:textColorPrimary"
+                android:textSize="1dp"
+                android:textStyle="bold|italic" />
+
+            <CheckBox
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="Destroy cache/working directory"
+                android:id="@+id/switch3"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:button="@null"
+                android:drawableRight="?android:attr/listChoiceIndicatorMultiple"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/content_inset_less"
+                android:fontFamily="sans-serif-light"
+                android:gravity="center"
+                android:lineSpacingMultiplier="1.2"
+                android:text=""
+                android:textColor="?android:textColorPrimary"
+                android:textSize="1dp"
+                android:textStyle="bold|italic" />
+
+            <CheckBox
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="Debugging Mode (Advanced Logs)"
+                android:id="@+id/switch4"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:button="@null"
+                android:drawableRight="?android:attr/listChoiceIndicatorMultiple"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/content_inset_less"
+                android:fontFamily="sans-serif-light"
+                android:gravity="center"
+                android:lineSpacingMultiplier="1.2"
+                android:text=""
+                android:textColor="?android:textColorPrimary"
                 android:textSize="@dimen/text_med"
                 android:textStyle="bold|italic" />
 
