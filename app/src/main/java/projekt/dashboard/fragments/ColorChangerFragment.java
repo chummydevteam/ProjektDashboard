@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.Switch;
+import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.azeesoft.lib.colorpicker.ColorPickerDialog;
@@ -44,7 +45,7 @@ public class ColorChangerFragment extends BasePageFragment {
 
 
     public String color_picked;
-    public boolean is_autorestart_enabled;
+    public boolean is_autorestart_enabled, is_hotreboot_enabled;
 
     public static boolean isAppInstalled(Context context, String packageName) {
         try {
@@ -117,7 +118,7 @@ public class ColorChangerFragment extends BasePageFragment {
 
         ViewGroup inflation = (ViewGroup) inflater.inflate(R.layout.fragment_colorpicker, container, false);
 
-        Switch autorestartSystemUI = (Switch) inflation.findViewById(R.id.switch1);
+        final Switch autorestartSystemUI = (Switch) inflation.findViewById(R.id.switch1);
         autorestartSystemUI.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -127,6 +128,25 @@ public class ColorChangerFragment extends BasePageFragment {
                 } else {
                     is_autorestart_enabled = false;
                     Log.e("Switch", "Universal variable to auto restart DISABLED.");
+                }
+            }
+        });
+
+        Switch hotreboot = (Switch) inflation.findViewById(R.id.switch2);
+        hotreboot.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    is_hotreboot_enabled = true;
+                    autorestartSystemUI.setChecked(false);
+                    autorestartSystemUI.setClickable(false);
+                    Log.e("Switch", "Universal variable to hot reboot ENABLED.");
+                    Toast toast = Toast.makeText(getActivity().getApplicationContext(), "This feature disables you from enabling both SystemUI restart and Hot Reboot. Disable Hot Reboot to switch to SystemUI Restart", Toast.LENGTH_LONG);
+                    toast.show();
+                } else {
+                    is_hotreboot_enabled = false;
+                    autorestartSystemUI.setClickable(true);
+                    Log.e("Switch", "Universal variable to hot reboot DISABLED.");
                 }
             }
         });
@@ -311,6 +331,9 @@ public class ColorChangerFragment extends BasePageFragment {
         if (is_autorestart_enabled){
             eu.chainfire.libsuperuser.Shell.SU.run("killall com.android.systemui");
             eu.chainfire.libsuperuser.Shell.SU.run("killall com.android.settings");
+        }
+        if (is_hotreboot_enabled) {
+            eu.chainfire.libsuperuser.Shell.SU.run("setprop ctl.restart zygote");
         }
     }
 

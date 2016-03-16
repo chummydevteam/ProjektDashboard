@@ -28,17 +28,17 @@
                 android:layout_marginBottom="@dimen/content_inset"
                 android:layout_marginTop="@dimen/content_inset_less"
                 android:scaleType="fitXY"
-                app:srcCompat="@drawable/homepage_icon"
+                android:src="@drawable/homepage_icon"
                 tools:ignore="ContentDescription" />
 
             <ImageView
                 android:id="@+id/landingIcon"
-                android:layout_width="wrap_content"
-                android:layout_height="90dp"
+                android:layout_width="250dp"
+                android:layout_height="60dp"
                 android:layout_marginBottom="@dimen/content_inset"
                 android:layout_marginTop="@dimen/content_inset_less"
                 android:scaleType="fitXY"
-                app:srcCompat="@drawable/homepage_landing_icon"
+                android:src="@drawable/homepage_landing_icon"
                 tools:ignore="ContentDescription" />
 
             <TextView

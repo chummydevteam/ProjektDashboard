@@ -31,7 +31,7 @@
 
 
     <string name="colorpicker_description">welcome to the color picker!</string>
-    <string name="colorpicker_description_secondary">this is a highly experimental feature to hotswap your accent colors in akzent and blakzent at runtime (meaning no reboot necessary)\n\nif you\'re experiencing any force closes, please contact Nicholas.\n\n</string>
+    <string name="colorpicker_description_secondary">this is a highly experimental feature to hotswap your accent colors at runtime (meaning that a full reboot isn\'t necessary and will not require creating and installing a new APK file)\n\nthis has no side effects but depending on the tweaks selected, you may need to clear out your recents after performing the color swap.\n\n</string>
 
     <string name="akzent_title">dark material // akZent</string>
     <string name="akzent_description">click here to change colors for akZent</string>

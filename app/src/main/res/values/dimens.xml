@@ -49,7 +49,7 @@
     <dimen name="apply_title_minheight">44dp</dimen>
 
     <dimen name="drawer_header_height">196dp</dimen>
-    <dimen name="landing_page_icon_size">236dp</dimen>
+    <dimen name="landing_page_icon_size">128dp</dimen>
 
     <dimen name="second_keyline">72dp</dimen>
     <dimen name="toolbar_horizontal_padding">4dp</dimen>
