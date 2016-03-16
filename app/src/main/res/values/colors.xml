@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <color name="cardsbg">#4d000000</color>
+    <color name="cardsbg">#212021</color>
 
     <!-- See dev_theming for Polar theming colors -->
 

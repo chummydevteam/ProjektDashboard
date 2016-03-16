@@ -1,5 +1,6 @@
 package projekt.dashboard.fragments;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.content.res.AssetManager;
@@ -33,6 +34,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.util.Random;
 
 import butterknife.ButterKnife;
 import projekt.dashboard.R;
@@ -57,7 +59,6 @@ public class ColorChangerFragment extends BasePageFragment {
             return false;
         }
     }
-
 
     @Nullable
     @Override
@@ -303,13 +304,50 @@ public class ColorChangerFragment extends BasePageFragment {
         }
     }
 
-    private class secondPhaseAsyncTasks extends AsyncTask<String, String, String> {
+    private class secondPhaseAsyncTasks extends AsyncTask<String, String, Void> {
+
+        private ProgressDialog pd;
+
         @Override
-        protected String doInBackground(String... params) {
+        protected Void doInBackground(String... params) {
             String theme_dir = params[0];
             createXMLfile("accent_color_dark.xml", theme_dir);
-            publishProgress();
+            pd.setProgress(60);
             return null;
+        }
+
+        protected void onPreExecute() {
+            String[] responses = {
+                    "Please wait, while your phone gets beautified!",
+                    "Injecting beautiful accents all over the place~",
+                    "Sprinkling some magic over here...and over there....",
+                    "Are you ready for some rainbow-licious fun?",
+                    "OMG, am I broken?",
+                    "I hope you did your reading, because you need to get ready for the amount of awesomeness this gives!",
+                    "I hope you don't have to report bugs......please no.",
+                    "That color is simply gorgeous!",
+                    "I don't have a library card, but do you mind if I check you out?",
+                    "I seem to have lost my phone number. Can I have yours?",
+                    "Are you religious? Because you're the answer to all my prayers.",
+                    "Did you sit in a pile of sugar? Cause you have a pretty sweet ass.",
+                    "Do you live in a corn field, cause I'm stalking you.",
+                    "You look cold. Want to use me as a blanket?",
+                    "Can I take your picture to prove to all my friends that angels do exist?",
+                    "My doctor says I'm lacking Vitamin U.",
+                    "If I were a cat I'd spend all 9 lives with you."};
+            int idx = new Random().nextInt(responses.length);
+            String random = (responses[idx]);
+
+            pd = new ProgressDialog(getActivity());
+            pd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            pd.setMessage(random);
+            pd.setIndeterminate(true);
+            pd.setCancelable(false);
+            pd.show();
+        }
+
+        protected void onPostExecute(Void result) {
+            pd.dismiss();
         }
 
         private void createXMLfile(String string, String theme_dir) {
@@ -491,15 +529,6 @@ public class ColorChangerFragment extends BasePageFragment {
             if (is_hotreboot_enabled) {
                 eu.chainfire.libsuperuser.Shell.SU.run("setprop ctl.restart zygote");
             }
-        }
-
-
-        protected void onProgressUpdate(Void... updateInteger) {
-            //Update your progress dialog here!
-        }
-
-        protected void onPostExecute(Void result) {
-            //progress.dismiss();
         }
     }
 }
