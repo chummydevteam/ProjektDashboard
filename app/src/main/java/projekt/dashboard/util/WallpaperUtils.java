@@ -377,6 +377,7 @@ public class WallpaperUtils {
         private int paletteAuthorColor;
         @Column
         private int paletteBgColor;
+
         public Wallpaper() {
         }
 

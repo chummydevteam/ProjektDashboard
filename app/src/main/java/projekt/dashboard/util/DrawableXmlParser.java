@@ -76,6 +76,7 @@ public class DrawableXmlParser {
         private final String mDrawable;
         private final Category mCategory;
         private String mName;
+
         public Icon(String drawable, Category category) {
             mDrawable = drawable;
             mCategory = category;

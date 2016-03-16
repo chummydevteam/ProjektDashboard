@@ -30,6 +30,7 @@ public class WallpaperAdapter extends RecyclerView.Adapter<WallpaperAdapter.Wall
     private final ClickListener mListener;
     private WallpaperUtils.WallpapersHolder mWallpapers;
     private ArrayList<WallpaperUtils.Wallpaper> mFiltered;
+
     public WallpaperAdapter(ClickListener listener) {
         mListener = listener;
     }
@@ -137,6 +138,7 @@ public class WallpaperAdapter extends RecyclerView.Adapter<WallpaperAdapter.Wall
         final WallpaperNameView name;
         final WallpaperAuthorView author;
         final ProgressBar progress;
+
         public WallpaperViewHolder(View itemView, ClickListener listener) {
             super(itemView);
             mListener = listener;

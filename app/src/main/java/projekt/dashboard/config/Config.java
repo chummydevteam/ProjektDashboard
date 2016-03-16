@@ -17,6 +17,7 @@ public class Config implements IConfig {
     private static Config mConfig;
     private Context mContext;
     private Resources mR;
+
     private Config(@Nullable Context context) {
         mR = null;
         mContext = context;

@@ -22,12 +22,15 @@ public class NoDragImageView extends ImageView {
     public NoDragImageView(Context context) {
         super(context);
     }
+
     public NoDragImageView(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
+
     public NoDragImageView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
+
     @SuppressLint("NewApi")
     public NoDragImageView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);

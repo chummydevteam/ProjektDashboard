@@ -202,6 +202,7 @@ public class AboutAdapter extends RecyclerView.Adapter<AboutAdapter.MainViewHold
         final View donateButton;
         final ImageView donateImage;
         private final OptionsClickListener mOptionsCb;
+
         public MainViewHolder(View itemView, OptionsClickListener optionsCb) {
             super(itemView);
             cover = ButterKnife.findById(itemView, R.id.cover);

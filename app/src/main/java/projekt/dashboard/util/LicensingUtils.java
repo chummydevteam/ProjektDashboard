@@ -32,6 +32,7 @@ public class LicensingUtils {
     private static LicenseCheckerCallback mLicenseCheckerCallback;
     private static LicenseChecker mChecker;
     private static ProgressDialogFragment mProgress;
+
     private LicensingUtils() {
     }
 
