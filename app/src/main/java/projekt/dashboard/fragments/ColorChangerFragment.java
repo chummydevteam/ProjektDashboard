@@ -13,8 +13,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.Switch;
 import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -68,7 +68,7 @@ public class ColorChangerFragment extends BasePageFragment {
         ViewGroup inflation = (ViewGroup) inflater.inflate(
                 R.layout.fragment_colorpicker, container, false);
 
-        final Switch autorestartSystemUI = (Switch) inflation.findViewById(R.id.switch1);
+        final CheckBox autorestartSystemUI = (CheckBox) inflation.findViewById(R.id.switch1);
         autorestartSystemUI.setOnCheckedChangeListener(
                 new CompoundButton.OnCheckedChangeListener() {
                     @Override
@@ -83,7 +83,7 @@ public class ColorChangerFragment extends BasePageFragment {
                     }
                 });
 
-        Switch hotreboot = (Switch) inflation.findViewById(R.id.switch2);
+        CheckBox hotreboot = (CheckBox) inflation.findViewById(R.id.switch2);
         hotreboot.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {

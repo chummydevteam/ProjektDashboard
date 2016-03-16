@@ -62,14 +62,15 @@
                 android:textStyle="bold|italic"
                 android:paddingBottom="10dp" />
 
-            <Switch
+            <CheckBox
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:text="Color Swap + Restart SystemUI"
                 android:id="@+id/switch1"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
-                android:textAlignment="center" />
+                android:button="@null"
+                android:drawableRight="?android:attr/listChoiceIndicatorMultiple"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -83,14 +84,15 @@
                 android:textSize="1dp"
                 android:textStyle="bold|italic" />
 
-            <Switch
+            <CheckBox
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:text="Color Swap + Hot Reboot"
                 android:id="@+id/switch2"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
-                android:textAlignment="center" />
+                android:button="@null"
+                android:drawableRight="?android:attr/listChoiceIndicatorMultiple" />
 
             <TextView
                 android:layout_width="match_parent"
