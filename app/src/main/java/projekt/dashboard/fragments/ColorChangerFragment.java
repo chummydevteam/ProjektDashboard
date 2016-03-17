@@ -1,12 +1,14 @@
 package projekt.dashboard.fragments;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.AssetManager;
 import android.graphics.Color;
-import android.media.Image;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -38,6 +40,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.util.GregorianCalendar;
 import java.util.Random;
 
 import butterknife.ButterKnife;
@@ -45,6 +48,7 @@ import projekt.dashboard.R;
 import projekt.dashboard.colorpicker.ColorPickerDialog;
 import projekt.dashboard.colorpicker.ColorPickerPreference;
 import projekt.dashboard.fragments.base.BasePageFragment;
+import projekt.dashboard.services.AlarmReceiver;
 
 
 /**
@@ -65,6 +69,17 @@ public class ColorChangerFragment extends BasePageFragment {
         }
     }
 
+    public void schedule() {
+        Long time = new GregorianCalendar().getTimeInMillis() + 10 * 1000;
+        Intent intent = new Intent("projekt.dashboard.SET_ACCENT_BY_TIME");
+
+        AlarmManager alarmManager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
+
+        alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, time, 10 * 1000, PendingIntent.getBroadcast(getActivity(), 1, intent, PendingIntent.FLAG_UPDATE_CURRENT));
+
+
+    }
+
     @Nullable
     @Override
     public View onCreateView(
@@ -72,6 +87,8 @@ public class ColorChangerFragment extends BasePageFragment {
 
         ViewGroup inflation = (ViewGroup) inflater.inflate(
                 R.layout.fragment_colorpicker, container, false);
+
+        schedule();
 
         final CheckBox autorestartSystemUI = (CheckBox) inflation.findViewById(R.id.switch1);
         autorestartSystemUI.setOnCheckedChangeListener(
@@ -221,7 +238,6 @@ public class ColorChangerFragment extends BasePageFragment {
         text2.setText("please install this theme first!");
         ImageView image = (ImageView) inflation.findViewById(R.id.projektklar_image);
         image.setAlpha(127);
-
 
 
         return inflation;
