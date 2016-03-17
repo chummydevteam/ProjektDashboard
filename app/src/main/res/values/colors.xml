@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <color name="colorAccent">@android:color/white</color>
     <color name="cardsbg">#212021</color>
 
     <!-- See dev_theming for Polar theming colors -->

@@ -2,11 +2,13 @@ package projekt.dashboard.fragments;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.AssetManager;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.CardView;
 import android.util.Log;
@@ -18,7 +20,6 @@ import android.widget.CompoundButton;
 import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
-import com.azeesoft.lib.colorpicker.ColorPickerDialog;
 
 import net.lingala.zip4j.core.ZipFile;
 import net.lingala.zip4j.exception.ZipException;
@@ -38,6 +39,8 @@ import java.util.Random;
 
 import butterknife.ButterKnife;
 import projekt.dashboard.R;
+import projekt.dashboard.colorpicker.ColorPickerDialog;
+import projekt.dashboard.colorpicker.ColorPickerPreference;
 import projekt.dashboard.fragments.base.BasePageFragment;
 
 
@@ -47,9 +50,8 @@ import projekt.dashboard.fragments.base.BasePageFragment;
 
 public class ColorChangerFragment extends BasePageFragment {
 
-
-    public String color_picked;
-    public boolean is_autorestart_enabled, is_hotreboot_enabled, is_cleancache_enabled, is_debugging_mode_enabled;
+    public String color_picked, saved_color;
+    public boolean is_autorestart_enabled, is_hotreboot_enabled, is_debugging_mode_enabled;
 
     public static boolean isAppInstalled(Context context, String packageName) {
         try {
@@ -75,10 +77,12 @@ public class ColorChangerFragment extends BasePageFragment {
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                         if (isChecked) {
                             is_autorestart_enabled = true;
-                            if (is_debugging_mode_enabled) Log.e("CheckBox", "Universal variable to auto restart ENABLED.");
+                            if (is_debugging_mode_enabled) Log.e("CheckBox",
+                                    "Universal variable to auto restart ENABLED.");
                         } else {
                             is_autorestart_enabled = false;
-                            if (is_debugging_mode_enabled) Log.e("CheckBox", "Universal variable to auto restart DISABLED.");
+                            if (is_debugging_mode_enabled) Log.e("CheckBox",
+                                    "Universal variable to auto restart DISABLED.");
                         }
                     }
                 });
@@ -91,7 +95,8 @@ public class ColorChangerFragment extends BasePageFragment {
                     is_hotreboot_enabled = true;
                     autorestartSystemUI.setChecked(false);
                     autorestartSystemUI.setClickable(false);
-                    if (is_debugging_mode_enabled) Log.e("CheckBox", "Universal variable to hot reboot ENABLED.");
+                    if (is_debugging_mode_enabled) Log.e("CheckBox",
+                            "Universal variable to hot reboot ENABLED.");
                     Toast toast = Toast.makeText(getActivity().getApplicationContext(),
                             "This feature disables you from enabling both SystemUI restart and " +
                                     "Hot Reboot. Disable Hot Reboot to switch to SystemUI Restart",
@@ -100,23 +105,8 @@ public class ColorChangerFragment extends BasePageFragment {
                 } else {
                     is_hotreboot_enabled = false;
                     autorestartSystemUI.setClickable(true);
-                    if (is_debugging_mode_enabled) Log.e("CheckBox", "Universal variable to hot reboot DISABLED.");
-                }
-            }
-        });
-
-        CheckBox cleancaches = (CheckBox) inflation.findViewById(R.id.switch3);
-        cleancaches.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    is_cleancache_enabled = true;
-                    if (is_debugging_mode_enabled)
-                        Log.e("CheckBox", "Universal variable to clean caches ENABLED.");
-                } else {
-                    is_hotreboot_enabled = false;
-                    if (is_debugging_mode_enabled)
-                        Log.e("CheckBox", "Universal variable to clean caches DISABLED.");
+                    if (is_debugging_mode_enabled) Log.e("CheckBox",
+                            "Universal variable to hot reboot DISABLED.");
                 }
             }
         });
@@ -144,7 +134,7 @@ public class ColorChangerFragment extends BasePageFragment {
                             "/data/resource-cache/com.chummy.jezebel.materialdark.donate" +
                                     "/common/resources.apk"};
                     new firstPhaseAsyncTasks().execute(firstPhaseCommands);
-                    launchColorPicker(
+                    launchColorPicker("akzent",
                             "/data/resource-cache/com.chummy.jezebel.materialdark.donate" +
                                     "/common/resources.apk");
                 } else {
@@ -168,7 +158,7 @@ public class ColorChangerFragment extends BasePageFragment {
                             "/data/resource-cache/com.chummy.jezebel.blackedout.donate" +
                                     "/common/resources.apk"};
                     new firstPhaseAsyncTasks().execute(firstPhaseCommands);
-                    launchColorPicker(
+                    launchColorPicker("blakzent",
                             "/data/resource-cache/com.chummy.jezebel.blackedout.donate" +
                                     "/common/resources.apk");
                 } else {
@@ -193,23 +183,37 @@ public class ColorChangerFragment extends BasePageFragment {
         return inflation;
     }
 
-    public void launchColorPicker(final String theme_dir) {
-        final ColorPickerDialog colorPickerDialog =
-                ColorPickerDialog.createColorPickerDialog(getActivity(),
-                        ColorPickerDialog.DARK_THEME);
-        colorPickerDialog.setHexaDecimalTextColor(Color.parseColor("#ffffff"));
-        // Keep this white so that the hex colors aren't yellow
-        colorPickerDialog.hideOpacityBar();
-        // Disable alpha because accents shouldn't be transparent
-        colorPickerDialog.setOnColorPickedListener(new ColorPickerDialog.OnColorPickedListener() {
+    public void launchColorPicker(String theme_name, String theme_dir) {
+        SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(getContext());
+        saved_color = settings.getString(theme_name, "0");
+
+        if (saved_color != "0"){
+            launchColorPickerPrivate(theme_dir, Color.parseColor(saved_color), theme_name);
+        } else {
+            int white = Color.argb(255, 255, 255, 255);
+            launchColorPickerPrivate(theme_dir, white, theme_name);
+        }
+    }
+
+    private void launchColorPickerPrivate(final String theme_dir, int color,
+                                          final String theme_name) {
+
+        final ColorPickerDialog cpd = new ColorPickerDialog(getActivity(), color);
+
+        SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(getContext());
+        final SharedPreferences.Editor editor = settings.edit();
+
+        cpd.setOnColorChangedListener(new ColorPickerDialog.OnColorChangedListener() {
             @Override
-            public void onColorPicked(int color, String hexVal) {
-                color_picked = hexVal;
+            public void onColorChanged(int color) {
+                color_picked = ColorPickerPreference.convertToARGB(color);
+                editor.putString(theme_name, color_picked);
+                editor.commit();
                 String[] secondPhaseCommands = {theme_dir};
                 new secondPhaseAsyncTasks().execute(secondPhaseCommands);
             }
         });
-        colorPickerDialog.show();
+        cpd.show();
     }
 
     public void cleanTempFolder() {
@@ -224,8 +228,6 @@ public class ColorChangerFragment extends BasePageFragment {
 
         fileOrDirectory.delete();
     }
-
-    ;
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
@@ -254,7 +256,8 @@ public class ColorChangerFragment extends BasePageFragment {
         }
 
         private void createTempFolder() {
-            if (is_debugging_mode_enabled) Log.e("createTempFolder", "Creating temporary folder....");
+            if (is_debugging_mode_enabled) Log.e("createTempFolder",
+                    "Creating temporary folder....");
             copyAssetFolder(getActivity().getAssets(), "aapt",
                     getActivity().getFilesDir().getAbsolutePath());
         }
@@ -277,11 +280,13 @@ public class ColorChangerFragment extends BasePageFragment {
                                 toPath + "/" + file);
                     }
                 }
-                if (is_debugging_mode_enabled) Log.e("CopyAssets", "All assets were moved to the app's file directory.");
+                if (is_debugging_mode_enabled) Log.e("CopyAssets",
+                        "All assets were moved to the app's file directory.");
                 return res;
             } catch (Exception e) {
                 e.printStackTrace();
-                if (is_debugging_mode_enabled) Log.e("CopyAssets", "Temporary folder creation failed (EXCEPTION).");
+                if (is_debugging_mode_enabled) Log.e("CopyAssets",
+                        "Temporary folder creation failed (EXCEPTION).");
                 return false;
             }
         }
@@ -303,7 +308,8 @@ public class ColorChangerFragment extends BasePageFragment {
                 return true;
             } catch (Exception e) {
                 e.printStackTrace();
-                if (is_debugging_mode_enabled) Log.e("CopyAssets", "Temporary folder creation failed (FILEEXCEPTION).");
+                if (is_debugging_mode_enabled) Log.e("CopyAssets",
+                        "Temporary folder creation failed (FILEEXCEPTION).");
                 return false;
             }
         }
@@ -353,7 +359,8 @@ public class ColorChangerFragment extends BasePageFragment {
                     "Sprinkling some magic over here...and over there....",
                     "Are you ready for some rainbow-licious fun?",
                     "OMG, am I broken?",
-                    "I hope you did your reading, because you need to get ready for the amount of awesomeness this gives!",
+                    "I hope you did your reading, because you need to get ready for the " +
+                            "amount of awesomeness this gives!",
                     "I hope you don't have to report bugs......please no.",
                     "That color is simply gorgeous!",
                     "I don't have a library card, but do you mind if I check you out?",
@@ -414,7 +421,8 @@ public class ColorChangerFragment extends BasePageFragment {
                     try {
                         compileDummyAPK(theme_dir);
                     } catch (Exception e) {
-                        if (is_debugging_mode_enabled) Log.e("CreateXMLFileException", "Could not create Dummy APK (EXCEPTION)");
+                        if (is_debugging_mode_enabled) Log.e("CreateXMLFileException",
+                                "Could not create Dummy APK (EXCEPTION)");
                     }
                 }
                 if (string == "accent_color_light.xml") {
@@ -424,7 +432,8 @@ public class ColorChangerFragment extends BasePageFragment {
                     createXMLfile("accent_color_light.xml", theme_dir);
                 }
             } catch (IOException e) {
-                if (is_debugging_mode_enabled) Log.e("CreateXMLFileException", "Failed to create new file (IOEXCEPTION).");
+                if (is_debugging_mode_enabled) Log.e("CreateXMLFileException",
+                        "Failed to create new file (IOEXCEPTION).");
             }
 
         }
@@ -445,7 +454,8 @@ public class ColorChangerFragment extends BasePageFragment {
             IOUtils.toString(nativeApp.getInputStream());
             IOUtils.toString(nativeApp.getErrorStream());
             nativeApp.waitFor();
-            if (is_debugging_mode_enabled) Log.e("CompileDummyAPK", "Successfully compiled dummy apk!");
+            if (is_debugging_mode_enabled) Log.e("CompileDummyAPK",
+                    "Successfully compiled dummy apk!");
             unzip(theme_dir);
         }
 
@@ -460,7 +470,8 @@ public class ColorChangerFragment extends BasePageFragment {
                 if (is_debugging_mode_enabled)
                     Log.e("Unzip", "The ZIP has been located and will now be unzipped...");
                 zipFile.extractAll(destination);
-                if (is_debugging_mode_enabled) Log.e("Unzip", "Successfully unzipped the file to the corresponding directory!");
+                if (is_debugging_mode_enabled) Log.e("Unzip",
+                        "Successfully unzipped the file to the corresponding directory!");
             } catch (ZipException e) {
                 if (is_debugging_mode_enabled) Log.e("Unzip",
                         "Failed to unzip the file the corresponding directory. (EXCEPTION)");
@@ -496,25 +507,29 @@ public class ColorChangerFragment extends BasePageFragment {
             if (is_debugging_mode_enabled) Log.e("performAAPTonCommonsAPK",
                     "Successfully copied all modified accent XMLs into the root folder.");
 
-            if (is_debugging_mode_enabled) Log.e("performAAPTonCommonsAPK", "Preparing for clean up on common-resources...");
+            if (is_debugging_mode_enabled) Log.e("performAAPTonCommonsAPK",
+                    "Preparing for clean up on common-resources...");
 
             Process nativeApp1 = Runtime.getRuntime().exec(
                     "aapt remove " +
                             getActivity().getFilesDir().getAbsolutePath() +
                             "/common-resources.apk res/color-v14/accent_color_dark.xml");
-            if (is_debugging_mode_enabled) Log.e("performAAPTonCommonsAPK", "Deleted dark accent file!");
+            if (is_debugging_mode_enabled) Log.e("performAAPTonCommonsAPK",
+                    "Deleted dark accent file!");
             nativeApp1.waitFor();
             Process nativeApp2 = Runtime.getRuntime().exec(
                     "aapt remove " +
                             getActivity().getFilesDir().getAbsolutePath() +
                             "/common-resources.apk res/color-v14/accent_color_light.xml");
-            if (is_debugging_mode_enabled) Log.e("performAAPTonCommonsAPK", "Deleted light accent file!");
+            if (is_debugging_mode_enabled) Log.e("performAAPTonCommonsAPK",
+                    "Deleted light accent file!");
             nativeApp2.waitFor();
             Process nativeApp3 = Runtime.getRuntime().exec(
                     "aapt remove " +
                             getActivity().getFilesDir().getAbsolutePath() +
                             "/common-resources.apk res/color-v14/accent_color.xml");
-            if (is_debugging_mode_enabled) Log.e("performAAPTonCommonsAPK", "Deleted main accent file!");
+            if (is_debugging_mode_enabled) Log.e("performAAPTonCommonsAPK",
+                    "Deleted main accent file!");
             nativeApp3.waitFor();
 
             eu.chainfire.libsuperuser.Shell.SU.run(
@@ -534,7 +549,8 @@ public class ColorChangerFragment extends BasePageFragment {
                             getActivity().getFilesDir().getAbsolutePath() +
                             "/common-resources.apk res/color-v14/accent_color.xml");
             if (is_debugging_mode_enabled)
-                Log.e("performAAPTonCommonsAPK", "Added freshly created main accent file...ALL DONE!");
+                Log.e("performAAPTonCommonsAPK",
+                        "Added freshly created main accent file...ALL DONE!");
 
             eu.chainfire.libsuperuser.Shell.SU.run("rm -r /res/color-v14");
             eu.chainfire.libsuperuser.Shell.SU.run("mount -o remount,ro /");
@@ -554,10 +570,9 @@ public class ColorChangerFragment extends BasePageFragment {
             if (is_debugging_mode_enabled) Log.e("copyFinalizedAPK",
                     "Successfully copied the modified resource APK into " +
                             "/data/resource-cache and modified the permissions!");
-            if (is_cleancache_enabled) {
-                cleanTempFolder();
-                if (is_debugging_mode_enabled) Log.e("cleanTempFolder", "Successfully cleaned up the whole work area!");
-            }
+            cleanTempFolder();
+            if (is_debugging_mode_enabled) Log.e("cleanTempFolder",
+                    "Successfully cleaned up the whole work area!");
 
             if (is_autorestart_enabled) {
                 eu.chainfire.libsuperuser.Shell.SU.run("killall com.android.systemui");
