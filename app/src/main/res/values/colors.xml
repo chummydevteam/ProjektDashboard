@@ -5,7 +5,10 @@
     <color name="colorAccent">@android:color/white</color>
     <color name="cardsbg">#212021</color>
 
+    <color name="disabled_text">#ff777777</color>
+
     <!-- See dev_theming for Polar theming colors -->
+
 
     <color name="viewer_overlay">#40000000</color>
 

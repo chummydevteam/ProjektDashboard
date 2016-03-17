@@ -149,6 +149,7 @@
                         android:orientation="horizontal">
 
                         <ImageView
+                            android:id="@+id/akzent_image"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:contentDescription="@null"
@@ -162,6 +163,7 @@
                             android:orientation="vertical">
 
                             <TextView
+                                android:id="@+id/akzent_title"
                                 android:layout_width="fill_parent"
                                 android:layout_height="wrap_content"
                                 android:paddingBottom="8dp"
@@ -173,6 +175,7 @@
                                 android:textSize="@dimen/text_med" />
 
                             <TextView
+                                android:id="@+id/akzent_description"
                                 android:layout_width="fill_parent"
                                 android:layout_height="wrap_content"
                                 android:lineSpacingMultiplier="1.2"
@@ -218,6 +221,7 @@
                         android:orientation="horizontal">
 
                         <ImageView
+                            android:id="@+id/blakzent_image"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:contentDescription="@null"
@@ -231,6 +235,7 @@
                             android:orientation="vertical">
 
                             <TextView
+                                android:id="@+id/blakzent_title"
                                 android:layout_width="fill_parent"
                                 android:layout_height="wrap_content"
                                 android:paddingBottom="8dp"
@@ -242,6 +247,7 @@
                                 android:textSize="@dimen/text_med" />
 
                             <TextView
+                                android:id="@+id/blakzent_description"
                                 android:layout_width="fill_parent"
                                 android:layout_height="wrap_content"
                                 android:lineSpacingMultiplier="1.2"
@@ -287,6 +293,7 @@
                         android:orientation="horizontal">
 
                         <ImageView
+                            android:id="@+id/projektklar_image"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:contentDescription="@null"
@@ -300,6 +307,7 @@
                             android:orientation="vertical">
 
                             <TextView
+                                android:id="@+id/projektklar_title"
                                 android:layout_width="fill_parent"
                                 android:layout_height="wrap_content"
                                 android:paddingBottom="8dp"
@@ -311,6 +319,7 @@
                                 android:textSize="@dimen/text_med" />
 
                             <TextView
+                                android:id="@+id/projektklar_description"
                                 android:layout_width="fill_parent"
                                 android:layout_height="wrap_content"
                                 android:lineSpacingMultiplier="1.2"

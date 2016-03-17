@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.AssetManager;
 import android.graphics.Color;
+import android.media.Image;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -17,6 +18,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -180,6 +183,46 @@ public class ColorChangerFragment extends BasePageFragment {
                 // nothing here yet :)
             }
         });
+
+
+        if (!isAppInstalled(getContext(), "com.chummy.jezebel.materialdark.donate")) {
+            akzent.setClickable(false);
+            akzent.setCardBackgroundColor(android.R.color.black);
+            TextView text1 = (TextView) inflation.findViewById(R.id.akzent_title);
+            text1.setTextColor(getResources().getColor(R.color.disabled_text));
+            TextView text2 = (TextView) inflation.findViewById(R.id.akzent_description);
+            text2.setTextColor(getResources().getColor(R.color.disabled_text));
+            text2.setText("please install this theme first!");
+            ImageView image = (ImageView) inflation.findViewById(R.id.akzent_image);
+            image.setAlpha(127);
+
+        }
+
+        if (!isAppInstalled(getContext(), "com.chummy.jezebel.blackedout.donate")) {
+            blakzent.setClickable(false);
+            blakzent.setCardBackgroundColor(android.R.color.black);
+            TextView text1 = (TextView) inflation.findViewById(R.id.blakzent_title);
+            text1.setTextColor(getResources().getColor(R.color.disabled_text));
+            TextView text2 = (TextView) inflation.findViewById(R.id.blakzent_description);
+            text2.setTextColor(getResources().getColor(R.color.disabled_text));
+            text2.setText("please install this theme first!");
+            ImageView image = (ImageView) inflation.findViewById(R.id.blakzent_image);
+            image.setAlpha(127);
+        }
+
+        // Disabling Klar integration for now
+
+        projektklar.setClickable(false);
+        projektklar.setCardBackgroundColor(android.R.color.black);
+        TextView text1 = (TextView) inflation.findViewById(R.id.projektklar_title);
+        text1.setTextColor(getResources().getColor(R.color.disabled_text));
+        TextView text2 = (TextView) inflation.findViewById(R.id.projektklar_description);
+        text2.setTextColor(getResources().getColor(R.color.disabled_text));
+        text2.setText("please install this theme first!");
+        ImageView image = (ImageView) inflation.findViewById(R.id.projektklar_image);
+        image.setAlpha(127);
+
+
 
         return inflation;
     }
