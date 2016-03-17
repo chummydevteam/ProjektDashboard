@@ -207,8 +207,7 @@ public class ColorChangerFragment extends BasePageFragment {
             @Override
             public void onColorChanged(int color) {
                 color_picked = ColorPickerPreference.convertToARGB(color);
-                editor.putString(theme_name, color_picked);
-                editor.commit();
+                editor.putString(theme_name, color_picked).commit();
                 String[] secondPhaseCommands = {theme_dir};
                 new secondPhaseAsyncTasks().execute(secondPhaseCommands);
             }

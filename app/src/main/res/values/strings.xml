@@ -12,7 +12,7 @@
     <string name="apply">Apply</string>
     <string name="save_to_device">Save to Device</string>
 
-    <string name="press_color_to_apply">Press color to apply!</string>
+    <string name="press_color_to_apply">Pick your color!</string>
     <string name="finish_apply">Select your options and press Apply to finalize!</string>
     <string name="finish_holo_apply">Go To Appearance settings -> Icon Packs and select this icon pack from the list.</string>
     <string name="finish_go_apply">Go theme applied!</string>
