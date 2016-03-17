@@ -7,7 +7,7 @@
     android:paddingRight="5dp"
     android:paddingEnd="5dp"
     android:paddingStart="5dp">
-    <com.dirtyunicorns.certified.colorpicker.ColorPickerView
+    <projekt.dashboard.colorpicker.ColorPickerView
         android:id="@+id/color_picker_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -43,7 +43,7 @@
         android:layout_height="40dp"
         android:layout_marginBottom="10dp"
         android:orientation="horizontal" >
-        <com.dirtyunicorns.certified.colorpicker.ColorPickerPanelView
+        <projekt.dashboard.colorpicker.ColorPickerPanelView
             android:id="@+id/old_color_panel"
             android:layout_width="0px"
             android:layout_height="fill_parent"
@@ -58,7 +58,7 @@
             android:textSize="20sp"
             android:layout_marginEnd="10dp"
             android:layout_marginStart="10dp" />
-        <com.dirtyunicorns.certified.colorpicker.ColorPickerPanelView
+        <projekt.dashboard.colorpicker.ColorPickerPanelView
             android:id="@+id/new_color_panel"
             android:layout_width="0px"
             android:layout_height="wrap_content"
