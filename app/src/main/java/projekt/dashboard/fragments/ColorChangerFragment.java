@@ -249,7 +249,7 @@ public class ColorChangerFragment extends BasePageFragment {
         @Override
         protected String doInBackground(String... params) {
             String theme_dir = params[0];
-            createTempFolder();
+            /*createTempFolder();*/ // We don't have anything in assets at this very moment
             copyCommonsFile(theme_dir);
             return null;
         }
@@ -440,14 +440,31 @@ public class ColorChangerFragment extends BasePageFragment {
         private void compileDummyAPK(String theme_dir) throws Exception {
             if (is_debugging_mode_enabled)
                 Log.e("CompileDummyAPK", "Beginning to compile dummy APK...");
+
+            // Create AndroidManifest.xml first, cutting down the assets file transfer!
+
+            File manifest = new File(getActivity().getFilesDir(), "AndroidManifest.xml");
+            if (!manifest.exists()) {
+                manifest.createNewFile();
+            }
+            FileWriter fw = new FileWriter(manifest);
+            BufferedWriter bw = new BufferedWriter(fw);
+            PrintWriter pw = new PrintWriter(bw);
+            String xmlTags = ("<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"no\"?>" + "\n");
+            String xmlRes1 = ("<manifest xmlns:android=\"http://schemas.android.com/apk/res/android\" package=\"common\"/>" + "\n");
+            pw.write(xmlTags);
+            pw.write(xmlRes1);
+            pw.close();
+            bw.close();
+            fw.close();
+
             Process nativeApp = Runtime.getRuntime().exec(
                     "aapt p -M " +
                             getActivity().getFilesDir().getAbsolutePath() +
                             "/AndroidManifest.xml -S " +
                             getActivity().getFilesDir().getAbsolutePath() +
                             "/res/ -I " +
-                            getActivity().getFilesDir().getAbsolutePath() +
-                            "/builder.jar -F " +
+                            "system/framework/framework-res.apk -F " +
                             getActivity().getFilesDir().getAbsolutePath() +
                             "/color-resources.apk\n");
             IOUtils.toString(nativeApp.getInputStream());
