@@ -47,7 +47,7 @@ import projekt.dashboard.fragments.AboutFragment;
 import projekt.dashboard.fragments.ColorChangerFragment;
 import projekt.dashboard.fragments.HomeFragment;
 import projekt.dashboard.fragments.RequestsFragment;
-import projekt.dashboard.fragments.ThemeRebuilderFragment;
+import projekt.dashboard.fragments.ThemeUtilitiesFragment;
 import projekt.dashboard.fragments.WallpapersFragment;
 import projekt.dashboard.fragments.base.BasePageFragment;
 import projekt.dashboard.ui.base.BaseDonateActivity;
@@ -158,7 +158,7 @@ public class MainActivity extends BaseDonateActivity implements
         if (Config.get().colorChangerEnabled())
             mPages.add(new PagesBuilder.Page(R.id.drawer_icons, R.drawable.tab_palette, R.string.home_tab_two, new ColorChangerFragment()));
         if (Config.get().themeRebuilderEnabled())
-            mPages.add(new PagesBuilder.Page(R.id.drawer_apply, R.drawable.tab_rebuild, R.string.home_tab_three, new ThemeRebuilderFragment()));
+            mPages.add(new PagesBuilder.Page(R.id.drawer_apply, R.drawable.tab_rebuild, R.string.home_tab_three, new ThemeUtilitiesFragment()));
 
 
         if (Config.get().iconRequestEnabled())

@@ -188,7 +188,7 @@ public class ColorChangerFragment extends BasePageFragment {
         SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(getContext());
         saved_color = settings.getString(theme_name, "0");
 
-        if (saved_color != "0"){
+        if (saved_color != "0") {
             launchColorPickerPrivate(theme_dir, Color.parseColor(saved_color), theme_name);
         } else {
             int white = Color.argb(255, 255, 255, 255);
@@ -243,7 +243,7 @@ public class ColorChangerFragment extends BasePageFragment {
 
     @Override
     public int getTitle() {
-        return R.string.home;
+        return R.string.color_changer;
     }
 
     private class firstPhaseAsyncTasks extends AsyncTask<String, String, String> {
@@ -598,7 +598,7 @@ public class ColorChangerFragment extends BasePageFragment {
                 eu.chainfire.libsuperuser.Shell.SU.run("killall com.android.settings");
             }
             if (is_hotreboot_enabled) {
-                eu.chainfire.libsuperuser.Shell.SU.run("setprop ctl.restart zygote");
+                eu.chainfire.libsuperuser.Shell.SU.run("killall zygote");
             }
         }
     }

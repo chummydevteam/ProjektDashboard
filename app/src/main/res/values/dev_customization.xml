@@ -42,6 +42,8 @@
     <string name="projektklar_title">projekt // klar</string>
     <string name="projektklar_description">click here to change colors for projekt // klar</string>
 
+    <string name="themeutilities_description">oh no! did something happen?</string>
+    <string name="themeutilities_description_secondary">here you have a collection of useful theme engine tweaks that you could use if you are encountering issues, or just felt like doing some sunday afternoon cleaning on your phone.\n\n</string>
 
 
     <!-- URL to JSON file containing a map of wallpapers, leave empty to disable wallpapers. -->

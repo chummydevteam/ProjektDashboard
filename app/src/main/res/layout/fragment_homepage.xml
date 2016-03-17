@@ -34,7 +34,7 @@
             <ImageView
                 android:id="@+id/landingIcon"
                 android:layout_width="250dp"
-                android:layout_height="60dp"
+                android:layout_height="55dp"
                 android:layout_marginBottom="@dimen/content_inset"
                 android:layout_marginTop="@dimen/content_inset_less"
                 android:scaleType="fitXY"

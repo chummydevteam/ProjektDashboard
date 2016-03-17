@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.pluscubed.insetsdispatcher.view.InsetsDispatcherFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clipToPadding="false">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clipToPadding="false"
+        android:paddingBottom="@dimen/list_with_fab_bottom_margin"
+        app:layout_windowInsets="bottom">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clipToPadding="false"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="@dimen/content_inset_less"
+            android:weightSum="1">
+
+            <TextView
+                android:id="@+id/landingMessage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/content_inset_less"
+                android:fontFamily="sans-serif-light"
+                android:gravity="center"
+                android:lineSpacingMultiplier="1.2"
+                android:text="@string/themeutilities_description"
+                android:textColor="?android:textColorPrimary"
+                android:textSize="@dimen/title_text_size"
+                android:textStyle="bold|italic" />
+
+            <TextView
+                android:id="@+id/landingMessageSecondary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/content_inset_less"
+                android:layout_weight="0.92"
+                android:fontFamily="sans-serif-light"
+                android:gravity="center"
+                android:lineSpacingMultiplier="1.2"
+                android:text="@string/themeutilities_description_secondary"
+                android:textColor="?android:textColorPrimary"
+                android:textSize="@dimen/content_text_size" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/content_inset_less"
+                android:fontFamily="sans-serif-light"
+                android:gravity="center"
+                android:lineSpacingMultiplier="1.2"
+                android:paddingBottom="10dp"
+                android:text="basic utilities"
+                android:textColor="?android:textColorPrimary"
+                android:textSize="@dimen/text_small"
+                android:textStyle="bold|italic" />
+
+            <CheckBox
+                android:id="@+id/check1"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:button="@null"
+                android:drawableRight="?android:attr/listChoiceIndicatorMultiple"
+                android:text="Perform SystemUI Restart" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/content_inset_less"
+                android:fontFamily="sans-serif-light"
+                android:gravity="center"
+                android:lineSpacingMultiplier="1.2"
+                android:text=""
+                android:textColor="?android:textColorPrimary"
+                android:textSize="1dp"
+                android:textStyle="bold|italic" />
+
+            <CheckBox
+                android:id="@+id/check2"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:button="@null"
+                android:drawableRight="?android:attr/listChoiceIndicatorMultiple"
+                android:text="Perform Soft Reboot" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/content_inset_less"
+                android:fontFamily="sans-serif-light"
+                android:gravity="center"
+                android:lineSpacingMultiplier="1.2"
+                android:text=""
+                android:textColor="?android:textColorPrimary"
+                android:textSize="1dp"
+                android:textStyle="bold|italic" />
+
+            <CheckBox
+                android:id="@+id/check3"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:button="@null"
+                android:drawableRight="?android:attr/listChoiceIndicatorMultiple"
+                android:text="Perform Complete System Reboot" />
+
+            <Button
+                android:id="@+id/button1"
+                android:clickable="true"
+                android:foreground="?android:selectableItemBackground"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/content_inset_less"
+                android:fontFamily="sans-serif-light"
+                android:gravity="center"
+                android:lineSpacingMultiplier="1.2"
+                android:text="perform action"
+                android:textColor="?android:textColorPrimary"
+                android:textSize="@dimen/text_ultrasmall"
+                android:textStyle="bold|italic"
+                android:background="@color/cardsbg" />
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/content_inset_less"
+                android:fontFamily="sans-serif-light"
+                android:gravity="center"
+                android:lineSpacingMultiplier="1.2"
+                android:text=""
+                android:textColor="?android:textColorPrimary"
+                android:textSize="@dimen/text_med"
+                android:textStyle="bold|italic" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/content_inset_less"
+                android:fontFamily="sans-serif-light"
+                android:gravity="center"
+                android:lineSpacingMultiplier="1.2"
+                android:paddingBottom="10dp"
+                android:text="debugging utilities"
+                android:textColor="?android:textColorPrimary"
+                android:textSize="@dimen/text_small"
+                android:textStyle="bold|italic" />
+
+            <CheckBox
+                android:id="@+id/switch1"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:button="@null"
+                android:drawableRight="?android:attr/listChoiceIndicatorMultiple"
+                android:text="Rebuild dark material // akzent" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/content_inset_less"
+                android:fontFamily="sans-serif-light"
+                android:gravity="center"
+                android:lineSpacingMultiplier="1.2"
+                android:text=""
+                android:textColor="?android:textColorPrimary"
+                android:textSize="1dp"
+                android:textStyle="bold|italic" />
+
+            <CheckBox
+                android:id="@+id/switch2"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:button="@null"
+                android:drawableRight="?android:attr/listChoiceIndicatorMultiple"
+                android:text="Rebuild blacked out // blakzent" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/content_inset_less"
+                android:fontFamily="sans-serif-light"
+                android:gravity="center"
+                android:lineSpacingMultiplier="1.2"
+                android:text=""
+                android:textColor="?android:textColorPrimary"
+                android:textSize="1dp"
+                android:textStyle="bold|italic" />
+
+            <CheckBox
+                android:id="@+id/switch3"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:button="@null"
+                android:drawableRight="?android:attr/listChoiceIndicatorMultiple"
+                android:text="Rebuild projekt // klar" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/content_inset_less"
+                android:fontFamily="sans-serif-light"
+                android:gravity="center"
+                android:lineSpacingMultiplier="1.2"
+                android:text=""
+                android:textColor="?android:textColorPrimary"
+                android:textSize="1dp"
+                android:textStyle="bold|italic" />
+
+            <CheckBox
+                android:id="@+id/switch4"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:button="@null"
+                android:drawableRight="?android:attr/listChoiceIndicatorMultiple"
+                android:text="Rebuild ALL color switch themes" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/content_inset_less"
+                android:fontFamily="sans-serif-light"
+                android:gravity="center"
+                android:lineSpacingMultiplier="1.2"
+                android:text=""
+                android:textColor="?android:textColorPrimary"
+                android:textSize="1dp"
+                android:textStyle="bold|italic" />
+
+            <CheckBox
+                android:id="@+id/switch5"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:button="@null"
+                android:drawableRight="?android:attr/listChoiceIndicatorMultiple"
+                android:text="Rebuild ALL chummydevteam themes" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/content_inset_less"
+                android:fontFamily="sans-serif-light"
+                android:gravity="center"
+                android:lineSpacingMultiplier="1.2"
+                android:text=""
+                android:textColor="?android:textColorPrimary"
+                android:textSize="1dp"
+                android:textStyle="bold|italic" />
+
+            <CheckBox
+                android:id="@+id/switch6"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:button="@null"
+                android:drawableRight="?android:attr/listChoiceIndicatorMultiple"
+                android:text="Rebuild ALL themes installed on the device" />
+
+            <Button
+                android:id="@+id/button2"
+                android:clickable="true"
+                android:foreground="?android:selectableItemBackground"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/content_inset_less"
+                android:fontFamily="sans-serif-light"
+                android:gravity="center"
+                android:lineSpacingMultiplier="1.2"
+                android:text="perform action"
+                android:textColor="?android:textColorPrimary"
+                android:textSize="@dimen/text_ultrasmall"
+                android:textStyle="bold|italic"
+                android:background="@color/cardsbg" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</com.pluscubed.insetsdispatcher.view.InsetsDispatcherFrameLayout>
