@@ -99,7 +99,8 @@ public class ColorChangerFragment extends BasePageFragment {
                             "Universal variable to hot reboot ENABLED.");
                     Toast toast = Toast.makeText(getActivity().getApplicationContext(),
                             "This feature disables you from enabling both SystemUI restart and " +
-                                    "Hot Reboot. Disable Hot Reboot to switch to SystemUI Restart",
+                                    "Hot Reboot. " +
+                                    "Disable Hot Reboot to switch to SystemUI Restart",
                             Toast.LENGTH_LONG);
                     toast.show();
                 } else {
@@ -450,8 +451,10 @@ public class ColorChangerFragment extends BasePageFragment {
             FileWriter fw = new FileWriter(manifest);
             BufferedWriter bw = new BufferedWriter(fw);
             PrintWriter pw = new PrintWriter(bw);
-            String xmlTags = ("<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"no\"?>" + "\n");
-            String xmlRes1 = ("<manifest xmlns:android=\"http://schemas.android.com/apk/res/android\" package=\"common\"/>" + "\n");
+            String xmlTags = ("<?xml version=\"1.0\" encoding=\"utf-8\" " +
+                    "standalone=\"no\"?>" + "\n");
+            String xmlRes1 = ("<manifest xmlns:android=\"http://schemas.android.com/" +
+                    "apk/res/android\" package=\"common\"/>" + "\n");
             pw.write(xmlTags);
             pw.write(xmlRes1);
             pw.close();
