@@ -38,7 +38,7 @@
                 android:layout_marginBottom="@dimen/content_inset"
                 android:layout_marginTop="@dimen/content_inset_less"
                 android:scaleType="fitXY"
-                android:src="@drawable/homepage_landing_icon"
+                android:src="@drawable/dashboard_logo"
                 tools:ignore="ContentDescription" />
 
             <TextView

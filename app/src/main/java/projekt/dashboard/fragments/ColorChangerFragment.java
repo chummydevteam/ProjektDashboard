@@ -6,7 +6,6 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.AssetManager;
 import android.graphics.Color;
-import android.media.Image;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -221,7 +220,6 @@ public class ColorChangerFragment extends BasePageFragment {
         text2.setText("please install this theme first!");
         ImageView image = (ImageView) inflation.findViewById(R.id.projektklar_image);
         image.setAlpha(127);
-
 
 
         return inflation;

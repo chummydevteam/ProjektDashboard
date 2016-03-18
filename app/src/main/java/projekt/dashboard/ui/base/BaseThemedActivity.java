@@ -10,7 +10,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.WindowManager;
 
 import com.afollestad.assent.AssentActivity;
 import com.afollestad.materialdialogs.util.DialogUtils;
@@ -25,8 +24,6 @@ import projekt.dashboard.util.Utils;
  */
 public abstract class BaseThemedActivity extends AssentActivity {
 
-    private boolean mLastDarkTheme = false;
-
     public static void themeMenu(Context context, Menu menu) {
         final int tintColor = DialogUtils.resolveColor(context, R.attr.toolbar_icons_color);
         for (int i = 0; i < menu.size(); i++) {
@@ -38,24 +35,11 @@ public abstract class BaseThemedActivity extends AssentActivity {
 
     public abstract Toolbar getToolbar();
 
-    public int getLastStatusBarInsetHeight() {
-        return 0;
-    }
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         Config.init(this);
-        mLastDarkTheme = darkTheme();
         setTheme(getCurrentTheme());
         super.onCreate(savedInstanceState);
-
-        if (Config.get().navDrawerModeEnabled()) {
-            if (Build.VERSION.SDK_INT == Build.VERSION_CODES.KITKAT) {
-                //TODO: Get insets working on KitKat when drawer is used.
-                getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-                getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
-            }
-        }
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M &&
                 !DialogUtils.resolveBoolean(this, R.attr.disable_auto_light_status_bar)) {
@@ -94,8 +78,6 @@ public abstract class BaseThemedActivity extends AssentActivity {
     protected void onResume() {
         super.onResume();
         Config.setContext(this);
-        if (mLastDarkTheme != darkTheme())
-            recreate();
     }
 
     @Override
@@ -110,22 +92,6 @@ public abstract class BaseThemedActivity extends AssentActivity {
 
     @StyleRes
     private int getCurrentTheme() {
-        if (isTranslucent()) {
-            if (!mLastDarkTheme)
-                return R.style.AppTheme_Light_Translucent;
-            return R.style.AppTheme_Dark_Translucent;
-        } else {
-            if (!mLastDarkTheme)
-                return R.style.AppTheme_Light;
-            return R.style.AppTheme_Dark;
-        }
-    }
-
-    protected final void darkTheme(boolean newValue) {
-        Config.get().darkTheme(newValue);
-    }
-
-    protected final boolean darkTheme() {
-        return Config.get().darkTheme();
+        return R.style.AppTheme_Dark;
     }
 }

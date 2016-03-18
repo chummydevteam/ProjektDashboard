@@ -1,22 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <color name="attention_color">#ffff0000</color>
     <color name="colorAccent">@android:color/white</color>
     <color name="cardsbg">#212021</color>
-
     <color name="disabled_text">#ff777777</color>
-
-    <!-- See dev_theming for Polar theming colors -->
-
-
     <color name="viewer_overlay">#40000000</color>
 
-    <color name="navigationview_normalicon_light">#606060</color>
-    <color name="navigationview_normalicon_dark">#9F9F9F</color>
-    <color name="navigationview_normaltext_light">#191919</color>
-    <color name="navigationview_normaltext_dark">#E6E6E6</color>
-    <color name="navigationview_selectedbg_light">#e2e2e2</color>
-    <color name="navigationview_selectedbg_dark">#474747</color>
-
+    <color name="primary_1_dark">#ff212021</color>
+    <color name="primary_2_dark">#ff212021</color>
+    <color name="accent_1_dark">@android:color/white</color>
+    <color name="accent_2_dark">@android:color/white</color>
+    <color name="window_bg_cards_dark">@android:color/black</color>
+    <color name="tab_indicator_color_dark">@android:color/white</color>
+    <color name="tab_icon_color_dark">@android:color/white</color>
+    <color name="card_background_dark">#ff1e1e1e</color>
+    <color name="toolbar_title_color_dark">@android:color/white</color>
+    <color name="toolbar_icons_color_dark">@android:color/white</color>
 </resources>

@@ -8,7 +8,6 @@ import com.anjlab.android.iab.v3.BillingProcessor;
 import com.anjlab.android.iab.v3.TransactionDetails;
 
 import projekt.dashboard.R;
-import projekt.dashboard.config.Config;
 import projekt.dashboard.util.Utils;
 
 /**
@@ -26,10 +25,6 @@ public abstract class BaseDonateActivity extends BaseThemedActivity implements B
     @Override
     protected void onResume() {
         super.onResume();
-        if (Config.get().donationEnabled() &&
-                BillingProcessor.isIabServiceAvailable(this)) {
-            bp = new BillingProcessor(this, Config.get().donationLicenseKey(), this);
-        }
     }
 
     @Override

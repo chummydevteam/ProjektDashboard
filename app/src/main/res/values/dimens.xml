@@ -26,7 +26,6 @@
     <dimen name="text_small">16sp</dimen>
     <dimen name="text_ultrasmall">12sp</dimen>
 
-
     <dimen name="fab_horizontal_margin">16dp</dimen>
     <dimen name="fab_bottom_margin">16dp</dimen>
     <dimen name="list_with_fab_bottom_margin">84dp</dimen>

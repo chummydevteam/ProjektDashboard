@@ -14,7 +14,12 @@ android {
     // Note to self, sample uses same keystore as Cabinet
 
     lintOptions {
-        abortOnError false
+        // set to true to turn off analysis progress reporting by lint
+        quiet false
+        // if true, stop the gradle build if errors are found
+        abortOnError true
+        // if true, only report errors
+        ignoreWarnings true
     }
 
     defaultConfig {
@@ -57,8 +62,6 @@ repositories {
 }
 
 dependencies {
-    compile project(path: ':licensing')
-
     compile('com.github.afollestad.material-dialogs:core:0.8.5.7@aar') {
         transitive = true
     }

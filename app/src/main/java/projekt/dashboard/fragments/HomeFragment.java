@@ -15,9 +15,6 @@ import projekt.dashboard.fragments.base.BasePageFragment;
  */
 public class HomeFragment extends BasePageFragment {
 
-//    @Bind(R.id.fab)
-//    FloatingActionButton mFab;
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

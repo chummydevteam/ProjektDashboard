@@ -1,21 +1,13 @@
 package projekt.dashboard.util;
 
 import android.content.Context;
-import android.content.res.XmlResourceParser;
-import android.support.annotation.NonNull;
-import android.support.annotation.XmlRes;
 
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
-
-import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
 import projekt.dashboard.BuildConfig;
-import projekt.dashboard.R;
 
 /**
  * @author Aidan Follestad (afollestad)
@@ -26,42 +18,6 @@ public class DrawableXmlParser {
     private static ArrayList<Category> mCategories;
 
     private DrawableXmlParser() {
-    }
-
-    public static List<Category> parse(@NonNull Context context, @XmlRes int xmlRes) {
-        mCategories = new ArrayList<>();
-        XmlResourceParser parser = null;
-        try {
-            parser = context.getResources().getXml(xmlRes);
-            int eventType = parser.getEventType();
-            while (eventType != XmlPullParser.END_DOCUMENT) {
-                switch (eventType) {
-                    case XmlPullParser.START_TAG:
-                        final String tagName = parser.getName();
-                        if (tagName.equalsIgnoreCase("category")) {
-                            mCurrentCategory = new Category(parser.getAttributeValue(null, "title"));
-                            mCategories.add(mCurrentCategory);
-                        } else if (tagName.equalsIgnoreCase("item")) {
-                            if (mCurrentCategory == null) {
-                                mCurrentCategory = new Category(context.getString(R.string.default_category));
-                                mCategories.add(mCurrentCategory);
-                            }
-                            mCurrentCategory.addItem(new Icon(parser.getAttributeValue(null, "drawable"), mCurrentCategory));
-                        }
-                        break;
-                }
-                eventType = parser.next();
-            }
-
-        } catch (XmlPullParserException | IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (parser != null)
-                parser.close();
-        }
-
-        mCurrentCategory = null;
-        return mCategories;
     }
 
     public static void cleanup() {
