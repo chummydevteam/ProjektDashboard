@@ -3,7 +3,6 @@ package projekt.dashboard.ui;
 import android.annotation.TargetApi;
 import android.app.FragmentManager;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -33,16 +32,12 @@ import android.widget.LinearLayout;
 import com.afollestad.bridge.Bridge;
 import com.afollestad.inquiry.Inquiry;
 import com.afollestad.materialdialogs.util.DialogUtils;
-import com.google.android.vending.licensing.Policy;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import projekt.dashboard.BuildConfig;
 import projekt.dashboard.R;
 import projekt.dashboard.adapters.MainPagerAdapter;
 import projekt.dashboard.config.Config;
-import projekt.dashboard.dialogs.ChangelogDialog;
-import projekt.dashboard.dialogs.InvalidLicenseDialog;
 import projekt.dashboard.fragments.AboutFragment;
 import projekt.dashboard.fragments.ColorChangerFragment;
 import projekt.dashboard.fragments.HomeFragment;
@@ -52,10 +47,8 @@ import projekt.dashboard.fragments.WallpapersFragment;
 import projekt.dashboard.fragments.base.BasePageFragment;
 import projekt.dashboard.ui.base.BaseDonateActivity;
 import projekt.dashboard.util.DrawableXmlParser;
-import projekt.dashboard.util.LicensingUtils;
 import projekt.dashboard.util.PagesBuilder;
 import projekt.dashboard.util.TintUtils;
-import projekt.dashboard.util.Utils;
 import projekt.dashboard.util.WallpaperUtils;
 import projekt.dashboard.views.DisableableViewPager;
 
@@ -67,7 +60,7 @@ import static projekt.dashboard.viewer.ViewerActivity.STATE_CURRENT_POSITION;
  * @author Aidan Follestad (afollestad)
  */
 public class MainActivity extends BaseDonateActivity implements
-        LicensingUtils.LicensingCallback, NavigationView.OnNavigationItemSelectedListener {
+        NavigationView.OnNavigationItemSelectedListener {
 
     public RecyclerView mRecyclerView;
 
@@ -171,35 +164,6 @@ public class MainActivity extends BaseDonateActivity implements
             mPages.add(new PagesBuilder.Page(R.id.drawer_about, R.drawable.tab_about, R.string.about, new AboutFragment()));
     }
 
-    public boolean retryLicenseCheck() {
-        return LicensingUtils.check(this, this);
-    }
-
-    @Override
-    public void onLicensingResult(boolean allow, int reason) {
-        if (allow)
-            showChangelogIfNecessary(true);
-        else InvalidLicenseDialog.show(this, reason == Policy.RETRY);
-    }
-
-    @Override
-    public void onLicensingError(int errorCode) {
-        Utils.showError(this, new Exception("License checking error occurred, make sure everything is setup correctly. Error code: " + errorCode));
-    }
-
-    public void showChangelogIfNecessary(boolean licenseAllowed) {
-        if (!Config.get().changelogEnabled()) {
-            retryLicenseCheck();
-        } else if (licenseAllowed || retryLicenseCheck()) {
-            final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-            final int currentVersion = BuildConfig.VERSION_CODE;
-            if (currentVersion != prefs.getInt("changelog_version", -1)) {
-                prefs.edit().putInt("changelog_version", currentVersion).apply();
-                ChangelogDialog.show(this);
-            }
-        }
-    }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
@@ -223,10 +187,7 @@ public class MainActivity extends BaseDonateActivity implements
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.changelog) {
-            ChangelogDialog.show(this);
-            return true;
-        } else if (item.getItemId() == R.id.darkTheme) {
+        if (item.getItemId() == R.id.darkTheme) {
             darkTheme(!darkTheme());
             mToolbar.postDelayed(new Runnable() {
                 @Override
@@ -466,7 +427,6 @@ public class MainActivity extends BaseDonateActivity implements
             Bridge.destroy();
             Inquiry.deinit();
             DrawableXmlParser.cleanup();
-            LicensingUtils.cleanup();
         }
     }
 

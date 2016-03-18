@@ -47,7 +47,7 @@
 
 
     <!-- URL to JSON file containing a map of wallpapers, leave empty to disable wallpapers. -->
-    <string name="wallpapers_json_url" formatted="false"></string>
+    <string name="wallpapers_json_url" formatted="false">http://pastebin.com/raw/hvKBvrXD</string>
 
     <!-- Email used to send icon requests, leave empty to disable this feature. -->
     <string name="icon_request_email"></string>
