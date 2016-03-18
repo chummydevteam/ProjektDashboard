@@ -55,6 +55,20 @@
                 android:textStyle="bold|italic" />
 
             <TextView
+                android:id="@+id/status_message"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/content_inset_less"
+                android:fontFamily="sans-serif-light"
+                android:gravity="center"
+                android:lineSpacingMultiplier="1.2"
+                android:text="« ROM_SUPPORTED_MESSAGE »"
+                android:textColor="?android:textColorPrimary"
+                android:textSize="@dimen/text_ultrasmall"
+                android:textAllCaps="true"
+                android:textStyle="bold" />
+
+            <TextView
                 android:id="@+id/landingMessageSecondary"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

@@ -23,11 +23,15 @@
         some sunday afternoon cleaning on your phone.\n\n</string>
 
     <string name="homepage_description">
-        cyanogenmod theming, evolved.
+        cyanogenmod theming, evolved!
     </string>
     <string name="homepage_description_secondary">
-        welcome to the cdt dashboard experimental app containing all publicly available projects
-        laid out tab-by-tab.
+        ever wondered how far devs could go with the cyanogenmod theme engine? we challanged
+        ourselves to reinvent the wheel, so we created and app to house all our tweaks in an
+        all-in-one package.
+
+        \n\nhowever this app may not work on all devices, so if you see an unsupported message above (red), do not attempt to run this
+        app unless you would like to be the guinea pig :)
     </string>
 
     <string name="home_tab_one">Home</string>

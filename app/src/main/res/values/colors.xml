@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="attention_color">#ffff0000</color>
+    <color name="attention_color_green">#ff1eff00</color>
+    <color name="attention_color_orange">#ffff9500</color>
     <color name="colorAccent">@android:color/white</color>
     <color name="cardsbg">#212021</color>
     <color name="disabled_text">#ff777777</color>
