@@ -13,14 +13,6 @@
     <uses-permission android:name="com.android.vending.BILLING" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
 
-    <receiver
-        android:name=".services.AlarmReceiver"
-        android:exported="false">
-        <intent-filter>
-            <action android:name="projekt.dashboard.SET_ACCENT_BY_TIME" />
-        </intent-filter>
-    </receiver>
-
     <receiver android:name=".services.BootReceiver">
         <intent-filter>
             <action android:name="android.intent.action.BOOT_COMPLETED" />
