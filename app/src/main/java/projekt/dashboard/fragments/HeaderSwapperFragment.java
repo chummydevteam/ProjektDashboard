@@ -60,6 +60,7 @@ public class HeaderSwapperFragment extends BasePageFragment {
     public String theme_dir;
     public FloatingActionButton apply_fab, fab;
     public int spinner_current = 0;
+    public int folder_directory = 1;
 
     public void cleanTempFolder() {
         File dir = getActivity().getFilesDir();
@@ -171,7 +172,7 @@ public class HeaderSwapperFragment extends BasePageFragment {
                                 Log.e("TAG SUCCESS", edittext.getText().toString() +
                                         " has been chosen!");
                                 theme_dir = "/data/app/" + edittext.getText().toString() +
-                                        "-1/base.apk";
+                                        "-" + folder_directory + "/base.apk";
                                 apply_fab.setClickable(true);
                                 Snackbar snackbar = Snackbar.make(fab, "you are tweaking '" +
                                                 edittext.getText().toString() + "'...",
@@ -224,11 +225,24 @@ public class HeaderSwapperFragment extends BasePageFragment {
     public boolean checkCurrentThemeSelection(String packageName) {
         try {
             getContext().getPackageManager().getApplicationInfo(packageName, 0);
-            File directory = new File("/data/app/" + packageName + "-1/base.apk");
-            if (directory.exists()) {
+            File directory1 = new File("/data/app/" + packageName + "-1/base.apk");
+            if (directory1.exists()) {
+                folder_directory = 1;
                 return true;
             } else {
-                return false;
+                File directory2 = new File("/data/app/" + packageName + "-2/base.apk");
+                if (directory2.exists()) {
+                    folder_directory = 2;
+                    return true;
+                } else {
+                    File directory3 = new File("/data/app/" + packageName + "-3/base.apk");
+                    if (directory3.exists()) {
+                        folder_directory = 3;
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
             }
         } catch (PackageManager.NameNotFoundException e) {
             return false;
@@ -236,7 +250,8 @@ public class HeaderSwapperFragment extends BasePageFragment {
     }
 
     public void letsGetStarted() {
-        String[] secondPhaseCommands = {theme_dir + "-1/base.apk"};
+        String[] secondPhaseCommands = {theme_dir};
+        Log.e("COLORIZATION CUSTOMS", secondPhaseCommands[0]);
         new secondPhaseAsyncTasks().execute(secondPhaseCommands);
 
         Button softReboot = (Button) inflation.findViewById(R.id.softreboot);
@@ -477,13 +492,18 @@ public class HeaderSwapperFragment extends BasePageFragment {
             // Copy the modified APK to the directory
             eu.chainfire.libsuperuser.Shell.SU.run("cp " +
                     getActivity().getFilesDir().getAbsolutePath() +
-                    "/new_header_apk.apk " + theme_dir + "-1/base.apk");
+                    "/new_header_apk.apk " + theme_dir);
+
+            Log.e("COLORIZATION FINALIZATION", "cp " +
+                    getActivity().getFilesDir().getAbsolutePath() +
+                    "/new_header_apk.apk " + theme_dir);
 
             // Clean the working directory
             cleanTempFolder();
 
             // Set Permissions for the new APK
-            eu.chainfire.libsuperuser.Shell.SU.run("chmod 644 " + theme_dir + "-1/base.apk");
+            eu.chainfire.libsuperuser.Shell.SU.run("chmod 644 " + theme_dir + "-" +
+                    folder_directory + "/base.apk");
 
             // Close everything and make sure
             eu.chainfire.libsuperuser.Shell.SU.run("rm -r /assets");
