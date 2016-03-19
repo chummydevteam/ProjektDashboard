@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.pluscubed.insetsdispatcher.view.InsetsDispatcherFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clipToPadding="false">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clipToPadding="false"
+        android:paddingBottom="@dimen/list_with_fab_bottom_margin"
+        app:layout_windowInsets="bottom">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clipToPadding="false"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="@dimen/content_inset_less"
+            android:weightSum="1">
+
+            <TextView
+                android:id="@+id/landingMessage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/content_inset_less"
+                android:fontFamily="sans-serif-light"
+                android:gravity="center"
+                android:lineSpacingMultiplier="1.2"
+                android:text="@string/contextualheaderswapper_description"
+                android:textColor="?android:textColorPrimary"
+                android:textSize="@dimen/title_text_size"
+                android:textStyle="bold|italic" />
+
+            <TextView
+                android:id="@+id/landingMessageSecondary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/content_inset_less"
+                android:layout_weight="0.92"
+                android:fontFamily="sans-serif-light"
+                android:gravity="center"
+                android:lineSpacingMultiplier="1.2"
+                android:text="@string/contextualheaderswapper_description_secondary"
+                android:textColor="?android:textColorPrimary"
+                android:textSize="@dimen/content_text_size" />
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:layout_marginLeft="7dp"
+                android:text="modifying contextual header file:"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textStyle="italic" />
+
+            <Spinner
+                android:id="@+id/spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="@dimen/content_inset" />
+
+            <TextView
+                android:id="@+id/textView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:layout_marginLeft="7dp"
+                android:text="select installed themes:"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textStyle="italic" />
+
+            <Spinner
+                android:id="@+id/spinner1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="@dimen/content_inset" />
+
+            <Button
+                android:id="@+id/softreboot"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/content_inset_less"
+                android:layout_marginTop="@dimen/content_inset_less"
+                android:background="@android:color/transparent"
+                android:clickable="true"
+                android:fontFamily="sans-serif-light"
+                android:foreground="?android:selectableItemBackground"
+                android:gravity="center"
+                android:lineSpacingMultiplier="1.2"
+                android:text="Click here to soft reboot after all modifications"
+                android:textColor="@color/attention_color"
+                android:textSize="@dimen/text_ultrasmall"
+                android:textStyle="bold|italic"
+                android:visibility="gone" />
+
+            <com.isseiaoki.simplecropview.CropImageView xmlns:custom="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/cropImageView"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:layout_marginTop="@dimen/content_inset_less"
+                android:padding="16dp"
+                android:visibility="gone"
+                custom:cropMode="ratio_free"
+                custom:overlayColor="#33000000" />
+
+            <Button
+                android:id="@+id/crop_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/content_inset_less"
+                android:layout_marginTop="@dimen/content_inset_less"
+                android:background="@color/cardsbg"
+                android:clickable="true"
+                android:fontFamily="sans-serif-light"
+                android:foreground="?android:selectableItemBackground"
+                android:gravity="center"
+                android:lineSpacingMultiplier="1.2"
+                android:text="Crop Image"
+                android:textColor="?android:textColorPrimary"
+                android:textSize="@dimen/text_ultrasmall"
+                android:textStyle="bold|italic"
+                android:visibility="gone" />
+
+            <ImageView
+                android:id="@+id/croppedImageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="16dp"
+                android:visibility="gone" />
+
+            <Button
+                android:id="@+id/save_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/content_inset_less"
+                android:layout_marginTop="@dimen/content_inset_less"
+                android:background="@color/cardsbg"
+                android:clickable="true"
+                android:fontFamily="sans-serif-light"
+                android:foreground="?android:selectableItemBackground"
+                android:gravity="center"
+                android:lineSpacingMultiplier="1.2"
+                android:text="Save and Set Image"
+                android:textColor="?android:textColorPrimary"
+                android:textSize="@dimen/text_ultrasmall"
+                android:textStyle="bold|italic"
+                android:visibility="gone" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/clayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/apply_fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|bottom|right"
+            android:layout_marginBottom="@dimen/content_inset"
+            android:layout_marginRight="20dp"
+            android:src="@drawable/ic_photo_library_24dp"
+            android:visibility="visible"
+            app:layout_windowInsets="bottom"
+            app:layout_windowInsetsUseMargin="true" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|bottom|right"
+            android:layout_marginBottom="@dimen/content_inset"
+            android:layout_marginRight="20dp"
+            android:src="@drawable/ic_cached_24dp"
+            android:visibility="gone"
+            app:layout_windowInsets="bottom"
+            app:layout_windowInsetsUseMargin="true" />
+
+    </android.support.design.widget.CoordinatorLayout>
+
+
+</com.pluscubed.insetsdispatcher.view.InsetsDispatcherFrameLayout>

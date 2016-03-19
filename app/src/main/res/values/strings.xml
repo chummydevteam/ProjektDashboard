@@ -1,6 +1,38 @@
 <resources>
     <string name="wallpapers_json_url" formatted="false">http://pastebin.com/raw/hvKBvrXD</string>
 
+    <string-array name="contextual_headers">
+        <item>notifhead_afternoon.png</item>
+        <item>notifhead_christmas.png</item>
+        <item>notifhead_morning.png</item>
+        <item>notifhead_newyearseve.png</item>
+        <item>notifhead_night.png</item>
+        <item>notifhead_noon.png</item>
+        <item>notifhead_sunrise.png</item>
+        <item>notifhead_sunset_hdpi.png</item>
+        <item>notifhead_sunset_xhdpi.png</item>
+        <item>notifhead_sunset.png</item>
+    </string-array>
+
+    <string-array name="themes">
+        <item>please select a theme...</item>
+        <item>dark material // akZent</item>
+        <item>blacked out // blakZent</item>
+        <item>select custom theme...</item>
+    </string-array>
+
+    <string name="about_title">Javatechig.com</string>
+    <string name="about_desc">Provides tutorials, tips, examples and source code on leading Java, Android, Blackberry, PhoneGap and other mobile technologies.</string>
+    <string name="action_about">About</string>
+    <string name="hello_world">Hello world!</string>
+
+    <string name="contextualheaderswapper_description">welcome to the contextual header swapper!</string>
+    <string name="contextualheaderswapper_description_secondary">this is a highly experimental feature to
+        allow you to set your own custom contextual headers for your systemui notification shade.\n\n
+        a soft reboot is required for the system to take your changes as we are modifying the actual
+        apk installed on your phone.\n\n
+    </string>
+
     <string name="colorpicker_description">welcome to the color picker!</string>
     <string name="colorpicker_description_secondary">this is a highly experimental feature to
         hotswap your accent colors at runtime (meaning that a full reboot isn\'t necessary and
@@ -27,16 +59,17 @@
     </string>
     <string name="homepage_description_secondary">
         ever wondered how far devs could go with the cyanogenmod theme engine? we challanged
-        ourselves to reinvent the wheel, so we created and app to house all our tweaks in an
+        ourselves to reinvent the wheel, so we created an app to house all our tweaks in an
         all-in-one package.
 
-        \n\nhowever this app may not work on all devices, so if you see an unsupported message above (red), do not attempt to run this
-        app unless you would like to be the guinea pig :)
+        \n\nhowever this app may not work on all devices, so if you see an unsupported message
+        above in red, do not attempt to run this app unless you are ready to be a guinea pig :)
     </string>
 
     <string name="home_tab_one">Home</string>
     <string name="home_tab_two">Color Picker</string>
-    <string name="home_tab_three">Theme Rebuilder</string>
+    <string name="home_tab_three">Contextual Header Swapper</string>
+    <string name="home_tab_four">Theme Utilities</string>
 
     <!-- App Strings -->
     <string name="home">home.</string>

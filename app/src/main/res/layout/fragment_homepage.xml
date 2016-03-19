@@ -63,9 +63,9 @@
                 android:gravity="center"
                 android:lineSpacingMultiplier="1.2"
                 android:text="« ROM_SUPPORTED_MESSAGE »"
+                android:textAllCaps="true"
                 android:textColor="?android:textColorPrimary"
                 android:textSize="@dimen/text_ultrasmall"
-                android:textAllCaps="true"
                 android:textStyle="bold" />
 
             <TextView

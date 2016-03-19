@@ -31,6 +31,7 @@ import projekt.dashboard.R;
 import projekt.dashboard.adapters.MainPagerAdapter;
 import projekt.dashboard.config.Config;
 import projekt.dashboard.fragments.ColorChangerFragment;
+import projekt.dashboard.fragments.ContextualHeaderSwapperFragment;
 import projekt.dashboard.fragments.HomeFragment;
 import projekt.dashboard.fragments.ThemeUtilitiesFragment;
 import projekt.dashboard.fragments.WallpapersFragment;
@@ -97,7 +98,8 @@ public class MainActivity extends BaseDonateActivity implements
 
         // Restore last selected page, tab/nav-drawer-item
         if (Config.get().persistSelectedPage()) {
-            int lastPage = PreferenceManager.getDefaultSharedPreferences(MainActivity.this).getInt("last_selected_page", 0);
+            int lastPage = PreferenceManager.getDefaultSharedPreferences(MainActivity.this)
+                    .getInt("last_selected_page", 0);
             if (lastPage > mPager.getAdapter().getCount() - 1) lastPage = 0;
             mPager.setCurrentItem(lastPage);
             if (mNavView != null) invalidateNavViewSelection(lastPage);
@@ -125,10 +127,13 @@ public class MainActivity extends BaseDonateActivity implements
         mPages = new PagesBuilder(6);
         mPages.add(new PagesBuilder.Page(R.id.home_fragment, R.drawable.tab_home,
                 R.string.home_tab_one, new HomeFragment()));
-        mPages.add(new PagesBuilder.Page(R.id.color_changer_fragment, R.drawable.tab_palette,
+        mPages.add(new PagesBuilder.Page(R.id.color_changer_fragment, R.drawable.tab_pipette,
                 R.string.home_tab_two, new ColorChangerFragment()));
+        mPages.add(new PagesBuilder.Page(R.id.header_swapper_fragment, R.drawable.tab_palette,
+                R.string.home_tab_three, new ContextualHeaderSwapperFragment()));
         mPages.add(new PagesBuilder.Page(R.id.theme_utilities_fragment, R.drawable.tab_rebuild,
-                R.string.home_tab_three, new ThemeUtilitiesFragment()));
+                R.string.home_tab_four, new ThemeUtilitiesFragment()));
+
     }
 
     @Override
@@ -173,7 +178,8 @@ public class MainActivity extends BaseDonateActivity implements
 
         for (PagesBuilder.Page page : mPages)
             addTab(page.iconRes);
-        mTabs.setSelectedTabIndicatorColor(DialogUtils.resolveColor(this, R.attr.tab_indicator_color));
+        mTabs.setSelectedTabIndicatorColor(DialogUtils.resolveColor(
+                this, R.attr.tab_indicator_color));
     }
 
     void dispatchFragmentUpdateTitle(final boolean checkTabsLocation) {
@@ -183,7 +189,8 @@ public class MainActivity extends BaseDonateActivity implements
         mPager.post(new Runnable() {
             @Override
             public void run() {
-                final BasePageFragment frag = (BasePageFragment) getFragmentManager().findFragmentByTag("page:" + mPager.getCurrentItem());
+                final BasePageFragment frag = (BasePageFragment) getFragmentManager()
+                        .findFragmentByTag("page:" + mPager.getCurrentItem());
                 if (frag != null) frag.updateTitle();
 
                 if (checkTabsLocation) {
@@ -239,7 +246,8 @@ public class MainActivity extends BaseDonateActivity implements
         TabLayout.Tab tab = mTabs.newTab().setIcon(icon);
         if (tab.getIcon() != null) {
             Drawable tintedIcon = DrawableCompat.wrap(tab.getIcon());
-            DrawableCompat.setTint(tintedIcon, DialogUtils.resolveColor(this, R.attr.tab_icon_color));
+            DrawableCompat.setTint(tintedIcon, DialogUtils.resolveColor(
+                    this, R.attr.tab_icon_color));
             tab.setIcon(tintedIcon);
         }
         mTabs.addTab(tab);
@@ -284,7 +292,8 @@ public class MainActivity extends BaseDonateActivity implements
         } else if (requestCode == RQ_VIEWWALLPAPER) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP && mDrawer != null) {
                 getWindow().setStatusBarColor(Color.TRANSPARENT);
-                mDrawer.setStatusBarBackgroundColor(DialogUtils.resolveColor(this, R.attr.colorPrimaryDark));
+                mDrawer.setStatusBarBackgroundColor(DialogUtils.resolveColor(
+                        this, R.attr.colorPrimaryDark));
             }
             if (mRecyclerView != null) {
                 mRecyclerView.requestFocus();

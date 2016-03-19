@@ -3,4 +3,5 @@
     <item name="home_fragment" type="id" />
     <item name="color_changer_fragment" type="id" />
     <item name="theme_utilities_fragment" type="id" />
+    <item name="header_swapper_fragment" type="id" />
 </resources>
