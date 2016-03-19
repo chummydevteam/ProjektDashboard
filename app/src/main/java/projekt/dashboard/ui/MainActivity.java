@@ -36,7 +36,7 @@ import projekt.dashboard.R;
 import projekt.dashboard.adapters.MainPagerAdapter;
 import projekt.dashboard.config.Config;
 import projekt.dashboard.fragments.ColorChangerFragment;
-import projekt.dashboard.fragments.ContextualHeaderSwapperFragment;
+import projekt.dashboard.fragments.HeaderSwapperFragment;
 import projekt.dashboard.fragments.HomeFragment;
 import projekt.dashboard.fragments.ThemeUtilitiesFragment;
 import projekt.dashboard.fragments.WallpapersFragment;
@@ -172,7 +172,7 @@ public class MainActivity extends BaseDonateActivity implements
         mPages.add(new PagesBuilder.Page(R.id.color_changer_fragment, R.drawable.tab_palette,
                 R.string.home_tab_two, new ColorChangerFragment()));
         mPages.add(new PagesBuilder.Page(R.id.header_swapper_fragment, R.drawable.tab_swapper,
-                R.string.home_tab_three, new ContextualHeaderSwapperFragment()));
+                R.string.home_tab_three, new HeaderSwapperFragment()));
         mPages.add(new PagesBuilder.Page(R.id.theme_utilities_fragment, R.drawable.tab_rebuild,
                 R.string.home_tab_four, new ThemeUtilitiesFragment()));
 

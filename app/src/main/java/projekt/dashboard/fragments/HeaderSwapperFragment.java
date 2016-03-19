@@ -48,7 +48,7 @@ import projekt.dashboard.fragments.base.BasePageFragment;
 /**
  * @author Nicholas Chum (nicholaschum)
  */
-public class ContextualHeaderSwapperFragment extends BasePageFragment {
+public class HeaderSwapperFragment extends BasePageFragment {
 
     private static int RESULT_LOAD_IMAGE = 1;
     public ViewGroup inflation;
