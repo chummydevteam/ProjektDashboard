@@ -71,6 +71,10 @@
     <string name="home_tab_three">Contextual Header Swapper</string>
     <string name="home_tab_four">Theme Utilities</string>
 
+    <string name="permission_not_granted_dialog_title">Permissions not granted</string>
+    <string name="permission_not_granted_dialog_message">Please grant dashboard storage permissions or the app will not function properly!</string>
+    <string name="dialog_ok">OK</string>
+
     <!-- App Strings -->
     <string name="home">home.</string>
     <string name="app_name">dashboard.</string>
