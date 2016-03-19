@@ -1,6 +1,5 @@
 package projekt.dashboard.ui;
 
-import android.Manifest;
 import android.annotation.TargetApi;
 import android.app.AlertDialog;
 import android.app.FragmentManager;
@@ -59,9 +58,8 @@ public class MainActivity extends BaseDonateActivity implements
         ActivityCompat.OnRequestPermissionsResultCallback,
         NavigationView.OnNavigationItemSelectedListener {
 
-    public RecyclerView mRecyclerView;
     private static final int PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 1;
-
+    public RecyclerView mRecyclerView;
     @Bind(R.id.toolbar)
     Toolbar mToolbar;
 
@@ -82,8 +80,6 @@ public class MainActivity extends BaseDonateActivity implements
     @Nullable
     @Bind(R.id.app_bar)
     LinearLayout mAppBarLinear;
-
-    int mDrawerModeTopInset;
 
     private PagesBuilder mPages;
 
@@ -173,9 +169,9 @@ public class MainActivity extends BaseDonateActivity implements
         mPages = new PagesBuilder(6);
         mPages.add(new PagesBuilder.Page(R.id.home_fragment, R.drawable.tab_home,
                 R.string.home_tab_one, new HomeFragment()));
-        mPages.add(new PagesBuilder.Page(R.id.color_changer_fragment, R.drawable.tab_pipette,
+        mPages.add(new PagesBuilder.Page(R.id.color_changer_fragment, R.drawable.tab_palette,
                 R.string.home_tab_two, new ColorChangerFragment()));
-        mPages.add(new PagesBuilder.Page(R.id.header_swapper_fragment, R.drawable.tab_palette,
+        mPages.add(new PagesBuilder.Page(R.id.header_swapper_fragment, R.drawable.tab_swapper,
                 R.string.home_tab_three, new ContextualHeaderSwapperFragment()));
         mPages.add(new PagesBuilder.Page(R.id.theme_utilities_fragment, R.drawable.tab_rebuild,
                 R.string.home_tab_four, new ThemeUtilitiesFragment()));

@@ -217,7 +217,7 @@ public class ColorChangerFragment extends BasePageFragment {
         text1.setTextColor(getResources().getColor(R.color.disabled_text));
         TextView text2 = (TextView) inflation.findViewById(R.id.projektklar_description);
         text2.setTextColor(getResources().getColor(R.color.disabled_text));
-        text2.setText("please install this theme first!");
+        text2.setText("theme disabled");
         ImageView image = (ImageView) inflation.findViewById(R.id.projektklar_image);
         image.setAlpha(127);
 
