@@ -71,7 +71,7 @@ public class HeaderSwapperFragment extends BasePageFragment {
     public CheckBox autoClearSystemUICache, freeCropMode;
 
     public void cleanTempFolder() {
-        File dir = getActivity().getFilesDir();
+        File dir = getActivity().getCacheDir();
         deleteRecursive(dir);
     }
 
@@ -456,34 +456,34 @@ public class HeaderSwapperFragment extends BasePageFragment {
                     ByteArrayOutputStream bytes = new ByteArrayOutputStream();
                     croppedBitmap.compress(Bitmap.CompressFormat.PNG, 40, bytes);
 
-                    File directory = new File(getActivity().getFilesDir(),
+                    File directory = new File(getActivity().getCacheDir(),
                             "/res/drawable-xxhdpi-v23/");
                     if (!directory.exists()) {
                         directory.mkdirs();
                     }
 
-                    File selected = new File(getActivity().getFilesDir() +
+                    File selected = new File(getActivity().getCacheDir() +
                             "/res/drawable-xxhdpi-v23/",
                             spinner.getSelectedItem().toString());
-                    File f = new File(getActivity().getFilesDir() + "/res/drawable-xxhdpi-v23/",
+                    File f = new File(getActivity().getCacheDir() + "/res/drawable-xxhdpi-v23/",
                             "notifhead_afternoon.png");
-                    File g = new File(getActivity().getFilesDir() + "/res/drawable-xxhdpi-v23/",
+                    File g = new File(getActivity().getCacheDir() + "/res/drawable-xxhdpi-v23/",
                             "notifhead_christmas.png");
-                    File h = new File(getActivity().getFilesDir() + "/res/drawable-xxhdpi-v23/",
+                    File h = new File(getActivity().getCacheDir() + "/res/drawable-xxhdpi-v23/",
                             "notifhead_morning.png");
-                    File i = new File(getActivity().getFilesDir() + "/res/drawable-xxhdpi-v23/",
+                    File i = new File(getActivity().getCacheDir() + "/res/drawable-xxhdpi-v23/",
                             "notifhead_newyearseve.png");
-                    File j = new File(getActivity().getFilesDir() + "/res/drawable-xxhdpi-v23/",
+                    File j = new File(getActivity().getCacheDir() + "/res/drawable-xxhdpi-v23/",
                             "notifhead_night.png");
-                    File k = new File(getActivity().getFilesDir() + "/res/drawable-xxhdpi-v23/",
+                    File k = new File(getActivity().getCacheDir() + "/res/drawable-xxhdpi-v23/",
                             "notifhead_noon.png");
-                    File l = new File(getActivity().getFilesDir() + "/res/drawable-xxhdpi-v23/",
+                    File l = new File(getActivity().getCacheDir() + "/res/drawable-xxhdpi-v23/",
                             "notifhead_sunrise.png");
-                    File m = new File(getActivity().getFilesDir() + "/res/drawable-xxhdpi-v23/",
+                    File m = new File(getActivity().getCacheDir() + "/res/drawable-xxhdpi-v23/",
                             "notifhead_sunset_hdpi.png");
-                    File n = new File(getActivity().getFilesDir() + "/res/drawable-xxhdpi-v23/",
+                    File n = new File(getActivity().getCacheDir() + "/res/drawable-xxhdpi-v23/",
                             "notifhead_sunset_xhdpi.png");
-                    File o = new File(getActivity().getFilesDir() + "/res/drawable-xxhdpi-v23/",
+                    File o = new File(getActivity().getCacheDir() + "/res/drawable-xxhdpi-v23/",
                             "notifhead_sunset.png");
 
                     try {
@@ -624,7 +624,7 @@ public class HeaderSwapperFragment extends BasePageFragment {
         private void copyCommonsFile(String theme_dir) {
             String sourcePath = theme_dir;
             File source = new File(sourcePath);
-            String destinationPath = getActivity().getFilesDir().getAbsolutePath() +
+            String destinationPath = getActivity().getCacheDir().getAbsolutePath() +
                     "/new_header_apk.apk";
             File destination = new File(destinationPath);
             try {
@@ -660,52 +660,52 @@ public class HeaderSwapperFragment extends BasePageFragment {
             // Copy the files over
             if (is_all_selected) {
                 eu.chainfire.libsuperuser.Shell.SU.run(
-                        "cp " + getActivity().getFilesDir().getAbsolutePath() +
+                        "cp " + getActivity().getCacheDir().getAbsolutePath() +
                                 "/res/drawable-xxhdpi-v23/" + "notifhead_afternoon.png" +
                                 " /assets/overlays/com.android.systemui/res/drawable-xxhdpi-v23/" +
                                 "notifhead_afternoon.png");
                 eu.chainfire.libsuperuser.Shell.SU.run(
-                        "cp " + getActivity().getFilesDir().getAbsolutePath() +
+                        "cp " + getActivity().getCacheDir().getAbsolutePath() +
                                 "/res/drawable-xxhdpi-v23/" + "notifhead_christmas.png" +
                                 " /assets/overlays/com.android.systemui/res/drawable-xxhdpi-v23/" +
                                 "notifhead_christmas.png");
                 eu.chainfire.libsuperuser.Shell.SU.run(
-                        "cp " + getActivity().getFilesDir().getAbsolutePath() +
+                        "cp " + getActivity().getCacheDir().getAbsolutePath() +
                                 "/res/drawable-xxhdpi-v23/" + "notifhead_morning.png" +
                                 " /assets/overlays/com.android.systemui/res/drawable-xxhdpi-v23/" +
                                 "notifhead_morning.png");
                 eu.chainfire.libsuperuser.Shell.SU.run(
-                        "cp " + getActivity().getFilesDir().getAbsolutePath() +
+                        "cp " + getActivity().getCacheDir().getAbsolutePath() +
                                 "/res/drawable-xxhdpi-v23/" + "notifhead_newyearseve.png" +
                                 " /assets/overlays/com.android.systemui/res/drawable-xxhdpi-v23/" +
                                 "notifhead_newyearseve.png");
                 eu.chainfire.libsuperuser.Shell.SU.run(
-                        "cp " + getActivity().getFilesDir().getAbsolutePath() +
+                        "cp " + getActivity().getCacheDir().getAbsolutePath() +
                                 "/res/drawable-xxhdpi-v23/" + "notifhead_night.png" +
                                 " /assets/overlays/com.android.systemui/res/drawable-xxhdpi-v23/" +
                                 "notifhead_night.png");
                 eu.chainfire.libsuperuser.Shell.SU.run(
-                        "cp " + getActivity().getFilesDir().getAbsolutePath() +
+                        "cp " + getActivity().getCacheDir().getAbsolutePath() +
                                 "/res/drawable-xxhdpi-v23/" + "notifhead_noon.png" +
                                 " /assets/overlays/com.android.systemui/res/drawable-xxhdpi-v23/" +
                                 "notifhead_noon.png");
                 eu.chainfire.libsuperuser.Shell.SU.run(
-                        "cp " + getActivity().getFilesDir().getAbsolutePath() +
+                        "cp " + getActivity().getCacheDir().getAbsolutePath() +
                                 "/res/drawable-xxhdpi-v23/" + "notifhead_sunrise.png" +
                                 " /assets/overlays/com.android.systemui/res/drawable-xxhdpi-v23/" +
                                 "notifhead_sunrise.png");
                 eu.chainfire.libsuperuser.Shell.SU.run(
-                        "cp " + getActivity().getFilesDir().getAbsolutePath() +
+                        "cp " + getActivity().getCacheDir().getAbsolutePath() +
                                 "/res/drawable-xxhdpi-v23/" + "notifhead_sunset_hdpi.png" +
                                 " /assets/overlays/com.android.systemui/res/drawable-xxhdpi-v23/" +
                                 "notifhead_sunset_hdpi.png");
                 eu.chainfire.libsuperuser.Shell.SU.run(
-                        "cp " + getActivity().getFilesDir().getAbsolutePath() +
+                        "cp " + getActivity().getCacheDir().getAbsolutePath() +
                                 "/res/drawable-xxhdpi-v23/" + "notifhead_sunset_xhdpi.png" +
                                 " /assets/overlays/com.android.systemui/res/drawable-xxhdpi-v23/" +
                                 "notifhead_sunset_xhdpi.png");
                 eu.chainfire.libsuperuser.Shell.SU.run(
-                        "cp " + getActivity().getFilesDir().getAbsolutePath() +
+                        "cp " + getActivity().getCacheDir().getAbsolutePath() +
                                 "/res/drawable-xxhdpi-v23/" + "notifhead_sunset.png" +
                                 " /assets/overlays/com.android.systemui/res/drawable-xxhdpi-v23/" +
                                 "notifhead_sunset.png");
@@ -713,7 +713,7 @@ public class HeaderSwapperFragment extends BasePageFragment {
                         "Successfully copied all drawables into the root folder.");
             } else {
                 eu.chainfire.libsuperuser.Shell.SU.run(
-                        "cp " + getActivity().getFilesDir().getAbsolutePath() +
+                        "cp " + getActivity().getCacheDir().getAbsolutePath() +
                                 "/res/drawable-xxhdpi-v23/" + spinner.getSelectedItem().toString() +
                                 " /assets/overlays/com.android.systemui/res/drawable-xxhdpi-v23/" +
                                 spinner.getSelectedItem().toString());
@@ -726,69 +726,69 @@ public class HeaderSwapperFragment extends BasePageFragment {
 
             if (is_all_selected) {
                 Process nativeApp1 = Runtime.getRuntime().exec(
-                        "aapt remove " + getActivity().getFilesDir().getAbsolutePath() +
+                        "aapt remove " + getActivity().getCacheDir().getAbsolutePath() +
                                 "/new_header_apk.apk " +
                                 "assets/overlays/com.android.systemui/res/drawable-xxhdpi-v23/" +
                                 "notifhead_afternoon.png");
                 nativeApp1.waitFor();
                 Log.e("performAAPTonCommonsAPK", "Deleted drawable file!");
                 Process nativeApp2 = Runtime.getRuntime().exec(
-                        "aapt remove " + getActivity().getFilesDir().getAbsolutePath() +
+                        "aapt remove " + getActivity().getCacheDir().getAbsolutePath() +
                                 "/new_header_apk.apk " +
                                 "assets/overlays/com.android.systemui/res/drawable-xxhdpi-v23/" +
                                 "notifhead_christmas.png");
                 nativeApp2.waitFor();
                 Log.e("performAAPTonCommonsAPK", "Deleted drawable file!");
                 Process nativeApp3 = Runtime.getRuntime().exec(
-                        "aapt remove " + getActivity().getFilesDir().getAbsolutePath() +
+                        "aapt remove " + getActivity().getCacheDir().getAbsolutePath() +
                                 "/new_header_apk.apk " +
                                 "assets/overlays/com.android.systemui/res/drawable-xxhdpi-v23/" +
                                 "notifhead_morning.png");
                 nativeApp3.waitFor();
                 Log.e("performAAPTonCommonsAPK", "Deleted drawable file!");
                 Process nativeApp4 = Runtime.getRuntime().exec(
-                        "aapt remove " + getActivity().getFilesDir().getAbsolutePath() +
+                        "aapt remove " + getActivity().getCacheDir().getAbsolutePath() +
                                 "/new_header_apk.apk " +
                                 "assets/overlays/com.android.systemui/res/drawable-xxhdpi-v23/" +
                                 "notifhead_newyearseve.png");
                 nativeApp4.waitFor();
                 Log.e("performAAPTonCommonsAPK", "Deleted drawable file!");
                 Process nativeApp5 = Runtime.getRuntime().exec(
-                        "aapt remove " + getActivity().getFilesDir().getAbsolutePath() +
+                        "aapt remove " + getActivity().getCacheDir().getAbsolutePath() +
                                 "/new_header_apk.apk " +
                                 "assets/overlays/com.android.systemui/res/drawable-xxhdpi-v23/" +
                                 "notifhead_night.png");
                 nativeApp5.waitFor();
                 Process nativeApp6 = Runtime.getRuntime().exec(
-                        "aapt remove " + getActivity().getFilesDir().getAbsolutePath() +
+                        "aapt remove " + getActivity().getCacheDir().getAbsolutePath() +
                                 "/new_header_apk.apk " +
                                 "assets/overlays/com.android.systemui/res/drawable-xxhdpi-v23/" +
                                 "notifhead_noon.png");
                 nativeApp6.waitFor();
                 Log.e("performAAPTonCommonsAPK", "Deleted drawable file!");
                 Process nativeApp7 = Runtime.getRuntime().exec(
-                        "aapt remove " + getActivity().getFilesDir().getAbsolutePath() +
+                        "aapt remove " + getActivity().getCacheDir().getAbsolutePath() +
                                 "/new_header_apk.apk " +
                                 "assets/overlays/com.android.systemui/res/drawable-xxhdpi-v23/" +
                                 "notifhead_sunrise.png");
                 nativeApp7.waitFor();
                 Log.e("performAAPTonCommonsAPK", "Deleted drawable file!");
                 Process nativeApp8 = Runtime.getRuntime().exec(
-                        "aapt remove " + getActivity().getFilesDir().getAbsolutePath() +
+                        "aapt remove " + getActivity().getCacheDir().getAbsolutePath() +
                                 "/new_header_apk.apk " +
                                 "assets/overlays/com.android.systemui/res/drawable-xxhdpi-v23/" +
                                 "notifhead_sunset_hdpi.png");
                 nativeApp8.waitFor();
                 Log.e("performAAPTonCommonsAPK", "Deleted drawable file!");
                 Process nativeApp9 = Runtime.getRuntime().exec(
-                        "aapt remove " + getActivity().getFilesDir().getAbsolutePath() +
+                        "aapt remove " + getActivity().getCacheDir().getAbsolutePath() +
                                 "/new_header_apk.apk " +
                                 "assets/overlays/com.android.systemui/res/drawable-xxhdpi-v23/" +
                                 "notifhead_sunset_xhdpi.png");
                 nativeApp9.waitFor();
                 Log.e("performAAPTonCommonsAPK", "Deleted drawable file!");
                 Process nativeApp10 = Runtime.getRuntime().exec(
-                        "aapt remove " + getActivity().getFilesDir().getAbsolutePath() +
+                        "aapt remove " + getActivity().getCacheDir().getAbsolutePath() +
                                 "/new_header_apk.apk " +
                                 "assets/overlays/com.android.systemui/res/drawable-xxhdpi-v23/" +
                                 "notifhead_sunset.png");
@@ -796,7 +796,7 @@ public class HeaderSwapperFragment extends BasePageFragment {
                 Log.e("performAAPTonCommonsAPK", "Deleted all drawable files!");
             } else {
                 Process nativeApp1 = Runtime.getRuntime().exec(
-                        "aapt remove " + getActivity().getFilesDir().getAbsolutePath() +
+                        "aapt remove " + getActivity().getCacheDir().getAbsolutePath() +
                                 "/new_header_apk.apk " +
                                 "assets/overlays/com.android.systemui/res/drawable-xxhdpi-v23/" +
                                 spinner.getSelectedItem().toString());
@@ -807,59 +807,59 @@ public class HeaderSwapperFragment extends BasePageFragment {
             // Adding all the new files in
             if (is_all_selected) {
                 eu.chainfire.libsuperuser.Shell.SU.run(
-                        "aapt add " + getActivity().getFilesDir().getAbsolutePath() +
+                        "aapt add " + getActivity().getCacheDir().getAbsolutePath() +
                                 "/new_header_apk.apk " +
                                 "assets/overlays/com.android.systemui/res/drawable-xxhdpi-v23/" +
                                 "notifhead_afternoon.png");
                 eu.chainfire.libsuperuser.Shell.SU.run(
-                        "aapt add " + getActivity().getFilesDir().getAbsolutePath() +
+                        "aapt add " + getActivity().getCacheDir().getAbsolutePath() +
                                 "/new_header_apk.apk " +
                                 "assets/overlays/com.android.systemui/res/drawable-xxhdpi-v23/" +
                                 "notifhead_christmas.png");
                 eu.chainfire.libsuperuser.Shell.SU.run(
-                        "aapt add " + getActivity().getFilesDir().getAbsolutePath() +
+                        "aapt add " + getActivity().getCacheDir().getAbsolutePath() +
                                 "/new_header_apk.apk " +
                                 "assets/overlays/com.android.systemui/res/drawable-xxhdpi-v23/" +
                                 "notifhead_morning.png");
                 eu.chainfire.libsuperuser.Shell.SU.run(
-                        "aapt add " + getActivity().getFilesDir().getAbsolutePath() +
+                        "aapt add " + getActivity().getCacheDir().getAbsolutePath() +
                                 "/new_header_apk.apk " +
                                 "assets/overlays/com.android.systemui/res/drawable-xxhdpi-v23/" +
                                 "notifhead_newyearseve.png");
                 eu.chainfire.libsuperuser.Shell.SU.run(
-                        "aapt add " + getActivity().getFilesDir().getAbsolutePath() +
+                        "aapt add " + getActivity().getCacheDir().getAbsolutePath() +
                                 "/new_header_apk.apk " +
                                 "assets/overlays/com.android.systemui/res/drawable-xxhdpi-v23/" +
                                 "notifhead_night.png");
                 eu.chainfire.libsuperuser.Shell.SU.run(
-                        "aapt add " + getActivity().getFilesDir().getAbsolutePath() +
+                        "aapt add " + getActivity().getCacheDir().getAbsolutePath() +
                                 "/new_header_apk.apk " +
                                 "assets/overlays/com.android.systemui/res/drawable-xxhdpi-v23/" +
                                 "notifhead_noon.png");
                 eu.chainfire.libsuperuser.Shell.SU.run(
-                        "aapt add " + getActivity().getFilesDir().getAbsolutePath() +
+                        "aapt add " + getActivity().getCacheDir().getAbsolutePath() +
                                 "/new_header_apk.apk " +
                                 "assets/overlays/com.android.systemui/res/drawable-xxhdpi-v23/" +
                                 "notifhead_sunrise.png");
                 eu.chainfire.libsuperuser.Shell.SU.run(
-                        "aapt add " + getActivity().getFilesDir().getAbsolutePath() +
+                        "aapt add " + getActivity().getCacheDir().getAbsolutePath() +
                                 "/new_header_apk.apk " +
                                 "assets/overlays/com.android.systemui/res/drawable-xxhdpi-v23/" +
                                 "notifhead_sunset_hdpi.png");
                 eu.chainfire.libsuperuser.Shell.SU.run(
-                        "aapt add " + getActivity().getFilesDir().getAbsolutePath() +
+                        "aapt add " + getActivity().getCacheDir().getAbsolutePath() +
                                 "/new_header_apk.apk " +
                                 "assets/overlays/com.android.systemui/res/drawable-xxhdpi-v23/" +
                                 "notifhead_sunset_xhdpi.png");
                 eu.chainfire.libsuperuser.Shell.SU.run(
-                        "aapt add " + getActivity().getFilesDir().getAbsolutePath() +
+                        "aapt add " + getActivity().getCacheDir().getAbsolutePath() +
                                 "/new_header_apk.apk " +
                                 "assets/overlays/com.android.systemui/res/drawable-xxhdpi-v23/" +
                                 "notifhead_sunset.png");
                 Log.e("performAAPTonCommonsAPK", "Added freshly created photo files...ALL DONE!");
             } else {
                 eu.chainfire.libsuperuser.Shell.SU.run(
-                        "aapt add " + getActivity().getFilesDir().getAbsolutePath() +
+                        "aapt add " + getActivity().getCacheDir().getAbsolutePath() +
                                 "/new_header_apk.apk " +
                                 "assets/overlays/com.android.systemui/res/drawable-xxhdpi-v23/" +
                                 spinner.getSelectedItem().toString());
@@ -871,7 +871,7 @@ public class HeaderSwapperFragment extends BasePageFragment {
 
             // Copy the modified APK to the directory
             eu.chainfire.libsuperuser.Shell.SU.run("cp " +
-                    getActivity().getFilesDir().getAbsolutePath() +
+                    getActivity().getCacheDir().getAbsolutePath() +
                     "/new_header_apk.apk " + theme_dir);
 
             // Set Permissions for the new APK
