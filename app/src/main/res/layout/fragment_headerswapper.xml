@@ -103,7 +103,7 @@
                 android:layout_below="@id/spinner"
                 android:layout_gravity="left"
                 android:layout_marginLeft="8dp"
-                android:text="select installed themes:"
+                android:text="select installed theme:"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:textStyle="italic" />
 
