@@ -107,7 +107,7 @@ public class HeaderSwapperFragment extends BasePageFragment {
                 startActivityForResult(i, RESULT_LOAD_IMAGE);
             }
         });
-        apply_fab.setClickable(false);
+        apply_fab.hide();
 
         spinner = (Spinner) inflation.findViewById(R.id.spinner);
         // Create an ArrayAdapter using the string array and a default spinner layout
@@ -185,7 +185,7 @@ public class HeaderSwapperFragment extends BasePageFragment {
             public void onItemSelected(AdapterView<?> arg0, View arg1,
                                        int pos, long id) {
                 if (pos == 0) {
-                    apply_fab.setClickable(false);
+                    apply_fab.hide();
                 }
                 if (pos == 1) {
                     if (checkCurrentThemeSelection("com.chummy.jezebel.materialdark.donate")) {
@@ -193,14 +193,14 @@ public class HeaderSwapperFragment extends BasePageFragment {
                                 + folder_directory + "/base.apk";
                         package_name = "com.chummy.jezebel.materialdark.donate";
                         spinner_current = 1;
-                        apply_fab.setClickable(true);
+                        apply_fab.show();
                     } else {
                         Toast toast = Toast.makeText(getActivity().getApplicationContext(),
                                 "Please install dark material // akZent before using!",
                                 Toast.LENGTH_LONG);
                         toast.show();
                         spinner1.setSelection(spinner_current); // reset position
-                        apply_fab.setClickable(false);
+                        apply_fab.hide();
                     }
                 }
                 if (pos == 2) {
@@ -209,14 +209,14 @@ public class HeaderSwapperFragment extends BasePageFragment {
                                 + folder_directory + "/base.apk";
                         package_name = "com.chummy.jezebel.blackedout.donate";
                         spinner_current = 2;
-                        apply_fab.setClickable(true);
+                        apply_fab.show();
                     } else {
                         Toast toast = Toast.makeText(getActivity().getApplicationContext(),
                                 "Please install blacked out // blakZent before using!",
                                 Toast.LENGTH_LONG);
                         toast.show();
                         spinner1.setSelection(spinner_current); // reset position
-                        apply_fab.setClickable(false);
+                        apply_fab.hide();
                     }
                 }
                 if (pos == 3) {
@@ -233,7 +233,7 @@ public class HeaderSwapperFragment extends BasePageFragment {
                                 theme_dir = "/data/app/" + edittext.getText().toString() +
                                         "-" + folder_directory + "/base.apk";
                                 package_name = edittext.getText().toString();
-                                apply_fab.setClickable(true);
+                                apply_fab.show();
                                 Snackbar snackbar = Snackbar.make(apply_fab, "you are tweaking '" +
                                                 edittext.getText().toString() + "'...",
                                         Snackbar.LENGTH_INDEFINITE);
@@ -251,7 +251,7 @@ public class HeaderSwapperFragment extends BasePageFragment {
                                 Log.e("TAG ERROR", edittext.getText().toString() +
                                         " does not exist.");
                                 spinner1.setSelection(spinner_current);
-                                apply_fab.setClickable(false);
+                                apply_fab.hide();
                                 Toast toast = Toast.makeText(getActivity().getApplicationContext(),
                                         "Unfortunately, the package identifier is not " +
                                                 "properly found!",
@@ -263,7 +263,7 @@ public class HeaderSwapperFragment extends BasePageFragment {
                     alert.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int whichButton) {
                             spinner1.setSelection(spinner_current);
-                            apply_fab.setClickable(false);
+                            apply_fab.hide();
                         }
                     });
                     alert.setCancelable(false);
@@ -308,7 +308,7 @@ public class HeaderSwapperFragment extends BasePageFragment {
                 });
 
         checkBoxInstructions = (TextView) inflation.findViewById(R.id.textView2);
-
+        saveButton = (Button) inflation.findViewById(R.id.save_button);
 
         return inflation;
     }
@@ -448,8 +448,6 @@ public class HeaderSwapperFragment extends BasePageFragment {
                     image_to_crop.setVisibility(View.GONE);
                 }
             });
-
-            saveButton = (Button) inflation.findViewById(R.id.save_button);
             saveButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View V) {
