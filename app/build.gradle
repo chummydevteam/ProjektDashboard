@@ -53,6 +53,8 @@ android {
         exclude 'META-INF/LICENSE.txt'
         exclude 'LICENSE.txt'
     }
+
+    useLibrary 'org.apache.http.legacy'
 }
 
 repositories {

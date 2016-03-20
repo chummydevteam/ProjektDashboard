@@ -86,7 +86,7 @@
                 android:text="color swap + soft reboot" />
 
             <CheckBox
-                android:id="@+id/switch4"
+                android:id="@+id/switch3"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
@@ -97,6 +97,19 @@
                 android:button="@null"
                 android:drawableRight="?android:attr/listChoiceIndicatorMultiple"
                 android:text="debugging mode (advanced logs)" />
+
+            <CheckBox
+                android:id="@+id/switch4"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="7dp"
+                android:layout_marginTop="5dp"
+                android:button="@null"
+                android:drawableRight="?android:attr/listChoiceIndicatorMultiple"
+                android:text="force update patched resource file" />
 
             <TextView
                 android:id="@+id/installed_title"
