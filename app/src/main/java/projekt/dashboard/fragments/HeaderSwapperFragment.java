@@ -10,6 +10,7 @@ import android.content.res.ColorStateList;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -40,6 +41,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Calendar;
 import java.util.Random;
 
 import butterknife.ButterKnife;
@@ -65,7 +67,8 @@ public class HeaderSwapperFragment extends BasePageFragment {
     public Button saveButton;
     public int spinner_current = 0;
     public int folder_directory = 1;
-    public TextView checkBoxInstructions;
+    public int current_hour;
+    public TextView checkBoxInstructions, currentTimeVariable;
     public CheckBox autoClearSystemUICache, freeCropMode;
 
     public void cleanTempFolder() {
@@ -88,6 +91,11 @@ public class HeaderSwapperFragment extends BasePageFragment {
 
         inflation = (ViewGroup) inflater.inflate(
                 R.layout.fragment_headerswapper, container, false);
+
+        Calendar c = Calendar.getInstance();
+        current_hour = c.get(Calendar.HOUR_OF_DAY);
+
+        currentTimeVariable = (TextView) inflation.findViewById(R.id.currentTime);
 
         apply_fab = (FloatingActionButton) inflation.findViewById(R.id.apply_fab);
         apply_fab.setBackgroundTintList(ColorStateList.valueOf(
@@ -115,8 +123,44 @@ public class HeaderSwapperFragment extends BasePageFragment {
                                        int pos, long id) {
                 if (pos == 0) {
                     is_all_selected = true;
+
                 } else {
                     is_all_selected = false;
+                }
+                if (current_hour == 6 ||
+                        current_hour == 7 ||
+                        current_hour == 8) {
+                    currentTimeVariable.setText("current time image: notifhead_sunrise");
+                }
+
+                if (current_hour == 9 ||
+                        current_hour == 10) {
+                    currentTimeVariable.setText("current time image: notifhead_morning");
+                }
+
+                if (current_hour == 11 ||
+                        current_hour == 12 ||
+                        current_hour == 13 ||
+                        current_hour == 14 ||
+                        current_hour == 15 ||
+                        current_hour == 16 ||
+                        current_hour == 17 ||
+                        current_hour == 18) {
+                    currentTimeVariable.setText("current time image: notifhead_afternoon");
+                }
+                if (current_hour == 19) {
+                    currentTimeVariable.setText("current time image: notifhead_sunset");
+                }
+
+                if (current_hour == 20 ||
+                        current_hour == 21 ||
+                        current_hour == 22 ||
+                        current_hour == 1 ||
+                        current_hour == 2 ||
+                        current_hour == 3 ||
+                        current_hour == 4 ||
+                        current_hour == 5) {
+                    currentTimeVariable.setText("current time image: notifhead_night");
                 }
             }
 
