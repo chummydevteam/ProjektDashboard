@@ -10,9 +10,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
 import butterknife.ButterKnife;
 import projekt.dashboard.R;
 import projekt.dashboard.fragments.base.BasePageFragment;
+import projekt.dashboard.util.Utils;
 
 /**
  * @author Nicholas Chum (nicholaschum)
@@ -20,14 +25,17 @@ import projekt.dashboard.fragments.base.BasePageFragment;
 public class HomeFragment extends BasePageFragment {
 
     final public static String checkRomSupported(Context context) {
-        if (isAppInstalled(context, "com.dirtyunicorns.duupdater")) {
-            return "Dirty Unicorns ✓";
-        }
-        if (isAppInstalled(context, "com.cyanogenmod.updater")) {
+        if (getProp("ro.cm.device") != "") {
             return "CyanogenMod ✓";
         }
-        if (isAppInstalled(context, "com.android.purenexussettings")) {
+        if (getProp("ro.du.device") != "") {
+            return "Dirty Unicorns ✓";
+        }
+        if (getProp("ro.purenexus.version") != "") {
             return "Pure Nexus ✓";
+        }
+        if (getProp("ro.screwd.device") != "") {
+            return "Screw'd Android ✓";
         } else {
             if (isAppInstalled(context, "org.cyanogenmod.theme.chooser")) {
                 return "cm_based_rom";
@@ -44,6 +52,23 @@ public class HomeFragment extends BasePageFragment {
         } catch (PackageManager.NameNotFoundException e) {
             return false;
         }
+    }
+
+    public static String getProp(String propName) {
+        Process p = null;
+        String result = "";
+        try {
+            p = new ProcessBuilder("/system/bin/getprop", propName).redirectErrorStream(true).start();
+            BufferedReader br = new BufferedReader(new InputStreamReader(p.getInputStream()));
+            String line = "";
+            while ((line = br.readLine()) != null) {
+                result = line;
+            }
+            br.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return result;
     }
 
     @Nullable
