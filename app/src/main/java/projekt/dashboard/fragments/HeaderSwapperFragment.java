@@ -24,9 +24,12 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.isseiaoki.simplecropview.CropImageView;
@@ -50,17 +53,20 @@ public class HeaderSwapperFragment extends BasePageFragment {
 
     private static int RESULT_LOAD_IMAGE = 1;
     public ViewGroup inflation;
-    public boolean is_all_selected, is_picture_selected;
+    public boolean is_all_selected, is_picture_selected, are_we_clearing_cache_after,
+            free_crop_mode;
     public boolean is_debugging_mode_enabled = true;
     public CropImageView cropImageView;
     public ImageView croppedImageView;
     public Bitmap croppedBitmap;
     public Spinner spinner, spinner1;
-    public String theme_dir;
+    public String theme_dir, package_name;
     public FloatingActionButton apply_fab;
     public Button saveButton;
     public int spinner_current = 0;
     public int folder_directory = 1;
+    public TextView checkBoxInstructions;
+    public CheckBox autoClearSystemUICache, freeCropMode;
 
     public void cleanTempFolder() {
         File dir = getActivity().getFilesDir();
@@ -142,6 +148,7 @@ public class HeaderSwapperFragment extends BasePageFragment {
                     if (checkCurrentThemeSelection("com.chummy.jezebel.materialdark.donate")) {
                         theme_dir = "/data/app/com.chummy.jezebel.materialdark.donate" + "-"
                                 + folder_directory + "/base.apk";
+                        package_name = "com.chummy.jezebel.materialdark.donate";
                         spinner_current = 1;
                         apply_fab.setClickable(true);
                     } else {
@@ -157,6 +164,7 @@ public class HeaderSwapperFragment extends BasePageFragment {
                     if (checkCurrentThemeSelection("com.chummy.jezebel.blackedout.donate")) {
                         theme_dir = "/data/app/com.chummy.jezebel.blackedout.donate" + "-"
                                 + folder_directory + "/base.apk";
+                        package_name = "com.chummy.jezebel.blackedout.donate";
                         spinner_current = 2;
                         apply_fab.setClickable(true);
                     } else {
@@ -181,6 +189,7 @@ public class HeaderSwapperFragment extends BasePageFragment {
                                         " has been chosen!");
                                 theme_dir = "/data/app/" + edittext.getText().toString() +
                                         "-" + folder_directory + "/base.apk";
+                                package_name = edittext.getText().toString();
                                 apply_fab.setClickable(true);
                                 Snackbar snackbar = Snackbar.make(apply_fab, "you are tweaking '" +
                                                 edittext.getText().toString() + "'...",
@@ -189,6 +198,7 @@ public class HeaderSwapperFragment extends BasePageFragment {
                                     @Override
                                     public void onClick(View view) {
                                         theme_dir = ""; // reset the theme directory
+                                        package_name = ""; // also reset the package name
                                         resetImageViews();
                                         spinner1.setSelection(0); // reset position
                                     }
@@ -227,6 +237,35 @@ public class HeaderSwapperFragment extends BasePageFragment {
         });
         // Apply the adapter to the spinner
         spinner1.setAdapter(adapter1);
+
+        autoClearSystemUICache = (CheckBox) inflation.findViewById(R.id.checkBox);
+        autoClearSystemUICache.setOnCheckedChangeListener(
+                new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                        if (isChecked) {
+                            are_we_clearing_cache_after = true;
+                        } else {
+                            are_we_clearing_cache_after = false;
+                        }
+                    }
+                });
+
+        freeCropMode = (CheckBox) inflation.findViewById(R.id.checkBox2);
+        freeCropMode.setOnCheckedChangeListener(
+                new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                        if (isChecked) {
+                            free_crop_mode = true;
+                        } else {
+                            free_crop_mode = false;
+                        }
+                    }
+                });
+
+        checkBoxInstructions = (TextView) inflation.findViewById(R.id.textView2);
+
 
         return inflation;
     }
@@ -307,6 +346,9 @@ public class HeaderSwapperFragment extends BasePageFragment {
         ImageView croppedImage = (ImageView) inflation.findViewById(R.id.croppedImageView);
         croppedImage.setVisibility(View.GONE);
         saveButton.setVisibility(View.GONE);
+        checkBoxInstructions.setVisibility(View.VISIBLE);
+        autoClearSystemUICache.setVisibility(View.VISIBLE);
+        freeCropMode.setVisibility(View.VISIBLE);
         is_picture_selected = false;
         changeFABaction();
     }
@@ -336,6 +378,15 @@ public class HeaderSwapperFragment extends BasePageFragment {
             image_to_crop.setVisibility(View.VISIBLE);
 
             cropImageView = (CropImageView) inflation.findViewById(R.id.cropImageView);
+
+            checkBoxInstructions.setVisibility(View.GONE);
+            autoClearSystemUICache.setVisibility(View.GONE);
+            freeCropMode.setVisibility(View.GONE);
+
+            if (!free_crop_mode) {
+                cropImageView.setCustomRatio(4, 1);
+            }
+
             croppedImageView = (ImageView) inflation.findViewById(R.id.croppedImageView);
             cropImageView.setImageBitmap(BitmapFactory.decodeFile(picturePath));
 
@@ -786,6 +837,12 @@ public class HeaderSwapperFragment extends BasePageFragment {
 
             // Do clean up
             cleanTempFolder();
+
+            // Follow boolean for autoclear cache
+            if (are_we_clearing_cache_after) {
+                eu.chainfire.libsuperuser.Shell.SU.run(
+                        "rm -r /data/resource-cache/" + package_name + "/com.android.systemui");
+            }
 
             // Close everything and make sure
             eu.chainfire.libsuperuser.Shell.SU.run("rm -r /assets");
