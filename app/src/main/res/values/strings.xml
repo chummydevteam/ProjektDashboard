@@ -2,6 +2,7 @@
     <string name="wallpapers_json_url" formatted="false">http://pastebin.com/raw/hvKBvrXD</string>
 
     <string-array name="contextual_headers">
+        <item>all headers</item>
         <item>notifhead_afternoon.png</item>
         <item>notifhead_christmas.png</item>
         <item>notifhead_morning.png</item>
@@ -28,9 +29,9 @@
 
     <string name="contextualheaderswapper_description">welcome to the contextual header swapper!</string>
     <string name="contextualheaderswapper_description_secondary">this is a highly experimental feature to
-        allow you to set your own custom contextual headers for your systemui notification shade.\n\n
+        allow you to set your own custom contextual headers for your systemui notification shade.
         a soft reboot is required for the system to take your changes as we are modifying the actual
-        apk installed on your phone.\n\n
+        apk installed on your phone.\n
     </string>
 
     <string name="colorpicker_description">welcome to the color picker!</string>

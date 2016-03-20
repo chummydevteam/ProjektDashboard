@@ -82,34 +82,6 @@
                 android:layout_marginBottom="@dimen/content_inset" />
 
             <Button
-                android:id="@+id/softreboot"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/content_inset_less"
-                android:layout_marginTop="@dimen/content_inset_less"
-                android:background="@android:color/transparent"
-                android:clickable="true"
-                android:fontFamily="sans-serif-light"
-                android:foreground="?android:selectableItemBackground"
-                android:gravity="center"
-                android:lineSpacingMultiplier="1.2"
-                android:text="Click here to soft reboot after all modifications"
-                android:textColor="@color/attention_color"
-                android:textSize="@dimen/text_ultrasmall"
-                android:textStyle="bold|italic"
-                android:visibility="gone" />
-
-            <com.isseiaoki.simplecropview.CropImageView xmlns:custom="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/cropImageView"
-                android:layout_width="match_parent"
-                android:layout_height="250dp"
-                android:layout_marginTop="@dimen/content_inset_less"
-                android:padding="16dp"
-                android:visibility="gone"
-                custom:cropMode="ratio_free"
-                custom:overlayColor="#33000000" />
-
-            <Button
                 android:id="@+id/crop_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -127,12 +99,22 @@
                 android:textStyle="bold|italic"
                 android:visibility="gone" />
 
-            <ImageView
-                android:id="@+id/croppedImageView"
-                android:layout_width="wrap_content"
+            <Button
+                android:id="@+id/softreboot"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_margin="16dp"
+                android:layout_marginBottom="@dimen/content_inset_less"
+                android:layout_marginTop="@dimen/content_inset_less"
+                android:background="@android:color/transparent"
+                android:clickable="true"
+                android:fontFamily="sans-serif-light"
+                android:foreground="?android:selectableItemBackground"
+                android:gravity="center"
+                android:lineSpacingMultiplier="1.2"
+                android:text="Click here to soft reboot after all modifications"
+                android:textColor="@color/attention_color"
+                android:textSize="@dimen/text_ultrasmall"
+                android:textStyle="bold|italic"
                 android:visibility="gone" />
 
             <Button
@@ -153,6 +135,25 @@
                 android:textStyle="bold|italic"
                 android:visibility="gone" />
 
+            <com.isseiaoki.simplecropview.CropImageView xmlns:custom="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/cropImageView"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:layout_marginTop="@dimen/content_inset_less"
+                android:padding="16dp"
+                android:visibility="gone"
+                custom:cropMode="ratio_free"
+                custom:overlayColor="#33000000" />
+
+            <ImageView
+                android:id="@+id/croppedImageView"
+                android:layout_width="wrap_content"
+                android:layout_height="250dp"
+                android:layout_gravity="center"
+                android:layout_margin="16dp"
+                android:layout_marginTop="@dimen/content_inset_less"
+                android:visibility="gone" />
+
         </LinearLayout>
 
     </ScrollView>
@@ -171,18 +172,6 @@
             android:layout_marginRight="20dp"
             android:src="@drawable/ic_photo_library_24dp"
             android:visibility="visible"
-            app:layout_windowInsets="bottom"
-            app:layout_windowInsetsUseMargin="true" />
-
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/fab"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center|bottom|right"
-            android:layout_marginBottom="@dimen/content_inset"
-            android:layout_marginRight="20dp"
-            android:src="@drawable/ic_cached_24dp"
-            android:visibility="gone"
             app:layout_windowInsets="bottom"
             app:layout_windowInsetsUseMargin="true" />
 
