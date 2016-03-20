@@ -74,7 +74,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/content_inset_less"
                 android:fontFamily="sans-serif-light"
-                android:gravity="center"
                 android:lineSpacingMultiplier="1.2"
                 android:text="@string/homepage_description_secondary"
                 android:textColor="?android:textColorPrimary"

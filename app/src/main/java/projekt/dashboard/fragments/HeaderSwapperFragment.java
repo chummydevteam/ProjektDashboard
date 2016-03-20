@@ -10,7 +10,6 @@ import android.content.res.ColorStateList;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -130,12 +129,12 @@ public class HeaderSwapperFragment extends BasePageFragment {
                 if (current_hour == 6 ||
                         current_hour == 7 ||
                         current_hour == 8) {
-                    currentTimeVariable.setText("current time image: notifhead_sunrise");
+                    currentTimeVariable.setText("notifhead_sunrise");
                 }
 
                 if (current_hour == 9 ||
                         current_hour == 10) {
-                    currentTimeVariable.setText("current time image: notifhead_morning");
+                    currentTimeVariable.setText("notifhead_morning");
                 }
 
                 if (current_hour == 11 ||
@@ -146,10 +145,10 @@ public class HeaderSwapperFragment extends BasePageFragment {
                         current_hour == 16 ||
                         current_hour == 17 ||
                         current_hour == 18) {
-                    currentTimeVariable.setText("current time image: notifhead_afternoon");
+                    currentTimeVariable.setText("notifhead_afternoon");
                 }
                 if (current_hour == 19) {
-                    currentTimeVariable.setText("current time image: notifhead_sunset");
+                    currentTimeVariable.setText("notifhead_sunset");
                 }
 
                 if (current_hour == 20 ||
@@ -160,7 +159,7 @@ public class HeaderSwapperFragment extends BasePageFragment {
                         current_hour == 3 ||
                         current_hour == 4 ||
                         current_hour == 5) {
-                    currentTimeVariable.setText("current time image: notifhead_night");
+                    currentTimeVariable.setText("notifhead_night");
                 }
             }
 
@@ -581,9 +580,8 @@ public class HeaderSwapperFragment extends BasePageFragment {
             String theme_dir = params[0];
             try {
                 copyCommonsFile(theme_dir);
-
             } catch (Exception e) {
-                Log.e("performAAPTonCommonsAPK", "Could not process file.");
+                Log.e("performAAPTonCommonsAPK", "Caught the exception.");
             }
             pd.setProgress(60);
             return null;

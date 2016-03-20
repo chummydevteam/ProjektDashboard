@@ -17,7 +17,6 @@ import java.io.InputStreamReader;
 import butterknife.ButterKnife;
 import projekt.dashboard.R;
 import projekt.dashboard.fragments.base.BasePageFragment;
-import projekt.dashboard.util.Utils;
 
 /**
  * @author Nicholas Chum (nicholaschum)
@@ -58,7 +57,8 @@ public class HomeFragment extends BasePageFragment {
         Process p = null;
         String result = "";
         try {
-            p = new ProcessBuilder("/system/bin/getprop", propName).redirectErrorStream(true).start();
+            p = new ProcessBuilder("/system/bin/getprop",
+                    propName).redirectErrorStream(true).start();
             BufferedReader br = new BufferedReader(new InputStreamReader(p.getInputStream()));
             String line = "";
             while ((line = br.readLine()) != null) {
@@ -73,7 +73,8 @@ public class HomeFragment extends BasePageFragment {
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
 
         final ViewGroup inflation = (ViewGroup) inflater.inflate(
                 R.layout.fragment_homepage, container, false);
@@ -90,7 +91,7 @@ public class HomeFragment extends BasePageFragment {
             status_message.setTextColor(getResources().getColor(R.color.attention_color_green));
             status_message.setText(checkRomSupported(getActivity()));
         }
-        Snackbar.make(inflation, "welcome to the cdt internal beta test of dashboard!",
+        Snackbar.make(inflation, "dashboard developer preview - internal beta test program",
                 Snackbar.LENGTH_INDEFINITE).show();
         return inflation;
     }

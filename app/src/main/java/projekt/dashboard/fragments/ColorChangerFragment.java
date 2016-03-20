@@ -4,7 +4,6 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.content.res.AssetManager;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -17,7 +16,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,11 +29,8 @@ import org.apache.commons.io.IOUtils;
 
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.util.Random;
 
@@ -183,45 +178,18 @@ public class ColorChangerFragment extends BasePageFragment {
             }
         });
 
-
-        if (!isAppInstalled(getContext(), "com.chummy.jezebel.materialdark.donate")) {
-            akzent.setClickable(false);
-            akzent.setCardBackgroundColor(android.R.color.black);
-            TextView text1 = (TextView) inflation.findViewById(R.id.akzent_title);
-            text1.setTextColor(getResources().getColor(R.color.disabled_text));
-            TextView text2 = (TextView) inflation.findViewById(R.id.akzent_description);
-            text2.setTextColor(getResources().getColor(R.color.disabled_text));
-            text2.setText("please install this theme first!");
-            ImageView image = (ImageView) inflation.findViewById(R.id.akzent_image);
-            image.setAlpha(127);
-
+        if (isAppInstalled(getContext(), "com.chummy.jezebel.materialdark.donate")) {
+            akzent.setVisibility(View.VISIBLE);
         }
-
-        if (!isAppInstalled(getContext(), "com.chummy.jezebel.blackedout.donate")) {
-            blakzent.setClickable(false);
-            blakzent.setCardBackgroundColor(android.R.color.black);
-            TextView text1 = (TextView) inflation.findViewById(R.id.blakzent_title);
-            text1.setTextColor(getResources().getColor(R.color.disabled_text));
-            TextView text2 = (TextView) inflation.findViewById(R.id.blakzent_description);
-            text2.setTextColor(getResources().getColor(R.color.disabled_text));
-            text2.setText("please install this theme first!");
-            ImageView image = (ImageView) inflation.findViewById(R.id.blakzent_image);
-            image.setAlpha(127);
+        if (isAppInstalled(getContext(), "com.chummy.jezebel.blackedout.donate")) {
+            blakzent.setVisibility(View.VISIBLE);
         }
-
-        // Disabling Klar integration for now
-
-        projektklar.setClickable(false);
-        projektklar.setCardBackgroundColor(android.R.color.black);
-        TextView text1 = (TextView) inflation.findViewById(R.id.projektklar_title);
-        text1.setTextColor(getResources().getColor(R.color.disabled_text));
-        TextView text2 = (TextView) inflation.findViewById(R.id.projektklar_description);
-        text2.setTextColor(getResources().getColor(R.color.disabled_text));
-        text2.setText("theme disabled");
-        ImageView image = (ImageView) inflation.findViewById(R.id.projektklar_image);
-        image.setAlpha(127);
-
-
+        if (!isAppInstalled(getContext(), "com.chummy.jezebel.materialdark.donate") &&
+                !isAppInstalled(getContext(), "com.chummy.jezebel.blackedout.donate")) {
+            TextView installedTitle = (TextView) inflation.findViewById(R.id.installed_title);
+            installedTitle.setText("no cdt color switch themes installed");
+        }
+        projektklar.setVisibility(View.GONE); // disable projekt klar functionality for now
         return inflation;
     }
 
@@ -291,76 +259,8 @@ public class ColorChangerFragment extends BasePageFragment {
         @Override
         protected String doInBackground(String... params) {
             String theme_dir = params[0];
-            /*createTempFolder();*/ // We don't have anything in assets at this very moment
             copyCommonsFile(theme_dir);
             return null;
-        }
-
-        private void createTempFolder() {
-            if (is_debugging_mode_enabled) Log.e("createTempFolder",
-                    "Creating temporary folder....");
-            copyAssetFolder(getActivity().getAssets(), "aapt",
-                    getActivity().getFilesDir().getAbsolutePath());
-        }
-
-
-        private boolean copyAssetFolder(AssetManager assetManager,
-                                        String fromAssetPath, String toPath) {
-            try {
-                String[] files = assetManager.list(fromAssetPath);
-                new File(toPath).mkdirs();
-                boolean res = true;
-                for (String file : files) {
-                    if (file.contains(".")) {
-                        res &= copyAsset(assetManager,
-                                fromAssetPath + "/" + file,
-                                toPath + "/" + file);
-                    } else {
-                        res &= copyAssetFolder(assetManager,
-                                fromAssetPath + "/" + file,
-                                toPath + "/" + file);
-                    }
-                }
-                if (is_debugging_mode_enabled) Log.e("CopyAssets",
-                        "All assets were moved to the app's file directory.");
-                return res;
-            } catch (Exception e) {
-                e.printStackTrace();
-                if (is_debugging_mode_enabled) Log.e("CopyAssets",
-                        "Temporary folder creation failed (EXCEPTION).");
-                return false;
-            }
-        }
-
-        private boolean copyAsset(AssetManager assetManager,
-                                  String fromAssetPath, String toPath) {
-            InputStream in = null;
-            OutputStream out = null;
-            try {
-                in = assetManager.open(fromAssetPath);
-                new File(toPath).createNewFile();
-                out = new FileOutputStream(toPath);
-                copyFile(in, out);
-                in.close();
-                in = null;
-                out.flush();
-                out.close();
-                out = null;
-                return true;
-            } catch (Exception e) {
-                e.printStackTrace();
-                if (is_debugging_mode_enabled) Log.e("CopyAssets",
-                        "Temporary folder creation failed (FILEEXCEPTION).");
-                return false;
-            }
-        }
-
-        private void copyFile(InputStream in, OutputStream out) throws IOException {
-            byte[] buffer = new byte[1024];
-            int read;
-            while ((read = in.read(buffer)) != -1) {
-                out.write(buffer, 0, read);
-            }
         }
 
         private void copyCommonsFile(String theme_dir) {

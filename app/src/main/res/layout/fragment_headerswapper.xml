@@ -39,14 +39,28 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/landingMessage"
+                android:layout_marginLeft="7dp"
+                android:layout_marginRight="8dp"
                 android:layout_marginTop="@dimen/content_inset_less"
                 android:layout_weight="0.92"
                 android:fontFamily="sans-serif-light"
-                android:gravity="center"
                 android:lineSpacingMultiplier="1.2"
                 android:text="@string/contextualheaderswapper_description_secondary"
                 android:textColor="?android:textColorPrimary"
                 android:textSize="@dimen/content_text_size" />
+
+            <TextView
+                android:id="@+id/currentTimeLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/landingMessageSecondary"
+                android:layout_gravity="left"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="@dimen/content_inset_less"
+                android:text="current time image:"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textSize="11dp"
+                android:textStyle="italic" />
 
             <TextView
                 android:id="@+id/currentTime"
@@ -54,9 +68,12 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/landingMessageSecondary"
                 android:layout_gravity="left"
-                android:layout_marginLeft="7dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="@dimen/content_inset_less"
+                android:layout_toRightOf="@+id/currentTimeLabel"
                 android:text="CURRENT_TIME_DRAWABLE_VARIABLE"
                 android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="@android:color/white"
                 android:textSize="11dp"
                 android:textStyle="italic" />
 
@@ -66,7 +83,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/currentTime"
                 android:layout_gravity="left"
-                android:layout_marginLeft="7dp"
+                android:layout_marginLeft="8dp"
                 android:text="modifying contextual header file:"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:textStyle="italic" />
@@ -85,7 +102,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/spinner"
                 android:layout_gravity="left"
-                android:layout_marginLeft="7dp"
+                android:layout_marginLeft="8dp"
                 android:text="select installed themes:"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:textStyle="italic" />
@@ -110,7 +127,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/spinner1"
                 android:layout_gravity="left"
-                android:layout_marginLeft="7dp"
+                android:layout_marginLeft="8dp"
                 android:text="options available before choosing a picture:"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:textStyle="italic" />
