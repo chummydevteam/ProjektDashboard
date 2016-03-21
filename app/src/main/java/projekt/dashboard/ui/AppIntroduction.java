@@ -20,7 +20,7 @@ public class AppIntroduction extends AppIntro {
     @Override
     public void init(Bundle savedInstanceState) {
         addSlide(AppIntroFragment.newInstance(
-                "welcome to dashboard",
+                "welcome to dashboard.",
                 "dashboard is a cm theme engine addon by chummy development team that allows" +
                         " you to expand the possibilities of all cdt themes, as well as extras " +
                         "for other themes as well.",
@@ -29,7 +29,7 @@ public class AppIntroduction extends AppIntro {
         ));
         addSlide(AppIntroFragment.newInstance(
                 "color picker",
-                "dashboard comes with a built in color picker for hotswapping of colors!\n\n" +
+                "dashboard comes with a built in color picker for hotswapping of colors!\n" +
                         "please allow it to automatically download a small patch file for " +
                         "itself before you leave your internet connection.",
                 R.drawable.painbrush_palette,
@@ -61,10 +61,9 @@ public class AppIntroduction extends AppIntro {
         ));
         addSlide(AppIntroFragment.newInstance(
                 "are you ready?",
-                "to use all the functions of the app, your phone must definitely have root" +
-                        "enabled, as well as a custom rom flashed if you would like to have a" +
-                        "contextual header!" +
-                        "phone!\n\n",
+                "please read everything that pops up while you use this app. crucial " +
+                        "information to prevent you from bootlooping such as soft " +
+                        "rebooting after setting an action is key!",
                 R.drawable.are_you_ready,
                 Color.parseColor("#212021")
         ));
