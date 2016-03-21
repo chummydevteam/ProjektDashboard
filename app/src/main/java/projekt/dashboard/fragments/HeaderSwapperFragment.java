@@ -163,6 +163,8 @@ public class HeaderSwapperFragment extends BasePageFragment {
                 if (current_hour == 20 ||
                         current_hour == 21 ||
                         current_hour == 22 ||
+                        current_hour == 23 ||
+                        current_hour == 0 ||
                         current_hour == 1 ||
                         current_hour == 2 ||
                         current_hour == 3 ||
