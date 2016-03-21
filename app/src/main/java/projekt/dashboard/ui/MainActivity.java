@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.app.FragmentManager;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
@@ -99,6 +100,13 @@ public class MainActivity extends BaseDonateActivity implements
         setupPages();
         setupPager();
         setupTabs();
+
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(
+                getApplicationContext());
+        if (prefs.getBoolean("first_run", true)) {
+            startActivity(new Intent(this, AppIntroduction.class));
+            finish();
+        }
 
         // But check permissions first - download will be started in the callback
         int permissionCheck = ContextCompat.checkSelfPermission(getApplicationContext(),

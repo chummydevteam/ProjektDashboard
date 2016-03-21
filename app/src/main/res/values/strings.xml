@@ -22,6 +22,7 @@
         <item>select custom theme...</item>
     </string-array>
 
+    <string name="contextualheaderswapper">contextual header swapper</string>
     <string name="contextualheaderswapper_description">contextual header swapper</string>
     <string name="contextualheaderswapper_description_secondary">this is a highly experimental feature to
         allow you to set your own custom contextual headers for your systemui notification shade.
@@ -62,10 +63,10 @@
         above in red, do not attempt to run this app unless you are ready to be a guinea pig :)
     </string>
 
-    <string name="home_tab_one">Home</string>
-    <string name="home_tab_two">Color Picker</string>
-    <string name="home_tab_three">Contextual Header Swapper</string>
-    <string name="home_tab_four">Theme Utilities</string>
+    <string name="home_tab_one">dashboard</string>
+    <string name="home_tab_two">color switcher</string>
+    <string name="home_tab_three">contextual header swapper</string>
+    <string name="home_tab_four">theme utilities</string>
 
     <string name="permission_not_granted_dialog_title">Permissions not granted</string>
     <string name="permission_not_granted_dialog_message">Please grant dashboard storage permissions
@@ -73,7 +74,7 @@
     <string name="dialog_ok">OK</string>
 
     <!-- App Strings -->
-    <string name="home">home.</string>
+    <string name="home">dashboard.</string>
     <string name="app_name">dashboard.</string>
     <string name="app_name_wallpaper">cdt walls</string>
     <string name="unable_to_contact_server">Unable to contact the server! Check your internet
@@ -81,8 +82,8 @@
     <string name="thank_you_donation">Thank you for your generosity!</string>
     <string name="request_cancelled">Request cancelled</string>
 
-    <string name="color_changer">color changer.</string>
-    <string name="theme_utils">utilities.</string>
+    <string name="color_changer">color switcher</string>
+    <string name="theme_utils">theme utilities</string>
     <string name="wallpapers">Wallpapers</string>
     <string name="wallpaper">Wallpaper</string>
     <string name="saved_to_x">Saved to %1$s!</string>

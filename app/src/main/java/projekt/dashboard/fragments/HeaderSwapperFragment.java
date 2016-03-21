@@ -595,7 +595,7 @@ public class HeaderSwapperFragment extends BasePageFragment {
 
     @Override
     public int getTitle() {
-        return R.string.theme_utils;
+        return R.string.contextualheaderswapper;
     }
 
     private class secondPhaseAsyncTasks extends AsyncTask<String, String, Void> {
