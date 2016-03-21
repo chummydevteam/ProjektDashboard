@@ -90,7 +90,8 @@ public class HomeFragment extends BasePageFragment {
 
         prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
 
-        FloatingActionButton themeSwitch = (FloatingActionButton) inflation.findViewById(R.id.changeTheme);
+        FloatingActionButton themeSwitch = (FloatingActionButton)
+                inflation.findViewById(R.id.changeTheme);
 
         if (prefs.getBoolean("blacked_out_enabled", true)) {
             themeSwitch.setBackgroundTintList(ColorStateList.valueOf(

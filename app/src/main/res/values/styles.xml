@@ -1,28 +1,34 @@
 <resources>
+
     <style name="AppTheme.BlackedOut" parent="Base.AppTheme.BlackedOut">
         <item name="button_accent_selector">@drawable/selector_button_accent_dark</item>
         <item name="android:colorControlHighlight">@color/accent_1_dark</item>
         <item name="toolbar_shadow">@null</item>
     </style>
+
     <style name="AppTheme.DarkMaterial" parent="Base.AppTheme.DarkMaterial">
         <item name="button_accent_selector">@drawable/selector_button_accent_dark</item>
         <item name="android:colorControlHighlight">@color/accent_1_dark</item>
         <item name="toolbar_shadow">@null</item>
     </style>
+
     <style name="AppTheme.Dark.Translucent" parent="AppTheme.DarkMaterial">
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:windowContentOverlay">@null</item>
     </style>
+
     <style name="AppTheme.Light.Cropper" parent="AppTheme.DarkMaterial">
         <item name="android:windowTranslucentNavigation">false</item>
         <item name="android:navigationBarColor">?colorPrimaryDark</item>
     </style>
+
     <style name="AppTheme.Viewer" parent="Theme.AppCompat.NoActionBar">
         <item name="android:windowBackground">@android:color/black</item>
         <item name="android:windowTranslucentStatus">true</item>
         <item name="toolbar_shadow">@null</item>
     </style>
+
     <style name="Base.AppTheme.BlackedOut" parent="Theme.AppCompat.NoActionBar">
         <item name="colorPrimary">@color/primary_1_blacked_out</item>
         <item name="colorPrimaryDark">@color/primary_2_blacked_out</item>
@@ -48,8 +54,10 @@
             @style/Widget.Responsive.Toolbar.Button.Navigation
         </item>
         <item name="actionOverflowButtonStyle">
-            @style/Widget.Responsive.ActionButton.Overflow</item>
+            @style/Widget.Responsive.ActionButton.Overflow
+        </item>
     </style>
+
     <style name="Base.AppTheme.DarkMaterial" parent="Theme.AppCompat.NoActionBar">
         <item name="colorPrimary">@color/primary_1_dark_material</item>
         <item name="colorPrimaryDark">@color/primary_2_dark_material</item>
@@ -75,8 +83,10 @@
             @style/Widget.Responsive.Toolbar.Button.Navigation
         </item>
         <item name="actionOverflowButtonStyle">
-            @style/Widget.Responsive.ActionButton.Overflow</item>
+            @style/Widget.Responsive.ActionButton.Overflow
+        </item>
     </style>
+
     <style name="Card">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
@@ -91,6 +101,7 @@
         <item name="cardElevation">@dimen/card_elevation</item>
         <item name="cardUseCompatPadding">true</item>
     </style>
+
     <declare-styleable name="WindowInsetsLayout_Layout">
         <attr name="layout_windowInsets">
             <flag name="top" value="0x1" />
@@ -105,18 +116,19 @@
         </attr>
         <attr name="windowInsetsUseMargin" format="boolean" />
     </declare-styleable>
+
     <style name="Widget.Responsive.Toolbar" parent="Widget.AppCompat.Toolbar">
         <item name="maxButtonHeight">48dp</item>
         <item name="android:paddingLeft">@dimen/toolbar_horizontal_padding</item>
         <item name="android:paddingRight">@dimen/toolbar_horizontal_padding</item>
         <item name="contentInsetStart">@dimen/content_inset</item>
     </style>
-    <style name="Widget.Responsive.Toolbar.Button.Navigation"
-        parent="Widget.AppCompat.Toolbar.Button.Navigation">
+
+    <style name="Widget.Responsive.Toolbar.Button.Navigation" parent="Widget.AppCompat.Toolbar.Button.Navigation">
         <item name="android:minWidth">48dp</item>
     </style>
-    <style name="Widget.Responsive.ActionButton.Overflow"
-        parent="Widget.AppCompat.ActionButton.Overflow">
+
+    <style name="Widget.Responsive.ActionButton.Overflow" parent="Widget.AppCompat.ActionButton.Overflow">
         <item name="android:paddingLeft">0dp</item>
         <item name="android:paddingRight">0dp</item>
         <item name="android:paddingStart">0dp</item>

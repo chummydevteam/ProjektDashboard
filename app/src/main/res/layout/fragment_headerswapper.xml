@@ -168,9 +168,9 @@
                 android:layout_alignRight="@id/fakeView"
                 android:layout_below="@id/checkBox"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="5dp"
                 android:layout_marginLeft="7dp"
                 android:layout_marginRight="7dp"
+                android:layout_marginTop="5dp"
                 android:button="@null"
                 android:drawableRight="?android:attr/listChoiceIndicatorMultiple"
                 android:text="debugging mode (advanced logs)" />

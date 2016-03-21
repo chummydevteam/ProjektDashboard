@@ -2,7 +2,6 @@ package projekt.dashboard.ui.base;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
@@ -19,7 +18,6 @@ import com.afollestad.materialdialogs.util.DialogUtils;
 
 import projekt.dashboard.R;
 import projekt.dashboard.config.Config;
-import projekt.dashboard.ui.AppIntroduction;
 import projekt.dashboard.util.TintUtils;
 import projekt.dashboard.util.Utils;
 

@@ -241,7 +241,7 @@ public class HeaderSwapperFragment extends BasePageFragment {
                             if (checkCurrentThemeSelection(edittext.getText().toString())) {
                                 if (is_debugging_mode_enabled) Log.e("TAG SUCCESS",
                                         edittext.getText().toString() +
-                                        " has been chosen!");
+                                                " has been chosen!");
                                 theme_dir = "/data/app/" + edittext.getText().toString() +
                                         "-" + folder_directory + "/base.apk";
                                 package_name = edittext.getText().toString();
@@ -252,7 +252,7 @@ public class HeaderSwapperFragment extends BasePageFragment {
                                 ViewGroup group = (ViewGroup) snackbar.getView();
                                 if (prefs.getBoolean("blacked_out_enabled", true)) {
                                     group.setBackgroundColor(
-                                            ContextCompat.getColor(getContext(), 
+                                            ContextCompat.getColor(getContext(),
                                                     R.color.primary_1_blacked_out));
                                 } else {
                                     group.setBackgroundColor(
@@ -273,7 +273,7 @@ public class HeaderSwapperFragment extends BasePageFragment {
                             } else {
                                 if (is_debugging_mode_enabled) Log.e("TAG ERROR",
                                         edittext.getText().toString() +
-                                        " does not exist.");
+                                                " does not exist.");
                                 spinner1.setSelection(spinner_current);
                                 apply_fab.hide();
                                 Toast toast = Toast.makeText(getActivity().getApplicationContext(),
