@@ -1,10 +1,16 @@
 package projekt.dashboard.fragments;
 
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.content.res.ColorStateList;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,11 +23,14 @@ import java.io.InputStreamReader;
 import butterknife.ButterKnife;
 import projekt.dashboard.R;
 import projekt.dashboard.fragments.base.BasePageFragment;
+import projekt.dashboard.ui.MainActivity;
 
 /**
  * @author Nicholas Chum (nicholaschum)
  */
 public class HomeFragment extends BasePageFragment {
+
+    public SharedPreferences prefs;
 
     final public static String checkRomSupported(Context context) {
         if (getProp("ro.cm.device") != "") {
@@ -79,6 +88,32 @@ public class HomeFragment extends BasePageFragment {
         final ViewGroup inflation = (ViewGroup) inflater.inflate(
                 R.layout.fragment_homepage, container, false);
 
+        prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
+
+        FloatingActionButton themeSwitch = (FloatingActionButton) inflation.findViewById(R.id.changeTheme);
+
+        if (prefs.getBoolean("blacked_out_enabled", true)) {
+            themeSwitch.setBackgroundTintList(ColorStateList.valueOf(
+                    getResources().getColor(R.color.primary_1_blacked_out)));
+        } else {
+            themeSwitch.setBackgroundTintList(ColorStateList.valueOf(
+                    getResources().getColor(R.color.primary_1_dark_material)));
+        }
+
+        themeSwitch.setOnClickListener((new View.OnClickListener() {
+            public void onClick(View v) {
+                if (prefs.getBoolean("blacked_out_enabled", true)) {
+                    prefs.edit().putBoolean("blacked_out_enabled", false).commit();
+                    getActivity().finish();
+                    getActivity().startActivity(new Intent(getActivity(), MainActivity.class));
+                } else {
+                    prefs.edit().putBoolean("blacked_out_enabled", true).commit();
+                    getActivity().finish();
+                    getActivity().startActivity(new Intent(getActivity(), MainActivity.class));
+                }
+            }
+        }));
+
         TextView status_message = (TextView) inflation.findViewById(R.id.status_message);
         if (checkRomSupported(getActivity()) == null) {
             status_message.setTextColor(getResources().getColor(R.color.attention_color));
@@ -91,8 +126,19 @@ public class HomeFragment extends BasePageFragment {
             status_message.setTextColor(getResources().getColor(R.color.attention_color_green));
             status_message.setText(checkRomSupported(getActivity()));
         }
-        Snackbar.make(inflation, "dashboard developer preview - internal beta test program",
-                Snackbar.LENGTH_INDEFINITE).show();
+        Snackbar snack = Snackbar.make(themeSwitch,
+                "dashboard developer preview - internal beta test program",
+                Snackbar.LENGTH_INDEFINITE);
+        ViewGroup group = (ViewGroup) snack.getView();
+        if (prefs.getBoolean("blacked_out_enabled", true)) {
+            group.setBackgroundColor(
+                    ContextCompat.getColor(getContext(), R.color.primary_1_blacked_out));
+        } else {
+            group.setBackgroundColor(
+                    ContextCompat.getColor(getContext(), R.color.primary_1_dark_material));
+        }
+        snack.show();
+
         return inflation;
     }
 

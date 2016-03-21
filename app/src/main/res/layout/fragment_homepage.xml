@@ -83,4 +83,23 @@
 
     </ScrollView>
 
+    <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/clayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/changeTheme"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|bottom|right"
+            android:layout_marginBottom="@dimen/content_inset"
+            android:layout_marginRight="20dp"
+            android:src="@drawable/ic_invert_colors_24dp"
+            android:visibility="visible"
+            app:layout_windowInsets="bottom"
+            app:layout_windowInsetsUseMargin="true" />
+
+    </android.support.design.widget.CoordinatorLayout>
+
 </com.pluscubed.insetsdispatcher.view.InsetsDispatcherFrameLayout>

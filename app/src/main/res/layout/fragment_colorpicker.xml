@@ -135,7 +135,7 @@
                     android:clickable="true"
                     android:foreground="?android:selectableItemBackground"
                     android:visibility="gone"
-                    card_view:cardBackgroundColor="@color/cardsbg"
+                    card_view:cardBackgroundColor="?attr/card_background"
                     card_view:cardCornerRadius="@dimen/card_corner_radius"
                     card_view:cardElevation="@dimen/cards_elevation">
 
@@ -202,7 +202,7 @@
                     android:clickable="true"
                     android:foreground="?android:selectableItemBackground"
                     android:visibility="gone"
-                    card_view:cardBackgroundColor="@color/cardsbg"
+                    card_view:cardBackgroundColor="?attr/card_background"
                     card_view:cardCornerRadius="@dimen/card_corner_radius"
                     card_view:cardElevation="@dimen/cards_elevation">
 
@@ -269,7 +269,7 @@
                     android:clickable="true"
                     android:foreground="?android:selectableItemBackground"
                     android:visibility="gone"
-                    card_view:cardBackgroundColor="@color/cardsbg"
+                    card_view:cardBackgroundColor="?attr/card_background"
                     card_view:cardCornerRadius="@dimen/card_corner_radius"
                     card_view:cardElevation="@dimen/cards_elevation">
 

@@ -2,8 +2,11 @@ package projekt.dashboard.ui.base;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.annotation.StyleRes;
 import android.support.v7.widget.Toolbar;
@@ -16,6 +19,7 @@ import com.afollestad.materialdialogs.util.DialogUtils;
 
 import projekt.dashboard.R;
 import projekt.dashboard.config.Config;
+import projekt.dashboard.ui.AppIntroduction;
 import projekt.dashboard.util.TintUtils;
 import projekt.dashboard.util.Utils;
 
@@ -86,12 +90,14 @@ public abstract class BaseThemedActivity extends AssentActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
-    protected boolean isTranslucent() {
-        return false;
-    }
-
     @StyleRes
     private int getCurrentTheme() {
-        return R.style.AppTheme_Dark;
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(
+                getApplicationContext());
+        if (prefs.getBoolean("blacked_out_enabled", true)) {
+            return R.style.AppTheme_BlackedOut;
+        } else {
+            return R.style.AppTheme_DarkMaterial;
+        }
     }
 }

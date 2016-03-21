@@ -19,7 +19,6 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme.Dark"
         android:vmSafeMode="true"
         tools:ignore="GoogleAppIndexingWarning,RtlEnabled,UnusedAttribute">
         <activity

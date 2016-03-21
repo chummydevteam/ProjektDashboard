@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.ColorStateList;
 import android.database.Cursor;
@@ -13,10 +14,12 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -68,6 +71,7 @@ public class HeaderSwapperFragment extends BasePageFragment {
     public int current_hour;
     public TextView checkBoxInstructions, currentTimeVariable;
     public CheckBox autoClearSystemUICache, freeCropMode, debugmode;
+    public SharedPreferences prefs;
 
     public void cleanTempFolder() {
         File dir = getActivity().getCacheDir();
@@ -92,12 +96,18 @@ public class HeaderSwapperFragment extends BasePageFragment {
 
         Calendar c = Calendar.getInstance();
         current_hour = c.get(Calendar.HOUR_OF_DAY);
-
         currentTimeVariable = (TextView) inflation.findViewById(R.id.currentTime);
 
+        prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
+
         apply_fab = (FloatingActionButton) inflation.findViewById(R.id.apply_fab);
-        apply_fab.setBackgroundTintList(ColorStateList.valueOf(
-                getResources().getColor(R.color.primary_1_dark)));
+        if (prefs.getBoolean("blacked_out_enabled", true)) {
+            apply_fab.setBackgroundTintList(ColorStateList.valueOf(
+                    getResources().getColor(R.color.primary_1_blacked_out)));
+        } else {
+            apply_fab.setBackgroundTintList(ColorStateList.valueOf(
+                    getResources().getColor(R.color.primary_1_dark_material)));
+        }
         apply_fab.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent i = new Intent(Intent.ACTION_PICK,
@@ -237,6 +247,17 @@ public class HeaderSwapperFragment extends BasePageFragment {
                                 Snackbar snackbar = Snackbar.make(apply_fab, "you are tweaking '" +
                                                 edittext.getText().toString() + "'...",
                                         Snackbar.LENGTH_INDEFINITE);
+                                ViewGroup group = (ViewGroup) snackbar.getView();
+                                if (prefs.getBoolean("blacked_out_enabled", true)) {
+                                    group.setBackgroundColor(
+                                            ContextCompat.getColor(getContext(), 
+                                                    R.color.primary_1_blacked_out));
+                                } else {
+                                    group.setBackgroundColor(
+                                            ContextCompat.getColor(getContext(),
+                                                    R.color.primary_1_dark_material));
+                                }
+
                                 snackbar.setAction("REVERT", new View.OnClickListener() {
                                     @Override
                                     public void onClick(View view) {
@@ -343,8 +364,13 @@ public class HeaderSwapperFragment extends BasePageFragment {
         if (!is_picture_selected) {
             apply_fab.setImageDrawable(getResources().getDrawable(
                     R.drawable.ic_photo_library_24dp));
-            apply_fab.setBackgroundTintList(ColorStateList.valueOf(
-                    getResources().getColor(R.color.primary_1_dark)));
+            if (prefs.getBoolean("blacked_out_enabled", true)) {
+                apply_fab.setBackgroundTintList(ColorStateList.valueOf(
+                        getResources().getColor(R.color.primary_1_blacked_out)));
+            } else {
+                apply_fab.setBackgroundTintList(ColorStateList.valueOf(
+                        getResources().getColor(R.color.primary_1_dark_material)));
+            }
             apply_fab.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
                     Intent i = new Intent(Intent.ACTION_PICK,
