@@ -49,11 +49,15 @@ public class ThemeUtilitiesFragment extends BasePageFragment {
                     @Override
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                         if (isChecked) {
-                            restartSystemUI.setChecked(false);
+                            if (restartSystemUI.isChecked()) {
+                                restartSystemUI.setChecked(false);
+                            }
                             restartSystemUI.setClickable(false);
+
                             softreboot = true;
                         } else {
                             restartSystemUI.setClickable(true);
+                            
                             softreboot = false;
                         }
                     }
@@ -65,14 +69,21 @@ public class ThemeUtilitiesFragment extends BasePageFragment {
                     @Override
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                         if (isChecked) {
-                            restartSystemUI.setChecked(false);
+                            if (restartSystemUI.isChecked()) {
+                                restartSystemUI.setChecked(false);
+                            }
+                            if (softReboot.isChecked()) {
+                                softReboot.setChecked(false);
+                            }
+
                             restartSystemUI.setClickable(false);
-                            softReboot.setChecked(false);
                             softReboot.setClickable(false);
+
                             reboot = true;
                         } else {
                             restartSystemUI.setClickable(true);
                             softReboot.setClickable(true);
+
                             reboot = false;
                         }
                     }
