@@ -49,7 +49,7 @@ public class HomeFragment extends BasePageFragment {
             return "Pure Nexus ✓";
         }
         if (getProp("ro.rr.device") != "") {
-            return null;
+            return "Resurrection Remix ✓";
         }
         if (getProp("ro.screwd.device") != "") {
             return "Screw'd Android ✓";
