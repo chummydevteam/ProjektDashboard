@@ -160,6 +160,21 @@
                 android:drawableRight="?android:attr/listChoiceIndicatorMultiple"
                 android:text="free crop mode" />
 
+            <CheckBox
+                android:id="@+id/checkBox3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignRight="@id/fakeView"
+                android:layout_below="@id/checkBox"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="7dp"
+                android:layout_marginRight="7dp"
+                android:button="@null"
+                android:drawableRight="?android:attr/listChoiceIndicatorMultiple"
+                android:text="debugging mode (advanced logs)" />
+
             <Button
                 android:id="@+id/crop_button"
                 android:layout_width="match_parent"
@@ -183,7 +198,7 @@
                 android:id="@+id/softreboot"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/crop_button"
+                android:layout_below="@id/checkBox3"
                 android:layout_marginBottom="@dimen/content_inset_less"
                 android:layout_marginTop="@dimen/content_inset_less"
                 android:background="@android:color/transparent"

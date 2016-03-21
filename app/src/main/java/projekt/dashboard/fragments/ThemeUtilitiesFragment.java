@@ -57,7 +57,7 @@ public class ThemeUtilitiesFragment extends BasePageFragment {
                             softreboot = true;
                         } else {
                             restartSystemUI.setClickable(true);
-                            
+
                             softreboot = false;
                         }
                     }
