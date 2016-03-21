@@ -33,6 +33,9 @@ public class HomeFragment extends BasePageFragment {
     public SharedPreferences prefs;
 
     final public static String checkRomSupported(Context context) {
+        if (getProp("ro.bliss.device") != "") {
+            return "Bliss ✓";
+        }
         if (getProp("ro.cm.device") != "") {
             return "CyanogenMod ✓";
         }
