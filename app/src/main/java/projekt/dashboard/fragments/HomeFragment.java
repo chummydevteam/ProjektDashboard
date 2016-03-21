@@ -33,6 +33,9 @@ public class HomeFragment extends BasePageFragment {
     public SharedPreferences prefs;
 
     final public static String checkRomSupported(Context context) {
+        if (getProp("ro.aicp.device") != "") {
+            return "AICP ✓";
+        }
         if (getProp("ro.bliss.device") != "") {
             return "Bliss ✓";
         }
@@ -44,6 +47,9 @@ public class HomeFragment extends BasePageFragment {
         }
         if (getProp("ro.purenexus.version") != "") {
             return "Pure Nexus ✓";
+        }
+        if (getProp("ro.rr.device") != "") {
+            return null;
         }
         if (getProp("ro.screwd.device") != "") {
             return "Screw'd Android ✓";
