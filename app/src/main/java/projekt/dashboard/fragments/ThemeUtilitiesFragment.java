@@ -141,12 +141,20 @@ public class ThemeUtilitiesFragment extends BasePageFragment {
                     @Override
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                         if (isChecked) {
-                            rebuildAkzent.setChecked(false);
+                            if (rebuildAkzent.isChecked()) {
+                                rebuildAkzent.setChecked(false);
+                            }
+                            if (rebuildBlakzent.isChecked()) {
+                                rebuildBlakzent.setChecked(false);
+                            }
+                            if (rebuildProjektKlar.isChecked()) {
+                                rebuildProjektKlar.setChecked(false);
+                            }
+
                             rebuildAkzent.setClickable(false);
-                            rebuildBlakzent.setChecked(false);
                             rebuildBlakzent.setClickable(false);
-                            rebuildProjektKlar.setChecked(false);
                             rebuildProjektKlar.setClickable(false);
+
                             all_color_switch = true;
                         } else {
                             rebuildAkzent.setClickable(true);
@@ -163,20 +171,31 @@ public class ThemeUtilitiesFragment extends BasePageFragment {
                     @Override
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                         if (isChecked) {
-                            rebuildAkzent.setChecked(false);
+                            if (rebuildAkzent.isChecked()) {
+                                rebuildAkzent.setChecked(false);
+                            }
+                            if (rebuildBlakzent.isChecked()) {
+                                rebuildBlakzent.setChecked(false);
+                            }
+                            if (rebuildProjektKlar.isChecked()) {
+                                rebuildProjektKlar.setChecked(false);
+                            }
+                            if (rebuildAllColorSwitchThemes.isChecked()) {
+                                rebuildAllColorSwitchThemes.setChecked(false);
+                            }
+
                             rebuildAkzent.setClickable(false);
-                            rebuildBlakzent.setChecked(false);
                             rebuildBlakzent.setClickable(false);
-                            rebuildProjektKlar.setChecked(false);
                             rebuildProjektKlar.setClickable(false);
-                            rebuildAllColorSwitchThemes.setChecked(false);
                             rebuildAllColorSwitchThemes.setClickable(false);
+
                             all_cdt_themes = true;
                         } else {
                             rebuildAkzent.setClickable(true);
                             rebuildBlakzent.setClickable(true);
                             rebuildProjektKlar.setClickable(true);
                             rebuildAllColorSwitchThemes.setClickable(true);
+
                             all_cdt_themes = false;
                         }
                     }
@@ -188,16 +207,28 @@ public class ThemeUtilitiesFragment extends BasePageFragment {
                     @Override
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                         if (isChecked) {
-                            rebuildAkzent.setChecked(false);
+                            if (rebuildAkzent.isChecked()) {
+                                rebuildAkzent.setChecked(false);
+                            }
+                            if (rebuildBlakzent.isChecked()) {
+                                rebuildBlakzent.setChecked(false);
+                            }
+                            if (rebuildProjektKlar.isChecked()) {
+                                rebuildProjektKlar.setChecked(false);
+                            }
+                            if (rebuildAllColorSwitchThemes.isChecked()) {
+                                rebuildAllColorSwitchThemes.setChecked(false);
+                            }
+                            if (rebuildCDTthemes.isChecked()) {
+                                rebuildCDTthemes.setChecked(false);
+                            }
+
                             rebuildAkzent.setClickable(false);
-                            rebuildBlakzent.setChecked(false);
                             rebuildBlakzent.setClickable(false);
-                            rebuildProjektKlar.setChecked(false);
                             rebuildProjektKlar.setClickable(false);
-                            rebuildAllColorSwitchThemes.setChecked(false);
                             rebuildAllColorSwitchThemes.setClickable(false);
-                            rebuildCDTthemes.setChecked(false);
                             rebuildCDTthemes.setClickable(false);
+
                             all_themes = true;
                         } else {
                             rebuildAkzent.setClickable(true);
@@ -205,6 +236,7 @@ public class ThemeUtilitiesFragment extends BasePageFragment {
                             rebuildProjektKlar.setClickable(true);
                             rebuildAllColorSwitchThemes.setClickable(true);
                             rebuildCDTthemes.setClickable(true);
+
                             all_themes = false;
                         }
                     }
