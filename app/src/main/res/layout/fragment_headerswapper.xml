@@ -176,25 +176,6 @@
                 android:text="debugging mode (advanced logs)" />
 
             <Button
-                android:id="@+id/crop_button"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/checkBox"
-                android:layout_marginBottom="@dimen/content_inset_less"
-                android:layout_marginTop="@dimen/content_inset_less"
-                android:background="?attr/card_background"
-                android:clickable="true"
-                android:fontFamily="sans-serif-light"
-                android:foreground="?android:selectableItemBackground"
-                android:gravity="center"
-                android:lineSpacingMultiplier="1.2"
-                android:text="Crop Image"
-                android:textColor="?android:textColorPrimary"
-                android:textSize="@dimen/text_ultrasmall"
-                android:textStyle="bold|italic"
-                android:visibility="gone" />
-
-            <Button
                 android:id="@+id/softreboot"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -209,6 +190,25 @@
                 android:lineSpacingMultiplier="1.2"
                 android:text="Click here to soft reboot after all modifications"
                 android:textColor="@color/attention_color"
+                android:textSize="@dimen/text_ultrasmall"
+                android:textStyle="bold|italic"
+                android:visibility="gone" />
+
+            <Button
+                android:id="@+id/crop_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/softreboot"
+                android:layout_marginBottom="@dimen/content_inset_less"
+                android:layout_marginTop="@dimen/content_inset_less"
+                android:background="?attr/card_background"
+                android:clickable="true"
+                android:fontFamily="sans-serif-light"
+                android:foreground="?android:selectableItemBackground"
+                android:gravity="center"
+                android:lineSpacingMultiplier="1.2"
+                android:text="Crop Image"
+                android:textColor="?android:textColorPrimary"
                 android:textSize="@dimen/text_ultrasmall"
                 android:textStyle="bold|italic"
                 android:visibility="gone" />
@@ -236,7 +236,7 @@
                 android:id="@+id/cropImageView"
                 android:layout_width="match_parent"
                 android:layout_height="250dp"
-                android:layout_below="@id/save_button"
+                android:layout_below="@id/crop_button"
                 android:layout_marginTop="@dimen/content_inset_less"
                 android:padding="16dp"
                 android:visibility="gone"
