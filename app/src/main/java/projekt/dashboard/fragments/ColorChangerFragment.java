@@ -178,11 +178,23 @@ public class ColorChangerFragment extends BasePageFragment {
                                     "2429389/dashboard.%20files/materialdark-resources.apk",
                                     "materialdark"};
                             new downloadResources().execute(downloadCommands);
-                            String[] firstPhaseCommands = {"materialdark"};
-                            new firstPhaseAsyncTasks().execute(firstPhaseCommands);
-                            launchColorPicker("akzent",
-                                    "/data/resource-cache/com.chummy.jezebel.materialdark.donate" +
-                                            "/common/resources.apk");
+                            if (!resourceFile.exists()) {
+                                new MaterialDialog.Builder(getActivity())
+                                        .title("patch required")
+                                        .content("to patch the system cache for color swapping " +
+                                                "capabilities, we must download a small 36kb apk " +
+                                                "resource cache file used by theme engine, " +
+                                                "however an internet connection is required.")
+                                        .positiveText("Okay")
+                                        .negativeText("Cancel")
+                                        .show();
+                            } else {
+                                String[] firstPhaseCommands = {"materialdark"};
+                                new firstPhaseAsyncTasks().execute(firstPhaseCommands);
+                                launchColorPicker("akzent",
+                                        "/data/resource-cache/com.chummy.jezebel.materialdark.donate" +
+                                                "/common/resources.apk");
+                            }
                         } else {
                             new MaterialDialog.Builder(getActivity())
                                     .title("patch required")
@@ -221,9 +233,9 @@ public class ColorChangerFragment extends BasePageFragment {
             public void onClick(View v) {
                 if (isAppInstalled(getActivity(), "com.chummy.jezebel.blackedout.donate")) {
 
-                    File directory = new File(getActivity().getFilesDir(),
+                    File resourceFile = new File(getActivity().getFilesDir(),
                             "blackedout-resources.apk");
-                    if (!directory.exists() || is_force_update_enabled) {
+                    if (!resourceFile.exists() || is_force_update_enabled) {
                         if (is_debugging_mode_enabled) Log.e("Initialization",
                                 "File not found, attempting to download...");
                         if (isNetworkAvailable()) {
@@ -233,11 +245,23 @@ public class ColorChangerFragment extends BasePageFragment {
                                     "2429389/dashboard.%20files/blackedout-resources.apk",
                                     "blackedout"};
                             new downloadResources().execute(downloadCommands);
-                            String[] firstPhaseCommands = {"blackedout"};
-                            new firstPhaseAsyncTasks().execute(firstPhaseCommands);
-                            launchColorPicker("blakzent",
-                                    "/data/resource-cache/com.chummy.jezebel.blackedout.donate" +
-                                            "/common/resources.apk");
+                            if (!resourceFile.exists()) {
+                                new MaterialDialog.Builder(getActivity())
+                                        .title("patch required")
+                                        .content("to patch the system cache for color swapping " +
+                                                "capabilities, we must download a small 36kb apk " +
+                                                "resource cache file used by theme engine, " +
+                                                "however an internet connection is required.")
+                                        .positiveText("Okay")
+                                        .negativeText("Cancel")
+                                        .show();
+                            } else {
+                                String[] firstPhaseCommands = {"blackedout"};
+                                new firstPhaseAsyncTasks().execute(firstPhaseCommands);
+                                launchColorPicker("blakzent",
+                                        "/data/resource-cache/com.chummy.jezebel.blackedout.donate" +
+                                                "/common/resources.apk");
+                            }
                         } else {
                             new MaterialDialog.Builder(getActivity())
                                     .title("patch required")

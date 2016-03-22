@@ -26,8 +26,8 @@ android {
         applicationId "projekt.dashboard"
         minSdkVersion 23
         targetSdkVersion 23
-        versionCode 100
-        versionName "developer preview"
+        versionCode 1
+        versionName "internal beta"
         generatedDensities = []
     }
 
