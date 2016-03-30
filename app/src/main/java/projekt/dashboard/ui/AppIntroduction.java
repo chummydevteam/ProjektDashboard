@@ -19,54 +19,13 @@ public class AppIntroduction extends AppIntro {
     // Please DO NOT override onCreate. Use init.
     @Override
     public void init(Bundle savedInstanceState) {
-        addSlide(AppIntroFragment.newInstance(
-                "welcome to dashboard.",
-                "dashboard is a cm theme engine addon by chummy development team that allows" +
-                        " you to expand the possibilities of all cdt themes, as well as extras " +
-                        "for other themes as well.",
-                R.drawable.homepage_icon,
-                Color.parseColor("#212021")
-        ));
-        addSlide(AppIntroFragment.newInstance(
-                "color picker",
-                "dashboard comes with a built in color picker for hotswapping of colors!\n" +
-                        "please allow it to automatically download a small patch file for " +
-                        "itself before you leave your internet connection.",
-                R.drawable.painbrush_palette,
-                Color.parseColor("#212021")
-        ));
-        addSlide(AppIntroFragment.newInstance(
-                "contextual header swapper",
-                "dashboard also comes with a built in contextual header swapper to customize " +
-                        "your phone further without the use of useless xposed plugins or making " +
-                        "a theme yourself!",
-                R.drawable.phone_heart,
-                Color.parseColor("#212021")
-        ));
-        addSlide(AppIntroFragment.newInstance(
-                "theme engine in need of diagnosing?",
-                "dashboard also comes with built in theme utilities to offer you a" +
-                        "plethora of options to help you fix your theme engine directly on your " +
-                        "phone!\n\n",
-                R.drawable.theme_utilities,
-                Color.parseColor("#212021")
-        ));
-        addSlide(AppIntroFragment.newInstance(
-                "this app needs root!",
-                "to use all the functions of the app, your phone must definitely have root " +
-                        "enabled, as well as a custom rom flashed if you would like to have a " +
-                        "contextual header!",
-                R.drawable.needs_root,
-                Color.parseColor("#212021")
-        ));
-        addSlide(AppIntroFragment.newInstance(
-                "are you ready?",
-                "please read everything that pops up while you use this app. crucial " +
-                        "information to prevent you from bootlooping such as soft " +
-                        "rebooting after setting an action is key!",
-                R.drawable.are_you_ready,
-                Color.parseColor("#212021")
-        ));
+
+        addSlide(AppIntroFragment.newInstance(getString(R.string.first_slide_title), getString(R.string.first_slide_description), R.drawable.homepage_icon, Color.parseColor("#212021")));
+        addSlide(AppIntroFragment.newInstance(getString(R.string.second_slide_title), getString(R.string.second_slide_description), R.drawable.painbrush_palette, Color.parseColor("#212021")));
+        addSlide(AppIntroFragment.newInstance(getString(R.string.third_slide_title), getString(R.string.third_slide_description), R.drawable.phone_heart, Color.parseColor("#212021")));
+        addSlide(AppIntroFragment.newInstance(getString(R.string.fourth_slide_title), getString(R.string.fourth_slide_description), R.drawable.theme_utilities, Color.parseColor("#212021")));
+        addSlide(AppIntroFragment.newInstance(getString(R.string.fifth_slide_title), getString(R.string.fifth_slide_description), R.drawable.needs_root, Color.parseColor("#212021")));
+        addSlide(AppIntroFragment.newInstance(getString(R.string.last_slide_title), getString(R.string.last_slide_description), R.drawable.are_you_ready, Color.parseColor("#212021")));
 
         showDoneButton(true);
         showSkipButton(false);
