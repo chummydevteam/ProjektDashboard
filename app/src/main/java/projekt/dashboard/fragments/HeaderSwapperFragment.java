@@ -1,9 +1,7 @@
 package projekt.dashboard.fragments;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -18,8 +16,6 @@ import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,7 +25,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -43,7 +38,9 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Random;
 
 import butterknife.ButterKnife;
@@ -66,7 +63,7 @@ public class HeaderSwapperFragment extends BasePageFragment {
     public String theme_dir, package_name;
     public FloatingActionButton apply_fab;
     public Button saveButton;
-    public int spinner_current = 0;
+    public int counter = 0;
     public int folder_directory = 1;
     public int current_hour;
     public TextView checkBoxInstructions, currentTimeVariable;
@@ -186,8 +183,34 @@ public class HeaderSwapperFragment extends BasePageFragment {
 
         spinner1 = (Spinner) inflation.findViewById(R.id.spinner1);
         // Create an ArrayAdapter using the string array and a default spinner layout
-        ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(getActivity(),
-                R.array.themes, android.R.layout.simple_spinner_item);
+        List<String> list = new ArrayList<String>();
+
+        list.add("please select a theme...");
+        list.add("dark material // akZent");
+        list.add("blacked out // blakZent");
+
+        // Now lets add all the located themes found that aren't cdt themes
+        File f = new File("/data/resource-cache/");
+        File[] files = f.listFiles();
+        for (File inFile : files) {
+            if (inFile.isDirectory()) {
+                if (!inFile.getAbsolutePath().substring(21).equals("com.chummy.jezebel.blackedout.donate")) {
+                    if (!inFile.getAbsolutePath().substring(21).equals("com.chummy.jezebel.materialdark.donate")) {
+                        if (!inFile.getAbsolutePath().substring(21).equals("projekt.klar")) {
+                            list.add(inFile.getAbsolutePath().substring(21));
+                            counter += 1;
+                        }
+                    }
+                }
+            }
+        }
+        if (counter == 0) {
+            Toast toast = Toast.makeText(getActivity().getApplicationContext(),
+                    "Woah there, your cache is currently empty! Please do a reboot first!",
+                    Toast.LENGTH_LONG);
+            toast.show();
+        }
+        ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, list);
         // Specify the layout to use when the list of choices appears
         adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Set On Item Selected Listener
@@ -203,14 +226,12 @@ public class HeaderSwapperFragment extends BasePageFragment {
                         theme_dir = "/data/app/com.chummy.jezebel.materialdark.donate" + "-"
                                 + folder_directory + "/base.apk";
                         package_name = "com.chummy.jezebel.materialdark.donate";
-                        spinner_current = 1;
                         apply_fab.show();
                     } else {
                         Toast toast = Toast.makeText(getActivity().getApplicationContext(),
                                 "Please install dark material // akZent before using!",
                                 Toast.LENGTH_LONG);
                         toast.show();
-                        spinner1.setSelection(spinner_current); // reset position
                         apply_fab.hide();
                     }
                 }
@@ -219,80 +240,22 @@ public class HeaderSwapperFragment extends BasePageFragment {
                         theme_dir = "/data/app/com.chummy.jezebel.blackedout.donate" + "-"
                                 + folder_directory + "/base.apk";
                         package_name = "com.chummy.jezebel.blackedout.donate";
-                        spinner_current = 2;
                         apply_fab.show();
                     } else {
                         Toast toast = Toast.makeText(getActivity().getApplicationContext(),
                                 "Please install blacked out // blakZent before using!",
                                 Toast.LENGTH_LONG);
                         toast.show();
-                        spinner1.setSelection(spinner_current); // reset position
                         apply_fab.hide();
                     }
-                }
-                if (pos == 3) {
-                    AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
-                    final EditText edittext = new EditText(getContext());
-                    alert.setMessage("please type the package identifier for your theme");
-                    alert.setTitle("custom theme selector");
-                    alert.setView(edittext);
-                    alert.setPositiveButton("CONFIRM", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int whichButton) {
-                            if (checkCurrentThemeSelection(edittext.getText().toString())) {
-                                if (is_debugging_mode_enabled) Log.e("TAG SUCCESS",
-                                        edittext.getText().toString() +
-                                                " has been chosen!");
-                                theme_dir = "/data/app/" + edittext.getText().toString() +
-                                        "-" + folder_directory + "/base.apk";
-                                package_name = edittext.getText().toString();
-                                apply_fab.show();
-                                Snackbar snackbar = Snackbar.make(apply_fab, "you are tweaking '" +
-                                                edittext.getText().toString() + "'...",
-                                        Snackbar.LENGTH_INDEFINITE);
-                                ViewGroup group = (ViewGroup) snackbar.getView();
-                                if (prefs.getBoolean("blacked_out_enabled", true)) {
-                                    group.setBackgroundColor(
-                                            ContextCompat.getColor(getContext(),
-                                                    R.color.primary_1_blacked_out));
-                                } else {
-                                    group.setBackgroundColor(
-                                            ContextCompat.getColor(getContext(),
-                                                    R.color.primary_1_dark_material));
-                                }
-
-                                snackbar.setAction("REVERT", new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View view) {
-                                        theme_dir = ""; // reset the theme directory
-                                        package_name = ""; // also reset the package name
-                                        resetImageViews();
-                                        spinner1.setSelection(0); // reset position
-                                    }
-                                });
-                                snackbar.show();
-                            } else {
-                                if (is_debugging_mode_enabled) Log.e("TAG ERROR",
-                                        edittext.getText().toString() +
-                                                " does not exist.");
-                                spinner1.setSelection(spinner_current);
-                                apply_fab.hide();
-                                Toast toast = Toast.makeText(getActivity().getApplicationContext(),
-                                        "Unfortunately, the package identifier is not " +
-                                                "properly found!",
-                                        Toast.LENGTH_LONG);
-                                toast.show();
-                            }
-                        }
-                    });
-                    alert.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int whichButton) {
-                            spinner1.setSelection(spinner_current);
-                            apply_fab.hide();
-                        }
-                    });
-                    alert.setCancelable(false);
-
-                    alert.show();
+                } else {
+                    String packageIdentifier = spinner1.getSelectedItem().toString();
+                    if (checkCurrentThemeSelection(packageIdentifier)) {
+                        theme_dir = "/data/app/" + packageIdentifier + "-"
+                                + folder_directory + "/base.apk";
+                        package_name = packageIdentifier;
+                        apply_fab.show();
+                    }
                 }
             }
 
@@ -304,6 +267,7 @@ public class HeaderSwapperFragment extends BasePageFragment {
         });
         // Apply the adapter to the spinner
         spinner1.setAdapter(adapter1);
+
 
         autoClearSystemUICache = (CheckBox) inflation.findViewById(R.id.checkBox);
         autoClearSystemUICache.setOnCheckedChangeListener(

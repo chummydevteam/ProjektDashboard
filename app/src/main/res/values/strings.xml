@@ -37,13 +37,6 @@
         <item>notifhead_sunset.png</item>
     </string-array>
 
-    <string-array name="themes">
-        <item>please select a theme...</item>
-        <item>dark material // akZent</item>
-        <item>blacked out // blakZent</item>
-        <item>select custom theme...</item>
-    </string-array>
-
     <string name="contextualheaderswapper">contextual header swapper</string>
     <string name="contextualheaderswapper_description">contextual header swapper</string>
     <string name="contextualheaderswapper_description_secondary">this is a highly experimental feature to
