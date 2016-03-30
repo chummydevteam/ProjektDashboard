@@ -48,7 +48,8 @@
     <string name="colorpicker_description">color switcher</string>
     <string name="colorpicker_description_secondary">this is a highly experimental feature to
         hotswap your accent colors at runtime (meaning that a full reboot isn\'t necessary and
-        will not require creating and installing a new APK file)\n\nthis has no side effects but
+        will not require creating and installing a new APK file)\n\nthis has no side effects except
+        battery stats force closing, so to regain battery stats again just rebuild the theme.
         depending on the tweaks selected, you may need to clear out your recents after performing
         the color swap.\n</string>
 

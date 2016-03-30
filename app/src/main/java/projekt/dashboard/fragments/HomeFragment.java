@@ -137,7 +137,7 @@ public class HomeFragment extends BasePageFragment {
             status_message.setText(checkRomSupported(getActivity()));
         }
         Snackbar snack = Snackbar.make(themeSwitch,
-                "dashboard developer preview - internal beta test program",
+                "dashboard developer preview - public beta test program",
                 Snackbar.LENGTH_INDEFINITE);
         ViewGroup group = (ViewGroup) snack.getView();
         if (prefs.getBoolean("blacked_out_enabled", true)) {

@@ -194,8 +194,10 @@ public class HeaderSwapperFragment extends BasePageFragment {
         File[] files = f.listFiles();
         for (File inFile : files) {
             if (inFile.isDirectory()) {
-                if (!inFile.getAbsolutePath().substring(21).equals("com.chummy.jezebel.blackedout.donate")) {
-                    if (!inFile.getAbsolutePath().substring(21).equals("com.chummy.jezebel.materialdark.donate")) {
+                if (!inFile.getAbsolutePath().substring(21).equals(
+                        "com.chummy.jezebel.blackedout.donate")) {
+                    if (!inFile.getAbsolutePath().substring(21).equals(
+                            "com.chummy.jezebel.materialdark.donate")) {
                         if (!inFile.getAbsolutePath().substring(21).equals("projekt.klar")) {
                             list.add(inFile.getAbsolutePath().substring(21));
                             counter += 1;
@@ -210,7 +212,8 @@ public class HeaderSwapperFragment extends BasePageFragment {
                     Toast.LENGTH_LONG);
             toast.show();
         }
-        ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, list);
+        ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(getActivity(),
+                android.R.layout.simple_spinner_item, list);
         // Specify the layout to use when the list of choices appears
         adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Set On Item Selected Listener
