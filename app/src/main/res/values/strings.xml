@@ -1,4 +1,26 @@
 <resources>
+
+    <!-- AppIntroduction -->
+    <string name="first_slide_title">welcome to dashboard.</string>
+    <string name="first_slide_description">dashboard is a cm theme engine addon by chummy development team that allows you to expand the possibilities of all cdt themes, as well as extras for other themes as well.</string>
+
+    <string name="second_slide_title">color picker</string>
+    <string name="second_slide_description">dashboard comes with a built in color picker for hotswapping of colors!\nplease allow it to automatically download a small patch file for itself before you leave your internet connection.</string>
+
+    <string name="third_slide_title">contextual header swapper</string>
+    <string name="third_slide_description">dashboard also comes with a built in contextual header swapper to customize your phone further without the use of useless xposed plugins or making a theme yourself!</string>
+
+    <string name="fourth_slide_title">theme engine in need of diagnosing?</string>
+    <string name="fourth_slide_description">dashboard also comes with built in theme utilities to offer you a plethora of options to help you fix your theme engine directly on your phone!\n\n</string>
+
+    <string name="fifth_slide_title">this app needs root!</string>
+    <string name="fifth_slide_description">to use all the functions of the app, your phone must definitely have root enabled, as well as a custom rom flashed if you would like to have a contextual header!</string>
+
+    <string name="last_slide_title">are you ready?</string>
+    <string name="last_slide_description">please read everything that pops up while you use this app. crucial information to prevent you from bootlooping such as soft rebooting after setting an action is key!</string>
+
+
+    <!-- AppIntroduction -->
     <string name="wallpapers_json_url" formatted="false">http://pastebin.com/raw/hvKBvrXD</string>
 
     <string-array name="contextual_headers">
