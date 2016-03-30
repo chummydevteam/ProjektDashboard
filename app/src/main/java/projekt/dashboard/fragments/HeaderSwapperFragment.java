@@ -192,16 +192,22 @@ public class HeaderSwapperFragment extends BasePageFragment {
         // Now lets add all the located themes found that aren't cdt themes
         File f = new File("/data/resource-cache/");
         File[] files = f.listFiles();
-        for (File inFile : files) {
-            if (inFile.isDirectory()) {
-                if (!inFile.getAbsolutePath().substring(21).equals(
-                        "com.chummy.jezebel.blackedout.donate")) {
+        if (files != null) {
+            for (File inFile : files) {
+                if (inFile.isDirectory()) {
                     if (!inFile.getAbsolutePath().substring(21).equals(
-                            "com.chummy.jezebel.materialdark.donate")) {
-                        if (!inFile.getAbsolutePath().substring(21).equals("projekt.klar")) {
-                            list.add(inFile.getAbsolutePath().substring(21));
+                            "com.chummy.jezebel.blackedout.donate")) {
+                        if (!inFile.getAbsolutePath().substring(21).equals(
+                                "com.chummy.jezebel.materialdark.donate")) {
+                            if (!inFile.getAbsolutePath().substring(21).equals("projekt.klar")) {
+                                list.add(inFile.getAbsolutePath().substring(21));
+                                counter += 1;
+                            }
+                        } else {
                             counter += 1;
                         }
+                    } else {
+                        counter += 1;
                     }
                 }
             }
@@ -249,6 +255,7 @@ public class HeaderSwapperFragment extends BasePageFragment {
                                 "Please install blacked out // blakZent before using!",
                                 Toast.LENGTH_LONG);
                         toast.show();
+                        spinner1.setSelection(0);
                         apply_fab.hide();
                     }
                 } else {
