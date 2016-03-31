@@ -55,7 +55,9 @@
     <string name="contextualheaderswapper_description_secondary">this is a highly experimental feature to
         allow you to set your own custom contextual headers for your systemui notification shade.
         a soft reboot is required for the system to take your changes as we are modifying the actual
-        apk installed on your phone.\n
+        apk installed on your phone.\n\ndon\'t forget to enable contextual headers (non-poly/hd)
+        in your rom\'s settings! if headers aren\'t set after a soft reboot, clear your systemui
+        cache!\n
     </string>
 
     <string name="colorpicker_description">color switcher</string>
