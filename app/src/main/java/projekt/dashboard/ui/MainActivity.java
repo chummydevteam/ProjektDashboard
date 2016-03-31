@@ -102,13 +102,6 @@ public class MainActivity extends BaseDonateActivity implements
         setupPager();
         setupTabs();
 
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(
-                getApplicationContext());
-        if (prefs.getBoolean("first_run", true)) {
-            startActivity(new Intent(this, AppIntroduction.class));
-            finish();
-        }
-
         // But check permissions first - download will be started in the callback
         int permissionCheck = ContextCompat.checkSelfPermission(getApplicationContext(),
                 android.Manifest.permission.WRITE_EXTERNAL_STORAGE);
