@@ -57,7 +57,7 @@
                 android:layout_gravity="left"
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="@dimen/content_inset_less"
-                android:text="current time image:"
+                android:text="@string/contextualheaderswapper_current_time_image"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:textSize="11dp"
                 android:textStyle="italic" />
@@ -84,7 +84,7 @@
                 android:layout_below="@id/currentTime"
                 android:layout_gravity="left"
                 android:layout_marginLeft="8dp"
-                android:text="modifying contextual header file:"
+                android:text="@string/contextualheaderswapper_modifying_contextual_header_file"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:textStyle="italic" />
 
@@ -103,7 +103,7 @@
                 android:layout_below="@id/spinner"
                 android:layout_gravity="left"
                 android:layout_marginLeft="8dp"
-                android:text="select installed theme:"
+                android:text="@string/contextualheaderswapper_select_installed_theme"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:textStyle="italic" />
 
@@ -128,7 +128,7 @@
                 android:layout_below="@id/spinner1"
                 android:layout_gravity="left"
                 android:layout_marginLeft="8dp"
-                android:text="options available before choosing a picture:"
+                android:text="@string/contextualheaderswapper_options_before_choosing_picture"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:textStyle="italic" />
 
@@ -144,7 +144,7 @@
                 android:layout_marginRight="7dp"
                 android:button="@null"
                 android:drawableRight="?android:attr/listChoiceIndicatorMultiple"
-                android:text="autoclear systemui cache" />
+                android:text="@string/contextualheaderswapper_autoclear_systemui_cache" />
 
             <CheckBox
                 android:id="@+id/checkBox2"
@@ -158,7 +158,7 @@
                 android:layout_toRightOf="@id/checkBox"
                 android:button="@null"
                 android:drawableRight="?android:attr/listChoiceIndicatorMultiple"
-                android:text="free crop mode" />
+                android:text="@string/contextualheaderswapper_free_crop_mode" />
 
             <CheckBox
                 android:id="@+id/checkBox3"
@@ -173,7 +173,7 @@
                 android:layout_marginTop="5dp"
                 android:button="@null"
                 android:drawableRight="?android:attr/listChoiceIndicatorMultiple"
-                android:text="debugging mode (advanced logs)" />
+                android:text="@string/contextualheaderswapper_debugging_mode" />
 
             <Button
                 android:id="@+id/softreboot"
@@ -188,7 +188,7 @@
                 android:foreground="?android:selectableItemBackground"
                 android:gravity="center"
                 android:lineSpacingMultiplier="1.2"
-                android:text="Click here to soft reboot after all modifications"
+                android:text="@string/contextualheaderswapper_soft_reboot_after_modifications"
                 android:textColor="@color/attention_color"
                 android:textSize="@dimen/text_ultrasmall"
                 android:textStyle="bold|italic"
@@ -207,7 +207,7 @@
                 android:foreground="?android:selectableItemBackground"
                 android:gravity="center"
                 android:lineSpacingMultiplier="1.2"
-                android:text="Crop Image"
+                android:text="@string/contextualheaderswapper_crop_image"
                 android:textColor="?android:textColorPrimary"
                 android:textSize="@dimen/text_ultrasmall"
                 android:textStyle="bold|italic"
@@ -226,7 +226,7 @@
                 android:foreground="?android:selectableItemBackground"
                 android:gravity="center"
                 android:lineSpacingMultiplier="1.2"
-                android:text="Save and Set Image"
+                android:text="@string/contextualheaderswapper_save_set_image"
                 android:textColor="?android:textColorPrimary"
                 android:textSize="@dimen/text_ultrasmall"
                 android:textStyle="bold|italic"
