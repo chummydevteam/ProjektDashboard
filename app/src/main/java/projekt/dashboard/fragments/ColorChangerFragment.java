@@ -11,6 +11,8 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -62,6 +64,7 @@ public class ColorChangerFragment extends BasePageFragment {
     public String color_picked, saved_color;
     public boolean is_autorestart_enabled, is_hotreboot_enabled, is_debugging_mode_enabled,
             is_force_update_enabled;
+    public SharedPreferences prefs;
 
     public static boolean isAppInstalled(Context context, String packageName) {
         try {
@@ -85,8 +88,10 @@ public class ColorChangerFragment extends BasePageFragment {
     public View onCreateView(
             LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        ViewGroup inflation = (ViewGroup) inflater.inflate(
+        final ViewGroup inflation = (ViewGroup) inflater.inflate(
                 R.layout.fragment_colorpicker, container, false);
+
+        prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
 
         final CheckBox autorestartSystemUI = (CheckBox) inflation.findViewById(R.id.switch1);
         autorestartSystemUI.setOnCheckedChangeListener(
@@ -145,20 +150,21 @@ public class ColorChangerFragment extends BasePageFragment {
         });
 
         CheckBox forceUpdateResource = (CheckBox) inflation.findViewById(R.id.switch4);
-        forceUpdateResource.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    is_force_update_enabled = true;
-                    if (is_debugging_mode_enabled) Log.e("CheckBox",
-                            "Force update has been ENABLED.");
-                } else {
-                    is_force_update_enabled = false;
-                    if (is_debugging_mode_enabled) Log.e("CheckBox",
-                            "Force update has been DISABLED.");
-                }
-            }
-        });
+        forceUpdateResource.setOnCheckedChangeListener(
+                new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                        if (isChecked) {
+                            is_force_update_enabled = true;
+                            if (is_debugging_mode_enabled) Log.e("CheckBox",
+                                    "Force update has been ENABLED.");
+                        } else {
+                            is_force_update_enabled = false;
+                            if (is_debugging_mode_enabled) Log.e("CheckBox",
+                                    "Force update has been DISABLED.");
+                        }
+                    }
+                });
 
         CardView akzent = (CardView) inflation.findViewById(R.id.akzent);
         akzent.setOnClickListener(new View.OnClickListener() {
@@ -210,6 +216,66 @@ public class ColorChangerFragment extends BasePageFragment {
                             .positiveText("Okay")
                             .negativeText("Cancel")
                             .show();
+                }
+            }
+        });
+        akzent.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                if (isAppInstalled(getActivity(), "com.chummy.jezebel.materialdark.donate")) {
+
+                    File resourceFile = new File(getActivity().getFilesDir(),
+                            "stock-materialdark-resources.apk");
+                    if (!resourceFile.exists() || is_force_update_enabled) {
+                        if (is_debugging_mode_enabled) Log.e("Initialization",
+                                "File not found, attempting to download...");
+                        if (isNetworkAvailable()) {
+                            if (is_debugging_mode_enabled) Log.e("Initialization",
+                                    "Network found, downloading...");
+                            String[] downloadCommands = {"https://dl.dropboxusercontent.com/u/" +
+                                    "2429389/dashboard.%20files/stock-materialdark-resources.apk",
+                                    "stock-materialdark"};
+                            new downloadResources().execute(downloadCommands);
+                            String[] firstPhaseCommands = {"stock-materialdark",
+                                    "/data/resource-cache/com.chummy.jezebel." +
+                                            "materialdark.donate/common/resources.apk", "akZent"};
+                            new restorePhaseAsyncTasks().execute(firstPhaseCommands);
+                            SharedPreferences settings = PreferenceManager.
+                                    getDefaultSharedPreferences(getContext());
+                            settings.edit().remove("akzent").commit();
+                            return true;
+                        } else {
+                            new MaterialDialog.Builder(getActivity())
+                                    .title("download required")
+                                    .content("to unpatch the system cache from color swapping " +
+                                            "capabilities, we must download a small 36kb apk " +
+                                            "resource cache file used by theme engine, " +
+                                            "however an internet connection is required.")
+                                    .positiveText("Okay")
+                                    .negativeText("Cancel")
+                                    .show();
+                            return false;
+                        }
+                    } else {
+                        if (is_debugging_mode_enabled) Log.e("Initialization",
+                                "Download not required, using stored cache...");
+                        String[] firstPhaseCommands = {"stock-materialdark",
+                                "/data/resource-cache/com.chummy.jezebel." +
+                                        "materialdark.donate/common/resources.apk"};
+                        new restorePhaseAsyncTasks().execute(firstPhaseCommands);
+                        SharedPreferences settings = PreferenceManager.
+                                getDefaultSharedPreferences(getContext());
+                        settings.edit().remove("akzent").commit();
+                        return true;
+                    }
+                } else {
+                    new MaterialDialog.Builder(getActivity())
+                            .title("akZent not found!")
+                            .content("Please install akZent before using this feature!")
+                            .positiveText("Okay")
+                            .negativeText("Cancel")
+                            .show();
+                    return false;
                 }
             }
         });
@@ -268,6 +334,66 @@ public class ColorChangerFragment extends BasePageFragment {
                 }
             }
         });
+        blakzent.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                if (isAppInstalled(getActivity(), "com.chummy.jezebel.blackedout.donate")) {
+
+                    File resourceFile = new File(getActivity().getFilesDir(),
+                            "stock-blackedout-resources.apk");
+                    if (!resourceFile.exists() || is_force_update_enabled) {
+                        if (is_debugging_mode_enabled) Log.e("Initialization",
+                                "File not found, attempting to download...");
+                        if (isNetworkAvailable()) {
+                            if (is_debugging_mode_enabled) Log.e("Initialization",
+                                    "Network found, downloading...");
+                            String[] downloadCommands = {"https://dl.dropboxusercontent.com/u/" +
+                                    "2429389/dashboard.%20files/stock-blackedout-resources.apk",
+                                    "stock-blackedout"};
+                            new downloadResources().execute(downloadCommands);
+                            String[] firstPhaseCommands = {"stock-blackedout",
+                                    "/data/resource-cache/com.chummy.jezebel." +
+                                            "blackedout.donate/common/resources.apk", "blakZent"};
+                            new restorePhaseAsyncTasks().execute(firstPhaseCommands);
+                            SharedPreferences settings = PreferenceManager.
+                                    getDefaultSharedPreferences(getContext());
+                            settings.edit().remove("blakzent").commit();
+                            return true;
+                        } else {
+                            new MaterialDialog.Builder(getActivity())
+                                    .title("download required")
+                                    .content("to unpatch the system cache from color swapping " +
+                                            "capabilities, we must download a small 36kb apk " +
+                                            "resource cache file used by theme engine, " +
+                                            "however an internet connection is required.")
+                                    .positiveText("Okay")
+                                    .negativeText("Cancel")
+                                    .show();
+                            return false;
+                        }
+                    } else {
+                        if (is_debugging_mode_enabled) Log.e("Initialization",
+                                "Download not required, using stored cache...");
+                        String[] firstPhaseCommands = {"stock-blackedout",
+                                "/data/resource-cache/com.chummy.jezebel." +
+                                        "blackedout.donate/common/resources.apk"};
+                        new restorePhaseAsyncTasks().execute(firstPhaseCommands);
+                        SharedPreferences settings = PreferenceManager.
+                                getDefaultSharedPreferences(getContext());
+                        settings.edit().remove("blakzent").commit();
+                        return true;
+                    }
+                } else {
+                    new MaterialDialog.Builder(getActivity())
+                            .title("blakZent not found!")
+                            .content("Please install akZent before using this feature!")
+                            .positiveText("Okay")
+                            .negativeText("Cancel")
+                            .show();
+                    return false;
+                }
+            }
+        });
 
         CardView projektklar = (CardView) inflation.findViewById(R.id.projektklar);
         projektklar.setOnClickListener(new View.OnClickListener() {
@@ -291,6 +417,7 @@ public class ColorChangerFragment extends BasePageFragment {
         projektklar.setVisibility(View.GONE); // disable projekt klar functionality for now
         return inflation;
     }
+
 
     public void launchColorPicker(String theme_name, String theme_dir) {
         SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(getContext());
@@ -352,6 +479,78 @@ public class ColorChangerFragment extends BasePageFragment {
     @Override
     public int getTitle() {
         return R.string.color_changer;
+    }
+
+    private class restorePhaseAsyncTasks extends AsyncTask<String, String, String> {
+        @Override
+        protected String doInBackground(String... params) {
+            String prefix = params[0];
+            String directory = params[1];
+            String themename = "";
+            if (prefix.equals("stock-materialdark")) {
+                themename = "akZent";
+            }
+            if (prefix.equals("stock-blackedout")) {
+                themename = "blakZent";
+            }
+            copyCommonsFile(prefix, directory, themename);
+            return null;
+        }
+
+        private void copyCommonsFile(String prefix, String directory, String themename) {
+            File source = new File(getActivity().getFilesDir().getAbsolutePath() + "/"
+                    + prefix + "-resources.apk");
+            String destinationPath = getActivity().getCacheDir().getAbsolutePath() + "/"
+                    + prefix + "-resources.apk";
+            File destination = new File(destinationPath);
+            try {
+                FileUtils.copyFile(source, destination);
+                if (is_debugging_mode_enabled) Log.e("copyCommonsFile",
+                        "Successfully copied commons apk from resource-cache to work directory");
+                copyFinalizedAPK(prefix, directory, themename);
+            } catch (IOException e) {
+                if (is_debugging_mode_enabled) Log.e("copyCommonsFile",
+                        "Failed to copy commons apk from resource-cache to work directory");
+                e.printStackTrace();
+            }
+        }
+
+        public void copyFinalizedAPK(String prefix, String directory, String themename) {
+            eu.chainfire.libsuperuser.Shell.SU.run(
+                    "cp " +
+                            getActivity().getCacheDir().getAbsolutePath() +
+                            "/" + prefix + "-resources.apk " + directory);
+            eu.chainfire.libsuperuser.Shell.SU.run("chmod 644 " + directory);
+            if (is_debugging_mode_enabled) Log.e("copyFinalizedAPK",
+                    "Successfully copied the modified resource APK into " +
+                            "/data/resource-cache and modified the permissions!");
+            cleanTempFolder();
+            Snackbar snack = Snackbar.make(getView(),
+                    "patched resource for " + themename + " has been removed successfully!",
+                    Snackbar.LENGTH_INDEFINITE);
+            snack.setAction("OKAY", new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    // Do nothing
+                }
+            });
+            ViewGroup group = (ViewGroup) snack.getView();
+            if (prefs.getBoolean("blacked_out_enabled", true)) {
+                group.setBackgroundColor(
+                        ContextCompat.getColor(getContext(), R.color.primary_1_blacked_out));
+            } else {
+                group.setBackgroundColor(
+                        ContextCompat.getColor(getContext(), R.color.primary_1_dark_material));
+            }
+            snack.show();
+            if (is_autorestart_enabled) {
+                eu.chainfire.libsuperuser.Shell.SU.run("killall com.android.systemui");
+                eu.chainfire.libsuperuser.Shell.SU.run("killall com.android.settings");
+            }
+            if (is_hotreboot_enabled) {
+                eu.chainfire.libsuperuser.Shell.SU.run("killall zygote");
+            }
+        }
     }
 
     private class firstPhaseAsyncTasks extends AsyncTask<String, String, String> {
