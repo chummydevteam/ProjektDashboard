@@ -69,6 +69,8 @@
     <string name="contextualheaderswapper_soft_reboot_after_modifications">Click here to soft reboot after all modifications</string>
     <string name="contextualheaderswapper_crop_image">Crop Image</string>
     <string name="contextualheaderswapper_save_set_image">Save and Set Image</string>
+    <string name="contextualheaderswapper_toast_cache_empty_reboot_first">Woah there, your cache is currently empty! Please do a reboot first!</string>
+    <string name="contextualheaderswapper_select_theme">please select a theme...</string>
 
     <string name="colorpicker_description">color switcher</string>
     <string name="colorpicker_description_secondary">this is a highly experimental feature to
@@ -80,9 +82,11 @@
 
     <string name="akzent_title">dark material // akZent</string>
     <string name="akzent_description">click here to change colors for akZent</string>
+    <string name="akzent_toast_install_before_using">Please install dark material // akZent before using!</string>
 
     <string name="blakzent_title">blacked out // blakZent</string>
     <string name="blakzent_description">click here to change colors for blakZent</string>
+    <string name="blakzent_toast_install_before_using">Please install blacked out // blakZent before using!</string>
 
     <string name="projektklar_title">projekt // klar</string>
     <string name="projektklar_description">click here to change colors for projekt // klar</string>
