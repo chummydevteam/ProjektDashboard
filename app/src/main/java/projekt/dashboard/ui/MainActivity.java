@@ -5,7 +5,6 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
@@ -34,6 +33,7 @@ import com.afollestad.materialdialogs.util.DialogUtils;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import eu.chainfire.libsuperuser.Shell;
 import projekt.dashboard.R;
 import projekt.dashboard.adapters.MainPagerAdapter;
 import projekt.dashboard.config.Config;
@@ -179,12 +179,14 @@ public class MainActivity extends BaseDonateActivity implements
         mPages = new PagesBuilder(6);
         mPages.add(new PagesBuilder.Page(R.id.home_fragment, R.drawable.tab_home,
                 R.string.home_tab_one, new HomeFragment()));
-        mPages.add(new PagesBuilder.Page(R.id.color_changer_fragment, R.drawable.tab_palette,
-                R.string.home_tab_two, new ColorChangerFragment()));
-        mPages.add(new PagesBuilder.Page(R.id.header_swapper_fragment, R.drawable.tab_swapper,
-                R.string.home_tab_three, new HeaderSwapperFragment()));
-        mPages.add(new PagesBuilder.Page(R.id.theme_utilities_fragment, R.drawable.tab_rebuild,
-                R.string.home_tab_four, new ThemeUtilitiesFragment()));
+        if (Shell.SU.available()) {
+            mPages.add(new PagesBuilder.Page(R.id.color_changer_fragment, R.drawable.tab_palette,
+                    R.string.home_tab_two, new ColorChangerFragment()));
+            mPages.add(new PagesBuilder.Page(R.id.header_swapper_fragment, R.drawable.tab_swapper,
+                    R.string.home_tab_three, new HeaderSwapperFragment()));
+            mPages.add(new PagesBuilder.Page(R.id.theme_utilities_fragment, R.drawable.tab_rebuild,
+                    R.string.home_tab_four, new ThemeUtilitiesFragment()));
+        }
         if (isNetworkAvailable()) {
             mPages.add(new PagesBuilder.Page(R.id.theme_utilities_fragment, R.drawable.tab_wallpapers,
                     R.string.home_tab_five, new WallpapersFragment()));

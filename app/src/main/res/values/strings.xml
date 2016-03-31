@@ -1,4 +1,10 @@
 <resources>
+    <!-- Splash Screen -->
+    <string name="loadingText">performing security verification&#8230;</string>
+    <string name="root_verified">you definitely have root, enabling it all&#8230;</string>
+    <string name="root_unverified">root unavailable, only enabling non-root features&#8230;</string>
+    <string name="initial_run">you\'re a new face, welcome to the party!</string>
+    <string name="welcome_back">eyyyy welcome back buddy!</string>
 
     <!-- AppIntroduction -->
     <string name="first_slide_title">welcome to dashboard.</string>
@@ -20,7 +26,6 @@
     <string name="last_slide_description">please read everything that pops up while you use this app. crucial information to prevent you from bootlooping such as soft rebooting after setting an action is key!</string>
 
     <!-- App -->
-
     <string name="layout_fragment_colorpicker_select_tweaks">select tweaks:</string>
     <string name="layout_fragment_colorpicker_color_swap_restart_systemui">color swap + restart systemui</string>
     <string name="layout_fragment_colorpicker_color_swap_soft_reboot">color swap + soft reboot</string>
@@ -28,7 +33,7 @@
     <string name="layout_fragment_colorpicker_force_update_patched_resource">force update patched resource file</string>
     <string name="layout_fragment_colorpicker_installed_color_switchable_themes">installed color switchable themes:</string>
 
-    <!-- AppIntroduction -->
+
     <string name="wallpapers_json_url" formatted="false">http://pastebin.com/raw/qUFucVd2</string>
 
     <string-array name="contextual_headers">
