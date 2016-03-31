@@ -3,12 +3,15 @@ package projekt.dashboard.ui;
 import android.annotation.TargetApi;
 import android.app.AlertDialog;
 import android.app.FragmentManager;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -173,6 +176,14 @@ public class MainActivity extends BaseDonateActivity implements
         }
     }
 
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) this.getSystemService(
+                Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
+
     private void setupPages() {
         mPages = new PagesBuilder(6);
         mPages.add(new PagesBuilder.Page(R.id.home_fragment, R.drawable.tab_home,
@@ -183,10 +194,10 @@ public class MainActivity extends BaseDonateActivity implements
                 R.string.home_tab_three, new HeaderSwapperFragment()));
         mPages.add(new PagesBuilder.Page(R.id.theme_utilities_fragment, R.drawable.tab_rebuild,
                 R.string.home_tab_four, new ThemeUtilitiesFragment()));
-        mPages.add(new PagesBuilder.Page(R.id.theme_utilities_fragment, R.drawable.tab_wallpapers,
-                R.string.home_tab_five, new WallpapersFragment()));
-
-
+        if (isNetworkAvailable()) {
+            mPages.add(new PagesBuilder.Page(R.id.theme_utilities_fragment, R.drawable.tab_wallpapers,
+                    R.string.home_tab_five, new WallpapersFragment()));
+        }
     }
 
     @Override
