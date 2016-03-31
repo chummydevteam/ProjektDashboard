@@ -21,7 +21,7 @@
 
 
     <!-- AppIntroduction -->
-    <string name="wallpapers_json_url" formatted="false">http://pastebin.com/raw/hvKBvrXD</string>
+    <string name="wallpapers_json_url" formatted="false">http://pastebin.com/raw/qUFucVd2</string>
 
     <string-array name="contextual_headers">
         <item>all headers</item>
@@ -83,6 +83,7 @@
     <string name="home_tab_two">color switcher</string>
     <string name="home_tab_three">contextual header swapper</string>
     <string name="home_tab_four">theme utilities</string>
+    <string name="home_tab_five">wallpapers</string>
 
     <string name="permission_not_granted_dialog_title">Permissions not granted</string>
     <string name="permission_not_granted_dialog_message">Please grant dashboard storage permissions

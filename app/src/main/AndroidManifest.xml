@@ -37,5 +37,9 @@
         <activity
             android:name=".ui.AppIntroduction"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".viewer.ViewerActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Viewer" />
     </application>
 </manifest>
