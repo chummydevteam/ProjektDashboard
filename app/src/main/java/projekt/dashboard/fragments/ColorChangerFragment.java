@@ -65,6 +65,7 @@ public class ColorChangerFragment extends BasePageFragment {
     public boolean is_autorestart_enabled, is_hotreboot_enabled, is_debugging_mode_enabled,
             is_force_update_enabled;
     public SharedPreferences prefs;
+    public ViewGroup inflation;
 
     public static boolean isAppInstalled(Context context, String packageName) {
         try {
@@ -88,7 +89,7 @@ public class ColorChangerFragment extends BasePageFragment {
     public View onCreateView(
             LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        final ViewGroup inflation = (ViewGroup) inflater.inflate(
+        inflation = (ViewGroup) inflater.inflate(
                 R.layout.fragment_colorpicker, container, false);
 
         prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
@@ -525,15 +526,9 @@ public class ColorChangerFragment extends BasePageFragment {
                     "Successfully copied the modified resource APK into " +
                             "/data/resource-cache and modified the permissions!");
             cleanTempFolder();
-            Snackbar snack = Snackbar.make(getView(),
+            Snackbar snack = Snackbar.make(inflation,
                     "patched resource for " + themename + " has been removed successfully!",
-                    Snackbar.LENGTH_INDEFINITE);
-            snack.setAction("OKAY", new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    // Do nothing
-                }
-            });
+                    Snackbar.LENGTH_SHORT);
             ViewGroup group = (ViewGroup) snack.getView();
             if (prefs.getBoolean("blacked_out_enabled", true)) {
                 group.setBackgroundColor(
