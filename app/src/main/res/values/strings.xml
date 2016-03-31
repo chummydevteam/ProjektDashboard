@@ -91,6 +91,17 @@
     <string name="themeutilities_description_secondary">here you have a collection of useful theme
         engine tweaks that you could use if you are encountering issues, or just felt like doing
         some sunday afternoon cleaning on your phone.\n</string>
+    <string name="themeutilities_basic_theme_utilities">basic theme utilities:</string>
+    <string name="themeutilities_perform_systemui_restart">perform systemui restart</string>
+    <string name="themeutilities_perform_soft_reboot">perform soft reboot</string>
+    <string name="themeutilities_perform_complete_system_reboot">perform complete system reboot</string>
+    <string name="themeutilities_perform_action">perform action</string>
+    <string name="themeutilities_rebuild_dark_material">rebuild dark material // akzent</string>
+    <string name="themeutilities_rebuild_blacked_out">rebuild blacked out // blakzent</string>
+    <string name="themeutilities_rebuild_projekt">rebuild projekt // klar</string>
+    <string name="themeutilities_rebuild_rebuild_all_color_switch_themes">rebuild all color switch themes</string>
+    <string name="themeutilities_rebuild_rebuild_all_chummydevteam_themes">rebuild all chummydevteam themes</string>
+    <string name="themeutilities_rebuild_rebuild_all_themes_installed_device">rebuild all themes installed on the device</string>
 
     <string name="homepage_description">
         cyanogenmod theming, evolved!
