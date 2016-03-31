@@ -132,13 +132,11 @@
 
     <string name="invalid_drawable_error"><![CDATA[Invalid drawable <b>%1$s</b>, the developer
     needs to fix this in <b>/res/xml/drawable.xml</b> and <b>/assets/drawable.xml</b>.]]></string>
-    <string name="set_wallpaper_using">Set Wallpaper Using…</string>
+    <string name="set_wallpaper_using">Set wallpaper using…</string>
 
-    <string name="download_cancelled">Download cancelled!</string>
+    <string name="download_cancelled">Download cancelled</string>
 
-    <string name="transition_name_circular_reveal" translatable="false">circularReveal</string>
-
-    <string-array name="wallpaper_options" translatable="false">
+    <string-array name="wallpaper_options">
         <item>@string/apply</item>
         <item>@string/save_to_device</item>
     </string-array>
