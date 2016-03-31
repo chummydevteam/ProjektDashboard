@@ -59,6 +59,16 @@
         in your rom\'s settings! if headers aren\'t set after a soft reboot, clear your systemui
         cache!\n
     </string>
+    <string name="contextualheaderswapper_current_time_image">current time image:</string>
+    <string name="contextualheaderswapper_modifying_contextual_header_file">modifying contextual header file:</string>
+    <string name="contextualheaderswapper_select_installed_theme">select installed theme:</string>
+    <string name="contextualheaderswapper_options_before_choosing_picture">options available before choosing a picture:</string>
+    <string name="contextualheaderswapper_autoclear_systemui_cache">autoclear systemui cache</string>
+    <string name="contextualheaderswapper_free_crop_mode">free crop mode</string>
+    <string name="contextualheaderswapper_debugging_mode">debugging mode (advanced logs)</string>
+    <string name="contextualheaderswapper_soft_reboot_after_modifications">Click here to soft reboot after all modifications</string>
+    <string name="contextualheaderswapper_crop_image">Crop Image</string>
+    <string name="contextualheaderswapper_save_set_image">Save and Set Image</string>
 
     <string name="colorpicker_description">color switcher</string>
     <string name="colorpicker_description_secondary">this is a highly experimental feature to
