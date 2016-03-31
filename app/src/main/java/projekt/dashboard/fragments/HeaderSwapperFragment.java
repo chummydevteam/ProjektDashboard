@@ -185,7 +185,7 @@ public class HeaderSwapperFragment extends BasePageFragment {
         // Create an ArrayAdapter using the string array and a default spinner layout
         List<String> list = new ArrayList<String>();
 
-        list.add("please select a theme...");
+        list.add(getResources().getString(R.string.contextualheaderswapper_select_theme));
         list.add("dark material // akZent");
         list.add("blacked out // blakZent");
 
@@ -213,8 +213,7 @@ public class HeaderSwapperFragment extends BasePageFragment {
             }
         }
         if (counter == 0) {
-            Toast toast = Toast.makeText(getActivity().getApplicationContext(),
-                    "Woah there, your cache is currently empty! Please do a reboot first!",
+            Toast toast = Toast.makeText(getActivity().getApplicationContext(), getResources().getString(R.string.contextualheaderswapper_toast_cache_empty_reboot_first),
                     Toast.LENGTH_LONG);
             toast.show();
         }
@@ -237,8 +236,7 @@ public class HeaderSwapperFragment extends BasePageFragment {
                         package_name = "com.chummy.jezebel.materialdark.donate";
                         apply_fab.show();
                     } else {
-                        Toast toast = Toast.makeText(getActivity().getApplicationContext(),
-                                "Please install dark material // akZent before using!",
+                        Toast toast = Toast.makeText(getActivity().getApplicationContext(),  getResources().getString(R.string.akzent_toast_install_before_using),
                                 Toast.LENGTH_LONG);
                         toast.show();
                         apply_fab.hide();
@@ -251,8 +249,7 @@ public class HeaderSwapperFragment extends BasePageFragment {
                         package_name = "com.chummy.jezebel.blackedout.donate";
                         apply_fab.show();
                     } else {
-                        Toast toast = Toast.makeText(getActivity().getApplicationContext(),
-                                "Please install blacked out // blakZent before using!",
+                        Toast toast = Toast.makeText(getActivity().getApplicationContext(), getResources().getString(R.string.blakzent_toast_install_before_using),
                                 Toast.LENGTH_LONG);
                         toast.show();
                         spinner1.setSelection(0);

@@ -55,7 +55,7 @@
                 android:layout_gravity="left"
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="@dimen/content_inset_less"
-                android:text="basic theme utilities:"
+                android:text="@string/themeutilities_basic_theme_utilities"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:textStyle="italic" />
 
@@ -70,7 +70,7 @@
                 android:layout_marginTop="5dp"
                 android:button="@null"
                 android:drawableRight="?android:attr/listChoiceIndicatorMultiple"
-                android:text="perform systemui restart" />
+                android:text="@string/themeutilities_perform_systemui_restart" />
 
             <CheckBox
                 android:id="@+id/check2"
@@ -83,7 +83,7 @@
                 android:layout_marginTop="5dp"
                 android:button="@null"
                 android:drawableRight="?android:attr/listChoiceIndicatorMultiple"
-                android:text="perform soft reboot" />
+                android:text="@string/themeutilities_perform_soft_reboot" />
 
             <CheckBox
                 android:id="@+id/check3"
@@ -96,7 +96,7 @@
                 android:layout_marginTop="5dp"
                 android:button="@null"
                 android:drawableRight="?android:attr/listChoiceIndicatorMultiple"
-                android:text="perform complete system reboot" />
+                android:text="@string/themeutilities_perform_complete_system_reboot" />
 
             <Button
                 android:id="@+id/button1"
@@ -111,7 +111,7 @@
                 android:foreground="?android:selectableItemBackground"
                 android:gravity="center"
                 android:lineSpacingMultiplier="1.2"
-                android:text="perform action"
+                android:text="@string/themeutilities_perform_action"
                 android:textColor="?android:textColorPrimary"
                 android:textSize="@dimen/text_ultrasmall"
                 android:textStyle="bold|italic" />
@@ -123,7 +123,7 @@
                 android:layout_gravity="left"
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="20dp"
-                android:text="basic theme utilities:"
+                android:text="@string/themeutilities_basic_theme_utilities"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:textStyle="italic" />
 
@@ -138,7 +138,7 @@
                 android:layout_marginTop="5dp"
                 android:button="@null"
                 android:drawableRight="?android:attr/listChoiceIndicatorMultiple"
-                android:text="rebuild dark material // akzent" />
+                android:text="@string/themeutilities_rebuild_dark_material" />
 
             <CheckBox
                 android:id="@+id/switch2"
@@ -151,7 +151,7 @@
                 android:layout_marginTop="5dp"
                 android:button="@null"
                 android:drawableRight="?android:attr/listChoiceIndicatorMultiple"
-                android:text="rebuild blacked out // blakzent" />
+                android:text="@string/themeutilities_rebuild_blacked_out" />
 
             <CheckBox
                 android:id="@+id/switch3"
@@ -164,7 +164,7 @@
                 android:layout_marginTop="5dp"
                 android:button="@null"
                 android:drawableRight="?android:attr/listChoiceIndicatorMultiple"
-                android:text="rebuild projekt // klar" />
+                android:text="@string/themeutilities_rebuild_projekt" />
 
             <CheckBox
                 android:id="@+id/switch4"
@@ -177,7 +177,7 @@
                 android:layout_marginTop="5dp"
                 android:button="@null"
                 android:drawableRight="?android:attr/listChoiceIndicatorMultiple"
-                android:text="rebuild all color switch themes" />
+                android:text="@string/themeutilities_rebuild_rebuild_all_color_switch_themes" />
 
             <CheckBox
                 android:id="@+id/switch5"
@@ -190,7 +190,7 @@
                 android:layout_marginTop="5dp"
                 android:button="@null"
                 android:drawableRight="?android:attr/listChoiceIndicatorMultiple"
-                android:text="rebuild all chummydevteam themes" />
+                android:text="@string/themeutilities_rebuild_rebuild_all_chummydevteam_themes" />
 
             <CheckBox
                 android:id="@+id/switch6"
@@ -203,7 +203,7 @@
                 android:layout_marginTop="5dp"
                 android:button="@null"
                 android:drawableRight="?android:attr/listChoiceIndicatorMultiple"
-                android:text="rebuild all themes installed on the device" />
+                android:text="@string/themeutilities_rebuild_rebuild_all_themes_installed_device" />
 
             <Button
                 android:id="@+id/button2"
@@ -218,7 +218,7 @@
                 android:foreground="?android:selectableItemBackground"
                 android:gravity="center"
                 android:lineSpacingMultiplier="1.2"
-                android:text="perform action"
+                android:text="@string/themeutilities_perform_action"
                 android:textColor="?android:textColorPrimary"
                 android:textSize="@dimen/text_ultrasmall"
                 android:textStyle="bold|italic" />
