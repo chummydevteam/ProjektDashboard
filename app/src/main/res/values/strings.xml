@@ -19,8 +19,15 @@
     <string name="last_slide_title">are you ready?</string>
     <string name="last_slide_description">please read everything that pops up while you use this app. crucial information to prevent you from bootlooping such as soft rebooting after setting an action is key!</string>
 
+    <!-- App -->
 
-    <!-- AppIntroduction -->
+    <string name="layout_fragment_colorpicker_select_tweaks">select tweaks:</string>
+    <string name="layout_fragment_colorpicker_color_swap_restart_systemui">color swap + restart systemui</string>
+    <string name="layout_fragment_colorpicker_color_swap_soft_reboot">color swap + soft reboot</string>
+    <string name="layout_fragment_colorpicker_debugging_mode">debugging mode (advanced logs)</string>
+    <string name="layout_fragment_colorpicker_force_update_patched_resource">force update patched resource file</string>
+    <string name="layout_fragment_colorpicker_installed_color_switchable_themes">installed color switchable themes:</string>
+
     <string name="wallpapers_json_url" formatted="false">http://pastebin.com/raw/hvKBvrXD</string>
 
     <string-array name="contextual_headers">

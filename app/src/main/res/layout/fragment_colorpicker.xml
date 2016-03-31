@@ -56,7 +56,7 @@
                 android:layout_gravity="left"
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="@dimen/content_inset_less"
-                android:text="select tweaks:"
+                android:text="@string/layout_fragment_colorpicker_select_tweaks"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:textStyle="italic" />
 
@@ -70,7 +70,7 @@
                 android:layout_marginRight="7dp"
                 android:button="@null"
                 android:drawableRight="?android:attr/listChoiceIndicatorMultiple"
-                android:text="color swap + restart systemui" />
+                android:text="@string/layout_fragment_colorpicker_color_swap_restart_systemui" />
 
             <CheckBox
                 android:id="@+id/switch2"
@@ -83,7 +83,7 @@
                 android:layout_marginTop="5dp"
                 android:button="@null"
                 android:drawableRight="?android:attr/listChoiceIndicatorMultiple"
-                android:text="color swap + soft reboot" />
+                android:text="@string/layout_fragment_colorpicker_color_swap_soft_reboot" />
 
             <CheckBox
                 android:id="@+id/switch3"
@@ -96,7 +96,7 @@
                 android:layout_marginTop="5dp"
                 android:button="@null"
                 android:drawableRight="?android:attr/listChoiceIndicatorMultiple"
-                android:text="debugging mode (advanced logs)" />
+                android:text="@string/layout_fragment_colorpicker_debugging_mode" />
 
             <CheckBox
                 android:id="@+id/switch4"
@@ -109,7 +109,7 @@
                 android:layout_marginTop="5dp"
                 android:button="@null"
                 android:drawableRight="?android:attr/listChoiceIndicatorMultiple"
-                android:text="force update patched resource file" />
+                android:text="@string/layout_fragment_colorpicker_force_update_patched_resource" />
 
             <TextView
                 android:id="@+id/installed_title"
@@ -118,7 +118,7 @@
                 android:layout_gravity="left"
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="@dimen/content_inset"
-                android:text="installed color switchable themes:"
+                android:text="@string/layout_fragment_colorpicker_installed_color_switchable_themes"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:textStyle="italic" />
 
