@@ -2,7 +2,6 @@ package projekt.dashboard.ui;
 
 import android.annotation.TargetApi;
 import android.app.AlertDialog;
-import android.app.FragmentManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -31,7 +30,6 @@ import android.view.ViewTreeObserver;
 import android.widget.LinearLayout;
 
 import com.afollestad.bridge.Bridge;
-import com.afollestad.inquiry.Inquiry;
 import com.afollestad.materialdialogs.util.DialogUtils;
 
 import butterknife.Bind;
@@ -333,16 +331,12 @@ public class MainActivity extends BaseDonateActivity implements
         if (isFinishing()) {
             Config.deinit();
             Bridge.destroy();
-            Inquiry.deinit();
             DrawableXmlParser.cleanup();
         }
     }
 
     @Override
     public void onBackPressed() {
-        if (mPager != null) {
-            FragmentManager fm = getFragmentManager();
-        }
         super.onBackPressed();
     }
 
