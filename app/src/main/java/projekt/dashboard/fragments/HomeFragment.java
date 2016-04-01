@@ -127,17 +127,16 @@ public class HomeFragment extends BasePageFragment {
         TextView status_message = (TextView) inflation.findViewById(R.id.status_message);
         if (checkRomSupported(getActivity()) == null) {
             status_message.setTextColor(getResources().getColor(R.color.attention_color));
-            status_message.setText("ROM NOT SUPPORTED ✘");
+            status_message.setText(getResources().getString(R.string.homepage_rom_not_supported));
         }
         if (checkRomSupported(getActivity()) == "cm_based_rom") {
             status_message.setTextColor(getResources().getColor(R.color.attention_color_orange));
-            status_message.setText("ROM NOT OFFICIALLY SUPPORTED (?)");
+            status_message.setText(getResources().getString(R.string.homepage_rom_not_officially_supported));
         } else {
             status_message.setTextColor(getResources().getColor(R.color.attention_color_green));
             status_message.setText(checkRomSupported(getActivity()));
         }
-        Snackbar snack = Snackbar.make(themeSwitch,
-                "dashboard developer preview - public beta test program",
+        Snackbar snack = Snackbar.make(themeSwitch, getResources().getString(R.string.homepage_dashboard_app_developpement_status),
                 Snackbar.LENGTH_INDEFINITE);
         ViewGroup group = (ViewGroup) snack.getView();
         if (prefs.getBoolean("blacked_out_enabled", true)) {
