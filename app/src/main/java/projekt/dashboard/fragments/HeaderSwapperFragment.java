@@ -107,10 +107,7 @@ public class HeaderSwapperFragment extends BasePageFragment {
         }
         apply_fab.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent i = new Intent(Intent.ACTION_PICK,
-                        android.provider.MediaStore
-                                .Images.Media.EXTERNAL_CONTENT_URI);
-                startActivityForResult(i, RESULT_LOAD_IMAGE);
+                startActivityForResult(getImageSelectionIntent(), RESULT_LOAD_IMAGE);
             }
         });
         apply_fab.hide();
@@ -346,10 +343,7 @@ public class HeaderSwapperFragment extends BasePageFragment {
             }
             apply_fab.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
-                    Intent i = new Intent(Intent.ACTION_PICK,
-                            android.provider.MediaStore
-                                    .Images.Media.EXTERNAL_CONTENT_URI);
-                    startActivityForResult(i, RESULT_LOAD_IMAGE);
+                    startActivityForResult(getImageSelectionIntent(), RESULT_LOAD_IMAGE);
                     is_picture_selected = true;
                 }
             });
@@ -392,6 +386,15 @@ public class HeaderSwapperFragment extends BasePageFragment {
         }
     }
 
+
+    private Intent getImageSelectionIntent() {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true);
+        return intent;
+    }
+
     public void letsGetStarted() {
         String[] secondPhaseCommands = {theme_dir};
         if (is_debugging_mode_enabled) Log.e("letsGetStarted", secondPhaseCommands[0]);
@@ -430,18 +433,17 @@ public class HeaderSwapperFragment extends BasePageFragment {
         if (requestCode == RESULT_LOAD_IMAGE &&
                 resultCode == Activity.RESULT_OK && null != data) {
             Uri selectedImage = data.getData();
-            String[] filePathColumn = {MediaStore.Images.Media.DATA};
+            Bitmap bitmap;
 
-            Cursor cursor = getActivity().getContentResolver().query(selectedImage,
-                    filePathColumn, null, null, null);
-            cursor.moveToFirst();
+            try {
+                bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), selectedImage);
+            } catch (IOException e) {
+                e.printStackTrace();
+                return;
+            }
 
             is_picture_selected = true;
             changeFABaction();
-
-            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-            String picturePath = cursor.getString(columnIndex);
-            cursor.close();
 
             final ImageView image_to_crop = (ImageView) inflation.findViewById(R.id.cropImageView);
             image_to_crop.setVisibility(View.VISIBLE);
@@ -458,7 +460,10 @@ public class HeaderSwapperFragment extends BasePageFragment {
             }
 
             croppedImageView = (ImageView) inflation.findViewById(R.id.croppedImageView);
-            cropImageView.setImageBitmap(BitmapFactory.decodeFile(picturePath));
+            cropImageView.setImageBitmap(bitmap);
+
+            //https://github.com/IsseiAoki/SimpleCropView/issues/45
+            //cropImageView.setImageURI(selectedImage);
 
             final Button cropButton = (Button) inflation.findViewById(R.id.crop_button);
             cropButton.setVisibility(View.VISIBLE);
