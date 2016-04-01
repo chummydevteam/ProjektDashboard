@@ -6,9 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.ColorStateList;
-import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -233,7 +231,7 @@ public class HeaderSwapperFragment extends BasePageFragment {
                         package_name = "com.chummy.jezebel.materialdark.donate";
                         apply_fab.show();
                     } else {
-                        Toast toast = Toast.makeText(getActivity().getApplicationContext(),  getResources().getString(R.string.akzent_toast_install_before_using),
+                        Toast toast = Toast.makeText(getActivity().getApplicationContext(), getResources().getString(R.string.akzent_toast_install_before_using),
                                 Toast.LENGTH_LONG);
                         toast.show();
                         apply_fab.hide();
@@ -615,7 +613,6 @@ public class HeaderSwapperFragment extends BasePageFragment {
                 if (is_debugging_mode_enabled) Log.e("performAAPTonCommonsAPK",
                         "Caught the exception.");
             }
-            pd.setProgress(60);
             return null;
         }
 
