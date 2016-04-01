@@ -89,7 +89,7 @@ public class SplashScreenActivity extends Activity {
                                 tv.setText(getResources().getString(R.string.initial_run));
                             }
                         });
-                        sleep(500);
+                        sleep(3000);
                         startActivity(new Intent(SplashScreenActivity.this, AppIntroduction.class));
                         finish();
                     } else {

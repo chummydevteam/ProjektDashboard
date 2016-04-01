@@ -1,8 +1,8 @@
 <resources>
     <!-- Splash Screen -->
     <string name="loadingText">performing security verification&#8230;</string>
-    <string name="root_verified">you definitely have root, enabling all features&#8230;</string>
-    <string name="root_unverified">root unavailable, only enabling non-root features&#8230;</string>
+    <string name="root_verified">enabling all features&#8230;</string>
+    <string name="root_unverified">only enabling non-root features&#8230;</string>
     <string name="initial_run">you\'re a new face, welcome to the party!</string>
     <string name="welcome_back">eyyyy welcome back buddy!</string>
 
