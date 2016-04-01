@@ -121,10 +121,7 @@ public class ColorChangerFragment extends BasePageFragment {
                     autorestartSystemUI.setClickable(false);
                     if (is_debugging_mode_enabled) Log.e("CheckBox",
                             "Universal variable to hot reboot ENABLED.");
-                    Toast toast = Toast.makeText(getActivity().getApplicationContext(),
-                            "This feature disables you from enabling both SystemUI restart and " +
-                                    "Hot Reboot. " +
-                                    "Disable Hot Reboot to switch to SystemUI Restart",
+                    Toast toast = Toast.makeText(getActivity().getApplicationContext(), getResources().getString(R.string.colorpicker_toast_disable_hot_reboot_switch_systemui_restart),
                             Toast.LENGTH_LONG);
                     toast.show();
                 } else {
