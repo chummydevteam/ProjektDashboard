@@ -129,7 +129,7 @@ public class WallpaperAdapter extends RecyclerView.Adapter<WallpaperAdapter.Wall
     }
 
     public static class WallpaperViewHolder extends RecyclerView.ViewHolder
-            implements View.OnClickListener, View.OnLongClickListener {
+            implements View.OnClickListener {
 
         final ClickListener mListener;
         final CardView card;
@@ -150,17 +150,11 @@ public class WallpaperAdapter extends RecyclerView.Adapter<WallpaperAdapter.Wall
             progress = ButterKnife.findById(itemView, R.id.progress);
 
             card.setOnClickListener(this);
-            card.setOnLongClickListener(this);
         }
 
         @Override
         public void onClick(View v) {
             mListener.onClick(v, getAdapterPosition(), false);
-        }
-
-        @Override
-        public boolean onLongClick(View v) {
-            return mListener.onClick(v, getAdapterPosition(), true);
         }
     }
 }
