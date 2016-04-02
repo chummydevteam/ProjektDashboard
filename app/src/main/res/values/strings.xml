@@ -66,6 +66,7 @@
     <string name="contextualheaderimporter_header_pack_na">n/a</string>
     <string name="contextualheaderimporter_not_all_themed">headers themed</string>
     <string name="contextualheaderimporter_only_one_themed">header themed</string>
+    <string name="contextualheaderimporter_options_before_choosing_picture">advanced options:</string>
 
     <string name="contextualheaderswapper">contextual header swapper</string>
     <string name="contextualheaderswapper_description">contextual header swapper</string>

@@ -229,7 +229,7 @@
                 android:layout_below="@id/spinner1"
                 android:layout_gravity="left"
                 android:layout_marginLeft="8dp"
-                android:text="@string/contextualheaderswapper_options_before_choosing_picture"
+                android:text="@string/contextualheaderimporter_options_before_choosing_picture"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:textStyle="italic" />
 

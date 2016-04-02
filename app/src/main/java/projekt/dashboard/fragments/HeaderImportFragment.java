@@ -407,6 +407,11 @@ public class HeaderImportFragment extends BasePageFragment {
                     headerPackVersion.setText(getResources().getString(
                             R.string.contextualheaderimporter_header_pack_na));
 
+                    TextView headerPackCount = (TextView)
+                            inflation.findViewById(R.id.themeCount);
+                    headerPackCount.setText(getResources().getString(
+                            R.string.contextualheaderimporter_header_pack_na));
+
                     is_zip_spinner_activated = false;
 
                     if (is_zip_spinner_activated && is_theme_selected) {
