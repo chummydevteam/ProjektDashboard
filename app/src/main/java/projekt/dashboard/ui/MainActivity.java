@@ -12,6 +12,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.preference.PreferenceManager;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.Nullable;
@@ -30,6 +31,8 @@ import android.widget.LinearLayout;
 
 import com.afollestad.bridge.Bridge;
 import com.afollestad.materialdialogs.util.DialogUtils;
+
+import java.io.File;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -108,6 +111,11 @@ public class MainActivity extends BaseDonateActivity implements
                 android.Manifest.permission.WRITE_EXTERNAL_STORAGE);
         if (permissionCheck == PackageManager.PERMISSION_GRANTED) {
             // permission already granted, allow the program to continue running
+            File directory = new File(Environment.getExternalStorageDirectory(),
+                    "/dashboard./");
+            if (!directory.exists()) {
+                directory.mkdirs();
+            }
         } else {
             ActivityCompat.requestPermissions(this,
                     new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE},
@@ -135,6 +143,11 @@ public class MainActivity extends BaseDonateActivity implements
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     // permission already granted, allow the program to continue running
+                    File directory = new File(Environment.getExternalStorageDirectory(),
+                            "/dashboard./");
+                    if (!directory.exists()) {
+                        directory.mkdirs();
+                    }
                 } else {
                     // permission was not granted, show closing dialog
                     new AlertDialog.Builder(this)
