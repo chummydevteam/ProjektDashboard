@@ -43,7 +43,7 @@ public class GaufrerWallpaperSource extends RemoteMuzeiArtSource {
     protected void onTryUpdate(int reason) throws RetryException {
         WallpaperUtils.WallpapersHolder wallpapers;
         try {
-            wallpapers = WallpaperUtils.getAll(this, !WallpaperUtils.didExpire(this));
+            wallpapers = WallpaperUtils.getAll(this, true);
         } catch (Exception e) {
             Log.d(GaufrerWallpaperSource.class.getSimpleName(), String.format("Failed to retrieve wallpapers for Muzei... %s", e.getMessage()));
             throw new RetryException();

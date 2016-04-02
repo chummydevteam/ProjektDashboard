@@ -2,8 +2,10 @@ package projekt.dashboard.fragments;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
 import android.support.v4.app.ActivityCompat;
@@ -20,7 +22,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -103,7 +109,63 @@ public class WallpapersFragment extends BasePageFragment implements
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_recyclerview, container, false);
+        View inflation = inflater.inflate(R.layout.fragment_recyclerview, container, false);
+
+        final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(
+                getActivity());
+
+        Spinner wallpaperSourcePicker = (Spinner) inflation.findViewById(R.id.sourcePicker);
+        ArrayAdapter<String> spinnerCountShoesArrayAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item, getResources().getStringArray(R.array.wallpaper_sources));
+        wallpaperSourcePicker.setAdapter(spinnerCountShoesArrayAdapter);
+        wallpaperSourcePicker.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> arg0, View arg1,
+                                       int pos, long id) {
+                if (pos == 0) {
+                    prefs.edit().putString("selected_wallpaper_source", "default").commit();
+                }
+                if (pos == 1) {
+                    prefs.edit().putString("selected_wallpaper_source", "customworx").commit();
+                }
+                if (pos == 2) {
+                    prefs.edit().putString("selected_wallpaper_source", "gagan").commit();
+                }
+                if (pos == 3) {
+                    prefs.edit().putString("selected_wallpaper_source", "vignesh").commit();
+
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> arg0) {
+                // TODO Auto-generated method stub
+
+            }
+        });
+        String mapTypeString = prefs.getString("selected_wallpaper_source", "default");
+        if (!mapTypeString.equals("default")) {
+            if (mapTypeString.equals("customworx")) {
+                wallpaperSourcePicker.setSelection(1);
+            }
+            if (mapTypeString.equals("gagan")) {
+                wallpaperSourcePicker.setSelection(2);
+            }
+            if (mapTypeString.equals("vignesh")) {
+                wallpaperSourcePicker.setSelection(3);
+            }
+        } else {
+            wallpaperSourcePicker.setSelection(0);
+        }
+
+        ImageButton restartActivity = (ImageButton) inflation.findViewById(R.id.restart);
+        restartActivity.setOnClickListener((new View.OnClickListener() {
+            public void onClick(View v) {
+                getActivity().finish();
+                getActivity().startActivity(new Intent(getActivity(), MainActivity.class));
+            }
+        }));
+
+        return inflation;
     }
 
     @Override
@@ -226,7 +288,7 @@ public class WallpapersFragment extends BasePageFragment implements
     }
 
     public void load() {
-        load(!WallpaperUtils.didExpire(getActivity()));
+        load(false);
     }
 
     private void load(boolean allowCached) {

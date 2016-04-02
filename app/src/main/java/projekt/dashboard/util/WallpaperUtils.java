@@ -1,6 +1,5 @@
 package projekt.dashboard.util;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -37,7 +36,6 @@ import java.io.File;
 import java.io.Serializable;
 import java.util.Locale;
 
-import projekt.dashboard.BuildConfig;
 import projekt.dashboard.R;
 import projekt.dashboard.fragments.WallpapersFragment;
 
@@ -58,30 +56,6 @@ public class WallpaperUtils {
     private WallpaperUtils() {
     }
 
-    @SuppressLint("CommitPrefEdits")
-    public static boolean didExpire(Context context) {
-        final long NOW = System.currentTimeMillis();
-        final String UPDATE_TIME_KEY = "wallpaper_last_update_time";
-        final String LAST_UPDATE_VERSION_KEY = "wallpaper_last_update_version";
-        final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-        final long LAST_UPDATE = prefs.getLong(UPDATE_TIME_KEY, -1);
-        final long INTERVAL = 24 * 60 * 60 * 1000; // every 24 hours
-
-        if (LAST_UPDATE == -1 || NOW >= (LAST_UPDATE + INTERVAL)) {
-            Log.d("WallpaperUtils", "Cache invalid: never updated, or it's been 24 hours since last update.");
-            // Never updated before, or it's been at least 24 hours
-            prefs.edit().putLong(UPDATE_TIME_KEY, NOW).commit();
-            return true;
-        } else if (prefs.getInt(LAST_UPDATE_VERSION_KEY, -1) != BuildConfig.VERSION_CODE) {
-            Log.d("WallpaperUtils", "App was updated, wallpapers cache is invalid.");
-            prefs.edit().putInt(LAST_UPDATE_VERSION_KEY, BuildConfig.VERSION_CODE).commit();
-            return true;
-        }
-
-        Log.d("WallpaperUtils", "Cache is still valid.");
-        return false;
-    }
-
     public static WallpapersHolder getAll(final Context context, boolean allowCached) throws Exception {
         Inquiry.init(context, DATABASE_NAME, DATABASE_VERSION);
         try {
@@ -100,7 +74,24 @@ public class WallpaperUtils {
         }
 
         try {
-            WallpapersHolder holder = Bridge.get(context.getString(R.string.wallpapers_json_url))
+            String defaultSource = "";
+            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+            String mapTypeString = prefs.getString("selected_wallpaper_source", "default");
+            if (!mapTypeString.equals("default")) {
+                if (mapTypeString.equals("customworx")) {
+                    defaultSource = context.getString(R.string.wallpapers_json_url_customworx);
+                }
+                if (mapTypeString.equals("gagan")) {
+                    defaultSource = context.getString(R.string.wallpapers_json_url_gagan);
+                }
+                if (mapTypeString.equals("vignesh")) {
+                    defaultSource = context.getString(R.string.wallpapers_json_url_vignesh);
+                }
+            } else {
+                defaultSource = context.getString(R.string.wallpapers_json_url);
+            }
+
+            WallpapersHolder holder = Bridge.get(defaultSource)
                     .tag(WallpapersFragment.class.getName())
                     .asClass(WallpapersHolder.class);
             if (holder == null)
@@ -160,7 +151,24 @@ public class WallpaperUtils {
             t.printStackTrace();
         }
 
-        Bridge.get(context.getString(R.string.wallpapers_json_url))
+        String defaultSource = "";
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        String mapTypeString = prefs.getString("selected_wallpaper_source", "default");
+        if (!mapTypeString.equals("default")) {
+            if (mapTypeString.equals("customworx")) {
+                defaultSource = context.getString(R.string.wallpapers_json_url_customworx);
+            }
+            if (mapTypeString.equals("gagan")) {
+                defaultSource = context.getString(R.string.wallpapers_json_url_gagan);
+            }
+            if (mapTypeString.equals("vignesh")) {
+                defaultSource = context.getString(R.string.wallpapers_json_url_vignesh);
+            }
+        } else {
+            defaultSource = context.getString(R.string.wallpapers_json_url);
+        }
+
+        Bridge.get(defaultSource)
                 .tag(WallpapersFragment.class.getName())
                 .asClass(WallpapersHolder.class, new ResponseConvertCallback<WallpapersHolder>() {
                     @Override
