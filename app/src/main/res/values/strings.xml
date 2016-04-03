@@ -56,12 +56,10 @@
     </string-array>
 
     <string-array name="dialog_responses">
-        <item>Please wait, while your phone gets beautified!</item>
-        <item>Injecting beautiful accents all over the place~</item>
         <item>Sprinkling some magic over here&#8230;and over there&#8230;</item>
-        <item>OMG, am I broken?</item>
-        <item>I hope you did your reading, because you need to get ready for the amount of awesomeness this gives!</item>
-        <item>I hope you don\'t have to report bugs......please no.</item>
+        <item>ERROR L337: Program terminated with errors....jk.</item>
+        <item>I hope you did your reading, because you need to get ready for the amount of awesomeness!</item>
+        <item>I hope you don\'t have to report bugs&#8230;please no.</item>
         <item>I don\'t have a library card, but do you mind if I check you out?</item>
         <item>I seem to have lost my phone number. Can I have yours?</item>
         <item>Are you religious? Because you\'re the answer to all my prayers.</item>
@@ -71,7 +69,54 @@
         <item>Can I take your picture to prove to all my friends that angels do exist?</item>
         <item>My doctor says I\'m lacking Vitamin U.</item>
         <item>If I were a cat I\'d spend all 9 lives with you.</item>
-        <item>Are you ready for some rainbow-licious fun?</item>
+        <item>Are you ready for some&#8230;fun?</item>
+        <item>I\’ll treat you like my homework: Slam you on the table and do you all night long!</item>
+        <item>You know why I am like a squirrel? Cause I want to bury my nuts in you.</item>
+        <item>You are hotter than the bottom of my laptop.</item>
+        <item>Do you have a Band-Aid? Because I just scraped my knee falling for you.</item>
+        <item>Do you know what my shirt is made of? @android:style/Theme.Material.</item>
+        <item>Did you invent the airplane? Cause you seem Wright for me.</item>
+        <item>If God made anything more beautiful than you, I\'m sure he\'d keep it for himself.</item>
+        <item>Do you have a map? I\'m getting lost in your eyes.</item>
+        <item>Does your left eye hurt? Because you\'ve been looking right all day.</item>
+        <item>I will stop loving you when an apple grows from a mango tree on the 30th of February.</item>
+        <item>Hi, my name is JDizzle. What\'s yours?</item>
+        <item>Are you a parking ticket? \'Cause you\'ve got fine written all over you.</item>
+        <item>Can I have directions&#8230;to your heart?</item>
+        <item>I\'m not drunk, I\'m just intoxicated by YOU.</item>
+        <item>Your body is 65% water and I\'m thirsty.</item>
+        <item>Have you been to the doctor lately? Cause I think you\'re lacking some Vitamin Me.</item>
+        <item>Forget about Spiderman, Superman, and Batman. I\'ll be your man.</item>
+        <item>Can I follow you home? Cause my parents always told me to follow my dreams.</item>
+        <item>For a moment I thought I had died and gone to heaven. Now I see that I am very much alive, and heaven has been brought to me.</item>
+        <item>Was your dad a boxer? Cause you\'re a knockout!</item>
+        <item>Damn, if being sexy was a crime, you\'d be guilty as charged!</item>
+        <item>I thought happiness started with an H. Why does mine start with U?</item>
+        <item>Do you work at Starbucks? Because I like you a latte.</item>
+        <item>Are you a banana? Because I find you a-peeling</item>
+        <item>Did you read Dr. Seuss as a kid? Because green eggs and&#8230;damn!</item>
+        <item>When we have each other, everything else is just background noise.</item>
+        <item>Smoking is hazardous to your health&#8230;and baby, you\'re killing me!</item>
+        <item>There isn\'t a word in the dictionary for how good you look.</item>
+        <item>Excuse me, but I think I dropped something - my jaw.</item>
+        <item>Are you a campfire? Cause you are hot and I want s\'more.</item>
+        <item>Of all the beautiful curves on your body, your smile is my favorite.</item>
+        <item>I\'m no organ donor but I\'d be happy to give you my heart.</item>
+        <item>Hershey\'s makes millions of kisses a day&#8230;all I\'m asking for is one from you.</item>
+        <item>Life without you would be like a broken pencil&#8230;pointless.</item>
+        <item>Kiss me if I\'m wrong, but dinosaurs still exist, right?</item>
+        <item>If nothing lasts forever, will you be my nothing?</item>
+        <item>I wonder what stories my heart would tell if you pressed your ear to my chest.</item>
+        <item>I didn\'t know that angels could fly so low!</item>
+        <item>What\'s on the menu? Me-n-U!</item>
+        <item>People call me John, but you can call me tonight.</item>
+        <item>Let\'s make like a fabric softener and \'Snuggle.</item>
+        <item>Were you arrested earlier? It\'s gotta be illegal to look that good.</item>
+        <item>You are the reason men fall in love.</item>
+        <item>Damn girl, you have more curves than a race track.</item>
+        <item>I hope there\'s a fire truck nearby, cause you\'re smokin\'!</item>
+        <item>Even if there wasn\'t gravity on earth, I\'d still fall for you.</item>
+        <item>Hello. Cupid called. He says to tell you that he needs my heart back.</item>
     </string-array>
 
     <string-array name="wallpaper_sources">
