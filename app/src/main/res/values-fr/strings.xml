@@ -1,0 +1,176 @@
+<resources>
+
+    <!-- AppIntroduction -->
+    <string name="first_slide_title">Bienvenue dans Dashboard.</string>
+    <string name="first_slide_description">Dashboard est une extension pour le moteur de thème Cyanogenmod, développée par Chummy Development Team, vous permettant d\'étendre les possibilités des thèmes CM, et plus particulièrement des thème cdt.</string>
+
+    <string name="second_slide_title">Modifier les couleurs</string>
+    <string name="second_slide_description">Dashboard est livré avec un sélecteur de couleur permettant le remplacement à chaud des couleurs !\nVeuillez l\'autoriser à télécharger automatiquement un fichier correctif avant d\'interrompre votre connexion Internet.</string>
+
+    <string name="third_slide_title">Modifier l\'en-tête contextuel</string>
+    <string name="third_slide_description">Dashboard est également livré avec un outil vous permettant de définir vos propres en-têtes contextuels pour personnaliser davantage votre appareil sans passer par l\'utilisation d\'extensions Xposed inutiles ou par la création de thème !</string>
+
+    <string name="fourth_slide_title">Le moteur de thème a besoin d\'être diagnostiqué ?</string>
+    <string name="fourth_slide_description">Dashboard est également livré avec des outils vous offrant une grande quantité d\'options pour vous aider à réparer votre moteur de thème directement depuis votre appareil !\n\n</string>
+
+    <string name="fifth_slide_title">Cette application a besoin d\'un accès root !</string>
+    <string name="fifth_slide_description">Pour utiliser toutes les fonctionnalités de l\'application, votre appareil doit absolument être rooté, avec une ROM alternative incluant les l\'en-têtes contextuels !</string>
+
+    <string name="last_slide_title">Êtes-vous prêt ?</string>
+    <string name="last_slide_description">Veuillez lire tout ce qui apparaît à l\'écran lorsque vous utilisez cette application. Des informations cruciales sont affichées, comme par exemple le redémarrage logiciel après avoir effectué certains réglages, pour empêcher votre appareil de subir des redémarrages en boucle !</string>
+
+    <!-- Splash Screen -->
+    <string name="loadingText">Vérification de sécurité en cours&#8230;</string>
+    <string name="root_verified">Activation de l\'ensemble des fonctionnalités&#8230;</string>
+    <string name="root_unverified">Activation des fonctionnalités ne nécessitant pas d\'accès root&#8230;</string>
+    <string name="initial_run">Vous êtes nouveau ici !\nBienvenue à la fête !</string>
+    <string name="welcome_back">Bon retour !</string>
+
+    <!-- App Home -->
+    <string name="homepage_description">Le moteur de thème Cyanogenmod amélioré !</string>
+    <string name="homepage_description_secondary">Vous êtes-vous déjà demandé jusqu\'où les développeurs pourraient aller avec le moteur de thème de Cyanogenmod ? Nous nous mettons au défi de réinventer la roue, en créant une application tout-en-un regroupant tous nos réglages.\n\nToute fois, cette application peut ne pas fonctionner sur tous les appareils, donc si vous voyez un message en rouge de non prise en charge ci-dessous, ne tentez pas d\'exécuter cette application sauf si vous êtes prêt à vous transformer en cochon d\'Inde :)</string>
+    <string name="homepage_rom_not_supported">ROM NON PRISE EN CHARGE ✘</string>
+    <string name="homepage_rom_not_officially_supported">ROM PAS OFFICIELLEMENT PRISE EN CHARGE</string>
+    <string name="homepage_dashboard_app_developpement_status">Version développeur de dashboard - Programme de test publique</string>
+
+    <!-- App Color Switcher -->
+    <string name="colorpicker_description">Modifier les couleurs</string>
+    <string name="colorpicker_description_secondary">Il s\'agit d\'une fonctionnalité hautement expérimentale vous permettant de remplacer les couleurs principales à la volé (ce qui signifie qu\'un redémarrage complet n\'est pas nécessaire et ne nécessite pas la création et l\'installation d\'un nouveau fichier APK)\n\nIl n\'y a aucun effet secondaire, mais en fonction des réglages choisis, vous devrez peut-être vider la liste de vos applications récentes, après avoir effectué le changement de couleur.\n</string>
+
+    <string name="colorpicker_toast_disable_hot_reboot_switch_systemui_restart">Effectuer un redémarrage de l\'affichage et un redémarrage logiciel est impossibles. Veuillez décocher le redémarrage logiciel pour pouvoir redémarrer l\'affichage</string>
+
+    <string name="akzent_title">dark material // akZent</string>
+    <string name="akzent_description">Appuyez ici pour changer les couleurs de akZent</string>
+    <string name="akzent_toast_install_before_using">Veuillez installer dark material // akZent avant d\'utiliser cette fonctionnalité !</string>
+
+    <string name="blakzent_title">blacked out // blakZent</string>
+    <string name="blakzent_description">Appuyez ici pour changer les couleurs de blakZent</string>
+    <string name="blakzent_toast_install_before_using">Veuillez installer blacked out // blakZent avant d\'utiliser cette fonctionnalité !</string>
+
+    <string name="projektklar_title">projekt // klar</string>
+    <string name="projektklar_description">Appuyez ici pour changer les couleurs de projekt // klar</string>
+
+    <string name="layout_fragment_colorpicker_select_tweaks">Sélectionnez les réglages :</string>
+    <string name="layout_fragment_colorpicker_color_swap_restart_systemui">Changer de couleur + redémarrage  de l\'affichage</string>
+    <string name="layout_fragment_colorpicker_color_swap_soft_reboot">Changer de couleur + redémarrage logiciel</string>
+    <string name="layout_fragment_colorpicker_debugging_mode">Mode de débogage (Journaux avancés)</string>
+    <string name="layout_fragment_colorpicker_force_update_patched_resource">Forcer la mise à jour du fichier de ressources corrigé</string>
+    <string name="layout_fragment_colorpicker_installed_color_switchable_themes">Thèmes installés permettant le changement de couleur :</string>
+
+    <!-- App Contextual Header Swapper -->
+    <string-array name="contextual_headers">
+        <item>Tous les en-têtes</item>
+        <item>notifhead_afternoon.png</item>
+        <item>notifhead_christmas.png</item>
+        <item>notifhead_morning.png</item>
+        <item>notifhead_newyearseve.png</item>
+        <item>notifhead_night.png</item>
+        <item>notifhead_noon.png</item>
+        <item>notifhead_sunrise.png</item>
+        <item>notifhead_sunset_hdpi.png</item>
+        <item>notifhead_sunset_xhdpi.png</item>
+        <item>notifhead_sunset.png</item>
+    </string-array>
+
+    <string name="contextualheaderswapper">En-tête contextuel</string>
+    <string name="contextualheaderswapper_description">Modifier l\'en-tête contextuel</string>
+    <string name="contextualheaderswapper_description_secondary">Il s\'agit d\'une fonctionnalité hautement expérimentale vous permettant de définir vos propres en-têtes contextuels. Un redémarrage logiciel est nécessaire pour que les modifications soient prises en compte, puisque nous modifions l\'application actuellement installée sur votre appareil.\n\nN\'oubliez pas d\'activer les en-têtes contextuels (Images normales ou HD Polygraphiques) dans les paramètres de votre ROM ! Si les en-têtes contextuels ne sont pas affichés après un redémarrage logiciel, videz le cache de l\'affichage !\n</string>
+
+    <string name="contextualheaderswapper_current_time_image">Image actuelle :</string>
+    <string name="contextualheaderswapper_modifying_contextual_header_file">Veuillez sélectionner le fichier d\'en-tête contextuel à modifier :</string>
+    <string name="contextualheaderswapper_select_installed_theme">Veuillez sélectionner le thème à modifier :</string>
+    <string name="contextualheaderswapper_options_before_choosing_picture">Options disponibles avant de choisir une image :</string>
+    <string name="contextualheaderswapper_autoclear_systemui_cache">Vider le cache de l\'affichage</string>
+    <string name="contextualheaderswapper_free_crop_mode">Rognage de l\'image libre</string>
+    <string name="contextualheaderswapper_debugging_mode">Mode de débogage (Journaux avancés)</string>
+    <string name="contextualheaderswapper_soft_reboot_after_modifications">Appuyez ici pour effectuer un redémarrage logiciel après toutes les modifications</string>
+
+    <string name="contextualheaderswapper_crop_image">Rogner l\'image</string>
+    <string name="contextualheaderswapper_save_set_image">Enregistrer et définir l\'image</string>
+    <string name="contextualheaderswapper_toast_cache_empty_reboot_first">Le cache est actuellement vide ! Veuillez effectuer un redémarrage d\'abord ! Si vous pensez qu\'il s\'agit d\'une erreur, essayez de reconstruire l\'ensemble de votre cache.</string>
+
+    <!-- App Contextual Header Importer -->
+    <string name="zipfile_checker_success">Fichier choisi :</string>
+    <string name="zipfile_checker_error">Le fichier choisi n\'est pas un ZIP valide !</string>
+    <string name="contextualheaderimporter">Importer des en-têtes contextuels</string>
+    <string name="contextualheaderimporter_description">Importer des en-têtes contextuels</string>
+    <string name="contextualheaderimporter_description_secondary">Il s\'agit d\'une fonctionnalité hautement expérimentale vous permettant de définir vos propres en-têtes contextuels à partir de paquets \".zip\" spécialement conçues par les créateurs de thème. Un redémarrage logiciel est nécessaire pour que les modifications soient prises en compte, puisque nous modifions l\'application actuellement installée sur votre appareil.\n\nN\'oubliez pas d\'activer les en-têtes contextuels (Images normales ou HD Polygraphiques) dans les paramètres de votre ROM ! Si les en-têtes contextuels ne sont pas affichés après un redémarrage logiciel, videz le cache de l\'affichage !\n</string>
+    <string name="contextualheaderimporter_select_downloaded_zip">Veuillez sélectionner un paquet d\'en-têtes contextuels depuis \"/storage/0/dashboard.\" :</string>
+    <string name="contextualheaderswapper_select_theme">Sélectionner un thème...</string>
+    <string name="contextualheaderswapper_select_zip">Sélectionner un paquet...</string>
+    <string name="contextualheaderimporter_all_themed">Importés</string>
+    <string name="contextualheaderimporter_information_header">Informations sur le paquet d\'en-têtes contextuels sélectionné</string>
+    <string name="contextualheaderimporter_header_pack_name">Nom : </string>
+    <string name="contextualheaderimporter_header_pack_author">Auteur : </string>
+    <string name="contextualheaderimporter_header_pack_team">Équipe : </string>
+    <string name="contextualheaderimporter_header_pack_version">Version : </string>
+    <string name="contextualheaderimporter_header_pack_theme_count">En-têtes contextuels : </string>
+    <string name="contextualheaderimporter_header_pack_na">Sans objet</string>
+    <string name="contextualheaderimporter_not_all_themed">En-têtes contextuels appliqués</string>
+    <string name="contextualheaderimporter_only_one_themed">En-tête contextuel appliqué</string>
+    <string name="contextualheaderimporter_options_before_choosing_picture">Options avancées :</string>
+
+    <!-- App Theme Utilities -->
+    <string name="themeutilities_description">Quelque chose est-il arrivé ?</string>
+    <string name="themeutilities_description_secondary">Voici une collection de réglages du moteur de thème utiles, que vous pouvez utiliser si vous rencontrez des problèmes, ou tout simplement pour faire un peu de nettoyage sur votre appareil.\n</string>
+    <string name="themeutilities_basic_theme_utilities">Réglages du moteur de thème :</string>
+    <string name="themeutilities_perform_systemui_restart">Effectuer un redémarrage de l\'affichage</string>
+    <string name="themeutilities_perform_soft_reboot">Effectuer un redémarrage logiciel</string>
+    <string name="themeutilities_perform_complete_system_reboot">Effectuer un redémarrage complet de l\'appareil</string>
+    <string name="themeutilities_perform_action">Appliquer</string>
+    <string name="themeutilities_rebuild_dark_material">Rétablir dark material // akzent</string>
+    <string name="themeutilities_rebuild_blacked_out">Rétablir blacked out // blakzent</string>
+    <string name="themeutilities_rebuild_projekt">Rétablir projekt // klar</string>
+    <string name="themeutilities_rebuild_rebuild_all_color_switch_themes">Rétablir tous les thèmes permettant le changement de couleur</string>
+    <string name="themeutilities_rebuild_rebuild_all_chummydevteam_themes">Rétablir tous les thèmes chummydevteam</string>
+    <string name="themeutilities_rebuild_rebuild_all_themes_installed_device">Rétablir tous les thèmes installés sur l\'appareil</string>
+
+    <!-- App Wallpapers -->
+    <string-array name="wallpaper_sources">
+        <item>Fonds d\'écran par défaut</item>
+        <item>Fonds d\'écran par Customworx</item>
+        <item>Fonds d\'écran par Gagan Singh</item>
+        <item>Fonds d\'écran par Vignesh Ravi</item>
+    </string-array>
+
+    <!-- dashboard. General Strings -->
+    <string name="home">dashboard.</string>
+    <string name="app_name">dashboard.</string>
+    <string name="home_tab_one">dashboard</string>
+    <string name="home_tab_two">Modifier les couleurs</string>
+    <string name="home_tab_three">Modifier l\'en-tête contextuel</string>
+    <string name="home_tab_four">Importer des en-têtes contextuels</string>
+    <string name="home_tab_five">Utilitaires pour thème</string>
+    <string name="home_tab_six">Fonds d\'écran</string>
+    <string name="permission_not_granted_dialog_title">Autorisations non accordées</string>
+    <string name="permission_not_granted_dialog_message">Veuillez accorder l\'autorisation de stockage à dashboard ou l\'application ne fonctionnera pas correctement !</string>
+    <string name="dialog_ok">OK</string>
+    <string name="write_storage_permission_denied">Autorisation d\'écriture sur la mémoire de stockage externe refusée !</string>
+
+    <!-- App Uncategorized Strings -->
+    <string name="app_name_wallpaper">Fonds d\'écran cdt</string>
+    <string name="unable_to_contact_server">Serveur indisponible ! Vérifiez votre connexion Internet.</string>
+    <string name="thank_you_donation">Nous vous remercions de votre générosité !</string>
+    <string name="request_cancelled">Demande annulée</string>
+    <string name="color_changer">Modifier les couleurs</string>
+    <string name="theme_utils">Utilitaires pour thème</string>
+    <string name="wallpapers">Fonds d\'écran</string>
+    <string name="wallpaper">Fond d\'écran</string>
+    <string name="saved_to_x">Enregistré dans %1$s !</string>
+    <string name="wallpaper_set">Fond d\'écran défini !</string>
+    <string name="apply">Appliquer</string>
+    <string name="save_to_device">Enregistrer sur l\'appareil</string>
+    <string name="press_color_to_apply">Choisissez votre couleur !</string>
+    <string name="dismiss">Annuler</string>
+    <string name="error">Erreur</string>
+    <string name="no_wallpapers">Aucun fond d\'écran</string>
+    <string name="search_wallpapers">Recherche de fonds d\'écran…</string>
+    <string name="reload_from_web">Actualiser partir d\'Internet</string>
+    <string name="downloading_wallpaper">Téléchargement du fond d\'écran en cours…</string>
+    <string name="cool">Génial</string>
+    <string name="invalid_drawable_error"><![CDATA[\Image incorrecte <b>%1$s</b>, le développeur
+    doit corriger ça dans <b>/res/xml/drawable.xml</b> et <b>/assets/drawable.xml</b>.]]></string>
+    <string name="set_wallpaper_using">Définir le fond d\'écran avec…</string>
+    <string name="download_cancelled">Téléchargement annulé !</string>
+
+</resources>
