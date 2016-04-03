@@ -47,6 +47,7 @@ public class AppIntroduction extends AppIntro {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(
                 getApplicationContext());
         prefs.edit().putBoolean("first_run", false).commit();
+        prefs.edit().putBoolean("blacked_out_enabled", false).commit();
         Intent intent = new Intent(AppIntroduction.this, MainActivity.class);
         startActivity(intent);
         finish();
