@@ -87,6 +87,9 @@ public class WallpaperUtils {
                 if (mapTypeString.equals("vignesh")) {
                     defaultSource = context.getString(R.string.wallpapers_json_url_vignesh);
                 }
+                if (mapTypeString.equals("vignesh_headers")) {
+                    defaultSource = context.getString(R.string.wallpapers_json_url_vignesh_headers);
+                }
             } else {
                 defaultSource = context.getString(R.string.wallpapers_json_url);
             }
@@ -163,6 +166,9 @@ public class WallpaperUtils {
             }
             if (mapTypeString.equals("vignesh")) {
                 defaultSource = context.getString(R.string.wallpapers_json_url_vignesh);
+            }
+            if (mapTypeString.equals("vignesh_headers")) {
+                defaultSource = context.getString(R.string.wallpapers_json_url_vignesh_headers);
             }
         } else {
             defaultSource = context.getString(R.string.wallpapers_json_url);
