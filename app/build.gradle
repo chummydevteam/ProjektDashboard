@@ -90,7 +90,6 @@ dependencies {
     compile 'com.github.florent37:glidepalette:1.0.6@aar'
 
     compile 'com.jakewharton:butterknife:7.0.1'
-    compile 'com.google.android.apps.muzei:muzei-api:2.0'
     compile 'com.makeramen:roundedimageview:2.2.1'
 
     compile 'com.anjlab.android.iab.v3:library:1.0.+'
@@ -111,6 +110,5 @@ dependencies {
     compile 'com.isseiaoki:simplecropview:1.0.16'
 
     // Application Welcome Intro
-    compile 'com.alexandrepiveteau:material-tutorial:1.1.0'
     compile 'com.github.paolorotolo:appintro:3.4.0'
 }
