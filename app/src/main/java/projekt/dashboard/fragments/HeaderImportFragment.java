@@ -929,24 +929,8 @@ public class HeaderImportFragment extends BasePageFragment {
         }
 
         protected void onPreExecute() {
-            String[] responses = {
-                    "Please wait, while your phone gets beautified!",
-                    "Injecting beautiful photos into your notification panel~",
-                    "Sprinkling some magic over here...and over there....",
-                    "OMG, am I broken?",
-                    "I hope you did your reading, because you need to get ready for the " +
-                            "amount of awesomeness this gives!",
-                    "I hope you don't have to report bugs......please no.",
-                    "That header is simply gorgeous!",
-                    "I don't have a library card, but do you mind if I check you out?",
-                    "I seem to have lost my phone number. Can I have yours?",
-                    "Are you religious? Because you're the answer to all my prayers.",
-                    "Did you sit in a pile of sugar? Cause you have a pretty sweet ass.",
-                    "Do you live in a corn field, cause I'm stalking you.",
-                    "You look cold. Want to use me as a blanket?",
-                    "Can I take your picture to prove to all my friends that angels do exist?",
-                    "My doctor says I'm lacking Vitamin U.",
-                    "If I were a cat I'd spend all 9 lives with you."};
+            String[] responses = getResources().getStringArray(R.array.dialog_responses);
+
             int idx = new Random().nextInt(responses.length);
             String random = (responses[idx]);
 

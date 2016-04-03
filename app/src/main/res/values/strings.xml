@@ -55,6 +55,25 @@
         <item>notifhead_sunset.png</item>
     </string-array>
 
+    <string-array name="dialog_responses">
+        <item>Please wait, while your phone gets beautified!</item>
+        <item>Injecting beautiful accents all over the place~</item>
+        <item>Sprinkling some magic over here&#8230;and over there&#8230;</item>
+        <item>OMG, am I broken?</item>
+        <item>I hope you did your reading, because you need to get ready for the amount of awesomeness this gives!</item>
+        <item>I hope you don\'t have to report bugs......please no.</item>
+        <item>I don\'t have a library card, but do you mind if I check you out?</item>
+        <item>I seem to have lost my phone number. Can I have yours?</item>
+        <item>Are you religious? Because you\'re the answer to all my prayers.</item>
+        <item>Did you sit in a pile of sugar? Cause you have a pretty sweet ass.</item>
+        <item>Do you live in a corn field, cause I\'m stalking you.</item>
+        <item>You look cold. Want to use me as a blanket?</item>
+        <item>Can I take your picture to prove to all my friends that angels do exist?</item>
+        <item>My doctor says I\'m lacking Vitamin U.</item>
+        <item>If I were a cat I\'d spend all 9 lives with you.</item>
+        <item>Are you ready for some rainbow-licious fun?</item>
+    </string-array>
+
     <string-array name="wallpaper_sources">
         <item>default wallpaper pack</item>
         <item>customworx wallpaper pack</item>
