@@ -36,6 +36,9 @@ public class HomeFragment extends BasePageFragment {
         if (getProp("ro.aicp.device") != "") {
             return "AICP ✓";
         }
+		if (getProp("ro.aosip.version") != "") {
+            return "AOSiP ✓";
+        }
         if (getProp("ro.bliss.device") != "") {
             return "Bliss ✓";
         }
