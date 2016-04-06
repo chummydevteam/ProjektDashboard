@@ -946,11 +946,27 @@ public class HeaderImportFragment extends BasePageFragment {
             apply_fab.setImageDrawable(getResources().getDrawable(R.drawable.ic_cached_24dp));
             apply_fab.setBackgroundTintList(ColorStateList.valueOf(
                     getResources().getColor(R.color.resetButton)));
-            apply_fab.setOnClickListener(new View.OnClickListener() {
-                public void onClick(View v) {
-                    eu.chainfire.libsuperuser.Shell.SU.run("killall zygote");
-                }
-            });
+            if (autoClearSystemUICache.isChecked()) {
+                apply_fab.setOnClickListener(new View.OnClickListener() {
+                    public void onClick(View v) {
+                        eu.chainfire.libsuperuser.Shell.SU.run("killall zygote");
+                    }
+                });
+            } else {
+                apply_fab.setOnClickListener(new View.OnClickListener() {
+                    public void onClick(View v) {
+                        eu.chainfire.libsuperuser.Shell.SU.run("killall com.android.systemui");
+                        getActivity().finish();
+                    }
+                });
+                apply_fab.setOnLongClickListener(new View.OnLongClickListener() {
+                    public boolean onLongClick(View v) {
+                        eu.chainfire.libsuperuser.Shell.SU.run("killall zygote");
+                        return true;
+                    }
+                });
+            }
+
             pd.dismiss();
         }
     }
