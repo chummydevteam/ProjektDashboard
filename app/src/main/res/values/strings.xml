@@ -4,7 +4,11 @@
     <string name="root_verified">enabling all features&#8230;</string>
     <string name="root_unverified">only enabling non-root features&#8230;</string>
     <string name="initial_run">you\'re a new face, welcome to the party!</string>
-    <string name="welcome_back">eyyyy welcome back buddy!</string>
+    <string name="welcome_back">eyyyy welcome back</string>
+    <string name="welcome_back_default_username">buddy</string>
+    <string name="welcome_back_dialog_message">what shall I call you from now on?</string>
+    <string name="welcome_back_dialog_title">make dashboard yours!</string>
+    <string name="welcome_back_dialog_confirm">I like it!</string>
 
     <!-- AppIntroduction -->
     <string name="first_slide_title">welcome to dashboard.</string>
@@ -196,7 +200,8 @@
     <string name="homepage_description_secondary">ever wondered how far devs could go with the cyanogenmod theme engine? we challanged ourselves to reinvent the wheel, so we created an app to house all our tweaks in an all-in-one package.\n\nhowever this app may not work on all devices, so if you see an unsupported message above in red, do not attempt to run this app unless you are ready to be a guinea pig :)</string>
     <string name="homepage_rom_not_supported">ROM NOT SUPPORTED ✘</string>
     <string name="homepage_rom_not_officially_supported">ROM NOT OFFICIALLY SUPPORTED (?)</string>
-    <string name="homepage_dashboard_app_developpement_status">dashboard developer preview - public beta test program</string>
+    <string name="homepage_dashboard_app_development_status">, welcome back to the dashboard beta program! </string>
+    <string name="homepage_dashboard_app_development_status_default_username">Hey there</string>
 
     <string name="home_tab_one">dashboard</string>
     <string name="home_tab_two">color switcher</string>

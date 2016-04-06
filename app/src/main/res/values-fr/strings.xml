@@ -31,7 +31,7 @@
     <string name="homepage_description_secondary">Vous êtes-vous déjà demandé jusqu\'où les développeurs pourraient aller avec le moteur de thème de Cyanogenmod ? Nous nous mettons au défi de réinventer la roue, en créant une application tout-en-un regroupant tous nos réglages.\n\nToute fois, cette application peut ne pas fonctionner sur tous les appareils, donc si vous voyez un message en rouge de non prise en charge ci-dessous, ne tentez pas d\'exécuter cette application sauf si vous êtes prêt à vous transformer en cochon d\'Inde :)</string>
     <string name="homepage_rom_not_supported">ROM NON PRISE EN CHARGE ✘</string>
     <string name="homepage_rom_not_officially_supported">ROM PAS OFFICIELLEMENT PRISE EN CHARGE</string>
-    <string name="homepage_dashboard_app_developpement_status">Version développeur de dashboard - Programme de test publique</string>
+    <string name="homepage_dashboard_app_development_status">Version développeur de dashboard - Programme de test publique</string>
 
     <!-- App Color Switcher -->
     <string name="colorpicker_description">Modifier les couleurs</string>

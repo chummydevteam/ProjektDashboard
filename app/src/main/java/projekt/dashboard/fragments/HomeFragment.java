@@ -21,6 +21,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 import butterknife.ButterKnife;
+import projekt.dashboard.BuildConfig;
 import projekt.dashboard.R;
 import projekt.dashboard.fragments.base.BasePageFragment;
 import projekt.dashboard.ui.MainActivity;
@@ -36,7 +37,7 @@ public class HomeFragment extends BasePageFragment {
         if (getProp("ro.aicp.device") != "") {
             return "AICP ✓";
         }
-		if (getProp("ro.aosip.version") != "") {
+        if (getProp("ro.aosip.version") != "") {
             return "AOSiP ✓";
         }
         if (getProp("ro.bliss.device") != "") {
@@ -139,7 +140,13 @@ public class HomeFragment extends BasePageFragment {
             status_message.setTextColor(getResources().getColor(R.color.attention_color_green));
             status_message.setText(checkRomSupported(getActivity()));
         }
-        Snackbar snack = Snackbar.make(themeSwitch, getResources().getString(R.string.homepage_dashboard_app_developpement_status),
+        Snackbar snack = Snackbar.make(themeSwitch, prefs.getString("dashboard_username",
+                        getResources().
+                                getString(R.string.
+                                        homepage_dashboard_app_development_status_default_username))
+                        + getResources().
+                        getString(R.string.homepage_dashboard_app_development_status)
+                        + " (" + BuildConfig.VERSION_NAME + ")",
                 Snackbar.LENGTH_INDEFINITE);
         ViewGroup group = (ViewGroup) snack.getView();
         if (prefs.getBoolean("blacked_out_enabled", true)) {

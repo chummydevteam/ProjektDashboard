@@ -57,7 +57,7 @@ public class SplashScreenActivity extends Activity {
         splashThread = new Thread() {
             @Override
             public void run() {
-                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(
+                final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(
                         getApplicationContext());
                 try {
                     sleep(300);
@@ -96,7 +96,9 @@ public class SplashScreenActivity extends Activity {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                tv.setText(getResources().getString(R.string.welcome_back));
+                                tv.setText(getResources().getString(R.string.welcome_back) +
+                                        " " + prefs.getString("dashboard_username", getResources().
+                                        getString(R.string.welcome_back_default_username)) + "!");
                             }
                         });
                         sleep(300);
