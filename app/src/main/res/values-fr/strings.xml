@@ -24,14 +24,19 @@
     <string name="root_verified">Activation de l\'ensemble des fonctionnalités&#8230;</string>
     <string name="root_unverified">Activation des fonctionnalités ne nécessitant pas d\'accès root&#8230;</string>
     <string name="initial_run">Vous êtes nouveau ici !\nBienvenue à la fête !</string>
-    <string name="welcome_back">Bon retour !</string>
+    <string name="welcome_back">Bon retour</string>
+    <string name="welcome_back_default_username">mon pote</string>
+    <string name="welcome_back_dialog_message">Comment dois-je vous appeler à partir de maintenant ?</string>
+    <string name="welcome_back_dialog_title">Personnalisez dashboard !</string>
+    <string name="welcome_back_dialog_confirm">Ça me plaît !</string>
 
     <!-- App Home -->
     <string name="homepage_description">Le moteur de thème Cyanogenmod amélioré !</string>
     <string name="homepage_description_secondary">Vous êtes-vous déjà demandé jusqu\'où les développeurs pourraient aller avec le moteur de thème de Cyanogenmod ? Nous nous mettons au défi de réinventer la roue, en créant une application tout-en-un regroupant tous nos réglages.\n\nToute fois, cette application peut ne pas fonctionner sur tous les appareils, donc si vous voyez un message en rouge de non prise en charge ci-dessous, ne tentez pas d\'exécuter cette application sauf si vous êtes prêt à vous transformer en cochon d\'Inde :)</string>
     <string name="homepage_rom_not_supported">ROM NON PRISE EN CHARGE ✘</string>
     <string name="homepage_rom_not_officially_supported">ROM PAS OFFICIELLEMENT PRISE EN CHARGE</string>
-    <string name="homepage_dashboard_app_development_status">Version développeur de dashboard - Programme de test publique</string>
+    <string name="homepage_dashboard_app_development_status">, bon retour sur la version de test publique de dashboard !</string>
+    <string name="homepage_dashboard_app_development_status_default_username">Salut</string>
 
     <!-- App Color Switcher -->
     <string name="colorpicker_description">Modifier les couleurs</string>
