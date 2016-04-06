@@ -1,25 +1,19 @@
 package projekt.dashboard.ui;
 
 import android.annotation.TargetApi;
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.preference.PreferenceManager;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.RecyclerView;
@@ -31,8 +25,6 @@ import android.widget.LinearLayout;
 
 import com.afollestad.bridge.Bridge;
 import com.afollestad.materialdialogs.util.DialogUtils;
-
-import java.io.File;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -61,10 +53,8 @@ import static projekt.dashboard.viewer.ViewerActivity.STATE_CURRENT_POSITION;
  * @author Aidan Follestad (afollestad)
  */
 public class MainActivity extends BaseDonateActivity implements
-        ActivityCompat.OnRequestPermissionsResultCallback,
         NavigationView.OnNavigationItemSelectedListener {
 
-    private static final int PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 1;
     public RecyclerView mRecyclerView;
     @Bind(R.id.toolbar)
     Toolbar mToolbar;
@@ -106,22 +96,6 @@ public class MainActivity extends BaseDonateActivity implements
         setupPager();
         setupTabs();
 
-        // But check permissions first - download will be started in the callback
-        int permissionCheck = ContextCompat.checkSelfPermission(getApplicationContext(),
-                android.Manifest.permission.WRITE_EXTERNAL_STORAGE);
-        if (permissionCheck == PackageManager.PERMISSION_GRANTED) {
-            // permission already granted, allow the program to continue running
-            File directory = new File(Environment.getExternalStorageDirectory(),
-                    "/dashboard./");
-            if (!directory.exists()) {
-                directory.mkdirs();
-            }
-        } else {
-            ActivityCompat.requestPermissions(this,
-                    new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                    PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE);
-        }
-
         // Restore last selected page, tab/nav-drawer-item
         if (Config.get().persistSelectedPage()) {
             int lastPage = PreferenceManager.getDefaultSharedPreferences(MainActivity.this)
@@ -130,41 +104,7 @@ public class MainActivity extends BaseDonateActivity implements
             mPager.setCurrentItem(lastPage);
             if (mNavView != null) invalidateNavViewSelection(lastPage);
         }
-
-
         processIntent(getIntent());
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String permissions[],
-                                           int[] grantResults) {
-        switch (requestCode) {
-            case PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE: {
-                if (grantResults.length > 0
-                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    // permission already granted, allow the program to continue running
-                    File directory = new File(Environment.getExternalStorageDirectory(),
-                            "/dashboard./");
-                    if (!directory.exists()) {
-                        directory.mkdirs();
-                    }
-                } else {
-                    // permission was not granted, show closing dialog
-                    new AlertDialog.Builder(this)
-                            .setTitle(R.string.permission_not_granted_dialog_title)
-                            .setMessage(R.string.permission_not_granted_dialog_message)
-                            .setPositiveButton(R.string.dialog_ok, new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    MainActivity.this.finish();
-                                }
-                            })
-                            .show();
-                    return;
-                }
-                break;
-            }
-        }
     }
 
     @Override

@@ -1,16 +1,24 @@
 package projekt.dashboard.ui;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.graphics.PixelFormat;
 import android.os.Bundle;
+import android.os.Environment;
 import android.preference.PreferenceManager;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.view.Window;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import java.io.File;
 
 import eu.chainfire.libsuperuser.Shell;
 import projekt.dashboard.R;
@@ -18,8 +26,10 @@ import projekt.dashboard.R;
 /**
  * Created by Nicholas on 2016-03-31.
  */
-public class SplashScreenActivity extends Activity {
+public class SplashScreenActivity extends Activity implements
+        ActivityCompat.OnRequestPermissionsResultCallback {
 
+    private static final int PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 1;
     public TextView tv;
     /**
      * Called when the activity is first created.
@@ -36,7 +46,56 @@ public class SplashScreenActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.splashscreen);
-        StartAnimations();
+
+        // But check permissions first - download will be started in the callback
+        int permissionCheck = ContextCompat.checkSelfPermission(getApplicationContext(),
+                android.Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        if (permissionCheck == PackageManager.PERMISSION_GRANTED) {
+            // permission already granted, allow the program to continue running
+            File directory = new File(Environment.getExternalStorageDirectory(),
+                    "/dashboard./");
+            if (!directory.exists()) {
+                directory.mkdirs();
+            }
+            StartAnimations();
+        } else {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                    PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[],
+                                           int[] grantResults) {
+        switch (requestCode) {
+            case PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE: {
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    // permission already granted, allow the program to continue running
+                    File directory = new File(Environment.getExternalStorageDirectory(),
+                            "/dashboard./");
+                    if (!directory.exists()) {
+                        directory.mkdirs();
+                    }
+                    StartAnimations();
+                } else {
+                    // permission was not granted, show closing dialog
+                    new AlertDialog.Builder(this)
+                            .setTitle(R.string.permission_not_granted_dialog_title)
+                            .setMessage(R.string.permission_not_granted_dialog_message)
+                            .setPositiveButton(R.string.dialog_ok, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    SplashScreenActivity.this.finish();
+                                }
+                            })
+                            .show();
+                    return;
+                }
+                break;
+            }
+        }
     }
 
     private void StartAnimations() {
