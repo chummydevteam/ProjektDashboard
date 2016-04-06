@@ -197,7 +197,7 @@
     <string name="themeutilities_rebuild_rebuild_all_themes_installed_device">rebuild all themes installed on the device</string>
 
     <string name="homepage_description">cyanogenmod theming, evolved!</string>
-    <string name="homepage_description_secondary">ever wondered how far devs could go with the cyanogenmod theme engine? we challanged ourselves to reinvent the wheel, so we created an app to house all our tweaks in an all-in-one package.\n\nhowever this app may not work on all devices, so if you see an unsupported message above in red, do not attempt to run this app unless you are ready to be a guinea pig :)</string>
+    <string name="homepage_description_secondary">ever wondered how far devs could go with the cyanogenmod theme engine? we challenged ourselves to reinvent the wheel, so we created an app to house all our tweaks in an all-in-one package.\n\nhowever this app may not work on all devices, so if you see an unsupported message above in red, do not attempt to run this app unless you are ready to be a guinea pig :)</string>
     <string name="homepage_rom_not_supported">ROM NOT SUPPORTED ✘</string>
     <string name="homepage_rom_not_officially_supported">ROM NOT OFFICIALLY SUPPORTED (?)</string>
     <string name="homepage_dashboard_app_development_status">, welcome back to the dashboard beta program! </string>
