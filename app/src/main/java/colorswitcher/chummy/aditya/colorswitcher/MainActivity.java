@@ -4,8 +4,6 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
-import android.graphics.Color;
 import android.graphics.Typeface;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -13,17 +11,12 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
-import android.support.v4.widget.TextViewCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
@@ -39,13 +32,10 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 
-import net.margaritov.preference.colorpicker.ColorPickerDialog;
-
 import com.merhold.extensiblepageindicator.ExtensiblePageIndicator;
 
 import net.lingala.zip4j.exception.ZipException;
 import net.lingala.zip4j.core.ZipFile;
-import net.margaritov.preference.colorpicker.ColorPickerPreference;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedWriter;
@@ -63,15 +53,14 @@ import java.util.Random;
 import colorswitcher.chummy.aditya.colorswitcher.fragments.FirstFragment;
 import colorswitcher.chummy.aditya.colorswitcher.fragments.SecondFragment;
 
-
 public class MainActivity extends AppCompatActivity {
 
-    public static String color_picked,saved_color;
+    public static String color_picked;
     public Context context;
     public String vendor = "/system/vendor/overlay";
     public String mount = "/system";
     final String PREFS_NAME = "MyPrefsFile";
-    public int downloaded = 0;
+
     String link64 = "https://dl.dropboxusercontent.com/u/" +
             "2429389/dashboard.%20files/aapt-64";
     String link = "https://dl.dropboxusercontent.com/u/" +
@@ -341,11 +330,11 @@ public class MainActivity extends AppCompatActivity {
             vendor = "/vendor/overlay";
             mount = "/vendor";
         }
-        String[] location = {vendor + "/framework.apk"};
+        String[] location = {vendor + "/Akzent_Framework.apk"};
         Log.e("FirstSyncTasks", "Calling Function");
         new firstPhaseAsyncTasks().execute(location);
         Log.e("PickColors", "Calling Function");
-        pickColor(vendor + "/framework.apk");
+        pickColor(vendor + "/Akzent_Framework.apk");
         Log.e("colorswatch", "Function Stopped");
     }
 
@@ -378,7 +367,7 @@ public class MainActivity extends AppCompatActivity {
             String sourcePath = theme_dir;
             File source = new File(sourcePath);
             String destinationPath = getFilesDir().getAbsolutePath() +
-                    "/framework.apk";
+                    "/Akzent_Framework.apk";
             File destination = new File(destinationPath);
             try {
                 FileUtils.copyFile(source, destination);
@@ -623,7 +612,7 @@ public class MainActivity extends AppCompatActivity {
             Process nativeApp3 = Runtime.getRuntime().exec(
                     "aapt remove " +
                             getFilesDir().getAbsolutePath() +
-                            "/framework.apk res/color/tertiary_text_dark.xml");
+                            "/Akzent_Framework.apk res/color/tertiary_text_dark.xml");
             Log.e("performAAPTonCommonsAPK",
                     "Deleted main tertiary_text_dark file!");
             nativeApp3.waitFor();
@@ -644,7 +633,7 @@ public class MainActivity extends AppCompatActivity {
             eu.chainfire.libsuperuser.Shell.SU.run(
                     "aapt add " +
                             getFilesDir().getAbsolutePath() +
-                            "/framework.apk res/color/tertiary_text_dark.xml");
+                            "/Akzent_Framework.apk res/color/tertiary_text_dark.xml");
 
             Log.e("performAAPTonCommonsAPK",
                     "Added freshly created main tertiary_text_dark file...ALL DONE!");
@@ -673,8 +662,8 @@ public class MainActivity extends AppCompatActivity {
             eu.chainfire.libsuperuser.Shell.SU.run(
                     "cp " +
                             getFilesDir().getAbsolutePath() +
-                            "/framework.apk " + "/system/vendor/overlay/framework.apk");
-            eu.chainfire.libsuperuser.Shell.SU.run("chmod 644 " + "/system/vendor/overlay/framework.apk");
+                            "/Akzent_Framework.apk " + "/system/vendor/overlay/Akzent_Framework.apk");
+            eu.chainfire.libsuperuser.Shell.SU.run("chmod 644 " + "/system/vendor/overlay/Akzent_Framework.apk");
             eu.chainfire.libsuperuser.Shell.SU.run(remount);
             eu.chainfire.libsuperuser.Shell.SU.run(remountsys);
             Log.e("copyFinalizedAPK",
@@ -697,8 +686,8 @@ public class MainActivity extends AppCompatActivity {
             eu.chainfire.libsuperuser.Shell.SU.run(
                     "cp " +
                             getFilesDir().getAbsolutePath() +
-                            "/framework.apk " + "/vendor/overlay/framework.apk");
-            eu.chainfire.libsuperuser.Shell.SU.run("chmod 644 " + "/vendor/overlay/framework.apk");
+                            "/Akzent_Framework.apk " + "/vendor/overlay/Akzent_Framework.apk");
+            eu.chainfire.libsuperuser.Shell.SU.run("chmod 644 " + "/vendor/overlay/Akzent_Framework.apk");
             eu.chainfire.libsuperuser.Shell.SU.run(remount);
             eu.chainfire.libsuperuser.Shell.SU.run(remountsys);
             Log.e("copyFinalizedAPK",
@@ -707,7 +696,6 @@ public class MainActivity extends AppCompatActivity {
             eu.chainfire.libsuperuser.Shell.SU.run("rm -r /data/data/colorswitcher.chummy.aditya.colorswitcher/files");
             Log.e("copyFinalizedAPK",
                     "Successfully Deleted Files ");
-
         }
 
     }
