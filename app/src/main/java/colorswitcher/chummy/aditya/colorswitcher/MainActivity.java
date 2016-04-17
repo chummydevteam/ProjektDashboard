@@ -51,6 +51,7 @@ import java.net.URL;
 import java.util.Random;
 
 import colorswitcher.chummy.aditya.colorswitcher.fragments.FirstFragment;
+import colorswitcher.chummy.aditya.colorswitcher.fragments.InstructionFragment;
 import colorswitcher.chummy.aditya.colorswitcher.fragments.SecondFragment;
 
 public class MainActivity extends AppCompatActivity {
@@ -130,8 +131,10 @@ public class MainActivity extends AppCompatActivity {
             FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
             switch (pos) {
                 case 0:
-                    return FirstFragment.newInstance();
+                return InstructionFragment.newInstance();
                 case 1:
+                    return FirstFragment.newInstance();
+                case 2:
                     return SecondFragment.newInstance();
                 default:
                     return FirstFragment.newInstance();
@@ -140,7 +143,7 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public int getCount() {
-            return 2;
+            return 3;
         }
     }
 
@@ -672,7 +675,9 @@ public class MainActivity extends AppCompatActivity {
             eu.chainfire.libsuperuser.Shell.SU.run("rm -r /data/data/colorswitcher.chummy.aditya.colorswitcher/files");
             Log.e("copyFinalizedAPK",
                     "Successfully Deleted Files ");
-
+            systemuirefresh();
+            Log.e("Systemui Refreshed",
+                    "Done");
         }
 
         public void copyFABFinalizedAPK() {
@@ -696,6 +701,14 @@ public class MainActivity extends AppCompatActivity {
             eu.chainfire.libsuperuser.Shell.SU.run("rm -r /data/data/colorswitcher.chummy.aditya.colorswitcher/files");
             Log.e("copyFinalizedAPK",
                     "Successfully Deleted Files ");
+            systemuirefresh();
+            Log.e("Systemui Refreshed",
+                    "Done");
+        }
+
+        public void systemuirefresh(){
+            String syskill = "busybox pkill com.android.systemui";
+            eu.chainfire.libsuperuser.Shell.SU.run(syskill);
         }
 
     }
