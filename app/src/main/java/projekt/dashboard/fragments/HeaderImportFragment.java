@@ -277,6 +277,7 @@ public class HeaderImportFragment extends BasePageFragment {
                         if (is_zip_spinner_activated && is_theme_selected) {
                             apply_fab.show();
                         } else {
+                            spinner1.setSelection(0);
                             apply_fab.hide();
                         }
                     }
@@ -305,6 +306,7 @@ public class HeaderImportFragment extends BasePageFragment {
                         if (is_zip_spinner_activated && is_theme_selected) {
                             apply_fab.show();
                         } else {
+                            spinner1.setSelection(0);
                             apply_fab.hide();
                         }
                     }
