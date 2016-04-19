@@ -84,6 +84,7 @@
             android:id="@android:id/empty"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/sourcePicker"
             android:layout_gravity="center"
             android:layout_marginBottom="@dimen/content_inset_more"
             android:layout_marginLeft="@dimen/content_inset_more"
