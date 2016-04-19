@@ -78,6 +78,12 @@ public class WallpaperUtils {
             SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
             String mapTypeString = prefs.getString("selected_wallpaper_source", "default");
             if (!mapTypeString.equals("default")) {
+                if (mapTypeString.equals("customworx_du")) {
+                    defaultSource = context.getString(R.string.wallpapers_json_url_customworx_du);
+                }
+                if (mapTypeString.equals("customworx_screwd")) {
+                    defaultSource = context.getString(R.string.wallpapers_json_url_customworx_screwd);
+                }
                 if (mapTypeString.equals("customworx")) {
                     defaultSource = context.getString(R.string.wallpapers_json_url_customworx);
                 }
@@ -158,6 +164,12 @@ public class WallpaperUtils {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         String mapTypeString = prefs.getString("selected_wallpaper_source", "default");
         if (!mapTypeString.equals("default")) {
+            if (mapTypeString.equals("customworx_du")) {
+                defaultSource = context.getString(R.string.wallpapers_json_url_customworx_du);
+            }
+            if (mapTypeString.equals("customworx_screwd")) {
+                defaultSource = context.getString(R.string.wallpapers_json_url_customworx_screwd);
+            }
             if (mapTypeString.equals("customworx")) {
                 defaultSource = context.getString(R.string.wallpapers_json_url_customworx);
             }
