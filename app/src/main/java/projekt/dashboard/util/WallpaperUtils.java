@@ -81,6 +81,9 @@ public class WallpaperUtils {
                 if (mapTypeString.equals("customworx_du")) {
                     defaultSource = context.getString(R.string.wallpapers_json_url_customworx_du);
                 }
+                if (mapTypeString.equals("customworx_octos")) {
+                    defaultSource = context.getString(R.string.wallpapers_json_url_customworx_octOS);
+                }
                 if (mapTypeString.equals("customworx_screwd")) {
                     defaultSource = context.getString(R.string.wallpapers_json_url_customworx_screwd);
                 }
@@ -166,6 +169,9 @@ public class WallpaperUtils {
         if (!mapTypeString.equals("default")) {
             if (mapTypeString.equals("customworx_du")) {
                 defaultSource = context.getString(R.string.wallpapers_json_url_customworx_du);
+            }
+            if (mapTypeString.equals("customworx_octos")) {
+                defaultSource = context.getString(R.string.wallpapers_json_url_customworx_octOS);
             }
             if (mapTypeString.equals("customworx_screwd")) {
                 defaultSource = context.getString(R.string.wallpapers_json_url_customworx_screwd);

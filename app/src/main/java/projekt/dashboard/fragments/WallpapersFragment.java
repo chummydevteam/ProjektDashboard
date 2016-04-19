@@ -128,18 +128,21 @@ public class WallpapersFragment extends BasePageFragment implements
                     prefs.edit().putString("selected_wallpaper_source", "customworx_du").commit();
                 }
                 if (pos == 2) {
-                    prefs.edit().putString("selected_wallpaper_source", "customworx_screwd").commit();
+                    prefs.edit().putString("selected_wallpaper_source", "customworx_octos").commit();
                 }
                 if (pos == 3) {
-                    prefs.edit().putString("selected_wallpaper_source", "customworx").commit();
+                    prefs.edit().putString("selected_wallpaper_source", "customworx_screwd").commit();
                 }
                 if (pos == 4) {
-                    prefs.edit().putString("selected_wallpaper_source", "gagan").commit();
+                    prefs.edit().putString("selected_wallpaper_source", "customworx").commit();
                 }
                 if (pos == 5) {
-                    prefs.edit().putString("selected_wallpaper_source", "vignesh_headers").commit();
+                    prefs.edit().putString("selected_wallpaper_source", "gagan").commit();
                 }
                 if (pos == 6) {
+                    prefs.edit().putString("selected_wallpaper_source", "vignesh_headers").commit();
+                }
+                if (pos == 7) {
                     prefs.edit().putString("selected_wallpaper_source", "vignesh").commit();
                 }
             }
@@ -155,20 +158,23 @@ public class WallpapersFragment extends BasePageFragment implements
             if (mapTypeString.equals("customworx_du")) {
                 wallpaperSourcePicker.setSelection(1);
             }
-            if (mapTypeString.equals("customworx_screwd")) {
+            if (mapTypeString.equals("customworx_octos")) {
                 wallpaperSourcePicker.setSelection(2);
             }
-            if (mapTypeString.equals("customworx")) {
+            if (mapTypeString.equals("customworx_screwd")) {
                 wallpaperSourcePicker.setSelection(3);
             }
-            if (mapTypeString.equals("gagan")) {
+            if (mapTypeString.equals("customworx")) {
                 wallpaperSourcePicker.setSelection(4);
             }
-            if (mapTypeString.equals("vignesh_headers")) {
+            if (mapTypeString.equals("gagan")) {
                 wallpaperSourcePicker.setSelection(5);
             }
-            if (mapTypeString.equals("vignesh")) {
+            if (mapTypeString.equals("vignesh_headers")) {
                 wallpaperSourcePicker.setSelection(6);
+            }
+            if (mapTypeString.equals("vignesh")) {
+                wallpaperSourcePicker.setSelection(7);
             }
         } else {
             wallpaperSourcePicker.setSelection(0);
