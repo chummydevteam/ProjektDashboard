@@ -6,6 +6,6 @@
     <item
         android:id="@+id/abandon_dashboard_work_area"
         android:orderInCategory="100"
-        android:title="delete dashboard. folder and restart"
+        android:title="@string/delete_dashboard_folder_restart"
         app:showAsAction="never" />
 </menu>

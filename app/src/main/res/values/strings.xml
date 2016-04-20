@@ -57,6 +57,7 @@
     <string name="downloader_title">dashboard certified header packs</string>
     <string name="downloader_empty">you have downloaded all available header packs\n\nif you would like to clear your dashboard downloads folder, click the overflow menu and select "delete dashboard. folder and restart".</string>
     <string name="downloader_toast_exit">the back button will now automatically close out and relaunch the application with your newly downloaded header packs in the correct spinners.</string>
+    <string name="delete_dashboard_folder_restart">delete dashboard. folder and restart</string>
 
     <string-array name="contextual_headers">
         <item>all headers</item>
