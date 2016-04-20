@@ -1,9 +1,13 @@
 package projekt.dashboard.fragments;
 
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.ColorStateList;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
@@ -16,6 +20,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.Spinner;
@@ -39,6 +44,7 @@ import java.util.zip.ZipFile;
 import butterknife.ButterKnife;
 import projekt.dashboard.R;
 import projekt.dashboard.fragments.base.BasePageFragment;
+import projekt.dashboard.ui.HeaderPackDownloadActivity;
 import projekt.dashboard.util.ReadXMLFile;
 
 /**
@@ -165,6 +171,14 @@ public class HeaderImportFragment extends BasePageFragment {
         }
     }
 
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getActivity().getSystemService(
+                Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -178,6 +192,18 @@ public class HeaderImportFragment extends BasePageFragment {
         currentTimeVariable = (TextView) inflation.findViewById(R.id.currentTime);
 
         prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
+
+        Button downloadButton = (Button) inflation.findViewById(R.id.downloadButton);
+        if (isNetworkAvailable()) {
+            downloadButton.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    Intent intent = new Intent(v.getContext(), HeaderPackDownloadActivity.class);
+                    startActivity(intent);
+                }
+            });
+        } else {
+            downloadButton.setVisibility(View.GONE);
+        }
 
         apply_fab = (FloatingActionButton) inflation.findViewById(R.id.apply_fab);
         if (prefs.getBoolean("blacked_out_enabled", true)) {
@@ -958,7 +984,10 @@ public class HeaderImportFragment extends BasePageFragment {
                 apply_fab.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {
                         eu.chainfire.libsuperuser.Shell.SU.run("killall com.android.systemui");
-                        getActivity().finish();
+                        Intent i = getContext().getPackageManager()
+                                .getLaunchIntentForPackage(getContext().getPackageName());
+                        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity(i);
                     }
                 });
                 apply_fab.setOnLongClickListener(new View.OnLongClickListener() {

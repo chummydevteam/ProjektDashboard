@@ -7,6 +7,7 @@
     <color name="resetButton">#ff006f</color>
     <color name="disabled_text">#ff777777</color>
     <color name="viewer_overlay">#40000000</color>
+    <color name="overlay_window_bg">#cc000000</color>
 
     // Theme Switcher
     <color name="primary_1_blacked_out">#ff000000</color>

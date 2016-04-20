@@ -49,6 +49,15 @@
     <string name="wallpapers_json_url_vignesh" formatted="false" translatable="false">http://pastebin.com/raw/9qAZ7ZhB</string>
     <string name="wallpapers_json_url_vignesh_headers" formatted="false" translatable="false">http://pastebin.com/raw/gu68kNdq</string>
 
+    <string name="downloader_button">Online Header Packs Database</string>
+    <string name="downloader_dialog_accept">Download</string>
+    <string name="downloader_dialog_cancel">Cancel</string>
+    <string name="downloader_dialog_one">downloading cloud database&#8230;</string>
+    <string name="downloader_dialog_two">downloading header pack&#8230;</string>
+    <string name="downloader_title">dashboard certified header packs</string>
+    <string name="downloader_empty">you have downloaded all available header packs\n\nif you would like to clear your dashboard downloads folder, click the overflow menu and select "delete dashboard. folder and restart".</string>
+    <string name="downloader_toast_exit">the back button will now automatically close out and relaunch the application with your newly downloaded header packs in the correct spinners.</string>
+
     <string-array name="contextual_headers">
         <item>all headers</item>
         <item>notifhead_afternoon.png</item>

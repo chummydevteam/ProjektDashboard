@@ -1,5 +1,9 @@
 <resources>
 
+    <style name="AppCompatAlertDialogStyle" parent="Theme.AppCompat.Dialog.Alert">
+        <item name="colorAccent">@android:color/white</item>
+    </style>
+
     <style name="AppTheme.BlackedOut" parent="Base.AppTheme.BlackedOut">
         <item name="button_accent_selector">@drawable/selector_button_accent_dark</item>
         <item name="android:colorControlHighlight">@color/accent_1_dark</item>
@@ -10,6 +14,12 @@
         <item name="button_accent_selector">@drawable/selector_button_accent_dark</item>
         <item name="android:colorControlHighlight">@color/accent_1_dark</item>
         <item name="toolbar_shadow">@null</item>
+    </style>
+
+    <style name="AppTheme.Overlay" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@color/overlay_window_bg</item>
+        <item name="android:windowContentOverlay">@null</item>
     </style>
 
     <style name="AppTheme.Dark.Translucent" parent="AppTheme.DarkMaterial">
