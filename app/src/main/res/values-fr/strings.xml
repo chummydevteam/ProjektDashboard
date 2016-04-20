@@ -97,6 +97,17 @@
     <!-- App Contextual Header Importer -->
     <string name="zipfile_checker_success">Fichier choisi :</string>
     <string name="zipfile_checker_error">Le fichier choisi n\'est pas un ZIP valide !</string>
+
+    <string name="downloader_button">Paquets d\'en-têtes contextuels en ligne</string>
+    <string name="downloader_dialog_accept">Télécharger</string>
+    <string name="downloader_dialog_cancel">Annuler</string>
+    <string name="downloader_dialog_one">Téléchargement de la base de données en cours&#8230;</string>
+    <string name="downloader_dialog_two">Téléchargement du paquet d\'en-têtes contextuels en cours&#8230;</string>
+    <string name="downloader_title">Paquets d\'en-têtes contextuels certifiés</string>
+    <string name="downloader_empty">Vous avez téléchargé tous les paquets d\'en-têtes contextuels disponibles.\n\nSi vous souhaitez effacer votre dossier de téléchargement de dashboard, cliquez sur le menu et sélectionnez \"Supprimer le dossier et redémarrer\".</string>
+    <string name="downloader_toast_exit">Relancer l\'application avec vos nouveaux paquets d\'en-tête, en utilisant le bouton retour.</string>
+    <string name="delete_dashboard_folder_restart">Supprimer le dossier et redémarrer</string>
+
     <string name="contextualheaderimporter">Importer des en-têtes contextuels</string>
     <string name="contextualheaderimporter_description">Importer des en-têtes contextuels</string>
     <string name="contextualheaderimporter_description_secondary">Il s\'agit d\'une fonctionnalité hautement expérimentale vous permettant de définir vos propres en-têtes contextuels à partir de paquets \".zip\" spécialement conçues par les créateurs de thème. Un redémarrage logiciel est nécessaire pour que les modifications soient prises en compte, puisque nous modifions l\'application actuellement installée sur votre appareil.\n\nN\'oubliez pas d\'activer les en-têtes contextuels (Images normales ou HD Polygraphiques) dans les paramètres de votre ROM ! Si les en-têtes contextuels ne sont pas affichés après un redémarrage logiciel, videz le cache de l\'affichage !\n</string>
