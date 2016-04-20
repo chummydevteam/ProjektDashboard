@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.ColorStateList;
+import android.graphics.Color;
+import android.media.Image;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
@@ -14,7 +16,11 @@ import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -32,6 +38,7 @@ import projekt.dashboard.ui.MainActivity;
 public class HomeFragment extends BasePageFragment {
 
     public SharedPreferences prefs;
+    public int current_pressed_count = 0;
 
     final public static String checkRomSupported(Context context) {
         if (getProp("ro.aicp.device") != "") {
@@ -105,6 +112,88 @@ public class HomeFragment extends BasePageFragment {
 
         FloatingActionButton themeSwitch = (FloatingActionButton)
                 inflation.findViewById(R.id.changeTheme);
+
+        Animation anim2 = AnimationUtils.loadAnimation(getContext(), R.anim.spin);
+        anim2.reset();
+        final ImageView iv2 = (ImageView) inflation.findViewById(R.id.spinnerWheel);
+        iv2.clearAnimation();
+        iv2.startAnimation(anim2);
+
+        final ImageView mainImage = (ImageView) inflation.findViewById(R.id.landingIconFirst);
+        mainImage.setOnClickListener((new View.OnClickListener() {
+            public void onClick(View v) {
+                if (current_pressed_count < 7) {
+                    switch (current_pressed_count) {
+                        case 0:
+                            current_pressed_count += 1;
+                            break;
+                        case 1:
+                            Toast toast1 = Toast.makeText(
+                                    getContext(),
+                                    getResources().getString(R.string.secret_feature_one),
+                                    Toast.LENGTH_SHORT);
+                            toast1.show();
+                            current_pressed_count += 1;
+                            break;
+                        case 2:
+                            Toast toast2 = Toast.makeText(
+                                    getContext(),
+                                    getResources().getString(R.string.secret_feature_two),
+                                    Toast.LENGTH_SHORT);
+                            toast2.show();
+                            current_pressed_count += 1;
+                            break;
+                        case 3:
+                            Toast toast3 = Toast.makeText(
+                                    getContext(),
+                                    getResources().getString(R.string.secret_feature_three),
+                                    Toast.LENGTH_SHORT);
+                            toast3.show();
+                            current_pressed_count += 1;
+                            break;
+                        case 4:
+                            Toast toast4 = Toast.makeText(
+                                    getContext(),
+                                    getResources().getString(R.string.secret_feature_four),
+                                    Toast.LENGTH_SHORT);
+                            toast4.show();
+                            current_pressed_count += 1;
+                            break;
+                        case 5:
+                            Toast toast5 = Toast.makeText(
+                                    getContext(),
+                                    getResources().getString(R.string.secret_feature_five),
+                                    Toast.LENGTH_SHORT);
+                            toast5.show();
+                            current_pressed_count += 1;
+                            break;
+                        case 6:
+                            Toast toast6 = Toast.makeText(
+                                    getContext(),
+                                    getResources().getString(R.string.secret_feature_six),
+                                    Toast.LENGTH_SHORT);
+                            toast6.show();
+                            current_pressed_count += 1;
+                            break;
+                    }
+                } else {
+                    Toast toast = Toast.makeText(
+                            getContext(),
+                            getResources().getString(R.string.secret_feature_seven),
+                            Toast.LENGTH_LONG);
+
+                    iv2.clearAnimation();
+
+                    Animation anim2 = AnimationUtils.loadAnimation(getContext(), R.anim.shake);
+                    anim2.reset();
+                    ImageView iv = (ImageView) inflation.findViewById(R.id.spinnerWheel);
+                    iv.clearAnimation();
+                    iv.startAnimation(anim2);
+                    
+                    toast.show();
+                }
+            }
+        }));
 
         if (prefs.getBoolean("blacked_out_enabled", true)) {
             themeSwitch.setBackgroundTintList(ColorStateList.valueOf(
