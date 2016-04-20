@@ -36,6 +36,9 @@
     <string name="secret_feature_five">fine, you just click me one more time (5)</string>
     <string name="secret_feature_six">I lied, the next one will be the real last time (6)</string>
     <string name="secret_feature_seven">advanced mode activated! (7)</string>
+    <string name="secret_feature_disabled">advanced mode disabled!</string>
+
+    <string name="advanced_mode_enabled">sprinkling some extra features&#8230;</string>
 
     <!-- App -->
     <string name="layout_fragment_colorpicker_select_tweaks">select tweaks:</string>
@@ -233,6 +236,8 @@
     <string name="home_tab_four">contextual header importer</string>
     <string name="home_tab_five">theme utilities</string>
     <string name="home_tab_six">wallpapers</string>
+    <string name="home_tab_seven">theme creator</string>
+    <string name="home_tab_eight">theme creator</string>
 
     <string name="permission_not_granted_dialog_title">Permissions not granted</string>
     <string name="permission_not_granted_dialog_message">Please grant dashboard storage permissions

@@ -5,8 +5,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.ColorStateList;
-import android.graphics.Color;
-import android.media.Image;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
@@ -39,6 +37,7 @@ public class HomeFragment extends BasePageFragment {
 
     public SharedPreferences prefs;
     public int current_pressed_count = 0;
+    public boolean clicked_after_seventh = false;
 
     final public static String checkRomSupported(Context context) {
         if (getProp("ro.aicp.device") != "") {
@@ -113,7 +112,13 @@ public class HomeFragment extends BasePageFragment {
         FloatingActionButton themeSwitch = (FloatingActionButton)
                 inflation.findViewById(R.id.changeTheme);
 
-        Animation anim2 = AnimationUtils.loadAnimation(getContext(), R.anim.spin);
+        Animation anim2;
+
+        if (prefs.getBoolean("advanced_mode_enabled", true)) {
+            anim2 = AnimationUtils.loadAnimation(getContext(), R.anim.shake);
+        } else {
+            anim2 = AnimationUtils.loadAnimation(getContext(), R.anim.spin);
+        }
         anim2.reset();
         final ImageView iv2 = (ImageView) inflation.findViewById(R.id.spinnerWheel);
         iv2.clearAnimation();
@@ -122,75 +127,132 @@ public class HomeFragment extends BasePageFragment {
         final ImageView mainImage = (ImageView) inflation.findViewById(R.id.landingIconFirst);
         mainImage.setOnClickListener((new View.OnClickListener() {
             public void onClick(View v) {
-                if (current_pressed_count < 7) {
-                    switch (current_pressed_count) {
-                        case 0:
-                            current_pressed_count += 1;
-                            break;
-                        case 1:
-                            Toast toast1 = Toast.makeText(
+                if (!prefs.getBoolean("advanced_mode_enabled", true)) {
+                    if (current_pressed_count < 6) {
+                        switch (current_pressed_count) {
+                            case 0:
+                                Toast toast = Toast.makeText(
+                                        getContext(),
+                                        getResources().getString(R.string.secret_feature_one),
+                                        Toast.LENGTH_SHORT);
+                                toast.show();
+                                current_pressed_count += 1;
+                                break;
+                            case 1:
+                                Toast toast1 = Toast.makeText(
+                                        getContext(),
+                                        getResources().getString(R.string.secret_feature_two),
+                                        Toast.LENGTH_SHORT);
+                                toast1.show();
+                                current_pressed_count += 1;
+                                break;
+                            case 2:
+                                Toast toast2 = Toast.makeText(
+                                        getContext(),
+                                        getResources().getString(R.string.secret_feature_three),
+                                        Toast.LENGTH_SHORT);
+                                toast2.show();
+                                current_pressed_count += 1;
+                                break;
+                            case 3:
+                                Toast toast3 = Toast.makeText(
+                                        getContext(),
+                                        getResources().getString(R.string.secret_feature_four),
+                                        Toast.LENGTH_SHORT);
+                                toast3.show();
+                                current_pressed_count += 1;
+                                break;
+                            case 4:
+                                Toast toast4 = Toast.makeText(
+                                        getContext(),
+                                        getResources().getString(R.string.secret_feature_five),
+                                        Toast.LENGTH_SHORT);
+                                toast4.show();
+                                current_pressed_count += 1;
+                                break;
+                            case 5:
+                                Toast toast5 = Toast.makeText(
+                                        getContext(),
+                                        getResources().getString(R.string.secret_feature_six),
+                                        Toast.LENGTH_SHORT);
+                                toast5.show();
+                                current_pressed_count += 1;
+                                break;
+                        }
+                    } else {
+                        if (!clicked_after_seventh) {
+                            Toast toast = Toast.makeText(
                                     getContext(),
-                                    getResources().getString(R.string.secret_feature_one),
-                                    Toast.LENGTH_SHORT);
-                            toast1.show();
-                            current_pressed_count += 1;
-                            break;
-                        case 2:
-                            Toast toast2 = Toast.makeText(
-                                    getContext(),
-                                    getResources().getString(R.string.secret_feature_two),
-                                    Toast.LENGTH_SHORT);
-                            toast2.show();
-                            current_pressed_count += 1;
-                            break;
-                        case 3:
-                            Toast toast3 = Toast.makeText(
-                                    getContext(),
-                                    getResources().getString(R.string.secret_feature_three),
-                                    Toast.LENGTH_SHORT);
-                            toast3.show();
-                            current_pressed_count += 1;
-                            break;
-                        case 4:
-                            Toast toast4 = Toast.makeText(
-                                    getContext(),
-                                    getResources().getString(R.string.secret_feature_four),
-                                    Toast.LENGTH_SHORT);
-                            toast4.show();
-                            current_pressed_count += 1;
-                            break;
-                        case 5:
-                            Toast toast5 = Toast.makeText(
-                                    getContext(),
-                                    getResources().getString(R.string.secret_feature_five),
-                                    Toast.LENGTH_SHORT);
-                            toast5.show();
-                            current_pressed_count += 1;
-                            break;
-                        case 6:
-                            Toast toast6 = Toast.makeText(
-                                    getContext(),
-                                    getResources().getString(R.string.secret_feature_six),
-                                    Toast.LENGTH_SHORT);
-                            toast6.show();
-                            current_pressed_count += 1;
-                            break;
+                                    getResources().getString(R.string.secret_feature_seven),
+                                    Toast.LENGTH_LONG);
+
+                            iv2.clearAnimation();
+
+                            Animation anim2 = AnimationUtils.loadAnimation(getContext(), R.anim.shake);
+                            anim2.reset();
+                            ImageView iv = (ImageView) inflation.findViewById(R.id.spinnerWheel);
+                            iv.clearAnimation();
+                            iv.startAnimation(anim2);
+
+                            toast.show();
+                            clicked_after_seventh = true;
+                            prefs.edit().putBoolean("advanced_mode_enabled", true).commit();
+                        } else {
+                            Intent i = getActivity().getPackageManager()
+                                    .getLaunchIntentForPackage(getActivity().getPackageName());
+                            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            startActivity(i);
+                        }
+
                     }
                 } else {
-                    Toast toast = Toast.makeText(
-                            getContext(),
-                            getResources().getString(R.string.secret_feature_seven),
-                            Toast.LENGTH_LONG);
+                    if (current_pressed_count < 6) {
+                        switch (current_pressed_count) {
+                            case 0:
+                                current_pressed_count += 1;
+                                break;
+                            case 1:
+                                current_pressed_count += 1;
+                                break;
+                            case 2:
+                                current_pressed_count += 1;
+                                break;
+                            case 3:
+                                current_pressed_count += 1;
+                                break;
+                            case 4:
+                                current_pressed_count += 1;
+                                break;
+                            case 5:
+                                current_pressed_count += 1;
+                                break;
+                        }
+                    } else {
+                        if (!clicked_after_seventh) {
+                            Toast toast = Toast.makeText(
+                                    getContext(),
+                                    getResources().getString(R.string.secret_feature_disabled),
+                                    Toast.LENGTH_LONG);
 
-                    iv2.clearAnimation();
+                            iv2.clearAnimation();
 
-                    Animation anim2 = AnimationUtils.loadAnimation(getContext(), R.anim.shake);
-                    anim2.reset();
-                    ImageView iv = (ImageView) inflation.findViewById(R.id.spinnerWheel);
-                    iv.clearAnimation();
-                    iv.startAnimation(anim2);
-                    
-                    toast.show();
+                            Animation anim2 = AnimationUtils.loadAnimation(getContext(), R.anim.spin);
+                            anim2.reset();
+                            ImageView iv = (ImageView) inflation.findViewById(R.id.spinnerWheel);
+                            iv.clearAnimation();
+                            iv.startAnimation(anim2);
+
+                            toast.show();
+                            clicked_after_seventh = true;
+                            prefs.edit().putBoolean("advanced_mode_enabled", false).commit();
+                        } else {
+                            Intent i = getActivity().getPackageManager()
+                                    .getLaunchIntentForPackage(getActivity().getPackageName());
+                            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            startActivity(i);
+                        }
+
+                    }
                 }
             }
         }));

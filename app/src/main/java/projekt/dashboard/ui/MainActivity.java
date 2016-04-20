@@ -3,6 +3,7 @@ package projekt.dashboard.ui;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
@@ -56,27 +57,23 @@ public class MainActivity extends BaseDonateActivity implements
         NavigationView.OnNavigationItemSelectedListener {
 
     public RecyclerView mRecyclerView;
+    public SharedPreferences prefs;
     @Bind(R.id.toolbar)
     Toolbar mToolbar;
-
     @Nullable
     @Bind(R.id.tabs)
     TabLayout mTabs;
-
     @Nullable
     @Bind(R.id.navigation_view)
     NavigationView mNavView;
     @Nullable
     @Bind(R.id.drawer)
     DrawerLayout mDrawer;
-
     @Bind(R.id.pager)
     DisableableViewPager mPager;
-
     @Nullable
     @Bind(R.id.app_bar)
     LinearLayout mAppBarLinear;
-
     private PagesBuilder mPages;
 
     @Override
@@ -89,12 +86,15 @@ public class MainActivity extends BaseDonateActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        prefs = PreferenceManager.getDefaultSharedPreferences(this);
+
         ButterKnife.bind(this);
         setSupportActionBar(mToolbar);
 
         setupPages();
         setupPager();
         setupTabs();
+
 
         // Restore last selected page, tab/nav-drawer-item
         if (Config.get().persistSelectedPage()) {
@@ -136,10 +136,22 @@ public class MainActivity extends BaseDonateActivity implements
         if (Shell.SU.available()) {
             mPages.add(new PagesBuilder.Page(R.id.color_changer_fragment, R.drawable.tab_palette,
                     R.string.home_tab_two, new ColorChangerFragment()));
+        }
+        if (prefs.getBoolean("advanced_mode_enabled", true)) {
+            mPages.add(new PagesBuilder.Page(R.id.theme_utilities_fragment, R.drawable.tab_creator,
+                    R.string.home_tab_seven, new ThemeUtilitiesFragment()));
+        }
+        if (Shell.SU.available()) {
             mPages.add(new PagesBuilder.Page(R.id.header_swapper_fragment, R.drawable.tab_swapper,
                     R.string.home_tab_three, new HeaderSwapperFragment()));
             mPages.add(new PagesBuilder.Page(R.id.header_swapper_fragment, R.drawable.tab_header_import,
                     R.string.home_tab_four, new HeaderImportFragment()));
+        }
+        if (prefs.getBoolean("advanced_mode_enabled", true)) {
+            mPages.add(new PagesBuilder.Page(R.id.theme_utilities_fragment, R.drawable.tab_recoveries,
+                    R.string.home_tab_eight, new ThemeUtilitiesFragment()));
+        }
+        if (Shell.SU.available()) {
             mPages.add(new PagesBuilder.Page(R.id.theme_utilities_fragment, R.drawable.tab_rebuild,
                     R.string.home_tab_five, new ThemeUtilitiesFragment()));
         }

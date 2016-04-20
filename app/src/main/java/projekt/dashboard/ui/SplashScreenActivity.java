@@ -152,6 +152,17 @@ public class SplashScreenActivity extends Activity implements
                         startActivity(new Intent(SplashScreenActivity.this, AppIntroduction.class));
                         finish();
                     } else {
+                        if (prefs.getBoolean("advanced_mode_enabled", true)) {
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    tv.setText(getResources().getString(
+                                            R.string.advanced_mode_enabled));
+                                }
+                            });
+                            sleep(3000);
+                        }
+
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
