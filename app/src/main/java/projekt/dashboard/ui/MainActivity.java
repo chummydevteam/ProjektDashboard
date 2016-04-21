@@ -141,18 +141,6 @@ public class MainActivity extends BaseDonateActivity implements
             mPages.add(new PagesBuilder.Page(R.id.header_swapper_fragment, R.drawable.tab_swapper,
                     R.string.home_tab_three, new HeaderSwapperFragment()));
         }
-        if (prefs.getBoolean("advanced_mode_enabled", true)) {
-            mPages.add(new PagesBuilder.Page(R.id.theme_utilities_fragment, R.drawable.tab_recoveries,
-                    R.string.home_tab_eight, new ThemeUtilitiesFragment()));
-        }
-        if (Shell.SU.available()) {
-            mPages.add(new PagesBuilder.Page(R.id.theme_utilities_fragment, R.drawable.tab_rebuild,
-                    R.string.home_tab_five, new ThemeUtilitiesFragment()));
-        }
-        if (isNetworkAvailable()) {
-            mPages.add(new PagesBuilder.Page(R.id.theme_utilities_fragment, R.drawable.tab_wallpapers,
-                    R.string.home_tab_six, new WallpapersFragment()));
-        }
     }
 
     @Override

@@ -330,10 +330,10 @@ public class HeaderSwapperFragment extends BasePageFragment {
                             "menuitem_background.png");
 
                     try {
-                            selected.createNewFile();
-                            FileOutputStream so = new FileOutputStream(selected);
-                            so.write(bytes.toByteArray());
-                            so.close();
+                        selected.createNewFile();
+                        FileOutputStream so = new FileOutputStream(selected);
+                        so.write(bytes.toByteArray());
+                        so.close();
 
                     } catch (IOException e) {
                         if (is_debugging_mode_enabled) Log.e("ImageSaver",
@@ -465,6 +465,7 @@ public class HeaderSwapperFragment extends BasePageFragment {
                 copyFinalizedAPK();
             }
         }
+
         public void copyFinalizedAPK() {
             String mount = "mount -o remount,rw /";
             String mountsys = "mount -o remount,rw /system";
