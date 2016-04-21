@@ -49,71 +49,6 @@
                 android:textColor="?android:textColorPrimary"
                 android:textSize="@dimen/content_text_size" />
 
-            <TextView
-                android:id="@+id/currentTimeLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/landingMessageSecondary"
-                android:layout_gravity="left"
-                android:layout_marginLeft="8dp"
-                android:layout_marginTop="@dimen/content_inset_less"
-                android:text="@string/contextualheaderswapper_current_time_image"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:textSize="11dp"
-                android:textStyle="italic" />
-
-            <TextView
-                android:id="@+id/currentTime"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/landingMessageSecondary"
-                android:layout_gravity="left"
-                android:layout_marginLeft="8dp"
-                android:layout_marginTop="@dimen/content_inset_less"
-                android:layout_toRightOf="@+id/currentTimeLabel"
-                android:text="CURRENT_TIME_DRAWABLE_VARIABLE"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:textColor="@android:color/white"
-                android:textSize="11dp"
-                android:textStyle="italic" />
-
-            <TextView
-                android:id="@+id/textView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/currentTime"
-                android:layout_gravity="left"
-                android:layout_marginLeft="8dp"
-                android:text="@string/contextualheaderswapper_modifying_contextual_header_file"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:textStyle="italic" />
-
-            <Spinner
-                android:id="@+id/spinner"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/textView"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginBottom="@dimen/content_inset" />
-
-            <TextView
-                android:id="@+id/textView1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/spinner"
-                android:layout_gravity="left"
-                android:layout_marginLeft="8dp"
-                android:text="@string/contextualheaderswapper_select_installed_theme"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:textStyle="italic" />
-
-            <Spinner
-                android:id="@+id/spinner1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/textView1"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginBottom="@dimen/content_inset" />
 
             <View
                 android:id="@+id/fakeView"
@@ -125,8 +60,9 @@
                 android:id="@+id/textView2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/spinner1"
+                android:layout_below="@id/landingMessageSecondary"
                 android:layout_gravity="left"
+                android:layout_marginTop="20dp"
                 android:layout_marginLeft="8dp"
                 android:text="@string/contextualheaderswapper_options_before_choosing_picture"
                 android:textAppearance="?android:attr/textAppearanceSmall"
@@ -160,26 +96,11 @@
                 android:drawableRight="?android:attr/listChoiceIndicatorMultiple"
                 android:text="@string/contextualheaderswapper_free_crop_mode" />
 
-            <CheckBox
-                android:id="@+id/checkBox3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignRight="@id/fakeView"
-                android:layout_below="@id/checkBox"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginLeft="7dp"
-                android:layout_marginRight="7dp"
-                android:layout_marginTop="5dp"
-                android:button="@null"
-                android:drawableRight="?android:attr/listChoiceIndicatorMultiple"
-                android:text="@string/contextualheaderswapper_debugging_mode" />
-
             <Button
                 android:id="@+id/softreboot"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/checkBox3"
+                android:layout_below="@id/checkBox2"
                 android:layout_marginBottom="@dimen/content_inset_less"
                 android:layout_marginTop="@dimen/content_inset_less"
                 android:background="@android:color/transparent"
