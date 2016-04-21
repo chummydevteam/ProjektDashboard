@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    tools:layout_marginTop="24dp">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/card"
+        style="@style/Card">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <projekt.dashboard.views.WallpaperImageView
+                    android:id="@+id/image"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    tools:background="#80000000"
+                    tools:ignore="ContentDescription" />
+
+                <ProgressBar
+                    android:id="@+id/progress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center" />
+
+            </FrameLayout>
+
+            <projekt.dashboard.views.WallpaperBgFrame
+                android:id="@+id/colorFrame"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?attr/card_background"
+                android:minHeight="48dp"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/content_inset_half_card"
+                android:paddingLeft="@dimen/content_inset"
+                android:paddingRight="@dimen/content_inset"
+                android:paddingTop="@dimen/content_inset_half">
+
+                <projekt.dashboard.views.WallpaperNameView
+                    android:id="@+id/name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-medium"
+                    android:textSize="@dimen/title_text_size"
+                    tools:text="Name" />
+
+                <projekt.dashboard.views.WallpaperAuthorView
+                    android:id="@+id/author"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-light"
+                    android:textSize="@dimen/body_text_size"
+                    tools:text="Author" />
+
+            </projekt.dashboard.views.WallpaperBgFrame>
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>

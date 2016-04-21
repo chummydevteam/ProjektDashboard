@@ -1,0 +1,38 @@
+<com.pluscubed.insetsdispatcher.view.InsetsDispatcherFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clipToPadding="false"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="@dimen/content_inset_less"
+        android:weightSum="1">
+
+
+        <Spinner
+            android:id="@+id/spinner1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textView1"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="@dimen/content_inset" />
+
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@android:id/list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/spinner1"
+            android:clipToPadding="false"
+            android:paddingBottom="@dimen/content_inset_quarter"
+            android:paddingTop="@dimen/content_inset_quarter"
+            android:scrollbarStyle="outsideOverlay"
+            android:scrollbars="vertical"
+            app:layout_windowInsets="bottom" />
+    </RelativeLayout>
+
+</com.pluscubed.insetsdispatcher.view.InsetsDispatcherFrameLayout>
