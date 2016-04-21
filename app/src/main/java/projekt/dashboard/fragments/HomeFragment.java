@@ -128,62 +128,13 @@ public class HomeFragment extends BasePageFragment {
         mainImage.setOnClickListener((new View.OnClickListener() {
             public void onClick(View v) {
                 if (!prefs.getBoolean("advanced_mode_enabled", true)) {
-                    if (current_pressed_count < 6) {
-                        switch (current_pressed_count) {
-                            case 0:
-                                Toast toast = Toast.makeText(
-                                        getContext(),
-                                        getResources().getString(R.string.secret_feature_one),
-                                        Toast.LENGTH_SHORT);
-                                toast.show();
-                                current_pressed_count += 1;
-                                break;
-                            case 1:
-                                Toast toast1 = Toast.makeText(
-                                        getContext(),
-                                        getResources().getString(R.string.secret_feature_two),
-                                        Toast.LENGTH_SHORT);
-                                toast1.show();
-                                current_pressed_count += 1;
-                                break;
-                            case 2:
-                                Toast toast2 = Toast.makeText(
-                                        getContext(),
-                                        getResources().getString(R.string.secret_feature_three),
-                                        Toast.LENGTH_SHORT);
-                                toast2.show();
-                                current_pressed_count += 1;
-                                break;
-                            case 3:
-                                Toast toast3 = Toast.makeText(
-                                        getContext(),
-                                        getResources().getString(R.string.secret_feature_four),
-                                        Toast.LENGTH_SHORT);
-                                toast3.show();
-                                current_pressed_count += 1;
-                                break;
-                            case 4:
-                                Toast toast4 = Toast.makeText(
-                                        getContext(),
-                                        getResources().getString(R.string.secret_feature_five),
-                                        Toast.LENGTH_SHORT);
-                                toast4.show();
-                                current_pressed_count += 1;
-                                break;
-                            case 5:
-                                Toast toast5 = Toast.makeText(
-                                        getContext(),
-                                        getResources().getString(R.string.secret_feature_six),
-                                        Toast.LENGTH_SHORT);
-                                toast5.show();
-                                current_pressed_count += 1;
-                                break;
-                        }
+                    if (current_pressed_count < 14) {
+                        current_pressed_count += 1;
                     } else {
                         if (!clicked_after_seventh) {
                             Toast toast = Toast.makeText(
                                     getContext(),
-                                    getResources().getString(R.string.secret_feature_seven),
+                                    getResources().getString(R.string.secret_feature_enabled),
                                     Toast.LENGTH_LONG);
 
                             iv2.clearAnimation();
@@ -206,27 +157,8 @@ public class HomeFragment extends BasePageFragment {
 
                     }
                 } else {
-                    if (current_pressed_count < 6) {
-                        switch (current_pressed_count) {
-                            case 0:
-                                current_pressed_count += 1;
-                                break;
-                            case 1:
-                                current_pressed_count += 1;
-                                break;
-                            case 2:
-                                current_pressed_count += 1;
-                                break;
-                            case 3:
-                                current_pressed_count += 1;
-                                break;
-                            case 4:
-                                current_pressed_count += 1;
-                                break;
-                            case 5:
-                                current_pressed_count += 1;
-                                break;
-                        }
+                    if (current_pressed_count < 14) {
+                        current_pressed_count += 1;
                     } else {
                         if (!clicked_after_seventh) {
                             Toast toast = Toast.makeText(
