@@ -19,6 +19,11 @@
     <string name="last_slide_title">Êtes-vous prêt ?</string>
     <string name="last_slide_description">Veuillez lire tout ce qui apparaît à l\'écran lorsque vous utilisez cette application. Des informations cruciales sont affichées, comme par exemple le redémarrage logiciel après avoir effectué certains réglages, pour empêcher votre appareil de subir des redémarrages en boucle !</string>
 
+    <string name="secret_feature_enabled">Mode pour passionné activé</string>
+    <string name="secret_feature_disabled">Mode pour passionné désactivé</string>
+
+    <string name="advanced_mode_enabled">Saupoudrage de quelques fonctionnalités supplémentaires&#8230;</string>
+
     <!-- Splash Screen -->
     <string name="loadingText">Vérification de sécurité en cours&#8230;</string>
     <string name="root_verified">Activation de l\'ensemble des fonctionnalités&#8230;</string>
@@ -159,6 +164,8 @@
     <string name="home_tab_four">Importer des en-têtes contextuels</string>
     <string name="home_tab_five">Utilitaires pour thème</string>
     <string name="home_tab_six">Fonds d\'écran</string>
+    <string name="home_tab_seven">Créateur de thème</string>
+    <string name="home_tab_eight">Créateur de thème</string>
     <string name="permission_not_granted_dialog_title">Autorisations non accordées</string>
     <string name="permission_not_granted_dialog_message">Veuillez accorder l\'autorisation de stockage à dashboard ou l\'application ne fonctionnera pas correctement !</string>
     <string name="dialog_ok">OK</string>
