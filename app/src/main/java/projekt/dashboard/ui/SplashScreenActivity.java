@@ -160,7 +160,7 @@ public class SplashScreenActivity extends Activity implements
                                             R.string.advanced_mode_enabled));
                                 }
                             });
-                            sleep(3000);
+                            sleep(1500);
                         }
 
                         runOnUiThread(new Runnable() {
