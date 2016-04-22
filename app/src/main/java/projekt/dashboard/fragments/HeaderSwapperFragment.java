@@ -65,7 +65,7 @@ public class HeaderSwapperFragment extends BasePageFragment {
     public int folder_directory = 1;
     public int current_hour;
     public TextView checkBoxInstructions, currentTimeVariable;
-    public CheckBox autoClearSystemUICache, freeCropMode;
+    public CheckBox freeCropMode;
     public SharedPreferences prefs;
     public String vendor = "/system/vendor/overlay";
     public String mount = "/system";
@@ -107,26 +107,6 @@ public class HeaderSwapperFragment extends BasePageFragment {
                 startActivityForResult(getImageSelectionIntent(), RESULT_LOAD_IMAGE);
             }
         });
-
-
-        autoClearSystemUICache = (CheckBox) inflation.findViewById(R.id.checkBox);
-        autoClearSystemUICache.setOnCheckedChangeListener(
-                new CompoundButton.OnCheckedChangeListener() {
-                    @Override
-                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                        if (isChecked) {
-                            are_we_clearing_cache_after = true;
-                            if (is_debugging_mode_enabled) Log.e("CheckBox",
-                                    "SystemUI theme cache will be wiped for this theme " +
-                                            "after applying.");
-                        } else {
-                            are_we_clearing_cache_after = false;
-                            if (is_debugging_mode_enabled) Log.e("CheckBox",
-                                    "SystemUI theme cache will NOT be wiped for this theme " +
-                                            "after applying.");
-                        }
-                    }
-                });
 
         freeCropMode = (CheckBox) inflation.findViewById(R.id.checkBox2);
         freeCropMode.setOnCheckedChangeListener(
@@ -253,7 +233,6 @@ public class HeaderSwapperFragment extends BasePageFragment {
         croppedImage.setVisibility(View.GONE);
         saveButton.setVisibility(View.GONE);
         checkBoxInstructions.setVisibility(View.VISIBLE);
-        autoClearSystemUICache.setVisibility(View.VISIBLE);
         freeCropMode.setVisibility(View.VISIBLE);
         is_picture_selected = false;
         changeFABaction();
@@ -285,7 +264,6 @@ public class HeaderSwapperFragment extends BasePageFragment {
             cropImageView = (CropImageView) inflation.findViewById(R.id.cropImageView);
 
             checkBoxInstructions.setVisibility(View.GONE);
-            autoClearSystemUICache.setVisibility(View.GONE);
             freeCropMode.setVisibility(View.GONE);
 
             if (!free_crop_mode) {
@@ -464,6 +442,7 @@ public class HeaderSwapperFragment extends BasePageFragment {
             } else {
                 copyFinalizedAPK();
             }
+            eu.chainfire.libsuperuser.Shell.SU.run("busybox pkill com.android.systemui");
         }
 
         public void copyFinalizedAPK() {
@@ -484,7 +463,7 @@ public class HeaderSwapperFragment extends BasePageFragment {
             Log.e("copyFinalizedAPK",
                     "Successfully copied the modified resource APK into " +
                             "/system/vendor/overlay/ and modified the permissions!");
-            eu.chainfire.libsuperuser.Shell.SU.run("rm -r /data/data/colorswitcher.chummy.aditya.colorswitcher/files");
+            eu.chainfire.libsuperuser.Shell.SU.run("rm -r /data/data/projekt.dashboard/files");
             Log.e("copyFinalizedAPK",
                     "Successfully Deleted Files ");
 
@@ -508,7 +487,7 @@ public class HeaderSwapperFragment extends BasePageFragment {
             Log.e("copyFinalizedAPK",
                     "Successfully copied the modified resource APK into " +
                             "/system/vendor/overlay/ and modified the permissions!");
-            eu.chainfire.libsuperuser.Shell.SU.run("rm -r /data/data/colorswitcher.chummy.aditya.colorswitcher/files");
+            eu.chainfire.libsuperuser.Shell.SU.run("rm -r /data/data/projekt.dashboard/files");
             Log.e("copyFinalizedAPK",
                     "Successfully Deleted Files ");
 
