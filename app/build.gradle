@@ -23,11 +23,11 @@ android {
     }
 
     defaultConfig {
-        applicationId "projekt.dashboard"
+        applicationId "projekt.layers"
         minSdkVersion 23
         targetSdkVersion 23
-        versionCode 16
-        versionName "sixteen"
+        versionCode 1
+        versionName "3"
         generatedDensities = []
     }
 

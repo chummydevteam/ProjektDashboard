@@ -19,7 +19,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <projekt.dashboard.views.WallpaperImageView
+                <projekt.layers.views.WallpaperImageView
                     android:id="@+id/image"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -35,7 +35,7 @@
 
             </FrameLayout>
 
-            <projekt.dashboard.views.WallpaperBgFrame
+            <projekt.layers.views.WallpaperBgFrame
                 android:id="@+id/colorFrame"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -47,7 +47,7 @@
                 android:paddingRight="@dimen/content_inset"
                 android:paddingTop="@dimen/content_inset_half">
 
-                <projekt.dashboard.views.WallpaperNameView
+                <projekt.layers.views.WallpaperNameView
                     android:id="@+id/name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -55,7 +55,7 @@
                     android:textSize="@dimen/title_text_size"
                     tools:text="Name" />
 
-                <projekt.dashboard.views.WallpaperAuthorView
+                <projekt.layers.views.WallpaperAuthorView
                     android:id="@+id/author"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -63,7 +63,7 @@
                     android:textSize="@dimen/body_text_size"
                     tools:text="Author" />
 
-            </projekt.dashboard.views.WallpaperBgFrame>
+            </projekt.layers.views.WallpaperBgFrame>
 
         </LinearLayout>
 

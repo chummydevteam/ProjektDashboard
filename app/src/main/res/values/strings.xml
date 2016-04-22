@@ -11,7 +11,7 @@
     <string name="welcome_back_dialog_confirm">I like it!</string>
 
     <!-- AppIntroduction -->
-    <string name="first_slide_title">welcome to dashboard.</string>
+    <string name="first_slide_title">welcome to dashboard.layers</string>
     <string name="first_slide_description">dashboard is a cm theme engine addon by chummy development team that allows you to expand the possibilities of all cdt themes, as well as extras for other themes as well.</string>
 
     <string name="second_slide_title">color picker</string>
@@ -217,7 +217,7 @@
     <string name="themeutilities_rebuild_rebuild_all_chummydevteam_themes">rebuild all chummydevteam themes</string>
     <string name="themeutilities_rebuild_rebuild_all_themes_installed_device">rebuild all themes installed on the device</string>
 
-    <string name="homepage_description">Welcome to CDT Dashboard.</string>
+    <string name="homepage_description">Welcome to CDT dashboard.layers</string>
     <string name="homepage_description_secondary">ever wondered how far devs could go with the Layers Theme Engine? we challenged ourselves to reinvent the wheel, so we created an app to house all our tweaks in an all-in-one package.\n\nhowever this app may not work on all devices, so if you see an unsupported message above in red, do not attempt to run this app unless you are ready to be a guinea pig :)</string>
     <string name="homepage_rom_supported">SUPPORTED √</string>
     <string name="homepage_rom_not_supported">NOT SUPPORTED ✘</string>
@@ -239,8 +239,8 @@
     <string name="dialog_ok">OK</string>
 
     <!-- App Strings -->
-    <string name="home">dashboard.</string>
-    <string name="app_name">dashboard.</string>
+    <string name="home">dashboard.layers</string>
+    <string name="app_name">dashboard.layers</string>
     <string name="app_name_wallpaper">cdt walls</string>
     <string name="unable_to_contact_server">Unable to contact the server! Check your internet
         connection.</string>
