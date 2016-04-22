@@ -40,11 +40,11 @@ public class HomeFragment extends BasePageFragment {
 
     final public static boolean checkRomSupported(Context context) {
 
-            if (isAppInstalled(context, "com.lovejoy777.rroandlayersmanager")) {
-                return true;
-            } else {
-                return false;
-            }
+        if (isAppInstalled(context, "com.lovejoy777.rroandlayersmanager")) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public static boolean isAppInstalled(Context context, String packageName) {
@@ -68,9 +68,9 @@ public class HomeFragment extends BasePageFragment {
         prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
 
         Animation anim2;
-        if(checkRomSupported(getActivity())){
+        if (checkRomSupported(getActivity())) {
             anim2 = AnimationUtils.loadAnimation(getContext(), R.anim.spin);
-        }else {
+        } else {
             anim2 = AnimationUtils.loadAnimation(getContext(), R.anim.shake);
         }
         anim2.reset();
@@ -82,19 +82,18 @@ public class HomeFragment extends BasePageFragment {
         if (checkRomSupported(getActivity())) {
             status_message.setTextColor(getResources().getColor(R.color.attention_color_green));
             status_message.setText(getResources().getString(R.string.homepage_rom_supported));
-        }
-        else {
+        } else {
             status_message.setTextColor(getResources().getColor(R.color.attention_color));
             status_message.setText(getResources().getString(R.string.homepage_rom_not_supported));
         }
-        Snackbar snack = Snackbar.make(inflation,prefs.getString("dashboard_username",
-                        getResources().
-                                getString(R.string.
-                                        homepage_dashboard_app_development_status_default_username))
+        Snackbar snack = Snackbar.make(inflation, prefs.getString("dashboard_username",
+                getResources().
+                        getString(R.string.
+                                homepage_dashboard_app_development_status_default_username))
                         + getResources().
                         getString(R.string.homepage_dashboard_app_development_status)
                         + " (" + BuildConfig.VERSION_NAME + ")",
-                Snackbar.LENGTH_INDEFINITE);
+                Snackbar.LENGTH_SHORT);
         snack.show();
         return inflation;
     }
