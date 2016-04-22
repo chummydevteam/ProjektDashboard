@@ -69,64 +69,77 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="horizontal">
+                    android:orientation="vertical">
 
                     <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="2"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/title"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentTop="true"
-                            android:layout_centerHorizontal="true"
-                            android:elegantTextHeight="false"
-                            android:fontFamily="sans-serif-thin"
-                            android:paddingLeft="30dp"
-                            android:paddingRight="20dp"
-                            android:paddingTop="20dp"
-                            android:text="Accent"
-                            android:textColor="#ffffff"
-                            android:textSize="24dp" />
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
 
                         <LinearLayout
-                            android:layout_width="match_parent"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal">
+                            android:layout_weight="2"
+                            android:orientation="vertical">
 
                             <TextView
-                                android:id="@+id/accentcolor"
+                                android:id="@+id/title"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_weight="2"
+                                android:layout_alignParentTop="true"
+                                android:layout_centerHorizontal="true"
                                 android:elegantTextHeight="false"
                                 android:fontFamily="sans-serif-thin"
-                                android:gravity="center_horizontal"
-                                android:text="#ffffff"
+                                android:paddingLeft="30dp"
+                                android:paddingRight="20dp"
+                                android:paddingTop="20dp"
+                                android:text="Accent"
                                 android:textColor="#ffffff"
-                                android:textSize="17dp" />
+                                android:textSize="24dp" />
 
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:id="@+id/accentcolor"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="2"
+                                    android:elegantTextHeight="false"
+                                    android:fontFamily="sans-serif-thin"
+                                    android:gravity="center_horizontal"
+                                    android:text="#ffffff"
+                                    android:textColor="#ffffff"
+                                    android:textSize="17dp" />
+
+                            </LinearLayout>
                         </LinearLayout>
-                    </LinearLayout>
 
-                    <ImageButton
-                        android:id="@+id/preview"
+                        <ImageButton
+                            android:id="@+id/preview"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="right|center|end"
+                            android:layout_weight="1"
+                            android:background="#00000000"
+                            android:src="@drawable/colorshow" />
+                    </LinearLayout>
+                    <Button
+                        android:id="@+id/sysui"
+                        android:layout_marginTop="20dp"
+                        android:layout_gravity="center_horizontal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="right|center|end"
-                        android:layout_weight="1"
-                        android:background="#00000000"
-                        android:src="@drawable/colorshow" />
+                        android:text="Restart SystemUI"/>
                 </LinearLayout>
-
             </RelativeLayout>
 
         </LinearLayout>
 
     </ScrollView>
+
     <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/clayout"
         android:layout_width="match_parent"

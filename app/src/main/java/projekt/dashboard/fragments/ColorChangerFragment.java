@@ -24,6 +24,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageButton;
@@ -131,6 +132,15 @@ public class ColorChangerFragment extends BasePageFragment {
                 cpd.show();
             }
         });
+
+        Button sysui = (Button) inflation.findViewById(R.id.sysui);
+        sysui.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                eu.chainfire.libsuperuser.Shell.SU.run("busybox pkill com.android.systemui");
+            }
+        });
+
 
         fab = (FloatingActionButton) inflation.findViewById(R.id.changeTheme);
         fab.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(color_picked)));
@@ -425,8 +435,8 @@ public class ColorChangerFragment extends BasePageFragment {
         }
 
         protected void onPostExecute(Void result) {
-            Log.e("SecondPhaseTasks", "Function Stopped");
             pd.dismiss();
+            Log.e("SecondPhaseTasks", "Function Stopped");
         }
 
         private void createXMLfile(String string, String theme_dir) {
@@ -665,7 +675,7 @@ public class ColorChangerFragment extends BasePageFragment {
             Log.e("copyFinalizedAPK",
                     "Successfully copied the modified resource APK into " +
                             "/system/vendor/overlay/ and modified the permissions!");
-            eu.chainfire.libsuperuser.Shell.SU.run("rm -r /data/data/colorswitcher.chummy.aditya.colorswitcher/files");
+            eu.chainfire.libsuperuser.Shell.SU.run("rm -r /data/data/projekt.dashboard/files");
             Log.e("copyFinalizedAPK",
                     "Successfully Deleted Files ");
 
@@ -689,7 +699,7 @@ public class ColorChangerFragment extends BasePageFragment {
             Log.e("copyFinalizedAPK",
                     "Successfully copied the modified resource APK into " +
                             "/system/vendor/overlay/ and modified the permissions!");
-            eu.chainfire.libsuperuser.Shell.SU.run("rm -r /data/data/colorswitcher.chummy.aditya.colorswitcher/files");
+            eu.chainfire.libsuperuser.Shell.SU.run("rm -r /data/data/projekt.dashboard/files");
             Log.e("copyFinalizedAPK",
                     "Successfully Deleted Files ");
 
