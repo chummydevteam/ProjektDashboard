@@ -62,7 +62,7 @@ public class ColorPickerPreference extends Preference implements Preference.OnPr
         if (blue.length() == 1) {
             blue = "0" + blue;
         }
-        return "#" + "ff" + red + green + blue; // DO NOT ALLOW ALPHAS
+        return "#" + alpha + red + green + blue; // DO NOT ALLOW ALPHAS
     }
 
     public static String convertToRGB(int color) {

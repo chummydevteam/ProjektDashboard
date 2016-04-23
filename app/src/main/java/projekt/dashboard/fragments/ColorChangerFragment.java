@@ -440,7 +440,7 @@ public class ColorChangerFragment extends BasePageFragment {
         cpd.setOnColorChangedListener(new ColorPickerDialog.OnColorChangedListener() {
             @Override
             public void onColorChanged(int color) {
-                color_picked = ColorPickerPreference.convertToARGB(color);
+                color_picked = ColorPickerPreference.convertToRGB(color);
                 editor.putString(theme_name, color_picked).commit();
                 String[] secondPhaseCommands = {theme_dir};
                 new secondPhaseAsyncTasks().execute(secondPhaseCommands);
