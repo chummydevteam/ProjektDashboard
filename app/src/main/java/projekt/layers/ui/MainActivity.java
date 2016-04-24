@@ -36,6 +36,7 @@ import projekt.layers.config.Config;
 import projekt.layers.fragments.ColorChangerFragment;
 import projekt.layers.fragments.HeaderSwapperFragment;
 import projekt.layers.fragments.HomeFragment;
+import projekt.layers.fragments.ThemeUtilitiesFragment;
 import projekt.layers.fragments.WallpapersFragment;
 import projekt.layers.fragments.base.BasePageFragment;
 import projekt.layers.ui.base.BaseDonateActivity;
@@ -138,6 +139,10 @@ public class MainActivity extends BaseDonateActivity implements
         if (Shell.SU.available()) {
             mPages.add(new PagesBuilder.Page(R.id.header_swapper_fragment, R.drawable.tab_swapper,
                     R.string.home_tab_three, new HeaderSwapperFragment()));
+        }
+        if (Shell.SU.available()) {
+            mPages.add(new PagesBuilder.Page(R.id.header_swapper_fragment, R.drawable.tab_swapper,
+                    R.string.home_tab_four, new ThemeUtilitiesFragment()));
         }
     }
 

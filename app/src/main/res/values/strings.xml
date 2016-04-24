@@ -201,9 +201,9 @@
     <string name="projektklar_title">projekt // klar</string>
     <string name="projektklar_description">click here to change colors for projekt // klar</string>
 
-    <string name="themeutilities_description">oh no! did something happen?</string>
-    <string name="themeutilities_description_secondary">here you have a collection of useful theme
-        engine tweaks that you could use if you are encountering issues, or just felt like doing
+    <string name="themeutilities_description">theme utilities</string>
+    <string name="themeutilities_description_secondary">here you have a collection of useful
+        tweaks that you could use if you are encountering issues, or just felt like doing
         some sunday afternoon cleaning on your phone.\n</string>
     <string name="themeutilities_basic_theme_utilities">basic theme utilities:</string>
     <string name="themeutilities_perform_systemui_restart">perform systemui restart</string>
