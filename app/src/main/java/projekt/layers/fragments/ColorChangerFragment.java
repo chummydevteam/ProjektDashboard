@@ -11,6 +11,7 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.util.Log;
@@ -57,6 +58,8 @@ import projekt.layers.fragments.base.BasePageFragment;
 
 public class ColorChangerFragment extends BasePageFragment {
 
+
+    SharedPreferences prefs;
     final String PREFS_NAME = "MyPrefsFile";
     String link64 = "https://dl.dropboxusercontent.com/u/" +
             "2429389/dashboard.%20files/aapt-64";
@@ -85,6 +88,7 @@ public class ColorChangerFragment extends BasePageFragment {
 
         inflation = (ViewGroup) inflater.inflate(
                 R.layout.fragment_colorpicker, container, false);
+        prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
 
         SharedPreferences settings = getActivity().getSharedPreferences(PREFS_NAME, 0);
         if (settings.getBoolean("my_first_time", true)) {
@@ -95,10 +99,11 @@ public class ColorChangerFragment extends BasePageFragment {
                 Log.e("DownloadAAPT", "Calling Function");
                 downloadAAPT();
                 // record the fact that the app has been started at least once
-
+                prefs.edit().putString("color_saved", color_picked).commit();
                 settings.edit().putBoolean("my_first_time", false).commit();
             }
         }
+
 
         accentcolor = (TextView) inflation.findViewById(R.id.accentcolor);
         imageButton = (ImageButton) inflation.findViewById(R.id.preview);
@@ -120,15 +125,6 @@ public class ColorChangerFragment extends BasePageFragment {
                 cpd.show();
             }
         });
-
-        Button sysui = (Button) inflation.findViewById(R.id.sysui);
-        sysui.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                eu.chainfire.libsuperuser.Shell.SU.run("busybox pkill com.android.systemui");
-            }
-        });
-
 
         fab = (FloatingActionButton) inflation.findViewById(R.id.changeTheme);
         fab.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(color_picked)));
@@ -643,6 +639,7 @@ public class ColorChangerFragment extends BasePageFragment {
             } else {
                 copyFinalizedAPK();
             }
+            eu.chainfire.libsuperuser.Shell.SU.run("busybox pkill com.android.systemui");
         }
 
         public void copyFinalizedAPK() {

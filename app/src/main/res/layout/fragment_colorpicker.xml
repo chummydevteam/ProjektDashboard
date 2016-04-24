@@ -110,7 +110,7 @@
                                     android:elegantTextHeight="false"
                                     android:fontFamily="sans-serif-thin"
                                     android:gravity="center_horizontal"
-                                    android:text="#ffffff"
+                                    android:text="#ff0000"
                                     android:textColor="#ffffff"
                                     android:textSize="17dp" />
 
@@ -126,13 +126,6 @@
                             android:background="#00000000"
                             android:src="@drawable/colorshow" />
                     </LinearLayout>
-                    <Button
-                        android:id="@+id/sysui"
-                        android:layout_marginTop="20dp"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Restart SystemUI"/>
                 </LinearLayout>
             </RelativeLayout>
 
