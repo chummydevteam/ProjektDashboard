@@ -141,8 +141,8 @@ public class MainActivity extends BaseDonateActivity implements
                     R.string.home_tab_three, new HeaderSwapperFragment()));
         }
         if (Shell.SU.available()) {
-            mPages.add(new PagesBuilder.Page(R.id.header_swapper_fragment, R.drawable.tab_swapper,
-                    R.string.home_tab_four, new ThemeUtilitiesFragment()));
+            mPages.add(new PagesBuilder.Page(R.id.theme_utilities_fragment, R.drawable.tab_creator,
+                    R.string.home_tab_seven, new ThemeUtilitiesFragment()));
         }
     }
 
