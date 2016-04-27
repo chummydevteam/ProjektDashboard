@@ -24,7 +24,7 @@
     <string name="fourth_slide_description">dashboard also comes with built in theme utilities to offer you a plethora of options to help you fix your layers directly on your phone!\n\n</string>
 
     <string name="fifth_slide_title">this app needs root!</string>
-    <string name="fifth_slide_description">to use all the functions of the app, your phone must definitely have root enabled, as well as a custom rom flashed if you would like to have a contextual header!</string>
+    <string name="fifth_slide_description">to use all the functions of the app, your phone must definitely have root enabled, as well as a custom rom flashed if you would like to have a notification header!</string>
 
     <string name="last_slide_title">are you ready?</string>
     <string name="last_slide_description">please read everything that pops up while you use this app. crucial information to prevent you from bootlooping such as soft rebooting after setting an action is key!</string>
@@ -153,8 +153,8 @@
         <item>vignesh ravi wallpaper pack</item>
     </string-array>
 
-    <string name="contextualheaderimporter">contextual header importer</string>
-    <string name="contextualheaderimporter_description">contextual header importer</string>
+    <string name="contextualheaderimporter">notification header importer</string>
+    <string name="contextualheaderimporter_description">notification header importer</string>
     <string name="contextualheaderimporter_description_secondary">this is a highly experimental feature to allow you to set your own custom contextual headers for your systemui notification shade based on pre-made zip files shared by themers. a soft reboot is required for the system to take your changes as we are modifying the actual apk installed on your phone.\n\ndon\'t forget to enable contextual headers (non-poly/hd) in your rom\'s settings! if headers aren\'t set after a soft reboot, clear your systemui cache!\n</string>
     <string name="contextualheaderimporter_select_downloaded_zip">select downloaded pack in \'/storage/0/dashboard.\':</string>
     <string name="contextualheaderimporter_all_themed">all headers themed</string>
@@ -173,7 +173,7 @@
     <string name="contextualheaderswapper_description">notification header swapper</string>
     <string name="contextualheaderswapper_description_secondary">this is a highly experimental feature to allow you to set your own custom notification headers for your systemui notification shade.</string>
     <string name="contextualheaderswapper_current_time_image">current time image:</string>
-    <string name="contextualheaderswapper_modifying_contextual_header_file">modifying contextual header file:</string>
+    <string name="contextualheaderswapper_modifying_contextual_header_file">modifying notification header file:</string>
     <string name="contextualheaderswapper_select_installed_theme">select installed theme:</string>
     <string name="contextualheaderswapper_options_before_choosing_picture">options available before choosing a picture:</string>
     <string name="contextualheaderswapper_autoclear_systemui_cache">autoclear systemui cache</string>
@@ -226,8 +226,8 @@
 
     <string name="home_tab_one">dashboard</string>
     <string name="home_tab_two">color switcher</string>
-    <string name="home_tab_three">contextual header swapper</string>
-    <string name="home_tab_four">contextual header importer</string>
+    <string name="home_tab_three">notification header swapper</string>
+    <string name="home_tab_four">notification header importer</string>
     <string name="home_tab_five">theme utilities</string>
     <string name="home_tab_six">wallpapers</string>
     <string name="home_tab_seven">theme creator</string>
