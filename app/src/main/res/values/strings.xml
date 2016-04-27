@@ -17,11 +17,11 @@
     <string name="second_slide_title">color picker</string>
     <string name="second_slide_description">dashboard comes with a built in color picker for hotswapping of colors!\nplease allow it to automatically download a small patch file for itself before you leave your internet connection.</string>
 
-    <string name="third_slide_title">contextual header swapper</string>
-    <string name="third_slide_description">dashboard also comes with a built in contextual header swapper to customize your phone further without the use of useless xposed plugins or making a theme yourself!</string>
+    <string name="third_slide_title">notification header swapper</string>
+    <string name="third_slide_description">dashboard also comes with a built in notification header swapper to customize your phone further without the use of useless xposed plugins or making a theme yourself!</string>
 
-    <string name="fourth_slide_title">theme engine in need of diagnosing?</string>
-    <string name="fourth_slide_description">dashboard also comes with built in theme utilities to offer you a plethora of options to help you fix your theme engine directly on your phone!\n\n</string>
+    <string name="fourth_slide_title">diagnosing?</string>
+    <string name="fourth_slide_description">dashboard also comes with built in theme utilities to offer you a plethora of options to help you fix your layers directly on your phone!\n\n</string>
 
     <string name="fifth_slide_title">this app needs root!</string>
     <string name="fifth_slide_description">to use all the functions of the app, your phone must definitely have root enabled, as well as a custom rom flashed if you would like to have a contextual header!</string>
