@@ -644,7 +644,7 @@ public class HeaderImportFragment extends BasePageFragment {
                                     "/headers/" + source.get(i) +
                                     " /assets/overlays/com.android.systemui/" +
                                     "res/drawable-xxhdpi-v23/" +
-                                    source.get(i);
+                                    source.get(i));
                     try {
                         Process nativeApp2 = Runtime.getRuntime().exec(
                                 "aapt remove " + getActivity().getCacheDir().getAbsolutePath() +
@@ -666,7 +666,7 @@ public class HeaderImportFragment extends BasePageFragment {
                         //
                     }
                 }
-            }
+
 
             if (is_debugging_mode_enabled) Log.e("performAAPTonCommonsAPK",
                     "Successfully performed all AAPT commands.");
