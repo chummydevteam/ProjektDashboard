@@ -51,6 +51,7 @@ public class AppIntroduction extends AppIntro {
                 getApplicationContext());
         prefs.edit().putBoolean("first_run", false).commit();
         prefs.edit().putBoolean("blacked_out_enabled", false).commit();
+        prefs.edit().putBoolean("advanced_mode_enabled", false).commit();
 
         AlertDialog.Builder alert = new AlertDialog.Builder(AppIntroduction.this);
         final EditText edittext = new EditText(getApplicationContext());
