@@ -146,16 +146,14 @@ public class MainActivity extends BaseDonateActivity implements
         if (prefs.getBoolean("advanced_mode_enabled", true)) {
             mPages.add(new PagesBuilder.Page(R.id.theme_utilities_fragment, R.drawable.tab_creator,
                     R.string.home_tab_seven, new CreatorFragment()));
+            mPages.add(new PagesBuilder.Page(R.id.theme_utilities_fragment, R.drawable.tab_overlay_picker,
+                    R.string.home_tab_eight, new ThemeUtilitiesFragment()));
         }
         if (Shell.SU.available()) {
             mPages.add(new PagesBuilder.Page(R.id.header_swapper_fragment, R.drawable.tab_swapper,
                     R.string.home_tab_three, new HeaderSwapperFragment()));
             mPages.add(new PagesBuilder.Page(R.id.header_swapper_fragment, R.drawable.tab_header_import,
                     R.string.home_tab_four, new HeaderImportFragment()));
-        }
-        if (prefs.getBoolean("advanced_mode_enabled", true)) {
-            mPages.add(new PagesBuilder.Page(R.id.theme_utilities_fragment, R.drawable.tab_overlay_picker,
-                    R.string.home_tab_eight, new ThemeUtilitiesFragment()));
         }
         if (Shell.SU.available()) {
             mPages.add(new PagesBuilder.Page(R.id.theme_utilities_fragment, R.drawable.tab_rebuild,
