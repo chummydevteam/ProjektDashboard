@@ -13,6 +13,6 @@
         card_stack:card_gap_bottom="5dp"
         card_stack:parallax_enabled="true"
         card_stack:parallax_scale="-6"
-        card_stack:showInitAnimation="true" />
+        card_stack:showInitAnimation="false" />
 
 </com.pluscubed.insetsdispatcher.view.InsetsDispatcherFrameLayout>
