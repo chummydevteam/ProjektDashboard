@@ -69,7 +69,7 @@ public class ColorChangerFragment extends BasePageFragment {
     FloatingActionButton fab;
     ImageButton imageButton;
     TextView accentcolor;
-    public String color_picked ="#ff0000";
+    public String color_picked = "#ff0000";
     public ViewGroup inflation;
 
     private boolean isNetworkAvailable() {
@@ -103,6 +103,12 @@ public class ColorChangerFragment extends BasePageFragment {
             }
         }
 
+        boolean phone = checkbitphone();
+        if (phone == true) {
+            Log.e("Main", "Found 64,Setting Vendor");
+            vendor = "/vendor/overlay";
+            mount = "/vendor";
+        }
 
         accentcolor = (TextView) inflation.findViewById(R.id.accentcolor);
         imageButton = (ImageButton) inflation.findViewById(R.id.preview);
@@ -170,7 +176,7 @@ public class ColorChangerFragment extends BasePageFragment {
         }
     }
 
-    public boolean checkbitphone() {
+    public static boolean checkbitphone() {
         Log.e("Checkbitphone", "Function Called");
         Log.e("Checkbitphone", "Function Started");
         String[] bit = Build.SUPPORTED_32_BIT_ABIS;
@@ -204,6 +210,7 @@ public class ColorChangerFragment extends BasePageFragment {
         return false;
     }
 
+
     private class downloadResources extends AsyncTask<String, Integer, String> {
 
         private ProgressDialog pd = new ProgressDialog(getActivity());
@@ -227,19 +234,10 @@ public class ColorChangerFragment extends BasePageFragment {
         @Override
         protected void onPostExecute(String result) {
             pd.setMessage("Download Complete,Getting Things Finalised");
-            final Handler handler = new Handler();
-            handler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    File File = new File(getActivity().getFilesDir().getAbsolutePath(), "/aapt");
-                    if (File.exists()) {
-                        Log.e("File Downloaded Found", "Copying File");
-                        Log.e("copyAAPT", "Calling Function");
-                        copyAAPT();
-                    }
-                    pd.dismiss();
-                }
-            }, 3000);
+            Log.e("File Downloaded Found", "Copying File");
+            Log.e("copyAAPT", "Calling Function");
+            copyAAPT();
+            pd.dismiss();
             Log.e("Downloadind Resources", "Function Stoppped");
         }
 
@@ -315,15 +313,10 @@ public class ColorChangerFragment extends BasePageFragment {
             return null;
         }
     }
+
     public void colorswatch() {
         Log.e("colorswatch", "Function Called");
         Log.e("colorswatch", "Function Started");
-        boolean phone = checkbitphone();
-        if (phone == true) {
-            Log.e("colorswatch", "Found 64,Setting Vendor");
-            vendor = "/vendor/overlay";
-            mount = "/vendor";
-        }
         String[] location = {vendor + "/Akzent_Framework.apk"};
         Log.e("FirstSyncTasks", "Calling Function");
         new firstPhaseAsyncTasks().execute(location);
@@ -331,6 +324,7 @@ public class ColorChangerFragment extends BasePageFragment {
         pickColor(vendor + "/Akzent_Framework.apk");
         Log.e("colorswatch", "Function Stopped");
     }
+
     public void pickColor(final String directory) {
         Log.e("PickColors", "Function Called");
         Log.e("PickColors", "Function Started");
@@ -339,6 +333,7 @@ public class ColorChangerFragment extends BasePageFragment {
         Log.e("PickColors", "Function Stopped");
 
     }
+
     private class firstPhaseAsyncTasks extends AsyncTask<String, String, String> {
         @Override
         protected String doInBackground(String... params) {
@@ -372,6 +367,7 @@ public class ColorChangerFragment extends BasePageFragment {
             }
         }
     }
+
     private class secondPhaseAsyncTasks extends AsyncTask<String, String, Void> {
 
         private ProgressDialog pd;
@@ -638,7 +634,7 @@ public class ColorChangerFragment extends BasePageFragment {
             } else {
                 copyFinalizedAPK();
             }
-            eu.chainfire.libsuperuser.Shell.SU.run("busybox pkill com.android.systemui");
+            eu.chainfire.libsuperuser.Shell.SU.run("busybox killall com.android.systemui");
         }
 
         public void copyFinalizedAPK() {

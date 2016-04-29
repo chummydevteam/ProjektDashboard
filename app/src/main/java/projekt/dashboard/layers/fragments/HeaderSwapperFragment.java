@@ -435,7 +435,7 @@ public class HeaderSwapperFragment extends BasePageFragment {
             } else {
                 copyFinalizedAPK();
             }
-            eu.chainfire.libsuperuser.Shell.SU.run("busybox pkill com.android.systemui");
+            eu.chainfire.libsuperuser.Shell.SU.run("busybox killall com.android.systemui");
         }
 
         public void copyFinalizedAPK() {
