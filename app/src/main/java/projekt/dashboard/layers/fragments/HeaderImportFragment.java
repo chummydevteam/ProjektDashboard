@@ -52,8 +52,7 @@ import projekt.dashboard.layers.util.ReadXMLFile;
 public class HeaderImportFragment extends BasePageFragment {
 
     public ViewGroup inflation;
-    public boolean are_we_clearing_cache_after,
-            is_debugging_mode_enabled, is_zip_spinner_activated, is_theme_selected;
+    public boolean is_zip_spinner_activated, is_theme_selected;
     public Spinner spinner, spinner1, spinner2;
     public String theme_dir, package_name;
     public FloatingActionButton apply_fab;
@@ -61,8 +60,9 @@ public class HeaderImportFragment extends BasePageFragment {
     public int folder_directory = 1;
     public int current_hour;
     public TextView currentTimeVariable;
-    public CheckBox autoClearSystemUICache, debugmode;
     public SharedPreferences prefs;
+    public String vendor = "/system/vendor/overlay";
+    public String mount = "/system";
 
     public void cleanTempFolder() {
         File dir = getActivity().getCacheDir();
@@ -108,10 +108,9 @@ public class HeaderImportFragment extends BasePageFragment {
     public void checkWhetherZIPisValid(String source, String destination) {
         try {
             net.lingala.zip4j.core.ZipFile zipFile = new net.lingala.zip4j.core.ZipFile(source);
-            if (is_debugging_mode_enabled)
-                Log.e("Unzip", "The ZIP has been located and will now be unzipped...");
+            Log.e("Unzip", "The ZIP has been located and will now be unzipped...");
             zipFile.extractAll(destination);
-            if (is_debugging_mode_enabled) Log.e("Unzip",
+            Log.e("Unzip",
                     "Successfully unzipped the file to the corresponding directory!");
 
             String[] checkerCommands = {destination + "/headers.xml"};
@@ -153,11 +152,11 @@ public class HeaderImportFragment extends BasePageFragment {
             if (is_zip_spinner_activated && is_theme_selected) {
                 apply_fab.show();
             } else {
-                apply_fab.hide();
+
             }
 
         } catch (ZipException e) {
-            if (is_debugging_mode_enabled) Log.e("Unzip",
+            Log.e("Unzip",
                     "Failed to unzip the file the corresponding directory. (EXCEPTION)");
             e.printStackTrace();
             is_zip_spinner_activated = false;
@@ -165,7 +164,7 @@ public class HeaderImportFragment extends BasePageFragment {
             if (is_zip_spinner_activated && is_theme_selected) {
                 apply_fab.show();
             } else {
-                apply_fab.hide();
+
             }
         }
     }
@@ -208,10 +207,16 @@ public class HeaderImportFragment extends BasePageFragment {
             apply_fab.setBackgroundTintList(ColorStateList.valueOf(
                     getResources().getColor(R.color.primary_1_dark_material)));
         }
+        boolean phone = ColorChangerFragment.checkbitphone();
+        if (phone == true) {
+            Log.e("Main", "Found 64,Setting Vendor");
+            vendor = "/vendor/overlay";
+            mount = "/vendor";
+        }
         apply_fab.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 String[] secondPhaseCommands = {
-                        theme_dir,
+                        vendor + "/Akzent_SystemUI.apk",
                         Environment.getExternalStorageDirectory().getAbsolutePath()
                                 + "/dashboard./" + spinner2.getSelectedItem().toString()};
                 new secondPhaseAsyncTasks().execute(secondPhaseCommands);
@@ -271,7 +276,7 @@ public class HeaderImportFragment extends BasePageFragment {
                     if (is_zip_spinner_activated && is_theme_selected) {
                         apply_fab.show();
                     } else {
-                        apply_fab.hide();
+
                     }
                 }
                 if (pos == 1) {
@@ -284,7 +289,7 @@ public class HeaderImportFragment extends BasePageFragment {
                         if (is_zip_spinner_activated && is_theme_selected) {
                             apply_fab.show();
                         } else {
-                            apply_fab.hide();
+
                         }
                     } else {
                         Toast toast = Toast.makeText(getActivity().getApplicationContext(),
@@ -298,7 +303,6 @@ public class HeaderImportFragment extends BasePageFragment {
                             apply_fab.show();
                         } else {
                             spinner1.setSelection(0);
-                            apply_fab.hide();
                         }
                     }
                 }
@@ -312,7 +316,6 @@ public class HeaderImportFragment extends BasePageFragment {
                         if (is_zip_spinner_activated && is_theme_selected) {
                             apply_fab.show();
                         } else {
-                            apply_fab.hide();
                         }
                     } else {
                         Toast toast = Toast.makeText(getActivity().getApplicationContext(),
@@ -327,7 +330,6 @@ public class HeaderImportFragment extends BasePageFragment {
                             apply_fab.show();
                         } else {
                             spinner1.setSelection(0);
-                            apply_fab.hide();
                         }
                     }
                 } else {
@@ -341,7 +343,6 @@ public class HeaderImportFragment extends BasePageFragment {
                         if (is_zip_spinner_activated && is_theme_selected) {
                             apply_fab.show();
                         } else {
-                            apply_fab.hide();
                         }
                     }
                 }
@@ -439,7 +440,6 @@ public class HeaderImportFragment extends BasePageFragment {
                     if (is_zip_spinner_activated && is_theme_selected) {
                         apply_fab.show();
                     } else {
-                        apply_fab.hide();
                     }
                 }
             }
@@ -451,39 +451,6 @@ public class HeaderImportFragment extends BasePageFragment {
         // Apply the adapter to the spinner
         spinner2.setAdapter(adapter2);
 
-        autoClearSystemUICache = (CheckBox) inflation.findViewById(R.id.checkBox);
-        autoClearSystemUICache.setOnCheckedChangeListener(
-                new CompoundButton.OnCheckedChangeListener() {
-                    @Override
-                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                        if (isChecked) {
-                            are_we_clearing_cache_after = true;
-                            if (is_debugging_mode_enabled) Log.e("CheckBox",
-                                    "SystemUI theme cache will be wiped for this theme " +
-                                            "after applying.");
-                        } else {
-                            are_we_clearing_cache_after = false;
-                            if (is_debugging_mode_enabled) Log.e("CheckBox",
-                                    "SystemUI theme cache will NOT be wiped for this theme " +
-                                            "after applying.");
-                        }
-                    }
-                });
-
-        debugmode = (CheckBox) inflation.findViewById(R.id.checkBox3);
-        debugmode.setOnCheckedChangeListener(
-                new CompoundButton.OnCheckedChangeListener() {
-                    @Override
-                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                        if (isChecked) {
-                            is_debugging_mode_enabled = true;
-                            Log.e("CheckBox", "Universal variable to advanced log ENABLED.");
-                        } else {
-                            is_debugging_mode_enabled = false;
-                            Log.e("CheckBox", "Universal variable to advanced log DISABLED.");
-                        }
-                    }
-                });
         return inflation;
     }
 
@@ -542,26 +509,30 @@ public class HeaderImportFragment extends BasePageFragment {
             try {
                 copyCommonsFile(theme_dir, header_zip);
             } catch (Exception e) {
-                if (is_debugging_mode_enabled) Log.e("performAAPTonCommonsAPK",
+                Log.e("performAAPTonCommonsAPK",
                         "Caught the exception.");
             }
             return null;
         }
 
         private void copyCommonsFile(String theme_dir, String header_zip) {
+            Log.e("CopyAkzent_SystemUIFile", "Function Called");
+            Log.e("CopyAkzent_SystemUIFile", "Function Started");
             String sourcePath = theme_dir;
             File source = new File(sourcePath);
             String destinationPath = getActivity().getCacheDir().getAbsolutePath() +
-                    "/new_header_apk.apk";
+                    "/Akzent_SystemUI.apk";
             File destination = new File(destinationPath);
             try {
                 FileUtils.copyFile(source, destination);
-                if (is_debugging_mode_enabled) Log.e("copyCommonsFile",
-                        "Successfully copied commons apk from resource-cache to work directory");
                 unzip(header_zip);
+                Log.e("CopyAkzent_SystemUIFile",
+                        "Successfully copied Akzent_SystemUI apk from overlays folder to work directory");
+                Log.e("CopyAkzent_SystemUIFile", "Function Stopped");
             } catch (IOException e) {
-                if (is_debugging_mode_enabled) Log.e("copyCommonsFile",
-                        "Failed to copy commons apk from resource-cache to work directory");
+                Log.e("CopyAkzent_SystemUIFile",
+                        "Failed to copy Akzent_SystemUI apk from resource-cache to work directory");
+                Log.e("CopyAkzent_SystemUIFile", "Function Stopped");
                 e.printStackTrace();
             }
         }
@@ -571,14 +542,13 @@ public class HeaderImportFragment extends BasePageFragment {
                 String destination = getActivity().getCacheDir().getAbsolutePath() + "/headers/";
 
                 net.lingala.zip4j.core.ZipFile zipFile = new net.lingala.zip4j.core.ZipFile(source);
-                if (is_debugging_mode_enabled)
-                    Log.e("Unzip", "The ZIP has been located and will now be unzipped...");
+                Log.e("Unzip", "The ZIP has been located and will now be unzipped...");
                 zipFile.extractAll(destination);
-                if (is_debugging_mode_enabled) Log.e("Unzip",
+                Log.e("Unzip",
                         "Successfully unzipped the file to the corresponding directory!");
                 performAAPTonCommonsAPK(processor());
             } catch (ZipException e) {
-                if (is_debugging_mode_enabled) Log.e("Unzip",
+                Log.e("Unzip",
                         "Failed to unzip the file the corresponding directory. (EXCEPTION)");
                 e.printStackTrace();
             }
@@ -620,334 +590,93 @@ public class HeaderImportFragment extends BasePageFragment {
 
             // Create the res/drawable-xxhdpi-v23 directory
 
-            if (is_debugging_mode_enabled) Log.e("postProcess",
+            Log.e("postProcess",
                     "Mounting system as read-write as we prepare for some commands...");
             eu.chainfire.libsuperuser.Shell.SU.run("mount -o remount,rw /");
-            eu.chainfire.libsuperuser.Shell.SU.run("mkdir /assets");
-            eu.chainfire.libsuperuser.Shell.SU.run("mkdir /assets/overlays");
-            eu.chainfire.libsuperuser.Shell.SU.run("mkdir /assets/overlays/com.android.systemui");
-            eu.chainfire.libsuperuser.Shell.SU.run(
-                    "mkdir /assets/overlays/com.android.systemui/res");
-            eu.chainfire.libsuperuser.Shell.SU.run(
-                    "mkdir /assets/overlays/com.android.systemui/res/drawable-xxhdpi-v23");
+            eu.chainfire.libsuperuser.Shell.SU.run("mkdir /res/drawable-xxhdpi-v4/");
 
             // Copy the files over
             for (int i = 0; i < source.size(); i++) {
-                if (source.get(i).equals("notifhead_afternoon.png")) {
-                    eu.chainfire.libsuperuser.Shell.SU.run(
-                            "cp " + getActivity().getCacheDir().getAbsolutePath() +
-                                    "/headers/" + "notifhead_afternoon.png" +
-                                    " /assets/overlays/com.android.systemui/" +
-                                    "res/drawable-xxhdpi-v23/" +
-                                    "notifhead_afternoon.png");
-                    try {
-                        Process nativeApp2 = Runtime.getRuntime().exec(
-                                "aapt remove " + getActivity().getCacheDir().getAbsolutePath() +
-                                        "/new_header_apk.apk " +
-                                        "assets/overlays/com.android.systemui/" +
-                                        "res/drawable-xxhdpi-v23/" +
-                                        "notifhead_afternoon.png");
-                        nativeApp2.waitFor();
-
-                        eu.chainfire.libsuperuser.Shell.SU.run(
-                                "aapt add " + getActivity().getCacheDir().getAbsolutePath() +
-                                        "/new_header_apk.apk " +
-                                        "assets/overlays/com.android.systemui/" +
-                                        "res/drawable-xxhdpi-v23/" +
-                                        "notifhead_afternoon.png");
-                    } catch (IOException e) {
-                        //
-                    } catch (InterruptedException f) {
-                        //
-                    }
-                }
-
-                if (source.get(i).equals("notifhead_christmas.png")) {
-                    eu.chainfire.libsuperuser.Shell.SU.run(
-                            "cp " + getActivity().getCacheDir().getAbsolutePath() +
-                                    "/headers/" + "notifhead_christmas.png" +
-                                    " /assets/overlays/com.android.systemui/" +
-                                    "res/drawable-xxhdpi-v23/" +
-                                    "notifhead_christmas.png");
-                    try {
-                        Process nativeApp2 = Runtime.getRuntime().exec(
-                                "aapt remove " + getActivity().getCacheDir().getAbsolutePath() +
-                                        "/new_header_apk.apk " +
-                                        "assets/overlays/com.android.systemui/" +
-                                        "res/drawable-xxhdpi-v23/" +
-                                        "notifhead_christmas.png");
-                        nativeApp2.waitFor();
-
-                        eu.chainfire.libsuperuser.Shell.SU.run(
-                                "aapt add " + getActivity().getCacheDir().getAbsolutePath() +
-                                        "/new_header_apk.apk " +
-                                        "assets/overlays/com.android.systemui/" +
-                                        "res/drawable-xxhdpi-v23/" +
-                                        "notifhead_christmas.png");
-                    } catch (IOException e) {
-                        //
-                    } catch (InterruptedException f) {
-                        //
-                    }
-                }
-
-                if (source.get(i).equals("notifhead_morning.png")) {
-                    eu.chainfire.libsuperuser.Shell.SU.run(
-                            "cp " + getActivity().getCacheDir().getAbsolutePath() +
-                                    "/headers/" + "notifhead_morning.png" +
-                                    " /assets/overlays/com.android.systemui/" +
-                                    "res/drawable-xxhdpi-v23/" +
-                                    "notifhead_morning.png");
-                    try {
-                        Process nativeApp2 = Runtime.getRuntime().exec(
-                                "aapt remove " + getActivity().getCacheDir().getAbsolutePath() +
-                                        "/new_header_apk.apk " +
-                                        "assets/overlays/com.android.systemui/" +
-                                        "res/drawable-xxhdpi-v23/" +
-                                        "notifhead_morning.png");
-                        nativeApp2.waitFor();
-
-                        eu.chainfire.libsuperuser.Shell.SU.run(
-                                "aapt add " + getActivity().getCacheDir().getAbsolutePath() +
-                                        "/new_header_apk.apk " +
-                                        "assets/overlays/com.android.systemui/" +
-                                        "res/drawable-xxhdpi-v23/" +
-                                        "notifhead_morning.png");
-                    } catch (IOException e) {
-                        //
-                    } catch (InterruptedException f) {
-                        //
-                    }
-                }
-
-                if (source.get(i).equals("notifhead_newyearseve.png")) {
-                    eu.chainfire.libsuperuser.Shell.SU.run(
-                            "cp " + getActivity().getCacheDir().getAbsolutePath() +
-                                    "/headers/" + "notifhead_newyearseve.png" +
-                                    " /assets/overlays/com.android.systemui/" +
-                                    "res/drawable-xxhdpi-v23/" +
-                                    "notifhead_newyearseve.png");
-                    try {
-                        Process nativeApp2 = Runtime.getRuntime().exec(
-                                "aapt remove " + getActivity().getCacheDir().getAbsolutePath() +
-                                        "/new_header_apk.apk " +
-                                        "assets/overlays/com.android.systemui/" +
-                                        "res/drawable-xxhdpi-v23/" +
-                                        "notifhead_newyearseve.png");
-                        nativeApp2.waitFor();
-
-                        eu.chainfire.libsuperuser.Shell.SU.run(
-                                "aapt add " + getActivity().getCacheDir().getAbsolutePath() +
-                                        "/new_header_apk.apk " +
-                                        "assets/overlays/com.android.systemui/" +
-                                        "res/drawable-xxhdpi-v23/" +
-                                        "notifhead_newyearseve.png");
-                    } catch (IOException e) {
-                        //
-                    } catch (InterruptedException f) {
-                        //
-                    }
-                }
-
-                if (source.get(i).equals("notifhead_night.png")) {
-                    eu.chainfire.libsuperuser.Shell.SU.run(
-                            "cp " + getActivity().getCacheDir().getAbsolutePath() +
-                                    "/headers/" + "notifhead_night.png" +
-                                    " /assets/overlays/com.android.systemui/" +
-                                    "res/drawable-xxhdpi-v23/" +
-                                    "notifhead_night.png");
-                    try {
-                        Process nativeApp2 = Runtime.getRuntime().exec(
-                                "aapt remove " + getActivity().getCacheDir().getAbsolutePath() +
-                                        "/new_header_apk.apk " +
-                                        "assets/overlays/com.android.systemui/" +
-                                        "res/drawable-xxhdpi-v23/" +
-                                        "notifhead_night.png");
-                        nativeApp2.waitFor();
-
-                        eu.chainfire.libsuperuser.Shell.SU.run(
-                                "aapt add " + getActivity().getCacheDir().getAbsolutePath() +
-                                        "/new_header_apk.apk " +
-                                        "assets/overlays/com.android.systemui/" +
-                                        "res/drawable-xxhdpi-v23/" +
-                                        "notifhead_night.png");
-                    } catch (IOException e) {
-                        //
-                    } catch (InterruptedException f) {
-                        //
-                    }
-                }
-
-                if (source.get(i).equals("notifhead_noon.png")) {
-                    eu.chainfire.libsuperuser.Shell.SU.run(
-                            "cp " + getActivity().getCacheDir().getAbsolutePath() +
-                                    "/headers/" + "notifhead_noon.png" +
-                                    " /assets/overlays/com.android.systemui/" +
-                                    "res/drawable-xxhdpi-v23/" +
-                                    "notifhead_noon.png");
-                    try {
-                        Process nativeApp2 = Runtime.getRuntime().exec(
-                                "aapt remove " + getActivity().getCacheDir().getAbsolutePath() +
-                                        "/new_header_apk.apk " +
-                                        "assets/overlays/com.android.systemui/" +
-                                        "res/drawable-xxhdpi-v23/" +
-                                        "notifhead_noon.png");
-                        nativeApp2.waitFor();
-
-                        eu.chainfire.libsuperuser.Shell.SU.run(
-                                "aapt add " + getActivity().getCacheDir().getAbsolutePath() +
-                                        "/new_header_apk.apk " +
-                                        "assets/overlays/com.android.systemui/" +
-                                        "res/drawable-xxhdpi-v23/" +
-                                        "notifhead_noon.png");
-                    } catch (IOException e) {
-                        //
-                    } catch (InterruptedException f) {
-                        //
-                    }
-                }
-
-                if (source.get(i).equals("notifhead_sunrise.png")) {
-                    eu.chainfire.libsuperuser.Shell.SU.run(
-                            "cp " + getActivity().getCacheDir().getAbsolutePath() +
-                                    "/headers/" + "notifhead_sunrise.png" +
-                                    " /assets/overlays/com.android.systemui/" +
-                                    "res/drawable-xxhdpi-v23/" +
-                                    "notifhead_sunrise.png");
-                    try {
-                        Process nativeApp2 = Runtime.getRuntime().exec(
-                                "aapt remove " + getActivity().getCacheDir().getAbsolutePath() +
-                                        "/new_header_apk.apk " +
-                                        "assets/overlays/com.android.systemui/" +
-                                        "res/drawable-xxhdpi-v23/" +
-                                        "notifhead_sunrise.png");
-                        nativeApp2.waitFor();
-
-                        eu.chainfire.libsuperuser.Shell.SU.run(
-                                "aapt add " + getActivity().getCacheDir().getAbsolutePath() +
-                                        "/new_header_apk.apk " +
-                                        "assets/overlays/com.android.systemui/" +
-                                        "res/drawable-xxhdpi-v23/" +
-                                        "notifhead_sunrise.png");
-                    } catch (IOException e) {
-                        //
-                    } catch (InterruptedException f) {
-                        //
-                    }
-                }
-
-                if (source.get(i).equals("notifhead_sunset_hdpi.png")) {
-                    eu.chainfire.libsuperuser.Shell.SU.run(
-                            "cp " + getActivity().getCacheDir().getAbsolutePath() +
-                                    "/headers/" + "notifhead_sunset_hdpi.png" +
-                                    " /assets/overlays/com.android.systemui/" +
-                                    "res/drawable-xxhdpi-v23/" +
-                                    "notifhead_sunset_hdpi.png");
-                    try {
-                        Process nativeApp2 = Runtime.getRuntime().exec(
-                                "aapt remove " + getActivity().getCacheDir().getAbsolutePath() +
-                                        "/new_header_apk.apk " +
-                                        "assets/overlays/com.android.systemui/" +
-                                        "res/drawable-xxhdpi-v23/" +
-                                        "notifhead_sunset_hdpi.png");
-                        nativeApp2.waitFor();
-
-                        eu.chainfire.libsuperuser.Shell.SU.run(
-                                "aapt add " + getActivity().getCacheDir().getAbsolutePath() +
-                                        "/new_header_apk.apk " +
-                                        "assets/overlays/com.android.systemui/" +
-                                        "res/drawable-xxhdpi-v23/" +
-                                        "notifhead_sunset_hdpi.png");
-                    } catch (IOException e) {
-                        //
-                    } catch (InterruptedException f) {
-                        //
-                    }
-                }
-
-                if (source.get(i).equals("notifhead_sunset_xhdpi.png")) {
-                    eu.chainfire.libsuperuser.Shell.SU.run(
-                            "cp " + getActivity().getCacheDir().getAbsolutePath() +
-                                    "/headers/" + "notifhead_sunset_xhdpi.png" +
-                                    " /assets/overlays/com.android.systemui/" +
-                                    "res/drawable-xxhdpi-v23/" +
-                                    "notifhead_sunset_xhdpi.png");
-                    try {
-                        Process nativeApp2 = Runtime.getRuntime().exec(
-                                "aapt remove " + getActivity().getCacheDir().getAbsolutePath() +
-                                        "/new_header_apk.apk " +
-                                        "assets/overlays/com.android.systemui/" +
-                                        "res/drawable-xxhdpi-v23/" +
-                                        "notifhead_sunset_xhdpi.png");
-                        nativeApp2.waitFor();
-
-                        eu.chainfire.libsuperuser.Shell.SU.run(
-                                "aapt add " + getActivity().getCacheDir().getAbsolutePath() +
-                                        "/new_header_apk.apk " +
-                                        "assets/overlays/com.android.systemui/" +
-                                        "res/drawable-xxhdpi-v23/" +
-                                        "notifhead_sunset_xhdpi.png");
-                    } catch (IOException e) {
-                        //
-                    } catch (InterruptedException f) {
-                        //
-                    }
-                }
-
-                if (source.get(i).equals("notifhead_sunset.png")) {
-                    eu.chainfire.libsuperuser.Shell.SU.run(
-                            "cp " + getActivity().getCacheDir().getAbsolutePath() +
-                                    "/headers/" + "notifhead_sunset.png" +
-                                    " /assets/overlays/com.android.systemui/" +
-                                    "res/drawable-xxhdpi-v23/" +
-                                    "notifhead_sunset.png");
-                    try {
-                        Process nativeApp2 = Runtime.getRuntime().exec(
-                                "aapt remove " + getActivity().getCacheDir().getAbsolutePath() +
-                                        "/new_header_apk.apk " +
-                                        "assets/overlays/com.android.systemui/" +
-                                        "res/drawable-xxhdpi-v23/" +
-                                        "notifhead_sunset.png");
-                        nativeApp2.waitFor();
-
-                        eu.chainfire.libsuperuser.Shell.SU.run(
-                                "aapt add " + getActivity().getCacheDir().getAbsolutePath() +
-                                        "/new_header_apk.apk " +
-                                        "assets/overlays/com.android.systemui/" +
-                                        "res/drawable-xxhdpi-v23/" +
-                                        "notifhead_sunset.png");
-                    } catch (IOException e) {
-                        //
-                    } catch (InterruptedException f) {
-                        //
-                    }
-                }
-            }
-
-            if (is_debugging_mode_enabled) Log.e("performAAPTonCommonsAPK",
-                    "Successfully performed all AAPT commands.");
-
-            // Copy the modified APK to the directory
-            eu.chainfire.libsuperuser.Shell.SU.run("cp " +
-                    getActivity().getCacheDir().getAbsolutePath() +
-                    "/new_header_apk.apk " + theme_dir);
-
-            // Set Permissions for the new APK
-            eu.chainfire.libsuperuser.Shell.SU.run("chmod 644 " + theme_dir);
-
-            // Do clean up
-            cleanTempFolder();
-
-            // Follow boolean for autoclear cache
-            if (are_we_clearing_cache_after) {
                 eu.chainfire.libsuperuser.Shell.SU.run(
-                        "rm -r /data/resource-cache/" + package_name +
-                                "/com.android.systemui");
+                        "cp " + getActivity().getCacheDir().getAbsolutePath() +
+                                "/headers/" + source.get(i) +
+                                " res/drawable-xxhdpi-v4/" +
+                                source.get(i));
+                try {
+                    Process nativeApp2 = Runtime.getRuntime().exec(
+                            "aapt remove " + getActivity().getCacheDir().getAbsolutePath() +
+                                    "/Akzent_SystemUI.apk " +
+                                    "res/drawable-xxhdpi-v4/" +
+                                    source.get(i));
+                    nativeApp2.waitFor();
+                    eu.chainfire.libsuperuser.Shell.SU.run(
+                            "aapt add " + getActivity().getCacheDir().getAbsolutePath() +
+                                    "/Akzent_SystemUI.apk " +
+                                    "res/drawable-xxhdpi-v4/" +
+                                    source.get(i));
+
+                } catch (Exception e) {
+                    //
+                }
             }
 
-            // Close everything and make sure
-            eu.chainfire.libsuperuser.Shell.SU.run("rm -r /assets");
+            Log.e("performAAPTonCommonsAPK",
+                    "Successfully performed all AAPT commands.");
+            eu.chainfire.libsuperuser.Shell.SU.run("rm -r /res/drawable-xxhdpi-v4/");
             eu.chainfire.libsuperuser.Shell.SU.run("mount -o remount,ro /");
+            if (ColorChangerFragment.checkbitphone()) {
+                copyFABFinalizedAPK();
+            } else {
+                copyFinalizedAPK();
+            }
+        }
+
+        public void copyFinalizedAPK() {
+            String mount = "mount -o remount,rw /";
+            String mountsys = "mount -o remount,rw /system";
+            String remount = "mount -o remount,ro /";
+            String remountsys = "mount -o remount,ro /system";
+            eu.chainfire.libsuperuser.Shell.SU.run(mount);
+            eu.chainfire.libsuperuser.Shell.SU.run(mountsys);
+
+            eu.chainfire.libsuperuser.Shell.SU.run(
+                    "cp " +
+                            getActivity().getCacheDir().getAbsolutePath() +
+                            "/Akzent_SystemUI.apk " + "/system/vendor/overlay/Akzent_SystemUI.apk");
+            eu.chainfire.libsuperuser.Shell.SU.run("chmod 644 " + "/system/vendor/overlay/Akzent_SystemUI.apk");
+            eu.chainfire.libsuperuser.Shell.SU.run(remount);
+            eu.chainfire.libsuperuser.Shell.SU.run(remountsys);
+            Log.e("copyFinalizedAPK",
+                    "Successfully copied the modified resource APK into " +
+                            "/system/vendor/overlay/ and modified the permissions!");
+            eu.chainfire.libsuperuser.Shell.SU.run("rm -r /data/data/projekt.dashboard.layers/cache");
+            Log.e("copyFinalizedAPK",
+                    "Successfully Deleted Files ");
+
+        }
+
+        public void copyFABFinalizedAPK() {
+            String mount = "mount -o remount,rw /";
+            String mountsys = "mount -o remount,rw /vendor";
+            String remount = "mount -o remount,ro /";
+            String remountsys = "mount -o remount,ro /vendor";
+            eu.chainfire.libsuperuser.Shell.SU.run(mount);
+            eu.chainfire.libsuperuser.Shell.SU.run(mountsys);
+
+            eu.chainfire.libsuperuser.Shell.SU.run(
+                    "cp " +
+                            getActivity().getCacheDir().getAbsolutePath() +
+                            "/Akzent_SystemUI.apk " + "/vendor/overlay/Akzent_SystemUI.apk");
+            eu.chainfire.libsuperuser.Shell.SU.run("chmod 644 " + "/vendor/overlay/Akzent_SystemUI.apk");
+            eu.chainfire.libsuperuser.Shell.SU.run(remount);
+            eu.chainfire.libsuperuser.Shell.SU.run(remountsys);
+            Log.e("copyFinalizedAPK",
+                    "Successfully copied the modified resource APK into " +
+                            "/system/vendor/overlay/ and modified the permissions!");
+            eu.chainfire.libsuperuser.Shell.SU.run("rm -r /data/data/projekt.dashboard.layers/cache");
+            Log.e("copyFinalizedAPK",
+                    "Successfully Deleted Files ");
+
         }
 
         protected void onPreExecute() {
@@ -965,33 +694,6 @@ public class HeaderImportFragment extends BasePageFragment {
         }
 
         protected void onPostExecute(Void result) {
-            apply_fab.setImageDrawable(getResources().getDrawable(R.drawable.ic_cached_24dp));
-            apply_fab.setBackgroundTintList(ColorStateList.valueOf(
-                    getResources().getColor(R.color.resetButton)));
-            if (autoClearSystemUICache.isChecked()) {
-                apply_fab.setOnClickListener(new View.OnClickListener() {
-                    public void onClick(View v) {
-                        eu.chainfire.libsuperuser.Shell.SU.run("killall zygote");
-                    }
-                });
-            } else {
-                apply_fab.setOnClickListener(new View.OnClickListener() {
-                    public void onClick(View v) {
-                        eu.chainfire.libsuperuser.Shell.SU.run("killall com.android.systemui");
-                        Intent i = getContext().getPackageManager()
-                                .getLaunchIntentForPackage(getContext().getPackageName());
-                        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        startActivity(i);
-                    }
-                });
-                apply_fab.setOnLongClickListener(new View.OnLongClickListener() {
-                    public boolean onLongClick(View v) {
-                        eu.chainfire.libsuperuser.Shell.SU.run("killall zygote");
-                        return true;
-                    }
-                });
-            }
-
             pd.dismiss();
         }
     }
