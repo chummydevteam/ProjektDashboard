@@ -168,7 +168,7 @@
     <string name="contextualheaderimporter_not_all_themed">headers themed</string>
     <string name="contextualheaderimporter_only_one_themed">header themed</string>
     <string name="contextualheaderimporter_options_before_choosing_picture">advanced options:</string>
-
+    <string name="contextualheaderswapper_supportcontextual">swap contextual headers too</string>
     <string name="contextualheaderswapper">notification header swapper</string>
     <string name="contextualheaderswapper_description">notification header swapper</string>
     <string name="contextualheaderswapper_description_secondary">this is a highly experimental feature to allow you to set your own custom notification headers for your systemui notification shade.</string>

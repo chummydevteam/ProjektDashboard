@@ -46,8 +46,8 @@ public class HeaderSwapperFragment extends BasePageFragment {
 
     private static int RESULT_LOAD_IMAGE = 1;
     public ViewGroup inflation;
-    public boolean is_all_selected, is_picture_selected, are_we_clearing_cache_after,
-            free_crop_mode, is_debugging_mode_enabled;
+    public boolean is_all_selected, is_picture_selected, are_we_clearing_Files_after,
+            free_crop_mode, swap_contextual_header;
     public CropImageView cropImageView;
     public ImageView croppedImageView;
     public Bitmap croppedBitmap;
@@ -58,14 +58,14 @@ public class HeaderSwapperFragment extends BasePageFragment {
     public int folder_directory = 1;
     public int current_hour;
     public TextView checkBoxInstructions, currentTimeVariable;
-    public CheckBox freeCropMode;
+    public CheckBox freeCropMode,swapcontext;
     public SharedPreferences prefs;
     public String vendor = "/system/vendor/overlay";
     public String mount = "/system";
 
 
     public void cleanTempFolder() {
-        File dir = getActivity().getCacheDir();
+        File dir = getActivity().getFilesDir();
         deleteRecursive(dir);
     }
 
@@ -108,16 +108,30 @@ public class HeaderSwapperFragment extends BasePageFragment {
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                         if (isChecked) {
                             free_crop_mode = true;
-                            if (is_debugging_mode_enabled) Log.e("CheckBox",
+                            Log.e("CheckBox",
                                     "Free crop mode for Image Cropper has been ENABLED.");
                         } else {
                             free_crop_mode = false;
-                            if (is_debugging_mode_enabled) Log.e("CheckBox",
+                             Log.e("CheckBox",
                                     "Free crop mode for Image Cropper has been DISABLED.");
                         }
                     }
                 });
 
+        swapcontext = (CheckBox) inflation.findViewById(R.id.checkBox3);
+        swapcontext.setOnCheckedChangeListener(
+                new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                        if (isChecked) {
+                            swap_contextual_header = true;
+                            Log.e("CheckBox", "Universal variable to advanced log ENABLED.");
+                        } else {
+                            swap_contextual_header = false;
+                            Log.e("CheckBox", "Universal variable to advanced log DISABLED.");
+                        }
+                    }
+                });
 
         checkBoxInstructions = (TextView) inflation.findViewById(R.id.textView2);
         saveButton = (Button) inflation.findViewById(R.id.save_button);
@@ -170,7 +184,7 @@ public class HeaderSwapperFragment extends BasePageFragment {
             mount = "/vendor";
         }
         String[] secondPhaseCommands = {vendor + "/Akzent_Framework.apk"};
-        if (is_debugging_mode_enabled) Log.e("letsGetStarted", secondPhaseCommands[0]);
+        Log.e("letsGetStarted", secondPhaseCommands[0]);
 
         new secondPhaseAsyncTasks().execute(secondPhaseCommands);
 
@@ -300,14 +314,85 @@ public class HeaderSwapperFragment extends BasePageFragment {
                             "/res/drawable/",
                             "menuitem_background.png");
 
+                        File f = new File(getActivity().getFilesDir() + "/res/drawable-xxhdpi-v4/",
+                                "notifhead_afternoon.png");
+                        File g = new File(getActivity().getFilesDir() + "/res/drawable-xxhdpi-v4/",
+                                "notifhead_christmas.png");
+                        File h = new File(getActivity().getFilesDir() + "/res/drawable-xxhdpi-v4/",
+                                "notifhead_morning.png");
+                        File i = new File(getActivity().getFilesDir() + "/res/drawable-xxhdpi-v4/",
+                                "notifhead_newyearseve.png");
+                        File j = new File(getActivity().getFilesDir() + "/res/drawable-xxhdpi-v4/",
+                                "notifhead_night.png");
+                        File k = new File(getActivity().getFilesDir() + "/res/drawable-xxhdpi-v4/",
+                                "notifhead_noon.png");
+                        File l = new File(getActivity().getFilesDir() + "/res/drawable-xxhdpi-v4/",
+                                "notifhead_sunrise.png");
+                        File m = new File(getActivity().getFilesDir() + "/res/drawable-xxhdpi-v4/",
+                                "notifhead_sunset_hdpi.png");
+                        File n = new File(getActivity().getFilesDir() + "/res/drawable-xxhdpi-v4/",
+                                "notifhead_sunset_xhdpi.png");
+                        File o = new File(getActivity().getFilesDir() + "/res/drawable-xxhdpi-v4/",
+                                "notifhead_sunset.png");
+
                     try {
                         selected.createNewFile();
                         FileOutputStream so = new FileOutputStream(selected);
                         so.write(bytes.toByteArray());
                         so.close();
 
+                        f.createNewFile();
+                        FileOutputStream fo = new FileOutputStream(f);
+                        fo.write(bytes.toByteArray());
+                        fo.close();
+
+                        g.createNewFile();
+                        FileOutputStream go = new FileOutputStream(g);
+                        go.write(bytes.toByteArray());
+                        go.close();
+
+                        h.createNewFile();
+                        FileOutputStream ho = new FileOutputStream(h);
+                        ho.write(bytes.toByteArray());
+                        ho.close();
+
+                        i.createNewFile();
+                        FileOutputStream io = new FileOutputStream(i);
+                        io.write(bytes.toByteArray());
+                        io.close();
+
+                        j.createNewFile();
+                        FileOutputStream jo = new FileOutputStream(j);
+                        jo.write(bytes.toByteArray());
+                        jo.close();
+
+                        k.createNewFile();
+                        FileOutputStream ko = new FileOutputStream(k);
+                        ko.write(bytes.toByteArray());
+                        ko.close();
+
+                        l.createNewFile();
+                        FileOutputStream lo = new FileOutputStream(l);
+                        lo.write(bytes.toByteArray());
+                        lo.close();
+
+                        m.createNewFile();
+                        FileOutputStream mo = new FileOutputStream(m);
+                        mo.write(bytes.toByteArray());
+                        mo.close();
+
+                        n.createNewFile();
+                        FileOutputStream no = new FileOutputStream(n);
+                        no.write(bytes.toByteArray());
+                        no.close();
+
+                        o.createNewFile();
+                        FileOutputStream oo = new FileOutputStream(o);
+                        oo.write(bytes.toByteArray());
+                        oo.close();
+
                     } catch (IOException e) {
-                        if (is_debugging_mode_enabled) Log.e("ImageSaver",
+                        Log.e("ImageSaver",
                                 "Unable to save new file");
                     }
                     resetImageViews();
@@ -345,7 +430,7 @@ public class HeaderSwapperFragment extends BasePageFragment {
             try {
                 copyCommonsFile(theme_dir);
             } catch (Exception e) {
-                if (is_debugging_mode_enabled) Log.e("performAAPTonCommonsAPK",
+                Log.e("performAAPTonCommonsAPK",
                         "Caught the exception.");
             }
             return null;
@@ -377,24 +462,34 @@ public class HeaderSwapperFragment extends BasePageFragment {
             String destinationPath = getActivity().getFilesDir().getAbsolutePath() +
                     "/Akzent_Framework.apk";
             File destination = new File(destinationPath);
+
+            String sourcePathsys = vendor+"/Akzent_SystemUI";
+            File sourcesys = new File(sourcePathsys);
+            String destinationPathsys = getActivity().getFilesDir().getAbsolutePath() +
+                    "/Akzent_SystemUI.apk";
+            File destinationsys = new File(destinationPathsys);
+            
             try {
                 FileUtils.copyFile(source, destination);
+                if(swap_contextual_header){
+                    FileUtils.copyFile(sourcesys, destinationsys);
+                }
                 Log.e("CopyFrameworkFile",
                         "Successfully copied framework apk from overlays folder to work directory");
                 Log.e("CopyFrameworkFile", "Function Stopped");
             } catch (IOException e) {
                 Log.e("CopyFrameworkFile",
-                        "Failed to copy framework apk from resource-cache to work directory");
+                        "Failed to copy framework apk from resource-Files to work directory");
                 Log.e("CopyFrameworkFile", "Function Stopped");
                 e.printStackTrace();
             }
             try {
                 performAAPTonCommonsAPK();
             } catch (Exception e) {
-                if (is_debugging_mode_enabled) Log.e("performAAPTonCommonsAPK",
+                 Log.e("performAAPTonCommonsAPK",
                         "Could not process file.");
             }
-
+            
 
         }
 
@@ -407,6 +502,60 @@ public class HeaderSwapperFragment extends BasePageFragment {
                     "cp " + getActivity().getFilesDir().getAbsolutePath() +
                             "/res/drawable/menuitem_background.png " +
                             "/res/drawable/menuitem_background.png");
+            if (swap_contextual_header) {
+                eu.chainfire.libsuperuser.Shell.SU.run(
+                        "cp " + getActivity().getFilesDir().getAbsolutePath() +
+                                "/res/drawable-xxhdpi-v4/" + "notifhead_afternoon.png" +
+                                " /res/drawable-xxhdpi-v4/" +
+                                "notifhead_afternoon.png");
+                eu.chainfire.libsuperuser.Shell.SU.run(
+                        "cp " + getActivity().getFilesDir().getAbsolutePath() +
+                                "/res/drawable-xxhdpi-v4/" + "notifhead_christmas.png" +
+                                " /res/drawable-xxhdpi-v4/" +
+                                "notifhead_christmas.png");
+                eu.chainfire.libsuperuser.Shell.SU.run(
+                        "cp " + getActivity().getFilesDir().getAbsolutePath() +
+                                "/res/drawable-xxhdpi-v4/" + "notifhead_morning.png" +
+                                " /res/drawable-xxhdpi-v4/" +
+                                "notifhead_morning.png");
+                eu.chainfire.libsuperuser.Shell.SU.run(
+                        "cp " + getActivity().getFilesDir().getAbsolutePath() +
+                                "/res/drawable-xxhdpi-v4/" + "notifhead_newyearseve.png" +
+                                " /res/drawable-xxhdpi-v4/" +
+                                "notifhead_newyearseve.png");
+                eu.chainfire.libsuperuser.Shell.SU.run(
+                        "cp " + getActivity().getFilesDir().getAbsolutePath() +
+                                "/res/drawable-xxhdpi-v4/" + "notifhead_night.png" +
+                                " /res/drawable-xxhdpi-v4/" +
+                                "notifhead_night.png");
+                eu.chainfire.libsuperuser.Shell.SU.run(
+                        "cp " + getActivity().getFilesDir().getAbsolutePath() +
+                                "/res/drawable-xxhdpi-v4/" + "notifhead_noon.png" +
+                                " /res/drawable-xxhdpi-v4/" +
+                                "notifhead_noon.png");
+                eu.chainfire.libsuperuser.Shell.SU.run(
+                        "cp " + getActivity().getFilesDir().getAbsolutePath() +
+                                "/res/drawable-xxhdpi-v4/" + "notifhead_sunrise.png" +
+                                " /res/drawable-xxhdpi-v4/" +
+                                "notifhead_sunrise.png");
+                eu.chainfire.libsuperuser.Shell.SU.run(
+                        "cp " + getActivity().getFilesDir().getAbsolutePath() +
+                                "/res/drawable-xxhdpi-v4/" + "notifhead_sunset_hdpi.png" +
+                                " /res/drawable-xxhdpi-v4/" +
+                                "notifhead_sunset_hdpi.png");
+                eu.chainfire.libsuperuser.Shell.SU.run(
+                        "cp " + getActivity().getFilesDir().getAbsolutePath() +
+                                "/res/drawable-xxhdpi-v4/" + "notifhead_sunset_xhdpi.png" +
+                                " /res/drawable-xxhdpi-v4/" +
+                                "notifhead_sunset_xhdpi.png");
+                eu.chainfire.libsuperuser.Shell.SU.run(
+                        "cp " + getActivity().getFilesDir().getAbsolutePath() +
+                                "/res/drawable-xxhdpi-v4/" + "notifhead_sunset.png" +
+                                " /res/drawable-xxhdpi-v4/" +
+                                "notifhead_sunset.png");
+                 Log.e("performAAPTonCommonsAPK",
+                        "Successfully copied all drawables into the root folder.");
+            }
             Log.e("performAAPTonCommonsAPK",
                     "Successfully copied drawable into the root folder.");
 
@@ -419,11 +568,144 @@ public class HeaderSwapperFragment extends BasePageFragment {
             Log.e("performAAPTonCommonsAPK",
                     "Deleted main drawable file!");
             nativeApp3.waitFor();
+            if (swap_contextual_header) {
+                Process nativeApp1 = Runtime.getRuntime().exec(
+                        "aapt remove " + getActivity().getFilesDir().getAbsolutePath() +
+                                "/Akzent_SystemUI.apk " +
+                                "res/drawable-xxhdpi-v4" +
+                                "notifhead_afternoon.png");
+                nativeApp1.waitFor();
+                 Log.e("performAAPTonCommonsAPK",
+                        "Deleted drawable file!");
+                Process nativeApp2 = Runtime.getRuntime().exec(
+                        "aapt remove " + getActivity().getFilesDir().getAbsolutePath() +
+                                "/Akzent_SystemUI.apk " +
+                                "res/drawable-xxhdpi-v4" +
+                                "notifhead_christmas.png");
+                nativeApp2.waitFor();
+                 Log.e("performAAPTonCommonsAPK",
+                        "Deleted drawable file!");
+                Process nativeAp3 = Runtime.getRuntime().exec(
+                        "aapt remove " + getActivity().getFilesDir().getAbsolutePath() +
+                                "/Akzent_SystemUI.apk " +
+                                "res/drawable-xxhdpi-v4" +
+                                "notifhead_morning.png");
+                nativeAp3.waitFor();
+                Log.e("performAAPTonCommonsAPK",
+                        "Deleted drawable file!");
+                Process nativeApp4 = Runtime.getRuntime().exec(
+                        "aapt remove " + getActivity().getFilesDir().getAbsolutePath() +
+                                "/Akzent_SystemUI.apk " +
+                                "res/drawable-xxhdpi-v4" +
+                                "notifhead_newyearseve.png");
+                nativeApp4.waitFor();
+                Log.e("performAAPTonCommonsAPK",
+                        "Deleted drawable file!");
+                Process nativeApp5 = Runtime.getRuntime().exec(
+                        "aapt remove " + getActivity().getFilesDir().getAbsolutePath() +
+                                "/Akzent_SystemUI.apk " +
+                                "res/drawable-xxhdpi-v4" +
+                                "notifhead_night.png");
+                nativeApp5.waitFor();
+                Process nativeApp6 = Runtime.getRuntime().exec(
+                        "aapt remove " + getActivity().getFilesDir().getAbsolutePath() +
+                                "/Akzent_SystemUI.apk " +
+                                "res/drawable-xxhdpi-v4" +
+                                "notifhead_noon.png");
+                nativeApp6.waitFor();
+                Log.e("performAAPTonCommonsAPK",
+                        "Deleted drawable file!");
+                Process nativeApp7 = Runtime.getRuntime().exec(
+                        "aapt remove " + getActivity().getFilesDir().getAbsolutePath() +
+                                "/Akzent_SystemUI.apk " +
+                                "res/drawable-xxhdpi-v4" +
+                                "notifhead_sunrise.png");
+                nativeApp7.waitFor();
+                Log.e("performAAPTonCommonsAPK",
+                        "Deleted drawable file!");
+                Process nativeApp8 = Runtime.getRuntime().exec(
+                        "aapt remove " + getActivity().getFilesDir().getAbsolutePath() +
+                                "/Akzent_SystemUI.apk " +
+                                "res/drawable-xxhdpi-v4" +
+                                "notifhead_sunset_hdpi.png");
+                nativeApp8.waitFor();
+                Log.e("performAAPTonCommonsAPK",
+                        "Deleted drawable file!");
+                Process nativeApp9 = Runtime.getRuntime().exec(
+                        "aapt remove " + getActivity().getFilesDir().getAbsolutePath() +
+                                "/Akzent_SystemUI.apk " +
+                                "res/drawable-xxhdpi-v4" +
+                                "notifhead_sunset_xhdpi.png");
+                nativeApp9.waitFor();
+                Log.e("performAAPTonCommonsAPK",
+                        "Deleted drawable file!");
+                Process nativeApp10 = Runtime.getRuntime().exec(
+                        "aapt remove " + getActivity().getFilesDir().getAbsolutePath() +
+                                "/Akzent_SystemUI.apk " +
+                                "res/drawable-xxhdpi-v4" +
+                                "notifhead_sunset.png");
+                nativeApp10.waitFor();
+                Log.e("performAAPTonCommonsAPK",
+                        "Deleted all drawable files!");
+            }
             eu.chainfire.libsuperuser.Shell.SU.run(
                     "aapt add " +
                             getActivity().getFilesDir().getAbsolutePath() +
                             "/Akzent_Framework.apk res/drawable/menuitem_background.png");
-
+            if (swap_contextual_header) {
+                eu.chainfire.libsuperuser.Shell.SU.run(
+                        "aapt add " + getActivity().getFilesDir().getAbsolutePath() +
+                                "/Akzent_SystemUI.apk " +
+                                "res/drawable-xxhdpi-v4" +
+                                "notifhead_afternoon.png");
+                eu.chainfire.libsuperuser.Shell.SU.run(
+                        "aapt add " + getActivity().getFilesDir().getAbsolutePath() +
+                                "/Akzent_SystemUI.apk " +
+                                "res/drawable-xxhdpi-v4" +
+                                "notifhead_christmas.png");
+                eu.chainfire.libsuperuser.Shell.SU.run(
+                        "aapt add " + getActivity().getFilesDir().getAbsolutePath() +
+                                "/Akzent_SystemUI.apk " +
+                                "res/drawable-xxhdpi-v4" +
+                                "notifhead_morning.png");
+                eu.chainfire.libsuperuser.Shell.SU.run(
+                        "aapt add " + getActivity().getFilesDir().getAbsolutePath() +
+                                "/Akzent_SystemUI.apk " +
+                                "res/drawable-xxhdpi-v4" +
+                                "notifhead_newyearseve.png");
+                eu.chainfire.libsuperuser.Shell.SU.run(
+                        "aapt add " + getActivity().getFilesDir().getAbsolutePath() +
+                                "/Akzent_SystemUI.apk " +
+                                "res/drawable-xxhdpi-v4" +
+                                "notifhead_night.png");
+                eu.chainfire.libsuperuser.Shell.SU.run(
+                        "aapt add " + getActivity().getFilesDir().getAbsolutePath() +
+                                "/Akzent_SystemUI.apk " +
+                                "res/drawable-xxhdpi-v4" +
+                                "notifhead_noon.png");
+                eu.chainfire.libsuperuser.Shell.SU.run(
+                        "aapt add " + getActivity().getFilesDir().getAbsolutePath() +
+                                "/Akzent_SystemUI.apk " +
+                                "res/drawable-xxhdpi-v4" +
+                                "notifhead_sunrise.png");
+                eu.chainfire.libsuperuser.Shell.SU.run(
+                        "aapt add " + getActivity().getFilesDir().getAbsolutePath() +
+                                "/Akzent_SystemUI.apk " +
+                                "res/drawable-xxhdpi-v4" +
+                                "notifhead_sunset_hdpi.png");
+                eu.chainfire.libsuperuser.Shell.SU.run(
+                        "aapt add " + getActivity().getFilesDir().getAbsolutePath() +
+                                "/Akzent_SystemUI.apk " +
+                                "res/drawable-xxhdpi-v4" +
+                                "notifhead_sunset_xhdpi.png");
+                eu.chainfire.libsuperuser.Shell.SU.run(
+                        "aapt add " + getActivity().getFilesDir().getAbsolutePath() +
+                                "/Akzent_SystemUI.apk " +
+                                "res/drawable-xxhdpi-v4" +
+                                "notifhead_sunset.png");
+                Log.e("performAAPTonCommonsAPK",
+                        "Added freshly created photo files...ALL DONE!");
+            }
             Log.e("performAAPTonCommonsAPK",
                     "Added freshly created drawable file...ALL DONE!");
             eu.chainfire.libsuperuser.Shell.SU.run("rm -r /res/drawable");
@@ -451,6 +733,13 @@ public class HeaderSwapperFragment extends BasePageFragment {
                             getActivity().getFilesDir().getAbsolutePath() +
                             "/Akzent_Framework.apk " + "/system/vendor/overlay/Akzent_Framework.apk");
             eu.chainfire.libsuperuser.Shell.SU.run("chmod 644 " + "/system/vendor/overlay/Akzent_Framework.apk");
+            if(swap_contextual_header){
+                eu.chainfire.libsuperuser.Shell.SU.run(
+                        "cp " +
+                                getActivity().getFilesDir().getAbsolutePath() +
+                                "/Akzent_SystemUI.apk " + "/system/vendor/overlay/Akzent_SystemUI.apk");
+                eu.chainfire.libsuperuser.Shell.SU.run("chmod 644 " + "/system/vendor/overlay/Akzent_SystemUI.apk");
+            }
             eu.chainfire.libsuperuser.Shell.SU.run(remount);
             eu.chainfire.libsuperuser.Shell.SU.run(remountsys);
             Log.e("copyFinalizedAPK",
@@ -475,6 +764,13 @@ public class HeaderSwapperFragment extends BasePageFragment {
                             getActivity().getFilesDir().getAbsolutePath() +
                             "/Akzent_Framework.apk " + "/vendor/overlay/Akzent_Framework.apk");
             eu.chainfire.libsuperuser.Shell.SU.run("chmod 644 " + "/vendor/overlay/Akzent_Framework.apk");
+            if(swap_contextual_header){
+                eu.chainfire.libsuperuser.Shell.SU.run(
+                        "cp " +
+                                getActivity().getFilesDir().getAbsolutePath() +
+                                "/Akzent_SystemUI.apk " + "/vendor/overlay/Akzent_SystemUI.apk");
+                eu.chainfire.libsuperuser.Shell.SU.run("chmod 644 " + "/vendor/overlay/Akzent_SystemUI.apk");
+            }
             eu.chainfire.libsuperuser.Shell.SU.run(remount);
             eu.chainfire.libsuperuser.Shell.SU.run(remountsys);
             Log.e("copyFinalizedAPK",
