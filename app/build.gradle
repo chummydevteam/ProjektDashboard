@@ -111,4 +111,8 @@ dependencies {
 
     // Application Welcome Intro
     compile 'com.github.paolorotolo:appintro:3.4.0'
+
+    // CardStack UI
+    compile 'com.mutualmobile.android:cardstack:0.4.5'
+    compile 'com.tramsun.libs:prefcompat:0.7'
 }

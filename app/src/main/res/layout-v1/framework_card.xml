@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    card_view:cardBackgroundColor="@color/card3_bg"
+    card_view:cardCornerRadius="6dp"
+    card_view:cardElevation="6dp"
+    card_view:cardUseCompatPadding="true">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/card_title"
+            style="@style/ShadowBlackTextWhite"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:padding="16dp"
+            android:text="@string/framework"
+            android:textSize="24sp"
+            android:textStyle="italic" />
+
+        <include
+            android:id="@+id/info"
+            layout="@layout/framework_preview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/card_title" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/info">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <include layout="@layout/system_accent_colorpicker" />
+
+                <include layout="@layout/system_accent_dual_colorpicker" />
+
+                <include layout="@layout/system_accent_light_colorpicker" />
+
+                <include layout="@layout/system_appbg_colorpicker" />
+
+                <include layout="@layout/system_appbg_light_colorpicker" />
+
+                <include layout="@layout/system_dialog_colorpicker" />
+
+                <include layout="@layout/system_dialog_light_colorpicker" />
+
+                <include layout="@layout/system_main_colorpicker" />
+
+                <include layout="@layout/system_notification_text_1_colorpicker" />
+
+                <include layout="@layout/system_notification_text_2_colorpicker" />
+
+                <include layout="@layout/system_ripple_colorpicker" />
+
+            </LinearLayout>
+        </ScrollView>
+    </RelativeLayout>
+</android.support.v7.widget.CardView>

@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    card_view:cardBackgroundColor="@color/card1_bg"
+    card_view:cardCornerRadius="6dp"
+    card_view:cardElevation="6dp"
+    card_view:cardUseCompatPadding="true">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/card_title"
+            style="@style/ShadowBlackTextWhite"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:padding="16dp"
+            android:text="@string/settings"
+            android:textSize="24sp"
+            android:textStyle="italic" />
+
+        <include
+            android:id="@+id/info"
+            layout="@layout/settings_preview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/card_title" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/info">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <Switch
+                    android:id="@+id/colorful_icon"
+                    style="@style/ShadowBlackTextWhite"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:padding="16dp"
+                    android:text="@string/settings_colorful_tweaks_icon" />
+
+                <Switch
+                    android:id="@+id/dashboard_rounding"
+                    style="@style/ShadowBlackTextWhite"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp"
+                    android:text="@string/settings_rounded_corners" />
+
+                <Switch
+                    android:id="@+id/dashboard_title_allcaps"
+                    style="@style/ShadowBlackTextWhite"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:padding="16dp"
+                    android:text="@string/settings_dashboard_title_allcaps" />
+
+                <Switch
+                    android:id="@+id/dashboard_title_bold"
+                    style="@style/ShadowBlackTextWhite"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:padding="16dp"
+                    android:text="@string/settings_dashboard_title_bold" />
+
+                <Switch
+                    android:id="@+id/dashboard_title_italics"
+                    style="@style/ShadowBlackTextWhite"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:padding="16dp"
+                    android:text="@string/settings_dashboard_title_italics" />
+
+                <Switch
+                    android:id="@+id/dashboard_dividers"
+                    style="@style/ShadowBlackTextWhite"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:padding="16dp"
+                    android:text="@string/settings_show_dashboard_dividers" />
+
+                <Switch
+                    android:id="@+id/dirty_tweaks_icons"
+                    style="@style/ShadowBlackTextWhite"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:padding="16dp"
+                    android:text="@string/settings_du_tweaks_icon_presence" />
+
+                <include layout="@layout/settings_icon_colorpicker" />
+
+                <include layout="@layout/settings_title_colorpicker" />
+
+            </LinearLayout>
+        </ScrollView>
+    </RelativeLayout>
+</android.support.v7.widget.CardView>

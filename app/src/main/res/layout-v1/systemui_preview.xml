@@ -1,0 +1,65 @@
+<com.pluscubed.insetsdispatcher.view.InsetsDispatcherFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/black"
+        android:clipToPadding="false"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:weightSum="1">
+
+        <TextView
+            android:id="@+id/wifiLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|right"
+            android:layout_marginTop="20dp"
+            android:clickable="true"
+            android:drawableTop="@drawable/ic_qs_wifi_full_4_cdt"
+            android:foreground="?android:selectableItemBackground"
+            android:gravity="center_horizontal"
+            android:text="@string/systemui_preview_label_wifi"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@android:color/white"
+            android:textSize="10dp" />
+
+        <View
+            android:id="@+id/fakeView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_centerInParent="true" />
+
+        <TextView
+            android:id="@+id/bluetoothLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|right"
+            android:layout_marginTop="20dp"
+            android:layout_toEndOf="@+id/fakeView"
+            android:clickable="true"
+            android:drawableTop="@drawable/ic_qs_bluetooth_on_cdt"
+            android:foreground="?android:selectableItemBackground"
+            android:gravity="center_horizontal"
+            android:text="@string/systemui_preview_label_bt"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@android:color/white"
+            android:textSize="10dp" />
+
+        <SeekBar
+            android:id="@+id/seekBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/bluetoothLabel"
+            android:layout_alignStart="@+id/wifiLabel"
+            android:layout_below="@+id/bluetoothLabel"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="20dp"
+            android:progress="50"
+            android:thumb="@drawable/ic_brightness_thumb" />
+
+    </RelativeLayout>
+
+</com.pluscubed.insetsdispatcher.view.InsetsDispatcherFrameLayout>

@@ -26,6 +26,8 @@ import android.widget.LinearLayout;
 
 import com.afollestad.bridge.Bridge;
 import com.afollestad.materialdialogs.util.DialogUtils;
+import com.mutualmobile.cardstack.CardStackLayout;
+import com.tramsun.libs.prefcompat.Pref;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -34,6 +36,7 @@ import projekt.dashboard.R;
 import projekt.dashboard.adapters.MainPagerAdapter;
 import projekt.dashboard.config.Config;
 import projekt.dashboard.fragments.ColorChangerFragment;
+import projekt.dashboard.fragments.CreatorFragment;
 import projekt.dashboard.fragments.HeaderImportFragment;
 import projekt.dashboard.fragments.HeaderSwapperFragment;
 import projekt.dashboard.fragments.HomeFragment;
@@ -76,6 +79,8 @@ public class MainActivity extends BaseDonateActivity implements
     LinearLayout mAppBarLinear;
     private PagesBuilder mPages;
 
+    private CardStackLayout mCardStackLayout;
+
     @Override
     public Toolbar getToolbar() {
         return mToolbar;
@@ -95,6 +100,7 @@ public class MainActivity extends BaseDonateActivity implements
         setupPager();
         setupTabs();
 
+        Pref.init(this);
 
         // Restore last selected page, tab/nav-drawer-item
         if (Config.get().persistSelectedPage()) {
@@ -139,7 +145,7 @@ public class MainActivity extends BaseDonateActivity implements
         }
         if (prefs.getBoolean("advanced_mode_enabled", true)) {
             mPages.add(new PagesBuilder.Page(R.id.theme_utilities_fragment, R.drawable.tab_creator,
-                    R.string.home_tab_seven, new ThemeUtilitiesFragment()));
+                    R.string.home_tab_seven, new CreatorFragment()));
         }
         if (Shell.SU.available()) {
             mPages.add(new PagesBuilder.Page(R.id.header_swapper_fragment, R.drawable.tab_swapper,

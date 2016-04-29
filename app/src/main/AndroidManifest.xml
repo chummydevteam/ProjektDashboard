@@ -41,7 +41,7 @@
         <activity
             android:name=".ui.HeaderPackDownloadActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.Overlay"/>
+            android:theme="@style/AppTheme.Overlay" />
         <activity
             android:name=".ui.MainActivity"
             android:screenOrientation="portrait" />

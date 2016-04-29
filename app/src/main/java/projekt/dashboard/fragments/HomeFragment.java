@@ -114,13 +114,16 @@ public class HomeFragment extends BasePageFragment {
 
         Animation anim2;
 
+        final ImageView iv2 = (ImageView) inflation.findViewById(R.id.spinnerWheel);
         if (prefs.getBoolean("advanced_mode_enabled", true)) {
-            anim2 = AnimationUtils.loadAnimation(getContext(), R.anim.shake);
+            iv2.setImageDrawable(getResources().getDrawable(R.drawable.rainbow_logo));
+            anim2 = AnimationUtils.loadAnimation(getContext(), R.anim.spin_faster);
         } else {
+            iv2.setImageDrawable(getResources().getDrawable(R.drawable.splashscreen_spinner));
             anim2 = AnimationUtils.loadAnimation(getContext(), R.anim.spin);
         }
         anim2.reset();
-        final ImageView iv2 = (ImageView) inflation.findViewById(R.id.spinnerWheel);
+
         iv2.clearAnimation();
         iv2.startAnimation(anim2);
 
@@ -167,7 +170,7 @@ public class HomeFragment extends BasePageFragment {
                                     Toast.LENGTH_LONG);
 
                             iv2.clearAnimation();
-
+                            iv2.setImageDrawable(getResources().getDrawable(R.drawable.splashscreen_spinner));
                             Animation anim2 = AnimationUtils.loadAnimation(getContext(), R.anim.spin);
                             anim2.reset();
                             ImageView iv = (ImageView) inflation.findViewById(R.id.spinnerWheel);
