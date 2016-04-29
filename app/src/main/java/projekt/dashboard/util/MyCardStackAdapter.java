@@ -49,10 +49,9 @@ public class MyCardStackAdapter extends CardStackAdapter implements
     // ==================================== SystemUI Tweaks ================================== //
     public int current_selected_qs_tile_color = Color.argb(255, 255, 255, 255);
     public int current_selected_qs_text_color = Color.argb(255, 255, 255, 255);
-    public int current_selected_system_accent_color = Color.argb(255, 255, 255, 255); // White
 
     // ==================================== Framework Tweaks ================================ //
-    public int current_selected_system_accent_dark_color = Color.argb(255, 255, 255, 255); // White
+    public int current_selected_system_accent_color = Color.argb(255, 255, 255, 255); // White
     public int current_selected_system_accent_dual_color = Color.argb(255, 119, 119, 119); // Medium Grey
     public int current_selected_system_accent_light_color = Color.argb(255, 119, 119, 119); // Medium grey
     public int current_selected_system_appbg_color = Color.argb(255, 0, 0, 0); // Black
@@ -77,6 +76,7 @@ public class MyCardStackAdapter extends CardStackAdapter implements
                 R.color.card2_bg, // SystemUI
                 R.color.card3_bg, // Framework
                 R.color.card4_bg, // Commons Modifications
+                R.color.card5_bg, // Finalized Card
         };
     }
 
@@ -101,6 +101,7 @@ public class MyCardStackAdapter extends CardStackAdapter implements
         if (position == 2) return getSystemUIView(container);
         if (position == 3) return getFrameworksView(container);
         if (position == 4) return getCommonsView(container);
+        if (position == 5) return getFinalizedView(container);
 
         CardView root = (CardView) mInflater.inflate(R.layout.card, container, false);
         root.setCardBackgroundColor(ContextCompat.getColor(mContext, bgColorIds[position]));
@@ -663,6 +664,13 @@ public class MyCardStackAdapter extends CardStackAdapter implements
     private View getCommonsView(ViewGroup container) {
         CardView root = (CardView) mInflater.inflate(R.layout.commons_card, container, false);
         root.setCardBackgroundColor(ContextCompat.getColor(mContext, bgColorIds[4]));
+
+        return root;
+    }
+
+    private View getFinalizedView(ViewGroup container) {
+        CardView root = (CardView) mInflater.inflate(R.layout.final_card, container, false);
+        root.setCardBackgroundColor(ContextCompat.getColor(mContext, bgColorIds[5]));
 
         return root;
     }

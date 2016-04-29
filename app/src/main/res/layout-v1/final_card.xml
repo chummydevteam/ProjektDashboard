@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/tools"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    card_view:cardBackgroundColor="@color/card5_bg"
+    card_view:cardCornerRadius="6dp"
+    card_view:cardElevation="6dp"
+    card_view:cardUseCompatPadding="true">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/card_title"
+            style="@style/ShadowBlackTextWhite"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:padding="16dp"
+            android:text="@string/finalized_card"
+            android:textSize="24sp"
+            android:textStyle="italic" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/card_title">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:paddingEnd="16dp"
+                android:paddingStart="16dp">
+
+                <TextView
+                    android:id="@+id/tv1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="creation name:"
+                    android:textColor="@android:color/white" />
+
+                <com.alimuzaffar.lib.widgets.AnimatedEditText
+                    android:id="@+id/edittext1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@+id/tv1"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="-11dp"
+                    android:layout_toRightOf="@+id/tv1"
+                    android:digits="0123456789.abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                    android:hint="if blank, theme name will remain..."
+                    android:inputType="textNoSuggestions"
+                    android:textSize="15dp"
+                    app:animateCursor="true"
+                    app:animateTextClear="true"
+                    app:animationType="popIn" />
+
+                <TextView
+                    android:id="@+id/tv2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/edittext1"
+                    android:layout_marginTop="10dp"
+                    android:text="creator name:"
+                    android:textColor="@android:color/white" />
+
+                <com.alimuzaffar.lib.widgets.AnimatedEditText
+                    android:id="@+id/edittext2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@+id/tv2"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="-11dp"
+                    android:layout_toRightOf="@+id/tv2"
+                    android:digits="0123456789.abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                    android:hint="if blank, username will be used..."
+                    android:inputType="textNoSuggestions"
+                    android:textSize="15dp"
+                    app:animateCursor="true"
+                    app:animateTextClear="true"
+                    app:animationType="popIn" />
+
+                <com.github.clans.fab.FloatingActionButton
+                    android:id="@+id/fab"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/edittext2"
+                    android:layout_centerInParent="true"
+                    android:layout_gravity="bottom|end"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginRight="8dp"
+                    android:src="@drawable/ic_done_24dp"
+                    fab:fab_colorNormal="@color/card3_bg"
+                    fab:fab_colorPressed="@color/card4_bg"
+                    fab:fab_colorRipple="@color/card4_bg" />
+
+            </RelativeLayout>
+        </ScrollView>
+    </RelativeLayout>
+</android.support.v7.widget.CardView>

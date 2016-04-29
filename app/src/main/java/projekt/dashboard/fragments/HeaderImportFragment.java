@@ -640,32 +640,32 @@ public class HeaderImportFragment extends BasePageFragment {
             // Copy the files over
             for (int i = 0; i < source.size(); i++) {
                 eu.chainfire.libsuperuser.Shell.SU.run(
-                            "cp " + getActivity().getCacheDir().getAbsolutePath() +
-                                    "/headers/" + source.get(i) +
-                                    " /assets/overlays/com.android.systemui/" +
+                        "cp " + getActivity().getCacheDir().getAbsolutePath() +
+                                "/headers/" + source.get(i) +
+                                " /assets/overlays/com.android.systemui/" +
+                                "res/drawable-xxhdpi-v23/" +
+                                source.get(i));
+                try {
+                    Process nativeApp2 = Runtime.getRuntime().exec(
+                            "aapt remove " + getActivity().getCacheDir().getAbsolutePath() +
+                                    "/new_header_apk.apk " +
+                                    "assets/overlays/com.android.systemui/" +
                                     "res/drawable-xxhdpi-v23/" +
                                     source.get(i));
-                    try {
-                        Process nativeApp2 = Runtime.getRuntime().exec(
-                                "aapt remove " + getActivity().getCacheDir().getAbsolutePath() +
-                                        "/new_header_apk.apk " +
-                                        "assets/overlays/com.android.systemui/" +
-                                        "res/drawable-xxhdpi-v23/" +
-                                        source.get(i));
-                        nativeApp2.waitFor();
+                    nativeApp2.waitFor();
 
-                        eu.chainfire.libsuperuser.Shell.SU.run(
-                                "aapt add " + getActivity().getCacheDir().getAbsolutePath() +
-                                        "/new_header_apk.apk " +
-                                        "assets/overlays/com.android.systemui/" +
-                                        "res/drawable-xxhdpi-v23/" +
-                                        source.get(i));
-                    } catch (IOException e) {
-                        //
-                    } catch (InterruptedException f) {
-                        //
-                    }
+                    eu.chainfire.libsuperuser.Shell.SU.run(
+                            "aapt add " + getActivity().getCacheDir().getAbsolutePath() +
+                                    "/new_header_apk.apk " +
+                                    "assets/overlays/com.android.systemui/" +
+                                    "res/drawable-xxhdpi-v23/" +
+                                    source.get(i));
+                } catch (IOException e) {
+                    //
+                } catch (InterruptedException f) {
+                    //
                 }
+            }
 
 
             if (is_debugging_mode_enabled) Log.e("performAAPTonCommonsAPK",

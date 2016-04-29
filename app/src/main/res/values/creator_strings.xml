@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="card_title">card</string>
+    <string name="card_title">unclassified card</string>
     <string name="settings">settings modifications</string>
     <string name="systemui">systemui modifications</string>
     <string name="framework">framework-res modifications</string>
-    <string name="commons">commons framework modifications</string>
+    <string name="commons">misc. modifications</string>
+    <string name="finalized_card">new theme attributes</string>
     <string name="theme_selection">theme selection</string>
+    <string name="empty">">> nothing to see here&#8230;yet!"</string>
 
     <!-- Settings Tweaks -->
     <string name="settings_rounded_corners">dashboard categories (rounded)</string>
@@ -49,4 +51,7 @@
     <string name="framework_preview_subheading">Information about our devs, maintainers and app features</string>
     <string name="framework_preview">Dark theme modifications example</string>
     <string name="framework_preview_light">Light theme modifications example</string>
+
+    <!-- Common Tweaks -->
+    <string name="commons_themable_google_apps">enable themable google apps theming</string>
 </resources>
