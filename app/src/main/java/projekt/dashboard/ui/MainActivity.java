@@ -154,7 +154,7 @@ public class MainActivity extends BaseDonateActivity implements
                     R.string.home_tab_four, new HeaderImportFragment()));
         }
         if (prefs.getBoolean("advanced_mode_enabled", true)) {
-            mPages.add(new PagesBuilder.Page(R.id.theme_utilities_fragment, R.drawable.tab_recoveries,
+            mPages.add(new PagesBuilder.Page(R.id.theme_utilities_fragment, R.drawable.tab_overlay_picker,
                     R.string.home_tab_eight, new ThemeUtilitiesFragment()));
         }
         if (Shell.SU.available()) {
