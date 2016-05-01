@@ -275,6 +275,12 @@
     <string name="set_wallpaper_using">Set wallpaper using…</string>
 
     <string name="download_cancelled">Download cancelled</string>
+    <string name="homepage_theme_full_supported">You are good to go</string>
+    <string name="homepage_theme_half_supported">theme is not completely installed,please reinstall</string>
+    <string name="homepage_theme_not_supported">theme is not installed</string>
+    <string name="theme_full_snack">You have not installed the theme correctly yet,click here to get yourself redirected to the main theme page</string>
+    <string name="theme_half_snack">It seems you missed some overlays while installing the overlay,click here to complete the installation</string>
+    <string name="theme_not_snack">Theme is not Installed , Please Click to install it</string>
 
     <string-array name="wallpaper_options">
         <item>@string/apply</item>
