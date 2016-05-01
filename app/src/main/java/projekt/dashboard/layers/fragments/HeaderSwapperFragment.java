@@ -452,6 +452,7 @@ public class HeaderSwapperFragment extends BasePageFragment {
 
         protected void onPostExecute(Void result) {
             pd.dismiss();
+            eu.chainfire.libsuperuser.Shell.SU.run("busybox killall com.android.systemui");
         }
 
         private void copyCommonsFile(String theme_dir) {
@@ -717,7 +718,6 @@ public class HeaderSwapperFragment extends BasePageFragment {
             } else {
                 copyFinalizedAPK();
             }
-            eu.chainfire.libsuperuser.Shell.SU.run("busybox killall com.android.systemui");
         }
 
         public void copyFinalizedAPK() {

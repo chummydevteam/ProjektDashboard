@@ -415,6 +415,7 @@ public class ColorChangerFragment extends BasePageFragment {
 
         protected void onPostExecute(Void result) {
             pd.dismiss();
+            eu.chainfire.libsuperuser.Shell.SU.run("busybox killall com.android.systemui");
             Log.e("SecondPhaseTasks", "Function Stopped");
         }
 
@@ -634,7 +635,6 @@ public class ColorChangerFragment extends BasePageFragment {
             } else {
                 copyFinalizedAPK();
             }
-            eu.chainfire.libsuperuser.Shell.SU.run("busybox killall com.android.systemui");
         }
 
         public void copyFinalizedAPK() {

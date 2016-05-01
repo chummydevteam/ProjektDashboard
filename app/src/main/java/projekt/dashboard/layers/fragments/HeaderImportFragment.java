@@ -695,6 +695,7 @@ public class HeaderImportFragment extends BasePageFragment {
 
         protected void onPostExecute(Void result) {
             pd.dismiss();
+            eu.chainfire.libsuperuser.Shell.SU.run("busybox killall com.android.systemui");
         }
     }
 
