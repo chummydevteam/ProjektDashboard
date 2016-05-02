@@ -208,25 +208,6 @@
                 android:layout_marginBottom="@dimen/content_inset"
                 android:visibility="visible" />
 
-            <TextView
-                android:id="@+id/textView1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/zipSpinner"
-                android:layout_gravity="left"
-                android:layout_marginLeft="8dp"
-                android:text="@string/contextualheaderswapper_select_installed_theme"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:textStyle="italic" />
-
-            <Spinner
-                android:id="@+id/spinner1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/textView1"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginBottom="@dimen/content_inset" />
-
             <View
                 android:id="@+id/fakeView"
                 android:layout_width="0dp"
@@ -237,7 +218,7 @@
                 android:id="@+id/textView2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/spinner1"
+                android:layout_below="@id/zipSpinner"
                 android:layout_gravity="left"
                 android:layout_marginLeft="8dp"
                 android:text="@string/contextualheaderimporter_options_before_choosing_picture"

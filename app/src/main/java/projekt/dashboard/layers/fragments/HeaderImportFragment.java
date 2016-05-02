@@ -53,7 +53,7 @@ public class HeaderImportFragment extends BasePageFragment {
 
     public ViewGroup inflation;
     public boolean is_zip_spinner_activated, is_theme_selected;
-    public Spinner spinner, spinner1, spinner2;
+    public Spinner spinner, spinner2;
     public String theme_dir, package_name;
     public FloatingActionButton apply_fab;
     public int counter = 0;
@@ -222,140 +222,6 @@ public class HeaderImportFragment extends BasePageFragment {
                 new secondPhaseAsyncTasks().execute(secondPhaseCommands);
             }
         });
-
-        spinner1 = (Spinner) inflation.findViewById(R.id.spinner1);
-        // Create an ArrayAdapter using the string array and a default spinner layout
-        List<String> list = new ArrayList<String>();
-
-        list.add(getResources().getString(R.string.contextualheaderswapper_select_theme));
-        list.add("dark material // akZent");
-        list.add("blacked out // blakZent");
-
-        // Now lets add all the located themes found that aren't cdt themes
-        File f = new File("/data/resource-cache/");
-        File[] files = f.listFiles();
-        if (files != null) {
-            for (File inFile : files) {
-                if (inFile.isDirectory()) {
-                    if (!inFile.getAbsolutePath().substring(21).equals(
-                            "com.chummy.jezebel.blackedout.donate")) {
-                        if (!inFile.getAbsolutePath().substring(21).equals(
-                                "com.chummy.jezebel.materialdark.donate")) {
-                            if (!inFile.getAbsolutePath().substring(21).equals("projekt.klar")) {
-                                list.add(inFile.getAbsolutePath().substring(21));
-                                counter += 1;
-                            }
-                        } else {
-                            counter += 1;
-                        }
-                    } else {
-                        counter += 1;
-                    }
-                }
-            }
-        }
-        if (counter == 0) {
-            Toast toast = Toast.makeText(getActivity().getApplicationContext(),
-                    getResources().getString(
-                            R.string.contextualheaderswapper_toast_cache_empty_reboot_first),
-                    Toast.LENGTH_LONG);
-            toast.show();
-        }
-        ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(getActivity(),
-                android.R.layout.simple_spinner_item, list);
-        // Specify the layout to use when the list of choices appears
-        adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        // Set On Item Selected Listener
-        spinner1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> arg0, View arg1,
-                                       int pos, long id) {
-                if (pos == 0) {
-                    is_theme_selected = false;
-
-                    if (is_zip_spinner_activated && is_theme_selected) {
-                        apply_fab.show();
-                    } else {
-
-                    }
-                }
-                if (pos == 1) {
-                    if (checkCurrentThemeSelection("com.chummy.jezebel.materialdark.donate")) {
-                        theme_dir = "/data/app/com.chummy.jezebel.materialdark.donate" + "-"
-                                + folder_directory + "/base.apk";
-                        package_name = "com.chummy.jezebel.materialdark.donate";
-                        is_theme_selected = true;
-
-                        if (is_zip_spinner_activated && is_theme_selected) {
-                            apply_fab.show();
-                        } else {
-
-                        }
-                    } else {
-                        Toast toast = Toast.makeText(getActivity().getApplicationContext(),
-                                getResources().getString(
-                                        R.string.akzent_toast_install_before_using),
-                                Toast.LENGTH_LONG);
-                        toast.show();
-                        is_theme_selected = false;
-
-                        if (is_zip_spinner_activated && is_theme_selected) {
-                            apply_fab.show();
-                        } else {
-                            spinner1.setSelection(0);
-                        }
-                    }
-                }
-                if (pos == 2) {
-                    if (checkCurrentThemeSelection("com.chummy.jezebel.blackedout.donate")) {
-                        theme_dir = "/data/app/com.chummy.jezebel.blackedout.donate" + "-"
-                                + folder_directory + "/base.apk";
-                        package_name = "com.chummy.jezebel.blackedout.donate";
-                        is_theme_selected = true;
-
-                        if (is_zip_spinner_activated && is_theme_selected) {
-                            apply_fab.show();
-                        } else {
-                        }
-                    } else {
-                        Toast toast = Toast.makeText(getActivity().getApplicationContext(),
-                                getResources().getString(
-                                        R.string.blakzent_toast_install_before_using),
-                                Toast.LENGTH_LONG);
-                        toast.show();
-                        spinner1.setSelection(0);
-                        is_theme_selected = false;
-
-                        if (is_zip_spinner_activated && is_theme_selected) {
-                            apply_fab.show();
-                        } else {
-                            spinner1.setSelection(0);
-                        }
-                    }
-                } else {
-                    String packageIdentifier = spinner1.getSelectedItem().toString();
-                    if (checkCurrentThemeSelection(packageIdentifier)) {
-                        theme_dir = "/data/app/" + packageIdentifier + "-"
-                                + folder_directory + "/base.apk";
-                        package_name = packageIdentifier;
-                        is_theme_selected = true;
-
-                        if (is_zip_spinner_activated && is_theme_selected) {
-                            apply_fab.show();
-                        } else {
-                        }
-                    }
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> arg0) {
-                // TODO Auto-generated method stub
-
-            }
-        });
-        // Apply the adapter to the spinner
-        spinner1.setAdapter(adapter1);
 
         spinner2 = (Spinner) inflation.findViewById(R.id.zipSpinner);
 
