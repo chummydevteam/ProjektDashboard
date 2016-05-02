@@ -260,4 +260,67 @@
     <string name="set_wallpaper_using">Définir le fond d\'écran avec…</string>
     <string name="download_cancelled">Téléchargement annulé !</string>
 
+    <!-- creator_strings.xml -->
+    <string name="card_title">Carte non classée</string>
+    <string name="settings">Paramètres</string>
+    <string name="systemui">Interface utilisateur</string>
+    <string name="framework">Interface système</string>
+    <string name="commons">Autres modifications</string>
+    <string name="finalized_card">Nouveaux attributs de thème</string>
+    <string name="theme_selection">Sélection du thème</string>
+    <string name="empty">">> Il n\'y a rien à voir ici&#8230; pour le moment !"</string>
+
+    <!-- Settings Tweaks -->
+    <string name="settings_rounded_corners">Catégories de dashboard (arrondie)</string>
+    <string name="settings_show_dashboard_dividers">Séparateurs de dashboard</string>
+    <string name="settings_du_tweaks_icon_presence">Afficher l\'icone des Dirty Tweaks</string>
+    <string name="settings_colorful_tweaks_icon">Icone de DU/PN tweaks coloré</string>
+    <string name="settings_dashboard_title_allcaps">Titres des catégories de dashboard en majuscules</string>
+    <string name="settings_dashboard_title_bold">Titres des catégories de dashboard en gras</string>
+    <string name="settings_dashboard_title_italics">Titres des catégories de dashboard en italique</string>
+    <string name="settings_icon_color">Paramètres de couleur des icônes</string>
+    <string name="settings_title_color">Paramètres de couleur des titres</string>
+    <string name="settings_header_text">SANS FIL ET RÉSEAUX</string>
+    <string name="settings_preview_title">Paramètres</string>
+    <string name="settings_wifi_text">Wi-Fi</string>
+
+    <!-- SystemUI Tweaks -->
+    <string name="qs_accent_color">Couleur principale</string>
+    <string name="qs_tile_icon_color">Couleur des raccourcis</string>
+    <string name="qs_tile_text_color">Couleur du libellé des raccourcis</string>
+
+    <string name="systemui_preview_label_bt">Bluetooth</string>
+    <string name="systemui_preview_label_wifi">Wi-Fi</string>
+    <string name="systemui_preview_label">Wi-Fi de</string>
+    <string name="systemui_preview_default_no_username">Votre </string>
+
+    <!-- Framework Tweaks -->
+    <string name="system_accent">Couleur principale (sombre)</string>
+    <string name="system_accent_dual">Couleur secondaire</string>
+    <string name="system_accent_light">Couleur principale (claire)</string>
+    <string name="system_appbg">Couleur de l\'arrière-plan (sombre)</string>
+    <string name="system_appbg_light">Couleur de l\'arrière-plan (claire)</string>
+    <string name="system_dialog">Couleur des fenêtres intruses (sombre)</string>
+    <string name="system_dialog_light">Couleur des fenêtres intruses (claire)</string>
+    <string name="system_notification_text_1">Texte principal des notifications</string>
+    <string name="system_notification_text_2">Texte secondaire des notifications</string>
+    <string name="system_ripple_color">Ondulations</string>
+    <string name="system_main_color">Couleur principale du thème</string>
+
+    <string name="framework_preview_title">Interface système de dashboard.</string>
+    <string name="framework_preview_heading">informations sur la chummy development team</string>
+    <string name="framework_preview_subheading">Information sur nos développeurs, mainteneurs et fonctionnalités de l\'application</string>
+    <string name="framework_preview">Exemple des modifications du thème sombre</string>
+    <string name="framework_preview_light">Exemple des modifications du thème clair</string>
+
+    <!-- Common Tweaks -->
+    <string name="commons_themable_google_apps">Activer l\'application de thème sur les applications Google</string>
+
+    <!-- Final Card -->
+    <string name="creation_name">Nom de la création :</string>
+    <string name="creator_name">Nom du créateur :</string>
+    <string name="allowed_characters">0123456789.abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ</string> <!-- Do not allow spaces in translations -->
+    <string name="creation_name_empty">(Nom par défaut)</string>
+    <string name="creator_name_empty">(Nom par défaut)</string>
+    <!-- end of creator_strings.xml -->
 </resources>
