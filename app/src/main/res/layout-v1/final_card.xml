@@ -42,7 +42,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:text="creation name:"
+                    android:text="@string/creation_name"
                     android:textColor="@android:color/white" />
 
                 <com.alimuzaffar.lib.widgets.AnimatedEditText
@@ -67,7 +67,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/edittext1"
                     android:layout_marginTop="10dp"
-                    android:text="creator name:"
+                    android:text="@string/creator_name"
                     android:textColor="@android:color/white" />
 
                 <com.alimuzaffar.lib.widgets.AnimatedEditText
