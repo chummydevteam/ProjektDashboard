@@ -1,7 +1,11 @@
 package projekt.dashboard.layers.fragments;
 
+import android.content.ComponentName;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,7 +13,13 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipFile;
+
 import butterknife.ButterKnife;
+import eu.chainfire.libsuperuser.Shell;
 import projekt.dashboard.layers.R;
 import projekt.dashboard.layers.fragments.base.BasePageFragment;
 
@@ -19,6 +29,8 @@ import projekt.dashboard.layers.fragments.base.BasePageFragment;
 public class ThemeUtilitiesFragment extends BasePageFragment {
 
     public boolean sysui, softreboot, reboot;
+    public String vendor = "/system/vendor/overlay";
+    public String mount = "/system";
 
     @Nullable
     @Override
@@ -102,7 +114,44 @@ public class ThemeUtilitiesFragment extends BasePageFragment {
                 }
             }
         });
+
+        Button layersmanager = (Button) inflation.findViewById(R.id.button2);
+        layersmanager.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.e("Changing Activity", "Layers Manager");
+                startActivity(new Intent().setComponent(new ComponentName("com.lovejoy777.rroandlayersmanager", "com.lovejoy777.rroandlayersmanager.MainActivity")));
+            }
+        });
+
+        Button clear = (Button) inflation.findViewById(R.id.button3);
+        clear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.e("cleaning", "cleaning folder");
+                cleanTempFolder();
+            }
+        });
         return inflation;
+    }
+
+    public void cleanTempFolder() {
+        if (ColorChangerFragment.checkbitphone()) {
+            vendor = "/vendor/overlay/";
+            mount = "/vendor";
+        }
+        String mountsys = new String("mount -o remount,rw "+mount);
+        String remountsys = new String("mount -o remount,ro "+mount);
+
+        String command =new String("rm -r "+vendor);
+        eu.chainfire.libsuperuser.Shell.SU.run(mountsys);
+        Log.e("clear",mountsys);
+        eu.chainfire.libsuperuser.Shell.SU.run(command);
+        Log.e("clear",command);
+        eu.chainfire.libsuperuser.Shell.SU.run("mkdir "+vendor);
+        Log.e("clear","mkdir");
+        eu.chainfire.libsuperuser.Shell.SU.run(remountsys);
+        Log.e("clear",remountsys);
     }
 
     @Override
