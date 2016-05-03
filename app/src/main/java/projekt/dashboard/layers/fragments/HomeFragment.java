@@ -55,7 +55,7 @@ public class HomeFragment extends BasePageFragment {
             vendor = "/vendor/overlay";
             mount = "/vendor";
         }
-        File f2 = new File(vendor + "Akzent_Framework.apk");
+        File f2 = new File(vendor, "Akzent_Framework.apk");
         if (f2.exists()) {
             return true;
         }
@@ -68,7 +68,7 @@ public class HomeFragment extends BasePageFragment {
             vendor = "/vendor/overlay";
             mount = "/vendor";
         }
-        File f2 = new File(vendor + "Akzent_SystemUI.apk");
+        File f2 = new File(vendor, "Akzent_SystemUI.apk");
         if (f2.exists()) {
             return true;
         }
@@ -119,80 +119,74 @@ public class HomeFragment extends BasePageFragment {
         if (checkThemeMainSupported(getActivity()) && checkThemeSysSupported(getActivity())) {
             theme_message.setTextColor(getResources().getColor(R.color.attention_color_green));
             theme_message.setText(getResources().getString(R.string.homepage_theme_full_supported));
+            Snackbar snack = Snackbar.make(inflation, prefs.getString("dashboard_username",
+                    getResources().
+                            getString(R.string.
+                                    homepage_dashboard_app_development_status_default_username))
+                            + getResources().
+                            getString(R.string.homepage_dashboard_app_development_status)
+                            + " (" + BuildConfig.VERSION_NAME + ")",
+                    Snackbar.LENGTH_SHORT);
+            snack.show();
         } else if (checkThemeMainSupported(getActivity())) {
             theme_message.setTextColor(getResources().getColor(R.color.attention_color));
             theme_message.setText(getResources().getString(R.string.homepage_theme_half_supported));
+            Snackbar snack = Snackbar.make(inflation, prefs.getString("dashboard_username",
+                    getResources().
+                            getString(R.string.
+                                    homepage_dashboard_app_development_status_default_username))
+                            + getResources().
+                            getString(R.string.homepage_dashboard_app_development_status)
+                            + " (" + BuildConfig.VERSION_NAME + ")",
+                    Snackbar.LENGTH_SHORT);
+            snack.show();
+            final Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    Snackbar.make(inflation, getResources().getString(R.string.theme_half_snack), Snackbar.LENGTH_INDEFINITE).setAction("Install", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            if (isAppInstalled(getActivity(), "com.chummy.aditya.materialdark.layers.donate")) {
+                                startActivity(new Intent().setComponent(new ComponentName("com.lovejoy777.rroandlayersmanager", "com.lovejoy777.rroandlayersmanager.MainActivity")));
+                            } else {
+                                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.chummy.aditya.materialdark.layers.donate")));
+                            }
+                        }
+                    }).show();
+                }
+            }, Snackbar.LENGTH_SHORT + 1000);
         } else if (checkThemeSysSupported(getActivity())) {
             theme_message.setTextColor(getResources().getColor(R.color.attention_color));
             theme_message.setText(getResources().getString(R.string.homepage_theme_half_supported));
+            Snackbar snack = Snackbar.make(inflation, prefs.getString("dashboard_username",
+                    getResources().
+                            getString(R.string.
+                                    homepage_dashboard_app_development_status_default_username))
+                            + getResources().
+                            getString(R.string.homepage_dashboard_app_development_status)
+                            + " (" + BuildConfig.VERSION_NAME + ")",
+                    Snackbar.LENGTH_SHORT);
+            snack.show();
+            final Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    Snackbar.make(inflation, getResources().getString(R.string.theme_half_snack), Snackbar.LENGTH_INDEFINITE).setAction("Install", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            if (isAppInstalled(getActivity(), "com.chummy.aditya.materialdark.layers.donate")) {
+                                startActivity(new Intent().setComponent(new ComponentName("com.lovejoy777.rroandlayersmanager", "com.lovejoy777.rroandlayersmanager.MainActivity")));
+                            } else {
+                                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.chummy.aditya.materialdark.layers.donate")));
+                            }
+                        }
+                    }).show();
+                }
+            }, Snackbar.LENGTH_SHORT + 1000);
         } else {
             theme_message.setTextColor(getResources().getColor(R.color.attention_color));
             theme_message.setText(getResources().getString(R.string.homepage_theme_not_supported));
-        }
-
-        if (checkThemeMainSupported(getActivity()) && checkThemeSysSupported(getActivity())) {
-            Snackbar snack = Snackbar.make(inflation, prefs.getString("dashboard_username",
-                    getResources().
-                            getString(R.string.
-                                    homepage_dashboard_app_development_status_default_username))
-                            + getResources().
-                            getString(R.string.homepage_dashboard_app_development_status)
-                            + " (" + BuildConfig.VERSION_NAME + ")",
-                    Snackbar.LENGTH_SHORT);
-            snack.show();
-        } else if (checkThemeMainSupported(getActivity())) {
-            Snackbar snack = Snackbar.make(inflation, prefs.getString("dashboard_username",
-                    getResources().
-                            getString(R.string.
-                                    homepage_dashboard_app_development_status_default_username))
-                            + getResources().
-                            getString(R.string.homepage_dashboard_app_development_status)
-                            + " (" + BuildConfig.VERSION_NAME + ")",
-                    Snackbar.LENGTH_SHORT);
-            snack.show();
-            final Handler handler = new Handler();
-            handler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    Snackbar.make(inflation, getResources().getString(R.string.theme_half_snack), Snackbar.LENGTH_INDEFINITE).setAction("Install", new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            if (isAppInstalled(getActivity(), "com.chummy.aditya.materialdark.layers.donate")) {
-                                startActivity(new Intent().setComponent(new ComponentName("com.lovejoy777.rroandlayersmanager","com.lovejoy777.rroandlayersmanager")));
-                            } else {
-                                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.chummy.aditya.materialdark.layers.donate")));
-                            }
-                        }
-                    }).show();
-                }
-            }, Snackbar.LENGTH_SHORT + 1000);
-        } else if (checkThemeSysSupported(getActivity())) {
-            Snackbar snack = Snackbar.make(inflation, prefs.getString("dashboard_username",
-                    getResources().
-                            getString(R.string.
-                                    homepage_dashboard_app_development_status_default_username))
-                            + getResources().
-                            getString(R.string.homepage_dashboard_app_development_status)
-                            + " (" + BuildConfig.VERSION_NAME + ")",
-                    Snackbar.LENGTH_SHORT);
-            snack.show();
-            final Handler handler = new Handler();
-            handler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    Snackbar.make(inflation, getResources().getString(R.string.theme_half_snack), Snackbar.LENGTH_INDEFINITE).setAction("Install", new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            if (isAppInstalled(getActivity(), "com.chummy.aditya.materialdark.layers.donate")) {
-                                startActivity(new Intent().setComponent(new ComponentName("com.lovejoy777.rroandlayersmanager","com.lovejoy777.rroandlayersmanager")));
-                            } else {
-                                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.chummy.aditya.materialdark.layers.donate")));
-                            }
-                        }
-                    }).show();
-                }
-            }, Snackbar.LENGTH_SHORT + 1000);
-        } else {
             Snackbar snack = Snackbar.make(inflation, prefs.getString("dashboard_username",
                     getResources().
                             getString(R.string.
@@ -210,7 +204,7 @@ public class HomeFragment extends BasePageFragment {
                         @Override
                         public void onClick(View v) {
                             if (isAppInstalled(getActivity(), "com.chummy.aditya.materialdark.layers.donate")) {
-                                startActivity(new Intent().setComponent(new ComponentName("com.lovejoy777.rroandlayersmanager","com.lovejoy777.rroandlayersmanager")));
+                                startActivity(new Intent().setComponent(new ComponentName("com.lovejoy777.rroandlayersmanager", "com.lovejoy777.rroandlayersmanager.MainActivity")));
                             } else {
                                 startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.chummy.aditya.materialdark.layers.donate")));
                             }
@@ -219,16 +213,6 @@ public class HomeFragment extends BasePageFragment {
                 }
             }, Snackbar.LENGTH_SHORT + 1000);
         }
-
-        Snackbar snack = Snackbar.make(inflation, prefs.getString("dashboard_username",
-                getResources().
-                        getString(R.string.
-                                homepage_dashboard_app_development_status_default_username))
-                        + getResources().
-                        getString(R.string.homepage_dashboard_app_development_status)
-                        + " (" + BuildConfig.VERSION_NAME + ")",
-                Snackbar.LENGTH_SHORT);
-        snack.show();
         return inflation;
     }
 
