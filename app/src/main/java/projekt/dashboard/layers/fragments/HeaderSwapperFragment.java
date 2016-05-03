@@ -67,19 +67,6 @@ public class HeaderSwapperFragment extends BasePageFragment {
     public String mount = "/system";
 
 
-    public void cleanTempFolder() {
-        File dir = getActivity().getFilesDir();
-        deleteRecursive(dir);
-    }
-
-    private void deleteRecursive(File fileOrDirectory) {
-        if (fileOrDirectory.isDirectory())
-            for (File child : fileOrDirectory.listFiles())
-                deleteRecursive(child);
-
-        fileOrDirectory.delete();
-    }
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -296,6 +283,8 @@ public class HeaderSwapperFragment extends BasePageFragment {
                             R.id.croppedImageView);
                     croppedImage.setVisibility(View.VISIBLE);
                     croppedBitmap = cropImageView.getCroppedBitmap();
+                    croppedBitmap.setHeight(1080);
+                    croppedBitmap.setWidth(432);
                     croppedImageView.setImageBitmap(cropImageView.getCroppedBitmap());
                     saveButton.setVisibility(View.VISIBLE);
                     cropButton.setVisibility(View.GONE);
