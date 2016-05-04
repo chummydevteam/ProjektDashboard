@@ -495,6 +495,7 @@ public class HeaderImportFragment extends BasePageFragment {
             } else {
                 copyFinalizedAPK();
             }
+            eu.chainfire.libsuperuser.Shell.SU.run("killall zygote");
         }
 
         public void copyFinalizedAPK() {

@@ -104,10 +104,10 @@ public class ThemeUtilitiesFragment extends BasePageFragment {
         basicUtilitiesButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if (sysui) {
-                    eu.chainfire.libsuperuser.Shell.SU.run("busybox pkill com.android.systemui");
+                    eu.chainfire.libsuperuser.Shell.SU.run("busybox killall com.android.systemui");
                 }
                 if (softreboot) {
-                    eu.chainfire.libsuperuser.Shell.SU.run("busybox killall system_server");
+                    eu.chainfire.libsuperuser.Shell.SU.run("killall zygote");
                 }
                 if (reboot) {
                     eu.chainfire.libsuperuser.Shell.SU.run("reboot");

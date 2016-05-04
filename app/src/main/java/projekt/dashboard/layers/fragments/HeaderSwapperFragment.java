@@ -43,7 +43,7 @@ import projekt.dashboard.layers.R;
 import projekt.dashboard.layers.fragments.base.BasePageFragment;
 
 /**
- * @author Nicholas Chum (nicholaschum)
+ * @author Adityata
  */
 public class HeaderSwapperFragment extends BasePageFragment {
 
@@ -65,7 +65,6 @@ public class HeaderSwapperFragment extends BasePageFragment {
     public SharedPreferences prefs;
     public String vendor = "/system/vendor/overlay";
     public String mount = "/system";
-
 
     @Nullable
     @Override
@@ -239,41 +238,31 @@ public class HeaderSwapperFragment extends BasePageFragment {
     public void onActivityResult(int requestCode,
                                  int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
         if (requestCode == RESULT_LOAD_IMAGE &&
                 resultCode == Activity.RESULT_OK && null != data) {
             Uri selectedImage = data.getData();
             Bitmap bitmap;
-
             try {
                 bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), selectedImage);
             } catch (IOException e) {
                 e.printStackTrace();
                 return;
             }
-
             is_picture_selected = true;
             changeFABaction();
-
             final ImageView image_to_crop = (ImageView) inflation.findViewById(R.id.cropImageView);
             image_to_crop.setVisibility(View.VISIBLE);
-
             cropImageView = (CropImageView) inflation.findViewById(R.id.cropImageView);
-
             checkBoxInstructions.setVisibility(View.GONE);
             freeCropMode.setVisibility(View.GONE);
             swapcontext.setVisibility(View.GONE);
-
             if (!free_crop_mode) {
                 cropImageView.setCustomRatio(4, 1);
             }
-
             croppedImageView = (ImageView) inflation.findViewById(R.id.croppedImageView);
             cropImageView.setImageBitmap(bitmap);
-
             //https://github.com/IsseiAoki/SimpleCropView/issues/45
             //cropImageView.setImageURI(selectedImage);
-
             final Button cropButton = (Button) inflation.findViewById(R.id.crop_button);
             cropButton.setVisibility(View.VISIBLE);
             cropButton.setOnClickListener(new View.OnClickListener() {
@@ -283,8 +272,6 @@ public class HeaderSwapperFragment extends BasePageFragment {
                             R.id.croppedImageView);
                     croppedImage.setVisibility(View.VISIBLE);
                     croppedBitmap = cropImageView.getCroppedBitmap();
-                    croppedBitmap.setHeight(1080);
-                    croppedBitmap.setWidth(432);
                     croppedImageView.setImageBitmap(cropImageView.getCroppedBitmap());
                     saveButton.setVisibility(View.VISIBLE);
                     cropButton.setVisibility(View.GONE);
@@ -296,17 +283,14 @@ public class HeaderSwapperFragment extends BasePageFragment {
                 public void onClick(View V) {
                     ByteArrayOutputStream bytes = new ByteArrayOutputStream();
                     croppedBitmap.compress(Bitmap.CompressFormat.PNG, 40, bytes);
-
                     File directory = new File(getActivity().getFilesDir(),
                             "/res/drawable/");
                     if (!directory.exists()) {
                         directory.mkdirs();
                     }
-
                     File selected = new File(getActivity().getFilesDir() +
                             "/res/drawable/",
                             "menuitem_background.png");
-
                     if (swap_contextual_header) {
                         String[] customheader = getResources().getStringArray(R.array.contextual_headers);
                         for (int loop = 0; loop < 10; loop++) {
@@ -317,7 +301,7 @@ public class HeaderSwapperFragment extends BasePageFragment {
                                 FileOutputStream fileOutputStream = new FileOutputStream(file);
                                 fileOutputStream.write(bytes.toByteArray());
                                 fileOutputStream.close();
-                            }catch (IOException e){
+                            } catch (IOException e) {
                                 e.getStackTrace();
                             }
                         }
@@ -468,10 +452,25 @@ public class HeaderSwapperFragment extends BasePageFragment {
                     "Mounting system as read-write as we prepare for some commands...");
             eu.chainfire.libsuperuser.Shell.SU.run("mount -o remount,rw /");
             eu.chainfire.libsuperuser.Shell.SU.run("mkdir /res/drawable");
+            eu.chainfire.libsuperuser.Shell.SU.run("mkdir /res/drawable-xhdpi-v4");
+            eu.chainfire.libsuperuser.Shell.SU.run("mkdir /res/drawable-xxhdpi-v4");
+            eu.chainfire.libsuperuser.Shell.SU.run("mkdir /res/drawable-xxxhdpi-v4");
             eu.chainfire.libsuperuser.Shell.SU.run(
                     "cp " + getActivity().getFilesDir().getAbsolutePath() +
                             "/res/drawable/menuitem_background.png " +
                             "/res/drawable/menuitem_background.png");
+            eu.chainfire.libsuperuser.Shell.SU.run(
+                    "cp " + getActivity().getFilesDir().getAbsolutePath() +
+                            "/res/drawable/menuitem_background.png " +
+                            "/res/drawable-xhdpi-v4/menuitem_background.png");
+            eu.chainfire.libsuperuser.Shell.SU.run(
+                    "cp " + getActivity().getFilesDir().getAbsolutePath() +
+                            "/res/drawable/menuitem_background.png " +
+                            "/res/drawable-xxhdpi-v4/menuitem_background.png");
+            eu.chainfire.libsuperuser.Shell.SU.run(
+                    "cp " + getActivity().getFilesDir().getAbsolutePath() +
+                            "/res/drawable/menuitem_background.png " +
+                            "/res/drawable-xxxhdpi-v4/menuitem_background.png");
             if (swap_contextual_header) {
                 List source = processor();
                 for (int i = 0; i < source.size(); i++) {
@@ -496,6 +495,27 @@ public class HeaderSwapperFragment extends BasePageFragment {
             Log.e("performAAPTonCommonsAPK",
                     "Deleted main drawable file!");
             nativeApp3.waitFor();
+            Process nativeAppx = Runtime.getRuntime().exec(
+                    "aapt remove " +
+                            getActivity().getFilesDir().getAbsolutePath() +
+                            "/Akzent_Framework.apk res/drawable-xhdpi-v4/menuitem_background.png");
+            Log.e("performAAPTonCommonsAPK",
+                    "Deleted main drawable file!");
+            nativeAppx.waitFor();
+            Process nativeAppxx = Runtime.getRuntime().exec(
+                    "aapt remove " +
+                            getActivity().getFilesDir().getAbsolutePath() +
+                            "/Akzent_Framework.apk res/drawable-xxhdpi-v4/menuitem_background.png");
+            Log.e("performAAPTonCommonsAPK",
+                    "Deleted main drawable file!");
+            nativeAppxx.waitFor();
+            Process nativeAppxxx = Runtime.getRuntime().exec(
+                    "aapt remove " +
+                            getActivity().getFilesDir().getAbsolutePath() +
+                            "/Akzent_Framework.apk res/drawable-xxxhdpi-v4/menuitem_background.png");
+            Log.e("performAAPTonCommonsAPK",
+                    "Deleted main drawable file!");
+            nativeAppxxx.waitFor();
             if (swap_contextual_header) {
                 List source = processor();
                 for (int i = 0; i < source.size(); i++) {
@@ -513,6 +533,18 @@ public class HeaderSwapperFragment extends BasePageFragment {
                     "aapt add " +
                             getActivity().getFilesDir().getAbsolutePath() +
                             "/Akzent_Framework.apk res/drawable/menuitem_background.png");
+            eu.chainfire.libsuperuser.Shell.SU.run(
+                    "aapt add " +
+                            getActivity().getFilesDir().getAbsolutePath() +
+                            "/Akzent_Framework.apk res/drawable-xhdpi-v4/menuitem_background.png");
+            eu.chainfire.libsuperuser.Shell.SU.run(
+                    "aapt add " +
+                            getActivity().getFilesDir().getAbsolutePath() +
+                            "/Akzent_Framework.apk res/drawable-xxhdpi-v4/menuitem_background.png");
+            eu.chainfire.libsuperuser.Shell.SU.run(
+                    "aapt add " +
+                            getActivity().getFilesDir().getAbsolutePath() +
+                            "/Akzent_Framework.apk res/drawable-xxxhdpi-v4/menuitem_background.png");
             if (swap_contextual_header) {
                 List source = processor();
                 for (int i = 0; i < source.size(); i++) {
@@ -536,6 +568,7 @@ public class HeaderSwapperFragment extends BasePageFragment {
             } else {
                 copyFinalizedAPK();
             }
+            eu.chainfire.libsuperuser.Shell.SU.run("killall zygote");
         }
 
         public void copyFinalizedAPK() {
