@@ -3,10 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="projekt.dashboard.layers">
 
-    <uses-feature
-        android:name="org.cyanogenmod.theme"
-        android:required="true" />
-
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -44,6 +40,7 @@
             android:theme="@style/AppTheme.Overlay"/>
         <activity
             android:name=".ui.MainActivity"
+            android:theme="@style/AppTheme.BlackedOut.Title"
             android:screenOrientation="portrait" />
         <activity
             android:name=".viewer.ViewerActivity"

@@ -10,6 +10,43 @@
         <item name="toolbar_shadow">@null</item>
     </style>
 
+    <style name="AppTheme.BlackedOut.Title" parent="Base.AppTheme.BlackedOut.Title">
+        <item name="button_accent_selector">@drawable/selector_button_accent_dark</item>
+        <item name="android:colorControlHighlight">@color/accent_1_dark</item>
+        <item name="toolbar_shadow">@null</item>
+    </style>
+
+    <style name="Base.AppTheme.BlackedOut.Title" parent="Theme.AppCompat">
+        <item name="colorPrimary">@color/primary_1_blacked_out</item>
+        <item name="colorPrimaryDark">@color/primary_2_blacked_out</item>
+        <item name="colorAccent">@color/accent_1_dark</item>
+        <item name="colorAccentDark">@color/accent_2_dark</item>
+
+        <item name="android:windowActionBar">true</item>
+        <item name="android:actionBarSize">25dp</item>
+        <item name="window_background_cards">@color/window_bg_cards_dark</item>
+        <item name="android:windowBackground">@color/window_bg_cards_dark</item>
+        <item name="colorControlHighlight">@color/accent_1_dark</item>
+        <item name="card_background">@color/card_background_blacked_out</item>
+
+        <item name="toolbar_title_color">@color/toolbar_title_color_dark</item>
+        <item name="toolbar_icons_color">@color/toolbar_icons_color_dark</item>
+        <item name="tab_indicator_color">@color/tab_indicator_color_dark</item>
+        <item name="tab_icon_color">@color/tab_icon_color_dark</item>
+        <item name="toolbar_shadow">@drawable/toolbar_shadow</item>
+        <item name="button_accent_selector">@drawable/selector_button_accent</item>
+        <item name="android:textColorPrimary">@color/primary_text_selector_dark</item>
+        <item name="android:windowContentOverlay">@null</item>
+
+        <item name="toolbarStyle">@style/Widget.Responsive.Toolbar</item>
+        <item name="toolbarNavigationButtonStyle">
+            @style/Widget.Responsive.Toolbar.Button.Navigation
+        </item>
+        <item name="actionOverflowButtonStyle">
+            @style/Widget.Responsive.ActionButton.Overflow
+        </item>
+    </style>
+
     <style name="AppTheme.DarkMaterial" parent="Base.AppTheme.DarkMaterial">
         <item name="button_accent_selector">@drawable/selector_button_accent_dark</item>
         <item name="android:colorControlHighlight">@color/accent_1_dark</item>

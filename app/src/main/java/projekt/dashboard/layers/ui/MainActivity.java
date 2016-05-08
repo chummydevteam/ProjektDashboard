@@ -1,6 +1,7 @@
 package projekt.dashboard.layers.ui;
 
 import android.annotation.TargetApi;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -8,6 +9,7 @@ import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -19,6 +21,7 @@ import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewTreeObserver;
@@ -26,6 +29,19 @@ import android.widget.LinearLayout;
 
 import com.afollestad.bridge.Bridge;
 import com.afollestad.materialdialogs.util.DialogUtils;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -58,6 +74,14 @@ public class MainActivity extends BaseDonateActivity implements
 
     public RecyclerView mRecyclerView;
     public SharedPreferences prefs;
+    final String PREFS_NAME = "MyPrefsFile";
+    String link64 = "https://dl.dropboxusercontent.com/u/" +
+            "2429389/dashboard.%20files/aapt-64";
+    String link = "https://dl.dropboxusercontent.com/u/" +
+            "2429389/dashboard.%20files/aapt";
+    public String vendor = "/system/vendor/overlay";
+    public String mount = "/system";
+
     @Bind(R.id.toolbar)
     Toolbar mToolbar;
     @Nullable
@@ -94,7 +118,21 @@ public class MainActivity extends BaseDonateActivity implements
         setupPages();
         setupPager();
         setupTabs();
+        prefs = PreferenceManager.getDefaultSharedPreferences(this);
 
+        SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+        if (settings.getBoolean("my_first_time", true)) {
+            //the app is being launched for first time, do something
+            if (isNetworkAvailable()) {
+                if (HomeFragment.checkThemeMainSupported(this) && HomeFragment.checkThemeSysSupported(this)) {
+                    Log.e("Switcher", "First time");
+                    Log.e("DownloadAAPT", "Calling Function");
+                    downloadAAPT();
+                    // record the fact that the app has been started at least once
+                    settings.edit().putBoolean("my_first_time", false).commit();
+                }
+            }
+        }
 
         // Restore last selected page, tab/nav-drawer-item
         if (Config.get().persistSelectedPage()) {
@@ -105,6 +143,140 @@ public class MainActivity extends BaseDonateActivity implements
             if (mNavView != null) invalidateNavViewSelection(lastPage);
         }
         processIntent(getIntent());
+    }
+
+    public void downloadAAPT() {
+        Log.e("DownloadAAPT", "Function Called");
+        Log.e("DownloadAAPT", "Function Started");
+        Log.e("Checkbitphone", "Calling Function");
+        boolean flag = ColorChangerFragment.checkbitphone();
+        if (flag) {
+            Log.e("DownloadAAPT", "64 Bit Active");
+            Log.e("64 bit Device ", Build.DEVICE + " Found,now changing the vendor and mount");
+            vendor = "/vendor/overlay";
+            mount = "/vendor";
+            Log.e("64 bit Device ", Build.DEVICE + " changed the vendor and mount");
+            String[] downloadCommands = {link64,
+                    "aapt"};
+            Log.e("DownloadindResources", "Calling Function");
+            new downloadResources().execute(downloadCommands);
+            Log.e("DownloadAAPT", "Function Stopped");
+        } else
+
+        {
+            Log.e("DownloadAAPT", "32 Bit Active");
+            Log.e("32 bit Device ", Build.DEVICE + " Found,now changing the vendor and mount");
+            vendor = "/system/vendor/overlay";
+            mount = "/system";
+            Log.e("32 bit Device ", Build.DEVICE + " changed the vendor and mount");
+            String[] downloadCommands = {link,
+                    "aapt"};
+            new downloadResources().execute(downloadCommands);
+            Log.e("DownloadAAPT", "Function Stopped");
+        }
+    }
+
+    private class downloadResources extends AsyncTask<String, Integer, String> {
+
+        private ProgressDialog pd = new ProgressDialog(MainActivity.this);
+
+        @Override
+        protected void onPreExecute() {
+            Log.e("Downloadind Resources", "Function Called");
+            Log.e("Downloadind Resources", "Function Started");
+            pd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            pd.setMessage("Downloading Resources");
+            pd.setIndeterminate(true);
+            pd.setCancelable(false);
+            pd.show();
+        }
+
+        @Override
+        protected void onProgressUpdate(Integer... progress) {
+            super.onProgressUpdate(progress);
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            pd.setMessage("Download Complete,Getting Things Finalised");
+            Log.e("File Downloaded Found", "Copying File");
+            Log.e("copyAAPT", "Calling Function");
+            copyAAPT();
+            pd.dismiss();
+            Log.e("Downloadind Resources", "Function Stoppped");
+        }
+
+        public void copyAAPT() {
+            Log.e("copyAAPT", "Function Called");
+            Log.e("copyAAPT", "Function Started");
+            Log.e("copyAAPT", "Start");
+            String mount = new String("mount -o remount,rw /");
+            String mountsys = new String("mount -o remount,rw /system");
+            String remount = new String("mount -o remount,ro /");
+            String remountsys = new String("mount -o remount,ro /system");
+            eu.chainfire.libsuperuser.Shell.SU.run(mount);
+            Log.e("copyAAPT", "Mounted /");
+            eu.chainfire.libsuperuser.Shell.SU.run(mountsys);
+            Log.e("copyAAPT", "Mounted " + mount);
+
+            eu.chainfire.libsuperuser.Shell.SU.run(
+                    "cp " +
+                            getFilesDir().getAbsolutePath() +
+                            "/aapt" + " /system/bin/aapt");
+            eu.chainfire.libsuperuser.Shell.SU.run("chmod 777 /system/bin/aapt");
+            Log.e("copyAAPT", "Copied AAPT");
+            eu.chainfire.libsuperuser.Shell.SU.run(remount);
+            Log.e("copyAAPT", "ReMounted /");
+            eu.chainfire.libsuperuser.Shell.SU.run(remountsys);
+            Log.e("copyAAPT", "ReMounted " + mount);
+            Log.e("copyAAPT", "End");
+            Log.e("copyAAPT", "Function Stopped");
+        }
+
+
+        @Override
+        protected String doInBackground(String... sUrl) {
+            try {
+                Log.e("File download", "Started from :" + sUrl[0]);
+                URL url = new URL(sUrl[0]);
+                //URLConnection connection = url.openConnection();
+                File myDir = new File(getFilesDir().getAbsolutePath());
+                HttpClient client = new DefaultHttpClient();
+                HttpPost request = new HttpPost(sUrl[0]);
+                request.setHeader("User-Agent", sUrl[0]);
+
+                HttpResponse response = client.execute(request);
+                // create the directory if it doesnt exist
+                if (!myDir.exists()) myDir.mkdirs();
+
+                File outputFile = new File(myDir, sUrl[1]);
+
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                int fileLength = connection.getContentLength();
+                // download the file
+                InputStream input = new BufferedInputStream(url.openStream());
+                OutputStream output = new FileOutputStream(outputFile);
+
+                byte data[] = new byte[1024];
+                long total = 0;
+                int count;
+
+                while ((count = input.read(data)) != -1) {
+                    total += count;
+                    // publishing the progress....
+                    publishProgress((int) (total * 100 / fileLength));
+                    output.write(data, 0, count);
+                }
+                output.flush();
+                output.close();
+                input.close();
+
+                Log.e("File download", "complete");
+            } catch (Exception e) {
+                Log.e("File download", "error: " + e.getMessage());
+            }
+            return null;
+        }
     }
 
     @Override

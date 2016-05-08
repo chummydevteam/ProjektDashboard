@@ -93,13 +93,14 @@ public class ColorChangerFragment extends BasePageFragment {
         if (settings.getBoolean("my_first_time", true)) {
             //the app is being launched for first time, do something
             if (isNetworkAvailable()) {
-
-                Log.e("Switcher", "First time");
-                Log.e("DownloadAAPT", "Calling Function");
-                downloadAAPT();
-                // record the fact that the app has been started at least once
-                prefs.edit().putString("color_saved", color_picked).commit();
-                settings.edit().putBoolean("my_first_time", false).commit();
+                if (HomeFragment.checkThemeMainSupported(getActivity()) && HomeFragment.checkThemeSysSupported(getActivity())) {
+                    Log.e("Switcher", "First time");
+                    Log.e("DownloadAAPT", "Calling Function");
+                    downloadAAPT();
+                    // record the fact that the app has been started at least once
+                    prefs.edit().putString("color_saved", color_picked).commit();
+                    settings.edit().putBoolean("my_first_time", false).commit();
+                }
             }
         }
 
