@@ -55,7 +55,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="16dp"
-                    android:text="@string/settings_rounded_corners" />
+                    android:text="@string/settings_rounded_corners"
+                    android:visibility="gone" />
 
                 <Switch
                     android:id="@+id/dashboard_title_allcaps"

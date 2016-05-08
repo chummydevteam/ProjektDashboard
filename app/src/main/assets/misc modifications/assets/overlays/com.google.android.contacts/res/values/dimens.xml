@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- You are editing Contacts' Dimensions-->
+
+<resources>
+    <dimen name="contact_browser_list_item_padding_top_or_bottom">12.0dip</dimen>
+    <dimen name="contact_browser_list_item_gap_between_image_and_text">15.0dip</dimen>
+    <dimen name="contact_browser_list_item_photo_size">40.0dip</dimen>
+    <dimen name="contact_browser_list_item_text_indent">8.0dip</dimen>
+    <dimen name="tab_text_size">14.0sp</dimen>
+</resources>
