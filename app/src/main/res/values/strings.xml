@@ -44,12 +44,13 @@
 
     <string name="zipfile_checker_success">file chosen: </string>
     <string name="zipfile_checker_error">File chosen was not a valid ZIP!</string>
-    
+
     <string name="wallpapers_json_url" formatted="false" translatable="false">http://pastebin.com/raw/R0fhp7vd</string>
     <string name="wallpapers_json_url_customworx_du" formatted="false" translatable="false">http://pastebin.com/raw/7bP1Qp5C</string>
     <string name="wallpapers_json_url_customworx_octOS" formatted="false" translatable="false">http://pastebin.com/raw/ia93pUKu</string>
     <string name="wallpapers_json_url_customworx_screwd" formatted="false" translatable="false">http://pastebin.com/raw/5MMtyesr</string>
     <string name="wallpapers_json_url_customworx" formatted="false" translatable="false">http://pastebin.com/raw/dbCArLaF</string>
+    <string name="wallpapers_json_url_gagan_du" formatted="false" translatable="false">http://pastebin.com/raw/CapPghtE</string>
     <string name="wallpapers_json_url_gagan" formatted="false" translatable="false">http://pastebin.com/raw/BwKeCHew</string>
     <string name="wallpapers_json_url_vignesh" formatted="false" translatable="false">http://pastebin.com/raw/9qAZ7ZhB</string>
     <string name="wallpapers_json_url_vignesh_headers" formatted="false" translatable="false">http://pastebin.com/raw/gu68kNdq</string>
@@ -148,6 +149,7 @@
         <item>customworx octos wallpaper pack</item>
         <item>customworx screw\'d wallpaper pack</item>
         <item>customworx wallpaper pack</item>
+        <item>gagan singh du wallpaper pack</item>
         <item>gagan singh wallpaper pack</item>
         <item>vignesh ravi wallpaper pack</item>
     </string-array>
