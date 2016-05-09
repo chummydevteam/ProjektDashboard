@@ -345,7 +345,7 @@ public class WallpapersFragment extends BasePageFragment implements
                         mEmpty.setText(error.getMessage());
                     }
                 } else {
-                    mEmpty.setText(cancelled ? R.string.request_cancelled : R.string.no_wallpapers);
+                    mEmpty.setText(cancelled ? R.string.request_cancelled : R.string.intro_wallpapers);
                     mWallpapers = wallpapers;
                     mAdapter.set(mWallpapers);
                 }

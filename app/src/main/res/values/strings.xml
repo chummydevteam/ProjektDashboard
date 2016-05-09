@@ -45,7 +45,7 @@
     <string name="zipfile_checker_success">file chosen: </string>
     <string name="zipfile_checker_error">File chosen was not a valid ZIP!</string>
 
-    <string name="wallpapers_json_url" formatted="false" translatable="false">http://pastebin.com/raw/R0fhp7vd</string>
+    <string name="wallpapers_json_url" formatted="false" translatable="false">https://raw.githubusercontent.com/nicholaschum/ProjektDashboard/resources/dashboard_welcome.js</string>
     <string name="wallpapers_json_url_customworx_du" formatted="false" translatable="false">http://pastebin.com/raw/7bP1Qp5C</string>
     <string name="wallpapers_json_url_customworx_octOS" formatted="false" translatable="false">http://pastebin.com/raw/ia93pUKu</string>
     <string name="wallpapers_json_url_customworx_screwd" formatted="false" translatable="false">http://pastebin.com/raw/5MMtyesr</string>
@@ -144,7 +144,7 @@
     </string-array>
 
     <string-array name="wallpaper_sources">
-        <item>default wallpaper pack</item>
+        <item>please select a wallpaper pack&#8230;</item>
         <item>customworx du wallpaper pack</item>
         <item>customworx octos wallpaper pack</item>
         <item>customworx screw\'d wallpaper pack</item>
@@ -265,7 +265,7 @@
 
     <string name="write_storage_permission_denied">Write external storage permission
         denied!</string>
-    <string name="no_wallpapers">No wallpapers</string>
+    <string name="intro_wallpapers">select a wallpaper source above and click the restart icon to begin loading wallpapers at launch of dashboard!</string>
     <string name="search_wallpapers">Search wallpapers…</string>
     <string name="reload_from_web">Reload from Web</string>
     <string name="downloading_wallpaper">Downloading wallpaper…</string>
