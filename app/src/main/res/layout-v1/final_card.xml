@@ -25,10 +25,30 @@
             android:textSize="24sp"
             android:textStyle="italic" />
 
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/card_title"
+            android:layout_gravity="left"
+            android:layout_marginLeft="16dp"
+            android:text="@string/creative_mode_card_theme_selection"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textStyle="italic" />
+
+        <Spinner
+            android:layout_below="@+id/textView1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/spinner2"
+            android:layout_marginStart="8dp"
+            android:layout_marginBottom="@dimen/content_inset"
+            android:layout_gravity="center_horizontal" />
+
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@+id/card_title">
+            android:layout_below="@+id/spinner2">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -38,10 +58,20 @@
                 android:paddingStart="16dp">
 
                 <TextView
+                    android:id="@+id/rl_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:text="@string/creative_mode_card_theme_attributes"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textStyle="italic" />
+
+                <TextView
                     android:id="@+id/tv1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
+                    android:layout_below="@+id/rl_title"
+                    android:layout_marginTop="@dimen/content_inset_half"
                     android:text="@string/creation_name"
                     android:textColor="@android:color/white" />
 

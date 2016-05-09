@@ -185,8 +185,8 @@
     <string name="contextualheaderswapper_crop_image">Crop Image</string>
     <string name="contextualheaderswapper_save_set_image">Save and Set Image</string>
     <string name="contextualheaderswapper_toast_cache_empty_reboot_first">Woah there, your cache is currently empty! Please do a reboot first! If you believe this is wrong, try to rebuild your entire cache.</string>
-    <string name="contextualheaderswapper_select_theme">please select a theme...</string>
-    <string name="contextualheaderswapper_select_zip">please select a premade zip...</string>
+    <string name="contextualheaderswapper_select_theme">please select a theme&#8230;</string>
+    <string name="contextualheaderswapper_select_zip">please select a premade zip&#8230;</string>
 
     <string name="colorpicker_description">color switcher</string>
     <string name="colorpicker_description_secondary">this is a highly experimental feature to hotswap your accent colors at runtime (meaning that a full reboot isn\'t necessary and will not require creating and installing a new APK file)\n\nthis has no side effects except battery stats force closing, so to regain battery stats again just rebuild the theme. depending on the tweaks selected, you may need to clear out your recents after performing the color swap.\n</string>

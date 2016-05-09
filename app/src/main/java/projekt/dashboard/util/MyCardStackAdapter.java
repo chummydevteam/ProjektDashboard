@@ -3,6 +3,7 @@ package projekt.dashboard.util;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
@@ -13,15 +14,23 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.SeekBar;
+import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.mutualmobile.cardstack.CardStackAdapter;
 import com.tramsun.libs.prefcompat.Pref;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 import projekt.dashboard.R;
 import projekt.dashboard.colorpicker.ColorPickerDialog;
@@ -34,6 +43,7 @@ public class MyCardStackAdapter extends CardStackAdapter implements
     public Runnable updateSettingsView;
     public SharedPreferences prefs;
     public boolean colorful_icon = true;
+    public int folder_directory;
 
     // ==================================== Settings Tweaks ================================== //
     public boolean category_title_caps = true;
@@ -71,7 +81,6 @@ public class MyCardStackAdapter extends CardStackAdapter implements
         mContext = activity;
         mInflater = LayoutInflater.from(activity);
         bgColorIds = new int[]{
-                R.color.card_bg, // Theme Selection
                 R.color.card1_bg, // Settings
                 R.color.card2_bg, // SystemUI
                 R.color.card3_bg, // Framework
@@ -96,12 +105,11 @@ public class MyCardStackAdapter extends CardStackAdapter implements
 
     @Override
     public View createView(int position, ViewGroup container) {
-        if (position == 0) return getThemeSelectorView(container);
-        if (position == 1) return getSettingsView(container);
-        if (position == 2) return getSystemUIView(container);
-        if (position == 3) return getFrameworksView(container);
-        if (position == 4) return getCommonsView(container);
-        if (position == 5) return getFinalizedView(container);
+        if (position == 0) return getSettingsView(container);
+        if (position == 1) return getSystemUIView(container);
+        if (position == 2) return getFrameworksView(container);
+        if (position == 3) return getCommonsView(container);
+        if (position == 4) return getFinalizedView(container);
 
         CardView root = (CardView) mInflater.inflate(R.layout.card, container, false);
         root.setCardBackgroundColor(ContextCompat.getColor(mContext, bgColorIds[position]));
@@ -110,18 +118,36 @@ public class MyCardStackAdapter extends CardStackAdapter implements
         return root;
     }
 
-    private View getThemeSelectorView(ViewGroup container) {
-        CardView root = (CardView) mInflater.inflate(
-                R.layout.theme_selection_card, container, false);
-        root.setCardBackgroundColor(ContextCompat.getColor(mContext, bgColorIds[0]));
-
-        return root;
+    public boolean checkCurrentThemeSelection(String packageName) {
+        try {
+            mContext.getPackageManager().getApplicationInfo(packageName, 0);
+            File directory1 = new File("/data/app/" + packageName + "-1/base.apk");
+            if (directory1.exists()) {
+                folder_directory = 1;
+                return true;
+            } else {
+                File directory2 = new File("/data/app/" + packageName + "-2/base.apk");
+                if (directory2.exists()) {
+                    folder_directory = 2;
+                    return true;
+                } else {
+                    File directory3 = new File("/data/app/" + packageName + "-3/base.apk");
+                    if (directory3.exists()) {
+                        folder_directory = 3;
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
+            }
+        } catch (PackageManager.NameNotFoundException e) {
+            return false;
+        }
     }
-
 
     private View getSettingsView(ViewGroup container) {
         CardView root = (CardView) mInflater.inflate(R.layout.settings_card, container, false);
-        root.setCardBackgroundColor(ContextCompat.getColor(mContext, bgColorIds[1]));
+        root.setCardBackgroundColor(ContextCompat.getColor(mContext, bgColorIds[0]));
 
         final ImageView wifiIcon = (ImageView) root.findViewById(R.id.wifiIcon);
         final TextView categoryHeader = (TextView) root.findViewById(R.id.categoryHeaderTitle);
@@ -295,7 +321,7 @@ public class MyCardStackAdapter extends CardStackAdapter implements
 
     private View getSystemUIView(ViewGroup container) {
         CardView root = (CardView) mInflater.inflate(R.layout.systemui_card, container, false);
-        root.setCardBackgroundColor(ContextCompat.getColor(mContext, bgColorIds[2]));
+        root.setCardBackgroundColor(ContextCompat.getColor(mContext, bgColorIds[1]));
 
         prefs = PreferenceManager.getDefaultSharedPreferences(mContext);
         final TextView wifiLabel = (TextView) root.findViewById(R.id.wifiLabel);
@@ -390,7 +416,7 @@ public class MyCardStackAdapter extends CardStackAdapter implements
 
     private View getFrameworksView(ViewGroup container) {
         CardView root = (CardView) mInflater.inflate(R.layout.framework_card, container, false);
-        root.setCardBackgroundColor(ContextCompat.getColor(mContext, bgColorIds[3]));
+        root.setCardBackgroundColor(ContextCompat.getColor(mContext, bgColorIds[2]));
 
         final android.support.v7.widget.Toolbar framework_toolbar =
                 (android.support.v7.widget.Toolbar) root.findViewById(R.id.framework_toolbar);
@@ -663,14 +689,107 @@ public class MyCardStackAdapter extends CardStackAdapter implements
 
     private View getCommonsView(ViewGroup container) {
         CardView root = (CardView) mInflater.inflate(R.layout.commons_card, container, false);
-        root.setCardBackgroundColor(ContextCompat.getColor(mContext, bgColorIds[4]));
+        root.setCardBackgroundColor(ContextCompat.getColor(mContext, bgColorIds[3]));
 
         return root;
     }
 
     private View getFinalizedView(ViewGroup container) {
         CardView root = (CardView) mInflater.inflate(R.layout.final_card, container, false);
-        root.setCardBackgroundColor(ContextCompat.getColor(mContext, bgColorIds[5]));
+        root.setCardBackgroundColor(ContextCompat.getColor(mContext, bgColorIds[4]));
+
+        int counter = 0;
+
+        final Spinner spinner1 = (Spinner) root.findViewById(R.id.spinner2);
+        // Create an ArrayAdapter using the string array and a default spinner layout
+        List<String> list = new ArrayList<String>();
+
+        list.add(mContext.getResources().getString(R.string.contextualheaderswapper_select_theme));
+        list.add("dark material // akZent");
+        list.add("blacked out // blakZent");
+
+        // Now lets add all the located themes found that aren't cdt themes
+        File f = new File("/data/resource-cache/");
+        File[] files = f.listFiles();
+        if (files != null) {
+            for (File inFile : files) {
+                if (inFile.isDirectory()) {
+                    if (!inFile.getAbsolutePath().substring(21).equals(
+                            "com.chummy.jezebel.blackedout.donate")) {
+                        if (!inFile.getAbsolutePath().substring(21).equals(
+                                "com.chummy.jezebel.materialdark.donate")) {
+                            if (!inFile.getAbsolutePath().substring(21).equals("projekt.klar")) {
+                                list.add(inFile.getAbsolutePath().substring(21));
+                                counter += 1;
+                            }
+                        } else {
+                            counter += 1;
+                        }
+                    } else {
+                        counter += 1;
+                    }
+                }
+            }
+        }
+        if (counter == 0) {
+            Toast toast = Toast.makeText(mContext.getApplicationContext(), mContext.getResources().getString(R.string.contextualheaderswapper_toast_cache_empty_reboot_first),
+                    Toast.LENGTH_LONG);
+            toast.show();
+        }
+        ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(mContext,
+                android.R.layout.simple_spinner_item, list);
+        // Specify the layout to use when the list of choices appears
+        adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        // Set On Item Selected Listener
+        spinner1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> arg0, View arg1,
+                                       int pos, long id) {
+                String package_name, theme_dir;
+
+                if (pos == 0) {
+
+                }
+                if (pos == 1) {
+                    if (checkCurrentThemeSelection("com.chummy.jezebel.materialdark.donate")) {
+                        theme_dir = "/data/app/com.chummy.jezebel.materialdark.donate" + "-"
+                                + folder_directory + "/base.apk";
+                        package_name = "com.chummy.jezebel.materialdark.donate";
+                    } else {
+                        Toast toast = Toast.makeText(mContext.getApplicationContext(), mContext.getResources().getString(R.string.akzent_toast_install_before_using),
+                                Toast.LENGTH_LONG);
+                        toast.show();
+                    }
+                }
+                if (pos == 2) {
+                    if (checkCurrentThemeSelection("com.chummy.jezebel.blackedout.donate")) {
+                        theme_dir = "/data/app/com.chummy.jezebel.blackedout.donate" + "-"
+                                + folder_directory + "/base.apk";
+                        package_name = "com.chummy.jezebel.blackedout.donate";
+                    } else {
+                        Toast toast = Toast.makeText(mContext.getApplicationContext(), mContext.getResources().getString(R.string.blakzent_toast_install_before_using),
+                                Toast.LENGTH_LONG);
+                        toast.show();
+                        spinner1.setSelection(0);
+                    }
+                } else {
+                    String packageIdentifier = spinner1.getSelectedItem().toString();
+                    if (checkCurrentThemeSelection(packageIdentifier)) {
+                        theme_dir = "/data/app/" + packageIdentifier + "-"
+                                + folder_directory + "/base.apk";
+                        package_name = packageIdentifier;
+                    }
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> arg0) {
+                // TODO Auto-generated method stub
+
+            }
+        });
+        // Apply the adapter to the spinner
+        spinner1.setAdapter(adapter1);
 
         return root;
     }

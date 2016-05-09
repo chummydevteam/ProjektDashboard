@@ -9,6 +9,9 @@
     <string name="theme_selection">theme selection</string>
     <string name="empty">">> nothing to see here&#8230;yet!"</string>
 
+    <string name="creative_mode_card_theme_selection">select installed theme:</string>
+    <string name="creative_mode_card_theme_attributes">new theme attributes:</string>
+
     <!-- Settings Tweaks -->
     <string name="settings_rounded_corners">dashboard categories (rounded)</string>
     <string name="settings_show_dashboard_dividers">dashboard dividers</string>
