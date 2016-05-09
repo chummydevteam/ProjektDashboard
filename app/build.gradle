@@ -24,7 +24,7 @@ android {
 
     defaultConfig {
         applicationId "projekt.dashboard.layers"
-        minSdkVersion 23
+        minSdkVersion 21
         targetSdkVersion 23
         versionCode 3
         versionName "test2"
