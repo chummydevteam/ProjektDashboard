@@ -81,10 +81,10 @@ public class MyCardStackAdapter extends CardStackAdapter implements
         mContext = activity;
         mInflater = LayoutInflater.from(activity);
         bgColorIds = new int[]{
-                R.color.card1_bg, // Settings
-                R.color.card2_bg, // SystemUI
-                R.color.card3_bg, // Framework
-                R.color.card4_bg, // Finalized Card
+                R.color.card1_bg, // Framework
+                R.color.card2_bg, // Settings
+                R.color.card3_bg, // SystemUI
+                R.color.card4_bg, // Final Card
         };
     }
 
@@ -104,9 +104,9 @@ public class MyCardStackAdapter extends CardStackAdapter implements
 
     @Override
     public View createView(int position, ViewGroup container) {
-        if (position == 0) return getSettingsView(container);
-        if (position == 1) return getSystemUIView(container);
-        if (position == 2) return getFrameworksView(container);
+        if (position == 0) return getFrameworksView(container);
+        if (position == 1) return getSettingsView(container);
+        if (position == 2) return getSystemUIView(container);
         if (position == 3) return getFinalizedView(container);
 
         CardView root = (CardView) mInflater.inflate(R.layout.card, container, false);
@@ -143,278 +143,9 @@ public class MyCardStackAdapter extends CardStackAdapter implements
         }
     }
 
-    private View getSettingsView(ViewGroup container) {
-        CardView root = (CardView) mInflater.inflate(R.layout.settings_card, container, false);
-        root.setCardBackgroundColor(ContextCompat.getColor(mContext, bgColorIds[0]));
-
-        final ImageView wifiIcon = (ImageView) root.findViewById(R.id.wifiIcon);
-        final TextView categoryHeader = (TextView) root.findViewById(R.id.categoryHeaderTitle);
-
-
-        // Colorful DU/PN Tweaks Icon
-
-        final Switch colorful_icon_switch = (Switch) root.findViewById(R.id.colorful_icon);
-        colorful_icon_switch.setOnCheckedChangeListener(
-                new CompoundButton.OnCheckedChangeListener() {
-                    @Override
-                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                        if (isChecked) {
-                            colorful_icon = true;
-                            Log.e("Switch Colorful Icon", colorful_icon + "");
-                        } else {
-                            colorful_icon = false;
-                            Log.e("Switch Colorful Icon", colorful_icon + "");
-                        }
-                    }
-                });
-
-
-        // Dashboard Categories (Rounded)
-
-        final Switch dashboard_round = (Switch) root.findViewById(R.id.dashboard_rounding);
-        dashboard_round.setOnCheckedChangeListener(
-                new CompoundButton.OnCheckedChangeListener() {
-                    @Override
-                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                        if (isChecked) {
-                            dashboard_rounding = true;
-                            Log.e("Dashboard (Rounded)", dashboard_rounding + "");
-                        } else {
-                            dashboard_rounding = false;
-                            Log.e("Dashboard (Rounded)", dashboard_rounding + "");
-                        }
-                    }
-                });
-
-        // Dashboard Categories Title (All Caps)
-
-        final Switch categories_title_caps = (Switch) root.findViewById(
-                R.id.dashboard_title_allcaps);
-        categories_title_caps.setOnCheckedChangeListener(
-                new CompoundButton.OnCheckedChangeListener() {
-                    @Override
-                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                        if (isChecked) {
-                            category_title_caps = true;
-                            Log.e("Categories Title (Caps)", category_title_caps + "");
-                        } else {
-                            category_title_caps = false;
-                            Log.e("Categories Title (Caps)", category_title_caps + "");
-                        }
-                    }
-                });
-
-        // Dashboard Categories Title (Bold)
-
-        final Switch categories_title_bold = (Switch) root.findViewById(
-                R.id.dashboard_title_bold);
-        categories_title_bold.setOnCheckedChangeListener(
-                new CompoundButton.OnCheckedChangeListener() {
-                    @Override
-                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                        if (isChecked) {
-                            category_title_bold = true;
-                            Log.e("Categories Title (Bold)", category_title_bold + "");
-                        } else {
-                            category_title_bold = false;
-                            Log.e("Categories Title (Bold)", category_title_bold + "");
-                        }
-                    }
-                });
-
-        // Dashboard Categories Title (Italics)
-
-        final Switch categories_title_italics = (Switch) root.findViewById(
-                R.id.dashboard_title_italics);
-        categories_title_italics.setOnCheckedChangeListener(
-                new CompoundButton.OnCheckedChangeListener() {
-                    @Override
-                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                        if (isChecked) {
-                            category_title_italics = true;
-                            Log.e("Categories Title (Ita)", category_title_italics + "");
-                        } else {
-                            category_title_italics = false;
-                            Log.e("Categories Title (Ita)", category_title_italics + "");
-                        }
-                    }
-                });
-
-        // Dashboard Dividers
-
-        final Switch dashboard_divider = (Switch) root.findViewById(R.id.dashboard_dividers);
-        dashboard_divider.setOnCheckedChangeListener(
-                new CompoundButton.OnCheckedChangeListener() {
-                    @Override
-                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                        if (isChecked) {
-                            dashboard_dividers = true;
-                            Log.e("Dashboard Dividers", dashboard_dividers + "");
-                        } else {
-                            dashboard_dividers = false;
-                            Log.e("Dashboard Dividers", dashboard_dividers + "");
-                        }
-                    }
-                });
-
-        // Dirty Tweaks Icon Presence
-
-        final Switch dutweaks_icons = (Switch) root.findViewById(R.id.dirty_tweaks_icons);
-        dutweaks_icons.setOnCheckedChangeListener(
-                new CompoundButton.OnCheckedChangeListener() {
-                    @Override
-                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                        if (isChecked) {
-                            dirtytweaks_iconpresence = true;
-                            Log.e("DU Tweaks Icon", dirtytweaks_iconpresence + "");
-                        } else {
-                            dirtytweaks_iconpresence = false;
-                            Log.e("DU Tweaks Icon", dirtytweaks_iconpresence + "");
-                        }
-                    }
-                });
-
-        // Settings Icons Colors
-
-        final ImageView settings_icon_colors = (ImageView) root.findViewById(
-                R.id.settings_icon_colorpicker);
-        settings_icon_colors.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                final ColorPickerDialog cpd = new ColorPickerDialog(
-                        mContext, current_selected_settings_icon_color);
-                cpd.setOnColorChangedListener(new ColorPickerDialog.OnColorChangedListener() {
-                    @Override
-                    public void onColorChanged(int color) {
-                        current_selected_settings_icon_color = color;
-                        settings_icon_colors.setColorFilter(color, PorterDuff.Mode.SRC_ATOP);
-                        wifiIcon.setColorFilter(color, PorterDuff.Mode.SRC_ATOP);
-                    }
-                });
-                cpd.show();
-            }
-        });
-
-        // Settings Title Colors
-
-        final ImageView settings_title_colors = (ImageView) root.findViewById(
-                R.id.settings_title_colorpicker);
-        settings_title_colors.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                final ColorPickerDialog cpd = new ColorPickerDialog(
-                        mContext, current_selected_settings_title_color);
-                cpd.setOnColorChangedListener(new ColorPickerDialog.OnColorChangedListener() {
-                    @Override
-                    public void onColorChanged(int color) {
-                        current_selected_settings_title_color = color;
-                        settings_title_colors.setColorFilter(color, PorterDuff.Mode.SRC_ATOP);
-                        categoryHeader.setTextColor(color);
-                    }
-                });
-                cpd.show();
-            }
-        });
-
-        return root;
-    }
-
-    private View getSystemUIView(ViewGroup container) {
-        CardView root = (CardView) mInflater.inflate(R.layout.systemui_card, container, false);
-        root.setCardBackgroundColor(ContextCompat.getColor(mContext, bgColorIds[1]));
-
-        prefs = PreferenceManager.getDefaultSharedPreferences(mContext);
-        final TextView wifiLabel = (TextView) root.findViewById(R.id.wifiLabel);
-        final TextView bluetoothLabel = (TextView) root.findViewById(R.id.bluetoothLabel);
-        wifiLabel.setText(prefs.getString("dashboard_username",
-                root.getResources().getString(R.string.systemui_preview_default_no_username)) +
-                root.getResources().getString(R.string.systemui_preview_label));
-        final SeekBar brightness = (SeekBar) root.findViewById(R.id.seekBar);
-
-        // QS Accent Colors
-
-        final ImageView qs_accents = (ImageView) root.findViewById(R.id.qs_accent_colorpicker);
-        qs_accents.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                final ColorPickerDialog cpd = new ColorPickerDialog(
-                        mContext, current_selected_qs_accent_color);
-                cpd.setOnColorChangedListener(new ColorPickerDialog.OnColorChangedListener() {
-                    @Override
-                    public void onColorChanged(int color) {
-                        current_selected_qs_accent_color = color;
-                        qs_accents.setColorFilter(color, PorterDuff.Mode.SRC_ATOP);
-                        ColorStateList csl = new ColorStateList(
-                                new int[][]{
-                                        new int[]{android.R.attr.state_pressed},
-                                        new int[]{android.R.attr.state_focused},
-                                        new int[]{}
-                                },
-                                new int[]{
-                                        color, color, color
-                                }
-                        );
-                        brightness.setProgressTintList(csl);
-                        brightness.setThumbTintList(csl);
-                    }
-                });
-                cpd.show();
-            }
-        });
-
-        // QS Icon Colors
-
-        final ImageView qs_tile = (ImageView) root.findViewById(R.id.qs_tile_icon_colorpicker);
-        qs_tile.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                final ColorPickerDialog cpd = new ColorPickerDialog(
-                        mContext, current_selected_qs_tile_color);
-                cpd.setOnColorChangedListener(new ColorPickerDialog.OnColorChangedListener() {
-                    @Override
-                    public void onColorChanged(int color) {
-                        current_selected_qs_tile_color = color;
-                        qs_tile.setColorFilter(color, PorterDuff.Mode.SRC_ATOP);
-                        ColorStateList csl = new ColorStateList(
-                                new int[][]{
-                                        new int[]{android.R.attr.state_pressed},
-                                        new int[]{android.R.attr.state_focused},
-                                        new int[]{}
-                                },
-                                new int[]{
-                                        color, color, color
-                                }
-                        );
-                        bluetoothLabel.setCompoundDrawableTintList(csl);
-                        wifiLabel.setCompoundDrawableTintList(csl);
-                    }
-                });
-                cpd.show();
-            }
-        });
-
-        // QS Title Colors
-
-        final ImageView qs_text = (ImageView) root.findViewById(R.id.qs_tile_text_colorpicker);
-        qs_text.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                final ColorPickerDialog cpd = new ColorPickerDialog(
-                        mContext, current_selected_qs_text_color);
-                cpd.setOnColorChangedListener(new ColorPickerDialog.OnColorChangedListener() {
-                    @Override
-                    public void onColorChanged(int color) {
-                        current_selected_qs_text_color = color;
-                        qs_text.setColorFilter(color, PorterDuff.Mode.SRC_ATOP);
-                        wifiLabel.setTextColor(color);
-                        bluetoothLabel.setTextColor(color);
-                    }
-                });
-                cpd.show();
-            }
-        });
-
-        return root;
-    }
-
     private View getFrameworksView(ViewGroup container) {
         CardView root = (CardView) mInflater.inflate(R.layout.framework_card, container, false);
-        root.setCardBackgroundColor(ContextCompat.getColor(mContext, bgColorIds[2]));
+        root.setCardBackgroundColor(ContextCompat.getColor(mContext, bgColorIds[0]));
 
         final android.support.v7.widget.Toolbar framework_toolbar =
                 (android.support.v7.widget.Toolbar) root.findViewById(R.id.framework_toolbar);
@@ -681,6 +412,275 @@ public class MyCardStackAdapter extends CardStackAdapter implements
             }
         });
 
+
+        return root;
+    }
+
+    private View getSettingsView(ViewGroup container) {
+        CardView root = (CardView) mInflater.inflate(R.layout.settings_card, container, false);
+        root.setCardBackgroundColor(ContextCompat.getColor(mContext, bgColorIds[1]));
+
+        final ImageView wifiIcon = (ImageView) root.findViewById(R.id.wifiIcon);
+        final TextView categoryHeader = (TextView) root.findViewById(R.id.categoryHeaderTitle);
+
+
+        // Colorful DU/PN Tweaks Icon
+
+        final Switch colorful_icon_switch = (Switch) root.findViewById(R.id.colorful_icon);
+        colorful_icon_switch.setOnCheckedChangeListener(
+                new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                        if (isChecked) {
+                            colorful_icon = true;
+                            Log.e("Switch Colorful Icon", colorful_icon + "");
+                        } else {
+                            colorful_icon = false;
+                            Log.e("Switch Colorful Icon", colorful_icon + "");
+                        }
+                    }
+                });
+
+
+        // Dashboard Categories (Rounded)
+
+        final Switch dashboard_round = (Switch) root.findViewById(R.id.dashboard_rounding);
+        dashboard_round.setOnCheckedChangeListener(
+                new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                        if (isChecked) {
+                            dashboard_rounding = true;
+                            Log.e("Dashboard (Rounded)", dashboard_rounding + "");
+                        } else {
+                            dashboard_rounding = false;
+                            Log.e("Dashboard (Rounded)", dashboard_rounding + "");
+                        }
+                    }
+                });
+
+        // Dashboard Categories Title (All Caps)
+
+        final Switch categories_title_caps = (Switch) root.findViewById(
+                R.id.dashboard_title_allcaps);
+        categories_title_caps.setOnCheckedChangeListener(
+                new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                        if (isChecked) {
+                            category_title_caps = true;
+                            Log.e("Categories Title (Caps)", category_title_caps + "");
+                        } else {
+                            category_title_caps = false;
+                            Log.e("Categories Title (Caps)", category_title_caps + "");
+                        }
+                    }
+                });
+
+        // Dashboard Categories Title (Bold)
+
+        final Switch categories_title_bold = (Switch) root.findViewById(
+                R.id.dashboard_title_bold);
+        categories_title_bold.setOnCheckedChangeListener(
+                new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                        if (isChecked) {
+                            category_title_bold = true;
+                            Log.e("Categories Title (Bold)", category_title_bold + "");
+                        } else {
+                            category_title_bold = false;
+                            Log.e("Categories Title (Bold)", category_title_bold + "");
+                        }
+                    }
+                });
+
+        // Dashboard Categories Title (Italics)
+
+        final Switch categories_title_italics = (Switch) root.findViewById(
+                R.id.dashboard_title_italics);
+        categories_title_italics.setOnCheckedChangeListener(
+                new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                        if (isChecked) {
+                            category_title_italics = true;
+                            Log.e("Categories Title (Ita)", category_title_italics + "");
+                        } else {
+                            category_title_italics = false;
+                            Log.e("Categories Title (Ita)", category_title_italics + "");
+                        }
+                    }
+                });
+
+        // Dashboard Dividers
+
+        final Switch dashboard_divider = (Switch) root.findViewById(R.id.dashboard_dividers);
+        dashboard_divider.setOnCheckedChangeListener(
+                new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                        if (isChecked) {
+                            dashboard_dividers = true;
+                            Log.e("Dashboard Dividers", dashboard_dividers + "");
+                        } else {
+                            dashboard_dividers = false;
+                            Log.e("Dashboard Dividers", dashboard_dividers + "");
+                        }
+                    }
+                });
+
+        // Dirty Tweaks Icon Presence
+
+        final Switch dutweaks_icons = (Switch) root.findViewById(R.id.dirty_tweaks_icons);
+        dutweaks_icons.setOnCheckedChangeListener(
+                new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                        if (isChecked) {
+                            dirtytweaks_iconpresence = true;
+                            Log.e("DU Tweaks Icon", dirtytweaks_iconpresence + "");
+                        } else {
+                            dirtytweaks_iconpresence = false;
+                            Log.e("DU Tweaks Icon", dirtytweaks_iconpresence + "");
+                        }
+                    }
+                });
+
+        // Settings Icons Colors
+
+        final ImageView settings_icon_colors = (ImageView) root.findViewById(
+                R.id.settings_icon_colorpicker);
+        settings_icon_colors.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                final ColorPickerDialog cpd = new ColorPickerDialog(
+                        mContext, current_selected_settings_icon_color);
+                cpd.setOnColorChangedListener(new ColorPickerDialog.OnColorChangedListener() {
+                    @Override
+                    public void onColorChanged(int color) {
+                        current_selected_settings_icon_color = color;
+                        settings_icon_colors.setColorFilter(color, PorterDuff.Mode.SRC_ATOP);
+                        wifiIcon.setColorFilter(color, PorterDuff.Mode.SRC_ATOP);
+                    }
+                });
+                cpd.show();
+            }
+        });
+
+        // Settings Title Colors
+
+        final ImageView settings_title_colors = (ImageView) root.findViewById(
+                R.id.settings_title_colorpicker);
+        settings_title_colors.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                final ColorPickerDialog cpd = new ColorPickerDialog(
+                        mContext, current_selected_settings_title_color);
+                cpd.setOnColorChangedListener(new ColorPickerDialog.OnColorChangedListener() {
+                    @Override
+                    public void onColorChanged(int color) {
+                        current_selected_settings_title_color = color;
+                        settings_title_colors.setColorFilter(color, PorterDuff.Mode.SRC_ATOP);
+                        categoryHeader.setTextColor(color);
+                    }
+                });
+                cpd.show();
+            }
+        });
+
+        return root;
+    }
+
+    private View getSystemUIView(ViewGroup container) {
+        CardView root = (CardView) mInflater.inflate(R.layout.systemui_card, container, false);
+        root.setCardBackgroundColor(ContextCompat.getColor(mContext, bgColorIds[2]));
+
+        prefs = PreferenceManager.getDefaultSharedPreferences(mContext);
+        final TextView wifiLabel = (TextView) root.findViewById(R.id.wifiLabel);
+        final TextView bluetoothLabel = (TextView) root.findViewById(R.id.bluetoothLabel);
+        wifiLabel.setText(prefs.getString("dashboard_username",
+                root.getResources().getString(R.string.systemui_preview_default_no_username)) +
+                root.getResources().getString(R.string.systemui_preview_label));
+        final SeekBar brightness = (SeekBar) root.findViewById(R.id.seekBar);
+
+        // QS Accent Colors
+
+        final ImageView qs_accents = (ImageView) root.findViewById(R.id.qs_accent_colorpicker);
+        qs_accents.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                final ColorPickerDialog cpd = new ColorPickerDialog(
+                        mContext, current_selected_qs_accent_color);
+                cpd.setOnColorChangedListener(new ColorPickerDialog.OnColorChangedListener() {
+                    @Override
+                    public void onColorChanged(int color) {
+                        current_selected_qs_accent_color = color;
+                        qs_accents.setColorFilter(color, PorterDuff.Mode.SRC_ATOP);
+                        ColorStateList csl = new ColorStateList(
+                                new int[][]{
+                                        new int[]{android.R.attr.state_pressed},
+                                        new int[]{android.R.attr.state_focused},
+                                        new int[]{}
+                                },
+                                new int[]{
+                                        color, color, color
+                                }
+                        );
+                        brightness.setProgressTintList(csl);
+                        brightness.setThumbTintList(csl);
+                    }
+                });
+                cpd.show();
+            }
+        });
+
+        // QS Icon Colors
+
+        final ImageView qs_tile = (ImageView) root.findViewById(R.id.qs_tile_icon_colorpicker);
+        qs_tile.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                final ColorPickerDialog cpd = new ColorPickerDialog(
+                        mContext, current_selected_qs_tile_color);
+                cpd.setOnColorChangedListener(new ColorPickerDialog.OnColorChangedListener() {
+                    @Override
+                    public void onColorChanged(int color) {
+                        current_selected_qs_tile_color = color;
+                        qs_tile.setColorFilter(color, PorterDuff.Mode.SRC_ATOP);
+                        ColorStateList csl = new ColorStateList(
+                                new int[][]{
+                                        new int[]{android.R.attr.state_pressed},
+                                        new int[]{android.R.attr.state_focused},
+                                        new int[]{}
+                                },
+                                new int[]{
+                                        color, color, color
+                                }
+                        );
+                        bluetoothLabel.setCompoundDrawableTintList(csl);
+                        wifiLabel.setCompoundDrawableTintList(csl);
+                    }
+                });
+                cpd.show();
+            }
+        });
+
+        // QS Title Colors
+
+        final ImageView qs_text = (ImageView) root.findViewById(R.id.qs_tile_text_colorpicker);
+        qs_text.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                final ColorPickerDialog cpd = new ColorPickerDialog(
+                        mContext, current_selected_qs_text_color);
+                cpd.setOnColorChangedListener(new ColorPickerDialog.OnColorChangedListener() {
+                    @Override
+                    public void onColorChanged(int color) {
+                        current_selected_qs_text_color = color;
+                        qs_text.setColorFilter(color, PorterDuff.Mode.SRC_ATOP);
+                        wifiLabel.setTextColor(color);
+                        bluetoothLabel.setTextColor(color);
+                    }
+                });
+                cpd.show();
+            }
+        });
 
         return root;
     }
