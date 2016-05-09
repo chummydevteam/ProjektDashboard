@@ -121,7 +121,9 @@ public class ColorChangerFragment extends BasePageFragment {
                     autorestartSystemUI.setClickable(false);
                     if (is_debugging_mode_enabled) Log.e("CheckBox",
                             "Universal variable to hot reboot ENABLED.");
-                    Toast toast = Toast.makeText(getActivity().getApplicationContext(), getResources().getString(R.string.colorpicker_toast_disable_hot_reboot_switch_systemui_restart),
+                    Toast toast = Toast.makeText(getActivity().getApplicationContext(),
+                            getResources().getString(
+                                    R.string.colorpicker_toast_disable_hot_reboot_switch_systemui_restart),
                             Toast.LENGTH_LONG);
                     toast.show();
                 } else {
@@ -178,8 +180,8 @@ public class ColorChangerFragment extends BasePageFragment {
                         if (isNetworkAvailable()) {
                             if (is_debugging_mode_enabled) Log.e("Initialization",
                                     "Network found, downloading...");
-                            String[] downloadCommands = {"https://dl.dropboxusercontent.com/u/" +
-                                    "2429389/dashboard.%20files/materialdark-resources.apk",
+                            String[] downloadCommands = {"https://github.com/nicholaschum/" +
+                                    "ProjektDashboard/raw/resources/materialdark-resources.apk",
                                     "materialdark"};
                             new downloadResources().execute(downloadCommands);
                             String[] firstPhaseCommands = {"materialdark"};
@@ -230,8 +232,9 @@ public class ColorChangerFragment extends BasePageFragment {
                         if (isNetworkAvailable()) {
                             if (is_debugging_mode_enabled) Log.e("Initialization",
                                     "Network found, downloading...");
-                            String[] downloadCommands = {"https://dl.dropboxusercontent.com/u/" +
-                                    "2429389/dashboard.%20files/stock-materialdark-resources.apk",
+                            String[] downloadCommands = {"https://github.com/nicholaschum/" +
+                                    "ProjektDashboard/raw/resources/" +
+                                    "stock-materialdark-resources.apk",
                                     "stock-materialdark"};
                             new downloadResources().execute(downloadCommands);
                             String[] firstPhaseCommands = {"stock-materialdark",
@@ -293,8 +296,8 @@ public class ColorChangerFragment extends BasePageFragment {
                         if (isNetworkAvailable()) {
                             if (is_debugging_mode_enabled) Log.e("Initialization",
                                     "Network found, downloading...");
-                            String[] downloadCommands = {"https://dl.dropboxusercontent.com/u/" +
-                                    "2429389/dashboard.%20files/blackedout-resources.apk",
+                            String[] downloadCommands = {"https://github.com/nicholaschum/" +
+                                    "ProjektDashboard/raw/resources/blackedout-resources.apk",
                                     "blackedout"};
                             new downloadResources().execute(downloadCommands);
                             String[] firstPhaseCommands = {"blackedout"};
@@ -345,8 +348,8 @@ public class ColorChangerFragment extends BasePageFragment {
                         if (isNetworkAvailable()) {
                             if (is_debugging_mode_enabled) Log.e("Initialization",
                                     "Network found, downloading...");
-                            String[] downloadCommands = {"https://dl.dropboxusercontent.com/u/" +
-                                    "2429389/dashboard.%20files/stock-blackedout-resources.apk",
+                            String[] downloadCommands = {"https://github.com/nicholaschum/" +
+                                    "ProjektDashboard/raw/resources/stock-blackedout-resources.apk",
                                     "stock-blackedout"};
                             new downloadResources().execute(downloadCommands);
                             String[] firstPhaseCommands = {"stock-blackedout",
