@@ -5,7 +5,7 @@
     xmlns:fab="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    card_view:cardBackgroundColor="@color/card5_bg"
+    card_view:cardBackgroundColor="@color/card4_bg"
     card_view:cardCornerRadius="6dp"
     card_view:cardElevation="6dp"
     card_view:cardUseCompatPadding="true">
@@ -37,13 +37,13 @@
             android:textStyle="italic" />
 
         <Spinner
-            android:layout_below="@+id/textView1"
+            android:id="@+id/spinner2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/spinner2"
-            android:layout_marginStart="8dp"
+            android:layout_below="@+id/textView1"
+            android:layout_gravity="center_horizontal"
             android:layout_marginBottom="@dimen/content_inset"
-            android:layout_gravity="center_horizontal" />
+            android:layout_marginStart="8dp" />
 
         <ScrollView
             android:layout_width="match_parent"
@@ -116,11 +116,21 @@
                     app:animateTextClear="true"
                     app:animationType="popIn" />
 
+                <Switch
+                    android:id="@+id/themable_gapps"
+                    style="@style/ShadowBlackTextWhite"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/edittext2"
+                    android:layout_marginTop="5dp"
+                    android:checked="false"
+                    android:text="@string/commons_themable_google_apps" />
+
                 <com.github.clans.fab.FloatingActionButton
                     android:id="@+id/fab"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/edittext2"
+                    android:layout_below="@+id/themable_gapps"
                     android:layout_centerInParent="true"
                     android:layout_gravity="bottom|end"
                     android:layout_marginBottom="8dp"
