@@ -131,7 +131,7 @@ public class HomeFragment extends BasePageFragment {
         mainImage.setOnClickListener((new View.OnClickListener() {
             public void onClick(View v) {
                 if (!prefs.getBoolean("advanced_mode_enabled", true)) {
-                    if (current_pressed_count < 14) {
+                    if (current_pressed_count < 9000) {
                         current_pressed_count += 1;
                     } else {
                         if (!clicked_after_seventh) {
@@ -160,7 +160,7 @@ public class HomeFragment extends BasePageFragment {
 
                     }
                 } else {
-                    if (current_pressed_count < 14) {
+                    if (current_pressed_count < 9000) {
                         current_pressed_count += 1;
                     } else {
                         if (!clicked_after_seventh) {
