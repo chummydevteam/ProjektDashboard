@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--You are editing Settings' Colors-->
-
-<resources>
-	<!-- Edits the background in settings-->
-		<color name="dashboard_background_color">@android:color/black</color>
-</resources>
