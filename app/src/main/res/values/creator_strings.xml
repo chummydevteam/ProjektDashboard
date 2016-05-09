@@ -3,7 +3,7 @@
     <string name="card_title">unclassified card</string>
     <string name="settings">settings modifications</string>
     <string name="systemui">systemui modifications</string>
-    <string name="framework">framework-res modifications</string>
+    <string name="framework">framework modifications</string>
     <string name="commons">misc. modifications</string>
     <string name="finalized_card">theme configuration</string>
     <string name="theme_selection">theme selection</string>
