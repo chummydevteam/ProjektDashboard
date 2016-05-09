@@ -319,7 +319,8 @@
     <!-- Final Card -->
     <string name="creation_name">Nom de la création :</string>
     <string name="creator_name">Nom du créateur :</string>
-    <string name="allowed_characters">0123456789.abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ</string> <!-- Do not allow spaces in translations -->
+    <string name="allowed_characters">0123456789.abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ</string>
+    <!-- Do not allow spaces in translations -->
     <string name="creation_name_empty">(Nom par défaut)</string>
     <string name="creator_name_empty">(Nom par défaut)</string>
     <!-- end of creator_strings.xml -->
