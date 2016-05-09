@@ -154,8 +154,8 @@
         <item>vignesh ravi wallpaper pack</item>
     </string-array>
 
-    <string name="contextualheaderimporter">contextual header importer</string>
-    <string name="contextualheaderimporter_description">contextual header importer</string>
+    <string name="contextualheaderimporter">contextual header pack importer</string>
+    <string name="contextualheaderimporter_description">@string/contextualheaderimporter</string>
     <string name="contextualheaderimporter_description_secondary">this is a highly experimental feature to allow you to set your own custom contextual headers for your systemui notification shade based on pre-made zip files shared by themers. a soft reboot is required for the system to take your changes as we are modifying the actual apk installed on your phone.\n\ndon\'t forget to enable contextual headers (non-poly/hd) in your rom\'s settings! if headers aren\'t set after a soft reboot, clear your systemui cache!\n</string>
     <string name="contextualheaderimporter_select_downloaded_zip">select downloaded pack in \'/storage/0/dashboard.\':</string>
     <string name="contextualheaderimporter_all_themed">all headers themed</string>
@@ -171,7 +171,7 @@
     <string name="contextualheaderimporter_options_before_choosing_picture">advanced options:</string>
 
     <string name="contextualheaderswapper">contextual header swapper</string>
-    <string name="contextualheaderswapper_description">contextual header swapper</string>
+    <string name="contextualheaderswapper_description">@string/contextualheaderswapper</string>
     <string name="contextualheaderswapper_description_secondary">this is a highly experimental feature to allow you to set your own custom contextual headers for your systemui notification shade. a soft reboot is required for the system to take your changes as we are modifying the actual apk installed on your phone.\n\ndon\'t forget to enable contextual headers (non-poly/hd) in your rom\'s settings! if headers aren\'t set after a soft reboot, clear your systemui cache!\n    </string>
     <string name="contextualheaderswapper_current_time_image">current time image:</string>
     <string name="contextualheaderswapper_modifying_contextual_header_file">modifying contextual header file:</string>
@@ -227,8 +227,8 @@
 
     <string name="home_tab_one">dashboard</string>
     <string name="home_tab_two">color switcher</string>
-    <string name="home_tab_three">contextual header swapper</string>
-    <string name="home_tab_four">contextual header importer</string>
+    <string name="home_tab_three">@string/contextualheaderswapper</string>
+    <string name="home_tab_four">@string/contextualheaderimporter_description</string>
     <string name="home_tab_five">theme utilities</string>
     <string name="home_tab_six">wallpapers</string>
     <string name="home_tab_seven">theme creator</string>
