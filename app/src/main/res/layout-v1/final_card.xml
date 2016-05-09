@@ -95,10 +95,11 @@
                     android:layout_gravity="bottom|end"
                     android:layout_marginBottom="8dp"
                     android:layout_marginRight="8dp"
+                    android:layout_marginTop="20dp"
                     android:src="@drawable/ic_done_24dp"
-                    fab:fab_colorNormal="@color/card3_bg"
-                    fab:fab_colorPressed="@color/card4_bg"
-                    fab:fab_colorRipple="@color/card4_bg" />
+                    fab:fab_colorNormal="@color/fab"
+                    fab:fab_colorPressed="@color/fab_pressed"
+                    fab:fab_colorRipple="@color/fab_ripple" />
 
             </RelativeLayout>
         </ScrollView>

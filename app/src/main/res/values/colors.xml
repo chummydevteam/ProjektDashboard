@@ -9,6 +9,10 @@
     <color name="viewer_overlay">#40000000</color>
     <color name="overlay_window_bg">#cc000000</color>
 
+    <color name="fab">#212021</color>
+    <color name="fab_pressed">#ff777777</color>
+    <color name="fab_ripple">#4a777777</color>
+
     // Theme Switcher
     <color name="primary_1_blacked_out">#ff000000</color>
     <color name="primary_2_blacked_out">#ff000000</color>
@@ -34,9 +38,9 @@
     <color name="toolbar_icons_color_dark">@android:color/white</color>
 
     <color name="card_bg">#212021</color>
-    <color name="card1_bg">#2b2a2b</color>
-    <color name="card2_bg">#353335</color>
-    <color name="card3_bg">#3f3d3f</color>
-    <color name="card4_bg">#494749</color>
-    <color name="card5_bg">#535153</color>
+    <color name="card1_bg">#111111</color>
+    <color name="card2_bg">#212021</color>
+    <color name="card3_bg">#111111</color>
+    <color name="card4_bg">#212021</color>
+    <color name="card5_bg">#111111</color>
 </resources>
