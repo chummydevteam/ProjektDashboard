@@ -5,7 +5,7 @@
     <string name="systemui">systemui modifications</string>
     <string name="framework">framework-res modifications</string>
     <string name="commons">misc. modifications</string>
-    <string name="finalized_card">new theme attributes</string>
+    <string name="finalized_card">theme configuration</string>
     <string name="theme_selection">theme selection</string>
     <string name="empty">">> nothing to see here&#8230;yet!"</string>
 
