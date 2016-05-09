@@ -47,7 +47,7 @@ import projekt.dashboard.layers.ui.HeaderPackDownloadActivity;
 import projekt.dashboard.layers.util.ReadXMLFile;
 
 /**
- * @author Adityata
+ * @author Nicholas Chum (nicholaschum)
  */
 public class HeaderImportFragment extends BasePageFragment {
 
@@ -185,7 +185,7 @@ public class HeaderImportFragment extends BasePageFragment {
         inflation = (ViewGroup) inflater.inflate(
                 R.layout.fragment_headersimporter, container, false);
 
-        prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
 
         Button downloadButton = (Button) inflation.findViewById(R.id.downloadButton);
         if (isNetworkAvailable()) {
@@ -322,7 +322,7 @@ public class HeaderImportFragment extends BasePageFragment {
 
     public boolean checkCurrentThemeSelection(String packageName) {
         try {
-            getActivity().getPackageManager().getApplicationInfo(packageName, 0);
+            getContext().getPackageManager().getApplicationInfo(packageName, 0);
             File directory1 = new File("/data/app/" + packageName + "-1/base.apk");
             if (directory1.exists()) {
                 folder_directory = 1;

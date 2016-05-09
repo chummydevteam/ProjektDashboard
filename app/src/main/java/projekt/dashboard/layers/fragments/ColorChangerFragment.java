@@ -52,7 +52,7 @@ import projekt.dashboard.layers.fragments.base.BasePageFragment;
 
 
 /**
- * @author Adityata
+ * @author Nicholas Chum (nicholaschum)
  */
 
 public class ColorChangerFragment extends BasePageFragment {
@@ -87,7 +87,7 @@ public class ColorChangerFragment extends BasePageFragment {
 
         inflation = (ViewGroup) inflater.inflate(
                 R.layout.fragment_colorpicker, container, false);
-        prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
 
         SharedPreferences settings = getActivity().getSharedPreferences(PREFS_NAME, 0);
         if (settings.getBoolean("my_first_time", true)) {

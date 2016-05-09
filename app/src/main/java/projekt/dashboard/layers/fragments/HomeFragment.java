@@ -33,7 +33,7 @@ import projekt.dashboard.layers.R;
 import projekt.dashboard.layers.fragments.base.BasePageFragment;
 
 /**
- * @author Adityata
+ * @author Nicholas Chum (nicholaschum)
  */
 public class HomeFragment extends BasePageFragment {
     public static String vendor = "/system/vendor/overlay";
@@ -93,13 +93,13 @@ public class HomeFragment extends BasePageFragment {
                 R.layout.fragment_homepage, container, false);
 
 
-        prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
 
         Animation anim2;
         if (checkRomSupported(getActivity())) {
-            anim2 = AnimationUtils.loadAnimation(getActivity(), R.anim.spin);
+            anim2 = AnimationUtils.loadAnimation(getContext(), R.anim.spin);
         } else {
-            anim2 = AnimationUtils.loadAnimation(getActivity(), R.anim.shake);
+            anim2 = AnimationUtils.loadAnimation(getContext(), R.anim.shake);
         }
         anim2.reset();
         final ImageView iv2 = (ImageView) inflation.findViewById(R.id.spinnerWheel);

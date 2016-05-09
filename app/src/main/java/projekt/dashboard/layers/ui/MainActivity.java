@@ -67,7 +67,7 @@ import static projekt.dashboard.layers.fragments.WallpapersFragment.RQ_VIEWWALLP
 import static projekt.dashboard.layers.viewer.ViewerActivity.STATE_CURRENT_POSITION;
 
 /**
- * @author Adityata
+ * @author Aidan Follestad (afollestad)
  */
 public class MainActivity extends BaseDonateActivity implements
         NavigationView.OnNavigationItemSelectedListener {

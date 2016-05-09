@@ -74,7 +74,7 @@ public class HeaderSwapperFragment extends BasePageFragment {
         inflation = (ViewGroup) inflater.inflate(
                 R.layout.fragment_headerswapper, container, false);
 
-        prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
 
         apply_fab = (FloatingActionButton) inflation.findViewById(R.id.apply_fab);
         if (prefs.getBoolean("blacked_out_enabled", true)) {
