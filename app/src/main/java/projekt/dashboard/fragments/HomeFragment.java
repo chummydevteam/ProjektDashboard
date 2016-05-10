@@ -10,6 +10,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +24,9 @@ import com.alimuzaffar.lib.widgets.AnimatedEditText;
 import com.michaldrabik.tapbarmenulib.TapBarMenu;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.text.ParseException;
@@ -325,11 +329,32 @@ public class HomeFragment extends BasePageFragment {
                             convertedDate.toString().length());
         } catch (ParseException e) {
         }
+        // Introduce Xposed Framework Checker
+
+        String xposed_version = "";
+
+        File f = new File("/system/framework/XposedBridge.jar");
+        if (f.exists() && !f.isDirectory()) {
+            File file = new File("/system/", "xposed.prop");
+            try {
+                BufferedReader br = new BufferedReader(new FileReader(file));
+                String unparsed_br = br.readLine();
+                xposed_version = unparsed_br.substring(8, 10);
+            } catch (FileNotFoundException e) {
+                Log.e("XposedChecker", "'xposed.prop' could not be found!");
+            } catch (IOException e) {
+                Log.e("XposedChecker", "Unable to parse BufferedReader from 'xposed.prop'");
+            }
+            xposed_version = ", " + "Xposed Framework" + " (" + xposed_version + ")";
+        }
+
         final String appendedStrings = Arrays.toString(myStrings).replaceAll("\\[|\\]", "") +
                 ", " +
-                getResources().getString(R.string.vendor_fingerprint) + " " + parsedDate;
+                getResources().getString(R.string.vendor_fingerprint) + " " +
+                parsedDate + xposed_version;
 
         TextView marqueeText = (TextView) inflation.findViewById(R.id.MarqueeText);
+
         marqueeText.setText(appendedStrings);
 
         marqueeText.setOnClickListener(new View.OnClickListener() {
