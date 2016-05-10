@@ -114,7 +114,6 @@ public class HomeFragment extends BasePageFragment {
 
     @OnClick({R.id.item1, R.id.item2})
     public void onMenuItemClick(View view) {
-        tapBarMenu.close();
         switch (view.getId()) {
             case R.id.item1:
                 if (prefs.getBoolean("blacked_out_enabled", true)) {
@@ -157,8 +156,17 @@ public class HomeFragment extends BasePageFragment {
                                 getActivity().finish();
                             }
                         });
+                alert.setNegativeButton(getResources().getString(
+                                R.string.downloader_dialog_cancel),
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int whichButton) {
+                                //
+                            }
+                        });
                 alert.show();
                 break;
+            default:
+                tapBarMenu.close();
         }
     }
 
