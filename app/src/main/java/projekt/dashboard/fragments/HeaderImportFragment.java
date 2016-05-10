@@ -109,10 +109,9 @@ public class HeaderImportFragment extends BasePageFragment {
     public void checkWhetherZIPisValid(String source, String destination) {
         try {
             net.lingala.zip4j.core.ZipFile zipFile = new net.lingala.zip4j.core.ZipFile(source);
-            if (is_debugging_mode_enabled)
-                Log.e("Unzip", "The ZIP has been located and will now be unzipped...");
+            Log.d("Unzip", "The ZIP has been located and will now be unzipped...");
             zipFile.extractAll(destination);
-            if (is_debugging_mode_enabled) Log.e("Unzip",
+            Log.d("Unzip",
                     "Successfully unzipped the file to the corresponding directory!");
 
             String[] checkerCommands = {destination + "/headers.xml"};
@@ -158,7 +157,7 @@ public class HeaderImportFragment extends BasePageFragment {
             }
 
         } catch (ZipException e) {
-            if (is_debugging_mode_enabled) Log.e("Unzip",
+            Log.d("Unzip",
                     "Failed to unzip the file the corresponding directory. (EXCEPTION)");
             e.printStackTrace();
             is_zip_spinner_activated = false;
@@ -464,12 +463,12 @@ public class HeaderImportFragment extends BasePageFragment {
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                         if (isChecked) {
                             are_we_clearing_cache_after = true;
-                            if (is_debugging_mode_enabled) Log.e("CheckBox",
+                            Log.d("CheckBox",
                                     "SystemUI theme cache will be wiped for this theme " +
                                             "after applying.");
                         } else {
                             are_we_clearing_cache_after = false;
-                            if (is_debugging_mode_enabled) Log.e("CheckBox",
+                            Log.d("CheckBox",
                                     "SystemUI theme cache will NOT be wiped for this theme " +
                                             "after applying.");
                         }
@@ -548,7 +547,7 @@ public class HeaderImportFragment extends BasePageFragment {
             try {
                 copyCommonsFile(theme_dir, header_zip);
             } catch (Exception e) {
-                if (is_debugging_mode_enabled) Log.e("performAAPTonCommonsAPK",
+                Log.d("performAAPTonCommonsAPK",
                         "Caught the exception.");
             }
             return null;
@@ -562,11 +561,11 @@ public class HeaderImportFragment extends BasePageFragment {
             File destination = new File(destinationPath);
             try {
                 FileUtils.copyFile(source, destination);
-                if (is_debugging_mode_enabled) Log.e("copyCommonsFile",
+                Log.d("copyCommonsFile",
                         "Successfully copied commons apk from resource-cache to work directory");
                 unzip(header_zip);
             } catch (IOException e) {
-                if (is_debugging_mode_enabled) Log.e("copyCommonsFile",
+                Log.d("copyCommonsFile",
                         "Failed to copy commons apk from resource-cache to work directory");
                 e.printStackTrace();
             }
@@ -577,14 +576,13 @@ public class HeaderImportFragment extends BasePageFragment {
                 String destination = getActivity().getCacheDir().getAbsolutePath() + "/headers/";
 
                 net.lingala.zip4j.core.ZipFile zipFile = new net.lingala.zip4j.core.ZipFile(source);
-                if (is_debugging_mode_enabled)
-                    Log.e("Unzip", "The ZIP has been located and will now be unzipped...");
+                Log.d("Unzip", "The ZIP has been located and will now be unzipped...");
                 zipFile.extractAll(destination);
-                if (is_debugging_mode_enabled) Log.e("Unzip",
+                Log.d("Unzip",
                         "Successfully unzipped the file to the corresponding directory!");
                 performAAPTonCommonsAPK(processor());
             } catch (ZipException e) {
-                if (is_debugging_mode_enabled) Log.e("Unzip",
+                Log.d("Unzip",
                         "Failed to unzip the file the corresponding directory. (EXCEPTION)");
                 e.printStackTrace();
             }
@@ -626,7 +624,7 @@ public class HeaderImportFragment extends BasePageFragment {
 
             // Create the res/drawable-xxhdpi-v23 directory
 
-            if (is_debugging_mode_enabled) Log.e("postProcess",
+            Log.d("postProcess",
                     "Mounting system as read-write as we prepare for some commands...");
             eu.chainfire.libsuperuser.Shell.SU.run("mount -o remount,rw /");
             eu.chainfire.libsuperuser.Shell.SU.run("mkdir /assets");
@@ -668,7 +666,7 @@ public class HeaderImportFragment extends BasePageFragment {
             }
 
 
-            if (is_debugging_mode_enabled) Log.e("performAAPTonCommonsAPK",
+            Log.d("performAAPTonCommonsAPK",
                     "Successfully performed all AAPT commands.");
 
             // Copy the modified APK to the directory

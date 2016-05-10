@@ -278,12 +278,12 @@ public class HeaderSwapperFragment extends BasePageFragment {
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                         if (isChecked) {
                             are_we_clearing_cache_after = true;
-                            if (is_debugging_mode_enabled) Log.e("CheckBox",
+                            Log.d("CheckBox",
                                     "SystemUI theme cache will be wiped for this theme " +
                                             "after applying.");
                         } else {
                             are_we_clearing_cache_after = false;
-                            if (is_debugging_mode_enabled) Log.e("CheckBox",
+                            Log.d("CheckBox",
                                     "SystemUI theme cache will NOT be wiped for this theme " +
                                             "after applying.");
                         }
@@ -297,11 +297,11 @@ public class HeaderSwapperFragment extends BasePageFragment {
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                         if (isChecked) {
                             free_crop_mode = true;
-                            if (is_debugging_mode_enabled) Log.e("CheckBox",
+                            Log.d("CheckBox",
                                     "Free crop mode for Image Cropper has been ENABLED.");
                         } else {
                             free_crop_mode = false;
-                            if (is_debugging_mode_enabled) Log.e("CheckBox",
+                            Log.d("CheckBox",
                                     "Free crop mode for Image Cropper has been DISABLED.");
                         }
                     }
@@ -395,7 +395,7 @@ public class HeaderSwapperFragment extends BasePageFragment {
 
     public void letsGetStarted() {
         String[] secondPhaseCommands = {theme_dir};
-        if (is_debugging_mode_enabled) Log.e("letsGetStarted", secondPhaseCommands[0]);
+        Log.d("letsGetStarted", secondPhaseCommands[0]);
         new secondPhaseAsyncTasks().execute(secondPhaseCommands);
 
         Button softReboot = (Button) inflation.findViewById(R.id.softreboot);
@@ -572,7 +572,7 @@ public class HeaderSwapperFragment extends BasePageFragment {
                             so.close();
                         }
                     } catch (IOException e) {
-                        if (is_debugging_mode_enabled) Log.e("ImageSaver",
+                        Log.d("ImageSaver",
                                 "Unable to save new file");
                     }
                     resetImageViews();
@@ -610,7 +610,7 @@ public class HeaderSwapperFragment extends BasePageFragment {
             try {
                 copyCommonsFile(theme_dir);
             } catch (Exception e) {
-                if (is_debugging_mode_enabled) Log.e("performAAPTonCommonsAPK",
+                Log.d("performAAPTonCommonsAPK",
                         "Caught the exception.");
             }
             return null;
@@ -642,17 +642,17 @@ public class HeaderSwapperFragment extends BasePageFragment {
             File destination = new File(destinationPath);
             try {
                 FileUtils.copyFile(source, destination);
-                if (is_debugging_mode_enabled) Log.e("copyCommonsFile",
+                Log.d("copyCommonsFile",
                         "Successfully copied commons apk from resource-cache to work directory");
             } catch (IOException e) {
-                if (is_debugging_mode_enabled) Log.e("copyCommonsFile",
+                Log.d("copyCommonsFile",
                         "Failed to copy commons apk from resource-cache to work directory");
                 e.printStackTrace();
             }
             try {
                 performAAPTonCommonsAPK();
             } catch (Exception e) {
-                if (is_debugging_mode_enabled) Log.e("performAAPTonCommonsAPK",
+                Log.d("performAAPTonCommonsAPK",
                         "Could not process file.");
             }
 
@@ -660,7 +660,7 @@ public class HeaderSwapperFragment extends BasePageFragment {
         }
 
         private void performAAPTonCommonsAPK() throws Exception {
-            if (is_debugging_mode_enabled) Log.e("performAAPTonCommonsAPK",
+            Log.d("performAAPTonCommonsAPK",
                     "Mounting system as read-write as we prepare for some commands...");
             eu.chainfire.libsuperuser.Shell.SU.run("mount -o remount,rw /");
             eu.chainfire.libsuperuser.Shell.SU.run("mkdir /assets");
@@ -723,7 +723,7 @@ public class HeaderSwapperFragment extends BasePageFragment {
                                 "/res/drawable-xxhdpi-v23/" + "notifhead_sunset.png" +
                                 " /assets/overlays/com.android.systemui/res/drawable-xxhdpi-v23/" +
                                 "notifhead_sunset.png");
-                if (is_debugging_mode_enabled) Log.e("performAAPTonCommonsAPK",
+                Log.d("performAAPTonCommonsAPK",
                         "Successfully copied all drawables into the root folder.");
             } else {
                 eu.chainfire.libsuperuser.Shell.SU.run(
@@ -731,11 +731,11 @@ public class HeaderSwapperFragment extends BasePageFragment {
                                 "/res/drawable-xxhdpi-v23/" + spinner.getSelectedItem().toString() +
                                 " /assets/overlays/com.android.systemui/res/drawable-xxhdpi-v23/" +
                                 spinner.getSelectedItem().toString());
-                if (is_debugging_mode_enabled) Log.e("performAAPTonCommonsAPK",
+                Log.d("performAAPTonCommonsAPK",
                         "Successfully copied drawable into the root folder.");
             }
 
-            if (is_debugging_mode_enabled) Log.e("performAAPTonCommonsAPK",
+            Log.d("performAAPTonCommonsAPK",
                     "Preparing for clean up on resources...");
 
             if (is_all_selected) {
@@ -745,7 +745,7 @@ public class HeaderSwapperFragment extends BasePageFragment {
                                 "assets/overlays/com.android.systemui/res/drawable-xxhdpi-v23/" +
                                 "notifhead_afternoon.png");
                 nativeApp1.waitFor();
-                if (is_debugging_mode_enabled) Log.e("performAAPTonCommonsAPK",
+                Log.d("performAAPTonCommonsAPK",
                         "Deleted drawable file!");
                 Process nativeApp2 = Runtime.getRuntime().exec(
                         "aapt remove " + getActivity().getCacheDir().getAbsolutePath() +
@@ -753,7 +753,7 @@ public class HeaderSwapperFragment extends BasePageFragment {
                                 "assets/overlays/com.android.systemui/res/drawable-xxhdpi-v23/" +
                                 "notifhead_christmas.png");
                 nativeApp2.waitFor();
-                if (is_debugging_mode_enabled) Log.e("performAAPTonCommonsAPK",
+                Log.d("performAAPTonCommonsAPK",
                         "Deleted drawable file!");
                 Process nativeApp3 = Runtime.getRuntime().exec(
                         "aapt remove " + getActivity().getCacheDir().getAbsolutePath() +
@@ -761,7 +761,7 @@ public class HeaderSwapperFragment extends BasePageFragment {
                                 "assets/overlays/com.android.systemui/res/drawable-xxhdpi-v23/" +
                                 "notifhead_morning.png");
                 nativeApp3.waitFor();
-                if (is_debugging_mode_enabled) Log.e("performAAPTonCommonsAPK",
+                Log.d("performAAPTonCommonsAPK",
                         "Deleted drawable file!");
                 Process nativeApp4 = Runtime.getRuntime().exec(
                         "aapt remove " + getActivity().getCacheDir().getAbsolutePath() +
@@ -769,7 +769,7 @@ public class HeaderSwapperFragment extends BasePageFragment {
                                 "assets/overlays/com.android.systemui/res/drawable-xxhdpi-v23/" +
                                 "notifhead_newyearseve.png");
                 nativeApp4.waitFor();
-                if (is_debugging_mode_enabled) Log.e("performAAPTonCommonsAPK",
+                Log.d("performAAPTonCommonsAPK",
                         "Deleted drawable file!");
                 Process nativeApp5 = Runtime.getRuntime().exec(
                         "aapt remove " + getActivity().getCacheDir().getAbsolutePath() +
@@ -783,7 +783,7 @@ public class HeaderSwapperFragment extends BasePageFragment {
                                 "assets/overlays/com.android.systemui/res/drawable-xxhdpi-v23/" +
                                 "notifhead_noon.png");
                 nativeApp6.waitFor();
-                if (is_debugging_mode_enabled) Log.e("performAAPTonCommonsAPK",
+                Log.d("performAAPTonCommonsAPK",
                         "Deleted drawable file!");
                 Process nativeApp7 = Runtime.getRuntime().exec(
                         "aapt remove " + getActivity().getCacheDir().getAbsolutePath() +
@@ -791,7 +791,7 @@ public class HeaderSwapperFragment extends BasePageFragment {
                                 "assets/overlays/com.android.systemui/res/drawable-xxhdpi-v23/" +
                                 "notifhead_sunrise.png");
                 nativeApp7.waitFor();
-                if (is_debugging_mode_enabled) Log.e("performAAPTonCommonsAPK",
+                Log.d("performAAPTonCommonsAPK",
                         "Deleted drawable file!");
                 Process nativeApp8 = Runtime.getRuntime().exec(
                         "aapt remove " + getActivity().getCacheDir().getAbsolutePath() +
@@ -799,7 +799,7 @@ public class HeaderSwapperFragment extends BasePageFragment {
                                 "assets/overlays/com.android.systemui/res/drawable-xxhdpi-v23/" +
                                 "notifhead_sunset_hdpi.png");
                 nativeApp8.waitFor();
-                if (is_debugging_mode_enabled) Log.e("performAAPTonCommonsAPK",
+                Log.d("performAAPTonCommonsAPK",
                         "Deleted drawable file!");
                 Process nativeApp9 = Runtime.getRuntime().exec(
                         "aapt remove " + getActivity().getCacheDir().getAbsolutePath() +
@@ -807,7 +807,7 @@ public class HeaderSwapperFragment extends BasePageFragment {
                                 "assets/overlays/com.android.systemui/res/drawable-xxhdpi-v23/" +
                                 "notifhead_sunset_xhdpi.png");
                 nativeApp9.waitFor();
-                if (is_debugging_mode_enabled) Log.e("performAAPTonCommonsAPK",
+                Log.d("performAAPTonCommonsAPK",
                         "Deleted drawable file!");
                 Process nativeApp10 = Runtime.getRuntime().exec(
                         "aapt remove " + getActivity().getCacheDir().getAbsolutePath() +
@@ -815,7 +815,7 @@ public class HeaderSwapperFragment extends BasePageFragment {
                                 "assets/overlays/com.android.systemui/res/drawable-xxhdpi-v23/" +
                                 "notifhead_sunset.png");
                 nativeApp10.waitFor();
-                if (is_debugging_mode_enabled) Log.e("performAAPTonCommonsAPK",
+                Log.d("performAAPTonCommonsAPK",
                         "Deleted all drawable files!");
             } else {
                 Process nativeApp1 = Runtime.getRuntime().exec(
@@ -824,7 +824,7 @@ public class HeaderSwapperFragment extends BasePageFragment {
                                 "assets/overlays/com.android.systemui/res/drawable-xxhdpi-v23/" +
                                 spinner.getSelectedItem().toString());
                 nativeApp1.waitFor();
-                if (is_debugging_mode_enabled) Log.e("performAAPTonCommonsAPK",
+                Log.d("performAAPTonCommonsAPK",
                         "Deleted drawable file!");
             }
 
@@ -880,7 +880,7 @@ public class HeaderSwapperFragment extends BasePageFragment {
                                 "/new_header_apk.apk " +
                                 "assets/overlays/com.android.systemui/res/drawable-xxhdpi-v23/" +
                                 "notifhead_sunset.png");
-                if (is_debugging_mode_enabled) Log.e("performAAPTonCommonsAPK",
+                Log.d("performAAPTonCommonsAPK",
                         "Added freshly created photo files...ALL DONE!");
             } else {
                 eu.chainfire.libsuperuser.Shell.SU.run(
@@ -888,10 +888,9 @@ public class HeaderSwapperFragment extends BasePageFragment {
                                 "/new_header_apk.apk " +
                                 "assets/overlays/com.android.systemui/res/drawable-xxhdpi-v23/" +
                                 spinner.getSelectedItem().toString());
-                if (is_debugging_mode_enabled) Log.e("AAPT ADD",
+                Log.d("AAPT ADD",
                         spinner.getSelectedItem().toString());
-                if (is_debugging_mode_enabled)
-                    Log.e("performAAPTonCommonsAPK",
+                Log.d("performAAPTonCommonsAPK",
                             "Added freshly created photo file...ALL DONE!");
             }
 

@@ -47,7 +47,6 @@
     <string name="layout_fragment_colorpicker_select_tweaks">select tweaks:</string>
     <string name="layout_fragment_colorpicker_color_swap_restart_systemui">color swap + restart systemui</string>
     <string name="layout_fragment_colorpicker_color_swap_soft_reboot">color swap + soft reboot</string>
-    <string name="layout_fragment_colorpicker_debugging_mode">debugging mode (advanced logs)</string>
     <string name="layout_fragment_colorpicker_force_update_patched_resource">force update patched resource file</string>
     <string name="layout_fragment_colorpicker_installed_color_switchable_themes">installed color switchable themes:</string>
 
@@ -189,7 +188,6 @@
     <string name="contextualheaderswapper_options_before_choosing_picture">options available before choosing a picture:</string>
     <string name="contextualheaderswapper_autoclear_systemui_cache">autoclear systemui cache</string>
     <string name="contextualheaderswapper_free_crop_mode">free crop mode</string>
-    <string name="contextualheaderswapper_debugging_mode">debugging mode (advanced logs)</string>
     <string name="contextualheaderswapper_soft_reboot_after_modifications">Click here to soft reboot after all modifications</string>
     <string name="contextualheaderswapper_crop_image">Crop Image</string>
     <string name="contextualheaderswapper_save_set_image">Save and Set Image</string>

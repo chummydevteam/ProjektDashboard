@@ -86,19 +86,6 @@
                 android:text="@string/layout_fragment_colorpicker_color_swap_soft_reboot" />
 
             <CheckBox
-                android:id="@+id/switch3"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="7dp"
-                android:layout_marginTop="5dp"
-                android:button="@null"
-                android:drawableRight="?android:attr/listChoiceIndicatorMultiple"
-                android:text="@string/layout_fragment_colorpicker_debugging_mode" />
-
-            <CheckBox
                 android:id="@+id/switch4"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"

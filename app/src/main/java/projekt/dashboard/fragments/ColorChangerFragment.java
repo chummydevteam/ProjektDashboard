@@ -101,11 +101,11 @@ public class ColorChangerFragment extends BasePageFragment {
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                         if (isChecked) {
                             is_autorestart_enabled = true;
-                            if (is_debugging_mode_enabled) Log.e("CheckBox",
+                            Log.d("CheckBox",
                                     "Universal variable to auto restart ENABLED.");
                         } else {
                             is_autorestart_enabled = false;
-                            if (is_debugging_mode_enabled) Log.e("CheckBox",
+                            Log.d("CheckBox",
                                     "Universal variable to auto restart DISABLED.");
                         }
                     }
@@ -119,7 +119,7 @@ public class ColorChangerFragment extends BasePageFragment {
                     is_hotreboot_enabled = true;
                     autorestartSystemUI.setChecked(false);
                     autorestartSystemUI.setClickable(false);
-                    if (is_debugging_mode_enabled) Log.e("CheckBox",
+                    Log.d("CheckBox",
                             "Universal variable to hot reboot ENABLED.");
                     Toast toast = Toast.makeText(getActivity().getApplicationContext(),
                             getResources().getString(
@@ -129,7 +129,7 @@ public class ColorChangerFragment extends BasePageFragment {
                 } else {
                     is_hotreboot_enabled = false;
                     autorestartSystemUI.setClickable(true);
-                    if (is_debugging_mode_enabled) Log.e("CheckBox",
+                    Log.d("CheckBox",
                             "Universal variable to hot reboot DISABLED.");
                 }
             }
@@ -156,11 +156,11 @@ public class ColorChangerFragment extends BasePageFragment {
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                         if (isChecked) {
                             is_force_update_enabled = true;
-                            if (is_debugging_mode_enabled) Log.e("CheckBox",
+                            Log.d("CheckBox",
                                     "Force update has been ENABLED.");
                         } else {
                             is_force_update_enabled = false;
-                            if (is_debugging_mode_enabled) Log.e("CheckBox",
+                            Log.d("CheckBox",
                                     "Force update has been DISABLED.");
                         }
                     }
@@ -175,10 +175,10 @@ public class ColorChangerFragment extends BasePageFragment {
                     File resourceFile = new File(getActivity().getFilesDir(),
                             "materialdark-resources.apk");
                     if (!resourceFile.exists() || is_force_update_enabled) {
-                        if (is_debugging_mode_enabled) Log.e("Initialization",
+                        Log.d("Initialization",
                                 "File not found, attempting to download...");
                         if (isNetworkAvailable()) {
-                            if (is_debugging_mode_enabled) Log.e("Initialization",
+                            Log.d("Initialization",
                                     "Network found, downloading...");
                             String[] downloadCommands = {"https://github.com/nicholaschum/" +
                                     "ProjektDashboard/raw/resources/materialdark-resources.apk",
@@ -201,7 +201,7 @@ public class ColorChangerFragment extends BasePageFragment {
                                     .show();
                         }
                     } else {
-                        if (is_debugging_mode_enabled) Log.e("Initialization",
+                        Log.d("Initialization",
                                 "Download not required, using stored cache...");
                         String[] firstPhaseCommands = {"materialdark"};
                         new firstPhaseAsyncTasks().execute(firstPhaseCommands);
@@ -227,10 +227,10 @@ public class ColorChangerFragment extends BasePageFragment {
                     File resourceFile = new File(getActivity().getFilesDir(),
                             "stock-materialdark-resources.apk");
                     if (!resourceFile.exists() || is_force_update_enabled) {
-                        if (is_debugging_mode_enabled) Log.e("Initialization",
+                        Log.d("Initialization",
                                 "File not found, attempting to download...");
                         if (isNetworkAvailable()) {
-                            if (is_debugging_mode_enabled) Log.e("Initialization",
+                            Log.d("Initialization",
                                     "Network found, downloading...");
                             String[] downloadCommands = {"https://github.com/nicholaschum/" +
                                     "ProjektDashboard/raw/resources/" +
@@ -258,7 +258,7 @@ public class ColorChangerFragment extends BasePageFragment {
                             return false;
                         }
                     } else {
-                        if (is_debugging_mode_enabled) Log.e("Initialization",
+                        Log.d("Initialization",
                                 "Download not required, using stored cache...");
                         String[] firstPhaseCommands = {"stock-materialdark",
                                 "/data/resource-cache/com.chummy.jezebel." +
@@ -291,10 +291,10 @@ public class ColorChangerFragment extends BasePageFragment {
                     File directory = new File(getActivity().getFilesDir(),
                             "blackedout-resources.apk");
                     if (!directory.exists() || is_force_update_enabled) {
-                        if (is_debugging_mode_enabled) Log.e("Initialization",
+                        Log.d("Initialization",
                                 "File not found, attempting to download...");
                         if (isNetworkAvailable()) {
-                            if (is_debugging_mode_enabled) Log.e("Initialization",
+                            Log.d("Initialization",
                                     "Network found, downloading...");
                             String[] downloadCommands = {"https://github.com/nicholaschum/" +
                                     "ProjektDashboard/raw/resources/blackedout-resources.apk",
@@ -317,7 +317,7 @@ public class ColorChangerFragment extends BasePageFragment {
                                     .show();
                         }
                     } else {
-                        if (is_debugging_mode_enabled) Log.e("Initialization",
+                        Log.d("Initialization",
                                 "Download not required, using stored cache...");
                         String[] firstPhaseCommands = {"blackedout"};
                         new firstPhaseAsyncTasks().execute(firstPhaseCommands);
@@ -343,10 +343,10 @@ public class ColorChangerFragment extends BasePageFragment {
                     File resourceFile = new File(getActivity().getFilesDir(),
                             "stock-blackedout-resources.apk");
                     if (!resourceFile.exists() || is_force_update_enabled) {
-                        if (is_debugging_mode_enabled) Log.e("Initialization",
+                        Log.d("Initialization",
                                 "File not found, attempting to download...");
                         if (isNetworkAvailable()) {
-                            if (is_debugging_mode_enabled) Log.e("Initialization",
+                            Log.d("Initialization",
                                     "Network found, downloading...");
                             String[] downloadCommands = {"https://github.com/nicholaschum/" +
                                     "ProjektDashboard/raw/resources/stock-blackedout-resources.apk",
@@ -373,7 +373,7 @@ public class ColorChangerFragment extends BasePageFragment {
                             return false;
                         }
                     } else {
-                        if (is_debugging_mode_enabled) Log.e("Initialization",
+                        Log.d("Initialization",
                                 "Download not required, using stored cache...");
                         String[] firstPhaseCommands = {"stock-blackedout",
                                 "/data/resource-cache/com.chummy.jezebel." +
@@ -506,11 +506,11 @@ public class ColorChangerFragment extends BasePageFragment {
             File destination = new File(destinationPath);
             try {
                 FileUtils.copyFile(source, destination);
-                if (is_debugging_mode_enabled) Log.e("copyCommonsFile",
+                Log.d("copyCommonsFile",
                         "Successfully copied commons apk from resource-cache to work directory");
                 copyFinalizedAPK(prefix, directory, themename);
             } catch (IOException e) {
-                if (is_debugging_mode_enabled) Log.e("copyCommonsFile",
+                Log.d("copyCommonsFile",
                         "Failed to copy commons apk from resource-cache to work directory");
                 e.printStackTrace();
             }
@@ -522,7 +522,7 @@ public class ColorChangerFragment extends BasePageFragment {
                             getActivity().getCacheDir().getAbsolutePath() +
                             "/" + prefix + "-resources.apk " + directory);
             eu.chainfire.libsuperuser.Shell.SU.run("chmod 644 " + directory);
-            if (is_debugging_mode_enabled) Log.e("copyFinalizedAPK",
+            Log.d("copyFinalizedAPK",
                     "Successfully copied the modified resource APK into " +
                             "/data/resource-cache and modified the permissions!");
             cleanTempFolder();
@@ -564,10 +564,10 @@ public class ColorChangerFragment extends BasePageFragment {
             File destination = new File(destinationPath);
             try {
                 FileUtils.copyFile(source, destination);
-                if (is_debugging_mode_enabled) Log.e("copyCommonsFile",
+                Log.d("copyCommonsFile",
                         "Successfully copied commons apk from resource-cache to work directory");
             } catch (IOException e) {
-                if (is_debugging_mode_enabled) Log.e("copyCommonsFile",
+                Log.d("copyCommonsFile",
                         "Failed to copy commons apk from resource-cache to work directory");
                 e.printStackTrace();
             }
@@ -638,7 +638,7 @@ public class ColorChangerFragment extends BasePageFragment {
                     try {
                         compileDummyAPK(theme_dir);
                     } catch (Exception e) {
-                        if (is_debugging_mode_enabled) Log.e("CreateXMLFileException",
+                        Log.d("CreateXMLFileException",
                                 "Could not create Dummy APK (EXCEPTION)");
                     }
                 }
@@ -649,15 +649,14 @@ public class ColorChangerFragment extends BasePageFragment {
                     createXMLfile("accent_color_light.xml", theme_dir);
                 }
             } catch (IOException e) {
-                if (is_debugging_mode_enabled) Log.e("CreateXMLFileException",
+                Log.d("CreateXMLFileException",
                         "Failed to create new file (IOEXCEPTION).");
             }
 
         }
 
         private void compileDummyAPK(String theme_dir) throws Exception {
-            if (is_debugging_mode_enabled)
-                Log.e("CompileDummyAPK", "Beginning to compile dummy APK...");
+            Log.d("CompileDummyAPK", "Beginning to compile dummy APK...");
 
             // Create AndroidManifest.xml first, cutting down the assets file transfer!
 
@@ -690,7 +689,7 @@ public class ColorChangerFragment extends BasePageFragment {
             IOUtils.toString(nativeApp.getInputStream());
             IOUtils.toString(nativeApp.getErrorStream());
             nativeApp.waitFor();
-            if (is_debugging_mode_enabled) Log.e("CompileDummyAPK",
+            Log.d("CompileDummyAPK",
                     "Successfully compiled dummy apk!");
             unzip(theme_dir);
         }
@@ -703,13 +702,12 @@ public class ColorChangerFragment extends BasePageFragment {
 
             try {
                 ZipFile zipFile = new ZipFile(source);
-                if (is_debugging_mode_enabled)
-                    Log.e("Unzip", "The ZIP has been located and will now be unzipped...");
+                Log.d("Unzip", "The ZIP has been located and will now be unzipped...");
                 zipFile.extractAll(destination);
-                if (is_debugging_mode_enabled) Log.e("Unzip",
+                Log.d("Unzip",
                         "Successfully unzipped the file to the corresponding directory!");
             } catch (ZipException e) {
-                if (is_debugging_mode_enabled) Log.e("Unzip",
+                Log.d("Unzip",
                         "Failed to unzip the file the corresponding directory. (EXCEPTION)");
                 e.printStackTrace();
             } finally {
@@ -723,7 +721,7 @@ public class ColorChangerFragment extends BasePageFragment {
 
         private void performAAPTonCommonsAPK(String theme_dir)
                 throws Exception {
-            if (is_debugging_mode_enabled) Log.e("performAAPTonCommonsAPK",
+            Log.d("performAAPTonCommonsAPK",
                     "Mounting system as read-write as we prepare for some commands...");
             eu.chainfire.libsuperuser.Shell.SU.run("mount -o remount,rw /");
             eu.chainfire.libsuperuser.Shell.SU.run("mkdir /res/color-v14");
@@ -740,31 +738,31 @@ public class ColorChangerFragment extends BasePageFragment {
                             "/color-resources/res/color-v14/accent_color.xml " +
                             "/res/color-v14/accent_color.xml");
 
-            if (is_debugging_mode_enabled) Log.e("performAAPTonCommonsAPK",
+            Log.d("performAAPTonCommonsAPK",
                     "Successfully copied all modified accent XMLs into the root folder.");
 
-            if (is_debugging_mode_enabled) Log.e("performAAPTonCommonsAPK",
+            Log.d("performAAPTonCommonsAPK",
                     "Preparing for clean up on common-resources...");
 
             Process nativeApp1 = Runtime.getRuntime().exec(
                     "aapt remove " +
                             getActivity().getCacheDir().getAbsolutePath() +
                             "/common-resources.apk res/color-v14/accent_color_dark.xml");
-            if (is_debugging_mode_enabled) Log.e("performAAPTonCommonsAPK",
+            Log.d("performAAPTonCommonsAPK",
                     "Deleted dark accent file!");
             nativeApp1.waitFor();
             Process nativeApp2 = Runtime.getRuntime().exec(
                     "aapt remove " +
                             getActivity().getCacheDir().getAbsolutePath() +
                             "/common-resources.apk res/color-v14/accent_color_light.xml");
-            if (is_debugging_mode_enabled) Log.e("performAAPTonCommonsAPK",
+            Log.d("performAAPTonCommonsAPK",
                     "Deleted light accent file!");
             nativeApp2.waitFor();
             Process nativeApp3 = Runtime.getRuntime().exec(
                     "aapt remove " +
                             getActivity().getCacheDir().getAbsolutePath() +
                             "/common-resources.apk res/color-v14/accent_color.xml");
-            if (is_debugging_mode_enabled) Log.e("performAAPTonCommonsAPK",
+            Log.d("performAAPTonCommonsAPK",
                     "Deleted main accent file!");
             nativeApp3.waitFor();
 
@@ -772,25 +770,22 @@ public class ColorChangerFragment extends BasePageFragment {
                     "aapt add " +
                             getActivity().getCacheDir().getAbsolutePath() +
                             "/common-resources.apk res/color-v14/accent_color_dark.xml");
-            if (is_debugging_mode_enabled)
-                Log.e("performAAPTonCommonsAPK", "Added freshly created dark accent file...");
+            Log.d("performAAPTonCommonsAPK", "Added freshly created dark accent file...");
             eu.chainfire.libsuperuser.Shell.SU.run(
                     "aapt add " +
                             getActivity().getCacheDir().getAbsolutePath() +
                             "/common-resources.apk res/color-v14/accent_color_light.xml");
-            if (is_debugging_mode_enabled)
-                Log.e("performAAPTonCommonsAPK", "Added freshly created light accent file...");
+            Log.d("performAAPTonCommonsAPK", "Added freshly created light accent file...");
             eu.chainfire.libsuperuser.Shell.SU.run(
                     "aapt add " +
                             getActivity().getCacheDir().getAbsolutePath() +
                             "/common-resources.apk res/color-v14/accent_color.xml");
-            if (is_debugging_mode_enabled)
-                Log.e("performAAPTonCommonsAPK",
+            Log.d("performAAPTonCommonsAPK",
                         "Added freshly created main accent file...ALL DONE!");
 
             eu.chainfire.libsuperuser.Shell.SU.run("rm -r /res/color-v14");
             eu.chainfire.libsuperuser.Shell.SU.run("mount -o remount,ro /");
-            if (is_debugging_mode_enabled) Log.e("performAAPTonCommonsAPK",
+            Log.d("performAAPTonCommonsAPK",
                     "Cleaned up root directory and remounted system as read-only.");
 
             // Finally, let's make sure the directories are pushed to the last command
@@ -803,11 +798,11 @@ public class ColorChangerFragment extends BasePageFragment {
                             getActivity().getCacheDir().getAbsolutePath() +
                             "/common-resources.apk " + directory);
             eu.chainfire.libsuperuser.Shell.SU.run("chmod 644 " + directory);
-            if (is_debugging_mode_enabled) Log.e("copyFinalizedAPK",
+            Log.d("copyFinalizedAPK",
                     "Successfully copied the modified resource APK into " +
                             "/data/resource-cache and modified the permissions!");
             cleanTempFolder();
-            if (is_debugging_mode_enabled) Log.e("cleanTempFolder",
+            Log.d("cleanTempFolder",
                     "Successfully cleaned up the whole work area!");
 
             if (is_autorestart_enabled) {
@@ -840,7 +835,7 @@ public class ColorChangerFragment extends BasePageFragment {
         @Override
         protected String doInBackground(String... sUrl) {
             try {
-                if (is_debugging_mode_enabled) Log.e("File download", "Started from :" + sUrl[0]);
+                Log.d("File download", "Started from :" + sUrl[0]);
                 URL url = new URL(sUrl[0]);
                 //URLConnection connection = url.openConnection();
                 File myDir = new File(getActivity().getFilesDir().getAbsolutePath());
@@ -874,9 +869,9 @@ public class ColorChangerFragment extends BasePageFragment {
                 output.close();
                 input.close();
 
-                if (is_debugging_mode_enabled) Log.e("File download", "complete");
+                Log.d("File download", "complete");
             } catch (Exception e) {
-                if (is_debugging_mode_enabled) Log.e("File download", "error: " + e.getMessage());
+                Log.d("File download", "error: " + e.getMessage());
             }
             return null;
         }

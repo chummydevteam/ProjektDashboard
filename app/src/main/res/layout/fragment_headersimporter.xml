@@ -261,20 +261,6 @@
                 android:drawableRight="?android:attr/listChoiceIndicatorMultiple"
                 android:text="@string/contextualheaderswapper_autoclear_systemui_cache" />
 
-            <CheckBox
-                android:id="@+id/checkBox3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_below="@id/textView2"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginLeft="7dp"
-                android:layout_marginRight="7dp"
-                android:layout_toRightOf="@id/checkBox"
-                android:button="@null"
-                android:drawableRight="?android:attr/listChoiceIndicatorMultiple"
-                android:text="@string/contextualheaderswapper_debugging_mode" />
-
         </RelativeLayout>
 
     </ScrollView>
