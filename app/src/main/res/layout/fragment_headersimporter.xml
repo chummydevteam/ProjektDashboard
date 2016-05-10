@@ -55,6 +55,8 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_below="@id/landingMessageSecondary"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
                 android:background="?attr/card_background"
                 android:clickable="true"
                 android:foreground="?android:selectableItemBackground"

@@ -26,8 +26,8 @@ android {
         applicationId "projekt.dashboard.layers"
         minSdkVersion 21
         targetSdkVersion 23
-        versionCode 3
-        versionName "test2"
+        versionCode 4
+        versionName "test3"
         generatedDensities = []
     }
 
@@ -112,4 +112,5 @@ dependencies {
 
     // Application Welcome Intro
     compile 'com.github.paolorotolo:appintro:3.4.0'
+
 }

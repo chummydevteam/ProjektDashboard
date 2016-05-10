@@ -15,7 +15,7 @@ import com.github.paolorotolo.appintro.AppIntroFragment;
 import projekt.dashboard.layers.R;
 
 /**
- * Created by Adityata
+ * Created by Nicholas on 2016-03-20.
  */
 public class AppIntroduction extends AppIntro {
 
