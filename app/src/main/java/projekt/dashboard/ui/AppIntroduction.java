@@ -9,8 +9,8 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.EditText;
 
+import com.alimuzaffar.lib.widgets.AnimatedEditText;
 import com.github.paolorotolo.appintro.AppIntro;
 import com.github.paolorotolo.appintro.AppIntroFragment;
 
@@ -60,7 +60,7 @@ public class AppIntroduction extends AppIntro {
         LayoutInflater inflater = this.getLayoutInflater();
         final View dialogView = inflater.inflate(R.layout.name_picker_dialog, null);
         alert.setView(dialogView);
-        final EditText textBox = (EditText) dialogView.findViewById(R.id.editText);
+        final AnimatedEditText textBox = (AnimatedEditText) dialogView.findViewById(R.id.editText);
 
         alert.setMessage(getResources().getString(R.string.welcome_back_dialog_message));
         alert.setTitle(getResources().getString(R.string.welcome_back_dialog_title));

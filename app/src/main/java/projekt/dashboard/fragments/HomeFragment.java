@@ -14,11 +14,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.alimuzaffar.lib.widgets.AnimatedEditText;
 import com.michaldrabik.tapbarmenulib.TapBarMenu;
 
 import java.io.BufferedReader;
@@ -132,7 +132,7 @@ public class HomeFragment extends BasePageFragment {
                 LayoutInflater inflater = getActivity().getLayoutInflater();
                 final View dialogView = inflater.inflate(R.layout.name_picker_dialog, null);
                 alert.setView(dialogView);
-                final EditText textBox = (EditText) dialogView.findViewById(R.id.editText);
+                final AnimatedEditText textBox = (AnimatedEditText) dialogView.findViewById(R.id.editText);
 
                 alert.setMessage(getResources().getString(R.string.change_name_dialog_message));
                 alert.setTitle(getResources().getString(R.string.change_name_dialog_title));
