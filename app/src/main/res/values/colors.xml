@@ -9,9 +9,6 @@
     <color name="viewer_overlay">#40000000</color>
     <color name="overlay_window_bg">#cc000000</color>
 
-    <!-- Overriding TapBarMenu Resource-->
-    <color name="red">#212021</color>
-
     <color name="fab">#111111</color>
     <color name="fab_pressed">#4a777777</color>
     <color name="fab_ripple">#4a777777</color>
