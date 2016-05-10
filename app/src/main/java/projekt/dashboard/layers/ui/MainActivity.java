@@ -1,15 +1,13 @@
 package projekt.dashboard.layers.ui;
 
 import android.annotation.TargetApi;
-import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
-import android.os.AsyncTask;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -58,6 +56,7 @@ import projekt.dashboard.layers.fragments.WallpapersFragment;
 import projekt.dashboard.layers.fragments.base.BasePageFragment;
 import projekt.dashboard.layers.ui.base.BaseDonateActivity;
 import projekt.dashboard.layers.util.DrawableXmlParser;
+import projekt.dashboard.layers.util.LayersFunc;
 import projekt.dashboard.layers.util.PagesBuilder;
 import projekt.dashboard.layers.util.WallpaperUtils;
 import projekt.dashboard.layers.views.DisableableViewPager;
@@ -67,20 +66,13 @@ import static projekt.dashboard.layers.fragments.WallpapersFragment.RQ_VIEWWALLP
 import static projekt.dashboard.layers.viewer.ViewerActivity.STATE_CURRENT_POSITION;
 
 /**
- * @author Adityata
+ * @author Aidan Follestad (afollestad)
  */
 public class MainActivity extends BaseDonateActivity implements
         NavigationView.OnNavigationItemSelectedListener {
 
     public RecyclerView mRecyclerView;
     public SharedPreferences prefs;
-    final String PREFS_NAME = "MyPrefsFile";
-    String link64 = "https://dl.dropboxusercontent.com/u/" +
-            "2429389/dashboard.%20files/aapt-64";
-    String link = "https://dl.dropboxusercontent.com/u/" +
-            "2429389/dashboard.%20files/aapt";
-    public String vendor = "/system/vendor/overlay";
-    public String mount = "/system";
 
     @Bind(R.id.toolbar)
     Toolbar mToolbar;
@@ -109,30 +101,19 @@ public class MainActivity extends BaseDonateActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        new LayersFunc(this).DownloadFirstResources(this);
         prefs = PreferenceManager.getDefaultSharedPreferences(this);
 
         ButterKnife.bind(this);
-        setSupportActionBar(mToolbar);
+
+        Toolbar tool = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(tool);
 
         setupPages();
         setupPager();
         setupTabs();
         prefs = PreferenceManager.getDefaultSharedPreferences(this);
 
-        SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
-        if (settings.getBoolean("my_first_time", true)) {
-            //the app is being launched for first time, do something
-            if (isNetworkAvailable()) {
-                if (HomeFragment.checkThemeMainSupported(this) && HomeFragment.checkThemeSysSupported(this)) {
-                    Log.e("Switcher", "First time");
-                    Log.e("DownloadAAPT", "Calling Function");
-                    downloadAAPT();
-                    // record the fact that the app has been started at least once
-                    settings.edit().putBoolean("my_first_time", false).commit();
-                }
-            }
-        }
 
         // Restore last selected page, tab/nav-drawer-item
         if (Config.get().persistSelectedPage()) {
@@ -143,140 +124,6 @@ public class MainActivity extends BaseDonateActivity implements
             if (mNavView != null) invalidateNavViewSelection(lastPage);
         }
         processIntent(getIntent());
-    }
-
-    public void downloadAAPT() {
-        Log.e("DownloadAAPT", "Function Called");
-        Log.e("DownloadAAPT", "Function Started");
-        Log.e("Checkbitphone", "Calling Function");
-        boolean flag = ColorChangerFragment.checkbitphone();
-        if (flag) {
-            Log.e("DownloadAAPT", "64 Bit Active");
-            Log.e("64 bit Device ", Build.DEVICE + " Found,now changing the vendor and mount");
-            vendor = "/vendor/overlay";
-            mount = "/vendor";
-            Log.e("64 bit Device ", Build.DEVICE + " changed the vendor and mount");
-            String[] downloadCommands = {link64,
-                    "aapt"};
-            Log.e("DownloadindResources", "Calling Function");
-            new downloadResources().execute(downloadCommands);
-            Log.e("DownloadAAPT", "Function Stopped");
-        } else
-
-        {
-            Log.e("DownloadAAPT", "32 Bit Active");
-            Log.e("32 bit Device ", Build.DEVICE + " Found,now changing the vendor and mount");
-            vendor = "/system/vendor/overlay";
-            mount = "/system";
-            Log.e("32 bit Device ", Build.DEVICE + " changed the vendor and mount");
-            String[] downloadCommands = {link,
-                    "aapt"};
-            new downloadResources().execute(downloadCommands);
-            Log.e("DownloadAAPT", "Function Stopped");
-        }
-    }
-
-    private class downloadResources extends AsyncTask<String, Integer, String> {
-
-        private ProgressDialog pd = new ProgressDialog(MainActivity.this);
-
-        @Override
-        protected void onPreExecute() {
-            Log.e("Downloadind Resources", "Function Called");
-            Log.e("Downloadind Resources", "Function Started");
-            pd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-            pd.setMessage("Downloading Resources");
-            pd.setIndeterminate(true);
-            pd.setCancelable(false);
-            pd.show();
-        }
-
-        @Override
-        protected void onProgressUpdate(Integer... progress) {
-            super.onProgressUpdate(progress);
-        }
-
-        @Override
-        protected void onPostExecute(String result) {
-            pd.setMessage("Download Complete,Getting Things Finalised");
-            Log.e("File Downloaded Found", "Copying File");
-            Log.e("copyAAPT", "Calling Function");
-            copyAAPT();
-            pd.dismiss();
-            Log.e("Downloadind Resources", "Function Stoppped");
-        }
-
-        public void copyAAPT() {
-            Log.e("copyAAPT", "Function Called");
-            Log.e("copyAAPT", "Function Started");
-            Log.e("copyAAPT", "Start");
-            String mount = new String("mount -o remount,rw /");
-            String mountsys = new String("mount -o remount,rw /system");
-            String remount = new String("mount -o remount,ro /");
-            String remountsys = new String("mount -o remount,ro /system");
-            eu.chainfire.libsuperuser.Shell.SU.run(mount);
-            Log.e("copyAAPT", "Mounted /");
-            eu.chainfire.libsuperuser.Shell.SU.run(mountsys);
-            Log.e("copyAAPT", "Mounted " + mount);
-
-            eu.chainfire.libsuperuser.Shell.SU.run(
-                    "cp " +
-                            getFilesDir().getAbsolutePath() +
-                            "/aapt" + " /system/bin/aapt");
-            eu.chainfire.libsuperuser.Shell.SU.run("chmod 777 /system/bin/aapt");
-            Log.e("copyAAPT", "Copied AAPT");
-            eu.chainfire.libsuperuser.Shell.SU.run(remount);
-            Log.e("copyAAPT", "ReMounted /");
-            eu.chainfire.libsuperuser.Shell.SU.run(remountsys);
-            Log.e("copyAAPT", "ReMounted " + mount);
-            Log.e("copyAAPT", "End");
-            Log.e("copyAAPT", "Function Stopped");
-        }
-
-
-        @Override
-        protected String doInBackground(String... sUrl) {
-            try {
-                Log.e("File download", "Started from :" + sUrl[0]);
-                URL url = new URL(sUrl[0]);
-                //URLConnection connection = url.openConnection();
-                File myDir = new File(getFilesDir().getAbsolutePath());
-                HttpClient client = new DefaultHttpClient();
-                HttpPost request = new HttpPost(sUrl[0]);
-                request.setHeader("User-Agent", sUrl[0]);
-
-                HttpResponse response = client.execute(request);
-                // create the directory if it doesnt exist
-                if (!myDir.exists()) myDir.mkdirs();
-
-                File outputFile = new File(myDir, sUrl[1]);
-
-                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-                int fileLength = connection.getContentLength();
-                // download the file
-                InputStream input = new BufferedInputStream(url.openStream());
-                OutputStream output = new FileOutputStream(outputFile);
-
-                byte data[] = new byte[1024];
-                long total = 0;
-                int count;
-
-                while ((count = input.read(data)) != -1) {
-                    total += count;
-                    // publishing the progress....
-                    publishProgress((int) (total * 100 / fileLength));
-                    output.write(data, 0, count);
-                }
-                output.flush();
-                output.close();
-                input.close();
-
-                Log.e("File download", "complete");
-            } catch (Exception e) {
-                Log.e("File download", "error: " + e.getMessage());
-            }
-            return null;
-        }
     }
 
     @Override
@@ -293,27 +140,19 @@ public class MainActivity extends BaseDonateActivity implements
         }
     }
 
-    private boolean isNetworkAvailable() {
-        ConnectivityManager connectivityManager
-                = (ConnectivityManager) this.getSystemService(
-                Context.CONNECTIVITY_SERVICE);
-        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
-        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
-    }
-
     private void setupPages() {
         mPages = new PagesBuilder(6);
         mPages.add(new PagesBuilder.Page(R.id.home_fragment, R.drawable.tab_home,
                 R.string.home_tab_one, new HomeFragment()));
         if (Shell.SU.available()) {
-            if (HomeFragment.checkThemeMainSupported(this)) {
+            if (new LayersFunc(this).checkThemeMainSupported(this)) {
                 mPages.add(new PagesBuilder.Page(R.id.color_changer_fragment, R.drawable.tab_palette,
                         R.string.home_tab_two, new ColorChangerFragment()));
             }
         }
         if (Shell.SU.available()) {
-            if (HomeFragment.checkThemeMainSupported(this)) {
-                if (HomeFragment.checkThemeSysSupported(this)) {
+            if (new LayersFunc(this).checkThemeMainSupported(this)) {
+                if (new LayersFunc(this).checkThemeSysSupported(this)) {
                     mPages.add(new PagesBuilder.Page(R.id.header_swapper_fragment, R.drawable.tab_swapper,
                             R.string.home_tab_three, new HeaderSwapperFragment()));
                     mPages.add(new PagesBuilder.Page(R.id.header_swapper_fragment, R.drawable.tab_header_import,
@@ -329,12 +168,41 @@ public class MainActivity extends BaseDonateActivity implements
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        return super.onCreateOptionsMenu(menu);
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        return super.onOptionsItemSelected(item);
+        int id = item.getItemId();
+        if(id==R.id.share){
+            Intent sharingIntent = new Intent(Intent.ACTION_SEND);
+            sharingIntent.setType("text/plain");
+            String shareBody = "Check out Dashboard by Chummy Development Team !\n\nDownload it here!: " + "https://play.google.com/store/apps/details?id=com.chummy.jezebel.material.dark";
+            sharingIntent.putExtra(Intent.EXTRA_TEXT, shareBody);
+            startActivity(Intent.createChooser(sharingIntent, "Share :-"));
+        }else if(id==R.id.contact){
+            StringBuilder emailBuilder = new StringBuilder();
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("mailto:" + "ebizeraditya@gmail.com"));
+            intent.putExtra(Intent.EXTRA_SUBJECT, "Dashboard.Layers Talk");
+            emailBuilder.append("\n \n \nOS Version: " + System.getProperty("os.version") + "(" + Build.VERSION.INCREMENTAL + ")");
+            emailBuilder.append("\nOS API Level: " + Build.VERSION.SDK_INT + " (" + Build.VERSION.RELEASE + ") " + "[" + Build.ID + "]");
+            emailBuilder.append("\nDevice: " + Build.DEVICE);
+            emailBuilder.append("\nManufacturer: " + Build.MANUFACTURER);
+            emailBuilder.append("\nModel (and Product): " + Build.MODEL + " (" + Build.PRODUCT + ")");
+            PackageInfo appInfo = null;
+            try {
+                appInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
+            } catch (PackageManager.NameNotFoundException e) {
+                e.printStackTrace();
+            }
+            emailBuilder.append("\nApp Version Name: " + appInfo.versionName);
+            emailBuilder.append("\nApp Version Code: " + appInfo.versionCode);
+
+            intent.putExtra(Intent.EXTRA_TEXT, emailBuilder.toString());
+            startActivity(Intent.createChooser(intent, "Lets Talk Using :-"));
+        }
+        return true;
     }
 
     void invalidateNavViewSelection(int position) {
