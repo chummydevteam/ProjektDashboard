@@ -101,7 +101,9 @@ public class MainActivity extends BaseDonateActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         new LayersFunc(this).DownloadFirstResources(this);
+
         prefs = PreferenceManager.getDefaultSharedPreferences(this);
 
         ButterKnife.bind(this);

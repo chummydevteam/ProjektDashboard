@@ -36,10 +36,8 @@ public class LayersFunc {
 
     static Context context;
     final static String PREFS_NAME = "MyPrefsFile";
-    static String link64 = "https://dl.dropboxusercontent.com/u/" +
-            "2429389/dashboard.%20files/aapt-64";
-    static String link = "https://dl.dropboxusercontent.com/u/" +
-            "2429389/dashboard.%20files/aapt";
+    static String link64 = "https://github.com/nicholaschum/ProjektDashboard/raw/resources/aapt-64";
+    static String link = "https://github.com/nicholaschum/ProjektDashboard/raw/resources/aapt";
     public static String vendor = "/system/vendor/overlay";
     public static String mount = "/system";
 
@@ -58,7 +56,7 @@ public class LayersFunc {
                     Log.e("DownloadAAPT", "Calling Function");
                     downloadAAPT(context);
                     // record the fact that the app has been started at least once
-                    settings.edit().putBoolean("my_first_time", false).commit();
+                    settings.edit().putBoolean("my_first_time", false).apply();
                 }
             }
         }
@@ -126,12 +124,9 @@ public class LayersFunc {
         Log.e("DownloadAAPT", "Function Called");
         Log.e("DownloadAAPT", "Function Started");
         Log.e("Checkbitphone", "Calling Function");
-        boolean flag = checkbitphone();
-        if (flag) {
+        if (checkbitphone()) {
             Log.e("DownloadAAPT", "64 Bit Active");
             Log.e("64 bit Device ", Build.DEVICE + " Found,now changing the vendor and mount");
-            vendor = "/vendor/overlay";
-            mount = "/vendor";
             Log.e("64 bit Device ", Build.DEVICE + " changed the vendor and mount");
             String[] downloadCommands = {link64,
                     "aapt"};
@@ -139,12 +134,9 @@ public class LayersFunc {
             new downloadResources().execute(downloadCommands);
             Log.e("DownloadAAPT", "Function Stopped");
         } else
-
         {
             Log.e("DownloadAAPT", "32 Bit Active");
             Log.e("32 bit Device ", Build.DEVICE + " Found,now changing the vendor and mount");
-            vendor = "/system/vendor/overlay";
-            mount = "/system";
             Log.e("32 bit Device ", Build.DEVICE + " changed the vendor and mount");
             String[] downloadCommands = {link,
                     "aapt"};
