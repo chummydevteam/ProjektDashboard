@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
@@ -112,7 +113,7 @@ public class HomeFragment extends BasePageFragment {
         tapBarMenu.toggle();
     }
 
-    @OnClick({R.id.item1, R.id.item2})
+    @OnClick({R.id.item1, R.id.item2, R.id.item3, R.id.item4})
     public void onMenuItemClick(View view) {
         switch (view.getId()) {
             case R.id.item1:
@@ -165,8 +166,17 @@ public class HomeFragment extends BasePageFragment {
                         });
                 alert.show();
                 break;
+            case R.id.item3:
+                Intent gplus = new Intent(Intent.ACTION_VIEW, Uri.parse("https://plus.google.com/communities/104086528025432169285"));
+                startActivity(gplus);
+                break;
+            case R.id.item4:
+                Intent xda = new Intent(Intent.ACTION_VIEW, Uri.parse("http://forum.xda-developers.com/android/themes/cdt-projektdashboard-t3348297"));
+                startActivity(xda);
+                break;
             default:
                 tapBarMenu.close();
+                break;
         }
     }
 

@@ -117,11 +117,7 @@
                 android:layout_weight="1"
                 android:paddingBottom="10dp"
                 android:paddingTop="10dp"
-                android:src="@drawable/ic_invert_colors_24dp" />
-
-            <Space
-                android:layout_width="56dp"
-                android:layout_height="match_parent" />
+                android:src="@drawable/tap_bar_invert" />
 
             <ImageView
                 android:id="@+id/item2"
@@ -130,7 +126,30 @@
                 android:layout_weight="1"
                 android:paddingBottom="10dp"
                 android:paddingTop="10dp"
-                android:src="@drawable/ic_create_24dp" />
+                android:src="@drawable/tap_bar_rename" />
+
+            <Space
+                android:layout_width="100dp"
+                android:layout_height="match_parent" />
+
+            <ImageView
+                android:id="@+id/item3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
+                android:src="@drawable/tap_bar_googleplus" />
+
+            <ImageView
+                android:id="@+id/item4"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
+                android:src="@drawable/tap_bar_xda" />
+
 
         </com.michaldrabik.tapbarmenulib.TapBarMenu>
 
