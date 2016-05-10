@@ -22,6 +22,7 @@ import butterknife.ButterKnife;
 import eu.chainfire.libsuperuser.Shell;
 import projekt.dashboard.layers.R;
 import projekt.dashboard.layers.fragments.base.BasePageFragment;
+import projekt.dashboard.layers.util.LayersFunc;
 
 /**
  * @author Nicholas Chum (nicholaschum)
@@ -136,7 +137,7 @@ public class ThemeUtilitiesFragment extends BasePageFragment {
     }
 
     public void cleanTempFolder() {
-        if (ColorChangerFragment.checkbitphone()) {
+        if (LayersFunc.checkbitphone()) {
             vendor = "/vendor/overlay/";
             mount = "/vendor";
         }

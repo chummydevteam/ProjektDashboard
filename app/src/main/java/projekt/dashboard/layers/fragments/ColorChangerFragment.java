@@ -1,12 +1,9 @@
 package projekt.dashboard.layers.fragments;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -24,24 +21,13 @@ import android.widget.TextView;
 import net.lingala.zip4j.core.ZipFile;
 import net.lingala.zip4j.exception.ZipException;
 
-import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.DefaultHttpClient;
 
-import java.io.BufferedInputStream;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.io.PrintWriter;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.Random;
 
 import butterknife.ButterKnife;
@@ -49,35 +35,25 @@ import projekt.dashboard.layers.R;
 import projekt.dashboard.layers.colorpicker.ColorPickerDialog;
 import projekt.dashboard.layers.colorpicker.ColorPickerPreference;
 import projekt.dashboard.layers.fragments.base.BasePageFragment;
+import projekt.dashboard.layers.util.LayersFunc;
 
 
 /**
- * @author Adityata
+ * @author Nicholas Chum (nicholaschum)
  */
 
 public class ColorChangerFragment extends BasePageFragment {
 
-
     SharedPreferences prefs;
-    final String PREFS_NAME = "MyPrefsFile";
-    String link64 = "https://dl.dropboxusercontent.com/u/" +
-            "2429389/dashboard.%20files/aapt-64";
-    String link = "https://dl.dropboxusercontent.com/u/" +
-            "2429389/dashboard.%20files/aapt";
-    public String vendor = "/system/vendor/overlay";
-    public String mount = "/system";
     FloatingActionButton fab;
     ImageButton imageButton;
     TextView accentcolor;
     public String color_picked = "#ff0000";
     public ViewGroup inflation;
+    static String File="Akzent_Framework";
 
-    private boolean isNetworkAvailable() {
-        ConnectivityManager connectivityManager
-                = (ConnectivityManager) getActivity().getSystemService(
-                Context.CONNECTIVITY_SERVICE);
-        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
-        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    public static String getFile() {
+        return File;
     }
 
     @Nullable
@@ -89,27 +65,7 @@ public class ColorChangerFragment extends BasePageFragment {
                 R.layout.fragment_colorpicker, container, false);
         prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
 
-        SharedPreferences settings = getActivity().getSharedPreferences(PREFS_NAME, 0);
-        if (settings.getBoolean("my_first_time", true)) {
-            //the app is being launched for first time, do something
-            if (isNetworkAvailable()) {
-                if (HomeFragment.checkThemeMainSupported(getActivity()) && HomeFragment.checkThemeSysSupported(getActivity())) {
-                    Log.e("Switcher", "First time");
-                    Log.e("DownloadAAPT", "Calling Function");
-                    downloadAAPT();
-                    // record the fact that the app has been started at least once
-                    prefs.edit().putString("color_saved", color_picked).commit();
-                    settings.edit().putBoolean("my_first_time", false).commit();
-                }
-            }
-        }
-
-        boolean phone = checkbitphone();
-        if (phone == true) {
-            Log.e("Main", "Found 64,Setting Vendor");
-            vendor = "/vendor/overlay";
-            mount = "/vendor";
-        }
+        new LayersFunc(getActivity()).DownloadFirstResources(getActivity());
 
         accentcolor = (TextView) inflation.findViewById(R.id.accentcolor);
         imageButton = (ImageButton) inflation.findViewById(R.id.preview);
@@ -146,183 +102,14 @@ public class ColorChangerFragment extends BasePageFragment {
         return inflation;
     }
 
-    public void downloadAAPT() {
-        Log.e("DownloadAAPT", "Function Called");
-        Log.e("DownloadAAPT", "Function Started");
-        Log.e("Checkbitphone", "Calling Function");
-        boolean flag = checkbitphone();
-        if (flag) {
-            Log.e("DownloadAAPT", "64 Bit Active");
-            Log.e("64 bit Device ", Build.DEVICE + " Found,now changing the vendor and mount");
-            vendor = "/vendor/overlay";
-            mount = "/vendor";
-            Log.e("64 bit Device ", Build.DEVICE + " changed the vendor and mount");
-            String[] downloadCommands = {link64,
-                    "aapt"};
-            Log.e("DownloadindResources", "Calling Function");
-            new downloadResources().execute(downloadCommands);
-            Log.e("DownloadAAPT", "Function Stopped");
-        } else
-
-        {
-            Log.e("DownloadAAPT", "32 Bit Active");
-            Log.e("32 bit Device ", Build.DEVICE + " Found,now changing the vendor and mount");
-            vendor = "/system/vendor/overlay";
-            mount = "/system";
-            Log.e("32 bit Device ", Build.DEVICE + " changed the vendor and mount");
-            String[] downloadCommands = {link,
-                    "aapt"};
-            new downloadResources().execute(downloadCommands);
-            Log.e("DownloadAAPT", "Function Stopped");
-        }
-    }
-
-    public static boolean checkbitphone() {
-        Log.e("Checkbitphone", "Function Called");
-        Log.e("Checkbitphone", "Function Started");
-        String[] bit = Build.SUPPORTED_32_BIT_ABIS;
-        String[] bit64 = Build.SUPPORTED_64_BIT_ABIS;
-        int flag = 0;
-        try {
-            if (bit64[0] != null) {
-                Log.e("Checkbitphone", "64 Found");
-                Log.e("Checkbitphone", "Checking if its one from FAB");
-                if (Build.DEVICE.equals("flounder") || Build.DEVICE.equals("flounder_lte") || Build.DEVICE.equals("angler") || Build.DEVICE.equals("bullhead")) {
-                    Log.e("64 bit Device ", Build.DEVICE + " Found,now returning");
-                    Log.e("Checkbitphone", "Function Stopped");
-                    return true;
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        try {
-            if (flag == 0) {
-                if (bit[0] != null) {
-                    Log.e("Checkbitphone", "32 Bit Active");
-                    Log.e("Checkbitphone", "Normal Phone Overlay Folder found");
-                    Log.e("Checkbitphone", "Function Stopped");
-                    return false;
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
-
-
-    private class downloadResources extends AsyncTask<String, Integer, String> {
-
-        private ProgressDialog pd = new ProgressDialog(getActivity());
-
-        @Override
-        protected void onPreExecute() {
-            Log.e("Downloadind Resources", "Function Called");
-            Log.e("Downloadind Resources", "Function Started");
-            pd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-            pd.setMessage("Downloading Resources");
-            pd.setIndeterminate(true);
-            pd.setCancelable(false);
-            pd.show();
-        }
-
-        @Override
-        protected void onProgressUpdate(Integer... progress) {
-            super.onProgressUpdate(progress);
-        }
-
-        @Override
-        protected void onPostExecute(String result) {
-            pd.setMessage("Download Complete,Getting Things Finalised");
-            Log.e("File Downloaded Found", "Copying File");
-            Log.e("copyAAPT", "Calling Function");
-            copyAAPT();
-            pd.dismiss();
-            Log.e("Downloadind Resources", "Function Stoppped");
-        }
-
-        public void copyAAPT() {
-            Log.e("copyAAPT", "Function Called");
-            Log.e("copyAAPT", "Function Started");
-            Log.e("copyAAPT", "Start");
-            String mount = new String("mount -o remount,rw /");
-            String mountsys = new String("mount -o remount,rw /system");
-            String remount = new String("mount -o remount,ro /");
-            String remountsys = new String("mount -o remount,ro /system");
-            eu.chainfire.libsuperuser.Shell.SU.run(mount);
-            Log.e("copyAAPT", "Mounted /");
-            eu.chainfire.libsuperuser.Shell.SU.run(mountsys);
-            Log.e("copyAAPT", "Mounted " + mount);
-
-            eu.chainfire.libsuperuser.Shell.SU.run(
-                    "cp " +
-                            getActivity().getFilesDir().getAbsolutePath() +
-                            "/aapt" + " /system/bin/aapt");
-            eu.chainfire.libsuperuser.Shell.SU.run("chmod 777 /system/bin/aapt");
-            Log.e("copyAAPT", "Copied AAPT");
-            eu.chainfire.libsuperuser.Shell.SU.run(remount);
-            Log.e("copyAAPT", "ReMounted /");
-            eu.chainfire.libsuperuser.Shell.SU.run(remountsys);
-            Log.e("copyAAPT", "ReMounted " + mount);
-            Log.e("copyAAPT", "End");
-            Log.e("copyAAPT", "Function Stopped");
-        }
-
-
-        @Override
-        protected String doInBackground(String... sUrl) {
-            try {
-                Log.e("File download", "Started from :" + sUrl[0]);
-                URL url = new URL(sUrl[0]);
-                //URLConnection connection = url.openConnection();
-                File myDir = new File(getActivity().getFilesDir().getAbsolutePath());
-                HttpClient client = new DefaultHttpClient();
-                HttpPost request = new HttpPost(sUrl[0]);
-                request.setHeader("User-Agent", sUrl[0]);
-
-                HttpResponse response = client.execute(request);
-                // create the directory if it doesnt exist
-                if (!myDir.exists()) myDir.mkdirs();
-
-                File outputFile = new File(myDir, sUrl[1]);
-
-                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-                int fileLength = connection.getContentLength();
-                // download the file
-                InputStream input = new BufferedInputStream(url.openStream());
-                OutputStream output = new FileOutputStream(outputFile);
-
-                byte data[] = new byte[1024];
-                long total = 0;
-                int count;
-
-                while ((count = input.read(data)) != -1) {
-                    total += count;
-                    // publishing the progress....
-                    publishProgress((int) (total * 100 / fileLength));
-                    output.write(data, 0, count);
-                }
-                output.flush();
-                output.close();
-                input.close();
-
-                Log.e("File download", "complete");
-            } catch (Exception e) {
-                Log.e("File download", "error: " + e.getMessage());
-            }
-            return null;
-        }
-    }
-
     public void colorswatch() {
         Log.e("colorswatch", "Function Called");
         Log.e("colorswatch", "Function Started");
-        String[] location = {vendor + "/Akzent_Framework.apk"};
+        String[] location = {LayersFunc.getvendor(),File+".apk"};
         Log.e("FirstSyncTasks", "Calling Function");
-        new firstPhaseAsyncTasks().execute(location);
+        new copyThemeFiles().execute(location);
         Log.e("PickColors", "Calling Function");
-        pickColor(vendor + "/Akzent_Framework.apk");
+        pickColor(LayersFunc.getvendor() + "/"+File+".apk");
         Log.e("colorswatch", "Function Stopped");
     }
 
@@ -335,38 +122,17 @@ public class ColorChangerFragment extends BasePageFragment {
 
     }
 
-    private class firstPhaseAsyncTasks extends AsyncTask<String, String, String> {
+    public class copyThemeFiles extends AsyncTask<String, String, String> {
         @Override
         protected String doInBackground(String... params) {
-            Log.e("FirstSyncTasks", "Function Called");
-            Log.e("FirstSyncTasks", "Function Started");
-            String theme_dir = params[0];
-            Log.e("CopyFrameworkFile", "Calling Function");
-            copyFrameworkFile(theme_dir);
-            Log.e("FirstSyncTasks", "Function Stopped");
+            Log.e("copythemeFiles", "Calling Function");
+            String theme_dir = params[0] +"/"+ params[1];
+            Log.e("copythemeFiles", theme_dir);
+            Log.e("copythemeFiles", params[1]);
+            LayersFunc.copyFileToApp(getActivity(),theme_dir, params[1]);
             return null;
         }
 
-        private void copyFrameworkFile(String theme_dir) {
-            Log.e("CopyFrameworkFile", "Function Called");
-            Log.e("CopyFrameworkFile", "Function Started");
-            String sourcePath = theme_dir;
-            File source = new File(sourcePath);
-            String destinationPath = getActivity().getFilesDir().getAbsolutePath() +
-                    "/Akzent_Framework.apk";
-            File destination = new File(destinationPath);
-            try {
-                FileUtils.copyFile(source, destination);
-                Log.e("CopyFrameworkFile",
-                        "Successfully copied framework apk from overlays folder to work directory");
-                Log.e("CopyFrameworkFile", "Function Stopped");
-            } catch (IOException e) {
-                Log.e("CopyFrameworkFile",
-                        "Failed to copy framework apk from resource-cache to work directory");
-                Log.e("CopyFrameworkFile", "Function Stopped");
-                e.printStackTrace();
-            }
-        }
     }
 
     private class secondPhaseAsyncTasks extends AsyncTask<String, String, Void> {
@@ -421,69 +187,16 @@ public class ColorChangerFragment extends BasePageFragment {
         }
 
         private void createXMLfile(String string, String theme_dir) {
-            try {
-                // Create the working directory
-                File directory = new File(getActivity().getFilesDir(), "/res/color/");
-                if (!directory.exists()) {
-                    directory.mkdirs();
-                }
-                // Create the files
-                File root = new File(getActivity().getFilesDir(), "/res/color/" + string);
-                if (!root.exists()) {
-                    root.createNewFile();
-                }
-                FileWriter fw = new FileWriter(root);
-                BufferedWriter bw = new BufferedWriter(fw);
-                PrintWriter pw = new PrintWriter(bw);
-                String xmlTags = ("<?xml version=\"1.0\" encoding=\"utf-8\"?>" + "\n");
-                String xmlRes1 = ("<selector" + "\n");
-                String xmlRes2 = ("  xmlns:android=\"http://schemas.android.com/apk/res/android\">"
-                        + "\n");
-                String xmlRes3 = ("    <item android:state_enabled=\"false\" android:color=\"" + color_picked + "\" />"
-                        + "\n");
-                String xmlRes4 = ("    <item android:state_window_focused=\"false\" android:color=\"" + color_picked + "\" />"
-                        + "\n");
-                String xmlRes5 = ("    <item android:state_pressed=\"true\" android:color=\"" + color_picked + "\" />"
-                        + "\n");
-                String xmlRes6 = ("    <item android:state_selected=\"true\" android:color=\"" + color_picked + "\" />"
-                        + "\n");
-                String xmlRes7 = ("    <item android:color=\"" + color_picked + "\" />"
-                        + "\n");
-                String xmlRes8 = ("</selector>");
-                pw.write(xmlTags);
-                pw.write(xmlRes1);
-                pw.write(xmlRes2);
-                pw.write(xmlRes3);
-                pw.write(xmlRes4);
-                pw.write(xmlRes5);
-                pw.write(xmlRes6);
-                pw.write(xmlRes7);
-                pw.write(xmlRes8);
-                pw.close();
-                bw.close();
-                fw.close();
-                Log.e("CreateXMLFileException",
-                        string + " Created");
-                if (string == "tertiary_text_dark.xml") {
-                    try {
-                        compileDummyAPK(theme_dir);
-                    } catch (Exception e) {
-                        Log.e("CreateXMLFileException",
-                                "Could not create Dummy APK (EXCEPTION)");
-                    }
-                }
-       /*         if (string == "accent_color_light.xml") {
-                    createXMLfile("accent_color.xml", theme_dir);
-                }
-                if (string == "accent_color_dark.xml") {
-                    createXMLfile("accent_color_light.xml", theme_dir);
-                }
-      */
-            } catch (IOException e) {
-                Log.e("CreateXMLFileException",
-                        "Failed to create new file (IOEXCEPTION).");
-            }
 
+            LayersFunc.createXML(string,getActivity(),color_picked);
+            if (string == "tertiary_text_dark.xml") {
+                try {
+                    compileDummyAPK(theme_dir);
+                } catch (Exception e) {
+                    Log.e("CreateXMLFileException",
+                            "Could not create Dummy APK (EXCEPTION)");
+                }
+            }
         }
 
         private void compileDummyAPK(String theme_dir) throws Exception {
@@ -491,28 +204,7 @@ public class ColorChangerFragment extends BasePageFragment {
             Log.e("CompileDummyAPK", "Beginning to compile dummy APK...");
 
             // Create AndroidManifest.xml first, cutting down the assets file transfer!
-
-            File manifest = new File(getActivity().getFilesDir(), "AndroidManifest.xml");
-            if (!manifest.exists()) {
-                manifest.createNewFile();
-            }
-            FileWriter fw = new FileWriter(manifest);
-            BufferedWriter bw = new BufferedWriter(fw);
-            PrintWriter pw = new PrintWriter(bw);
-            //String xmlTags = ("<?xml version=\"1.0\" encoding=\"utf-8\" " +
-            //          "standalone=\"no\"?>" + "\n");
-            String xmlRes1 = ("<manifest xmlns:android=\"http://schemas.android.com/" +
-                    "apk/res/android\" package=\"common\" android:versionCode=\"1\"" +
-                    " android:versionName=\"1.0\">" + "\n");
-            String xmlRes2 = ("<overlay android:targetPackage=\"android\" android:priority=\"100\"/>" + "\n");
-            String xmlRes3 = ("</manifest>" + "\n");
-            //  pw.write(xmlTags);
-            pw.write(xmlRes1);
-            pw.write(xmlRes2);
-            pw.write(xmlRes3);
-            pw.close();
-            bw.close();
-            fw.close();
+            LayersFunc.createManifest(getActivity());
 
             Process nativeApp = Runtime.getRuntime().exec(
                     "aapt p -M " +
@@ -562,68 +254,8 @@ public class ColorChangerFragment extends BasePageFragment {
                     "Mounting system as read-write as we prepare for some commands...");
             eu.chainfire.libsuperuser.Shell.SU.run("mount -o remount,rw /");
             eu.chainfire.libsuperuser.Shell.SU.run("mkdir /res/color");
-            eu.chainfire.libsuperuser.Shell.SU.run(
-                    "cp " + getActivity().getFilesDir().getAbsolutePath() +
-                            "/color-resources/res/color/tertiary_text_dark.xml " +
-                            "/res/color/tertiary_text_dark.xml");
-         /*   eu.chainfire.libsuperuser.Shell.SU.run(
-                    "cp " + getActivity().getFilesDir().getAbsolutePath() +
-                            "/color-resources/res/color/accent_color_light.xml " +
-                            "/res/color/accent_color_light.xml");
-            eu.chainfire.libsuperuser.Shell.SU.run(
-                    "cp " + getActivity().getFilesDir().getAbsolutePath() +
-                            "/color-resources/res/color/accent_color.xml " +
-                            "/res/color/accent_color.xml");
-*/
-            Log.e("performAAPTonCommonsAPK",
-                    "Successfully copied all modified accent XMLs into the root folder.");
 
-            Log.e("performAAPTonCommonsAPK",
-                    "Preparing for clean up on resources...");
-/*
-            Process nativeApp1 = Runtime.getRuntime().exec(
-                    "aapt remove " +
-                            getActivity().getFilesDir().getAbsolutePath() +
-                            "/framework.apk res/color/accent_color_dark.xml");
-            Log.e("performAAPTonCommonsAPK",
-                    "Deleted dark accent file!");
-            nativeApp1.waitFor();
-            Process nativeApp2 = Runtime.getRuntime().exec(
-                    "aapt remove " +
-                            getActivity().getFilesDir().getAbsolutePath() +
-                            "/framework.apk res/color/accent_color_light.xml");
-            Log.e("performAAPTonCommonsAPK",
-                    "Deleted light accent file!");
-            nativeApp2.waitFor();
-  */
-            Process nativeApp3 = Runtime.getRuntime().exec(
-                    "aapt remove " +
-                            getActivity().getFilesDir().getAbsolutePath() +
-                            "/Akzent_Framework.apk res/color/tertiary_text_dark.xml");
-            Log.e("performAAPTonCommonsAPK",
-                    "Deleted main tertiary_text_dark file!");
-            nativeApp3.waitFor();
-/*
-            eu.chainfire.libsuperuser.Shell.SU.run(
-                    "aapt add " +
-                            getActivity().getFilesDir().getAbsolutePath() +
-                            "/framework.apk res/color/accent_color_dark.xml");
-
-            Log.e("performAAPTonCommonsAPK", "Added freshly created dark accent file...");
-            eu.chainfire.libsuperuser.Shell.SU.run(
-                    "aapt add " +
-                            getActivity().getFilesDir().getAbsolutePath() +
-                            "/framework.apk res/color/accent_color_light.xml");
-
-            Log.e("performAAPTonCommonsAPK", "Added freshly created light accent file...");
-  */
-            eu.chainfire.libsuperuser.Shell.SU.run(
-                    "aapt add " +
-                            getActivity().getFilesDir().getAbsolutePath() +
-                            "/Akzent_Framework.apk res/color/tertiary_text_dark.xml");
-
-            Log.e("performAAPTonCommonsAPK",
-                    "Added freshly created main tertiary_text_dark file...ALL DONE!");
+            LayersFunc.LayersColorSwitch(getActivity(),File,"tertiary_text_dark","color");
 
             eu.chainfire.libsuperuser.Shell.SU.run("rm -r /res/color");
             eu.chainfire.libsuperuser.Shell.SU.run("mount -o remount,ro /");
@@ -631,61 +263,12 @@ public class ColorChangerFragment extends BasePageFragment {
                     "Cleaned up root directory and remounted system as read-only.");
 
             // Finally, let's make sure the directories are pushed to the last command
-            if (checkbitphone()) {
-                copyFABFinalizedAPK();
+            if (LayersFunc.checkbitphone()) {
+                LayersFunc.copyFABFinalizedAPK(getActivity(),File);
             } else {
-                copyFinalizedAPK();
+                LayersFunc.copyFinalizedAPK(getActivity(),File);
             }
         }
-
-        public void copyFinalizedAPK() {
-            String mount = "mount -o remount,rw /";
-            String mountsys = "mount -o remount,rw /system";
-            String remount = "mount -o remount,ro /";
-            String remountsys = "mount -o remount,ro /system";
-            eu.chainfire.libsuperuser.Shell.SU.run(mount);
-            eu.chainfire.libsuperuser.Shell.SU.run(mountsys);
-
-            eu.chainfire.libsuperuser.Shell.SU.run(
-                    "cp " +
-                            getActivity().getFilesDir().getAbsolutePath() +
-                            "/Akzent_Framework.apk " + "/system/vendor/overlay/Akzent_Framework.apk");
-            eu.chainfire.libsuperuser.Shell.SU.run("chmod 644 " + "/system/vendor/overlay/Akzent_Framework.apk");
-            eu.chainfire.libsuperuser.Shell.SU.run(remount);
-            eu.chainfire.libsuperuser.Shell.SU.run(remountsys);
-            Log.e("copyFinalizedAPK",
-                    "Successfully copied the modified resource APK into " +
-                            "/system/vendor/overlay/ and modified the permissions!");
-            eu.chainfire.libsuperuser.Shell.SU.run("rm -r /data/data/projekt.dashboard.layers/files");
-            Log.e("copyFinalizedAPK",
-                    "Successfully Deleted Files ");
-
-        }
-
-        public void copyFABFinalizedAPK() {
-            String mount = "mount -o remount,rw /";
-            String mountsys = "mount -o remount,rw /vendor";
-            String remount = "mount -o remount,ro /";
-            String remountsys = "mount -o remount,ro /vendor";
-            eu.chainfire.libsuperuser.Shell.SU.run(mount);
-            eu.chainfire.libsuperuser.Shell.SU.run(mountsys);
-
-            eu.chainfire.libsuperuser.Shell.SU.run(
-                    "cp " +
-                            getActivity().getFilesDir().getAbsolutePath() +
-                            "/Akzent_Framework.apk " + "/vendor/overlay/Akzent_Framework.apk");
-            eu.chainfire.libsuperuser.Shell.SU.run("chmod 644 " + "/vendor/overlay/Akzent_Framework.apk");
-            eu.chainfire.libsuperuser.Shell.SU.run(remount);
-            eu.chainfire.libsuperuser.Shell.SU.run(remountsys);
-            Log.e("copyFinalizedAPK",
-                    "Successfully copied the modified resource APK into " +
-                            "/system/vendor/overlay/ and modified the permissions!");
-            eu.chainfire.libsuperuser.Shell.SU.run("rm -r /data/data/projekt.dashboard.layers/files");
-            Log.e("copyFinalizedAPK",
-                    "Successfully Deleted Files ");
-
-        }
-
     }
 
     @Override

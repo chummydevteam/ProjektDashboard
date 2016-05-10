@@ -44,10 +44,11 @@ import butterknife.ButterKnife;
 import projekt.dashboard.layers.R;
 import projekt.dashboard.layers.fragments.base.BasePageFragment;
 import projekt.dashboard.layers.ui.HeaderPackDownloadActivity;
+import projekt.dashboard.layers.util.LayersFunc;
 import projekt.dashboard.layers.util.ReadXMLFile;
 
 /**
- * @author Adityata
+ * @author Nicholas Chum (nicholaschum)
  */
 public class HeaderImportFragment extends BasePageFragment {
 
@@ -61,11 +62,9 @@ public class HeaderImportFragment extends BasePageFragment {
     public int current_hour;
     public TextView currentTimeVariable;
     public SharedPreferences prefs;
-    public String vendor = "/system/vendor/overlay";
-    public String mount = "/system";
 
     public void cleanTempFolder() {
-        File dir = getActivity().getCacheDir();
+        File dir = getActivity().getFilesDir();
         deleteRecursive(dir);
     }
 
@@ -87,7 +86,7 @@ public class HeaderImportFragment extends BasePageFragment {
                 "notifhead_sunset_xhdpi.png", "notifhead_sunset.png");
 
         File f2 = new File(
-                getActivity().getCacheDir().getAbsolutePath() + "/headers/");
+                getActivity().getFilesDir().getAbsolutePath() + "/headers/");
         File[] files2 = f2.listFiles();
         if (files2 != null) {
             for (File inFile2 : files2) {
@@ -207,16 +206,10 @@ public class HeaderImportFragment extends BasePageFragment {
             apply_fab.setBackgroundTintList(ColorStateList.valueOf(
                     getResources().getColor(R.color.primary_1_dark_material)));
         }
-        boolean phone = ColorChangerFragment.checkbitphone();
-        if (phone == true) {
-            Log.e("Main", "Found 64,Setting Vendor");
-            vendor = "/vendor/overlay";
-            mount = "/vendor";
-        }
         apply_fab.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 String[] secondPhaseCommands = {
-                        vendor + "/Akzent_SystemUI.apk",
+                        LayersFunc.getvendor() + "/Akzent_SystemUI.apk",
                         Environment.getExternalStorageDirectory().getAbsolutePath()
                                 + "/dashboard./" + spinner2.getSelectedItem().toString()};
                 new secondPhaseAsyncTasks().execute(secondPhaseCommands);
@@ -274,7 +267,7 @@ public class HeaderImportFragment extends BasePageFragment {
                     checkWhetherZIPisValid(Environment.getExternalStorageDirectory().
                                     getAbsolutePath() +
                                     "/dashboard./" + spinner2.getSelectedItem(),
-                            getActivity().getCacheDir().getAbsolutePath() + "/headers");
+                            getActivity().getFilesDir().getAbsolutePath() + "/headers");
                 } else {
                     TextView headerPackName = (TextView)
                             inflation.findViewById(R.id.themeName);
@@ -386,7 +379,7 @@ public class HeaderImportFragment extends BasePageFragment {
             Log.e("CopyAkzent_SystemUIFile", "Function Started");
             String sourcePath = theme_dir;
             File source = new File(sourcePath);
-            String destinationPath = getActivity().getCacheDir().getAbsolutePath() +
+            String destinationPath = getActivity().getFilesDir().getAbsolutePath() +
                     "/Akzent_SystemUI.apk";
             File destination = new File(destinationPath);
             try {
@@ -405,7 +398,7 @@ public class HeaderImportFragment extends BasePageFragment {
 
         public void unzip(String source) {
             try {
-                String destination = getActivity().getCacheDir().getAbsolutePath() + "/headers/";
+                String destination = getActivity().getFilesDir().getAbsolutePath() + "/headers/";
 
                 net.lingala.zip4j.core.ZipFile zipFile = new net.lingala.zip4j.core.ZipFile(source);
                 Log.e("Unzip", "The ZIP has been located and will now be unzipped...");
@@ -430,7 +423,7 @@ public class HeaderImportFragment extends BasePageFragment {
             List<String> list = new ArrayList<String>();
 
             File f2 = new File(
-                    getActivity().getCacheDir().getAbsolutePath() + "/headers/");
+                    getActivity().getFilesDir().getAbsolutePath() + "/headers/");
             File[] files2 = f2.listFiles();
             if (files2 != null) {
                 for (File inFile2 : files2) {
@@ -464,19 +457,19 @@ public class HeaderImportFragment extends BasePageFragment {
             // Copy the files over
             for (int i = 0; i < source.size(); i++) {
                 eu.chainfire.libsuperuser.Shell.SU.run(
-                        "cp " + getActivity().getCacheDir().getAbsolutePath() +
+                        "cp " + getActivity().getFilesDir().getAbsolutePath() +
                                 "/headers/" + source.get(i) +
                                 " res/drawable-xxhdpi-v4/" +
                                 source.get(i));
                 try {
                     Process nativeApp2 = Runtime.getRuntime().exec(
-                            "aapt remove " + getActivity().getCacheDir().getAbsolutePath() +
+                            "aapt remove " + getActivity().getFilesDir().getAbsolutePath() +
                                     "/Akzent_SystemUI.apk " +
                                     "res/drawable-xxhdpi-v4/" +
                                     source.get(i));
                     nativeApp2.waitFor();
                     eu.chainfire.libsuperuser.Shell.SU.run(
-                            "aapt add " + getActivity().getCacheDir().getAbsolutePath() +
+                            "aapt add " + getActivity().getFilesDir().getAbsolutePath() +
                                     "/Akzent_SystemUI.apk " +
                                     "res/drawable-xxhdpi-v4/" +
                                     source.get(i));
@@ -490,60 +483,12 @@ public class HeaderImportFragment extends BasePageFragment {
                     "Successfully performed all AAPT commands.");
             eu.chainfire.libsuperuser.Shell.SU.run("rm -r /res/drawable-xxhdpi-v4/");
             eu.chainfire.libsuperuser.Shell.SU.run("mount -o remount,ro /");
-            if (ColorChangerFragment.checkbitphone()) {
-                copyFABFinalizedAPK();
+            if (LayersFunc.checkbitphone()) {
+                LayersFunc.copyFABFinalizedAPK(getActivity(),"Akzent_SystemUI");
             } else {
-                copyFinalizedAPK();
+                LayersFunc.copyFinalizedAPK(getActivity(),"Akzent_SystemUI");
             }
             eu.chainfire.libsuperuser.Shell.SU.run("killall zygote");
-        }
-
-        public void copyFinalizedAPK() {
-            String mount = "mount -o remount,rw /";
-            String mountsys = "mount -o remount,rw /system";
-            String remount = "mount -o remount,ro /";
-            String remountsys = "mount -o remount,ro /system";
-            eu.chainfire.libsuperuser.Shell.SU.run(mount);
-            eu.chainfire.libsuperuser.Shell.SU.run(mountsys);
-
-            eu.chainfire.libsuperuser.Shell.SU.run(
-                    "cp " +
-                            getActivity().getCacheDir().getAbsolutePath() +
-                            "/Akzent_SystemUI.apk " + "/system/vendor/overlay/Akzent_SystemUI.apk");
-            eu.chainfire.libsuperuser.Shell.SU.run("chmod 644 " + "/system/vendor/overlay/Akzent_SystemUI.apk");
-            eu.chainfire.libsuperuser.Shell.SU.run(remount);
-            eu.chainfire.libsuperuser.Shell.SU.run(remountsys);
-            Log.e("copyFinalizedAPK",
-                    "Successfully copied the modified resource APK into " +
-                            "/system/vendor/overlay/ and modified the permissions!");
-            eu.chainfire.libsuperuser.Shell.SU.run("rm -r /data/data/projekt.dashboard.layers/cache");
-            Log.e("copyFinalizedAPK",
-                    "Successfully Deleted Files ");
-
-        }
-
-        public void copyFABFinalizedAPK() {
-            String mount = "mount -o remount,rw /";
-            String mountsys = "mount -o remount,rw /vendor";
-            String remount = "mount -o remount,ro /";
-            String remountsys = "mount -o remount,ro /vendor";
-            eu.chainfire.libsuperuser.Shell.SU.run(mount);
-            eu.chainfire.libsuperuser.Shell.SU.run(mountsys);
-
-            eu.chainfire.libsuperuser.Shell.SU.run(
-                    "cp " +
-                            getActivity().getCacheDir().getAbsolutePath() +
-                            "/Akzent_SystemUI.apk " + "/vendor/overlay/Akzent_SystemUI.apk");
-            eu.chainfire.libsuperuser.Shell.SU.run("chmod 644 " + "/vendor/overlay/Akzent_SystemUI.apk");
-            eu.chainfire.libsuperuser.Shell.SU.run(remount);
-            eu.chainfire.libsuperuser.Shell.SU.run(remountsys);
-            Log.e("copyFinalizedAPK",
-                    "Successfully copied the modified resource APK into " +
-                            "/system/vendor/overlay/ and modified the permissions!");
-            eu.chainfire.libsuperuser.Shell.SU.run("rm -r /data/data/projekt.dashboard.layers/cache");
-            Log.e("copyFinalizedAPK",
-                    "Successfully Deleted Files ");
-
         }
 
         protected void onPreExecute() {

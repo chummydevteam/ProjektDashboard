@@ -41,6 +41,7 @@ import java.util.Random;
 import butterknife.ButterKnife;
 import projekt.dashboard.layers.R;
 import projekt.dashboard.layers.fragments.base.BasePageFragment;
+import projekt.dashboard.layers.util.LayersFunc;
 
 /**
  * @author Adityata
@@ -564,73 +565,19 @@ public class HeaderSwapperFragment extends BasePageFragment {
             Log.e("performAAPTonCommonsAPK",
                     "Cleaned up root directory and remounted system as read-only.");
             if (checkbitphone()) {
-                copyFABFinalizedAPK();
+                LayersFunc.copyFABFinalizedAPK(getActivity(),"Akzent_Framework");
+                if(swap_contextual_header){
+                    LayersFunc.copyFABFinalizedAPK(getActivity(),"Akzent_SystemUI");
+                }
             } else {
-                copyFinalizedAPK();
+                LayersFunc.copyFinalizedAPK(getActivity(),"Akzent_Framework");
+                if(swap_contextual_header){
+                    LayersFunc.copyFinalizedAPK(getActivity(),"Akzent_SystemUI");
+                }
             }
             eu.chainfire.libsuperuser.Shell.SU.run("killall zygote");
         }
 
-        public void copyFinalizedAPK() {
-            String mount = "mount -o remount,rw /";
-            String mountsys = "mount -o remount,rw /system";
-            String remount = "mount -o remount,ro /";
-            String remountsys = "mount -o remount,ro /system";
-            eu.chainfire.libsuperuser.Shell.SU.run(mount);
-            eu.chainfire.libsuperuser.Shell.SU.run(mountsys);
 
-            eu.chainfire.libsuperuser.Shell.SU.run(
-                    "cp " +
-                            getActivity().getFilesDir().getAbsolutePath() +
-                            "/Akzent_Framework.apk " + "/system/vendor/overlay/Akzent_Framework.apk");
-            eu.chainfire.libsuperuser.Shell.SU.run("chmod 644 " + "/system/vendor/overlay/Akzent_Framework.apk");
-            if (swap_contextual_header) {
-                eu.chainfire.libsuperuser.Shell.SU.run(
-                        "cp " +
-                                getActivity().getFilesDir().getAbsolutePath() +
-                                "/Akzent_SystemUI.apk " + "/system/vendor/overlay/Akzent_SystemUI.apk");
-                eu.chainfire.libsuperuser.Shell.SU.run("chmod 644 " + "/system/vendor/overlay/Akzent_SystemUI.apk");
-            }
-            eu.chainfire.libsuperuser.Shell.SU.run(remount);
-            eu.chainfire.libsuperuser.Shell.SU.run(remountsys);
-            Log.e("copyFinalizedAPK",
-                    "Successfully copied the modified resource APK into " +
-                            "/system/vendor/overlay/ and modified the permissions!");
-            eu.chainfire.libsuperuser.Shell.SU.run("rm -r /data/data/projekt.dashboard.layers/files");
-            Log.e("copyFinalizedAPK",
-                    "Successfully Deleted Files ");
-
-        }
-
-        public void copyFABFinalizedAPK() {
-            String mount = "mount -o remount,rw /";
-            String mountsys = "mount -o remount,rw /vendor";
-            String remount = "mount -o remount,ro /";
-            String remountsys = "mount -o remount,ro /vendor";
-            eu.chainfire.libsuperuser.Shell.SU.run(mount);
-            eu.chainfire.libsuperuser.Shell.SU.run(mountsys);
-
-            eu.chainfire.libsuperuser.Shell.SU.run(
-                    "cp " +
-                            getActivity().getFilesDir().getAbsolutePath() +
-                            "/Akzent_Framework.apk " + "/vendor/overlay/Akzent_Framework.apk");
-            eu.chainfire.libsuperuser.Shell.SU.run("chmod 644 " + "/vendor/overlay/Akzent_Framework.apk");
-            if (swap_contextual_header) {
-                eu.chainfire.libsuperuser.Shell.SU.run(
-                        "cp " +
-                                getActivity().getFilesDir().getAbsolutePath() +
-                                "/Akzent_SystemUI.apk " + "/vendor/overlay/Akzent_SystemUI.apk");
-                eu.chainfire.libsuperuser.Shell.SU.run("chmod 644 " + "/vendor/overlay/Akzent_SystemUI.apk");
-            }
-            eu.chainfire.libsuperuser.Shell.SU.run(remount);
-            eu.chainfire.libsuperuser.Shell.SU.run(remountsys);
-            Log.e("copyFinalizedAPK",
-                    "Successfully copied the modified resource APK into " +
-                            "/system/vendor/overlay/ and modified the permissions!");
-            eu.chainfire.libsuperuser.Shell.SU.run("rm -r /data/data/projekt.dashboard.layers/files");
-            Log.e("copyFinalizedAPK",
-                    "Successfully Deleted Files ");
-
-        }
     }
 }
