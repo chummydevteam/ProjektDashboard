@@ -29,7 +29,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="20dp"
                 android:layout_marginTop="10dp"
-                android:src="@drawable/splashscreen_logo" />
+                android:src="@drawable/splashscreen_logo_big" />
 
             <ImageView
                 android:id="@+id/spinnerWheel"
@@ -38,7 +38,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="50dp"
-                android:src="@drawable/splashscreen_spinner" />
+                android:src="@drawable/splashscreen_spinner_big" />
 
             <ImageView
                 android:id="@+id/landingIcon"
