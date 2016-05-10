@@ -121,4 +121,7 @@ dependencies {
 
     // Floating Action Button
     compile 'com.github.clans:fab:1.6.3'
+
+    // Floating Action Button and Expandable Toolbar
+    compile 'com.github.michaldrabik:tapbarmenu:1.0.5'
 }

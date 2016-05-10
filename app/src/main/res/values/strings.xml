@@ -10,6 +10,11 @@
     <string name="welcome_back_dialog_title">make dashboard yours!</string>
     <string name="welcome_back_dialog_confirm">I like it!</string>
 
+    <!-- Home Screen -->
+    <string name="change_name_dialog_message">I assume you want me to call you something else, master?</string>
+    <string name="change_name_dialog_title">let\'s change it up!</string>
+    <string name="change_name_dialog_confirm">Much better!</string>
+
     <!-- AppIntroduction -->
     <string name="first_slide_title">welcome to dashboard.</string>
     <string name="first_slide_description">dashboard is a cm theme engine addon by chummy development team that allows you to expand the possibilities of all cdt themes, as well as extras for other themes as well.</string>

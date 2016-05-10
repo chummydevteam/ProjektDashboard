@@ -7,6 +7,8 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.EditText;
 
 import com.github.paolorotolo.appintro.AppIntro;
@@ -54,15 +56,24 @@ public class AppIntroduction extends AppIntro {
         prefs.edit().putBoolean("advanced_mode_enabled", false).commit();
 
         AlertDialog.Builder alert = new AlertDialog.Builder(AppIntroduction.this);
-        final EditText edittext = new EditText(getApplicationContext());
+
+        LayoutInflater inflater = this.getLayoutInflater();
+        final View dialogView = inflater.inflate(R.layout.name_picker_dialog, null);
+        alert.setView(dialogView);
+        final EditText textBox = (EditText) dialogView.findViewById(R.id.editText);
+
         alert.setMessage(getResources().getString(R.string.welcome_back_dialog_message));
         alert.setTitle(getResources().getString(R.string.welcome_back_dialog_title));
-        alert.setView(edittext);
         alert.setCancelable(false);
         alert.setPositiveButton(getResources().getString(R.string.welcome_back_dialog_confirm),
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
-                        prefs.edit().putString("dashboard_username", edittext.getText().toString()).commit();
+                        String string_processor = textBox.getText().toString();
+                        if (string_processor.endsWith(" ")) {
+                            string_processor = string_processor.substring(0,
+                                    string_processor.length() - 1);
+                        }
+                        prefs.edit().putString("dashboard_username", string_processor).commit();
                         startActivity(new Intent(AppIntroduction.this, MainActivity.class));
                         finish();
                     }

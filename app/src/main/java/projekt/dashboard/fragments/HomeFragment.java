@@ -1,34 +1,37 @@
 package projekt.dashboard.fragments;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.michaldrabik.tapbarmenulib.TapBarMenu;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
-import projekt.dashboard.BuildConfig;
+import butterknife.OnClick;
 import projekt.dashboard.R;
 import projekt.dashboard.fragments.base.BasePageFragment;
 import projekt.dashboard.ui.MainActivity;
+import projekt.dashboard.ui.SplashScreenActivity;
 
 /**
  * @author Nicholas Chum (nicholaschum)
@@ -38,6 +41,8 @@ public class HomeFragment extends BasePageFragment {
     public SharedPreferences prefs;
     public int current_pressed_count = 0;
     public boolean clicked_after_seventh = false;
+    @Bind(R.id.tapBarMenu)
+    TapBarMenu tapBarMenu;
 
     final public static String checkRomSupported(Context context) {
         if (getProp("ro.aicp.device") != "") {
@@ -99,6 +104,61 @@ public class HomeFragment extends BasePageFragment {
         return result;
     }
 
+    @OnClick(R.id.tapBarMenu)
+    public void onMenuButtonClick() {
+        tapBarMenu.toggle();
+    }
+
+    @OnClick({R.id.item1, R.id.item2})
+    public void onMenuItemClick(View view) {
+        tapBarMenu.close();
+        switch (view.getId()) {
+            case R.id.item1:
+                if (prefs.getBoolean("blacked_out_enabled", true)) {
+                    prefs.edit().putBoolean("blacked_out_enabled", false).commit();
+                    getActivity().finish();
+                    getActivity().startActivity(new Intent(getActivity(), MainActivity.class));
+                } else {
+                    prefs.edit().putBoolean("blacked_out_enabled", true).commit();
+                    getActivity().finish();
+                    getActivity().startActivity(new Intent(getActivity(), MainActivity.class));
+                }
+                break;
+            case R.id.item2:
+                final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(
+                        getContext());
+                AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
+
+                LayoutInflater inflater = getActivity().getLayoutInflater();
+                final View dialogView = inflater.inflate(R.layout.name_picker_dialog, null);
+                alert.setView(dialogView);
+                final EditText textBox = (EditText) dialogView.findViewById(R.id.editText);
+
+                alert.setMessage(getResources().getString(R.string.change_name_dialog_message));
+                alert.setTitle(getResources().getString(R.string.change_name_dialog_title));
+
+                alert.setCancelable(false);
+                alert.setPositiveButton(getResources().getString(
+                                R.string.change_name_dialog_confirm),
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int whichButton) {
+                                String string_processor = textBox.getText().toString();
+                                if (string_processor.endsWith(" ")) {
+                                    string_processor = string_processor.substring(
+                                            0, string_processor.length() - 1);
+                                }
+                                prefs.edit().putString(
+                                        "dashboard_username", string_processor).commit();
+                                startActivity(new Intent(
+                                        getActivity(), SplashScreenActivity.class));
+                                getActivity().finish();
+                            }
+                        });
+                alert.show();
+                break;
+        }
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -108,9 +168,6 @@ public class HomeFragment extends BasePageFragment {
                 R.layout.fragment_homepage, container, false);
 
         prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
-
-        FloatingActionButton themeSwitch = (FloatingActionButton)
-                inflation.findViewById(R.id.changeTheme);
 
         Animation anim2;
 
@@ -188,28 +245,6 @@ public class HomeFragment extends BasePageFragment {
                         }
 
                     }
-                }
-            }
-        }));
-
-        if (prefs.getBoolean("blacked_out_enabled", true)) {
-            themeSwitch.setBackgroundTintList(ColorStateList.valueOf(
-                    getResources().getColor(R.color.primary_1_blacked_out)));
-        } else {
-            themeSwitch.setBackgroundTintList(ColorStateList.valueOf(
-                    getResources().getColor(R.color.primary_1_dark_material)));
-        }
-
-        themeSwitch.setOnClickListener((new View.OnClickListener() {
-            public void onClick(View v) {
-                if (prefs.getBoolean("blacked_out_enabled", true)) {
-                    prefs.edit().putBoolean("blacked_out_enabled", false).commit();
-                    getActivity().finish();
-                    getActivity().startActivity(new Intent(getActivity(), MainActivity.class));
-                } else {
-                    prefs.edit().putBoolean("blacked_out_enabled", true).commit();
-                    getActivity().finish();
-                    getActivity().startActivity(new Intent(getActivity(), MainActivity.class));
                 }
             }
         }));

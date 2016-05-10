@@ -102,17 +102,36 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/changeTheme"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center|bottom|right"
-            android:layout_marginBottom="@dimen/content_inset"
-            android:layout_marginRight="20dp"
-            android:src="@drawable/ic_invert_colors_24dp"
-            android:visibility="visible"
-            app:layout_windowInsets="bottom"
-            app:layout_windowInsetsUseMargin="true" />
+        <com.michaldrabik.tapbarmenulib.TapBarMenu
+            android:id="@+id/tapBarMenu"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="24dp">
+
+            <ImageView
+                android:id="@+id/item1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
+                android:src="@drawable/ic_invert_colors_24dp" />
+
+            <Space
+                android:layout_width="56dp"
+                android:layout_height="match_parent" />
+
+            <ImageView
+                android:id="@+id/item2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
+                android:src="@drawable/ic_create_24dp" />
+
+        </com.michaldrabik.tapbarmenulib.TapBarMenu>
 
     </android.support.design.widget.CoordinatorLayout>
 
