@@ -25,10 +25,15 @@ import com.michaldrabik.tapbarmenulib.TapBarMenu;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Arrays;
+import java.util.Date;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import projekt.dashboard.BuildConfig;
 import projekt.dashboard.R;
 import projekt.dashboard.fragments.base.BasePageFragment;
 import projekt.dashboard.ui.MainActivity;
@@ -42,44 +47,9 @@ public class HomeFragment extends BasePageFragment {
     public SharedPreferences prefs;
     public int current_pressed_count = 0;
     public boolean clicked_after_seventh = false;
+    public String current_rom;
     @Bind(R.id.tapBarMenu)
     TapBarMenu tapBarMenu;
-
-    final public static String checkRomSupported(Context context) {
-        if (getProp("ro.aicp.device") != "") {
-            return "AICP ✓";
-        }
-        if (getProp("ro.aosip.version") != "") {
-            return "AOSiP ✓";
-        }
-        if (getProp("ro.bliss.device") != "") {
-            return "Bliss ✓";
-        }
-        if (getProp("ro.cm.device") != "") {
-            return "CyanogenMod ✓";
-        }
-        if (getProp("ro.du.device") != "") {
-            return "Dirty Unicorns ✓";
-        }
-        if (getProp("ro.purenexus.version") != "") {
-            return "Pure Nexus ✓";
-        }
-        if (getProp("ro.rr.device") != "") {
-            return "Resurrection Remix ✓";
-        }
-        if (getProp("ro.screwd.device") != "") {
-            return "Screw'd Android ✓";
-        }
-        if (getProp("ro.validus.version") != "") {
-            return "Validus ✓";
-        } else {
-            if (isAppInstalled(context, "org.cyanogenmod.theme.chooser")) {
-                return "cm_based_rom";
-            } else {
-                return null;
-            }
-        }
-    }
 
     public static boolean isAppInstalled(Context context, String packageName) {
         try {
@@ -106,6 +76,53 @@ public class HomeFragment extends BasePageFragment {
             e.printStackTrace();
         }
         return result;
+    }
+
+    final public String checkRomSupported(Context context) {
+        if (getProp("ro.aicp.device") != "") {
+            current_rom = "AICP";
+            return "AICP ✓";
+        }
+        if (getProp("ro.aosip.version") != "") {
+            current_rom = "AOSiP";
+            return "AOSiP ✓";
+        }
+        if (getProp("ro.bliss.device") != "") {
+            current_rom = "Bliss";
+            return "Bliss ✓";
+        }
+        if (getProp("ro.cm.device") != "") {
+            current_rom = "CyanogenMod";
+            return "CyanogenMod ✓";
+        }
+        if (getProp("ro.du.device") != "") {
+            current_rom = "Dirty Unicorns";
+            return "Dirty Unicorns ✓";
+        }
+        if (getProp("ro.purenexus.version") != "") {
+            current_rom = "PureNexus";
+            return "Pure Nexus ✓";
+        }
+        if (getProp("ro.rr.device") != "") {
+            current_rom = "Resurrection Remix";
+            return "Resurrection Remix ✓";
+        }
+        if (getProp("ro.screwd.device") != "") {
+            current_rom = "Screw'd";
+            return "Screw'd Android ✓";
+        }
+        if (getProp("ro.validus.version") != "") {
+            current_rom = "Validus";
+            return "Validus ✓";
+        } else {
+            if (isAppInstalled(context, "org.cyanogenmod.theme.chooser")) {
+                current_rom = "Generic CMTE Based ROM";
+                return "cm_based_rom";
+            } else {
+                current_rom = null;
+                return null;
+            }
+        }
     }
 
     @OnClick(R.id.tapBarMenu)
@@ -277,11 +294,67 @@ public class HomeFragment extends BasePageFragment {
         }
         if (checkRomSupported(getActivity()) == "cm_based_rom") {
             status_message.setTextColor(getResources().getColor(R.color.attention_color_orange));
-            status_message.setText(getResources().getString(R.string.homepage_rom_not_officially_supported));
+            status_message.setText(getResources().getString(
+                    R.string.homepage_rom_not_officially_supported));
         } else {
             status_message.setTextColor(getResources().getColor(R.color.attention_color_green));
             status_message.setText(checkRomSupported(getActivity()));
         }
+
+        TextView usernameMessage = (TextView) inflation.findViewById(R.id.usernameMessage);
+        usernameMessage.setText(getResources().getString(R.string.username_welcome) + ", " +
+                prefs.getString("dashboard_username", getResources().getString(R.string.
+                        homepage_dashboard_app_development_status_default_username)) + "!");
+
+        final String[] myStrings = {
+                "dashboard." + " (" + BuildConfig.VERSION_NAME + ")",
+                current_rom + " " + getProp("ro.build.version.release") +
+                        " (" + getProp("ro.build.id") + ")",
+                getProp("ro.product.manufacturer") + " " + getProp("ro.product.model") +
+                        " (" + getProp("ro.product.name") + ")",
+                getProp("ro.sf.lcd_density") + "DPI"};
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date convertedDate = new Date();
+        String parsedDate = "";
+        try {
+            convertedDate = dateFormat.parse(getProp("ro.build.version.security_patch"));
+            parsedDate = convertedDate.toString().substring(4, 10) + ", " +
+                    convertedDate.toString().substring(
+                            convertedDate.toString().length() - 4,
+                            convertedDate.toString().length());
+        } catch (ParseException e) {
+        }
+        final String appendedStrings = Arrays.toString(myStrings).replaceAll("\\[|\\]", "") +
+                ", " +
+                getResources().getString(R.string.vendor_fingerprint) + " " + parsedDate;
+
+        TextView marqueeText = (TextView) inflation.findViewById(R.id.MarqueeText);
+        marqueeText.setText(appendedStrings);
+
+        marqueeText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.HONEYCOMB) {
+                    android.text.ClipboardManager clipboard = (android.text.ClipboardManager)
+                            getContext().getSystemService(Context.CLIPBOARD_SERVICE);
+                    clipboard.setText(appendedStrings);
+                } else {
+                    android.content.ClipboardManager clipboard = (android.content.ClipboardManager)
+                            getContext().getSystemService(Context.CLIPBOARD_SERVICE);
+                    android.content.ClipData clip = android.content.ClipData.newPlainText(
+                            getResources().getString(
+                                    R.string.copied_system_info), appendedStrings);
+                    clipboard.setPrimaryClip(clip);
+                }
+                Toast toast = Toast.makeText(
+                        getContext(),
+                        getResources().getString(R.string.copied_system_info_to_clipboard),
+                        Toast.LENGTH_LONG);
+                toast.show();
+
+            }
+        });
 
         return inflation;
     }

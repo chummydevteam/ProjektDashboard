@@ -9,6 +9,10 @@
     <string name="welcome_back_dialog_message">what shall I call you from now on?</string>
     <string name="welcome_back_dialog_title">make dashboard yours!</string>
     <string name="welcome_back_dialog_confirm">I like it!</string>
+    <string name="username_welcome">welcome back</string>
+    <string name="copied_system_info">System Information</string>
+    <string name="copied_system_info_to_clipboard">Successfully copied system information to clipboard!</string>
+    <string name="vendor_fingerprint">Security Patch Level:</string>
 
     <!-- Home Screen -->
     <string name="change_name_dialog_message">I assume you want me to call you something else, master?</string>
