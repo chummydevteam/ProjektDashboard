@@ -103,6 +103,10 @@ public class HomeFragment extends BasePageFragment {
             current_rom = "Dirty Unicorns";
             return "Dirty Unicorns ✓";
         }
+        if (getProp("ro.to.version") != "") {
+            current_rom = "OctOS";
+            return "OctOS ✓";
+        }
         if (getProp("ro.purenexus.version") != "") {
             current_rom = "PureNexus";
             return "Pure Nexus ✓";
