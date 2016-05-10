@@ -68,6 +68,9 @@ public class HomeFragment extends BasePageFragment {
         }
         if (getProp("ro.screwd.device") != "") {
             return "Screw'd Android ✓";
+        }
+        if (getProp("ro.validus.version") != "") {
+            return "Validus ✓";
         } else {
             if (isAppInstalled(context, "org.cyanogenmod.theme.chooser")) {
                 return "cm_based_rom";
