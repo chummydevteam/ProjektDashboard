@@ -475,20 +475,6 @@ public class HeaderImportFragment extends BasePageFragment {
                     }
                 });
 
-        debugmode = (CheckBox) inflation.findViewById(R.id.checkBox3);
-        debugmode.setOnCheckedChangeListener(
-                new CompoundButton.OnCheckedChangeListener() {
-                    @Override
-                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                        if (isChecked) {
-                            is_debugging_mode_enabled = true;
-                            Log.e("CheckBox", "Universal variable to advanced log ENABLED.");
-                        } else {
-                            is_debugging_mode_enabled = false;
-                            Log.e("CheckBox", "Universal variable to advanced log DISABLED.");
-                        }
-                    }
-                });
         return inflation;
     }
 

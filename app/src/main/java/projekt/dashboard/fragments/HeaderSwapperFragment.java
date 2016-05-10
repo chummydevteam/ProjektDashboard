@@ -53,7 +53,7 @@ public class HeaderSwapperFragment extends BasePageFragment {
     private static int RESULT_LOAD_IMAGE = 1;
     public ViewGroup inflation;
     public boolean is_all_selected, is_picture_selected, are_we_clearing_cache_after,
-            free_crop_mode, is_debugging_mode_enabled;
+            free_crop_mode;
     public CropImageView cropImageView;
     public ImageView croppedImageView;
     public Bitmap croppedBitmap;
@@ -65,7 +65,7 @@ public class HeaderSwapperFragment extends BasePageFragment {
     public int folder_directory = 1;
     public int current_hour;
     public TextView checkBoxInstructions, currentTimeVariable;
-    public CheckBox autoClearSystemUICache, freeCropMode, debugmode;
+    public CheckBox autoClearSystemUICache, freeCropMode;
     public SharedPreferences prefs;
 
     public void cleanTempFolder() {
@@ -307,21 +307,6 @@ public class HeaderSwapperFragment extends BasePageFragment {
                     }
                 });
 
-        debugmode = (CheckBox) inflation.findViewById(R.id.checkBox3);
-        debugmode.setOnCheckedChangeListener(
-                new CompoundButton.OnCheckedChangeListener() {
-                    @Override
-                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                        if (isChecked) {
-                            is_debugging_mode_enabled = true;
-                            Log.e("CheckBox", "Universal variable to advanced log ENABLED.");
-                        } else {
-                            is_debugging_mode_enabled = false;
-                            Log.e("CheckBox", "Universal variable to advanced log DISABLED.");
-                        }
-                    }
-                });
-
         checkBoxInstructions = (TextView) inflation.findViewById(R.id.textView2);
         saveButton = (Button) inflation.findViewById(R.id.save_button);
 
@@ -418,7 +403,6 @@ public class HeaderSwapperFragment extends BasePageFragment {
         checkBoxInstructions.setVisibility(View.VISIBLE);
         autoClearSystemUICache.setVisibility(View.VISIBLE);
         freeCropMode.setVisibility(View.VISIBLE);
-        debugmode.setVisibility(View.VISIBLE);
         is_picture_selected = false;
         changeFABaction();
     }
@@ -451,7 +435,6 @@ public class HeaderSwapperFragment extends BasePageFragment {
             checkBoxInstructions.setVisibility(View.GONE);
             autoClearSystemUICache.setVisibility(View.GONE);
             freeCropMode.setVisibility(View.GONE);
-            debugmode.setVisibility(View.GONE);
 
             if (!free_crop_mode) {
                 cropImageView.setCustomRatio(4, 1);

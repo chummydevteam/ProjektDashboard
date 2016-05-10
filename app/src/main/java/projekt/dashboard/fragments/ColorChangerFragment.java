@@ -62,7 +62,7 @@ import projekt.dashboard.fragments.base.BasePageFragment;
 public class ColorChangerFragment extends BasePageFragment {
 
     public String color_picked, saved_color;
-    public boolean is_autorestart_enabled, is_hotreboot_enabled, is_debugging_mode_enabled,
+    public boolean is_autorestart_enabled, is_hotreboot_enabled,
             is_force_update_enabled;
     public SharedPreferences prefs;
     public ViewGroup inflation;
@@ -131,20 +131,6 @@ public class ColorChangerFragment extends BasePageFragment {
                     autorestartSystemUI.setClickable(true);
                     Log.d("CheckBox",
                             "Universal variable to hot reboot DISABLED.");
-                }
-            }
-        });
-
-        CheckBox debugmode = (CheckBox) inflation.findViewById(R.id.switch3);
-        debugmode.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    is_debugging_mode_enabled = true;
-                    Log.e("CheckBox", "Universal variable to advanced log ENABLED.");
-                } else {
-                    is_debugging_mode_enabled = false;
-                    Log.e("CheckBox", "Universal variable to advanced log DISABLED.");
                 }
             }
         });
