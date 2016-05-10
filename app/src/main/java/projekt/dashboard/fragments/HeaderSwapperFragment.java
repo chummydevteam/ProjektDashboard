@@ -874,7 +874,7 @@ public class HeaderSwapperFragment extends BasePageFragment {
                 Log.d("AAPT ADD",
                         spinner.getSelectedItem().toString());
                 Log.d("performAAPTonCommonsAPK",
-                            "Added freshly created photo file...ALL DONE!");
+                        "Added freshly created photo file...ALL DONE!");
             }
 
             // Copy the modified APK to the directory

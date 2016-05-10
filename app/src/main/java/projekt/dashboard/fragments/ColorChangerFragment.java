@@ -767,7 +767,7 @@ public class ColorChangerFragment extends BasePageFragment {
                             getActivity().getCacheDir().getAbsolutePath() +
                             "/common-resources.apk res/color-v14/accent_color.xml");
             Log.d("performAAPTonCommonsAPK",
-                        "Added freshly created main accent file...ALL DONE!");
+                    "Added freshly created main accent file...ALL DONE!");
 
             eu.chainfire.libsuperuser.Shell.SU.run("rm -r /res/color-v14");
             eu.chainfire.libsuperuser.Shell.SU.run("mount -o remount,ro /");
