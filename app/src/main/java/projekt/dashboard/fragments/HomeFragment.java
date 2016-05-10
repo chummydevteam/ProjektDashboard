@@ -226,23 +226,6 @@ public class HomeFragment extends BasePageFragment {
             status_message.setTextColor(getResources().getColor(R.color.attention_color_green));
             status_message.setText(checkRomSupported(getActivity()));
         }
-        Snackbar snack = Snackbar.make(themeSwitch, prefs.getString("dashboard_username",
-                        getResources().
-                                getString(R.string.
-                                        homepage_dashboard_app_development_status_default_username))
-                        + getResources().
-                        getString(R.string.homepage_dashboard_app_development_status)
-                        + " (" + BuildConfig.VERSION_NAME + ")",
-                Snackbar.LENGTH_INDEFINITE);
-        ViewGroup group = (ViewGroup) snack.getView();
-        if (prefs.getBoolean("blacked_out_enabled", true)) {
-            group.setBackgroundColor(
-                    ContextCompat.getColor(getContext(), R.color.primary_1_blacked_out));
-        } else {
-            group.setBackgroundColor(
-                    ContextCompat.getColor(getContext(), R.color.primary_1_dark_material));
-        }
-        snack.show();
 
         return inflation;
     }
