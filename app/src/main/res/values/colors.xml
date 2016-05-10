@@ -8,13 +8,14 @@
     <color name="disabled_text">#ff777777</color>
     <color name="viewer_overlay">#40000000</color>
     <color name="overlay_window_bg">#cc000000</color>
-
+    <color name="material_deep_teal_200">@android:color/white</color>
+    <color name="material_grey_850">@android:color/black</color>
     // Theme Switcher
     <color name="primary_1_blacked_out">#ff000000</color>
     <color name="primary_2_blacked_out">#ff000000</color>
 
     <color name="primary_1_dark_material">#ff212021</color>
-    <color name="primary_2_dark_material">#ff212021</color>
+    <color name="primary_2_dark_material">#ff151515</color>
 
     <color name="card_background_blacked_out">#ff000000</color>
     <color name="card_background_dark_material">#ff1e1e1e</color>
