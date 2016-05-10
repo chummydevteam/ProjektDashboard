@@ -10,7 +10,7 @@
     <color name="overlay_window_bg">#cc000000</color>
 
     <!-- Overriding TapBarMenu Resource-->
-    <color name="red">#141314</color>
+    <color name="red">#212021</color>
 
     <color name="fab">#111111</color>
     <color name="fab_pressed">#4a777777</color>
