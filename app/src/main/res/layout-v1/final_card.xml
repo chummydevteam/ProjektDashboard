@@ -132,7 +132,7 @@
                     android:text="@string/commons_themable_google_apps" />
 
                 <com.github.clans.fab.FloatingActionButton
-                    android:id="@+id/fab"
+                    android:id="@+id/begin_action"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/themable_gapps"

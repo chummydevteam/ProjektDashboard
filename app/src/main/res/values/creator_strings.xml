@@ -12,6 +12,12 @@
     <string name="creative_mode_card_theme_selection">select installed theme:</string>
     <string name="creative_mode_card_theme_attributes">new theme attributes:</string>
 
+
+    <string name="no_theme_selected">Please select a theme from the spinner dropdown before clicking the apply button!</string>
+    <string name="unzipping_assets_dialog_title">theme is extracting&#8230;</string>
+    <string name="unzipping_assets_small">please wait&#8230;</string>
+    <string name="unzipping_assets_big">chosen theme is huge\nextraction may take a while&#8230;</string>
+
     <!-- Settings Tweaks -->
     <string name="settings_rounded_corners">dashboard categories (rounded)</string>
     <string name="settings_show_dashboard_dividers">dashboard dividers</string>
