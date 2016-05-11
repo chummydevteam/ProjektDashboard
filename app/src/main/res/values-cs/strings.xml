@@ -25,16 +25,16 @@
     <string name="first_slide_description">dashboard je doplňek cm motivů vytvořený chummy vývojářským týmem (chummy development team), která ti dovoluje rozšířit možnosti všech cdt motivů, a také dalších motivů.</string>
 
     <string name="second_slide_title">měnič barev</string>
-    <string name="second_slide_description">dashboard má zabudovaný měnič barev pro vyměnňování barev!/nProsím dovolte mu automaticky stáhnout maličký soubor s opravami, než opustíte internetové připojení.</string>
+    <string name="second_slide_description">dashboard má zabudovaný měnič barev pro vyměnňování barev!\nProsím dovolte mu automaticky stáhnout maličký soubor s opravami, než opustíte internetové připojení.</string>
 
     <string name="third_slide_title">měnič časového záhlaví</string>
     <string name="third_slide_description">dashboard také přichází se zabudovaným měničem časového záhlaví pro vylepšení vašeho telefonu ještě více bez použití xposed doplňků nebo dělání vlastního motivu!</string>
 
-    <string name="fourth_slide_title">motor motivu v potřebě diagnózy?</string>
-    <string name="fourth_slide_description">dashboard také přichází s vystavěnýma službama, pro nabídnutí více možností pro opravu vašeho motoru motivu přímo z vašeho telefonu!\n\n</string>
+    <string name="fourth_slide_title">motiv potřebuje diagnózyu</string>
+    <string name="fourth_slide_description">dashboard také přichází se službama pro opravu vašeho motoru motivu přímo z vašeho telefonu!\n\n</string>
 
     <string name="fifth_slide_title">tato aplikace potřebuje root!</string>
-    <string name="fifth_slide_description">pro použití všech funkcí této apliakce, váš telefon musí mít zapnutý root přístup a také nahranou Custom ROM, pokud chcete časové záhlaví!</string>
+    <string name="fifth_slide_description">pro použití všech funkcí této aplikace, váš telefon musí mít zapnutý root přístup a také nahranou Custom ROM, pokud chcete časové záhlaví!</string>
 
     <string name="last_slide_title">Jsi připraven?</string>
     <string name="last_slide_description">prosím, čti vše co vyskočí, při používání této aplikace. tyto informace jsou klíč k předcházení nekonečné smyčky zapínání a také náhodného restartu!</string>
@@ -157,7 +157,7 @@
     <string name="contextualheaderimporter_header_pack_theme_count">dostupné záhlaví: </string>
     <string name="contextualheaderimporter_header_pack_na">nedostupné</string>
     <string name="contextualheaderimporter_not_all_themed">dostupné záhlaví</string>
-	<string name="contextualheaderimporter_only_one_themed">jedno dostupné záhlaví</string>
+    <string name="contextualheaderimporter_only_one_themed">jedno dostupné záhlaví</string>
     <string name="contextualheaderimporter_options_before_choosing_picture">rozšířené nastavení:</string>
 
     <string name="contextualheaderswapper">měnič časového záhlaví</string>
@@ -169,7 +169,7 @@
     <string name="contextualheaderswapper_options_before_choosing_picture">možnosti dostupné před zvolením obrázku:</string>
     <string name="contextualheaderswapper_autoclear_systemui_cache">automaticky vymazat mezipaměť systemui</string>
     <string name="contextualheaderswapper_free_crop_mode">volný mód ořezání</string>
-	<string name="contextualheaderswapper_debugging_mode">režim ladění (pokročilé logy)</string>
+    <string name="contextualheaderswapper_debugging_mode">režim ladění (pokročilé logy)</string>
     <string name="contextualheaderswapper_soft_reboot_after_modifications">Klikni zde pro rychlý restart po všech modifikacích</string>
     <string name="contextualheaderswapper_crop_image">Oříznout Obrázek</string>
     <string name="contextualheaderswapper_save_set_image">Uložit a Nastavit Obrázek</string>
@@ -195,7 +195,7 @@
     <string name="themeutilities_description">ale ne! stalo se něco?</string>
     <string name="themeutilities_description_secondary">tady máte kolekci užitečných funkcí motivů,
 	    které můžete použít při naražení na problémy, nebo by jste se cítili, jako že je čas
-		na nedělní úklid vašeho telefonu./n</string>
+		na nedělní úklid vašeho telefonu.\n</string>
     <string name="themeutilities_basic_theme_utilities">základní užitečnosti motivů:</string>
     <string name="themeutilities_perform_systemui_restart">udělat restart systemui</string>
     <string name="themeutilities_perform_soft_reboot">udělat rychlý restart</string>
