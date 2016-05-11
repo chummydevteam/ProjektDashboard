@@ -65,6 +65,7 @@ public class MyCardStackAdapter extends CardStackAdapter implements
     public SharedPreferences prefs;
     public boolean colorful_icon = true;
     public int folder_directory = 1;
+    public String current_cdt_theme;
 
     // ==================================== Framework Tweaks ================================ //
     public int current_selected_system_accent_color = Color.argb(255, 255, 255, 255); // White
@@ -760,8 +761,8 @@ public class MyCardStackAdapter extends CardStackAdapter implements
         final AnimatedEditText aet2 = (AnimatedEditText) root.findViewById(R.id.edittext2);
 
         list.add(mContext.getResources().getString(R.string.contextualheaderswapper_select_theme));
-        // list.add("dark material // akZent");
-        // list.add("blacked out // blakZent");
+        list.add("dark material // akZent");
+        list.add("blacked out // blakZent");
 
 
         // Now lets add all the located themes found that aren't cdt themes
@@ -812,6 +813,7 @@ public class MyCardStackAdapter extends CardStackAdapter implements
                         toast.show();
                     } else {
                         colorful_icon_switch.setVisibility(View.VISIBLE);
+                        current_cdt_theme = "com.chummy.jezebel.materialdark.donate";
                     }
                 }
                 if (pos == 2) {
@@ -824,6 +826,7 @@ public class MyCardStackAdapter extends CardStackAdapter implements
                         spinner1.setSelection(0);
                     } else {
                         colorful_icon_switch.setVisibility(View.VISIBLE);
+                        current_cdt_theme = "com.chummy.jezebel.blackedout.donate";
                     }
                 }
             }
@@ -859,15 +862,20 @@ public class MyCardStackAdapter extends CardStackAdapter implements
                 if (spinner1.getSelectedItemPosition() != 0 && !aet1.getText().toString()
                         .equals("")) {
                     spinnerItem = spinner1.getSelectedItem().toString();
+                    if (spinnerItem.equals("dark material // akZent") ||
+                            spinnerItem.equals("blacked out // blakZent")) {
+                        spinnerItem = current_cdt_theme;
+                    } else {
+                        spinnerItem = spinner1.getSelectedItem().toString();
+                    }
                     themeName = aet1.getText().toString();
                     themeAuthor = aet2.getText().toString();
                     if (themeAuthor.equals("")) {
                         themeAuthor = prefs.getString("dashboard_username",
                                 mContext.getResources().getString(R.string.default_username));
                     }
-
                     Phase1_UnzipAssets unzipTask = new Phase1_UnzipAssets();
-                    unzipTask.execute(spinner1.getSelectedItem().toString());
+                    unzipTask.execute(spinnerItem);
                 } else {
                     Toast toast = Toast.makeText(mContext.getApplicationContext(),
                             mContext.getResources().getString(
@@ -1617,7 +1625,8 @@ public class MyCardStackAdapter extends CardStackAdapter implements
                                 "/dashboard_creation.apk -f\n");
                 nativeApp.waitFor();
             } catch (IOException e) {
-            } catch (InterruptedException f) {}
+            } catch (InterruptedException f) {
+            }
 
             // APK should now be built, good for us, now let's break it
 
