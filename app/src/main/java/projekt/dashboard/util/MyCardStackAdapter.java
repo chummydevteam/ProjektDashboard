@@ -29,6 +29,7 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.alimuzaffar.lib.widgets.AnimatedEditText;
 import com.mutualmobile.cardstack.CardStackAdapter;
 import com.tramsun.libs.prefcompat.Pref;
 
@@ -86,12 +87,11 @@ public class MyCardStackAdapter extends CardStackAdapter implements
     // ==================================== SystemUI Tweaks ================================== //
     public int current_selected_qs_tile_color = Color.argb(255, 255, 255, 255);
     public int current_selected_qs_text_color = Color.argb(255, 255, 255, 255);
-
+    public Switch colorful_icon_switch;
+    public String spinnerItem, themeName, themeAuthor;
     ProgressDialog mProgressDialog;
     private PowerManager.WakeLock mWakeLock;
     private Logger log = new Logger(MyCardStackAdapter.class.getSimpleName());
-
-    public Switch colorful_icon_switch;
 
     public MyCardStackAdapter(Activity activity) {
         super(activity);
@@ -737,6 +737,9 @@ public class MyCardStackAdapter extends CardStackAdapter implements
         // Create an ArrayAdapter using the string array and a default spinner layout
         List<String> list = new ArrayList<String>();
 
+        final AnimatedEditText aet1 = (AnimatedEditText) root.findViewById(R.id.edittext1);
+        final AnimatedEditText aet2 = (AnimatedEditText) root.findViewById(R.id.edittext2);
+
         list.add(mContext.getResources().getString(R.string.contextualheaderswapper_select_theme));
         list.add("dark material // akZent");
         list.add("blacked out // blakZent");
@@ -822,7 +825,7 @@ public class MyCardStackAdapter extends CardStackAdapter implements
             public void onClick(View v) {
                 // We have to unzip the destination APK first
 
-                mProgressDialog = new ProgressDialog(mContext, android.R.style.Theme_DeviceDefault_NoActionBar_Fullscreen);
+                mProgressDialog = new ProgressDialog(mContext);
                 mProgressDialog.setTitle(mContext.getResources().getString(
                         R.string.unzipping_assets_dialog_title));
                 mProgressDialog.setMessage(
@@ -833,7 +836,14 @@ public class MyCardStackAdapter extends CardStackAdapter implements
 
                 // Check that there is SOMETHING changed, let's decide on the theme at least
 
-                if (spinner1.getSelectedItemPosition() != 0) {
+                if (spinner1.getSelectedItemPosition() != 0 && !aet1.getText().toString().equals("")) {
+                    spinnerItem = spinner1.getSelectedItem().toString();
+                    themeName = aet1.getText().toString();
+                    themeAuthor = aet2.getText().toString();
+                    if (themeAuthor.equals("")) {
+                        themeAuthor = prefs.getString("dashboard_username", mContext.getResources().getString(R.string.default_username));
+                    }
+
                     Phase1_UnzipAssets unzipTask = new Phase1_UnzipAssets();
                     unzipTask.execute(spinner1.getSelectedItem().toString());
                 } else {
@@ -846,150 +856,6 @@ public class MyCardStackAdapter extends CardStackAdapter implements
             }
         });
         return root;
-    }
-
-    public void startPhase2() {
-
-        // Begin going through all AsyncTasks for Framework (v10)
-
-        Phase2_InjectAndMove accent = new Phase2_InjectAndMove();
-        String accent_color = "#" + Integer.toHexString(current_selected_system_accent_color);
-        accent.execute("accent_color", accent_color, "theme_color_accent",
-                mContext.getCacheDir().getAbsolutePath() +
-                        "/creative_mode/assets/overlays/common/res/values-v10/");
-
-        Phase2_InjectAndMove accent_secondary = new Phase2_InjectAndMove();
-        String accent_secondary_color = "#" + Integer.toHexString(
-                current_selected_system_accent_dual_color);
-        accent_secondary.execute("dialer_button_bar", accent_secondary_color,
-                "theme_color_accent_secondary", mContext.getCacheDir().getAbsolutePath() +
-                        "/creative_mode/assets/overlays/common/res/values-v10/");
-
-        Phase2_InjectAndMove accent_light = new Phase2_InjectAndMove();
-        String accent_light_color = "#" + Integer.toHexString(
-                current_selected_system_accent_light_color);
-        accent_light.execute("accent_color_light", accent_light_color, "theme_color_accent_light",
-                mContext.getCacheDir().getAbsolutePath() +
-                        "/creative_mode/assets/overlays/common/res/values-v10/");
-
-        Phase2_InjectAndMove app_bg = new Phase2_InjectAndMove();
-        String app_bg_color = "#" + Integer.toHexString(current_selected_system_appbg_color);
-        app_bg.execute("app_background", app_bg_color, "theme_color_app_background",
-                mContext.getCacheDir().getAbsolutePath() +
-                        "/creative_mode/assets/overlays/common/res/values-v10/");
-
-        Phase2_InjectAndMove app_bg_light = new Phase2_InjectAndMove();
-        String app_bg_light_color = "#" + Integer.toHexString(
-                current_selected_system_appbg_light_color);
-        app_bg_light.execute("light_background", app_bg_light_color,
-                "theme_color_light_background",
-                mContext.getCacheDir().getAbsolutePath() +
-                        "/creative_mode/assets/overlays/common/res/values-v10/");
-
-        Phase2_InjectAndMove dialog_dark = new Phase2_InjectAndMove();
-        String dialog_dark_color = "#" + Integer.toHexString(current_selected_system_dialog_color);
-        dialog_dark.execute("dialog_color_dark", dialog_dark_color, "theme_color_dialog_dark",
-                mContext.getCacheDir().getAbsolutePath() +
-                        "/creative_mode/assets/overlays/common/res/values-v10/");
-
-        Phase2_InjectAndMove dialog_light = new Phase2_InjectAndMove();
-        String dialog_light_color = "#" + Integer.toHexString(
-                current_selected_system_dialog_light_color);
-        dialog_light.execute("dialog_color_light", dialog_light_color,
-                "theme_color_dialog_light", mContext.getCacheDir().getAbsolutePath() +
-                        "/creative_mode/assets/overlays/common/res/values-v10/");
-
-        Phase2_InjectAndMove theme_color = new Phase2_InjectAndMove();
-        String theme_color_ = "#" + Integer.toHexString(current_selected_system_main_color);
-        theme_color.execute("theme_color", theme_color_, "theme_color",
-                mContext.getCacheDir().getAbsolutePath() +
-                        "/creative_mode/assets/overlays/common/res/values-v10/");
-
-        Phase2_InjectAndMove notification_primary = new Phase2_InjectAndMove();
-        String notification_primary_color = "#" + Integer.toHexString(
-                current_selected_system_notifications_primary_color);
-        notification_primary.execute("notification_primary", notification_primary_color,
-                "theme_color_notification_primary", mContext.getCacheDir().getAbsolutePath() +
-                        "/creative_mode/assets/overlays/common/res/values-v10/");
-
-        Phase2_InjectAndMove notification_secondary = new Phase2_InjectAndMove();
-        String notification_secondary_color = "#" + Integer.toHexString(
-                current_selected_system_notifications_secondary_color);
-        notification_secondary.execute("notification_secondary", notification_secondary_color,
-                "theme_color_notification_secondary", mContext.getCacheDir().getAbsolutePath() +
-                        "/creative_mode/assets/overlays/common/res/values-v10/");
-
-        Phase2_InjectAndMove ripple = new Phase2_InjectAndMove();
-        String ripple_color = "#" + Integer.toHexString(current_selected_system_ripple_color);
-        ripple.execute("ripple_dark", ripple_color, "theme_color_ripple_color",
-                mContext.getCacheDir().getAbsolutePath() +
-                        "/creative_mode/assets/overlays/common/res/values-v10/");
-
-        // Begin going through all AsyncTasks for Settings (v11)
-
-        Phase2_InjectAndMove settings_icon = new Phase2_InjectAndMove();
-        String settings_icon_color = "#" + Integer.toHexString(
-                current_selected_settings_icon_color);
-        settings_icon.execute("settings_icon_tint", settings_icon_color,
-                "theme_color_settings_icon_tint",
-                mContext.getCacheDir().getAbsolutePath() +
-                        "/creative_mode/assets/overlays/com.android.settings/res/values-v11/");
-
-        Phase2_InjectAndMove settings_title = new Phase2_InjectAndMove();
-        String settings_title_color = "#" + Integer.toHexString(
-                current_selected_settings_title_color);
-        settings_title.execute("theme_accent", settings_title_color,
-                "theme_color_settings_title_color",
-                mContext.getCacheDir().getAbsolutePath() +
-                        "/creative_mode/assets/overlays/com.android.settings/res/values-v11/");
-
-        // Begin going through all AsyncTasks for SystemUI (v12)
-
-        Phase2_InjectAndMove sysui_accent = new Phase2_InjectAndMove();
-        String sysui_accent_color = "#" + Integer.toHexString(current_selected_qs_accent_color);
-        sysui_accent.execute("system_accent_color", sysui_accent_color,
-                "theme_color_systemui_accent_color",
-                mContext.getCacheDir().getAbsolutePath() +
-                        "/creative_mode/assets/overlays/com.android.systemui/res/values-v12/");
-
-        Phase2_InjectAndMove sysui_qs_tile = new Phase2_InjectAndMove();
-        String sysui_qs_tile_color = "#" + Integer.toHexString(current_selected_qs_tile_color);
-        sysui_qs_tile.execute("qs_icon_color", sysui_qs_tile_color,
-                "theme_color_systemui_qs_icon_color",
-                mContext.getCacheDir().getAbsolutePath() +
-                        "/creative_mode/assets/overlays/common/res/values-v12/");
-
-        Phase2_InjectAndMove sysui_qs_tile_disabled = new Phase2_InjectAndMove();
-        String sysui_qs_tile_disabled_color = "#4d" +
-                Integer.toHexString(current_selected_qs_tile_color).substring(2);
-        sysui_qs_tile_disabled.execute("qs_icon_color_disabled", sysui_qs_tile_disabled_color,
-                "theme_color_systemui_qs_icon_disabled_color",
-                mContext.getCacheDir().getAbsolutePath() +
-                        "/creative_mode/assets/overlays/common/res/values-v12/");
-
-        Phase2_InjectAndMove sysui_qs_tile_text = new Phase2_InjectAndMove();
-        String sysui_qs_tile_text_color = "#" + Integer.toHexString(current_selected_qs_tile_color);
-        sysui_qs_tile_text.execute("qs_tile_text", sysui_qs_tile_text_color,
-                "theme_color_systemui_qs_tile_text_color",
-                mContext.getCacheDir().getAbsolutePath() +
-                        "/creative_mode/assets/overlays/common/res/values-v12/");
-
-        // Let's do a while loop file checker for now to wait for v10 to fill up
-
-        Integer processed_items = 0;
-        while (processed_items < 11 || processed_items.equals(null)) {
-            try {
-                Thread.sleep(1000);
-                Log.d("WhileLoop", "Processes aren't done, while loop continuing...");
-                processed_items = new File(mContext.getCacheDir().getAbsolutePath() +
-                        "/creative_mode/assets/overlays/common/res/values-v10/").listFiles().length;
-            } catch (InterruptedException e) {
-                //
-            }
-        }
-        Phase3_MovePremadeFiles phase3 = new Phase3_MovePremadeFiles();
-        phase3.execute();
-
     }
 
     private class Phase1_UnzipAssets extends AsyncTask<String, Integer, String> {
@@ -1008,15 +874,6 @@ public class MyCardStackAdapter extends CardStackAdapter implements
         }
 
         @Override
-        protected void onProgressUpdate(Integer... progress) {
-            super.onProgressUpdate(progress);
-            // if we get here, length is known, now set indeterminate to false
-            mProgressDialog.setIndeterminate(false);
-            mProgressDialog.setMax(100);
-            mProgressDialog.setProgress(progress[0]);
-        }
-
-        @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
             mProgressDialog.setTitle("configuring the fun!");
@@ -1025,15 +882,150 @@ public class MyCardStackAdapter extends CardStackAdapter implements
             startPhase2();
         }
 
+        public void startPhase2() {
+
+            // Begin going through all AsyncTasks for Framework (v10)
+
+            Phase2_InjectAndMove accent = new Phase2_InjectAndMove();
+            String accent_color = "#" + Integer.toHexString(current_selected_system_accent_color);
+            accent.execute("accent_color", accent_color, "theme_color_accent",
+                    mContext.getCacheDir().getAbsolutePath() +
+                            "/creative_mode/assets/overlays/common/res/values-v10/");
+
+            Phase2_InjectAndMove accent_secondary = new Phase2_InjectAndMove();
+            String accent_secondary_color = "#" + Integer.toHexString(
+                    current_selected_system_accent_dual_color);
+            accent_secondary.execute("dialer_button_bar", accent_secondary_color,
+                    "theme_color_accent_secondary", mContext.getCacheDir().getAbsolutePath() +
+                            "/creative_mode/assets/overlays/common/res/values-v10/");
+
+            Phase2_InjectAndMove accent_light = new Phase2_InjectAndMove();
+            String accent_light_color = "#" + Integer.toHexString(
+                    current_selected_system_accent_light_color);
+            accent_light.execute("accent_color_light", accent_light_color, "theme_color_accent_light",
+                    mContext.getCacheDir().getAbsolutePath() +
+                            "/creative_mode/assets/overlays/common/res/values-v10/");
+
+            Phase2_InjectAndMove app_bg = new Phase2_InjectAndMove();
+            String app_bg_color = "#" + Integer.toHexString(current_selected_system_appbg_color);
+            app_bg.execute("app_background", app_bg_color, "theme_color_app_background",
+                    mContext.getCacheDir().getAbsolutePath() +
+                            "/creative_mode/assets/overlays/common/res/values-v10/");
+
+            Phase2_InjectAndMove app_bg_light = new Phase2_InjectAndMove();
+            String app_bg_light_color = "#" + Integer.toHexString(
+                    current_selected_system_appbg_light_color);
+            app_bg_light.execute("light_background", app_bg_light_color,
+                    "theme_color_light_background",
+                    mContext.getCacheDir().getAbsolutePath() +
+                            "/creative_mode/assets/overlays/common/res/values-v10/");
+
+            Phase2_InjectAndMove dialog_dark = new Phase2_InjectAndMove();
+            String dialog_dark_color = "#" + Integer.toHexString(current_selected_system_dialog_color);
+            dialog_dark.execute("dialog_color_dark", dialog_dark_color, "theme_color_dialog_dark",
+                    mContext.getCacheDir().getAbsolutePath() +
+                            "/creative_mode/assets/overlays/common/res/values-v10/");
+
+            Phase2_InjectAndMove dialog_light = new Phase2_InjectAndMove();
+            String dialog_light_color = "#" + Integer.toHexString(
+                    current_selected_system_dialog_light_color);
+            dialog_light.execute("dialog_color_light", dialog_light_color,
+                    "theme_color_dialog_light", mContext.getCacheDir().getAbsolutePath() +
+                            "/creative_mode/assets/overlays/common/res/values-v10/");
+
+            Phase2_InjectAndMove theme_color = new Phase2_InjectAndMove();
+            String theme_color_ = "#" + Integer.toHexString(current_selected_system_main_color);
+            theme_color.execute("theme_color", theme_color_, "theme_color",
+                    mContext.getCacheDir().getAbsolutePath() +
+                            "/creative_mode/assets/overlays/common/res/values-v10/");
+
+            Phase2_InjectAndMove notification_primary = new Phase2_InjectAndMove();
+            String notification_primary_color = "#" + Integer.toHexString(
+                    current_selected_system_notifications_primary_color);
+            notification_primary.execute("notification_primary", notification_primary_color,
+                    "theme_color_notification_primary", mContext.getCacheDir().getAbsolutePath() +
+                            "/creative_mode/assets/overlays/common/res/values-v10/");
+
+            Phase2_InjectAndMove notification_secondary = new Phase2_InjectAndMove();
+            String notification_secondary_color = "#" + Integer.toHexString(
+                    current_selected_system_notifications_secondary_color);
+            notification_secondary.execute("notification_secondary", notification_secondary_color,
+                    "theme_color_notification_secondary", mContext.getCacheDir().getAbsolutePath() +
+                            "/creative_mode/assets/overlays/common/res/values-v10/");
+
+            Phase2_InjectAndMove ripple = new Phase2_InjectAndMove();
+            String ripple_color = "#" + Integer.toHexString(current_selected_system_ripple_color);
+            ripple.execute("ripple_dark", ripple_color, "theme_color_ripple_color",
+                    mContext.getCacheDir().getAbsolutePath() +
+                            "/creative_mode/assets/overlays/common/res/values-v10/");
+
+            // Begin going through all AsyncTasks for Settings (v11)
+
+            Phase2_InjectAndMove settings_icon = new Phase2_InjectAndMove();
+            String settings_icon_color = "#" + Integer.toHexString(
+                    current_selected_settings_icon_color);
+            settings_icon.execute("settings_icon_tint", settings_icon_color,
+                    "theme_color_settings_icon_tint",
+                    mContext.getCacheDir().getAbsolutePath() +
+                            "/creative_mode/assets/overlays/com.android.settings/res/values-v11/");
+
+            Phase2_InjectAndMove settings_title = new Phase2_InjectAndMove();
+            String settings_title_color = "#" + Integer.toHexString(
+                    current_selected_settings_title_color);
+            settings_title.execute("theme_accent", settings_title_color,
+                    "theme_color_settings_title_color",
+                    mContext.getCacheDir().getAbsolutePath() +
+                            "/creative_mode/assets/overlays/com.android.settings/res/values-v11/");
+
+            // Begin going through all AsyncTasks for SystemUI (v12)
+
+            Phase2_InjectAndMove sysui_accent = new Phase2_InjectAndMove();
+            String sysui_accent_color = "#" + Integer.toHexString(current_selected_qs_accent_color);
+            sysui_accent.execute("system_accent_color", sysui_accent_color,
+                    "theme_color_systemui_accent_color",
+                    mContext.getCacheDir().getAbsolutePath() +
+                            "/creative_mode/assets/overlays/com.android.systemui/res/values-v12/");
+
+            Phase2_InjectAndMove sysui_qs_tile = new Phase2_InjectAndMove();
+            String sysui_qs_tile_color = "#" + Integer.toHexString(current_selected_qs_tile_color);
+            sysui_qs_tile.execute("qs_icon_color", sysui_qs_tile_color,
+                    "theme_color_systemui_qs_icon_color",
+                    mContext.getCacheDir().getAbsolutePath() +
+                            "/creative_mode/assets/overlays/common/res/values-v12/");
+
+            Phase2_InjectAndMove sysui_qs_tile_disabled = new Phase2_InjectAndMove();
+            String sysui_qs_tile_disabled_color = "#4d" +
+                    Integer.toHexString(current_selected_qs_tile_color).substring(2);
+            sysui_qs_tile_disabled.execute("qs_icon_color_disabled", sysui_qs_tile_disabled_color,
+                    "theme_color_systemui_qs_icon_disabled_color",
+                    mContext.getCacheDir().getAbsolutePath() +
+                            "/creative_mode/assets/overlays/common/res/values-v12/");
+
+            Phase2_InjectAndMove sysui_qs_tile_text = new Phase2_InjectAndMove();
+            String sysui_qs_tile_text_color = "#" + Integer.toHexString(current_selected_qs_tile_color);
+            sysui_qs_tile_text.execute("qs_tile_text", sysui_qs_tile_text_color,
+                    "theme_color_systemui_qs_tile_text_color",
+                    mContext.getCacheDir().getAbsolutePath() +
+                            "/creative_mode/assets/overlays/common/res/values-v12/");
+
+            Phase3_MovePremadeFiles phase3 = new Phase3_MovePremadeFiles();
+            phase3.execute();
+
+        }
+
         @Override
         protected String doInBackground(String... sUrl) {
+            try {
+                Thread.sleep(10000);
+            } catch (InterruptedException e) {
+
+            }
+
             String package_identifier = sUrl[0];
             try {
                 unzip(package_identifier);
             } catch (IOException e) {
-
             }
-
             return null;
         }
 
@@ -1102,20 +1094,6 @@ public class MyCardStackAdapter extends CardStackAdapter implements
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            // take CPU lock to prevent CPU from going off if the user
-            // presses the power button during download
-            PowerManager pm = (PowerManager)
-                    mContext.getApplicationContext().getSystemService(Context.POWER_SERVICE);
-            mProgressDialog.show();
-        }
-
-        @Override
-        protected void onProgressUpdate(Integer... progress) {
-            super.onProgressUpdate(progress);
-            // if we get here, length is known, now set indeterminate to false
-            mProgressDialog.setIndeterminate(false);
-            mProgressDialog.setMax(100);
-            mProgressDialog.setProgress(progress[0]);
         }
 
         @Override
@@ -1206,36 +1184,16 @@ public class MyCardStackAdapter extends CardStackAdapter implements
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            // take CPU lock to prevent CPU from going off if the user
-            // presses the power button during download
-            PowerManager pm = (PowerManager)
-                    mContext.getApplicationContext().getSystemService(Context.POWER_SERVICE);
-            mProgressDialog.show();
-        }
-
-        @Override
-        protected void onProgressUpdate(Integer... progress) {
-            super.onProgressUpdate(progress);
-            // if we get here, length is known, now set indeterminate to false
-            mProgressDialog.setIndeterminate(false);
-            mProgressDialog.setMax(100);
-            mProgressDialog.setProgress(progress[0]);
         }
 
         @Override
         protected void onPostExecute(String result) {
-
             super.onPostExecute(result);
-
-            //mWakeLock.release();
-            //mProgressDialog.dismiss();
         }
 
         @Override
         protected String doInBackground(String... sUrl) {
             copyFileOrDir("");
-
-
             return null;
         }
 
@@ -1272,7 +1230,6 @@ public class MyCardStackAdapter extends CardStackAdapter implements
                     MoveWhateverIsActivated();
                 }
             } catch (IOException e) {
-                //
             }
         }
 
@@ -1340,7 +1297,10 @@ public class MyCardStackAdapter extends CardStackAdapter implements
                         "/creative_mode/assets/overlays/com.android.settings/res/values-v11/";
                 moveFile(source, "dirty_tweaks_icon_presence.xml", destination);
             }
-            mProgressDialog.dismiss();
+
+            Phase4_ManifestCreation createManifest = new Phase4_ManifestCreation();
+            createManifest.execute();
+
         }
 
         private void createSettingsTitleXML(String filename, String theme_destination) {
@@ -1437,8 +1397,87 @@ public class MyCardStackAdapter extends CardStackAdapter implements
                 new File(current_source + inputFile).delete();
 
             } catch (FileNotFoundException f) {
-                //
             } catch (Exception e) {
+            }
+        }
+    }
+
+    private class Phase4_ManifestCreation extends AsyncTask<String, Integer, String> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+
+            try{
+                Thread.sleep(5000);
+            } catch (InterruptedException e) {
+
+            }
+
+
+            //mWakeLock.release();
+            mProgressDialog.dismiss();
+        }
+
+        @Override
+        protected String doInBackground(String... sUrl) {
+            String packageName = spinnerItem;
+            packageName = packageName + "." + themeName;
+
+            String theme_name = themeName;
+            String theme_author = themeAuthor;
+
+            String filename = "AndroidManifest";
+
+            createXMLfile(packageName, theme_name, theme_author, filename);
+            return null;
+        }
+
+        private void createXMLfile(String packageName, String theme_name, String theme_author,
+                                   String filename) {
+
+            File root = new File(
+                    mContext.getCacheDir().getAbsolutePath() + "/" + filename + ".xml");
+            try {
+                root.createNewFile();
+                FileWriter fw = new FileWriter(root);
+                BufferedWriter bw = new BufferedWriter(fw);
+                PrintWriter pw = new PrintWriter(bw);
+                String xmlTags = ("<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"no\"?>" + "\n");
+                String xmlRes1 = ("<manifest xmlns:android=\"http://schemas.android.com/apk/res/android\"" + "\n");
+                String xmlRes2 = ("    package=\"" + packageName + "\">" + "\n");
+                String xmlRes3 = ("    <uses-feature" + "\n");
+                String xmlRes4 = ("        android:name=\"org.cyanogenmod.theme\"" + "\n");
+                String xmlRes5 = ("        android:required=\"true\" />" + "\n");
+                String xmlRes6 = ("    <meta-data" + "\n");
+                String xmlRes7 = ("        android:name=\"org.cyanogenmod.theme.name\"" + "\n");
+                String xmlRes8 = ("        android:value=\"" + theme_name + "\" />" + "\n");
+                String xmlRes9 = ("    <meta-data" + "\n");
+                String xmlRes10 = ("        android:name=\"org.cyanogenmod.theme.author\"" + "\n");
+                String xmlRes11 = ("        android:value=\"" + theme_author + "\" />" + "\n");
+                String xmlRes12 = ("</manifest>");
+                pw.write(xmlTags);
+                pw.write(xmlRes1);
+                pw.write(xmlRes2);
+                pw.write(xmlRes3);
+                pw.write(xmlRes4);
+                pw.write(xmlRes5);
+                pw.write(xmlRes6);
+                pw.write(xmlRes7);
+                pw.write(xmlRes8);
+                pw.write(xmlRes9);
+                pw.write(xmlRes10);
+                pw.write(xmlRes11);
+                pw.write(xmlRes12);
+                pw.close();
+                bw.close();
+                fw.close();
+            } catch (IOException e) {
                 //
             }
         }
