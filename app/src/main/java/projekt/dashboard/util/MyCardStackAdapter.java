@@ -91,6 +91,7 @@ public class MyCardStackAdapter extends CardStackAdapter implements
     private PowerManager.WakeLock mWakeLock;
     private Logger log = new Logger(MyCardStackAdapter.class.getSimpleName());
 
+    public Switch colorful_icon_switch;
 
     public MyCardStackAdapter(Activity activity) {
         super(activity);
@@ -466,7 +467,7 @@ public class MyCardStackAdapter extends CardStackAdapter implements
 
         // Colorful DU/PN Tweaks Icon
 
-        final Switch colorful_icon_switch = (Switch) root.findViewById(R.id.colorful_icon);
+        colorful_icon_switch = (Switch) root.findViewById(R.id.colorful_icon);
         colorful_icon_switch.setOnCheckedChangeListener(
                 new CompoundButton.OnCheckedChangeListener() {
                     @Override
@@ -480,6 +481,7 @@ public class MyCardStackAdapter extends CardStackAdapter implements
                         }
                     }
                 });
+        colorful_icon_switch.setVisibility(View.GONE);
 
 
         // Dashboard Categories (Rounded)
@@ -785,6 +787,8 @@ public class MyCardStackAdapter extends CardStackAdapter implements
                                         R.string.akzent_toast_install_before_using),
                                 Toast.LENGTH_LONG);
                         toast.show();
+                    } else {
+                        colorful_icon_switch.setVisibility(View.VISIBLE);
                     }
                 }
                 if (pos == 2) {
@@ -795,6 +799,8 @@ public class MyCardStackAdapter extends CardStackAdapter implements
                                 Toast.LENGTH_LONG);
                         toast.show();
                         spinner1.setSelection(0);
+                    } else {
+                        colorful_icon_switch.setVisibility(View.VISIBLE);
                     }
                 }
             }
@@ -1036,7 +1042,7 @@ public class MyCardStackAdapter extends CardStackAdapter implements
 
             Boolean is_valid = checkCurrentThemeSelection(package_identifier);
 
-            // After checking package identifier validity, continue to check for exact folder number
+            // After checking package identifier validity, check for exact folder number
             if (is_valid) {
                 int folder_abbreviation = checkCurrentThemeSelectionLocation(package_identifier);
                 if (folder_abbreviation != 0) {
@@ -1360,7 +1366,8 @@ public class MyCardStackAdapter extends CardStackAdapter implements
                 }
             }
 
-            String boldItalics = ("        <item name=\"android:textStyle\">" + parseMe + "</item>" + "\n");
+            String boldItalics = ("        <item name=\"android:textStyle\">" +
+                    parseMe + "</item>" + "\n");
 
             if (!category_title_bold && !category_title_italics) {
                 boldItalics = "";
@@ -1376,8 +1383,10 @@ public class MyCardStackAdapter extends CardStackAdapter implements
                 PrintWriter pw = new PrintWriter(bw);
                 String xmlTags = ("<?xml version=\"1.0\" encoding=\"utf-8\"?>" + "\n");
                 String xmlRes1 = ("<resources>" + "\n");
-                String xmlRes2 = ("    <style name=\"TextAppearance.CategoryTitle\" parent=\"@android:style/TextAppearance.Material.Body2\">" + "\n");
-                String xmlRes3 = ("        <item name=\"android:textColor\">?android:attr/colorAccent</item>" + "\n");
+                String xmlRes2 = ("    <style name=\"TextAppearance.CategoryTitle\" " +
+                        "parent=\"@android:style/TextAppearance.Material.Body2\">" + "\n");
+                String xmlRes3 = ("        <item name=\"android:textColor\">" +
+                        "?android:attr/colorAccent</item>" + "\n");
                 String xmlRes5 = ("    </style>" + "\n");
                 String xmlRes6 = ("</resources>");
                 pw.write(xmlTags);
