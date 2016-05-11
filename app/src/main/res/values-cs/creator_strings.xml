@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="card_title">nezařazená karta</string>
+    <string name="settings">modifikace nastavení</string>
+    <string name="systemui">modifikace systemui</string>
+    <string name="framework">modifikace frameworku</string>
+    <string name="commons">různé modifikace</string>
+    <string name="finalized_card">konfigurace motivu</string>
+    <string name="theme_selection">zvolení motivu</string>
+    <string name="empty">">> tady není nic k vidění&#8230;zatím!"</string>
+
+    <string name="creative_mode_card_theme_selection">zvolte nainstalovaný motiv:</string>
+    <string name="creative_mode_card_theme_attributes">nové vlastnosti motivu</string>
+
+
+    <string name="no_theme_selected">Prosím zvolte motiv ze spodní nabídky před kliknutím na tlačítko použít!</string>
+    <string name="unzipping_assets_dialog_title">motiv se extrahuje&#8230;</string>
+    <string name="unzipping_assets_small">čekejte prosím&#8230;</string>
+    <string name="unzipping_assets_big">vybraný motiv je velký/nextrakce může chvíli trvat&#8230;</string>
+
+    <!-- Settings Tweaks -->
+    <string name="settings_rounded_corners">kategorie (zaoblené)</string>
+    <string name="settings_show_dashboard_dividers">rozdělovače kategorií</string>
+    <string name="settings_du_tweaks_icon_presence">přítomnost ikony dirty tweaks</string>
+    <string name="settings_colorful_tweaks_icon">barevná ikonka du/pn</string>
+    <string name="settings_dashboard_title_allcaps">název kategorií - všechno velkým</string>
+    <string name="settings_dashboard_title_bold">název kategorií - tučné</string>
+    <string name="settings_dashboard_title_italics">název kategorií - kurzíva</string>
+    <string name="settings_icon_color">barva ikon nastavení</string>
+    <string name="settings_title_color">barva názvů nastavení</string>
+    <string name="settings_header_text">BEZDRÁTOVÁ PŘIPOJENÍ A SÍTĚ</string>
+    <string name="settings_preview_title">Nastavení</string>
+    <string name="settings_wifi_text">Wi-Fi</string>
+
+    <!-- SystemUI Tweaks -->
+    <string name="qs_accent_color">hlavní barva systemui</string>
+    <string name="qs_tile_icon_color">barva přepínače rychlého nastevní</string>
+    <string name="qs_tile_text_color">barva textu rychlého nastevní</string>
+
+    <string name="systemui_preview_label_bt">Bluetooth</string>
+    <string name="systemui_preview_label_wifi">Wifi</string>
+    <string name="systemui_preview_label"> (ova) Wifi</string>
+    <string name="systemui_preview_default_no_username">Tvoje</string>
+
+    <!-- Framework Tweaks -->
+    <string name="system_accent">odstín frameworku (tmavý)</string>
+    <string name="system_accent_dual">odstín frameworku (druhý)</string>
+    <string name="system_accent_light">odstín frameworku (světlý)</string>
+    <string name="system_appbg">pozadí aplikace frameworku (tmavé)</string>
+    <string name="system_appbg_light">framework app background (světlé)</string>
+    <string name="system_dialog">framework dialog background (tmavé)</string>
+    <string name="system_dialog_light">framework dialog background (světlé)</string>
+    <string name="system_notification_text_1">oznámení frameworku (hlavní text)</string>
+    <string name="system_notification_text_2">oznámení frameworku (vedlejší text)</string>
+    <string name="system_ripple_color">vlnění systémového frameworku</string>
+    <string name="system_main_color">barva hlavního motivu frameworku</string>
+
+    <string name="framework_preview_title">framework dashboardu.</string>
+    <string name="framework_preview_heading">Informace o chummy development team</string>
+    <string name="framework_preview_subheading">Informace o našich vývojářích, správcích a funkcích aplikace</string>
+    <string name="framework_preview">Ukázka modifikace tmavého motivu</string>
+    <string name="framework_preview_light">Ukázka modifikace světlého motivu</string>
+
+    <!-- Common Tweaks -->
+    <string name="commons_themable_google_apps">zapnout dělání motivů na motivové google aplikace</string>
+
+    <!-- Final Card -->
+    <string name="creation_name">název kreace:</string>
+    <string name="creator_name">jméno tvůrce:</string>
+    <string name="allowed_characters">0123456789.-_/()(͡° ͜ʖ ͡°)aábcčd´deěéfghijklmnňoópqrřsštťuúůvwxyzžAÁBCČDĎEĚÉFGHIJKLMNŇOÓPQRŘSŠTŤUÚŮVWXYZŽ</string>
+    <!-- Do not allow spaces in translations -->
+    <string name="creation_name_empty">prosím napiště název vašeho motivu&#8230;</string>
+    <string name="creator_name_empty">pokud bude toto pole prázdné, bude použito standartní jméno&#8230;</string>
+</resources>
