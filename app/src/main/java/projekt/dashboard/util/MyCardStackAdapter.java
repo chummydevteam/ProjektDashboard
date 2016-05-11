@@ -3,13 +3,16 @@ package projekt.dashboard.util;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.AssetManager;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
+import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Environment;
 import android.os.PowerManager;
 import android.preference.PreferenceManager;
 import android.support.v4.content.ContextCompat;
@@ -49,6 +52,7 @@ import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
+import kellinwood.security.zipsigner.ZipSigner;
 import projekt.dashboard.R;
 import projekt.dashboard.colorpicker.ColorPickerDialog;
 
@@ -836,7 +840,8 @@ public class MyCardStackAdapter extends CardStackAdapter implements
 
                 // Check that there is SOMETHING changed, let's decide on the theme at least
 
-                if (spinner1.getSelectedItemPosition() != 0 && !aet1.getText().toString().equals("")) {
+                if (spinner1.getSelectedItemPosition() != 0 && !aet1.getText().toString()
+                        .equals("")) {
                     spinnerItem = spinner1.getSelectedItem().toString();
                     themeName = aet1.getText().toString();
                     themeAuthor = aet2.getText().toString();
@@ -1421,7 +1426,7 @@ public class MyCardStackAdapter extends CardStackAdapter implements
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-            Phase5_CompileAndSign createAPK = new Phase5_CompileAndSign();
+            Phase5_Compile createAPK = new Phase5_Compile();
             createAPK.execute();
         }
 
@@ -1505,19 +1510,20 @@ public class MyCardStackAdapter extends CardStackAdapter implements
                 String xmlRes1 = ("<manifest xmlns:android=\"http://schemas.android.com/" +
                         "apk/res/android\"" + "\n");
                 String xmlRes2 = ("    package=\"" + packageName + "\">" + "\n");
-                String xmlRes3 = ("    <uses-feature" + "\n");
-                String xmlRes4 = ("        android:name=\"org.cyanogenmod.theme\"" + "\n");
-                String xmlRes5 = ("        android:required=\"true\" />" + "\n");
-                String xmlRes6 = ("    <meta-data" + "\n");
-                String xmlRes7 = ("        android:name=\"org.cyanogenmod.theme.name\"" + "\n");
-                String xmlRes8 = ("        android:value=\"" + theme_name + "\" />" + "\n");
-                String xmlRes9 = ("    <meta-data" + "\n");
-                String xmlRes10 = ("        android:name=\"org.cyanogenmod.theme.author\"" + "\n");
-                String xmlRes11 = ("        android:value=\"" + theme_author + "\" />" + "\n");
-                String xmlRes12 = ("    <application android:hasCode=\"false\"" + "\n");
-                String xmlRes13 = ("        android:icon=\"" + icon_location + "\"" + "\n");
-                String xmlRes14 = ("        android:label=\"" + theme_name + "\"/>" + "\n");
-                String xmlRes15 = ("</manifest>");
+                String xmlRes3 = ("    <uses-sdk android:minSdkVersion=\"23\"/>" + "\n");
+                String xmlRes4 = ("    <uses-feature" + "\n");
+                String xmlRes5 = ("        android:name=\"org.cyanogenmod.theme\"" + "\n");
+                String xmlRes6 = ("        android:required=\"true\" />" + "\n");
+                String xmlRes7 = ("    <meta-data" + "\n");
+                String xmlRes8 = ("        android:name=\"org.cyanogenmod.theme.name\"" + "\n");
+                String xmlRes9 = ("        android:value=\"" + theme_name + "\" />" + "\n");
+                String xmlRes10 = ("    <meta-data" + "\n");
+                String xmlRes11 = ("        android:name=\"org.cyanogenmod.theme.author\"" + "\n");
+                String xmlRes12 = ("        android:value=\"" + theme_author + "\" />" + "\n");
+                String xmlRes13 = ("    <application android:hasCode=\"false\"" + "\n");
+                String xmlRes14 = ("        android:icon=\"" + icon_location + "\"" + "\n");
+                String xmlRes15 = ("        android:label=\"" + theme_name + "\"/>" + "\n");
+                String xmlRes16 = ("</manifest>");
                 pw.write(xmlTags);
                 pw.write(xmlRes1);
                 pw.write(xmlRes2);
@@ -1534,6 +1540,7 @@ public class MyCardStackAdapter extends CardStackAdapter implements
                 pw.write(xmlRes13);
                 pw.write(xmlRes14);
                 pw.write(xmlRes15);
+                pw.write(xmlRes16);
                 pw.close();
                 bw.close();
                 fw.close();
@@ -1543,7 +1550,7 @@ public class MyCardStackAdapter extends CardStackAdapter implements
         }
     }
 
-    private class Phase5_CompileAndSign extends AsyncTask<String, Integer, String> {
+    private class Phase5_Compile extends AsyncTask<String, Integer, String> {
 
         @Override
         protected void onPreExecute() {
@@ -1554,24 +1561,167 @@ public class MyCardStackAdapter extends CardStackAdapter implements
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
+            Phase6_SignAndInstall phase6 = new Phase6_SignAndInstall();
+            phase6.execute();
+        }
+
+        @Override
+        protected String doInBackground(String... sUrl) {
+
+            // Let's clean up the dashboard cache for creative mode extraction zone
+
+            File[] fileList = new File(mContext.getCacheDir().getAbsolutePath() +
+                    "/creative_mode/").listFiles();
+            for (int i = 0; i < fileList.length; i++) {
+                if (!fileList[i].getName().equals("AndroidManifest.xml") &&
+                        !fileList[i].getName().equals("assets") &&
+                        !fileList[i].getName().equals("res")) {
+                    File file = new File(mContext.getCacheDir().getAbsolutePath() +
+                            "/creative_mode/" + fileList[i].getName());
+                    boolean deleted = file.delete();
+                    if (fileList[i].getName().equals("META-INF")) {
+                        eu.chainfire.libsuperuser.Shell.SU.run(
+                                "rm -r " + mContext.getCacheDir().getAbsolutePath() +
+                                        "/creative_mode/META-INF");
+                    }
+                    Log.d("FileDeletion", "Deleted file/folder: " + fileList[i].getName());
+                }
+            }
+
+            // Now let's build an APK based on the cleaned out directory
+            try {
+                Process nativeApp = Runtime.getRuntime().exec(
+                        "aapt p -M " +
+                                mContext.getCacheDir().getAbsolutePath() + "/creative_mode" +
+                                "/AndroidManifest.xml -S " +
+                                mContext.getCacheDir().getAbsolutePath() + "/creative_mode" +
+                                "/res/ -I " +
+                                "system/framework/framework-res.apk -F " +
+                                mContext.getCacheDir().getAbsolutePath() +
+                                "/dashboard_creation.apk -f\n");
+            } catch (IOException e) {
+            }
+
+            // APK should now be built, good for us, now let's break it
+
+            try {
+                unzipNewAPK();
+            } catch (IOException e) {
+            }
+
+            // The APK has now overwritten the resources located in creative_mode folder - zip it!
+
+            String source = mContext.getCacheDir().getAbsolutePath() +
+                    "/dashboard_creation_unsigned.apk";
+            String destination = mContext.getCacheDir().getAbsolutePath() + "/creative_mode/";
+            try {
+                UnsignedAPKCreator.main(source, destination);
+            } catch (Exception e) {
+            } finally {
+                Log.d("UnsignedAPKCreator", "Finished compiling unsigned APK file!");
+            }
+            return null;
+
+        }
+
+        public void unzipNewAPK() throws IOException {
+            String source = mContext.getCacheDir().getAbsolutePath() +
+                    "/dashboard_creation.apk";
+            String destination = mContext.getCacheDir().getAbsolutePath() +
+                    "/creative_mode/";
+
+            ZipInputStream inputStream = new ZipInputStream(
+                    new BufferedInputStream(new FileInputStream(source)));
+            try {
+                ZipEntry zipEntry;
+                int count;
+                byte[] buffer = new byte[8192];
+                while ((zipEntry = inputStream.getNextEntry()) != null) {
+                    File file = new File(destination, zipEntry.getName());
+                    File dir = zipEntry.isDirectory() ? file : file.getParentFile();
+                    if (!dir.isDirectory() && !dir.mkdirs())
+                        throw new FileNotFoundException("Failed to ensure directory: " +
+                                dir.getAbsolutePath());
+                    if (zipEntry.isDirectory())
+                        continue;
+                    FileOutputStream outputStream = new FileOutputStream(file);
+                    try {
+                        while ((count = inputStream.read(buffer)) != -1)
+                            outputStream.write(buffer, 0, count);
+                    } finally {
+                        outputStream.close();
+                    }
+                }
+            } finally {
+                inputStream.close();
+            }
+        }
+    }
+
+    private class Phase6_SignAndInstall extends AsyncTask<String, Integer, String> {
+
+        @Override
+        protected void onPreExecute() {
+            Log.d("Phase 6", "This phase has started it's asynchronous task.");
+            super.onPreExecute();
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
             //mWakeLock.release();
+
             mProgressDialog.dismiss();
         }
 
         @Override
         protected String doInBackground(String... sUrl) {
 
-            String source = mContext.getCacheDir().getAbsolutePath() + "/dashboard_creation.apk";
-            String destination = mContext.getCacheDir().getAbsolutePath() + "/creative_mode/";
             try {
-                UnsignedAPKCreator.main(source, destination);
-            } catch (Exception e) {
-            }
-            Log.d("UnsignedAPKCreator", "Finished compiling unsigned APK file!");
+                // Sign with the built-in default test key/certificate.
+                String source = mContext.getCacheDir().getAbsolutePath() +
+                        "/dashboard_creation_unsigned.apk";
+                String destination = mContext.getCacheDir().getAbsolutePath() +
+                        "/dashboard_creation_signed.apk";
 
+                ZipSigner zipSigner = new ZipSigner();
+                zipSigner.setKeymode("auto-testkey");
+
+                zipSigner.signZip(source, destination);
+            } catch (Throwable t) {
+                Log.e("ZipSigner", "APK could not be signed. " + t.toString());
+            } finally {
+                Log.d("ZipSigner", "APK successfully signed!");
+
+                eu.chainfire.libsuperuser.Shell.SU.run(
+                        "cp " + mContext.getCacheDir().getAbsolutePath() +
+                                "/dashboard_creation_signed.apk " +
+                                Environment.getExternalStorageDirectory().getAbsolutePath() +
+                                "/dashboard./dashboard_creation_signed.apk");
+
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setDataAndType(Uri.fromFile(new File(
+                                Environment.getExternalStorageDirectory().getAbsolutePath() +
+                                        "/dashboard./dashboard_creation_signed.apk")),
+                        "application/vnd.android.package-archive");
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                mContext.startActivity(intent);
+            }
             return null;
         }
 
 
+        public void cleanTempFolder() {
+            File dir = mContext.getCacheDir();
+            deleteRecursive(dir);
+        }
+
+        private void deleteRecursive(File fileOrDirectory) {
+            if (fileOrDirectory.isDirectory())
+                for (File child : fileOrDirectory.listFiles())
+                    deleteRecursive(child);
+
+            fileOrDirectory.delete();
+        }
     }
 }
