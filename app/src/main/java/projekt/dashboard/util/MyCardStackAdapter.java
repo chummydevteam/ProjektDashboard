@@ -841,7 +841,8 @@ public class MyCardStackAdapter extends CardStackAdapter implements
                     themeName = aet1.getText().toString();
                     themeAuthor = aet2.getText().toString();
                     if (themeAuthor.equals("")) {
-                        themeAuthor = prefs.getString("dashboard_username", mContext.getResources().getString(R.string.default_username));
+                        themeAuthor = prefs.getString("dashboard_username",
+                                mContext.getResources().getString(R.string.default_username));
                     }
 
                     Phase1_UnzipAssets unzipTask = new Phase1_UnzipAssets();
@@ -862,6 +863,7 @@ public class MyCardStackAdapter extends CardStackAdapter implements
 
         @Override
         protected void onPreExecute() {
+            Log.d("Phase 1", "This phase has started it's asynchronous task.");
             super.onPreExecute();
             // take CPU lock to prevent CPU from going off if the user
             // presses the power button during download
@@ -902,7 +904,8 @@ public class MyCardStackAdapter extends CardStackAdapter implements
             Phase2_InjectAndMove accent_light = new Phase2_InjectAndMove();
             String accent_light_color = "#" + Integer.toHexString(
                     current_selected_system_accent_light_color);
-            accent_light.execute("accent_color_light", accent_light_color, "theme_color_accent_light",
+            accent_light.execute("accent_color_light", accent_light_color,
+                    "theme_color_accent_light",
                     mContext.getCacheDir().getAbsolutePath() +
                             "/creative_mode/assets/overlays/common/res/values-v10/");
 
@@ -921,7 +924,8 @@ public class MyCardStackAdapter extends CardStackAdapter implements
                             "/creative_mode/assets/overlays/common/res/values-v10/");
 
             Phase2_InjectAndMove dialog_dark = new Phase2_InjectAndMove();
-            String dialog_dark_color = "#" + Integer.toHexString(current_selected_system_dialog_color);
+            String dialog_dark_color = "#" + Integer.toHexString(
+                    current_selected_system_dialog_color);
             dialog_dark.execute("dialog_color_dark", dialog_dark_color, "theme_color_dialog_dark",
                     mContext.getCacheDir().getAbsolutePath() +
                             "/creative_mode/assets/overlays/common/res/values-v10/");
@@ -1002,7 +1006,8 @@ public class MyCardStackAdapter extends CardStackAdapter implements
                             "/creative_mode/assets/overlays/common/res/values-v12/");
 
             Phase2_InjectAndMove sysui_qs_tile_text = new Phase2_InjectAndMove();
-            String sysui_qs_tile_text_color = "#" + Integer.toHexString(current_selected_qs_tile_color);
+            String sysui_qs_tile_text_color = "#" + Integer.toHexString(
+                    current_selected_qs_tile_color);
             sysui_qs_tile_text.execute("qs_tile_text", sysui_qs_tile_text_color,
                     "theme_color_systemui_qs_tile_text_color",
                     mContext.getCacheDir().getAbsolutePath() +
@@ -1010,7 +1015,6 @@ public class MyCardStackAdapter extends CardStackAdapter implements
 
             Phase3_MovePremadeFiles phase3 = new Phase3_MovePremadeFiles();
             phase3.execute();
-
         }
 
         @Override
@@ -1018,7 +1022,8 @@ public class MyCardStackAdapter extends CardStackAdapter implements
             String package_identifier = sUrl[0];
             try {
                 unzip(package_identifier);
-            } catch (IOException e) {}
+            } catch (IOException e) {
+            }
             return null;
         }
 
@@ -1086,6 +1091,7 @@ public class MyCardStackAdapter extends CardStackAdapter implements
 
         @Override
         protected void onPreExecute() {
+            Log.d("Phase 2", "This phase has started it's asynchronous task.");
             super.onPreExecute();
         }
 
@@ -1176,11 +1182,13 @@ public class MyCardStackAdapter extends CardStackAdapter implements
 
         @Override
         protected void onPreExecute() {
+            Log.d("Phase 3", "This phase has started it's asynchronous task.");
             super.onPreExecute();
         }
 
         @Override
         protected void onPostExecute(String result) {
+            MoveWhateverIsActivated();
             super.onPostExecute(result);
         }
 
@@ -1220,7 +1228,6 @@ public class MyCardStackAdapter extends CardStackAdapter implements
                             copyFileOrDir(p + assets[i]);
                         }
                     }
-                    MoveWhateverIsActivated();
                 }
             } catch (IOException e) {
             }
@@ -1290,6 +1297,14 @@ public class MyCardStackAdapter extends CardStackAdapter implements
                         "/creative_mode/assets/overlays/com.android.settings/res/values-v11/";
                 moveFile(source, "dirty_tweaks_icon_presence.xml", destination);
             }
+
+            // Add default theme icon if no traditional theme icon found
+
+            String source = mContext.getCacheDir().getAbsolutePath() +
+                    "/creative_files/";
+            String destination = mContext.getCacheDir().getAbsolutePath() +
+                    "/creative_mode/res/drawable-xxhdpi/";
+            moveFile(source, "dashboard_default.png", destination);
 
             Phase4_ManifestCreation createManifest = new Phase4_ManifestCreation();
             createManifest.execute();
@@ -1399,14 +1414,15 @@ public class MyCardStackAdapter extends CardStackAdapter implements
 
         @Override
         protected void onPreExecute() {
+            Log.d("Phase 4", "This phase has started it's asynchronous task.");
             super.onPreExecute();
         }
 
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-            //mWakeLock.release();
-            mProgressDialog.dismiss();
+            Phase5_CompileAndSign createAPK = new Phase5_CompileAndSign();
+            createAPK.execute();
         }
 
         @Override
@@ -1419,13 +1435,6 @@ public class MyCardStackAdapter extends CardStackAdapter implements
 
             String filename = "AndroidManifest";
 
-            try{
-                // Only Thread.sleep() in doInBackground for AsyncTasks, or spinner will freeze!
-                Thread.sleep(5000);
-            } catch (InterruptedException e) {
-
-            }
-
             createXMLfile(packageName, theme_name, theme_author, filename);
             return null;
         }
@@ -1434,14 +1443,67 @@ public class MyCardStackAdapter extends CardStackAdapter implements
                                    String filename) {
 
             File root = new File(
-                    mContext.getCacheDir().getAbsolutePath() + "/" + filename + ".xml");
+                    mContext.getCacheDir().getAbsolutePath() + "/creative_mode/" +
+                            filename + ".xml");
+
+            String icon_location = "";
+
+            File iconChecker1 = new File(mContext.getCacheDir().getAbsolutePath() +
+                    "/creative_mode/res/drawable-xhdpi/ic_launcher.png");
+            File iconChecker1_ = new File(mContext.getCacheDir().getAbsolutePath() +
+                    "/creative_mode/res/drawable-xhdpi-v4/ic_launcher.png");
+            File iconChecker2 = new File(mContext.getCacheDir().getAbsolutePath() +
+                    "/creative_mode/res/mipmap-xhdpi/ic_launcher.png");
+            File iconChecker2_ = new File(mContext.getCacheDir().getAbsolutePath() +
+                    "/creative_mode/res/mipmap-xhdpi-v4/ic_launcher.png");
+            File iconChecker3 = new File(mContext.getCacheDir().getAbsolutePath() +
+                    "/creative_mode/res/drawable-xhdpi/cdt.png");
+            File iconChecker3_ = new File(mContext.getCacheDir().getAbsolutePath() +
+                    "/creative_mode/res/drawable-xhdpi-v4/cdt.png");
+
+            // Now check for the icon on non -v4 folders
+
+            if (iconChecker1.exists()) {
+                icon_location = "@drawable/ic_launcher";
+            } else {
+                if (iconChecker2.exists()) {
+                    icon_location = "@mipmap/ic_launcher";
+                } else {
+                    if (iconChecker3.exists()) {
+                        icon_location = "@drawable/cdt";
+                    } else {
+                        icon_location = "@drawable/dashboard_default";
+
+                    }
+                }
+            }
+
+            // Now check for the icon on -v4 folders
+
+            if (iconChecker1_.exists()) {
+                icon_location = "@drawable/ic_launcher";
+            } else {
+                if (iconChecker2_.exists()) {
+                    icon_location = "@mipmap/ic_launcher";
+                } else {
+                    if (iconChecker3_.exists()) {
+                        icon_location = "@drawable/cdt";
+                    } else {
+                        icon_location = "@drawable/dashboard_default";
+
+                    }
+                }
+            }
+
             try {
                 root.createNewFile();
                 FileWriter fw = new FileWriter(root);
                 BufferedWriter bw = new BufferedWriter(fw);
                 PrintWriter pw = new PrintWriter(bw);
-                String xmlTags = ("<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"no\"?>" + "\n");
-                String xmlRes1 = ("<manifest xmlns:android=\"http://schemas.android.com/apk/res/android\"" + "\n");
+                String xmlTags = ("<?xml version=\"1.0\" encoding=\"utf-8\" " +
+                        "standalone=\"no\"?>" + "\n");
+                String xmlRes1 = ("<manifest xmlns:android=\"http://schemas.android.com/" +
+                        "apk/res/android\"" + "\n");
                 String xmlRes2 = ("    package=\"" + packageName + "\">" + "\n");
                 String xmlRes3 = ("    <uses-feature" + "\n");
                 String xmlRes4 = ("        android:name=\"org.cyanogenmod.theme\"" + "\n");
@@ -1452,7 +1514,10 @@ public class MyCardStackAdapter extends CardStackAdapter implements
                 String xmlRes9 = ("    <meta-data" + "\n");
                 String xmlRes10 = ("        android:name=\"org.cyanogenmod.theme.author\"" + "\n");
                 String xmlRes11 = ("        android:value=\"" + theme_author + "\" />" + "\n");
-                String xmlRes12 = ("</manifest>");
+                String xmlRes12 = ("    <application android:hasCode=\"false\"" + "\n");
+                String xmlRes13 = ("        android:icon=\"" + icon_location + "\"" + "\n");
+                String xmlRes14 = ("        android:label=\"" + theme_name + "\"/>" + "\n");
+                String xmlRes15 = ("</manifest>");
                 pw.write(xmlTags);
                 pw.write(xmlRes1);
                 pw.write(xmlRes2);
@@ -1466,6 +1531,9 @@ public class MyCardStackAdapter extends CardStackAdapter implements
                 pw.write(xmlRes10);
                 pw.write(xmlRes11);
                 pw.write(xmlRes12);
+                pw.write(xmlRes13);
+                pw.write(xmlRes14);
+                pw.write(xmlRes15);
                 pw.close();
                 bw.close();
                 fw.close();
@@ -1473,5 +1541,37 @@ public class MyCardStackAdapter extends CardStackAdapter implements
                 //
             }
         }
+    }
+
+    private class Phase5_CompileAndSign extends AsyncTask<String, Integer, String> {
+
+        @Override
+        protected void onPreExecute() {
+            Log.d("Phase 5", "This phase has started it's asynchronous task.");
+            super.onPreExecute();
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+            //mWakeLock.release();
+            mProgressDialog.dismiss();
+        }
+
+        @Override
+        protected String doInBackground(String... sUrl) {
+
+            String source = mContext.getCacheDir().getAbsolutePath() + "/dashboard_creation.apk";
+            String destination = mContext.getCacheDir().getAbsolutePath() + "/creative_mode/";
+            try {
+                UnsignedAPKCreator.main(source, destination);
+            } catch (Exception e) {
+            }
+            Log.d("UnsignedAPKCreator", "Finished compiling unsigned APK file!");
+
+            return null;
+        }
+
+
     }
 }
