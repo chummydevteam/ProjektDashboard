@@ -34,6 +34,15 @@
     <string name="welcome_back_dialog_message">Comment dois-je vous appeler à partir de maintenant ?</string>
     <string name="welcome_back_dialog_title">Personnalisez dashboard !</string>
     <string name="welcome_back_dialog_confirm">Ça me plaît !</string>
+    <string name="username_welcome">Bon retour</string>
+    <string name="copied_system_info">Informations système</string>
+    <string name="copied_system_info_to_clipboard">Les informations système ont correctement été copiées dans le presse-papiers !</string>
+    <string name="vendor_fingerprint">Niveau du correctif de sécurité :</string>
+
+    <!-- Home Screen -->
+    <string name="change_name_dialog_message">Je suppose que vous voulez que je vous appelle autrement, Maître ?</string>
+    <string name="change_name_dialog_title">Changeons cela !</string>
+    <string name="change_name_dialog_confirm">Beaucoup mieux !</string>
 
     <!-- App Home -->
     <string name="homepage_description">Le moteur de thème Cyanogenmod amélioré !</string>
@@ -170,6 +179,7 @@
     <string name="permission_not_granted_dialog_message">Veuillez accorder l\'autorisation de stockage à dashboard ou l\'application ne fonctionnera pas correctement !</string>
     <string name="dialog_ok">OK</string>
     <string name="write_storage_permission_denied">Autorisation d\'écriture sur la mémoire de stockage externe refusée !</string>
+    <string name="intro_wallpapers">Sélectionnez une source de fonds d\'écran ci-dessus et cliquez sur l\'icône de redémarrage pour commencer le chargement des fonds d\'écran au démarrage de dashboard !</string>
     <string-array name="dialog_responses">
         <item>Saupoudrage d\'un peu de magie par ici&#8230; et par là&#8230;</item>
         <item>ERREUR L337 : Programme interrompu par des erreurs....jk.</item>
@@ -270,6 +280,9 @@
     <string name="theme_selection">Sélection du thème</string>
     <string name="empty">">> Il n\'y a rien à voir ici&#8230; pour le moment !"</string>
 
+    <string name="creative_mode_card_theme_selection">Sélectionner un thème installé :</string>
+    <string name="creative_mode_card_theme_attributes">Nouveaux attributs de thème :</string>
+
     <!-- Settings Tweaks -->
     <string name="settings_rounded_corners">Catégories de dashboard (arrondie)</string>
     <string name="settings_show_dashboard_dividers">Séparateurs de dashboard</string>
@@ -314,7 +327,7 @@
     <string name="framework_preview_light">Exemple des modifications du thème clair</string>
 
     <!-- Common Tweaks -->
-    <string name="commons_themable_google_apps">Activer l\'application de thème sur les applications Google</string>
+    <string name="commons_themable_google_apps">Activer l\'utilisation de thème sur les applications Google</string>
 
     <!-- Final Card -->
     <string name="creation_name">Nom de la création :</string>
