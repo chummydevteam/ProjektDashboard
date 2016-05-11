@@ -1015,17 +1015,10 @@ public class MyCardStackAdapter extends CardStackAdapter implements
 
         @Override
         protected String doInBackground(String... sUrl) {
-            try {
-                Thread.sleep(10000);
-            } catch (InterruptedException e) {
-
-            }
-
             String package_identifier = sUrl[0];
             try {
                 unzip(package_identifier);
-            } catch (IOException e) {
-            }
+            } catch (IOException e) {}
             return null;
         }
 
@@ -1412,14 +1405,6 @@ public class MyCardStackAdapter extends CardStackAdapter implements
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-
-            try{
-                Thread.sleep(5000);
-            } catch (InterruptedException e) {
-
-            }
-
-
             //mWakeLock.release();
             mProgressDialog.dismiss();
         }
@@ -1433,6 +1418,13 @@ public class MyCardStackAdapter extends CardStackAdapter implements
             String theme_author = themeAuthor;
 
             String filename = "AndroidManifest";
+
+            try{
+                // Only Thread.sleep() in doInBackground for AsyncTasks, or spinner will freeze!
+                Thread.sleep(5000);
+            } catch (InterruptedException e) {
+
+            }
 
             createXMLfile(packageName, theme_name, theme_author, filename);
             return null;
