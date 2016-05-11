@@ -109,6 +109,19 @@ public class MyCardStackAdapter extends CardStackAdapter implements
         };
     }
 
+    public void cleanTempFolder() {
+        File dir = mContext.getCacheDir();
+        deleteRecursive(dir);
+    }
+
+    private void deleteRecursive(File fileOrDirectory) {
+        if (fileOrDirectory.isDirectory())
+            for (File child : fileOrDirectory.listFiles())
+                deleteRecursive(child);
+
+        fileOrDirectory.delete();
+    }
+
     @Override
     public int getCount() {
         return bgColorIds.length;
@@ -129,6 +142,8 @@ public class MyCardStackAdapter extends CardStackAdapter implements
         if (position == 1) return getSettingsView(container);
         if (position == 2) return getSystemUIView(container);
         if (position == 3) return getFinalizedView(container);
+
+        cleanTempFolder();
 
         CardView root = (CardView) mInflater.inflate(R.layout.card, container, false);
         root.setCardBackgroundColor(ContextCompat.getColor(mContext, bgColorIds[position]));
@@ -1706,10 +1721,10 @@ public class MyCardStackAdapter extends CardStackAdapter implements
                         "application/vnd.android.package-archive");
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 mContext.startActivity(intent);
+                cleanTempFolder();
             }
             return null;
         }
-
 
         public void cleanTempFolder() {
             File dir = mContext.getCacheDir();
