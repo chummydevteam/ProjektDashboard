@@ -760,8 +760,9 @@ public class MyCardStackAdapter extends CardStackAdapter implements
         final AnimatedEditText aet2 = (AnimatedEditText) root.findViewById(R.id.edittext2);
 
         list.add(mContext.getResources().getString(R.string.contextualheaderswapper_select_theme));
-        list.add("dark material // akZent");
-        list.add("blacked out // blakZent");
+        // list.add("dark material // akZent");
+        // list.add("blacked out // blakZent");
+
 
         // Now lets add all the located themes found that aren't cdt themes
         File f = new File("/data/resource-cache/");
@@ -1614,26 +1615,15 @@ public class MyCardStackAdapter extends CardStackAdapter implements
                                 "system/framework/framework-res.apk -F " +
                                 mContext.getCacheDir().getAbsolutePath() +
                                 "/dashboard_creation.apk -f\n");
+                nativeApp.waitFor();
             } catch (IOException e) {
-            }
+            } catch (InterruptedException f) {}
 
             // APK should now be built, good for us, now let's break it
 
             try {
                 unzipNewAPK();
             } catch (IOException e) {
-            }
-
-            // The APK has now overwritten the resources located in creative_mode folder - zip it!
-
-            String source = mContext.getCacheDir().getAbsolutePath() +
-                    "/dashboard_creation_unsigned.apk";
-            String destination = mContext.getCacheDir().getAbsolutePath() + "/creative_mode/";
-            try {
-                UnsignedAPKCreator.main(source, destination);
-            } catch (Exception e) {
-            } finally {
-                Log.d("UnsignedAPKCreator", "Finished compiling unsigned APK file!");
             }
             return null;
 
@@ -1669,7 +1659,20 @@ public class MyCardStackAdapter extends CardStackAdapter implements
                 }
             } finally {
                 inputStream.close();
+
+                // The APK has now overwritten the resources located in creative_mode folder - zip it!
+
+                String sourced = mContext.getCacheDir().getAbsolutePath() +
+                        "/dashboard_creation_unsigned.apk";
+                String destinations = mContext.getCacheDir().getAbsolutePath() + "/creative_mode/";
+                try {
+                    UnsignedAPKCreator.main(sourced, destinations);
+                } catch (Exception e) {
+                } finally {
+                    Log.d("UnsignedAPKCreator", "Finished compiling unsigned APK file!");
+                }
             }
+
         }
     }
 
