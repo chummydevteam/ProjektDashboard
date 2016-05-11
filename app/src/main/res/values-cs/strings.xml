@@ -54,16 +54,6 @@
     <string name="zipfile_checker_success">vybraný soubor: </string>
     <string name="zipfile_checker_error">Vybraný soubor nebyl platný soubor ZIP!</string>
 
-    <string name="wallpapers_json_url" formatted="false" translatable="false">https://raw.githubusercontent.com/nicholaschum/ProjektDashboard/resources/dashboard_welcome.js</string>
-    <string name="wallpapers_json_url_customworx_du" formatted="false" translatable="false">http://pastebin.com/raw/7bP1Qp5C</string>
-    <string name="wallpapers_json_url_customworx_octOS" formatted="false" translatable="false">http://pastebin.com/raw/ia93pUKu</string>
-    <string name="wallpapers_json_url_customworx_screwd" formatted="false" translatable="false">http://pastebin.com/raw/5MMtyesr</string>
-    <string name="wallpapers_json_url_customworx" formatted="false" translatable="false">http://pastebin.com/raw/dbCArLaF</string>
-    <string name="wallpapers_json_url_gagan_du" formatted="false" translatable="false">http://pastebin.com/raw/CapPghtE</string>
-    <string name="wallpapers_json_url_gagan" formatted="false" translatable="false">http://pastebin.com/raw/BwKeCHew</string>
-    <string name="wallpapers_json_url_vignesh_du" formatted="false" translatable="false">http://pastebin.com/raw/Ksf8c4Tf</string>
-    <string name="wallpapers_json_url_vignesh" formatted="false" translatable="false">http://pastebin.com/raw/9qAZ7ZhB</string>
-
     <string name="downloader_button">Databáze balíčku se záhlavými</string>
     <string name="downloader_dialog_accept">Stáhnout</string>
     <string name="downloader_dialog_cancel">zrušit</string>
@@ -146,7 +136,7 @@
         <item>prosím zvolte zdroje balíčků pozadí&#8230;</item>
         <item>customworxův balíček tapet du</item>
         <item>customworxův balíček tapet octos</item>
-        <item>customworxův balíček tapet screw/'d</item>
+        <item>customworxův balíček tapet screw\'d</item>
         <item>customworxův balíček tapet</item>
         <item>balíček du tapet gagana singha</item>
         <item>balíček tapet gagana singha</item>
@@ -210,7 +200,7 @@
     <string name="themeutilities_perform_systemui_restart">udělat restart systemui</string>
     <string name="themeutilities_perform_soft_reboot">udělat rychlý restart</string>
     <string name="themeutilities_perform_complete_system_reboot">udělat kompletní restart systému</string>
-    <string name="themeutilities_perform_action">udělat akci/string>
+    <string name="themeutilities_perform_action">udělat akci</string>
     <string name="themeutilities_rebuild_dark_material">předělat dark material // akzent</string>
     <string name="themeutilities_rebuild_blacked_out">předělat blacked out // blakzent</string>
     <string name="themeutilities_rebuild_projekt">předělat projekt // klar</string>
