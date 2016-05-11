@@ -182,7 +182,7 @@
                 android:layout_weight="1"
                 android:paddingBottom="10dp"
                 android:paddingTop="10dp"
-                android:src="@drawable/tap_bar_xda" />
+                android:src="@drawable/tap_bar_creator" />
 
 
         </com.michaldrabik.tapbarmenulib.TapBarMenu>

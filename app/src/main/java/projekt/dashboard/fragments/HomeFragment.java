@@ -22,6 +22,7 @@ import android.widget.Toast;
 
 import com.alimuzaffar.lib.widgets.AnimatedEditText;
 import com.michaldrabik.tapbarmenulib.TapBarMenu;
+import com.tramsun.libs.prefcompat.Pref;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -192,12 +193,28 @@ public class HomeFragment extends BasePageFragment {
                 alert.show();
                 break;
             case R.id.item3:
-                Intent gplus = new Intent(Intent.ACTION_VIEW, Uri.parse("https://plus.google.com/communities/104086528025432169285"));
+                Intent gplus = new Intent(Intent.ACTION_VIEW, Uri.parse(
+                        "https://plus.google.com/communities/104086528025432169285"));
                 startActivity(gplus);
                 break;
             case R.id.item4:
-                Intent xda = new Intent(Intent.ACTION_VIEW, Uri.parse("http://forum.xda-developers.com/android/themes/cdt-projektdashboard-t3348297"));
-                startActivity(xda);
+                SharedPreferences prefs0 = PreferenceManager.getDefaultSharedPreferences(getContext());
+                Boolean creative_activated = prefs0.getBoolean("advanced_mode_enabled", false);
+
+                if (creative_activated) {
+                    prefs0.edit().putBoolean("advanced_mode_enabled", false).commit();
+                    Intent i = getActivity().getPackageManager()
+                            .getLaunchIntentForPackage(getActivity().getPackageName());
+                    i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(i);
+                } else {
+                    prefs0.edit().putBoolean("advanced_mode_enabled", true).commit();
+                    Intent i = getActivity().getPackageManager()
+                            .getLaunchIntentForPackage(getActivity().getPackageName());
+                    i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(i);
+                }
+
                 break;
             default:
                 tapBarMenu.close();
@@ -229,71 +246,6 @@ public class HomeFragment extends BasePageFragment {
 
         iv2.clearAnimation();
         iv2.startAnimation(anim2);
-
-        final ImageView mainImage = (ImageView) inflation.findViewById(R.id.landingIconFirst);
-        mainImage.setOnClickListener((new View.OnClickListener() {
-            public void onClick(View v) {
-                if (!prefs.getBoolean("advanced_mode_enabled", true)) {
-                    if (current_pressed_count < 14) {
-                        current_pressed_count += 1;
-                    } else {
-                        if (!clicked_after_seventh) {
-                            Toast toast = Toast.makeText(
-                                    getContext(),
-                                    getResources().getString(R.string.secret_feature_enabled),
-                                    Toast.LENGTH_LONG);
-
-                            iv2.clearAnimation();
-
-                            Animation anim2 = AnimationUtils.loadAnimation(getContext(), R.anim.shake);
-                            anim2.reset();
-                            ImageView iv = (ImageView) inflation.findViewById(R.id.spinnerWheel);
-                            iv.clearAnimation();
-                            iv.startAnimation(anim2);
-
-                            toast.show();
-                            clicked_after_seventh = true;
-                            prefs.edit().putBoolean("advanced_mode_enabled", true).commit();
-                        } else {
-                            Intent i = getActivity().getPackageManager()
-                                    .getLaunchIntentForPackage(getActivity().getPackageName());
-                            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                            startActivity(i);
-                        }
-
-                    }
-                } else {
-                    if (current_pressed_count < 14) {
-                        current_pressed_count += 1;
-                    } else {
-                        if (!clicked_after_seventh) {
-                            Toast toast = Toast.makeText(
-                                    getContext(),
-                                    getResources().getString(R.string.secret_feature_disabled),
-                                    Toast.LENGTH_LONG);
-
-                            iv2.clearAnimation();
-                            iv2.setImageDrawable(getResources().getDrawable(R.drawable.splashscreen_spinner));
-                            Animation anim2 = AnimationUtils.loadAnimation(getContext(), R.anim.spin);
-                            anim2.reset();
-                            ImageView iv = (ImageView) inflation.findViewById(R.id.spinnerWheel);
-                            iv.clearAnimation();
-                            iv.startAnimation(anim2);
-
-                            toast.show();
-                            clicked_after_seventh = true;
-                            prefs.edit().putBoolean("advanced_mode_enabled", false).commit();
-                        } else {
-                            Intent i = getActivity().getPackageManager()
-                                    .getLaunchIntentForPackage(getActivity().getPackageName());
-                            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                            startActivity(i);
-                        }
-
-                    }
-                }
-            }
-        }));
 
         TextView status_message = (TextView) inflation.findViewById(R.id.status_message);
         if (checkRomSupported(getActivity()) == null) {
