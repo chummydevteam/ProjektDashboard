@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Splash Screen -->
+    <string name="loadingText">provádím bezpečnostní kontrolu&#8230;</string>
+    <string name="root_verified">aktivuju všechny funkce&#8230;</string>
+    <string name="root_unverified">zapínám jenom funkce bez rootu&#8230;</string>
+    <string name="initial_run">jsi tady nový, vítej na párty!</string>
+    <string name="welcome_back">eyyyy vítej zpátky</string>
+    <string name="welcome_back_default_username">kámo</string>
+    <string name="welcome_back_dialog_message">jak bych ti měl říkat?</string>
+    <string name="welcome_back_dialog_title">udělej dashboard tvoji!</string>
+    <string name="welcome_back_dialog_confirm">Líbí se mi to!</string>
+    <string name="username_welcome">vítej zpět</string>
+    <string name="copied_system_info">Systémové Informace</string>
+    <string name="copied_system_info_to_clipboard">Úspěšně zkopírovány informace o systému na nástěnku!</string>
+    <string name="vendor_fingerprint">Úroveň oprav zabezpečení:</string>
+
+    <!-- Home Screen -->
+    <string name="change_name_dialog_message">Hádám, že chcete, abych Vám říkal jinak, pane? (5. pád) </string>
+    <string name="change_name_dialog_title">poď to změnit!</string>
+    <string name="change_name_dialog_confirm">O hodně lepší!</string>
+
+    <!-- AppIntroduction -->
+    <string name="first_slide_title">Vítej v dashboard.</string>
+    <string name="first_slide_description">dashboard je doplňek cm motivů vytvořený chummy vývojářským týmem (chummy development team), která ti dovoluje rozšířit možnosti všech cdt motivů, a také dalších motivů.</string>
+
+    <string name="second_slide_title">měnič barev</string>
+    <string name="second_slide_description">dashboard má zabudovaný měnič barev pro vyměnňování barev!/nProsím dovolte mu automaticky stáhnout maličký soubor s opravami, než opustíte internetové připojení.</string>
+
+    <string name="third_slide_title">měnič časového záhlaví</string>
+    <string name="third_slide_description">dashboard také přichází se zabudovaným měničem časového záhlaví pro vylepšení vašeho telefonu ještě více bez použití xposed doplňků nebo dělání vlastního motivu!</string>
+
+    <string name="fourth_slide_title">motor motivu v potřebě diagnózy?</string>
+    <string name="fourth_slide_description">dashboard také přichází s vystavěnýma službama, pro nabídnutí více možností pro opravu vašeho motoru motivu přímo z vašeho telefonu!\n\n</string>
+
+    <string name="fifth_slide_title">tato aplikace potřebuje root!</string>
+    <string name="fifth_slide_description">pro použití všech funkcí této apliakce, váš telefon musí mít zapnutý root přístup a také nahranou Custom ROM, pokud chcete časové záhlaví!</string>
+
+    <string name="last_slide_title">Jsi připraven?</string>
+    <string name="last_slide_description">prosím, čti vše co vyskočí, při používání této aplikace. tyto informace jsou klíč k předcházení nekonečné smyčky zapínání a také náhodného restartu!</string>
+
+    <string name="secret_feature_enabled">kreativní mód zapnut</string>
+    <string name="secret_feature_disabled">kreativní mód vypnut</string>
+
+    <string name="advanced_mode_enabled">přidávám další extra funkce&#8230;</string>
+
+    <!-- App -->
+    <string name="layout_fragment_colorpicker_select_tweaks">vyber funkce:</string>
+    <string name="layout_fragment_colorpicker_color_swap_restart_systemui">změna barev + restart systemui</string>
+    <string name="layout_fragment_colorpicker_color_swap_soft_reboot">změna barev + rychlý restart</string>
+    <string name="layout_fragment_colorpicker_force_update_patched_resource">vynutit aktualizaci opravených zdrojových souborů</string>
+    <string name="layout_fragment_colorpicker_installed_color_switchable_themes">Nainstalované motivy s podporou změny barev:</string>
+
+    <string name="zipfile_checker_success">vybraný soubor: </string>
+    <string name="zipfile_checker_error">Vybraný soubor nebyl platný soubor ZIP!</string>
+
+    <string name="wallpapers_json_url" formatted="false" translatable="false">https://raw.githubusercontent.com/nicholaschum/ProjektDashboard/resources/dashboard_welcome.js</string>
+    <string name="wallpapers_json_url_customworx_du" formatted="false" translatable="false">http://pastebin.com/raw/7bP1Qp5C</string>
+    <string name="wallpapers_json_url_customworx_octOS" formatted="false" translatable="false">http://pastebin.com/raw/ia93pUKu</string>
+    <string name="wallpapers_json_url_customworx_screwd" formatted="false" translatable="false">http://pastebin.com/raw/5MMtyesr</string>
+    <string name="wallpapers_json_url_customworx" formatted="false" translatable="false">http://pastebin.com/raw/dbCArLaF</string>
+    <string name="wallpapers_json_url_gagan_du" formatted="false" translatable="false">http://pastebin.com/raw/CapPghtE</string>
+    <string name="wallpapers_json_url_gagan" formatted="false" translatable="false">http://pastebin.com/raw/BwKeCHew</string>
+    <string name="wallpapers_json_url_vignesh_du" formatted="false" translatable="false">http://pastebin.com/raw/Ksf8c4Tf</string>
+    <string name="wallpapers_json_url_vignesh" formatted="false" translatable="false">http://pastebin.com/raw/9qAZ7ZhB</string>
+
+    <string name="downloader_button">Databáze balíčku se záhlavými</string>
+    <string name="downloader_dialog_accept">Stáhnout</string>
+    <string name="downloader_dialog_cancel">zrušit</string>
+    <string name="downloader_dialog_one">stahuju cloudovou databázi&#8230;</string>
+    <string name="downloader_dialog_two">stahuju balík záhlaví&#8230;</string>
+    <string name="downloader_title">certifikované dashboard balíčky záhlaví</string>
+    <string name="downloader_empty">stáhl jsi všechny dostupné balíčky záhlaví\n\npokud chceš vyčistit složky stahování dashboard, klikni na menu tlačítko a zvol "vymazat složku dashboard. a restartovat".</string>
+    <string name="downloader_toast_exit">tlačítko zpět automaticky zavře a znovu zapne aplikaci s vašimi nově staženými balíky záhlaví ve správných nabídkách.</string>
+    <string name="delete_dashboard_folder_restart">vymazat složku dashboard. a restartovat</string>
+
+    <string-array name="contextual_headers">
+        <item>všechny záhlaví</item>
+        <item>notifhead_afternoon.png</item>
+        <item>notifhead_christmas.png</item>
+        <item>notifhead_morning.png</item>
+        <item>notifhead_newyearseve.png</item>
+        <item>notifhead_night.png</item>
+        <item>notifhead_noon.png</item>
+        <item>notifhead_sunrise.png</item>
+        <item>notifhead_sunset_hdpi.png</item>
+        <item>notifhead_sunset_xhdpi.png</item>
+        <item>notifhead_sunset.png</item>
+    </string-array>
+
+    <string-array name="dialog_responses">
+        <item>Rozlévám nějaké kouzla tady#8230;a tam&#8230;</item>
+        <item>ERROR 1337: Program vypnut s errory..... dělám si srandu.</item>
+        <item>Doufám že jsi četl, protože se musíš překvapit na tu spoustu úžasnosti!</item>
+        <item>Doufám, že nemusíš nahlašovat chyby&#8230;prosím ne.</item>
+        <item>Nemám průkazku do knihovny, bude ti vadit když si tě prohlídnu?</item>
+        <item>Ztratil jsem svoje telefonní číslo. Můžu mít tvoje?</item>
+        <item>Jsi nábožensky založený? Protože jsi odpověd na všechny moje motlitby.</item>
+        <item>Seděl jsi na hromadě cukru? Protože máš hodně sladký zadek.</item>
+        <item>Vypadáš chladně. Chceš mě použít jako přikrývku?</item>
+        <item>Můžu si tě vyfotit pro důkaz toho, že andělé existují?</item>
+        <item>Můj doktor říká, že mi chybí vitamín TY.</item>
+        <item>Kdyby jsem byl kočka. Strávil vych s tebou všech 9 životů.</item>
+        <item>Jsi připravený pro nějakou &#8230;srandu?</item>
+        <item>Budu se k tobě chovat jako k domácímu úkolu, položím tě na stůj a budu tě dělat celou noc!</item>
+        <item>Víš proč jsem jako veverka? Chci do tebe schovat svoje žaludy!</item>
+        <item>Jsi úžasný jako spodek mojeho notebooku.</item>
+        <item>Máš lékarničku? Protože jsem si zrovna odřel koleno, když jsem pro tebe padal.</item>
+        <item>Víš z čeho je moje tričko? @android:style/Theme.Material.</item>
+        <item>Kdyby bůh udělal něco hezčího než ty, jsem si jistý, že by si to nechal pro sebe.</item>
+        <item>Máš mapu? Protože se trácím v tvojich očích.</item>
+        <item>Přestanu tě milovat až vyroste jablko na mangovníku 30. února.</item>
+        <item>Ahoj, moje jméno je JDizzle. Jaké je tvoje?</item>
+        <item>Můžu dostat souřadnice&#8230;k tvému srdci?</item>
+        <item>Nejsem opilý, jsem jenom omámený TEBOU.</item>
+        <item>Tvoje tělo je ze 65% voda a já mám žízeň.</item>
+        <item>Byl jsi někdy nedávno u doktora? Protože myslím že ti chybí vitamín JÁ.</item>
+        <item>Zapomeň na Spidermana, Supermana a Batmana. Já budu tvůj man.</item>
+        <item>Můžu tě následovat domů? Protože moji rodiče vždycky říkali, že mám následovat svoje sny.</item>
+        <item>Na chvíli jsem myslel, že jsem zemřel a byl v nebi. Teď ale vidím, že jsem naživu a že nebe bylo přineseno ke mě.</item>
+        <item>Sakra, kdyby byl trestný čin být sexy, byl by jsi hodně vinný!</item>
+        <item>Myslel jsem, že štěstí začíná se S. Proč moje začíná s T?</item>
+        <item>Pracuješ ve Starbucks? Protože tě mám rád jako laté.</item>
+        <item>Když máme sami sebe, všechno ostatní je jenom šum.</item>
+        <item>Kouření je nebezpečné pro tvoje zdraví&#8230;a baby, ty mě zabíjíš!</item>
+        <item>Ve slovníku není slovo pro to, jak dobře vypadáš.</item>
+        <item>Omluv mě, ale myslím, že mi něco upadlo - moje čelist.</item>
+        <item>Jsi táborák? Protože jsi hot a chci více!</item>
+        <item>Ze všech krásných křivek na tvém těle, tvůj úsměv je nejkrásnější.</item>
+        <item>Nejsem dárce orgánu, ale byl bych rád darovat ti moje srdce.</item>
+        <item>Hershey dělají milióny pusinek denně&#8230;všechno co chci, je jedna od tebe.</item>
+        <item>Život bez tebe by byl jako zlomená tužka&#8230;nesmyslný.</item>
+        <item>Polib mě jestli to je špatně, ale dinosauři pořád existují, že?</item>
+        <item>Když nic netrvá navždy, budeš moje nic?</item>
+        <item>Přemýšlím jaké příběhy by řeklo moje srdce, kdyby jsi dala své ucho na mou hruď.</item>
+        <item>Nevěděl jsem, že andělé lítají tak nízko!</item>
+        <item>Byl už jsi někdy dříve zatčený? Protože nemůže být legální vypadat tak dobře.</item>
+        <item>Ty jsi ten důvod, proč se muži zamilovávají.</item>
+        <item>Sakra holka! Máš více křivek než závodní dráha.</item>
+        <item>Doufám, že je někde hasičské auto, protože kouříš!</item>
+        <item>Even if there wasn\'t gravity on earth, I\'d still fall for you.</item>
+        <item>Ahoj, řekl kupid. Říkal, že potřebuje moje srdce zpátky.</item>
+    </string-array>
+
+    <string-array name="wallpaper_sources">
+        <item>prosím zvolte zdroje balíčků pozadí&#8230;</item>
+        <item>customworxův balíček tapet du</item>
+        <item>customworxův balíček tapet octos</item>
+        <item>customworxův balíček tapet screw/'d</item>
+        <item>customworxův balíček tapet</item>
+        <item>balíček du tapet gagana singha</item>
+        <item>balíček tapet gagana singha</item>
+        <item>balíček du tapet od vigneshe raviho</item>
+        <item>balíček tapet od vigneshe raviho</item>
+    </string-array>
+
+    <string name="contextualheaderimporter">importér balíčku časového záhlaví</string>
+    <string name="contextualheaderimporter_description">@string/contextualheaderimporter</string>
+    <string name="contextualheaderimporter_description_secondary">toto je velmi experimentální funkce, která vám povoluje zvolit vlastní časové záhlaví pro vaši oznamovací oblast systemui, založená na předpřipravených zip souborech sdílených autory motivů. rychlý restart je vyžadován, protože měníme aktuální apk soubor instalovaný na vašem zařízení.\n\nNezapomeňte zapnout časové záhlaví (ne poly, hd) ve vašem nastavení ROM! pokud se záhlaví nenastaví po restartu, vymažte mezipamět systemui!\n</string>
+    <string name="contextualheaderimporter_select_downloaded_zip">zvolte stažený balíček v \'/storage/0/dashboard.\':</string>
+    <string name="contextualheaderimporter_all_themed">všechny záhlaví dostupná</string>
+    <string name="contextualheaderimporter_information_header">informace o zvoleném balíčku záhlaví</string>
+    <string name="contextualheaderimporter_header_pack_name">název balíčku: </string>
+    <string name="contextualheaderimporter_header_pack_author">autor balíčku: </string>
+    <string name="contextualheaderimporter_header_pack_team">název týmu: </string>
+    <string name="contextualheaderimporter_header_pack_version">verze balíčku: </string>
+    <string name="contextualheaderimporter_header_pack_theme_count">dostupné záhlaví: </string>
+    <string name="contextualheaderimporter_header_pack_na">nedostupné</string>
+    <string name="contextualheaderimporter_not_all_themed">dostupné záhlaví</string>
+	<string name="contextualheaderimporter_only_one_themed">jedno dostupné záhlaví</string>
+    <string name="contextualheaderimporter_options_before_choosing_picture">rozšířené nastavení:</string>
+
+    <string name="contextualheaderswapper">měnič časového záhlaví</string>
+    <string name="contextualheaderswapper_description">@string/contextualheaderswapper</string>
+    <string name="contextualheaderswapper_description_secondary">toto je velmi experimentální funkce, která vám povoluje zvolit vlastní časové záhlaví pro vaši oznamovací oblast systemui, založená na předpřipravených zip souborech sdílených autory motivů. rychlý restart je vyžadován, protože měníme aktuální apk soubor instalovaný na vašem zařízení.\n\nNezapomeňte zapnout časové záhlaví (ne poly, hd) ve vašem nastavení ROM! pokud se záhlaví nenastaví po restartu, vymažte mezipamět systemui!\n    </string>
+    <string name="contextualheaderswapper_current_time_image">obrázek času nyní:</string>
+    <string name="contextualheaderswapper_modifying_contextual_header_file">upravuji soubor časového záhlaví:</string>
+    <string name="contextualheaderswapper_select_installed_theme">zvolte nainstalovaný motiv:</string>
+    <string name="contextualheaderswapper_options_before_choosing_picture">možnosti dostupné před zvolením obrázku:</string>
+    <string name="contextualheaderswapper_autoclear_systemui_cache">automaticky vymazat mezipaměť systemui</string>
+    <string name="contextualheaderswapper_free_crop_mode">volný mód ořezání</string>
+	<string name="contextualheaderswapper_debugging_mode">režim ladění (pokročilé logy)</string>
+    <string name="contextualheaderswapper_soft_reboot_after_modifications">Klikni zde pro rychlý restart po všech modifikacích</string>
+    <string name="contextualheaderswapper_crop_image">Oříznout Obrázek</string>
+    <string name="contextualheaderswapper_save_set_image">Uložit a Nastavit Obrázek</string>
+    <string name="contextualheaderswapper_toast_cache_empty_reboot_first">Heleme se, tvoje mezipaměť je zrovna prázdná! Prosím první restartujte! Pokud věříte, že to je špatně, zkuste předělat celou mezipaměť motivů.</string>
+    <string name="contextualheaderswapper_select_theme">prosím zvolte motiv&#8230;</string>
+    <string name="contextualheaderswapper_select_zip">prosím zvolte předtím udělaný zip&#8230;</string>
+
+    <string name="colorpicker_description">měnič barev</string>
+    <string name="colorpicker_description_secondary">toto je velmí experimentální funkce pro rychlé přehození hlavní barvy za chodu (to znamená, že plný restart není nutný a nebudete potřebovat dělat a instalovat nový apk soubor)\n\ntoto nemá žádné vedlejší efekty až na to, že v některých romkách se nedají načíst satistiky baterie, takže pro zobratení statistik znovu předělejte téma nebo ho změňte. podle zvolených funkcí, budete muset vypnout naposledy zapnuté aplikace po změně barvy.\n</string>
+    <string name="colorpicker_toast_disable_hot_reboot_switch_systemui_restart">Tato funkce vypíná funkci zapnutí restartu systemui a rychlého restartu. Vypněte rychlý restart pro přepnutí na SystemUI restart</string>
+
+    <string name="akzent_title">material // akZent</string>
+    <string name="akzent_description">klikněte zde pro změnu barev pro akZent</string>
+    <string name="akzent_toast_install_before_using">Prosím, před použitím nainstalujte dark material // akZent!</string>
+
+    <string name="blakzent_title">blacked out // blakZent</string>
+    <string name="blakzent_description">klikněte zde pro změnu barev pro blakZent</string>
+    <string name="blakzent_toast_install_before_using">Prosím, před použitím nainstalujte blacked out // blakZent!</string>
+
+    <string name="projektklar_title">projekt // klar</string>
+    <string name="projektklar_description">klikněte zde, pro změnu barev pro projekt // klar</string>
+
+    <string name="themeutilities_description">ale ne! stalo se něco?</string>
+    <string name="themeutilities_description_secondary">tady máte kolekci užitečných funkcí motivů,
+	    které můžete použít při naražení na problémy, nebo by jste se cítili, jako že je čas
+		na nedělní úklid vašeho telefonu./n</string>
+    <string name="themeutilities_basic_theme_utilities">základní užitečnosti motivů:</string>
+    <string name="themeutilities_perform_systemui_restart">udělat restart systemui</string>
+    <string name="themeutilities_perform_soft_reboot">udělat rychlý restart</string>
+    <string name="themeutilities_perform_complete_system_reboot">udělat kompletní restart systému</string>
+    <string name="themeutilities_perform_action">udělat akci/string>
+    <string name="themeutilities_rebuild_dark_material">předělat dark material // akzent</string>
+    <string name="themeutilities_rebuild_blacked_out">předělat blacked out // blakzent</string>
+    <string name="themeutilities_rebuild_projekt">předělat projekt // klar</string>
+    <string name="themeutilities_rebuild_rebuild_all_color_switch_themes">předělat všechny motivy s podporou přepínání barev</string>
+    <string name="themeutilities_rebuild_rebuild_all_chummydevteam_themes">předělat všechny motivy od cdt</string>
+    <string name="themeutilities_rebuild_rebuild_all_themes_installed_device">předělat všechny motivy naisntalovány na zařízení</string>
+
+    <string name="homepage_description">cyanogenmod motivy se vyvinuly!</string>
+    <string name="homepage_description_secondary">přemýšleli jste někdy kde až vývojáři dokážou zajít s cyanogenmod motivy? dali jsem si výzvu, přeobjevit kolo, takže jsme vytvořili aplikaci, která skladuje všechny naše funkce v all-in-one balení\n\navšak, tato aplikace nemusí fungovat na všech zařízeních, takže pokud uvidíte červenou zprávu nepodporováno nahoře, nepokoušejte se běžet tuto aplikaci pokud nejste připraven na to, být testovací morče :)</string>
+    <string name="homepage_rom_not_supported">ROM NENÍ PODPOROVANÁ ✘</string>
+    <string name="homepage_rom_not_officially_supported">ROM NENÍ OFICIÁLNĚ PODPOROVANÁ (?)</string>
+    <string name="homepage_dashboard_app_development_status">, vítej zpět v programu dashboard! </string>
+    <string name="homepage_dashboard_app_development_status_default_username">Ahoj tam</string>
+
+    <string name="home_tab_one">dashboard</string>
+    <string name="home_tab_two">měnič barev</string>
+    <string name="home_tab_three">@string/contextualheaderswapper</string>
+    <string name="home_tab_four">@string/contextualheaderimporter_description</string>
+    <string name="home_tab_five">užitečnosti motivů</string>
+    <string name="home_tab_six">pozadí</string>
+    <string name="home_tab_seven">tvůrce motivu</string>
+    <string name="home_tab_eight">tvůrce motivu</string>
+
+    <string name="permission_not_granted_dialog_title">Oprávnění nebylo povoleno</string>
+    <string name="permission_not_granted_dialog_message">Prosím povolte aplikaci dashboard přistup do úložiště
+	    nebo tato aplikace nebude fungovat správně!</string>
+    <string name="dialog_ok">OK</string>
+
+    <!-- App Strings -->
+    <string name="home">dashboard.</string>
+    <string name="app_name">dashboard.</string>
+    <string name="app_name_wallpaper">cdt tapety</string>
+    <string name="unable_to_contact_server">Nebylo možné kontaktovat server! zkontrolujte připojení k
+	     internetu.</string>
+    <string name="thank_you_donation">Děkuji za všechnu tvoji štědrost!</string>
+    <string name="request_cancelled">Požadavek zamítnut</string>
+
+    <string name="color_changer">měnič barev</string>
+    <string name="theme_utils">užitečnosti motivů</string>
+    <string name="wallpapers">Tapety</string>
+    <string name="wallpaper">Tapeta</string>
+    <string name="saved_to_x">Uloženo do %1$s!</string>
+    <string name="wallpaper_set">Tapeta nastavena!</string>
+    <string name="apply">Použít</string>
+    <string name="save_to_device">Uložit do zařízení</string>
+
+    <string name="press_color_to_apply">Vyber si barvu!</string>
+
+    <string name="dismiss">Zamítnout</string>
+    <string name="error">Chyba</string>
+
+    <string name="write_storage_permission_denied">Zápis do externího úložiště byl
+	     zamítnut!</string>
+    <string name="intro_wallpapers">vyberte zdroj pozadí nahoře a zmáčkněte ikonu restartu pro načítání pozadí při spuštění dashboard!</string>
+    <string name="search_wallpapers">Hledat tapety…</string>
+    <string name="reload_from_web">Znovu načíst z Webu</string>
+    <string name="downloading_wallpaper">Stahování tapety…</string>
+
+    <string name="cool">Hustý</string>
+
+    <string name="invalid_drawable_error"><![CDATA[Invalid drawable <b>%1$s</b>, the developer
+    needs to fix this in <b>/res/xml/drawable.xml</b> and <b>/assets/drawable.xml</b>.]]></string>
+    <string name="set_wallpaper_using">Použít tapetu s…</string>
+
+    <string name="download_cancelled">Stahování zrušeno</string>
+
+    <string-array name="wallpaper_options">
+        <item>@string/apply</item>
+        <item>@string/save_to_device</item>
+    </string-array>
+
+</resources>
