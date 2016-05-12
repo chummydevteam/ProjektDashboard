@@ -170,10 +170,10 @@ public class SettingsActivity extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
                     has_modified_anything = true;
-                    prefs.edit().putBoolean("theme_debugging_enabled", true).commit();
+                    prefs.edit().putBoolean("wallpapers_enabled", true).commit();
                 } else {
                     has_modified_anything = true;
-                    prefs.edit().putBoolean("theme_debugging_enabled", false).commit();
+                    prefs.edit().putBoolean("wallpapers_enabled", false).commit();
                 }
             }
         });
