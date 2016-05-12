@@ -57,6 +57,7 @@ public class SplashScreenActivity extends Activity implements
             if (!directory.exists()) {
                 directory.mkdirs();
             }
+            cleanTempFolder();
             StartAnimations();
         } else {
             ActivityCompat.requestPermissions(this,
@@ -78,6 +79,7 @@ public class SplashScreenActivity extends Activity implements
                     if (!directory.exists()) {
                         directory.mkdirs();
                     }
+                    cleanTempFolder();
                     StartAnimations();
                 } else {
                     // permission was not granted, show closing dialog
@@ -169,6 +171,19 @@ public class SplashScreenActivity extends Activity implements
         };
         splashThread.start();
 
+    }
+
+    public void cleanTempFolder() {
+        File dir = getApplicationContext().getCacheDir();
+        deleteRecursive(dir);
+    }
+
+    private void deleteRecursive(File fileOrDirectory) {
+        if (fileOrDirectory.isDirectory())
+            for (File child : fileOrDirectory.listFiles())
+                deleteRecursive(child);
+
+        fileOrDirectory.delete();
     }
 
 }
