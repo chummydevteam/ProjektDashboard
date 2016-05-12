@@ -14,6 +14,11 @@
 
 
     <string name="no_theme_selected">Prosím zvolte motiv ze spodní nabídky před kliknutím na tlačítko použít!</string>
+    <string name="phase2_dialog_title">zpracovávám všechny vaše úpravy</string>
+    <string name="phase3_dialog_title">přemisťuju speciální úpravy</string>
+    <string name="phase4_dialog_title">vytvářím nová manifest</string>
+    <string name="phase5_dialog_title">vytvářím motiv</string>
+    <string name="phase6_dialog_title">dokončuju a podepisuju motiv</string>
     <string name="unzipping_assets_dialog_title">motiv se extrahuje&#8230;</string>
     <string name="unzipping_assets_small">čekejte prosím&#8230;</string>
     <string name="unzipping_assets_big">vybraný motiv je velký/nextrakce může chvíli trvat&#8230;</string>
@@ -38,8 +43,8 @@
     <string name="qs_tile_text_color">barva textu rychlého nastevní</string>
 
     <string name="systemui_preview_label_bt">Bluetooth</string>
-    <string name="systemui_preview_label_wifi">Wifi</string>
-    <string name="systemui_preview_label"> (ova) Wifi</string>
+    <string name="systemui_preview_label_wifi">Wi-fi</string>
+    <string name="systemui_preview_label"> Wi-fi</string>
     <string name="systemui_preview_default_no_username">Tvoje</string>
 
     <!-- Framework Tweaks -->
@@ -47,12 +52,12 @@
     <string name="system_accent_dual">odstín frameworku (druhý)</string>
     <string name="system_accent_light">odstín frameworku (světlý)</string>
     <string name="system_appbg">pozadí aplikace frameworku (tmavé)</string>
-    <string name="system_appbg_light">framework app background (světlé)</string>
-    <string name="system_dialog">framework dialog background (tmavé)</string>
-    <string name="system_dialog_light">framework dialog background (světlé)</string>
+    <string name="system_appbg_light">pozadí nápisů frameworku (světlé)</string>
+    <string name="system_dialog">pozadí nápisů frameworku (tmavé)</string>
+    <string name="system_dialog_light">pozadí nápisů frameworku (světlé)</string>
     <string name="system_notification_text_1">oznámení frameworku (hlavní text)</string>
     <string name="system_notification_text_2">oznámení frameworku (vedlejší text)</string>
-    <string name="system_ripple_color">vlnění systémového frameworku</string>
+    <string name="system_ripple_color">barva efektu při dlouhém stisku</string>
     <string name="system_main_color">barva hlavního motivu frameworku</string>
 
     <string name="framework_preview_title">framework dashboardu.</string>
@@ -62,10 +67,10 @@
     <string name="framework_preview_light">Ukázka modifikace světlého motivu</string>
 
     <!-- Common Tweaks -->
-    <string name="commons_themable_google_apps">zapnout dělání motivů na motivové google aplikace</string>
+    <string name="commons_themable_google_apps">zapnout motivy na google aplikace, které již byly na-motivovány</string>
 
     <!-- Final Card -->
-    <string name="creation_name">název kreace:</string>
+    <string name="creation_name">název stvoření:</string>
     <string name="creator_name">jméno tvůrce:</string>
     <string name="allowed_characters">0123456789.-_/()(͡° ͜ʖ ͡°)aábcčd´deěéfghijklmnňoópqrřsštťuúůvwxyzžAÁBCČDĎEĚÉFGHIJKLMNŇOÓPQRŘSŠTŤUÚŮVWXYZŽ</string>
     <!-- Do not allow spaces in translations -->
