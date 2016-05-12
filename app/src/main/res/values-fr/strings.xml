@@ -283,6 +283,12 @@
     <string name="creative_mode_card_theme_selection">Sélectionner un thème installé :</string>
     <string name="creative_mode_card_theme_attributes">Nouveaux attributs de thème :</string>
 
+    <string name="default_username">Utilisateur dashboard</string>
+    <string name="no_theme_selected">Veuillez sélectionner un thème dans la liste déroulante et définir un nom pour le thème, avant de cliquer sur le bouton Appliquer !</string>
+    <string name="unzipping_assets_dialog_title">Thème en cous d\'extraction&#8230;</string>
+    <string name="unzipping_assets_small">Veuillez patienter&#8230;</string>
+    <string name="unzipping_assets_big">Le thème choisi est très grand\nSon extraction peut prendre un certain temps&#8230;</string>
+
     <!-- Settings Tweaks -->
     <string name="settings_rounded_corners">Catégories de dashboard (arrondie)</string>
     <string name="settings_show_dashboard_dividers">Séparateurs de dashboard</string>
@@ -334,6 +340,9 @@
     <string name="creator_name">Nom du créateur :</string>
     <string name="allowed_characters">0123456789.abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ</string>
     <!-- Do not allow spaces in translations -->
+
+    <string name="configuring_fun">Préparation de la fête !</string>
+
     <string name="creation_name_empty">(Nom par défaut)</string>
     <string name="creator_name_empty">(Nom par défaut)</string>
     <!-- end of creator_strings.xml -->
