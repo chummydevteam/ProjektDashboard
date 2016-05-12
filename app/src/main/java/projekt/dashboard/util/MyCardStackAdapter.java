@@ -72,6 +72,8 @@ public class MyCardStackAdapter extends CardStackAdapter implements
     public CircularFillableLoaders loader;
     public TextView loader_string;
 
+    public ImageView main_color;
+
     // ==================================== Framework Tweaks ================================ //
     public int current_selected_system_accent_color = Color.argb(255, 255, 255, 255); // White
     public int current_selected_system_accent_dual_color = Color.argb(255, 119, 119, 119); // Medium Grey
@@ -396,7 +398,7 @@ public class MyCardStackAdapter extends CardStackAdapter implements
 
         // Framework System Main Color
 
-        final ImageView main_color = (ImageView) root.findViewById(
+        main_color = (ImageView) root.findViewById(
                 R.id.system_main_colorpicker);
         main_color.setColorFilter(current_selected_system_main_color, PorterDuff.Mode.SRC_ATOP);
         main_color.setOnClickListener(new View.OnClickListener() {
@@ -820,6 +822,8 @@ public class MyCardStackAdapter extends CardStackAdapter implements
                         toast.show();
                     } else {
                         colorful_icon_switch.setVisibility(View.VISIBLE);
+                        current_selected_system_main_color = Color.argb(255, 33, 32, 33);
+                        main_color.setColorFilter(current_selected_system_main_color);
                         current_cdt_theme = "com.chummy.jezebel.materialdark.donate";
                     }
                 }
@@ -833,6 +837,8 @@ public class MyCardStackAdapter extends CardStackAdapter implements
                         spinner1.setSelection(0);
                     } else {
                         colorful_icon_switch.setVisibility(View.VISIBLE);
+                        current_selected_system_main_color = Color.argb(255, 0, 0, 0);
+                        main_color.setColorFilter(current_selected_system_main_color);
                         current_cdt_theme = "com.chummy.jezebel.blackedout.donate";
                     }
                 }
