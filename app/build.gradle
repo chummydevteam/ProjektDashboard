@@ -119,9 +119,6 @@ dependencies {
     // EditText
     compile 'com.alimuzaffar.lib:animated-edit-text:0.0.8'
 
-    // Floating Action Button
-    compile 'com.github.clans:fab:1.6.3'
-
     // Floating Action Button and Expandable Toolbar
     compile 'com.github.michaldrabik:tapbarmenu:1.0.5'
 

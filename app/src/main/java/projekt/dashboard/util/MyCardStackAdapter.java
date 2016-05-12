@@ -23,6 +23,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -906,8 +907,7 @@ public class MyCardStackAdapter extends CardStackAdapter implements
 
         // Begin Creative Mode Functions
 
-        com.github.clans.fab.FloatingActionButton creative_mode_start =
-                (com.github.clans.fab.FloatingActionButton) root.findViewById(R.id.begin_action);
+        Button creative_mode_start = (Button) root.findViewById(R.id.begin_action);
         creative_mode_start.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // We have to unzip the destination APK first

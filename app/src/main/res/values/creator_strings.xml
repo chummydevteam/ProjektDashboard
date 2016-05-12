@@ -13,8 +13,8 @@
     <string name="creative_mode_card_theme_attributes">new theme attributes:</string>
 
     <string name="default_username">Dashboard User</string>
-    <string name="no_theme_selected">Please select a theme from the spinner dropdown as well as setting a theme name before clicking the apply button!</string>
-
+    <string name="no_theme_selected">You must select a theme from the spinner dropdown and set a theme name before clicking me!</string>
+    <string name="begin_action_button">Let\'s get started!</string>
 
     <!-- Dialog Messages -->
     <string name="unzipping_assets_dialog_title">theme is extracting&#8230;</string>
