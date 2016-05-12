@@ -1441,8 +1441,9 @@ public class MyCardStackAdapter extends CardStackAdapter implements
             if (!dashboard_dividers) {
                 String source = mContext.getCacheDir().getAbsolutePath() +
                         "/creative_files/";
+                // Use v12 here just in case the user ticks this option after selecting a color
                 String destination = mContext.getCacheDir().getAbsolutePath() +
-                        "/creative_mode/assets/overlays/com.android.settings/res/values-v11/";
+                        "/creative_mode/assets/overlays/com.android.settings/res/values-v12/";
                 moveFile(source, "dashboard_dividers.xml", destination);
             }
             if (!dirtytweaks_iconpresence) {
