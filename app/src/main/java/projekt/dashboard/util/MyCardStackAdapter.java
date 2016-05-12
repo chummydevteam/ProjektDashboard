@@ -907,7 +907,7 @@ public class MyCardStackAdapter extends CardStackAdapter implements
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-            mProgressDialog.setTitle("configuring the fun!");
+            mProgressDialog.setTitle(R.string.configuring_fun);
             mProgressDialog.setMessage(mContext.getResources().getString(R.string.
                     unzipping_assets_small));
             startPhase2();
