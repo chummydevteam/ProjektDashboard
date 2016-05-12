@@ -30,6 +30,7 @@
     <color name="material_grey_850">@android:color/black</color>
 
     <color name="window_bg_cards_dark">#ff000000</color>
+    <color name="window_bg_glass">#99000000</color>
 
     <color name="tab_indicator_color_dark">@android:color/white</color>
     <color name="tab_icon_color_dark">@android:color/white</color>

@@ -287,8 +287,6 @@
 
     <string name="download_cancelled">Download cancelled</string>
 
-    <string name="configuring_fun">configuring the fun!</string>
-
     <string-array name="wallpaper_options">
         <item>@string/apply</item>
         <item>@string/save_to_device</item>

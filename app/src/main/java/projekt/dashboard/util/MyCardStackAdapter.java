@@ -849,15 +849,15 @@ public class MyCardStackAdapter extends CardStackAdapter implements
             public void onClick(View v) {
                 // We have to unzip the destination APK first
 
-                mProgressDialog = new ProgressDialog(mContext);
                 did_it_compile = true;  // Reset the checker
 
+                mProgressDialog = new ProgressDialog(mContext, R.style.CreativeMode_ActivityTheme);
                 mProgressDialog.setTitle(mContext.getResources().getString(
                         R.string.unzipping_assets_dialog_title));
                 mProgressDialog.setMessage(
                         mContext.getResources().getString(R.string.unzipping_assets_small));
-                mProgressDialog.setIndeterminate(true);
-                mProgressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                mProgressDialog.setIndeterminate(false);
+                mProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
                 mProgressDialog.setCancelable(false);
 
                 // Check that there is SOMETHING changed, let's decide on the theme at least
@@ -896,6 +896,8 @@ public class MyCardStackAdapter extends CardStackAdapter implements
         @Override
         protected void onPreExecute() {
             Log.d("Phase 1", "This phase has started it's asynchronous task.");
+            mProgressDialog.setProgress(10);
+
             super.onPreExecute();
             // take CPU lock to prevent CPU from going off if the user
             // presses the power button during download
@@ -910,7 +912,7 @@ public class MyCardStackAdapter extends CardStackAdapter implements
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-            mProgressDialog.setTitle(R.string.configuring_fun);
+            mProgressDialog.setTitle(R.string.phase2_dialog_title);
             mProgressDialog.setMessage(mContext.getResources().getString(R.string.
                     unzipping_assets_small));
             startPhase2();
@@ -1044,6 +1046,7 @@ public class MyCardStackAdapter extends CardStackAdapter implements
                     "theme_color_systemui_qs_tile_text_color",
                     mContext.getCacheDir().getAbsolutePath() +
                             "/creative_mode/assets/overlays/common/res/values-v12/");
+
 
             Phase3_MovePremadeFiles phase3 = new Phase3_MovePremadeFiles();
             phase3.execute();
@@ -1236,6 +1239,8 @@ public class MyCardStackAdapter extends CardStackAdapter implements
         @Override
         protected void onPreExecute() {
             Log.d("Phase 3", "This phase has started it's asynchronous task.");
+            mProgressDialog.setTitle(R.string.phase3_dialog_title);
+            mProgressDialog.setProgress(30);
             super.onPreExecute();
         }
 
@@ -1496,6 +1501,8 @@ public class MyCardStackAdapter extends CardStackAdapter implements
         @Override
         protected void onPreExecute() {
             Log.d("Phase 4", "This phase has started it's asynchronous task.");
+            mProgressDialog.setTitle(R.string.phase4_dialog_title);
+            mProgressDialog.setProgress(40);
             super.onPreExecute();
         }
 
@@ -1636,6 +1643,8 @@ public class MyCardStackAdapter extends CardStackAdapter implements
         @Override
         protected void onPreExecute() {
             Log.d("Phase 5", "This phase has started it's asynchronous task.");
+            mProgressDialog.setTitle(R.string.phase5_dialog_title);
+            mProgressDialog.setProgress(50);
             super.onPreExecute();
         }
 
@@ -1786,6 +1795,8 @@ public class MyCardStackAdapter extends CardStackAdapter implements
 
         @Override
         protected void onPreExecute() {
+            mProgressDialog.setTitle(R.string.phase6_dialog_title);
+            mProgressDialog.setProgress(90);
             Log.d("Phase 6", "This phase has started it's asynchronous task.");
             super.onPreExecute();
         }
@@ -1825,31 +1836,25 @@ public class MyCardStackAdapter extends CardStackAdapter implements
                                 "/dashboard_creation_signed.apk " +
                                 Environment.getExternalStorageDirectory().getAbsolutePath() +
                                 "/dashboard./dashboard_creation_signed.apk");
-
-                // Once the transfer is complete, launch it like a normal APK
-                if (did_it_compile) {
-                    Intent intent = new Intent(Intent.ACTION_VIEW);
-                    intent.setDataAndType(Uri.fromFile(new File(
-                                    Environment.getExternalStorageDirectory().getAbsolutePath() +
-                                            "/dashboard./dashboard_creation_signed.apk")),
-                            "application/vnd.android.package-archive");
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    mContext.startActivity(intent);
-                }
-
-                // Temporary cache folder MUST be cleared for next run.
-                cleanTempFolder();
-
             } catch (Throwable t) {
                 did_it_compile = false;
                 Log.e("ZipSigner", "APK could not be signed. " + t.toString());
-                Toast toast = Toast.makeText(mContext.getApplicationContext(),
-                        mContext.getResources().getString(
-                                R.string.zipsigner_exception_toast),
-                        Toast.LENGTH_LONG);
-                toast.show();
-                return null;
             }
+
+            // Once the transfer is complete, launch it like a normal APK
+            if (did_it_compile) {
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setDataAndType(Uri.fromFile(new File(
+                                Environment.getExternalStorageDirectory().getAbsolutePath() +
+                                        "/dashboard./dashboard_creation_signed.apk")),
+                        "application/vnd.android.package-archive");
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                mContext.startActivity(intent);
+            }
+
+            // Temporary cache folder MUST be cleared for next run.
+            cleanTempFolder();
+
             return null;
         }
 

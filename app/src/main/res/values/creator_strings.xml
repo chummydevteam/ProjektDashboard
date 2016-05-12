@@ -14,11 +14,20 @@
 
     <string name="default_username">Dashboard User</string>
     <string name="no_theme_selected">Please select a theme from the spinner dropdown as well as setting a theme name before clicking the apply button!</string>
+
+
+    <!-- Dialog Messages -->
     <string name="unzipping_assets_dialog_title">theme is extracting&#8230;</string>
     <string name="unzipping_assets_small">please wait&#8230;</string>
     <string name="unzipping_assets_big">chosen theme is huge\nextraction may take a while&#8230;</string>
 
-    // Exception Catches
+    <string name="phase2_dialog_title">processing all your tweaks</string>
+    <string name="phase3_dialog_title">moving special tweaks over</string>
+    <string name="phase4_dialog_title">creating new manifest</string>
+    <string name="phase5_dialog_title">unifying and compiling theme</string>
+    <string name="phase6_dialog_title">finalizing and signing theme</string>
+
+    <!-- Exception Catches -->
     <string name="zipsigner_exception_toast">Failed to create new theme (Exception: ZipSigner)</string>
     <string name="unzipNewAPK_exception_toast">Failed to create new theme (Exception: UnzipNewAPK)</string>
     <string name="UnsignedAPKCreator_exception_toast">Failed to create new theme (Exception: UnsignedAPKCreator)</string>
