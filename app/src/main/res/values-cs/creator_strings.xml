@@ -31,7 +31,10 @@
     <string name="settings_dashboard_title_allcaps">název kategorií - všechno velkým</string>
     <string name="settings_dashboard_title_bold">název kategorií - tučné</string>
     <string name="settings_dashboard_title_italics">název kategorií - kurzíva</string>
+    <string name="settings_dashboard_background">barva pozadí (rozdělovače)</string>
+    <string name="settings_dashboard_category_background">barva pozadí kategorie</string>
     <string name="settings_icon_color">barva ikon nastavení</string>
+    <string name="settings_switchbar_background">barva pozadí přepínačů</string>
     <string name="settings_title_color">barva názvů nastavení</string>
     <string name="settings_header_text">BEZDRÁTOVÁ PŘIPOJENÍ A SÍTĚ</string>
     <string name="settings_preview_title">Nastavení</string>
