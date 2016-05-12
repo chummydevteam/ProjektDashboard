@@ -33,6 +33,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.alimuzaffar.lib.widgets.AnimatedEditText;
+import com.mikhaellopez.circularfillableloaders.CircularFillableLoaders;
 import com.mutualmobile.cardstack.CardStackAdapter;
 import com.tramsun.libs.prefcompat.Pref;
 
@@ -67,6 +68,9 @@ public class MyCardStackAdapter extends CardStackAdapter implements
     public int folder_directory = 1;
     public String current_cdt_theme;
     public Boolean did_it_compile = true;
+
+    public CircularFillableLoaders loader;
+    public TextView loader_string;
 
     // ==================================== Framework Tweaks ================================ //
     public int current_selected_system_accent_color = Color.argb(255, 255, 255, 255); // White
@@ -151,6 +155,7 @@ public class MyCardStackAdapter extends CardStackAdapter implements
         root.setCardBackgroundColor(ContextCompat.getColor(mContext, bgColorIds[position]));
         TextView cardTitle = (TextView) root.findViewById(R.id.card_title);
         cardTitle.setText(mContext.getResources().getString(R.string.card_title, position));
+
         return root;
     }
 
@@ -749,7 +754,8 @@ public class MyCardStackAdapter extends CardStackAdapter implements
     }
 
     private View getFinalizedView(ViewGroup container) {
-        CardView root = (CardView) mInflater.inflate(R.layout.final_card, container, false);
+        final CardView root = (CardView) mInflater.inflate(R.layout.final_card, container, false);
+        final ViewGroup inflation = (ViewGroup) mInflater.inflate(R.layout.custom_dialog_loader, container, false);
         root.setCardBackgroundColor(ContextCompat.getColor(mContext, bgColorIds[3]));
 
         int counter = 0;
@@ -852,12 +858,7 @@ public class MyCardStackAdapter extends CardStackAdapter implements
                 did_it_compile = true;  // Reset the checker
 
                 mProgressDialog = new ProgressDialog(mContext, R.style.CreativeMode_ActivityTheme);
-                mProgressDialog.setTitle(mContext.getResources().getString(
-                        R.string.unzipping_assets_dialog_title));
-                mProgressDialog.setMessage(
-                        mContext.getResources().getString(R.string.unzipping_assets_small));
                 mProgressDialog.setIndeterminate(false);
-                mProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
                 mProgressDialog.setCancelable(false);
 
                 // Check that there is SOMETHING changed, let's decide on the theme at least
@@ -896,8 +897,6 @@ public class MyCardStackAdapter extends CardStackAdapter implements
         @Override
         protected void onPreExecute() {
             Log.d("Phase 1", "This phase has started it's asynchronous task.");
-            mProgressDialog.setProgress(10);
-
             super.onPreExecute();
             // take CPU lock to prevent CPU from going off if the user
             // presses the power button during download
@@ -907,14 +906,20 @@ public class MyCardStackAdapter extends CardStackAdapter implements
                     getClass().getName());
             mWakeLock.acquire();
             mProgressDialog.show();
+            mProgressDialog.setContentView(R.layout.custom_dialog_loader);
+            loader_string = (TextView) mProgressDialog.findViewById(R.id.loadingTextCreativeMode);
+            loader_string.setText(mContext.getResources().getString(
+                    R.string.unzipping_assets_small));
+            loader = (CircularFillableLoaders) mProgressDialog.findViewById(
+                    R.id.circularFillableLoader);
+            loader.setProgress(90);
         }
 
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-            mProgressDialog.setTitle(R.string.phase2_dialog_title);
-            mProgressDialog.setMessage(mContext.getResources().getString(R.string.
-                    unzipping_assets_small));
+            loader.setProgress(80);
+            loader_string.setText(mContext.getResources().getString(R.string.phase2_dialog_title));
             startPhase2();
         }
 
@@ -1057,7 +1062,6 @@ public class MyCardStackAdapter extends CardStackAdapter implements
             String package_identifier = sUrl[0];
             try {
                 unzip(package_identifier);
-                mProgressDialog.setProgress(20);
             } catch (IOException e) {
                 did_it_compile = false;
                 Toast toast = Toast.makeText(mContext.getApplicationContext(),
@@ -1086,8 +1090,7 @@ public class MyCardStackAdapter extends CardStackAdapter implements
                     File checkFile = new File(source);
                     long fileSize = checkFile.length();
                     if (fileSize > 50000000) { // Picking 50mb to be the threshold of large themes
-                        mProgressDialog.setMessage(
-                                mContext.getResources().getString(R.string.unzipping_assets_big));
+                        loader_string.setText(mContext.getResources().getString(R.string.unzipping_assets_big));
                     }
                     File myDir = new File(mContext.getCacheDir(), "creative_mode");
                     if (!myDir.exists()) {
@@ -1239,8 +1242,8 @@ public class MyCardStackAdapter extends CardStackAdapter implements
         @Override
         protected void onPreExecute() {
             Log.d("Phase 3", "This phase has started it's asynchronous task.");
-            mProgressDialog.setTitle(R.string.phase3_dialog_title);
-            mProgressDialog.setProgress(30);
+            loader.setProgress(70);
+            loader_string.setText(mContext.getResources().getString(R.string.phase3_dialog_title));
             super.onPreExecute();
         }
 
@@ -1501,8 +1504,8 @@ public class MyCardStackAdapter extends CardStackAdapter implements
         @Override
         protected void onPreExecute() {
             Log.d("Phase 4", "This phase has started it's asynchronous task.");
-            mProgressDialog.setTitle(R.string.phase4_dialog_title);
-            mProgressDialog.setProgress(40);
+            loader.setProgress(60);
+            loader_string.setText(mContext.getResources().getString(R.string.phase4_dialog_title));
             super.onPreExecute();
         }
 
@@ -1643,8 +1646,8 @@ public class MyCardStackAdapter extends CardStackAdapter implements
         @Override
         protected void onPreExecute() {
             Log.d("Phase 5", "This phase has started it's asynchronous task.");
-            mProgressDialog.setTitle(R.string.phase5_dialog_title);
-            mProgressDialog.setProgress(50);
+            loader.setProgress(50);
+            loader_string.setText(mContext.getResources().getString(R.string.phase5_dialog_title));
             super.onPreExecute();
         }
 
@@ -1795,9 +1798,9 @@ public class MyCardStackAdapter extends CardStackAdapter implements
 
         @Override
         protected void onPreExecute() {
-            mProgressDialog.setTitle(R.string.phase6_dialog_title);
-            mProgressDialog.setProgress(90);
             Log.d("Phase 6", "This phase has started it's asynchronous task.");
+            loader.setProgress(10);
+            loader_string.setText(mContext.getResources().getString(R.string.phase6_dialog_title));
             super.onPreExecute();
         }
 

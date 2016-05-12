@@ -18,8 +18,8 @@
 
     <!-- Dialog Messages -->
     <string name="unzipping_assets_dialog_title">theme is extracting&#8230;</string>
-    <string name="unzipping_assets_small">please wait&#8230;</string>
-    <string name="unzipping_assets_big">chosen theme is huge\nextraction may take a while&#8230;</string>
+    <string name="unzipping_assets_small">preparing theme&#8230;</string>
+    <string name="unzipping_assets_big">chosen theme is huge\npreparation may take a while&#8230;</string>
 
     <string name="phase2_dialog_title">processing all your tweaks</string>
     <string name="phase3_dialog_title">moving special tweaks over</string>

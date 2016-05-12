@@ -131,4 +131,7 @@ dependencies {
     compile files('src/main/libs/kellinwood-logging-log4j-1.0.jar')
     compile files('src/main/libs/zipio-lib-1.8.jar')
     compile files('src/main/libs/zipsigner-lib-1.17.jar')
+
+    // Dialogs
+    compile 'com.mikhaellopez:circularfillableloaders:1.2.0'
 }
