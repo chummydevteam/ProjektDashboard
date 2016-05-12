@@ -40,7 +40,7 @@ import butterknife.OnClick;
 import projekt.dashboard.BuildConfig;
 import projekt.dashboard.R;
 import projekt.dashboard.fragments.base.BasePageFragment;
-import projekt.dashboard.ui.MainActivity;
+import projekt.dashboard.ui.SettingsActivity;
 import projekt.dashboard.ui.SplashScreenActivity;
 
 /**
@@ -142,7 +142,9 @@ public class HomeFragment extends BasePageFragment {
     public void onMenuItemClick(View view) {
         switch (view.getId()) {
             case R.id.item1:
-                if (prefs.getBoolean("blacked_out_enabled", true)) {
+                Intent intent = new Intent(view.getContext(), SettingsActivity.class);
+                startActivity(intent);
+                /*if (prefs.getBoolean("blacked_out_enabled", true)) {
                     prefs.edit().putBoolean("blacked_out_enabled", false).commit();
                     getActivity().finish();
                     getActivity().startActivity(new Intent(getActivity(), MainActivity.class));
@@ -150,7 +152,7 @@ public class HomeFragment extends BasePageFragment {
                     prefs.edit().putBoolean("blacked_out_enabled", true).commit();
                     getActivity().finish();
                     getActivity().startActivity(new Intent(getActivity(), MainActivity.class));
-                }
+                }*/
                 break;
             case R.id.item2:
                 final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(

@@ -1,0 +1,178 @@
+<com.pluscubed.insetsdispatcher.view.InsetsDispatcherFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/overlay_window_bg"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+        <TextView
+            android:id="@+id/toolbar_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="dashboard. preferences"
+            android:textColor="@android:color/white"
+            android:textSize="20dp"
+            android:textStyle="italic" />
+
+
+    </android.support.v7.widget.Toolbar>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:clipToPadding="false"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="@dimen/content_inset_less"
+        android:weightSum="1">
+
+        <TextView
+            android:id="@+id/tab_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginStart="10dp"
+            android:paddingBottom="10dp"
+            android:text="show/hide dashboard. tabs"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textStyle="italic" />
+
+        <Switch
+            android:id="@+id/enable_color_switcher"
+            style="@style/ShadowBlackTextWhite"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tab_title"
+            android:checked="true"
+            android:padding="16dp"
+            android:text="enable color switcher tab" />
+
+        <Switch
+            android:id="@+id/enable_header_swapper"
+            style="@style/ShadowBlackTextWhite"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/enable_color_switcher"
+            android:checked="true"
+            android:padding="16dp"
+            android:text="enable header swapper tab" />
+
+        <Switch
+            android:id="@+id/enable_header_importer"
+            style="@style/ShadowBlackTextWhite"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/enable_header_swapper"
+            android:checked="true"
+            android:padding="16dp"
+            android:text="enable header pack importer tab" />
+
+        <Switch
+            android:id="@+id/enable_theme_utilities"
+            style="@style/ShadowBlackTextWhite"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/enable_header_importer"
+            android:checked="true"
+            android:padding="16dp"
+            android:text="enable theme debugging tab" />
+
+
+        <Switch
+            android:id="@+id/enable_wallpapers"
+            style="@style/ShadowBlackTextWhite"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/enable_theme_utilities"
+            android:checked="true"
+            android:padding="16dp"
+            android:text="enable wallpaper tab" />
+
+        <TextView
+            android:id="@+id/app_theme_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/enable_wallpapers"
+            android:layout_gravity="left"
+            android:layout_marginStart="10dp"
+            android:paddingBottom="10dp"
+            android:paddingTop="20dp"
+            android:text="app utilities"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textStyle="italic" />
+
+        <Switch
+            android:id="@+id/enable_blacked_out"
+            style="@style/ShadowBlackTextWhite"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/app_theme_title"
+            android:checked="true"
+            android:padding="16dp"
+            android:text="enable blacked out mode" />
+
+        <LinearLayout
+            android:id="@+id/clear_dashboard_folder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/enable_blacked_out"
+            android:layout_marginEnd="15dp"
+            android:layout_marginStart="15dp"
+            android:clickable="true"
+            android:foreground="?android:selectableItemBackground"
+            android:orientation="vertical"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp">
+
+            <TextView
+                android:id="@+id/EMP_NAME2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="clear dashboard. folder"
+                android:textColor="@android:color/white"></TextView>
+
+            <TextView
+                android:id="@+id/Description2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="/storage/0/dashboard./"
+                android:textSize="@dimen/content_inset_less"></TextView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/clear_cache"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/clear_dashboard_folder"
+            android:layout_marginEnd="15dp"
+            android:layout_marginStart="15dp"
+            android:clickable="true"
+            android:foreground="?android:selectableItemBackground"
+            android:orientation="vertical"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp">
+
+            <TextView
+                android:id="@+id/EMP_NAME"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="clear app cache"
+                android:textColor="@android:color/white"></TextView>
+
+            <TextView
+                android:id="@+id/cache"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="CACHE_SIZE_HERE"
+                android:textSize="@dimen/content_inset_less"></TextView>
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</com.pluscubed.insetsdispatcher.view.InsetsDispatcherFrameLayout>

@@ -50,6 +50,7 @@
                     android:text="@string/settings_colorful_tweaks_icon" />
 
                 <include layout="@layout/settings_dashboard_colorpicker" />
+
                 <include layout="@layout/settings_dashboard_category_colorpicker" />
 
                 <Switch

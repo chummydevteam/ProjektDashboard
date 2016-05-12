@@ -53,8 +53,7 @@ import projekt.dashboard.util.ReadXMLFile;
 public class HeaderImportFragment extends BasePageFragment {
 
     public ViewGroup inflation;
-    public boolean are_we_clearing_cache_after,
-            is_debugging_mode_enabled, is_zip_spinner_activated, is_theme_selected;
+    public boolean are_we_clearing_cache_after, is_zip_spinner_activated, is_theme_selected;
     public Spinner spinner, spinner1, spinner2;
     public String theme_dir, package_name;
     public FloatingActionButton apply_fab;
@@ -62,7 +61,7 @@ public class HeaderImportFragment extends BasePageFragment {
     public int folder_directory = 1;
     public int current_hour;
     public TextView currentTimeVariable;
-    public CheckBox autoClearSystemUICache, debugmode;
+    public CheckBox autoClearSystemUICache;
     public SharedPreferences prefs;
 
     public void cleanTempFolder() {

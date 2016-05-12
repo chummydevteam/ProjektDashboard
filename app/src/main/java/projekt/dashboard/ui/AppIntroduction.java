@@ -55,6 +55,12 @@ public class AppIntroduction extends AppIntro {
         prefs.edit().putBoolean("blacked_out_enabled", false).commit();
         prefs.edit().putBoolean("advanced_mode_enabled", false).commit();
 
+        prefs.edit().putBoolean("color_switcher_enabled", true).commit();
+        prefs.edit().putBoolean("header_swapper_enabled", true).commit();
+        prefs.edit().putBoolean("header_importer_enabled", true).commit();
+        prefs.edit().putBoolean("theme_debugging_enabled", true).commit();
+        prefs.edit().putBoolean("wallpapers_enabled", true).commit();
+
         AlertDialog.Builder alert = new AlertDialog.Builder(AppIntroduction.this);
 
         LayoutInflater inflater = this.getLayoutInflater();

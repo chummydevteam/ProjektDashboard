@@ -43,6 +43,10 @@
             android:screenOrientation="sensorPortrait"
             android:theme="@style/AppTheme.Overlay" />
         <activity
+            android:name=".ui.SettingsActivity"
+            android:screenOrientation="sensorPortrait"
+            android:theme="@style/AppTheme.Overlay" />
+        <activity
             android:name=".ui.MainActivity"
             android:screenOrientation="sensorPortrait" />
         <activity

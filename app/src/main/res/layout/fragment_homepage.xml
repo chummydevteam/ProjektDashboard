@@ -151,7 +151,7 @@
                 android:layout_weight="1"
                 android:paddingBottom="10dp"
                 android:paddingTop="10dp"
-                android:src="@drawable/tap_bar_invert" />
+                android:src="@drawable/tap_bar_settings" />
 
             <ImageView
                 android:id="@+id/item2"

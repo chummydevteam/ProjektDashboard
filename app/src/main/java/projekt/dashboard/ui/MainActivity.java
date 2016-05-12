@@ -137,31 +137,37 @@ public class MainActivity extends BaseDonateActivity implements
 
     private void setupPages() {
         mPages = new PagesBuilder(6);
+
         mPages.add(new PagesBuilder.Page(R.id.home_fragment, R.drawable.tab_home,
                 R.string.home_tab_one, new HomeFragment()));
+
         if (Shell.SU.available()) {
-            mPages.add(new PagesBuilder.Page(R.id.color_changer_fragment, R.drawable.tab_palette,
-                    R.string.home_tab_two, new ColorChangerFragment()));
-        }
-        if (prefs.getBoolean("advanced_mode_enabled", true)) {
-            mPages.add(new PagesBuilder.Page(R.id.theme_utilities_fragment, R.drawable.tab_creator,
-                    R.string.home_tab_seven, new CreatorFragment()));
-            /*mPages.add(new PagesBuilder.Page(R.id.theme_utilities_fragment, R.drawable.tab_overlay_picker,
-                    R.string.home_tab_eight, new ThemeUtilitiesFragment()));*/
-        }
-        if (Shell.SU.available()) {
-            mPages.add(new PagesBuilder.Page(R.id.header_swapper_fragment, R.drawable.tab_swapper,
-                    R.string.home_tab_three, new HeaderSwapperFragment()));
-            mPages.add(new PagesBuilder.Page(R.id.header_swapper_fragment, R.drawable.tab_header_import,
-                    R.string.home_tab_four, new HeaderImportFragment()));
-        }
-        if (Shell.SU.available()) {
-            mPages.add(new PagesBuilder.Page(R.id.theme_utilities_fragment, R.drawable.tab_rebuild,
-                    R.string.home_tab_five, new ThemeUtilitiesFragment()));
+            if (prefs.getBoolean("color_switcher_enabled", true)) {
+                mPages.add(new PagesBuilder.Page(R.id.color_changer_fragment, R.drawable.tab_palette,
+                        R.string.home_tab_two, new ColorChangerFragment()));
+            }
+            if (prefs.getBoolean("advanced_mode_enabled", true)) {
+                mPages.add(new PagesBuilder.Page(R.id.theme_utilities_fragment, R.drawable.tab_creator,
+                        R.string.home_tab_seven, new CreatorFragment()));
+            }
+            if (prefs.getBoolean("header_swapper_enabled", true)) {
+                mPages.add(new PagesBuilder.Page(R.id.header_swapper_fragment, R.drawable.tab_swapper,
+                        R.string.home_tab_three, new HeaderSwapperFragment()));
+            }
+            if (prefs.getBoolean("header_importer_enabled", true)) {
+                mPages.add(new PagesBuilder.Page(R.id.header_swapper_fragment, R.drawable.tab_header_import,
+                        R.string.home_tab_four, new HeaderImportFragment()));
+            }
+            if (prefs.getBoolean("theme_debugging_enabled", true)) {
+                mPages.add(new PagesBuilder.Page(R.id.theme_utilities_fragment, R.drawable.tab_rebuild,
+                        R.string.home_tab_five, new ThemeUtilitiesFragment()));
+            }
         }
         if (isNetworkAvailable()) {
-            mPages.add(new PagesBuilder.Page(R.id.theme_utilities_fragment, R.drawable.tab_wallpapers,
-                    R.string.home_tab_six, new WallpapersFragment()));
+            if (prefs.getBoolean("wallpapers_enabled", true)) {
+                mPages.add(new PagesBuilder.Page(R.id.theme_utilities_fragment, R.drawable.tab_wallpapers,
+                        R.string.home_tab_six, new WallpapersFragment()));
+            }
         }
     }
 
