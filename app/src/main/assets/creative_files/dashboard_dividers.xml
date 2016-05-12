@@ -3,5 +3,5 @@
 
 <resources>
 	<!-- Edits the background in settings-->
-		<color name="dashboard_background_color">@android:color/black</color>
+		<color name="dashboard_background_color">@color/dashboard_category_background_color</color>
 </resources>

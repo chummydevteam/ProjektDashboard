@@ -1347,14 +1347,14 @@ public class MyCardStackAdapter extends CardStackAdapter implements
                                 "res/values-v11/");
             }
 
-            if (dashboard_dividers) {
+            if (!dashboard_dividers) {
                 String source = mContext.getCacheDir().getAbsolutePath() +
                         "/creative_files/";
                 String destination = mContext.getCacheDir().getAbsolutePath() +
                         "/creative_mode/assets/overlays/com.android.settings/res/values-v11/";
                 moveFile(source, "dashboard_dividers.xml", destination);
             }
-            if (dirtytweaks_iconpresence) {
+            if (!dirtytweaks_iconpresence) {
                 String source = mContext.getCacheDir().getAbsolutePath() +
                         "/creative_files/";
                 String destination = mContext.getCacheDir().getAbsolutePath() +
