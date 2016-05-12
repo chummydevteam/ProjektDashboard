@@ -1037,7 +1037,7 @@ public class MyCardStackAdapter extends CardStackAdapter implements
 
             Phase2_InjectAndMove sysui_qs_tile_text = new Phase2_InjectAndMove();
             String sysui_qs_tile_text_color = "#" + Integer.toHexString(
-                    current_selected_qs_tile_color);
+                    current_selected_qs_text_color);
             sysui_qs_tile_text.execute("qs_tile_text", sysui_qs_tile_text_color,
                     "theme_color_systemui_qs_tile_text_color",
                     mContext.getCacheDir().getAbsolutePath() +
