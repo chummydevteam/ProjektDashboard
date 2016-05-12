@@ -18,6 +18,22 @@
     <string name="unzipping_assets_small">please wait&#8230;</string>
     <string name="unzipping_assets_big">chosen theme is huge\nextraction may take a while&#8230;</string>
 
+    // Exception Catches
+    <string name="zipsigner_exception_toast">Failed to create new theme (Exception: ZipSigner)</string>
+    <string name="unzipNewAPK_exception_toast">Failed to create new theme (Exception: UnzipNewAPK)</string>
+    <string name="UnsignedAPKCreator_exception_toast">Failed to create new theme (Exception: UnsignedAPKCreator)</string>
+    <string name="createXMLFile_exception_toast">Failed to create new theme (Exception: createXMLFile (IOException))</string>
+    <string name="moveFile_exception_toast">Failed to create new theme (Exception: moveFile)</string>
+    <string name="moveFile_FNF_exception_toast">Failed to create new theme (Exception: moveFile (FileNotFound))</string>
+    <string name="createSettingsTitleXML_exception_toast">Failed to create new theme (Exception: createSettingsTitleXML (IOException))</string>
+    <string name="copyFile_exception_toast">Failed to create new theme (Exception: copyFile)</string>
+    <string name="copyFileOrDir_exception_toast">Failed to create new theme (Exception: copyFileOrDir (IOException))</string>
+    <string name="moveXMLfile_exception_toast">Failed to create new theme (Exception: moveXMLfile)</string>
+    <string name="moveXMLfile_FNF_exception_toast">Failed to create new theme (Exception: moveXMLfile (FileNotFound))</string>
+    <string name="unzip_exception_toast">Failed to create new theme (Exception: unzip (IOException))</string>
+    <string name="process_IO_exception_toast">Failed to create new theme (Exception: ProcessBuilder (IOException))</string>
+    <string name="process_Interrupted_exception_toast">Failed to create new theme (Exception: ProcessBuilder (InterruptedException))</string>
+
     <!-- Settings Tweaks -->
     <string name="settings_rounded_corners">dashboard categories (rounded)</string>
     <string name="settings_show_dashboard_dividers">dashboard dividers</string>

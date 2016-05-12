@@ -66,6 +66,7 @@ public class MyCardStackAdapter extends CardStackAdapter implements
     public boolean colorful_icon = true;
     public int folder_directory = 1;
     public String current_cdt_theme;
+    public Boolean did_it_compile = true;
 
     // ==================================== Framework Tweaks ================================ //
     public int current_selected_system_accent_color = Color.argb(255, 255, 255, 255); // White
@@ -849,6 +850,8 @@ public class MyCardStackAdapter extends CardStackAdapter implements
                 // We have to unzip the destination APK first
 
                 mProgressDialog = new ProgressDialog(mContext);
+                did_it_compile = true;  // Reset the checker
+
                 mProgressDialog.setTitle(mContext.getResources().getString(
                         R.string.unzipping_assets_dialog_title));
                 mProgressDialog.setMessage(
@@ -1051,7 +1054,14 @@ public class MyCardStackAdapter extends CardStackAdapter implements
             String package_identifier = sUrl[0];
             try {
                 unzip(package_identifier);
+                mProgressDialog.setProgress(20);
             } catch (IOException e) {
+                did_it_compile = false;
+                Toast toast = Toast.makeText(mContext.getApplicationContext(),
+                        mContext.getResources().getString(
+                                R.string.unzip_exception_toast),
+                        Toast.LENGTH_LONG);
+                toast.show();
             }
             return null;
         }
@@ -1161,12 +1171,16 @@ public class MyCardStackAdapter extends CardStackAdapter implements
                 pw.close();
                 bw.close();
                 fw.close();
-            } catch (IOException e) {
-                //
-            } finally {
                 moveXMLfile(
                         mContext.getCacheDir().getAbsolutePath() + "/",
                         filename + ".xml", theme_destination);
+            } catch (IOException e) {
+                did_it_compile = false;
+                Toast toast = Toast.makeText(mContext.getApplicationContext(),
+                        mContext.getResources().getString(
+                                R.string.createXMLFile_exception_toast),
+                        Toast.LENGTH_LONG);
+                toast.show();
             }
         }
 
@@ -1198,9 +1212,19 @@ public class MyCardStackAdapter extends CardStackAdapter implements
                 new File(current_source + inputFile).delete();
 
             } catch (FileNotFoundException f) {
-                //
+                did_it_compile = false;
+                Toast toast = Toast.makeText(mContext.getApplicationContext(),
+                        mContext.getResources().getString(
+                                R.string.moveXMLfile_FNF_exception_toast),
+                        Toast.LENGTH_LONG);
+                toast.show();
             } catch (Exception e) {
-                //
+                did_it_compile = false;
+                Toast toast = Toast.makeText(mContext.getApplicationContext(),
+                        mContext.getResources().getString(
+                                R.string.moveXMLfile_exception_toast),
+                        Toast.LENGTH_LONG);
+                toast.show();
             }
         }
     }
@@ -1259,6 +1283,12 @@ public class MyCardStackAdapter extends CardStackAdapter implements
                     }
                 }
             } catch (IOException e) {
+                did_it_compile = false;
+                Toast toast = Toast.makeText(mContext.getApplicationContext(),
+                        mContext.getResources().getString(
+                                R.string.copyFileOrDir_exception_toast),
+                        Toast.LENGTH_LONG);
+                toast.show();
             }
         }
 
@@ -1286,8 +1316,14 @@ public class MyCardStackAdapter extends CardStackAdapter implements
                 out.flush();
                 out.close();
             } catch (Exception e) {
-                Log.d("tag", "Exception in copyFile() of " + newFileName);
-                Log.d("tag", "Exception in copyFile() " + e.toString());
+                did_it_compile = false;
+                Log.e("copyFile", "Exception in copyFile() for " + newFileName);
+                Log.e("copyFile", "Exception in copyFile() " + e.toString());
+                Toast toast = Toast.makeText(mContext.getApplicationContext(),
+                        mContext.getResources().getString(
+                                R.string.copyFile_exception_toast),
+                        Toast.LENGTH_LONG);
+                toast.show();
             }
         }
 
@@ -1397,12 +1433,16 @@ public class MyCardStackAdapter extends CardStackAdapter implements
                 pw.close();
                 bw.close();
                 fw.close();
-            } catch (IOException e) {
-                //
-            } finally {
                 moveFile(
                         mContext.getCacheDir().getAbsolutePath() + "/",
                         filename + ".xml", theme_destination);
+            } catch (IOException e) {
+                did_it_compile = false;
+                Toast toast = Toast.makeText(mContext.getApplicationContext(),
+                        mContext.getResources().getString(
+                                R.string.createSettingsTitleXML_exception_toast),
+                        Toast.LENGTH_LONG);
+                toast.show();
             }
         }
 
@@ -1434,7 +1474,19 @@ public class MyCardStackAdapter extends CardStackAdapter implements
                 new File(current_source + inputFile).delete();
 
             } catch (FileNotFoundException f) {
+                did_it_compile = false;
+                Toast toast = Toast.makeText(mContext.getApplicationContext(),
+                        mContext.getResources().getString(
+                                R.string.moveFile_FNF_exception_toast),
+                        Toast.LENGTH_LONG);
+                toast.show();
             } catch (Exception e) {
+                did_it_compile = false;
+                Toast toast = Toast.makeText(mContext.getApplicationContext(),
+                        mContext.getResources().getString(
+                                R.string.moveFile_exception_toast),
+                        Toast.LENGTH_LONG);
+                toast.show();
             }
         }
     }
@@ -1475,7 +1527,7 @@ public class MyCardStackAdapter extends CardStackAdapter implements
                     mContext.getCacheDir().getAbsolutePath() + "/creative_mode/" +
                             filename + ".xml");
 
-            String icon_location = "";
+            String icon_location;
 
             File iconChecker1 = new File(mContext.getCacheDir().getAbsolutePath() +
                     "/creative_mode/res/drawable-xhdpi/ic_launcher.png");
@@ -1569,7 +1621,12 @@ public class MyCardStackAdapter extends CardStackAdapter implements
                 bw.close();
                 fw.close();
             } catch (IOException e) {
-                //
+                did_it_compile = false;
+                Toast toast = Toast.makeText(mContext.getApplicationContext(),
+                        mContext.getResources().getString(
+                                R.string.createXMLFile_exception_toast),
+                        Toast.LENGTH_LONG);
+                toast.show();
             }
         }
     }
@@ -1623,19 +1680,43 @@ public class MyCardStackAdapter extends CardStackAdapter implements
                                 "system/framework/framework-res.apk -F " +
                                 mContext.getCacheDir().getAbsolutePath() +
                                 "/dashboard_creation.apk -f\n");
+
+                // We need this Process to be waited for before moving on to the next function.
                 nativeApp.waitFor();
+
+                // APK should now be built, good for us, now let's break it apart
+                try {
+                    unzipNewAPK();
+                } catch (IOException e) {
+                    did_it_compile = false;
+                    Log.e("unzipNewAPK", "There has been an exception while trying to unzip the " +
+                            "new dummy APK.");
+                    Toast toast = Toast.makeText(mContext.getApplicationContext(),
+                            mContext.getResources().getString(
+                                    R.string.unzipNewAPK_exception_toast),
+                            Toast.LENGTH_LONG);
+                    toast.show();
+                }
             } catch (IOException e) {
+                did_it_compile = false;
+                Log.e("ProcessBuilder", "There has been an exception while trying to create the " +
+                        "new dummy APK.");
+                Toast toast = Toast.makeText(mContext.getApplicationContext(),
+                        mContext.getResources().getString(
+                                R.string.process_IO_exception_toast),
+                        Toast.LENGTH_LONG);
+                toast.show();
             } catch (InterruptedException f) {
-            }
-
-            // APK should now be built, good for us, now let's break it
-
-            try {
-                unzipNewAPK();
-            } catch (IOException e) {
+                did_it_compile = false;
+                Log.e("ProcessBuilder", "There has been an exception while trying to create the " +
+                        "new dummy APK.");
+                Toast toast = Toast.makeText(mContext.getApplicationContext(),
+                        mContext.getResources().getString(
+                                R.string.process_Interrupted_exception_toast),
+                        Toast.LENGTH_LONG);
+                toast.show();
             }
             return null;
-
         }
 
         public void unzipNewAPK() throws IOException {
@@ -1666,22 +1747,38 @@ public class MyCardStackAdapter extends CardStackAdapter implements
                         outputStream.close();
                     }
                 }
-            } finally {
                 inputStream.close();
+                Log.d("unzipNewAPK", "Finished decompressing new APK file!");
 
-                // The APK has now overwritten the resources located in creative_mode folder - zip it!
+                // The APK has now overwritten the resources located in creative_mode folder -
+                // zip it!
 
                 String sourced = mContext.getCacheDir().getAbsolutePath() +
                         "/dashboard_creation_unsigned.apk";
                 String destinations = mContext.getCacheDir().getAbsolutePath() + "/creative_mode/";
                 try {
                     UnsignedAPKCreator.main(sourced, destinations);
-                } catch (Exception e) {
-                } finally {
                     Log.d("UnsignedAPKCreator", "Finished compiling unsigned APK file!");
+                } catch (Exception e) {
+                    did_it_compile = false;
+                    Log.e("UnsignedAPKCreator", "There has been an exception while trying to " +
+                            "create the unsigned APK.");
+                    Toast toast = Toast.makeText(mContext.getApplicationContext(),
+                            mContext.getResources().getString(
+                                    R.string.UnsignedAPKCreator_exception_toast),
+                            Toast.LENGTH_LONG);
+                    toast.show();
                 }
+            } catch (Exception e) {
+                did_it_compile = false;
+                Log.e("unzipNewAPK", "There has been an exception while trying to decompress " +
+                        "the APK.");
+                Toast toast = Toast.makeText(mContext.getApplicationContext(),
+                        mContext.getResources().getString(
+                                R.string.unzipNewAPK_exception_toast),
+                        Toast.LENGTH_LONG);
+                toast.show();
             }
-
         }
     }
 
@@ -1696,16 +1793,15 @@ public class MyCardStackAdapter extends CardStackAdapter implements
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-            //mWakeLock.release();
-
             mProgressDialog.dismiss();
+            mWakeLock.release();
         }
 
         @Override
         protected String doInBackground(String... sUrl) {
 
             try {
-                // Sign with the built-in default test key/certificate.
+                // Sign with the built-in auto-test key/certificate.
                 String source = mContext.getCacheDir().getAbsolutePath() +
                         "/dashboard_creation_unsigned.apk";
                 String destination = mContext.getCacheDir().getAbsolutePath() +
@@ -1713,27 +1809,46 @@ public class MyCardStackAdapter extends CardStackAdapter implements
 
                 ZipSigner zipSigner = new ZipSigner();
                 zipSigner.setKeymode("auto-testkey");
-
                 zipSigner.signZip(source, destination);
-            } catch (Throwable t) {
-                Log.e("ZipSigner", "APK could not be signed. " + t.toString());
-            } finally {
+
                 Log.d("ZipSigner", "APK successfully signed!");
 
+                // Delete the previous APK if it exists in the dashboard folder
+                eu.chainfire.libsuperuser.Shell.SU.run(
+                        "rm -r " + Environment.getExternalStorageDirectory().getAbsolutePath() +
+                                "/dashboard./dashboard_creation_signed.apk");
+
+                // We need root to copy this file because as of this moment, there are extra needs
+                // to care for when transferring this file due to permissions.
                 eu.chainfire.libsuperuser.Shell.SU.run(
                         "cp " + mContext.getCacheDir().getAbsolutePath() +
                                 "/dashboard_creation_signed.apk " +
                                 Environment.getExternalStorageDirectory().getAbsolutePath() +
                                 "/dashboard./dashboard_creation_signed.apk");
 
-                Intent intent = new Intent(Intent.ACTION_VIEW);
-                intent.setDataAndType(Uri.fromFile(new File(
-                                Environment.getExternalStorageDirectory().getAbsolutePath() +
-                                        "/dashboard./dashboard_creation_signed.apk")),
-                        "application/vnd.android.package-archive");
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                mContext.startActivity(intent);
+                // Once the transfer is complete, launch it like a normal APK
+                if (did_it_compile) {
+                    Intent intent = new Intent(Intent.ACTION_VIEW);
+                    intent.setDataAndType(Uri.fromFile(new File(
+                                    Environment.getExternalStorageDirectory().getAbsolutePath() +
+                                            "/dashboard./dashboard_creation_signed.apk")),
+                            "application/vnd.android.package-archive");
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    mContext.startActivity(intent);
+                }
+
+                // Temporary cache folder MUST be cleared for next run.
                 cleanTempFolder();
+
+            } catch (Throwable t) {
+                did_it_compile = false;
+                Log.e("ZipSigner", "APK could not be signed. " + t.toString());
+                Toast toast = Toast.makeText(mContext.getApplicationContext(),
+                        mContext.getResources().getString(
+                                R.string.zipsigner_exception_toast),
+                        Toast.LENGTH_LONG);
+                toast.show();
+                return null;
             }
             return null;
         }
