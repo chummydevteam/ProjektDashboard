@@ -24,6 +24,9 @@
 
     <string name="advanced_mode_enabled">Saupoudrage de quelques fonctionnalités supplémentaires&#8230;</string>
 
+    <string name="skip_button">PASSER</string>
+    <string name="done_button">OK</string>
+
     <!-- Splash Screen -->
     <string name="loadingText">Vérification de sécurité en cours&#8230;</string>
     <string name="root_verified">Activation de l\'ensemble des fonctionnalités&#8230;</string>
@@ -285,9 +288,32 @@
 
     <string name="default_username">Utilisateur dashboard</string>
     <string name="no_theme_selected">Veuillez sélectionner un thème dans la liste déroulante et définir un nom pour le thème, avant de cliquer sur le bouton Appliquer !</string>
+    <string name="begin_action_button">Commençons !</string>
     <string name="unzipping_assets_dialog_title">Thème en cous d\'extraction&#8230;</string>
     <string name="unzipping_assets_small">Veuillez patienter&#8230;</string>
     <string name="unzipping_assets_big">Le thème choisi est très grand\nSon extraction peut prendre un certain temps&#8230;</string>
+
+    <string name="phase2_dialog_title">Traitement de tous vos réglages</string>
+    <string name="phase3_dialog_title">Déplacement de réglages spéciaux</string>
+    <string name="phase4_dialog_title">Création du nouveau manifeste</string>
+    <string name="phase5_dialog_title">Intégration et compilation du thème</string>
+    <string name="phase6_dialog_title">Finalisation et signature du thème</string>
+
+    <!-- Exception Catches -->
+    <string name="zipsigner_exception_toast">Impossible de créer le nouveau thème (Exception : ZipSigner)</string>
+    <string name="unzipNewAPK_exception_toast">Impossible de créer le nouveau thème (Exception : UnzipNewAPK)</string>
+    <string name="UnsignedAPKCreator_exception_toast">Impossible de créer le nouveau thème (Exception : UnsignedAPKCreator)</string>
+    <string name="createXMLFile_exception_toast">Impossible de créer le nouveau thème (Exception : createXMLFile (IOException))</string>
+    <string name="moveFile_exception_toast">Impossible de créer le nouveau thème (Exception : moveFile)</string>
+    <string name="moveFile_FNF_exception_toast">Impossible de créer le nouveau thème (Exception : moveFile (FileNotFound))</string>
+    <string name="createSettingsTitleXML_exception_toast">Impossible de créer le nouveau thème (Exception : createSettingsTitleXML (IOException))</string>
+    <string name="copyFile_exception_toast">Impossible de créer le nouveau thème (Exception : copyFile)</string>
+    <string name="copyFileOrDir_exception_toast">Impossible de créer le nouveau thème (Exception : copyFileOrDir (IOException))</string>
+    <string name="moveXMLfile_exception_toast">Impossible de créer le nouveau thème (Exception : moveXMLfile)</string>
+    <string name="moveXMLfile_FNF_exception_toast">Impossible de créer le nouveau thème (Exception : moveXMLfile (FileNotFound))</string>
+    <string name="unzip_exception_toast">Impossible de créer le nouveau thème (Exception : unzip (IOException))</string>
+    <string name="process_IO_exception_toast">Impossible de créer le nouveau thème (Exception : ProcessBuilder (IOException))</string>
+    <string name="process_Interrupted_exception_toast">Impossible de créer le nouveau thème (Exception : ProcessBuilder (InterruptedException))</string>
 
     <!-- Settings Tweaks -->
     <string name="settings_rounded_corners">Catégories de dashboard (arrondie)</string>
@@ -297,8 +323,11 @@
     <string name="settings_dashboard_title_allcaps">Titres des catégories de dashboard en majuscules</string>
     <string name="settings_dashboard_title_bold">Titres des catégories de dashboard en gras</string>
     <string name="settings_dashboard_title_italics">Titres des catégories de dashboard en italique</string>
+    <string name="settings_dashboard_background">Couleur de l\'arrière-plan (Séparateurs)</string>
+    <string name="settings_dashboard_category_background">Couleur de l\'arrière-plan des catégories</string>
     <string name="settings_icon_color">Paramètres de couleur des icônes</string>
     <string name="settings_title_color">Paramètres de couleur des titres</string>
+    <string name="settings_switchbar_background">Couleur de l\'arrière-plan des commutateur</string>
     <string name="settings_header_text">SANS FIL ET RÉSEAUX</string>
     <string name="settings_preview_title">Paramètres</string>
     <string name="settings_wifi_text">Wi-Fi</string>
@@ -345,7 +374,7 @@
 
     <string name="creation_name_empty">(Nom par défaut)</string>
     <string name="creator_name_empty">(Nom par défaut)</string>
+
     <!-- end of creator_strings.xml -->
-    <string name="skip_button">PASSER</string>
-    <string name="done_button">OK</string>
+
 </resources>
