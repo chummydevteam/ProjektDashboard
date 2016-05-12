@@ -294,4 +294,6 @@
         <item>@string/save_to_device</item>
     </string-array>
 
+    <string name="skip_button">SKIP</string>
+    <string name="done_button">DONE</string>
 </resources>
