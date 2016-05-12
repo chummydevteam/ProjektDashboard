@@ -142,19 +142,6 @@ public class HomeFragment extends BasePageFragment {
     public void onMenuItemClick(View view) {
         switch (view.getId()) {
             case R.id.item1:
-                Intent intent = new Intent(view.getContext(), SettingsActivity.class);
-                startActivity(intent);
-                /*if (prefs.getBoolean("blacked_out_enabled", true)) {
-                    prefs.edit().putBoolean("blacked_out_enabled", false).commit();
-                    getActivity().finish();
-                    getActivity().startActivity(new Intent(getActivity(), MainActivity.class));
-                } else {
-                    prefs.edit().putBoolean("blacked_out_enabled", true).commit();
-                    getActivity().finish();
-                    getActivity().startActivity(new Intent(getActivity(), MainActivity.class));
-                }*/
-                break;
-            case R.id.item2:
                 final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(
                         getContext());
                 AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
@@ -193,12 +180,7 @@ public class HomeFragment extends BasePageFragment {
                         });
                 alert.show();
                 break;
-            case R.id.item3:
-                Intent gplus = new Intent(Intent.ACTION_VIEW, Uri.parse(
-                        "https://plus.google.com/communities/104086528025432169285"));
-                startActivity(gplus);
-                break;
-            case R.id.item4:
+            case R.id.item2:
                 SharedPreferences prefs0 = PreferenceManager.getDefaultSharedPreferences(getContext());
                 Boolean creative_activated = prefs0.getBoolean("advanced_mode_enabled", false);
 
@@ -216,6 +198,15 @@ public class HomeFragment extends BasePageFragment {
                     startActivity(i);
                 }
 
+                break;
+            case R.id.item3:
+                Intent gplus = new Intent(Intent.ACTION_VIEW, Uri.parse(
+                        "https://plus.google.com/communities/104086528025432169285"));
+                startActivity(gplus);
+                break;
+            case R.id.item4:
+                Intent intent = new Intent(view.getContext(), SettingsActivity.class);
+                startActivity(intent);
                 break;
             default:
                 tapBarMenu.close();

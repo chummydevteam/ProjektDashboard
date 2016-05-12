@@ -151,7 +151,7 @@
                 android:layout_weight="1"
                 android:paddingBottom="10dp"
                 android:paddingTop="10dp"
-                android:src="@drawable/tap_bar_settings" />
+                android:src="@drawable/tap_bar_rename" />
 
             <ImageView
                 android:id="@+id/item2"
@@ -160,7 +160,7 @@
                 android:layout_weight="1"
                 android:paddingBottom="10dp"
                 android:paddingTop="10dp"
-                android:src="@drawable/tap_bar_rename" />
+                android:src="@drawable/tap_bar_creator" />
 
             <Space
                 android:layout_width="100dp"
@@ -182,8 +182,7 @@
                 android:layout_weight="1"
                 android:paddingBottom="10dp"
                 android:paddingTop="10dp"
-                android:src="@drawable/tap_bar_creator" />
-
+                android:src="@drawable/tap_bar_settings" />
 
         </com.michaldrabik.tapbarmenulib.TapBarMenu>
 
