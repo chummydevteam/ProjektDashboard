@@ -14,7 +14,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="dashboard. preferences"
+            android:text="@string/settings_title"
             android:textColor="@android:color/white"
             android:textSize="20dp"
             android:textStyle="italic" />
@@ -39,7 +39,7 @@
             android:layout_gravity="left"
             android:layout_marginStart="10dp"
             android:paddingBottom="10dp"
-            android:text="show/hide dashboard. tabs"
+            android:text="@string/settings_subtitle1"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:textStyle="italic" />
 
@@ -51,7 +51,7 @@
             android:layout_below="@id/tab_title"
             android:checked="true"
             android:padding="16dp"
-            android:text="enable color switcher tab" />
+            android:text="@string/settings_color_switcher_tab" />
 
         <Switch
             android:id="@+id/enable_header_swapper"
@@ -61,7 +61,7 @@
             android:layout_below="@id/enable_color_switcher"
             android:checked="true"
             android:padding="16dp"
-            android:text="enable header swapper tab" />
+            android:text="@string/settings_header_swapper_tab" />
 
         <Switch
             android:id="@+id/enable_header_importer"
@@ -71,7 +71,7 @@
             android:layout_below="@id/enable_header_swapper"
             android:checked="true"
             android:padding="16dp"
-            android:text="enable header pack importer tab" />
+            android:text="@string/settings_header_importer_tab" />
 
         <Switch
             android:id="@+id/enable_theme_utilities"
@@ -81,7 +81,7 @@
             android:layout_below="@id/enable_header_importer"
             android:checked="true"
             android:padding="16dp"
-            android:text="enable theme debugging tab" />
+            android:text="@string/settings_theme_debugging_tab" />
 
 
         <Switch
@@ -92,7 +92,7 @@
             android:layout_below="@id/enable_theme_utilities"
             android:checked="true"
             android:padding="16dp"
-            android:text="enable wallpaper tab" />
+            android:text="@string/settings_wallpaper_tab" />
 
         <TextView
             android:id="@+id/app_theme_title"
@@ -103,7 +103,7 @@
             android:layout_marginStart="10dp"
             android:paddingBottom="10dp"
             android:paddingTop="20dp"
-            android:text="app utilities"
+            android:text="@string/settings_subtitle2"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:textStyle="italic" />
 
@@ -115,7 +115,7 @@
             android:layout_below="@id/app_theme_title"
             android:checked="true"
             android:padding="16dp"
-            android:text="enable blacked out mode" />
+            android:text="@string/settings_blacked_out_mode" />
 
         <LinearLayout
             android:id="@+id/clear_dashboard_folder"
@@ -131,45 +131,15 @@
             android:paddingTop="10dp">
 
             <TextView
-                android:id="@+id/EMP_NAME2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="clear dashboard. folder"
+                android:text="@string/settings_clear_dashboard_folder"
                 android:textColor="@android:color/white"></TextView>
 
             <TextView
-                android:id="@+id/Description2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="/storage/0/dashboard./"
-                android:textSize="@dimen/content_inset_less"></TextView>
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/clear_cache"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/clear_dashboard_folder"
-            android:layout_marginEnd="15dp"
-            android:layout_marginStart="15dp"
-            android:clickable="true"
-            android:foreground="?android:selectableItemBackground"
-            android:orientation="vertical"
-            android:paddingBottom="10dp"
-            android:paddingTop="10dp">
-
-            <TextView
-                android:id="@+id/EMP_NAME"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="clear app cache"
-                android:textColor="@android:color/white"></TextView>
-
-            <TextView
-                android:id="@+id/cache"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="CACHE_SIZE_HERE"
                 android:textSize="@dimen/content_inset_less"></TextView>
         </LinearLayout>
 

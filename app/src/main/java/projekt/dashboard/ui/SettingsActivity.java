@@ -207,28 +207,5 @@ public class SettingsActivity extends AppCompatActivity {
             }
         });
 
-        LinearLayout linearLayout2 = (LinearLayout) findViewById(R.id.clear_cache);
-        final TextView textView = (TextView) findViewById(R.id.cache);
-        java.io.File file = new java.io.File(getCacheDir().getAbsolutePath());
-        long fileSizeInBytes = file.length();
-        long fileSizeInKB = fileSizeInBytes / 1024;
-        long fileSizeInMB = fileSizeInKB / 1024;
-        textView.setText(Long.toString(fileSizeInMB) + " MB");
-        linearLayout2.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                File f = new File(getCacheDir().getAbsolutePath() + "/");
-                DeleteRecursive(f);
-                java.io.File file = new java.io.File(getCacheDir().getAbsolutePath());
-                long fileSizeInBytes = file.length();
-                long fileSizeInKB = fileSizeInBytes / 1024;
-                long fileSizeInMB = fileSizeInKB / 1024;
-                textView.setText(Long.toString(fileSizeInMB) + " MB");
-            }
-        });
-
-
     }
-
 }
-
-

@@ -164,6 +164,18 @@
         <item>vignesh ravi wallpaper pack</item>
     </string-array>
 
+    <string name="settings_title">dashboard. preferences</string>
+    <string name="settings_subtitle1">show/hide dashboard. tabs</string>
+    <string name="settings_subtitle2">application utilities</string>
+    <string name="settings_color_switcher_tab">enable color switcher tab</string>
+    <string name="settings_header_swapper_tab">enable header swapper tab</string>
+    <string name="settings_header_importer_tab">enable header pack importer tab</string>
+    <string name="settings_theme_debugging_tab">enable theme debugging tab</string>
+    <string name="settings_wallpaper_tab">enable wallpaper tab</string>
+    <string name="settings_blacked_out_mode">enable blacked out mode</string>
+    <string name="settings_clear_dashboard_folder">clear dashboard. folder</string>
+
+
     <string name="contextualheaderimporter">contextual header pack importer</string>
     <string name="contextualheaderimporter_description">@string/contextualheaderimporter</string>
     <string name="contextualheaderimporter_description_secondary">this is a highly experimental feature to allow you to set your own custom contextual headers for your systemui notification shade based on pre-made zip files shared by themers. a soft reboot is required for the system to take your changes as we are modifying the actual apk installed on your phone.\n\ndon\'t forget to enable contextual headers (non-poly/hd) in your rom\'s settings! if headers aren\'t set after a soft reboot, clear your systemui cache!\n</string>
