@@ -93,8 +93,11 @@ public class MyCardStackAdapter extends CardStackAdapter implements
     public boolean dashboard_dividers = true;
     public boolean dirtytweaks_iconpresence = true;
     public boolean dashboard_rounding = false;
+    public int current_selected_dashboard_background_color = Color.argb(255, 33, 32, 33);
+    public int current_selected_dashboard_category_background_color = Color.argb(255, 0, 0, 0);
     public int current_selected_settings_icon_color = Color.argb(255, 255, 255, 255);
     public int current_selected_settings_title_color = Color.argb(255, 255, 255, 255);
+    public int current_selected_settings_switchbar_color = Color.argb(255, 55, 55, 55);
     public int current_selected_qs_accent_color = Color.argb(255, 255, 255, 255);
     // ==================================== SystemUI Tweaks ================================== //
     public int current_selected_qs_tile_color = Color.argb(255, 255, 255, 255);
@@ -602,6 +605,50 @@ public class MyCardStackAdapter extends CardStackAdapter implements
                     }
                 });
 
+        // Settings Dashboard Background Color
+
+        final ImageView settings_dashboard_background_color = (ImageView) root.findViewById(
+                R.id.settings_dashboard_background_colorpicker);
+        settings_dashboard_background_color.setColorFilter(current_selected_dashboard_background_color, PorterDuff.Mode.SRC_ATOP);
+        settings_dashboard_background_color.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                final ColorPickerDialog cpd = new ColorPickerDialog(
+                        mContext, current_selected_dashboard_background_color);
+                cpd.setOnColorChangedListener(new ColorPickerDialog.OnColorChangedListener() {
+                    @Override
+                    public void onColorChanged(int color) {
+                        current_selected_dashboard_background_color = color;
+                        settings_dashboard_background_color.setColorFilter(color, PorterDuff.Mode.SRC_ATOP);
+                    }
+                });
+                cpd.show();
+            }
+        });
+
+        // Settings Dashboard Category Background Color
+
+        final ImageView settings_dashboard_category_background_color = (ImageView) root.findViewById(
+                R.id.settings_dashboard_category_colorpicker);
+        final RelativeLayout settings_preview = (RelativeLayout) root.findViewById(R.id.settings_container);
+        settings_dashboard_category_background_color.setColorFilter(current_selected_dashboard_category_background_color,
+                PorterDuff.Mode.SRC_ATOP);
+        settings_dashboard_category_background_color.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                final ColorPickerDialog cpd = new ColorPickerDialog(
+                        mContext, current_selected_dashboard_category_background_color);
+                cpd.setOnColorChangedListener(new ColorPickerDialog.OnColorChangedListener() {
+                    @Override
+                    public void onColorChanged(int color) {
+                        current_selected_dashboard_category_background_color = color;
+                        settings_dashboard_category_background_color.setColorFilter(color,
+                                PorterDuff.Mode.SRC_ATOP);
+                        settings_preview.setBackgroundColor(color);
+                    }
+                });
+                cpd.show();
+            }
+        });
+
         // Settings Icons Colors
 
         final ImageView settings_icon_colors = (ImageView) root.findViewById(
@@ -636,6 +683,26 @@ public class MyCardStackAdapter extends CardStackAdapter implements
                         current_selected_settings_title_color = color;
                         settings_title_colors.setColorFilter(color, PorterDuff.Mode.SRC_ATOP);
                         categoryHeader.setTextColor(color);
+                    }
+                });
+                cpd.show();
+            }
+        });
+
+        // Settings Switchbar Background Color
+
+        final ImageView settings_switchbar_background_color = (ImageView) root.findViewById(
+                R.id.settings_switchbar_background_colorpicker);
+        settings_switchbar_background_color.setColorFilter(current_selected_settings_switchbar_color, PorterDuff.Mode.SRC_ATOP);
+        settings_switchbar_background_color.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                final ColorPickerDialog cpd = new ColorPickerDialog(
+                        mContext, current_selected_settings_switchbar_color);
+                cpd.setOnColorChangedListener(new ColorPickerDialog.OnColorChangedListener() {
+                    @Override
+                    public void onColorChanged(int color) {
+                        current_selected_settings_switchbar_color = color;
+                        settings_switchbar_background_color.setColorFilter(color, PorterDuff.Mode.SRC_ATOP);
                     }
                 });
                 cpd.show();
@@ -742,7 +809,6 @@ public class MyCardStackAdapter extends CardStackAdapter implements
 
     private View getFinalizedView(ViewGroup container) {
         final CardView root = (CardView) mInflater.inflate(R.layout.final_card, container, false);
-        final ViewGroup inflation = (ViewGroup) mInflater.inflate(R.layout.custom_dialog_loader, container, false);
         root.setCardBackgroundColor(ContextCompat.getColor(mContext, bgColorIds[3]));
 
         int counter = 0;
@@ -995,6 +1061,23 @@ public class MyCardStackAdapter extends CardStackAdapter implements
 
             // Begin going through all AsyncTasks for Settings (v11)
 
+            Phase2_InjectAndMove settings_dashboard = new Phase2_InjectAndMove();
+            String settings_dashboard_color = "#" + Integer.toHexString(
+                    current_selected_dashboard_background_color);
+            settings_dashboard.execute("dashboard_background_color", settings_dashboard_color,
+                    "theme_color_settings_dashboard_background",
+                    mContext.getCacheDir().getAbsolutePath() +
+                            "/creative_mode/assets/overlays/com.android.settings/res/values-v11/");
+
+            Phase2_InjectAndMove settings_dashboard_category = new Phase2_InjectAndMove();
+            String settings_dashboard_category_color = "#" + Integer.toHexString(
+                    current_selected_dashboard_category_background_color);
+            settings_dashboard_category.execute("dashboard_category_background_color",
+                    settings_dashboard_category_color,
+                    "theme_color_settings_dashboard_category_background",
+                    mContext.getCacheDir().getAbsolutePath() +
+                            "/creative_mode/assets/overlays/com.android.settings/res/values-v11/");
+
             Phase2_InjectAndMove settings_icon = new Phase2_InjectAndMove();
             String settings_icon_color = "#" + Integer.toHexString(
                     current_selected_settings_icon_color);
@@ -1008,6 +1091,14 @@ public class MyCardStackAdapter extends CardStackAdapter implements
                     current_selected_settings_title_color);
             settings_title.execute("theme_accent", settings_title_color,
                     "theme_color_settings_title_color",
+                    mContext.getCacheDir().getAbsolutePath() +
+                            "/creative_mode/assets/overlays/com.android.settings/res/values-v11/");
+
+            Phase2_InjectAndMove switchbar_background = new Phase2_InjectAndMove();
+            String switchbar_background_color = "#" + Integer.toHexString(
+                    current_selected_settings_switchbar_color);
+            switchbar_background.execute("switchbar_background_color", switchbar_background_color,
+                    "theme_color_settings_switchbar_background",
                     mContext.getCacheDir().getAbsolutePath() +
                             "/creative_mode/assets/overlays/com.android.settings/res/values-v11/");
 

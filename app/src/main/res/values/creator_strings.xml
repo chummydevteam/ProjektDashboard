@@ -51,8 +51,11 @@
     <string name="settings_dashboard_title_allcaps">dashboard category title - all caps</string>
     <string name="settings_dashboard_title_bold">dashboard category title - bold</string>
     <string name="settings_dashboard_title_italics">dashboard category title - italics</string>
+    <string name="settings_dashboard_background">dashboard background color (dividers)</string>
+    <string name="settings_dashboard_category_background">dashboard category background color</string>
     <string name="settings_icon_color">settings icon colors</string>
     <string name="settings_title_color">settings title colors</string>
+    <string name="settings_switchbar_background">switchbar background color</string>
     <string name="settings_header_text">WIRELESS &amp; NETWORKS</string>
     <string name="settings_preview_title">Settings</string>
     <string name="settings_wifi_text">Wi-Fi</string>

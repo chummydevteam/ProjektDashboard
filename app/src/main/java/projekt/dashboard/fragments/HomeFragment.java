@@ -22,7 +22,6 @@ import android.widget.Toast;
 
 import com.alimuzaffar.lib.widgets.AnimatedEditText;
 import com.michaldrabik.tapbarmenulib.TapBarMenu;
-import com.tramsun.libs.prefcompat.Pref;
 
 import java.io.BufferedReader;
 import java.io.File;

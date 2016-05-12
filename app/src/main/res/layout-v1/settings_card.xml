@@ -49,6 +49,9 @@
                     android:padding="16dp"
                     android:text="@string/settings_colorful_tweaks_icon" />
 
+                <include layout="@layout/settings_dashboard_colorpicker" />
+                <include layout="@layout/settings_dashboard_category_colorpicker" />
+
                 <Switch
                     android:id="@+id/dashboard_rounding"
                     style="@style/ShadowBlackTextWhite"
@@ -106,6 +109,8 @@
                 <include layout="@layout/settings_icon_colorpicker" />
 
                 <include layout="@layout/settings_title_colorpicker" />
+
+                <include layout="@layout/settings_switchbar_colorpicker" />
 
             </LinearLayout>
         </ScrollView>
