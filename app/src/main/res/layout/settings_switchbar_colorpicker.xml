@@ -22,13 +22,13 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/title"
+        android:id="@+id/settings_switchbar_background_colorpicker_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:padding="11dp"
         android:text="@string/settings_switchbar_background"
-        android:textColor="@android:color/white"
+        android:textColor="@color/creative_mode_text_disabled"
         android:textSize="15dip"
         android:typeface="sans" />
 </RelativeLayout>

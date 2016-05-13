@@ -13,6 +13,8 @@
     <color name="fab_pressed">#4a777777</color>
     <color name="fab_ripple">#4a777777</color>
 
+    <color name="creative_mode_text_disabled">#ff777777</color>
+
     <!-- Theme Changer -->
     <color name="primary_1_blacked_out">#ff000000</color>
     <color name="primary_2_blacked_out">#ff000000</color>

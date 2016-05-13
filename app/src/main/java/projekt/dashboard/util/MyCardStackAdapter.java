@@ -101,12 +101,39 @@ public class MyCardStackAdapter extends CardStackAdapter implements
     public int current_selected_settings_icon_color = Color.argb(255, 255, 255, 255);
     public int current_selected_settings_title_color = Color.argb(255, 255, 255, 255);
     public int current_selected_settings_switchbar_color = Color.argb(255, 55, 55, 55);
-    public int current_selected_qs_accent_color = Color.argb(255, 255, 255, 255);
     // ==================================== SystemUI Tweaks ================================== //
+    public int current_selected_qs_accent_color = Color.argb(255, 255, 255, 255);
     public int current_selected_qs_tile_color = Color.argb(255, 255, 255, 255);
     public int current_selected_qs_text_color = Color.argb(255, 255, 255, 255);
     public Switch colorful_icon_switch;
     public String spinnerItem, themeName, themeAuthor;
+    // ========================= On decision based color injection =========================== //
+    public Boolean is_framework_accent_changed = false;
+    public Boolean is_framework_accent_secondary_changed = false;
+    public Boolean is_framework_accent_light_changed = false;
+    public Boolean is_framework_app_background_changed = false;
+    public Boolean is_framework_app_background_light_changed = false;
+    public Boolean is_framework_dialog_background_dark_changed = false;
+    public Boolean is_framework_dialog_background_light_changed = false;
+    public Boolean is_framework_main_theme_color_changed = false;
+    public Boolean is_framework_notifications_primary_changed = false;
+    public Boolean is_framework_notifications_secondary_changed = false;
+    public Boolean is_framework_system_ripple_changed = false;
+    public Boolean is_settings_colorful_icon_color_changed = false;
+    public Boolean is_settings_dashboard_background_color_changed = false;
+    public Boolean is_settings_dashboard_category_background_color_changed = false;
+    public Boolean is_settings_dashboard_category_title_caps_changed = false;
+    public Boolean is_settings_dashboard_category_title_bold_changed = false;
+    public Boolean is_settings_dashboard_category_title_italics_changed = false;
+    public Boolean is_settings_dashboard_dividers_changed = false;
+    public Boolean is_settings_dashboard_dirty_tweaks_icon_presence_changed = false;
+    public Boolean is_settings_icon_color_changed = false;
+    public Boolean is_settings_title_color_changed = false;
+    public Boolean is_settings_switchbar_background_color_changed = false;
+    public Boolean is_systemui_accent_color_changed = false;
+    public Boolean is_systemui_qs_tile_color_changed = false;
+    public Boolean is_systemui_qs_text_color_changed = false;
+
     ProgressDialog mProgressDialog;
     private PowerManager.WakeLock mWakeLock;
     private Logger log = new Logger(MyCardStackAdapter.class.getSimpleName());
@@ -220,6 +247,8 @@ public class MyCardStackAdapter extends CardStackAdapter implements
 
         final ImageView accent_universal = (ImageView) root.findViewById(
                 R.id.system_accent_colorpicker);
+        final TextView accent_universal_text = (TextView) root.findViewById(
+                R.id.system_accent_colorpicker_text);
         accent_universal.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 final ColorPickerDialog cpd = new ColorPickerDialog(
@@ -240,6 +269,8 @@ public class MyCardStackAdapter extends CardStackAdapter implements
                         );
                         switch1.setTrackTintList(csl);
                         switch1.setThumbTintList(csl);
+                        is_framework_accent_changed = true;
+                        accent_universal_text.setTextColor(mContext.getColor(android.R.color.white));
                     }
                 });
                 cpd.show();
@@ -250,6 +281,8 @@ public class MyCardStackAdapter extends CardStackAdapter implements
 
         final ImageView accent_secondary = (ImageView) root.findViewById(
                 R.id.system_accent_dual_colorpicker);
+        final TextView accent_secondary_text = (TextView) root.findViewById(
+                R.id.system_accent_dual_colorpicker_text);
         accent_secondary.setColorFilter(
                 current_selected_system_accent_dual_color, PorterDuff.Mode.SRC_ATOP);
         accent_secondary.setOnClickListener(new View.OnClickListener() {
@@ -261,6 +294,8 @@ public class MyCardStackAdapter extends CardStackAdapter implements
                     public void onColorChanged(int color) {
                         current_selected_system_accent_dual_color = color;
                         accent_secondary.setColorFilter(color, PorterDuff.Mode.SRC_ATOP);
+                        is_framework_accent_secondary_changed = true;
+                        accent_secondary_text.setTextColor(mContext.getColor(android.R.color.white));
                     }
                 });
                 cpd.show();
@@ -271,6 +306,8 @@ public class MyCardStackAdapter extends CardStackAdapter implements
 
         final ImageView accent_light = (ImageView) root.findViewById(
                 R.id.system_accent_light_colorpicker);
+        final TextView accent_light_text = (TextView) root.findViewById(
+                R.id.system_accent_light_colorpicker_text);
         accent_light.setColorFilter(
                 current_selected_system_accent_light_color, PorterDuff.Mode.SRC_ATOP);
         accent_light.setOnClickListener(new View.OnClickListener() {
@@ -293,6 +330,8 @@ public class MyCardStackAdapter extends CardStackAdapter implements
                         );
                         switch2.setTrackTintList(csl);
                         switch2.setThumbTintList(csl);
+                        is_framework_accent_light_changed = true;
+                        accent_light_text.setTextColor(mContext.getColor(android.R.color.white));
                     }
                 });
                 cpd.show();
@@ -303,6 +342,8 @@ public class MyCardStackAdapter extends CardStackAdapter implements
 
         final ImageView appbg_dark = (ImageView) root.findViewById(
                 R.id.system_appbg_colorpicker);
+        final TextView appbg_dark_text = (TextView) root.findViewById(
+                R.id.system_appbg_colorpicker_text);
         rl.setBackgroundColor(current_selected_system_appbg_color);
         appbg_dark.setColorFilter(current_selected_system_appbg_color, PorterDuff.Mode.SRC_ATOP);
         appbg_dark.setOnClickListener(new View.OnClickListener() {
@@ -315,6 +356,8 @@ public class MyCardStackAdapter extends CardStackAdapter implements
                         current_selected_system_appbg_color = color;
                         appbg_dark.setColorFilter(color, PorterDuff.Mode.SRC_ATOP);
                         rl.setBackgroundColor(color);
+                        is_framework_app_background_changed = true;
+                        appbg_dark_text.setTextColor(mContext.getColor(android.R.color.white));
                     }
                 });
                 cpd.show();
@@ -325,6 +368,8 @@ public class MyCardStackAdapter extends CardStackAdapter implements
 
         final ImageView appbg_light = (ImageView) root.findViewById(
                 R.id.system_appbg_light_colorpicker);
+        final TextView appbg_light_text = (TextView) root.findViewById(
+                R.id.system_appbg_light_colorpicker_text);
         appbg_light.setColorFilter(
                 current_selected_system_appbg_light_color, PorterDuff.Mode.SRC_ATOP);
         switch2.setBackgroundColor(current_selected_system_appbg_light_color);
@@ -338,6 +383,8 @@ public class MyCardStackAdapter extends CardStackAdapter implements
                         current_selected_system_appbg_light_color = color;
                         appbg_light.setColorFilter(color, PorterDuff.Mode.SRC_ATOP);
                         switch2.setBackgroundColor(color);
+                        is_framework_app_background_light_changed = true;
+                        appbg_light_text.setTextColor(mContext.getColor(android.R.color.white));
                     }
                 });
                 cpd.show();
@@ -348,6 +395,8 @@ public class MyCardStackAdapter extends CardStackAdapter implements
 
         final ImageView dialog_dark = (ImageView) root.findViewById(
                 R.id.system_dialog_colorpicker);
+        final TextView dialog_dark_text = (TextView) root.findViewById(
+                R.id.system_dialog_colorpicker_text);
         dialog_dark.setColorFilter(current_selected_system_dialog_color, PorterDuff.Mode.SRC_ATOP);
         dialog_dark.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -359,6 +408,8 @@ public class MyCardStackAdapter extends CardStackAdapter implements
                     public void onColorChanged(int color) {
                         current_selected_system_dialog_color = color;
                         dialog_dark.setColorFilter(color, PorterDuff.Mode.SRC_ATOP);
+                        is_framework_dialog_background_dark_changed = true;
+                        dialog_dark_text.setTextColor(mContext.getColor(android.R.color.white));
                     }
                 });
                 cpd.show();
@@ -369,6 +420,8 @@ public class MyCardStackAdapter extends CardStackAdapter implements
 
         final ImageView dialog_light = (ImageView) root.findViewById(
                 R.id.system_dialog_light_colorpicker);
+        final TextView dialog_light_text = (TextView) root.findViewById(
+                R.id.system_dialog_light_colorpicker_text);
         dialog_light.setColorFilter(
                 current_selected_system_dialog_light_color, PorterDuff.Mode.SRC_ATOP);
         dialog_light.setOnClickListener(new View.OnClickListener() {
@@ -381,6 +434,8 @@ public class MyCardStackAdapter extends CardStackAdapter implements
                     public void onColorChanged(int color) {
                         current_selected_system_dialog_light_color = color;
                         dialog_light.setColorFilter(color, PorterDuff.Mode.SRC_ATOP);
+                        is_framework_dialog_background_light_changed = true;
+                        dialog_light_text.setTextColor(mContext.getColor(android.R.color.white));
                     }
                 });
                 cpd.show();
@@ -391,6 +446,8 @@ public class MyCardStackAdapter extends CardStackAdapter implements
 
         main_color = (ImageView) root.findViewById(
                 R.id.system_main_colorpicker);
+        final TextView main_color_text = (TextView) root.findViewById(
+                R.id.system_main_colorpicker_text);
         main_color.setColorFilter(current_selected_system_main_color, PorterDuff.Mode.SRC_ATOP);
         main_color.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -404,6 +461,8 @@ public class MyCardStackAdapter extends CardStackAdapter implements
                         main_color.setColorFilter(color, PorterDuff.Mode.SRC_ATOP);
                         framework_toolbar.setBackgroundColor(color);
                         settings_toolbar.setBackgroundColor(color);
+                        is_framework_main_theme_color_changed = true;
+                        main_color_text.setTextColor(mContext.getColor(android.R.color.white));
                     }
                 });
                 cpd.show();
@@ -414,6 +473,8 @@ public class MyCardStackAdapter extends CardStackAdapter implements
 
         final ImageView notifications_primary = (ImageView) root.findViewById(
                 R.id.system_notification_text_1_colorpicker);
+        final TextView notifications_primary_text = (TextView) root.findViewById(
+                R.id.system_notification_text_1_colorpicker_text);
         notifications_primary.setColorFilter(
                 current_selected_system_notifications_primary_color, PorterDuff.Mode.SRC_ATOP);
         notifications_primary.setOnClickListener(new View.OnClickListener() {
@@ -425,6 +486,8 @@ public class MyCardStackAdapter extends CardStackAdapter implements
                     public void onColorChanged(int color) {
                         current_selected_system_notifications_primary_color = color;
                         notifications_primary.setColorFilter(color, PorterDuff.Mode.SRC_ATOP);
+                        is_framework_notifications_primary_changed = true;
+                        notifications_primary_text.setTextColor(mContext.getColor(android.R.color.white));
                     }
                 });
                 cpd.show();
@@ -435,6 +498,8 @@ public class MyCardStackAdapter extends CardStackAdapter implements
 
         final ImageView notifications_secondary = (ImageView) root.findViewById(
                 R.id.system_notification_text_2_colorpicker);
+        final TextView notifications_secondary_text = (TextView) root.findViewById(
+                R.id.system_notification_text_2_colorpicker_text);
         notifications_secondary.setColorFilter(
                 current_selected_system_notifications_secondary_color, PorterDuff.Mode.SRC_ATOP);
         notifications_secondary.setOnClickListener(new View.OnClickListener() {
@@ -446,6 +511,8 @@ public class MyCardStackAdapter extends CardStackAdapter implements
                     public void onColorChanged(int color) {
                         current_selected_system_notifications_secondary_color = color;
                         notifications_secondary.setColorFilter(color, PorterDuff.Mode.SRC_ATOP);
+                        is_framework_notifications_secondary_changed = true;
+                        notifications_secondary_text.setTextColor(mContext.getColor(android.R.color.white));
                     }
                 });
                 cpd.show();
@@ -456,6 +523,8 @@ public class MyCardStackAdapter extends CardStackAdapter implements
 
         final ImageView ripples = (ImageView) root.findViewById(
                 R.id.system_ripple_colorpicker);
+        final TextView ripples_text = (TextView) root.findViewById(
+                R.id.system_ripple_colorpicker_text);
         ripples.setColorFilter(current_selected_system_ripple_color, PorterDuff.Mode.SRC_ATOP);
         ripples.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -467,6 +536,8 @@ public class MyCardStackAdapter extends CardStackAdapter implements
                     public void onColorChanged(int color) {
                         current_selected_system_ripple_color = color;
                         ripples.setColorFilter(color, PorterDuff.Mode.SRC_ATOP);
+                        is_framework_system_ripple_changed = true;
+                        ripples_text.setTextColor(mContext.getColor(android.R.color.white));
                     }
                 });
                 cpd.show();
@@ -500,27 +571,11 @@ public class MyCardStackAdapter extends CardStackAdapter implements
                             colorful_icon = false;
                             Log.d("Switch Colorful Icon", colorful_icon + "");
                         }
+                        is_settings_colorful_icon_color_changed = true;
+                        colorful_icon_switch.setTextColor(mContext.getColor(android.R.color.white));
                     }
                 });
         colorful_icon_switch.setVisibility(View.GONE);
-
-
-        // Dashboard Categories (Rounded)
-
-        final Switch dashboard_round = (Switch) root.findViewById(R.id.dashboard_rounding);
-        dashboard_round.setOnCheckedChangeListener(
-                new CompoundButton.OnCheckedChangeListener() {
-                    @Override
-                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                        if (isChecked) {
-                            dashboard_rounding = true;
-                            Log.d("Dashboard (Rounded)", dashboard_rounding + "");
-                        } else {
-                            dashboard_rounding = false;
-                            Log.d("Dashboard (Rounded)", dashboard_rounding + "");
-                        }
-                    }
-                });
 
         // Dashboard Categories Title (All Caps)
 
@@ -537,6 +592,8 @@ public class MyCardStackAdapter extends CardStackAdapter implements
                             category_title_caps = false;
                             Log.d("Categories Title (Caps)", category_title_caps + "");
                         }
+                        is_settings_dashboard_category_title_caps_changed = true;
+                        categories_title_caps.setTextColor(mContext.getColor(android.R.color.white));
                     }
                 });
 
@@ -555,6 +612,8 @@ public class MyCardStackAdapter extends CardStackAdapter implements
                             category_title_bold = false;
                             Log.d("Categories Title (Bold)", category_title_bold + "");
                         }
+                        is_settings_dashboard_category_title_bold_changed = true;
+                        categories_title_bold.setTextColor(mContext.getColor(android.R.color.white));
                     }
                 });
 
@@ -573,6 +632,8 @@ public class MyCardStackAdapter extends CardStackAdapter implements
                             category_title_italics = false;
                             Log.d("Categories Title (Ita)", category_title_italics + "");
                         }
+                        is_settings_dashboard_category_title_italics_changed = true;
+                        categories_title_italics.setTextColor(mContext.getColor(android.R.color.white));
                     }
                 });
 
@@ -590,6 +651,8 @@ public class MyCardStackAdapter extends CardStackAdapter implements
                             dashboard_dividers = false;
                             Log.d("Dashboard Dividers", dashboard_dividers + "");
                         }
+                        is_settings_dashboard_dividers_changed = true;
+                        dashboard_divider.setTextColor(mContext.getColor(android.R.color.white));
                     }
                 });
 
@@ -607,6 +670,8 @@ public class MyCardStackAdapter extends CardStackAdapter implements
                             dirtytweaks_iconpresence = false;
                             Log.d("DU Tweaks Icon", dirtytweaks_iconpresence + "");
                         }
+                        is_settings_dashboard_dirty_tweaks_icon_presence_changed = true;
+                        dutweaks_icons.setTextColor(mContext.getColor(android.R.color.white));
                     }
                 });
 
@@ -614,6 +679,8 @@ public class MyCardStackAdapter extends CardStackAdapter implements
 
         final ImageView settings_dashboard_background_color = (ImageView) root.findViewById(
                 R.id.settings_dashboard_background_colorpicker);
+        final TextView settings_dashboard_background_color_text = (TextView) root.findViewById(
+                R.id.settings_dashboard_background_colorpicker_text);
         settings_dashboard_background_color.setColorFilter(current_selected_dashboard_background_color, PorterDuff.Mode.SRC_ATOP);
         settings_dashboard_background_color.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -624,6 +691,8 @@ public class MyCardStackAdapter extends CardStackAdapter implements
                     public void onColorChanged(int color) {
                         current_selected_dashboard_background_color = color;
                         settings_dashboard_background_color.setColorFilter(color, PorterDuff.Mode.SRC_ATOP);
+                        is_settings_dashboard_background_color_changed = true;
+                        settings_dashboard_background_color_text.setTextColor(mContext.getColor(android.R.color.white));
                     }
                 });
                 cpd.show();
@@ -634,6 +703,8 @@ public class MyCardStackAdapter extends CardStackAdapter implements
 
         final ImageView settings_dashboard_category_background_color = (ImageView) root.findViewById(
                 R.id.settings_dashboard_category_colorpicker);
+        final TextView settings_dashboard_category_background_color_text = (TextView) root.findViewById(
+                R.id.settings_dashboard_category_colorpicker_text);
         final RelativeLayout settings_preview = (RelativeLayout) root.findViewById(R.id.settings_container);
         settings_dashboard_category_background_color.setColorFilter(current_selected_dashboard_category_background_color,
                 PorterDuff.Mode.SRC_ATOP);
@@ -648,6 +719,8 @@ public class MyCardStackAdapter extends CardStackAdapter implements
                         settings_dashboard_category_background_color.setColorFilter(color,
                                 PorterDuff.Mode.SRC_ATOP);
                         settings_preview.setBackgroundColor(color);
+                        is_settings_dashboard_category_background_color_changed = true;
+                        settings_dashboard_category_background_color_text.setTextColor(mContext.getColor(android.R.color.white));
                     }
                 });
                 cpd.show();
@@ -658,6 +731,8 @@ public class MyCardStackAdapter extends CardStackAdapter implements
 
         final ImageView settings_icon_colors = (ImageView) root.findViewById(
                 R.id.settings_icon_colorpicker);
+        final TextView settings_icon_colors_text = (TextView) root.findViewById(
+                R.id.settings_icon_colorpicker_text);
         settings_icon_colors.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 final ColorPickerDialog cpd = new ColorPickerDialog(
@@ -668,6 +743,8 @@ public class MyCardStackAdapter extends CardStackAdapter implements
                         current_selected_settings_icon_color = color;
                         settings_icon_colors.setColorFilter(color, PorterDuff.Mode.SRC_ATOP);
                         wifiIcon.setColorFilter(color, PorterDuff.Mode.SRC_ATOP);
+                        is_settings_icon_color_changed = true;
+                        settings_icon_colors_text.setTextColor(mContext.getColor(android.R.color.white));
                     }
                 });
                 cpd.show();
@@ -678,6 +755,8 @@ public class MyCardStackAdapter extends CardStackAdapter implements
 
         final ImageView settings_title_colors = (ImageView) root.findViewById(
                 R.id.settings_title_colorpicker);
+        final TextView settings_title_colors_text = (TextView) root.findViewById(
+                R.id.settings_title_colorpicker_text);
         settings_title_colors.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 final ColorPickerDialog cpd = new ColorPickerDialog(
@@ -688,6 +767,8 @@ public class MyCardStackAdapter extends CardStackAdapter implements
                         current_selected_settings_title_color = color;
                         settings_title_colors.setColorFilter(color, PorterDuff.Mode.SRC_ATOP);
                         categoryHeader.setTextColor(color);
+                        is_settings_title_color_changed = true;
+                        settings_title_colors_text.setTextColor(mContext.getColor(android.R.color.white));
                     }
                 });
                 cpd.show();
@@ -698,6 +779,8 @@ public class MyCardStackAdapter extends CardStackAdapter implements
 
         final ImageView settings_switchbar_background_color = (ImageView) root.findViewById(
                 R.id.settings_switchbar_background_colorpicker);
+        final TextView settings_switchbar_background_color_text = (TextView) root.findViewById(
+                R.id.settings_switchbar_background_colorpicker_text);
         settings_switchbar_background_color.setColorFilter(current_selected_settings_switchbar_color, PorterDuff.Mode.SRC_ATOP);
         settings_switchbar_background_color.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -708,6 +791,8 @@ public class MyCardStackAdapter extends CardStackAdapter implements
                     public void onColorChanged(int color) {
                         current_selected_settings_switchbar_color = color;
                         settings_switchbar_background_color.setColorFilter(color, PorterDuff.Mode.SRC_ATOP);
+                        is_settings_switchbar_background_color_changed = true;
+                        settings_switchbar_background_color_text.setTextColor(mContext.getColor(android.R.color.white));
                     }
                 });
                 cpd.show();
@@ -732,6 +817,8 @@ public class MyCardStackAdapter extends CardStackAdapter implements
         // QS Accent Colors
 
         final ImageView qs_accents = (ImageView) root.findViewById(R.id.qs_accent_colorpicker);
+        final TextView qs_accents_text = (TextView) root.findViewById(
+                R.id.qs_accent_colorpicker_text);
         qs_accents.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 final ColorPickerDialog cpd = new ColorPickerDialog(
@@ -753,6 +840,8 @@ public class MyCardStackAdapter extends CardStackAdapter implements
                         );
                         brightness.setProgressTintList(csl);
                         brightness.setThumbTintList(csl);
+                        is_systemui_accent_color_changed = true;
+                        qs_accents_text.setTextColor(mContext.getColor(android.R.color.white));
                     }
                 });
                 cpd.show();
@@ -762,6 +851,8 @@ public class MyCardStackAdapter extends CardStackAdapter implements
         // QS Icon Colors
 
         final ImageView qs_tile = (ImageView) root.findViewById(R.id.qs_tile_icon_colorpicker);
+        final TextView qs_tile_text = (TextView) root.findViewById(
+                R.id.qs_tile_icon_colorpicker_text);
         qs_tile.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 final ColorPickerDialog cpd = new ColorPickerDialog(
@@ -783,6 +874,8 @@ public class MyCardStackAdapter extends CardStackAdapter implements
                         );
                         bluetoothLabel.setCompoundDrawableTintList(csl);
                         wifiLabel.setCompoundDrawableTintList(csl);
+                        is_systemui_qs_tile_color_changed = true;
+                        qs_tile_text.setTextColor(mContext.getColor(android.R.color.white));
                     }
                 });
                 cpd.show();
@@ -792,6 +885,8 @@ public class MyCardStackAdapter extends CardStackAdapter implements
         // QS Title Colors
 
         final ImageView qs_text = (ImageView) root.findViewById(R.id.qs_tile_text_colorpicker);
+        final TextView qs_text_text = (TextView) root.findViewById(
+                R.id.qs_tile_text_colorpicker_text);
         qs_text.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 final ColorPickerDialog cpd = new ColorPickerDialog(
@@ -803,6 +898,8 @@ public class MyCardStackAdapter extends CardStackAdapter implements
                         qs_text.setColorFilter(color, PorterDuff.Mode.SRC_ATOP);
                         wifiLabel.setTextColor(color);
                         bluetoothLabel.setTextColor(color);
+                        is_systemui_qs_text_color_changed = true;
+                        qs_text_text.setTextColor(mContext.getColor(android.R.color.white));
                     }
                 });
                 cpd.show();
@@ -996,155 +1093,195 @@ public class MyCardStackAdapter extends CardStackAdapter implements
 
             // Begin going through all AsyncTasks for Framework (v10)
 
-            Phase2_InjectAndMove accent = new Phase2_InjectAndMove();
-            String accent_color = "#" + Integer.toHexString(current_selected_system_accent_color);
-            accent.execute("accent_color", accent_color, "theme_color_accent",
-                    mContext.getCacheDir().getAbsolutePath() +
-                            "/creative_mode/assets/overlays/common/res/values-v10/");
+            if (is_framework_accent_changed) {
+                Phase2_InjectAndMove accent = new Phase2_InjectAndMove();
+                String accent_color = "#" + Integer.toHexString(current_selected_system_accent_color);
+                accent.execute("accent_color", accent_color, "theme_color_accent",
+                        mContext.getCacheDir().getAbsolutePath() +
+                                "/creative_mode/assets/overlays/common/res/values-v10/");
+            }
 
-            Phase2_InjectAndMove accent_secondary = new Phase2_InjectAndMove();
-            String accent_secondary_color = "#" + Integer.toHexString(
-                    current_selected_system_accent_dual_color);
-            accent_secondary.execute("dialer_button_bar", accent_secondary_color,
-                    "theme_color_accent_secondary", mContext.getCacheDir().getAbsolutePath() +
-                            "/creative_mode/assets/overlays/common/res/values-v10/");
+            if (is_framework_accent_secondary_changed) {
+                Phase2_InjectAndMove accent_secondary = new Phase2_InjectAndMove();
+                String accent_secondary_color = "#" + Integer.toHexString(
+                        current_selected_system_accent_dual_color);
+                accent_secondary.execute("dialer_button_bar", accent_secondary_color,
+                        "theme_color_accent_secondary", mContext.getCacheDir().getAbsolutePath() +
+                                "/creative_mode/assets/overlays/common/res/values-v10/");
+            }
 
-            Phase2_InjectAndMove accent_light = new Phase2_InjectAndMove();
-            String accent_light_color = "#" + Integer.toHexString(
-                    current_selected_system_accent_light_color);
-            accent_light.execute("accent_color_light", accent_light_color,
-                    "theme_color_accent_light",
-                    mContext.getCacheDir().getAbsolutePath() +
-                            "/creative_mode/assets/overlays/common/res/values-v10/");
+            if (is_framework_accent_light_changed) {
+                Phase2_InjectAndMove accent_light = new Phase2_InjectAndMove();
+                String accent_light_color = "#" + Integer.toHexString(
+                        current_selected_system_accent_light_color);
+                accent_light.execute("accent_color_light", accent_light_color,
+                        "theme_color_accent_light",
+                        mContext.getCacheDir().getAbsolutePath() +
+                                "/creative_mode/assets/overlays/common/res/values-v10/");
+            }
 
-            Phase2_InjectAndMove app_bg = new Phase2_InjectAndMove();
-            String app_bg_color = "#" + Integer.toHexString(current_selected_system_appbg_color);
-            app_bg.execute("app_background", app_bg_color, "theme_color_app_background",
-                    mContext.getCacheDir().getAbsolutePath() +
-                            "/creative_mode/assets/overlays/common/res/values-v10/");
+            if (is_framework_app_background_changed) {
+                Phase2_InjectAndMove app_bg = new Phase2_InjectAndMove();
+                String app_bg_color = "#" + Integer.toHexString(current_selected_system_appbg_color);
+                app_bg.execute("app_background", app_bg_color, "theme_color_app_background",
+                        mContext.getCacheDir().getAbsolutePath() +
+                                "/creative_mode/assets/overlays/common/res/values-v10/");
+            }
 
-            Phase2_InjectAndMove app_bg_light = new Phase2_InjectAndMove();
-            String app_bg_light_color = "#" + Integer.toHexString(
-                    current_selected_system_appbg_light_color);
-            app_bg_light.execute("light_background", app_bg_light_color,
-                    "theme_color_light_background",
-                    mContext.getCacheDir().getAbsolutePath() +
-                            "/creative_mode/assets/overlays/common/res/values-v10/");
+            if (is_framework_app_background_light_changed) {
+                Phase2_InjectAndMove app_bg_light = new Phase2_InjectAndMove();
+                String app_bg_light_color = "#" + Integer.toHexString(
+                        current_selected_system_appbg_light_color);
+                app_bg_light.execute("light_background", app_bg_light_color,
+                        "theme_color_light_background",
+                        mContext.getCacheDir().getAbsolutePath() +
+                                "/creative_mode/assets/overlays/common/res/values-v10/");
+            }
 
-            Phase2_InjectAndMove dialog_dark = new Phase2_InjectAndMove();
-            String dialog_dark_color = "#" + Integer.toHexString(
-                    current_selected_system_dialog_color);
-            dialog_dark.execute("dialog_color_dark", dialog_dark_color, "theme_color_dialog_dark",
-                    mContext.getCacheDir().getAbsolutePath() +
-                            "/creative_mode/assets/overlays/common/res/values-v10/");
+            if (is_framework_dialog_background_dark_changed) {
+                Phase2_InjectAndMove dialog_dark = new Phase2_InjectAndMove();
+                String dialog_dark_color = "#" + Integer.toHexString(
+                        current_selected_system_dialog_color);
+                dialog_dark.execute("dialog_color_dark", dialog_dark_color, "theme_color_dialog_dark",
+                        mContext.getCacheDir().getAbsolutePath() +
+                                "/creative_mode/assets/overlays/common/res/values-v10/");
+            }
 
-            Phase2_InjectAndMove dialog_light = new Phase2_InjectAndMove();
-            String dialog_light_color = "#" + Integer.toHexString(
-                    current_selected_system_dialog_light_color);
-            dialog_light.execute("dialog_color_light", dialog_light_color,
-                    "theme_color_dialog_light", mContext.getCacheDir().getAbsolutePath() +
-                            "/creative_mode/assets/overlays/common/res/values-v10/");
+            if (is_framework_dialog_background_light_changed) {
+                Phase2_InjectAndMove dialog_light = new Phase2_InjectAndMove();
+                String dialog_light_color = "#" + Integer.toHexString(
+                        current_selected_system_dialog_light_color);
+                dialog_light.execute("dialog_color_light", dialog_light_color,
+                        "theme_color_dialog_light", mContext.getCacheDir().getAbsolutePath() +
+                                "/creative_mode/assets/overlays/common/res/values-v10/");
+            }
 
-            Phase2_InjectAndMove theme_color = new Phase2_InjectAndMove();
-            String theme_color_ = "#" + Integer.toHexString(current_selected_system_main_color);
-            theme_color.execute("theme_color", theme_color_, "theme_color",
-                    mContext.getCacheDir().getAbsolutePath() +
-                            "/creative_mode/assets/overlays/common/res/values-v10/");
+            if (is_framework_main_theme_color_changed) {
+                Phase2_InjectAndMove theme_color = new Phase2_InjectAndMove();
+                String theme_color_ = "#" + Integer.toHexString(current_selected_system_main_color);
+                theme_color.execute("theme_color", theme_color_, "theme_color",
+                        mContext.getCacheDir().getAbsolutePath() +
+                                "/creative_mode/assets/overlays/common/res/values-v10/");
+            }
 
-            Phase2_InjectAndMove notification_primary = new Phase2_InjectAndMove();
-            String notification_primary_color = "#" + Integer.toHexString(
-                    current_selected_system_notifications_primary_color);
-            notification_primary.execute("notification_primary", notification_primary_color,
-                    "theme_color_notification_primary", mContext.getCacheDir().getAbsolutePath() +
-                            "/creative_mode/assets/overlays/common/res/values-v10/");
+            if (is_framework_notifications_primary_changed) {
+                Phase2_InjectAndMove notification_primary = new Phase2_InjectAndMove();
+                String notification_primary_color = "#" + Integer.toHexString(
+                        current_selected_system_notifications_primary_color);
+                notification_primary.execute("notification_primary", notification_primary_color,
+                        "theme_color_notification_primary", mContext.getCacheDir().getAbsolutePath() +
+                                "/creative_mode/assets/overlays/common/res/values-v10/");
+            }
 
-            Phase2_InjectAndMove notification_secondary = new Phase2_InjectAndMove();
-            String notification_secondary_color = "#" + Integer.toHexString(
-                    current_selected_system_notifications_secondary_color);
-            notification_secondary.execute("notification_secondary", notification_secondary_color,
-                    "theme_color_notification_secondary", mContext.getCacheDir().getAbsolutePath() +
-                            "/creative_mode/assets/overlays/common/res/values-v10/");
+            if (is_framework_notifications_secondary_changed) {
+                Phase2_InjectAndMove notification_secondary = new Phase2_InjectAndMove();
+                String notification_secondary_color = "#" + Integer.toHexString(
+                        current_selected_system_notifications_secondary_color);
+                notification_secondary.execute("notification_secondary", notification_secondary_color,
+                        "theme_color_notification_secondary", mContext.getCacheDir().getAbsolutePath() +
+                                "/creative_mode/assets/overlays/common/res/values-v10/");
+            }
 
-            Phase2_InjectAndMove ripple = new Phase2_InjectAndMove();
-            String ripple_color = "#" + Integer.toHexString(current_selected_system_ripple_color);
-            ripple.execute("ripple_dark", ripple_color, "theme_color_ripple_color",
-                    mContext.getCacheDir().getAbsolutePath() +
-                            "/creative_mode/assets/overlays/common/res/values-v10/");
+            if (is_framework_system_ripple_changed) {
+                Phase2_InjectAndMove ripple = new Phase2_InjectAndMove();
+                String ripple_color = "#" + Integer.toHexString(current_selected_system_ripple_color);
+                ripple.execute("ripple_dark", ripple_color, "theme_color_ripple_color",
+                        mContext.getCacheDir().getAbsolutePath() +
+                                "/creative_mode/assets/overlays/common/res/values-v10/");
+            }
 
             // Begin going through all AsyncTasks for Settings (v11)
 
-            Phase2_InjectAndMove settings_dashboard = new Phase2_InjectAndMove();
-            String settings_dashboard_color = "#" + Integer.toHexString(
-                    current_selected_dashboard_background_color);
-            settings_dashboard.execute("dashboard_background_color", settings_dashboard_color,
-                    "theme_color_settings_dashboard_background",
-                    mContext.getCacheDir().getAbsolutePath() +
-                            "/creative_mode/assets/overlays/com.android.settings/res/values-v11/");
+            if (is_settings_dashboard_background_color_changed) {
+                Phase2_InjectAndMove settings_dashboard = new Phase2_InjectAndMove();
+                String settings_dashboard_color = "#" + Integer.toHexString(
+                        current_selected_dashboard_background_color);
+                settings_dashboard.execute("dashboard_background_color", settings_dashboard_color,
+                        "theme_color_settings_dashboard_background",
+                        mContext.getCacheDir().getAbsolutePath() +
+                                "/creative_mode/assets/overlays/com.android.settings/res/values-v11/");
+            }
 
-            Phase2_InjectAndMove settings_dashboard_category = new Phase2_InjectAndMove();
-            String settings_dashboard_category_color = "#" + Integer.toHexString(
-                    current_selected_dashboard_category_background_color);
-            settings_dashboard_category.execute("dashboard_category_background_color",
-                    settings_dashboard_category_color,
-                    "theme_color_settings_dashboard_category_background",
-                    mContext.getCacheDir().getAbsolutePath() +
-                            "/creative_mode/assets/overlays/com.android.settings/res/values-v11/");
+            if (is_settings_dashboard_category_background_color_changed) {
+                Phase2_InjectAndMove settings_dashboard_category = new Phase2_InjectAndMove();
+                String settings_dashboard_category_color = "#" + Integer.toHexString(
+                        current_selected_dashboard_category_background_color);
+                settings_dashboard_category.execute("dashboard_category_background_color",
+                        settings_dashboard_category_color,
+                        "theme_color_settings_dashboard_category_background",
+                        mContext.getCacheDir().getAbsolutePath() +
+                                "/creative_mode/assets/overlays/com.android.settings/res/values-v11/");
+            }
 
-            Phase2_InjectAndMove settings_icon = new Phase2_InjectAndMove();
-            String settings_icon_color = "#" + Integer.toHexString(
-                    current_selected_settings_icon_color);
-            settings_icon.execute("settings_icon_tint", settings_icon_color,
-                    "theme_color_settings_icon_tint",
-                    mContext.getCacheDir().getAbsolutePath() +
-                            "/creative_mode/assets/overlays/com.android.settings/res/values-v11/");
+            if (is_settings_icon_color_changed) {
+                Phase2_InjectAndMove settings_icon = new Phase2_InjectAndMove();
+                String settings_icon_color = "#" + Integer.toHexString(
+                        current_selected_settings_icon_color);
+                settings_icon.execute("settings_icon_tint", settings_icon_color,
+                        "theme_color_settings_icon_tint",
+                        mContext.getCacheDir().getAbsolutePath() +
+                                "/creative_mode/assets/overlays/common/res/values-v11/");
+            }
 
-            Phase2_InjectAndMove settings_title = new Phase2_InjectAndMove();
-            String settings_title_color = "#" + Integer.toHexString(
-                    current_selected_settings_title_color);
-            settings_title.execute("theme_accent", settings_title_color,
-                    "theme_color_settings_title_color",
-                    mContext.getCacheDir().getAbsolutePath() +
-                            "/creative_mode/assets/overlays/com.android.settings/res/values-v11/");
+            if (is_settings_title_color_changed) {
+                Phase2_InjectAndMove settings_title = new Phase2_InjectAndMove();
+                String settings_title_color = "#" + Integer.toHexString(
+                        current_selected_settings_title_color);
+                settings_title.execute("settings_title_color", settings_title_color,
+                        "theme_color_settings_title_color",
+                        mContext.getCacheDir().getAbsolutePath() +
+                                "/creative_mode/assets/overlays/com.android.settings/res/values-v11/");
+            }
 
-            Phase2_InjectAndMove switchbar_background = new Phase2_InjectAndMove();
-            String switchbar_background_color = "#" + Integer.toHexString(
-                    current_selected_settings_switchbar_color);
-            switchbar_background.execute("switchbar_background_color", switchbar_background_color,
-                    "theme_color_settings_switchbar_background",
-                    mContext.getCacheDir().getAbsolutePath() +
-                            "/creative_mode/assets/overlays/com.android.settings/res/values-v11/");
+            if (is_settings_switchbar_background_color_changed) {
+                Phase2_InjectAndMove switchbar_background = new Phase2_InjectAndMove();
+                String switchbar_background_color = "#" + Integer.toHexString(
+                        current_selected_settings_switchbar_color);
+                switchbar_background.execute("switchbar_background_color", switchbar_background_color,
+                        "theme_color_settings_switchbar_background",
+                        mContext.getCacheDir().getAbsolutePath() +
+                                "/creative_mode/assets/overlays/com.android.settings/res/values-v11/");
+            }
 
             // Begin going through all AsyncTasks for SystemUI (v12)
 
-            Phase2_InjectAndMove sysui_accent = new Phase2_InjectAndMove();
-            String sysui_accent_color = "#" + Integer.toHexString(current_selected_qs_accent_color);
-            sysui_accent.execute("system_accent_color", sysui_accent_color,
-                    "theme_color_systemui_accent_color",
-                    mContext.getCacheDir().getAbsolutePath() +
-                            "/creative_mode/assets/overlays/com.android.systemui/res/values-v12/");
+            if (is_systemui_accent_color_changed) {
+                Phase2_InjectAndMove sysui_accent = new Phase2_InjectAndMove();
+                String sysui_accent_color = "#" + Integer.toHexString(current_selected_qs_accent_color);
+                sysui_accent.execute("system_accent_color", sysui_accent_color,
+                        "theme_color_systemui_accent_color",
+                        mContext.getCacheDir().getAbsolutePath() +
+                                "/creative_mode/assets/overlays/com.android.systemui/res/values-v12/");
+            }
 
-            Phase2_InjectAndMove sysui_qs_tile = new Phase2_InjectAndMove();
-            String sysui_qs_tile_color = "#" + Integer.toHexString(current_selected_qs_tile_color);
-            sysui_qs_tile.execute("qs_icon_color", sysui_qs_tile_color,
-                    "theme_color_systemui_qs_icon_color",
-                    mContext.getCacheDir().getAbsolutePath() +
-                            "/creative_mode/assets/overlays/common/res/values-v12/");
+            if (is_systemui_qs_tile_color_changed) {
+                Phase2_InjectAndMove sysui_qs_tile = new Phase2_InjectAndMove();
+                String sysui_qs_tile_color = "#" + Integer.toHexString(current_selected_qs_tile_color);
+                sysui_qs_tile.execute("qs_icon_color", sysui_qs_tile_color,
+                        "theme_color_systemui_qs_icon_color",
+                        mContext.getCacheDir().getAbsolutePath() +
+                                "/creative_mode/assets/overlays/common/res/values-v12/");
+            }
 
-            Phase2_InjectAndMove sysui_qs_tile_disabled = new Phase2_InjectAndMove();
-            String sysui_qs_tile_disabled_color = "#4d" +
-                    Integer.toHexString(current_selected_qs_tile_color).substring(2);
-            sysui_qs_tile_disabled.execute("qs_icon_color_disabled", sysui_qs_tile_disabled_color,
-                    "theme_color_systemui_qs_icon_disabled_color",
-                    mContext.getCacheDir().getAbsolutePath() +
-                            "/creative_mode/assets/overlays/common/res/values-v12/");
+            if (is_systemui_qs_tile_color_changed) {
+                Phase2_InjectAndMove sysui_qs_tile_disabled = new Phase2_InjectAndMove();
+                String sysui_qs_tile_disabled_color = "#4d" +
+                        Integer.toHexString(current_selected_qs_tile_color).substring(2);
+                sysui_qs_tile_disabled.execute("qs_icon_color_disabled", sysui_qs_tile_disabled_color,
+                        "theme_color_systemui_qs_icon_disabled_color",
+                        mContext.getCacheDir().getAbsolutePath() +
+                                "/creative_mode/assets/overlays/common/res/values-v12/");
+            }
 
-            Phase2_InjectAndMove sysui_qs_tile_text = new Phase2_InjectAndMove();
-            String sysui_qs_tile_text_color = "#" + Integer.toHexString(
-                    current_selected_qs_text_color);
-            sysui_qs_tile_text.execute("qs_tile_text", sysui_qs_tile_text_color,
-                    "theme_color_systemui_qs_tile_text_color",
-                    mContext.getCacheDir().getAbsolutePath() +
-                            "/creative_mode/assets/overlays/common/res/values-v12/");
+            if (is_systemui_qs_text_color_changed) {
+                Phase2_InjectAndMove sysui_qs_tile_text = new Phase2_InjectAndMove();
+                String sysui_qs_tile_text_color = "#" + Integer.toHexString(
+                        current_selected_qs_text_color);
+                sysui_qs_tile_text.execute("qs_tile_text", sysui_qs_tile_text_color,
+                        "theme_color_systemui_qs_tile_text_color",
+                        mContext.getCacheDir().getAbsolutePath() +
+                                "/creative_mode/assets/overlays/common/res/values-v12/");
+            }
 
 
             Phase3_MovePremadeFiles phase3 = new Phase3_MovePremadeFiles();
@@ -1357,18 +1494,17 @@ public class MyCardStackAdapter extends CardStackAdapter implements
             AssetManager assetManager = mContext.getAssets();
             String assets[];
             try {
-                Log.i("copyFileOrDir", "copyFileOrDir() -> " + path);
+                Log.d("movePremadeFiles", path);
                 assets = assetManager.list(path);
                 if (assets.length == 0) {
                     copyFile(path);
                 } else {
                     String fullPath = TARGET_BASE_PATH + path;
-                    Log.i("copyFileOrDir", "Path = " + fullPath);
                     File dir = new File(fullPath);
                     if (!dir.exists() && !path.startsWith("images") &&
                             !path.startsWith("sounds") && !path.startsWith("webkit")) {
                         if (!dir.mkdirs()) {
-                            Log.i("copyFileOrDir", "Could not create directory " + fullPath);
+                            Log.e("movePremadeFiles", "Could not create directory " + fullPath);
                         }
                     }
                     for (int i = 0; i < assets.length; ++i) {
@@ -1401,7 +1537,6 @@ public class MyCardStackAdapter extends CardStackAdapter implements
             OutputStream out;
             String newFileName = null;
             try {
-                Log.i("tag", "copyFile() " + filename);
                 in = assetManager.open(filename);
                 if (filename.endsWith(".jpg")) // .jpg used to avoid compression on APK file
                     newFileName = TARGET_BASE_PATH + filename.substring(0, filename.length() - 4);
@@ -1419,8 +1554,8 @@ public class MyCardStackAdapter extends CardStackAdapter implements
                 out.close();
             } catch (Exception e) {
                 did_it_compile = false;
-                Log.e("copyFile", "Exception in copyFile() for " + newFileName);
-                Log.e("copyFile", "Exception in copyFile() " + e.toString());
+                Log.e("movePremadeFiles", "Exception in copyFile() for " + newFileName);
+                Log.e("movePremadeFiles", "Exception in copyFile() " + e.toString());
                 Toast toast = Toast.makeText(mContext.getApplicationContext(),
                         mContext.getResources().getString(
                                 R.string.copyFile_exception_toast),
@@ -1430,7 +1565,7 @@ public class MyCardStackAdapter extends CardStackAdapter implements
         }
 
         private void MoveWhateverIsActivated() {
-            if (!colorful_icon) {
+            if (!colorful_icon && is_settings_colorful_icon_color_changed) {
                 String source_colorful_du = mContext.getCacheDir().getAbsolutePath() +
                         "/creative_files/";
                 String destination_colorful_du = mContext.getCacheDir().getAbsolutePath() +
@@ -1443,27 +1578,45 @@ public class MyCardStackAdapter extends CardStackAdapter implements
                 moveFile(source_colorful_du, "ic_dirtytweaks.xml", destination_colorful_du);
                 moveFile(source_colorful_pn, "ic_settings_purenexus.xml", destination_colorful_pn);
             }
-            if (category_title_bold || category_title_italics || category_title_caps) {
-                createSettingsTitleXML("settings_title_style",
-                        mContext.getCacheDir().getAbsolutePath() +
-                                "/creative_mode/assets/overlays/com.android.settings/" +
-                                "res/values-v11/");
+            if (is_settings_dashboard_category_title_caps_changed ||
+                    is_settings_dashboard_category_title_bold_changed ||
+                    is_settings_dashboard_category_title_italics_changed) {
+                if (category_title_bold || category_title_italics || category_title_caps) {
+                    createSettingsTitleXML("settings_title_style",
+                            mContext.getCacheDir().getAbsolutePath() +
+                                    "/creative_mode/assets/overlays/com.android.settings/" +
+                                    "res/values-v11/");
+                }
             }
-
-            if (!dashboard_dividers) {
+            if (dashboard_dividers && is_settings_dashboard_dividers_changed) {
                 String source = mContext.getCacheDir().getAbsolutePath() +
                         "/creative_files/";
                 // Use v12 here just in case
                 String destination = mContext.getCacheDir().getAbsolutePath() +
                         "/creative_mode/assets/overlays/com.android.settings/res/values-v12/";
-                moveFile(source, "dashboard_dividers.xml", destination);
+                moveFile(source, "dashboard_dividers_activated.xml", destination);
             }
-            if (!dirtytweaks_iconpresence) {
+            if (!dashboard_dividers && is_settings_dashboard_dividers_changed) {
+                String source = mContext.getCacheDir().getAbsolutePath() +
+                        "/creative_files/";
+                // Use v12 here just in case
+                String destination = mContext.getCacheDir().getAbsolutePath() +
+                        "/creative_mode/assets/overlays/com.android.settings/res/values-v12/";
+                moveFile(source, "dashboard_dividers_deactivated.xml", destination);
+            }
+            if (dirtytweaks_iconpresence && is_settings_dashboard_dirty_tweaks_icon_presence_changed) {
                 String source = mContext.getCacheDir().getAbsolutePath() +
                         "/creative_files/";
                 String destination = mContext.getCacheDir().getAbsolutePath() +
                         "/creative_mode/assets/overlays/com.android.settings/res/values-v11/";
-                moveFile(source, "dirty_tweaks_icon_presence.xml", destination);
+                moveFile(source, "dirty_tweaks_icon_presence_deactivated.xml", destination);
+            }
+            if (!dirtytweaks_iconpresence && is_settings_dashboard_dirty_tweaks_icon_presence_changed) {
+                String source = mContext.getCacheDir().getAbsolutePath() +
+                        "/creative_files/";
+                String destination = mContext.getCacheDir().getAbsolutePath() +
+                        "/creative_mode/assets/overlays/com.android.settings/res/values-v11/";
+                moveFile(source, "dirty_tweaks_icon_presence_activated.xml", destination);
             }
 
             // Add default theme icon if no traditional theme icon found
@@ -1485,16 +1638,16 @@ public class MyCardStackAdapter extends CardStackAdapter implements
                     mContext.getCacheDir().getAbsolutePath() + "/" + filename + ".xml");
 
             String parseMe = "";
-            String allCaps = ("        <item name=\"android:textAllCaps\">false</item>" + "\n");
+            String allCaps = "";
 
-            if (category_title_bold) {
+            if (category_title_bold && is_settings_dashboard_category_title_bold_changed) {
                 if (parseMe.length() == 0) {
                     parseMe = "bold";
                 } else {
                     parseMe += "|bold";
                 }
             }
-            if (category_title_italics) {
+            if (category_title_italics || is_settings_dashboard_category_title_italics_changed) {
                 if (parseMe.length() == 0) {
                     parseMe = "italic";
                 } else {
@@ -1508,8 +1661,11 @@ public class MyCardStackAdapter extends CardStackAdapter implements
             if (!category_title_bold && !category_title_italics) {
                 boldItalics = "";
             }
-            if (category_title_caps) {
+            if (category_title_caps && is_settings_dashboard_category_title_caps_changed) {
                 allCaps = ("        <item name=\"android:textAllCaps\">true</item>" + "\n");
+            }
+            if (!category_title_caps && is_settings_dashboard_category_title_caps_changed) {
+                allCaps = ("        <item name=\"android:textAllCaps\">false</item>" + "\n");
             }
 
             try {

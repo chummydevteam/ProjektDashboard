@@ -47,20 +47,12 @@
                     android:layout_height="wrap_content"
                     android:checked="true"
                     android:padding="16dp"
-                    android:text="@string/settings_colorful_tweaks_icon" />
+                    android:text="@string/settings_colorful_tweaks_icon"
+                    android:textColor="@color/creative_mode_text_disabled" />
 
                 <include layout="@layout/settings_dashboard_colorpicker" />
 
                 <include layout="@layout/settings_dashboard_category_colorpicker" />
-
-                <Switch
-                    android:id="@+id/dashboard_rounding"
-                    style="@style/ShadowBlackTextWhite"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="16dp"
-                    android:text="@string/settings_rounded_corners"
-                    android:visibility="gone" />
 
                 <Switch
                     android:id="@+id/dashboard_title_allcaps"
@@ -69,7 +61,8 @@
                     android:layout_height="wrap_content"
                     android:checked="true"
                     android:padding="16dp"
-                    android:text="@string/settings_dashboard_title_allcaps" />
+                    android:text="@string/settings_dashboard_title_allcaps"
+                    android:textColor="@color/creative_mode_text_disabled" />
 
                 <Switch
                     android:id="@+id/dashboard_title_bold"
@@ -78,7 +71,8 @@
                     android:layout_height="wrap_content"
                     android:checked="true"
                     android:padding="16dp"
-                    android:text="@string/settings_dashboard_title_bold" />
+                    android:text="@string/settings_dashboard_title_bold"
+                    android:textColor="@color/creative_mode_text_disabled" />
 
                 <Switch
                     android:id="@+id/dashboard_title_italics"
@@ -87,7 +81,8 @@
                     android:layout_height="wrap_content"
                     android:checked="true"
                     android:padding="16dp"
-                    android:text="@string/settings_dashboard_title_italics" />
+                    android:text="@string/settings_dashboard_title_italics"
+                    android:textColor="@color/creative_mode_text_disabled" />
 
                 <Switch
                     android:id="@+id/dashboard_dividers"
@@ -96,7 +91,8 @@
                     android:layout_height="wrap_content"
                     android:checked="true"
                     android:padding="16dp"
-                    android:text="@string/settings_show_dashboard_dividers" />
+                    android:text="@string/settings_show_dashboard_dividers"
+                    android:textColor="@color/creative_mode_text_disabled" />
 
                 <Switch
                     android:id="@+id/dirty_tweaks_icons"
@@ -105,7 +101,8 @@
                     android:layout_height="wrap_content"
                     android:checked="true"
                     android:padding="16dp"
-                    android:text="@string/settings_du_tweaks_icon_presence" />
+                    android:text="@string/settings_du_tweaks_icon_presence"
+                    android:textColor="@color/creative_mode_text_disabled" />
 
                 <include layout="@layout/settings_icon_colorpicker" />
 
