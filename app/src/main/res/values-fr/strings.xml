@@ -160,12 +160,27 @@
 
     <!-- App Wallpapers -->
     <string-array name="wallpaper_sources">
-        <item>Fonds d\'écran par défaut</item>
-        <item>Fonds d\'écran par Customworx</item>
-        <item>Fonds d\'écran par Gagan Singh</item>
-        <item>En-têtes par Vignesh Ravi</item>
-        <item>Fonds d\'écran par Vignesh Ravi</item>
+        <item>Sélectionnez un paquet&#8230;</item>
+        <item>Fonds d\'écran DU Customworx</item>
+        <item>Fonds d\'écran Octos Customworx</item>
+        <item>Fonds d\'écran Screw\'d Customworx</item>
+        <item>Fonds d\'écran Customworx</item>
+        <item>Fonds d\'écran DU Gagan Singh</item>
+        <item>Fonds d\'écran Gagan Singh</item>
+        <item>Fonds d\'écran DU Vignesh Ravi</item>
+        <item>Fonds d\'écran Vignesh Ravi</item>
     </string-array>
+
+    <string name="settings_title">Préférences</string>
+    <string name="settings_subtitle1">Afficher les onglets</string>
+    <string name="settings_subtitle2">Utilitaires</string>
+    <string name="settings_color_switcher_tab">Modifier les couleurs</string>
+    <string name="settings_header_swapper_tab">Modifier l\'en-tête contextuel</string>
+    <string name="settings_header_importer_tab">Importer des en-têtes contextuels</string>
+    <string name="settings_theme_debugging_tab">Mode de débogage</string>
+    <string name="settings_wallpaper_tab">Fonds d\'écran</string>
+    <string name="settings_blacked_out_mode">Mode Blacked Out</string>
+    <string name="settings_clear_dashboard_folder">Supprimer le contenu du dossier dashboard.</string>
 
     <!-- dashboard. General Strings -->
     <string name="home">dashboard.</string>
@@ -214,7 +229,7 @@
         <item>Je ne suis pas saoul, je suis simplement enivré par VOUS.</item>
         <item>Votre corps est composé à 65% d\'eau et j\'ai très soif.</item>
         <item>Êtes-vous croyante ? Parce que vous semblez être la réponse à toutes mes prières</item>
-        <item>Oubliez Spiderman, Superman et Batman. Je serai ton \"Man\".</item>
+        <item>Oubliez Spiderman, Superman et Batman. Je serai votre \"Man\".</item>
         <item>Puis-je vous suivre chez vous ? Mes parents m\’ont toujours encouragé à poursuivre mes rêves.</item>
         <item>Pendant un moment, je pensais que j\'étais mort et arrivé au paradis. Maintenant, je vois que je suis bien vivant, et que le paradis m\'a été apporté .</item>
         <item>Êtes-vous magicienne ? Parce que quand je vous regarde, tout le reste disparaît !</item>
