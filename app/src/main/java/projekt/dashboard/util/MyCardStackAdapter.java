@@ -1776,6 +1776,31 @@ public class MyCardStackAdapter extends CardStackAdapter implements
                 }
             }
 
+            File[] fileList2 = new File(mContext.getCacheDir().getAbsolutePath() +
+                    "/creative_mode/res/").listFiles();
+            for (int i = 0; i < fileList2.length; i++) {
+                if (!fileList2[i].getName().equals("drawable-xhdpi") &&
+                        !fileList2[i].getName().equals("drawable-xhdpi-v4") &&
+                        !fileList2[i].getName().equals("drawable-xxhdpi") &&
+                        !fileList2[i].getName().equals("drawable-xxhdpi-v4") &&
+                        !fileList2[i].getName().equals("drawable-xxxhdpi") &&
+                        !fileList2[i].getName().equals("drawable-xxxhdpi-v4") &&
+                        !fileList2[i].getName().equals("mipmap-xhdpi") &&
+                        !fileList2[i].getName().equals("mipmap-xhdpi-v4") &&
+                        !fileList2[i].getName().equals("mipmap-xxhdpi") &&
+                        !fileList2[i].getName().equals("mipmap-xxhdpi-v4") &&
+                        !fileList2[i].getName().equals("mipmap-xxxhdpi") &&
+                        !fileList2[i].getName().equals("mipmap-xxxhdpi-v4")) {
+                    File file2 = new File(mContext.getCacheDir().getAbsolutePath() +
+                            "/creative_mode/" + fileList2[i].getName());
+                    boolean deleted2 = file2.delete();
+                    eu.chainfire.libsuperuser.Shell.SU.run(
+                            "rm -r " + mContext.getCacheDir().getAbsolutePath() +
+                                    "/creative_mode/res/" + fileList2[i].getName());
+                    Log.d("FileDeletion", "Deleted file/folder: " + fileList2[i].getName());
+                }
+            }
+
             // Now let's build an APK based on the cleaned out directory
             try {
                 Process nativeApp = Runtime.getRuntime().exec(
@@ -1789,7 +1814,9 @@ public class MyCardStackAdapter extends CardStackAdapter implements
                                 "/dashboard_creation.apk -f\n");
 
                 // We need this Process to be waited for before moving on to the next function.
+                Log.d("ProcessWaitFor", "Dummy APK creation is running now...");
                 nativeApp.waitFor();
+                Log.d("ProcessWaitFor", "Dummy APK creation has completed!");
 
                 // APK should now be built, good for us, now let's break it apart
                 try {
