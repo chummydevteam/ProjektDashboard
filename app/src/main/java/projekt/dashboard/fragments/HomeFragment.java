@@ -49,8 +49,6 @@ import projekt.dashboard.ui.SplashScreenActivity;
 public class HomeFragment extends BasePageFragment {
 
     public SharedPreferences prefs;
-    public int current_pressed_count = 0;
-    public boolean clicked_after_seventh = false;
     public String current_rom;
     @Bind(R.id.tapBarMenu)
     TapBarMenu tapBarMenu;
