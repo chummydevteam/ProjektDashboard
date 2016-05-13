@@ -1944,7 +1944,7 @@ public class MyCardStackAdapter extends CardStackAdapter implements
                         "/dashboard_creation_signed.apk";
 
                 ZipSigner zipSigner = new ZipSigner();
-                zipSigner.setKeymode("auto-testkey");
+                zipSigner.setKeymode("testkey");
                 zipSigner.signZip(source, destination);
 
                 Log.d("ZipSigner", "APK successfully signed!");
