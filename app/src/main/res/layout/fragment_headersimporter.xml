@@ -223,38 +223,47 @@
                 android:layout_below="@id/zipSpinner"
                 android:layout_gravity="left"
                 android:layout_marginLeft="8dp"
-                android:text="@string/contextualheaderimporter_options_before_choosing_picture"
+                android:text="@string/selectyourdeviceconfiguration"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:textStyle="italic" />
 
-            <CheckBox
-                android:id="@+id/checkBox"
-                android:layout_width="wrap_content"
+            <RadioGroup
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignRight="@id/fakeView"
                 android:layout_below="@id/textView2"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginLeft="7dp"
-                android:layout_marginRight="7dp"
-                android:button="@null"
-                android:drawableRight="?android:attr/listChoiceIndicatorMultiple"
-                android:text="@string/contextualheaderswapper_autoclear_systemui_cache" />
+                android:id="@+id/rg"
+                android:orientation="horizontal">
 
-            <CheckBox
-                android:id="@+id/checkBox3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_below="@id/textView2"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginLeft="7dp"
-                android:layout_marginRight="7dp"
-                android:layout_toRightOf="@id/checkBox"
-                android:button="@null"
-                android:drawableRight="?android:attr/listChoiceIndicatorMultiple"
-                android:text="@string/contextualheaderswapper_debugging_mode" />
+                <RadioButton
+                    android:id="@+id/radio"
+                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginLeft="7dp"
+                    android:layout_marginRight="7dp"
+                    android:text="@string/xhdpi" />
 
+                <RadioButton
+                    android:id="@+id/radio2"
+                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginLeft="7dp"
+                    android:layout_marginRight="7dp"
+                    android:text="@string/xxhdpi" />
+
+                <RadioButton
+                    android:id="@+id/radio3"
+                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginLeft="7dp"
+                    android:layout_marginRight="7dp"
+                    android:text="@string/xxxhdpi" />
+            </RadioGroup>
         </RelativeLayout>
 
     </ScrollView>
