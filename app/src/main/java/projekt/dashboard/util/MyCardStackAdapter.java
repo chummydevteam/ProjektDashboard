@@ -38,6 +38,8 @@ import com.mikhaellopez.circularfillableloaders.CircularFillableLoaders;
 import com.mutualmobile.cardstack.CardStackAdapter;
 import com.tramsun.libs.prefcompat.Pref;
 
+import net.lingala.zip4j.exception.ZipException;
+
 import java.io.BufferedInputStream;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -50,8 +52,10 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.zip.ZipEntry;
+import java.util.zip.ZipFile;
 import java.util.zip.ZipInputStream;
 
 import kellinwood.security.zipsigner.ZipSigner;
@@ -77,6 +81,7 @@ public class MyCardStackAdapter extends CardStackAdapter implements
     public android.support.v7.widget.Toolbar framework_toolbar;
     public android.support.v7.widget.Toolbar settings_toolbar;
     public ImageView main_color;
+    public String header_pack_location = "";
 
     // ==================================== Framework Tweaks ================================ //
     public int current_selected_system_accent_color = Color.argb(255, 255, 255, 255); // White
@@ -96,7 +101,6 @@ public class MyCardStackAdapter extends CardStackAdapter implements
     public boolean category_title_italics = true;
     public boolean dashboard_dividers = true;
     public boolean dirtytweaks_iconpresence = true;
-    public boolean dashboard_rounding = false;
     public int current_selected_dashboard_background_color = Color.argb(255, 33, 32, 33);
     public int current_selected_dashboard_category_background_color = Color.argb(255, 0, 0, 0);
     public int current_selected_settings_icon_color = Color.argb(255, 255, 255, 255);
@@ -131,6 +135,7 @@ public class MyCardStackAdapter extends CardStackAdapter implements
     public Boolean is_settings_icon_color_changed = false;
     public Boolean is_settings_title_color_changed = false;
     public Boolean is_settings_switchbar_background_color_changed = false;
+    public Boolean is_header_pack_chosen = false;
     public Boolean is_systemui_accent_color_changed = false;
     public Boolean is_systemui_qs_tile_color_changed = false;
     public Boolean is_systemui_qs_text_color_changed = false;
@@ -149,6 +154,19 @@ public class MyCardStackAdapter extends CardStackAdapter implements
                 R.color.card3_bg, // SystemUI
                 R.color.card4_bg, // Final Card
         };
+    }
+
+    public void cleanTempFolder() {
+        File dir = mContext.getCacheDir();
+        deleteRecursive(dir);
+    }
+
+    private void deleteRecursive(File fileOrDirectory) {
+        if (fileOrDirectory.isDirectory())
+            for (File child : fileOrDirectory.listFiles())
+                deleteRecursive(child);
+
+        fileOrDirectory.delete();
     }
 
     @Override
@@ -803,8 +821,89 @@ public class MyCardStackAdapter extends CardStackAdapter implements
         return root;
     }
 
+    public void checkWhetherZIPisValid(CardView root, String source, String destination) {
+
+        try {
+            net.lingala.zip4j.core.ZipFile zipFile = new net.lingala.zip4j.core.ZipFile(source);
+            Log.d("Unzip", "The ZIP has been located and will now be unzipped...");
+            zipFile.extractAll(destination);
+            Log.d("Unzip",
+                    "Successfully unzipped the file to the corresponding directory!");
+
+            String[] checkerCommands = {destination + "/headers.xml"};
+            String[] newArray = ReadXMLFile.main(checkerCommands);
+
+            header_pack_location = source;
+            is_header_pack_chosen = true;
+
+            TextView headerPackName = (TextView) root.findViewById(R.id.themeName2);
+            headerPackName.setText(newArray[0]);
+
+            TextView headerPackAuthor = (TextView) root.findViewById(R.id.themeAuthor2);
+            headerPackAuthor.setText(newArray[1]);
+
+            TextView headerPackDevTeam = (TextView) root.findViewById(R.id.themeDevTeam2);
+            headerPackDevTeam.setText(newArray[2]);
+
+            TextView headerPackVersion = (TextView) root.findViewById(R.id.themeVersion2);
+            headerPackVersion.setText(newArray[3]);
+
+            TextView headerPackCount = (TextView) root.findViewById(R.id.themeCount2);
+            int how_many_themed = countPNGs();
+            if (how_many_themed == 10) {
+                headerPackCount.setText(mContext.getResources().getString(
+                        R.string.contextualheaderimporter_all_themed));
+            } else {
+                if (how_many_themed == 1) {
+                    headerPackCount.setText(
+                            how_many_themed + " " + mContext.getResources().getString(
+                                    R.string.contextualheaderimporter_only_one_themed));
+                } else {
+                    headerPackCount.setText(
+                            how_many_themed + " " + mContext.getResources().getString(
+                                    R.string.contextualheaderimporter_not_all_themed));
+                }
+            }
+
+            cleanTempFolder();
+
+        } catch (ZipException e) {
+            Log.d("Unzip",
+                    "Failed to unzip the file the corresponding directory. (EXCEPTION)");
+            e.printStackTrace();
+        }
+    }
+
+    public int countPNGs() {
+        int count = 0;
+
+        List<String> filenamePNGs = Arrays.asList(
+                "notifhead_afternoon.png", "notifhead_christmas.png", "notifhead_morning.png",
+                "notifhead_newyearseve.png", "notifhead_night.png", "notifhead_noon.png",
+                "notifhead_sunrise.png", "notifhead_sunset_hdpi.png",
+                "notifhead_sunset_xhdpi.png", "notifhead_sunset.png");
+
+        File f2 = new File(
+                mContext.getCacheDir().getAbsolutePath() + "/headers/");
+        File[] files2 = f2.listFiles();
+        if (files2 != null) {
+            for (File inFile2 : files2) {
+                if (inFile2.isFile()) {
+                    // Filter out filenames of which were unzipped earlier
+                    String filenameParse[] = inFile2.getAbsolutePath().split("/");
+                    String filename = filenameParse[filenameParse.length - 1];
+
+                    if (filenamePNGs.contains(filename)) {
+                        count += 1;
+                    }
+                }
+            }
+        }
+        return count;
+    }
+
     private View getSystemUIView(ViewGroup container) {
-        CardView root = (CardView) mInflater.inflate(R.layout.systemui_card, container, false);
+        final CardView root = (CardView) mInflater.inflate(R.layout.systemui_card, container, false);
         root.setCardBackgroundColor(ContextCompat.getColor(mContext, bgColorIds[2]));
 
         prefs = PreferenceManager.getDefaultSharedPreferences(mContext);
@@ -814,6 +913,95 @@ public class MyCardStackAdapter extends CardStackAdapter implements
                 root.getResources().getString(R.string.systemui_preview_default_no_username)) +
                 root.getResources().getString(R.string.systemui_preview_label));
         final SeekBar brightness = (SeekBar) root.findViewById(R.id.seekBar);
+
+        final Spinner spinner3 = (Spinner) root.findViewById(R.id.spinner3);
+
+        List<String> zipsFound = new ArrayList<String>();
+        zipsFound.add(mContext.getResources().getString(R.string.contextual_header_pack));
+
+        // Function that filters out all zip files within /storage/0/dashboard., but not only that,
+        // it checks the zip file and sees if there is headers.xml found inside so that it's a
+        // filter.
+
+        File f2 = new File(
+                Environment.getExternalStorageDirectory().getAbsolutePath() + "/dashboard./");
+        File[] files2 = f2.listFiles();
+        if (files2 != null) {
+            for (File inFile2 : files2) {
+                if (inFile2.isFile()) {
+                    String filenameArray[] = inFile2.toString().split("\\.");
+                    String extension = filenameArray[filenameArray.length - 1];
+                    if (extension.equals("zip")) {
+                        try {
+                            String filenameParse[] = inFile2.getAbsolutePath().split("/");
+                            String filename = filenameParse[filenameParse.length - 1];
+
+                            ZipFile zipFile = new ZipFile(
+                                    Environment.getExternalStorageDirectory().
+                                            getAbsolutePath() + "/dashboard./" + filename);
+                            ZipEntry entry = zipFile.getEntry("headers.xml");
+                            if (entry != null) {
+                                // headers.xml was found in the file, so add it into the spinner
+                                zipsFound.add(filename);
+                            }
+                        } catch (IOException e) {
+                            System.out.println(
+                                    "There was an IOException within the filter function");
+                        }
+                    }
+                }
+            }
+        }
+        // Create an ArrayAdapter using the string array and a default spinner layout
+        final ArrayAdapter<String> adapter3 = new ArrayAdapter<String>(mContext,
+                android.R.layout.simple_spinner_item, zipsFound);
+        // Specify the layout to use when the list of choices appears
+        adapter3.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner3.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> arg0, View arg1,
+                                       int pos, long id) {
+                if (pos != 0) {
+                    checkWhetherZIPisValid(root, Environment.getExternalStorageDirectory().
+                                    getAbsolutePath() +
+                                    "/dashboard./" + spinner3.getSelectedItem(),
+                            mContext.getCacheDir().getAbsolutePath() + "/headers");
+                } else {
+                    header_pack_location = "";
+                    is_header_pack_chosen = false;
+                    TextView headerPackName = (TextView)
+                            root.findViewById(R.id.themeName2);
+                    headerPackName.setText(mContext.getResources().getString(
+                            R.string.contextualheaderimporter_header_pack_na));
+
+                    TextView headerPackAuthor = (TextView)
+                            root.findViewById(R.id.themeAuthor2);
+                    headerPackAuthor.setText(mContext.getResources().getString(
+                            R.string.contextualheaderimporter_header_pack_na));
+
+                    TextView headerPackDevTeam = (TextView)
+                            root.findViewById(R.id.themeDevTeam2);
+                    headerPackDevTeam.setText(mContext.getResources().getString(
+                            R.string.contextualheaderimporter_header_pack_na));
+
+                    TextView headerPackVersion = (TextView)
+                            root.findViewById(R.id.themeVersion2);
+                    headerPackVersion.setText(mContext.getResources().getString(
+                            R.string.contextualheaderimporter_header_pack_na));
+
+                    TextView headerPackCount = (TextView)
+                            root.findViewById(R.id.themeCount2);
+                    headerPackCount.setText(mContext.getResources().getString(
+                            R.string.contextualheaderimporter_header_pack_na));
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> arg0) {
+            }
+        });
+        // Apply the adapter to the spinner
+        spinner3.setAdapter(adapter3);
 
         // QS Accent Colors
 
@@ -1982,6 +2170,9 @@ public class MyCardStackAdapter extends CardStackAdapter implements
 
                 // APK should now be built, good for us, now let's break it apart
                 try {
+                    if (is_header_pack_chosen) {
+                        unzipHeaderPacks();
+                    }
                     unzipNewAPK();
                 } catch (IOException e) {
                     did_it_compile = false;
@@ -2072,6 +2263,52 @@ public class MyCardStackAdapter extends CardStackAdapter implements
                 Toast toast = Toast.makeText(mContext.getApplicationContext(),
                         mContext.getResources().getString(
                                 R.string.unzipNewAPK_exception_toast),
+                        Toast.LENGTH_LONG);
+                toast.show();
+            }
+        }
+
+        public void unzipHeaderPacks() throws IOException {
+            String source = header_pack_location;
+            String destination = mContext.getCacheDir().getAbsolutePath() +
+                    "/creative_mode/assets/overlays/com.android.systemui/res/drawable-xxhdpi-v20/";
+
+            ZipInputStream inputStream = new ZipInputStream(
+                    new BufferedInputStream(new FileInputStream(source)));
+            try {
+                ZipEntry zipEntry;
+                int count;
+                byte[] buffer = new byte[8192];
+                while ((zipEntry = inputStream.getNextEntry()) != null) {
+                    File file = new File(destination, zipEntry.getName());
+                    File dir = zipEntry.isDirectory() ? file : file.getParentFile();
+                    if (!dir.isDirectory() && !dir.mkdirs())
+                        throw new FileNotFoundException("Failed to ensure directory: " +
+                                dir.getAbsolutePath());
+                    if (zipEntry.isDirectory())
+                        continue;
+                    FileOutputStream outputStream = new FileOutputStream(file);
+                    try {
+                        while ((count = inputStream.read(buffer)) != -1) {
+                            outputStream.write(buffer, 0, count);
+                        }
+                    } finally {
+                        outputStream.close();
+                    }
+                }
+                File headers_xml = new File(mContext.getCacheDir().getAbsolutePath() +
+                        "/creative_mode/assets/overlays/com.android.systemui/res/" +
+                        "drawable-xxhdpi-v20/headers.xml");
+                boolean deleted = headers_xml.delete();
+                inputStream.close();
+                Log.d("unzipHeaderPacks", "Finished decompressing header pack archive!");
+            } catch (Exception e) {
+                did_it_compile = false;
+                Log.e("unzipHeaderPacks", "There has been an exception while trying to " +
+                        "decompress the ZIP.");
+                Toast toast = Toast.makeText(mContext.getApplicationContext(),
+                        mContext.getResources().getString(
+                                R.string.unzipHeaderPacks_exception_toast),
                         Toast.LENGTH_LONG);
                 toast.show();
             }

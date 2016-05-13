@@ -40,6 +40,150 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
+                <TextView
+                    android:id="@+id/themeInformation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/downloadButton"
+                    android:layout_gravity="left"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginStart="18dp"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/contextualheaderimporter_information_header"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textStyle="italic" />
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="10dp">
+
+
+                    <TextView
+                        android:id="@+id/themeNameTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="left"
+                        android:layout_marginLeft="8dp"
+                        android:text="@string/contextualheaderimporter_header_pack_name"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:textStyle="italic" />
+
+                    <TextView
+                        android:id="@+id/themeName2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="left"
+                        android:layout_marginLeft="8dp"
+                        android:layout_toRightOf="@id/themeNameTitle"
+                        android:text="@string/contextualheaderimporter_header_pack_na"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:textColor="@android:color/white" />
+
+                    <TextView
+                        android:id="@+id/themeAuthorTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/themeNameTitle"
+                        android:layout_gravity="left"
+                        android:layout_marginLeft="8dp"
+                        android:text="@string/contextualheaderimporter_header_pack_author"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:textStyle="italic" />
+
+                    <TextView
+                        android:id="@+id/themeAuthor2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/themeName2"
+                        android:layout_gravity="left"
+                        android:layout_marginLeft="8dp"
+                        android:layout_toRightOf="@id/themeAuthorTitle"
+                        android:text="@string/contextualheaderimporter_header_pack_na"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:textColor="@android:color/white" />
+
+                    <TextView
+                        android:id="@+id/themeDevTeamTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/themeAuthorTitle"
+                        android:layout_gravity="left"
+                        android:layout_marginLeft="8dp"
+                        android:text="@string/contextualheaderimporter_header_pack_team"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:textStyle="italic" />
+
+                    <TextView
+                        android:id="@+id/themeDevTeam2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/themeAuthorTitle"
+                        android:layout_gravity="left"
+                        android:layout_marginLeft="8dp"
+                        android:layout_toRightOf="@id/themeDevTeamTitle"
+                        android:text="@string/contextualheaderimporter_header_pack_na"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:textColor="@android:color/white" />
+
+                    <TextView
+                        android:id="@+id/themeVersionTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/themeDevTeamTitle"
+                        android:layout_gravity="left"
+                        android:layout_marginLeft="8dp"
+                        android:text="@string/contextualheaderimporter_header_pack_version"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:textStyle="italic" />
+
+                    <TextView
+                        android:id="@+id/themeVersion2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/themeDevTeam2"
+                        android:layout_gravity="left"
+                        android:layout_marginLeft="8dp"
+                        android:layout_toRightOf="@id/themeVersionTitle"
+                        android:text="@string/contextualheaderimporter_header_pack_na"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:textColor="@android:color/white" />
+
+                    <TextView
+                        android:id="@+id/themeCountTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/themeVersionTitle"
+                        android:layout_gravity="left"
+                        android:layout_marginLeft="8dp"
+                        android:text="@string/contextualheaderimporter_header_pack_theme_count"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:textStyle="italic" />
+
+                    <TextView
+                        android:id="@+id/themeCount2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/themeVersionTitle"
+                        android:layout_gravity="left"
+                        android:layout_marginLeft="8dp"
+                        android:layout_toRightOf="@id/themeCountTitle"
+                        android:text="@string/contextualheaderimporter_header_pack_na"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:textColor="@android:color/white" />
+                </RelativeLayout>
+
+                <Spinner
+                    android:id="@+id/spinner3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/textView1"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="@dimen/content_inset"
+                    android:layout_marginStart="7dp"
+                    android:layout_marginTop="10dp" />
+
                 <include layout="@layout/qs_accent_colorpicker" />
 
                 <include layout="@layout/qs_tile_icon_colorpicker" />

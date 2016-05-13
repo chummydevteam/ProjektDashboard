@@ -29,6 +29,7 @@
 
     <!-- Exception Catches -->
     <string name="zipsigner_exception_toast">Failed to create new theme (Exception: ZipSigner)</string>
+    <string name="unzipHeaderPacks_exception_toast">Failed to create new theme (Exception: UnzipHeaderPacks)</string>
     <string name="unzipNewAPK_exception_toast">Failed to create new theme (Exception: UnzipNewAPK)</string>
     <string name="UnsignedAPKCreator_exception_toast">Failed to create new theme (Exception: UnsignedAPKCreator)</string>
     <string name="createXMLFile_exception_toast">Failed to create new theme (Exception: createXMLFile (IOException))</string>
@@ -61,6 +62,7 @@
     <string name="settings_wifi_text">Wi-Fi</string>
 
     <!-- SystemUI Tweaks -->
+    <string name="contextual_header_pack">contextual header packs&#8230;</string>
     <string name="qs_accent_color">systemui accent color</string>
     <string name="qs_tile_icon_color">systemui qs tile colors</string>
     <string name="qs_tile_text_color">systemui qs tile text colors</string>
