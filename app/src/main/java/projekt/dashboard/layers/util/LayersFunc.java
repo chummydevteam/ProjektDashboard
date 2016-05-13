@@ -2,13 +2,20 @@ package projekt.dashboard.layers.util;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
+import android.os.Environment;
 import android.util.Log;
+
+import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.MaterialDialog;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.http.HttpResponse;
@@ -27,6 +34,9 @@ import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.StringTokenizer;
+
+import projekt.dashboard.layers.R;
 
 
 /**
@@ -40,25 +50,58 @@ public class LayersFunc {
     static String link = "https://github.com/nicholaschum/ProjektDashboard/raw/resources/aapt";
     public static String vendor = "/system/vendor/overlay";
     public static String mount = "/system";
+    public static boolean downloaded = true;
+    public static String themeframework = "Nill";
+    public static String themesystemui = "Nill";
 
     public LayersFunc(Context contextxyz) {
         context = contextxyz;
     }
 
-    public static void DownloadFirstResources(Context context) {
-        SharedPreferences settings = context.getSharedPreferences(PREFS_NAME, 0);
+    public static void DownloadFirstResources(final Context context) {
         changeVendorAndMount();
-        if (settings.getBoolean("my_first_time", true)) {
-            //the app is being launched for first time, do something
+        findFrameworkFile();
+        findSystemUIFile();
+        Log.e("Final Framework", themeframework);
+        Log.e("Final SystemUI", themesystemui);
+        File aa = new File("/system/bin/aapt");
+        if (aa.exists()) {
+
+        } else {
             if (isNetworkAvailable(context)) {
-                if (checkThemeMainSupported(context) && checkThemeSysSupported(context)) {
-                    Log.e("Switcher", "First time");
-                    Log.e("DownloadAAPT", "Calling Function");
-                    downloadAAPT(context);
-                    // record the fact that the app has been started at least once
-                    settings.edit().putBoolean("my_first_time", false).apply();
-                }
+                Log.e("Switcher", "First time");
+                Log.e("DownloadAAPT", "Calling Function");
+                downloaded = true;
+                downloadAAPT(context);
+            } else {
+                MaterialDialog md = new MaterialDialog.Builder(context)
+                        .title("We Need to Download Some Resources")
+                        .content("Please connect to the internet and meet us back here")
+                        .positiveText("Open Settings")
+                        .negativeText("Cancel")
+                        .onPositive(new MaterialDialog.SingleButtonCallback() {
+                            @Override
+                            public void onClick(MaterialDialog dialog, DialogAction which) {
+                                Intent intent_rrolayers = context.getPackageManager().getLaunchIntentForPackage("com.android.settings");
+                                context.startActivity(intent_rrolayers);
+                                downloaded = false;
+                            }
+                        })
+                        .onNegative(new MaterialDialog.SingleButtonCallback() {
+                            @Override
+                            public void onClick(MaterialDialog dialog, DialogAction which) {
+                                downloaded = false;
+                            }
+                        })
+                        .dismissListener(new DialogInterface.OnDismissListener() {
+                            @Override
+                            public void onDismiss(DialogInterface dialog) {
+                                downloaded = false;
+                            }
+                        })
+                        .show();
             }
+
         }
     }
 
@@ -70,10 +113,10 @@ public class LayersFunc {
             mount = "/vendor";
             Log.e("64 bit Device ", Build.DEVICE + " changed the vendor and mount");
         } else {
-            Log.e("Checking", "64 Bit Active");
+            Log.e("Checking", "32 Bit Active");
             Log.e("32 bit Device ", Build.DEVICE + " Found,now changing the vendor and mount");
-            vendor = "/vendor/overlay";
-            mount = "/vendor";
+            vendor = "/system/vendor/overlay";
+            mount = "/system";
             Log.e("32 bit Device ", Build.DEVICE + " changed the vendor and mount");
         }
     }
@@ -133,8 +176,7 @@ public class LayersFunc {
             Log.e("DownloadindResources", "Calling Function");
             new downloadResources().execute(downloadCommands);
             Log.e("DownloadAAPT", "Function Stopped");
-        } else
-        {
+        } else {
             Log.e("DownloadAAPT", "32 Bit Active");
             Log.e("32 bit Device ", Build.DEVICE + " Found,now changing the vendor and mount");
             Log.e("32 bit Device ", Build.DEVICE + " changed the vendor and mount");
@@ -288,13 +330,13 @@ public class LayersFunc {
         }
     }
 
-    public static void copyFileToApp(Context context,String theme_dir, String destination_dir) {
+    public static void copyFileToApp(Context context, String theme_dir, String destination_dir) {
         Log.e("CopyFrameworkFile", "Function Called");
         Log.e("CopyFrameworkFile", "Function Started");
         String sourcePath = theme_dir;
         File source = new File(sourcePath);
         Log.e("Source", sourcePath);
-        String destinationPath = context.getFilesDir().getAbsolutePath()+"/"+destination_dir;
+        String destinationPath = context.getFilesDir().getAbsolutePath() + "/" + destination_dir;
         Log.e("Destination", destinationPath);
         Log.e("CopyFrameworkFile", "Function Started");
         File destination = new File(destinationPath);
@@ -384,47 +426,78 @@ public class LayersFunc {
         fw.close();
     }
 
-    public static void copyFinalizedAPK(Context context, String file) {
+    public static void copyFinalizedAPK(Context context, String file, boolean files) {
         String mount = "mount -o remount,rw /";
         String mountsys = "mount -o remount,rw /system";
         String remount = "mount -o remount,ro /";
         String remountsys = "mount -o remount,ro /system";
         eu.chainfire.libsuperuser.Shell.SU.run(mount);
         eu.chainfire.libsuperuser.Shell.SU.run(mountsys);
+        if (files) {
             eu.chainfire.libsuperuser.Shell.SU.run(
                     "cp " +
                             context.getFilesDir().getAbsolutePath() +
                             "/" + file + ".apk " + "/system/vendor/overlay/" + file + ".apk");
-            eu.chainfire.libsuperuser.Shell.SU.run("chmod 644 " + "/system/vendor/overlay/" + file + ".apk");
+            Log.e("copyFinalizedAPK",
+                    "Successfully copied the modified resource APK from " + context.getFilesDir().getAbsolutePath() + " into " +
+                            "/system/vendor/overlay/ and modified the permissions!");
+        } else {
+            eu.chainfire.libsuperuser.Shell.SU.run(
+                    "cp " +
+                            context.getCacheDir().getAbsolutePath() +
+                            "/" + file + ".apk " + "/system/vendor/overlay/" + file + ".apk");
+            Log.e("copyFinalizedAPK",
+                    "Successfully copied the modified resource APK from " + context.getCacheDir().getAbsolutePath() + " into " +
+                            "/system/vendor/overlay/ and modified the permissions!");
+        }
+        eu.chainfire.libsuperuser.Shell.SU.run("chmod 644 " + "/system/vendor/overlay/" + file + ".apk");
         eu.chainfire.libsuperuser.Shell.SU.run(remount);
         eu.chainfire.libsuperuser.Shell.SU.run(remountsys);
-        Log.e("copyFinalizedAPK",
-                "Successfully copied the modified resource APK into " +
-                        "/system/vendor/overlay/ and modified the permissions!");
-        eu.chainfire.libsuperuser.Shell.SU.run("rm -r /data/data/projekt.dashboard.layers/files");
+        if (files) {
+            eu.chainfire.libsuperuser.Shell.SU.run("rm -r /data/data/projekt.dashboard.layers/files");
+        } else {
+            eu.chainfire.libsuperuser.Shell.SU.run("rm -r /data/data/projekt.dashboard.layers/cache");
+        }
         Log.e("copyFinalizedAPK",
                 "Successfully Deleted Files ");
 
     }
 
-    public static void copyFABFinalizedAPK(Context context, String file) {
+    public static void copyFABFinalizedAPK(Context context, String file, boolean files) {
         String mount = "mount -o remount,rw /";
         String mountsys = "mount -o remount,rw /vendor";
         String remount = "mount -o remount,ro /";
         String remountsys = "mount -o remount,ro /vendor";
         eu.chainfire.libsuperuser.Shell.SU.run(mount);
         eu.chainfire.libsuperuser.Shell.SU.run(mountsys);
-        eu.chainfire.libsuperuser.Shell.SU.run(
-                "cp " +
-                        context.getFilesDir().getAbsolutePath() +
-                        "/" + file + ".apk " + "/vendor/overlay/" + file + ".apk");
+        if (files) {
+            eu.chainfire.libsuperuser.Shell.SU.run(
+                    "cp " +
+                            context.getFilesDir().getAbsolutePath() +
+                            "/" + file + ".apk " + "/vendor/overlay/" + file + ".apk");
+            Log.e("copyFinalizedAPK",
+                    "Successfully copied the modified resource APK from " + context.getFilesDir().getAbsolutePath() + " into " +
+                            "/vendor/overlay/ and modified the permissions!");
+        } else {
+            eu.chainfire.libsuperuser.Shell.SU.run(
+                    "cp " +
+                            context.getCacheDir().getAbsolutePath() +
+                            "/" + file + ".apk " + "/vendor/overlay/" + file + ".apk");
+            Log.e("copyFinalizedAPK",
+                    "Successfully copied the modified resource APK from " + context.getCacheDir().getAbsolutePath() + " into " +
+                            "/vendor/overlay/ and modified the permissions!");
+        }
         eu.chainfire.libsuperuser.Shell.SU.run("chmod 644 " + "/vendor/overlay/" + file + ".apk");
         eu.chainfire.libsuperuser.Shell.SU.run(remount);
         eu.chainfire.libsuperuser.Shell.SU.run(remountsys);
         Log.e("copyFinalizedAPK",
                 "Successfully copied the modified resource APK into " +
                         "/vendor/overlay/ and modified the permissions!");
-        eu.chainfire.libsuperuser.Shell.SU.run("rm -r /data/data/projekt.dashboard.layers/files");
+        if (files) {
+            eu.chainfire.libsuperuser.Shell.SU.run("rm -r /data/data/projekt.dashboard.layers/files");
+        } else {
+            eu.chainfire.libsuperuser.Shell.SU.run("rm -r /data/data/projekt.dashboard.layers/cache");
+        }
         Log.e("copyFinalizedAPK",
                 "Successfully Deleted Files ");
 
@@ -454,5 +527,55 @@ public class LayersFunc {
 
         Log.e("performAAPTonCommonsAPK",
                 "Added freshly created main " + file + " file...ALL DONE!");
+    }
+
+    public static void findFrameworkFile() {
+        try {
+            File f2 = new File(vendor + "/");
+            File[] files2 = f2.listFiles();
+            if (files2 != null) {
+                for (File inFile2 : files2) {
+                    if (inFile2.isFile()) {
+                        Log.e("Bhadwa", "Mila " + inFile2);
+                        String filenameParse[] = inFile2.getAbsolutePath().split("/");
+                        String last = filenameParse[filenameParse.length - 1];
+                        StringTokenizer stringTokenizer = new StringTokenizer(last, ".");
+                        String finalname = stringTokenizer.nextToken();
+                        if (finalname.contains("HeaderSwapperFrame")) {
+                            Log.e("MILA", finalname);
+                            themeframework = finalname;
+                            break;
+                        }
+                    }
+                }
+            }
+        } catch (Exception e) {
+
+        }
+    }
+
+    public static void findSystemUIFile() {
+        try {
+            File f2 = new File(vendor + "/");
+            File[] files2 = f2.listFiles();
+            if (files2 != null) {
+                for (File inFile2 : files2) {
+                    if (inFile2.isFile()) {
+                        Log.e("Bhadwa", "Mila " + inFile2);
+                        String filenameParse[] = inFile2.getAbsolutePath().split("/");
+                        String last = filenameParse[filenameParse.length - 1];
+                        StringTokenizer stringTokenizer = new StringTokenizer(last, ".");
+                        String finalname = stringTokenizer.nextToken();
+                        if (finalname.contains("HeaderSwapperSys")) {
+                            Log.e("MILA", finalname);
+                            themesystemui = finalname;
+                            break;
+                        }
+                    }
+                }
+            }
+        } catch (Exception e) {
+
+        }
     }
 }
