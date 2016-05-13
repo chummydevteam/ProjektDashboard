@@ -12,7 +12,6 @@ import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.Switch;
-import android.widget.TextView;
 
 import java.io.File;
 

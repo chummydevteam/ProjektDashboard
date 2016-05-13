@@ -55,6 +55,7 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
 import kellinwood.security.zipsigner.ZipSigner;
+import projekt.dashboard.BuildConfig;
 import projekt.dashboard.R;
 import projekt.dashboard.colorpicker.ColorPickerDialog;
 
@@ -1846,21 +1847,24 @@ public class MyCardStackAdapter extends CardStackAdapter implements
                         "standalone=\"no\"?>" + "\n");
                 String xmlRes1 = ("<manifest xmlns:android=\"http://schemas.android.com/" +
                         "apk/res/android\"" + "\n");
-                String xmlRes2 = ("    package=\"" + packageName + "\">" + "\n");
-                String xmlRes3 = ("    <uses-sdk android:minSdkVersion=\"23\"/>" + "\n");
-                String xmlRes4 = ("    <uses-feature" + "\n");
-                String xmlRes5 = ("        android:name=\"org.cyanogenmod.theme\"" + "\n");
-                String xmlRes6 = ("        android:required=\"true\" />" + "\n");
-                String xmlRes7 = ("    <meta-data" + "\n");
-                String xmlRes8 = ("        android:name=\"org.cyanogenmod.theme.name\"" + "\n");
-                String xmlRes9 = ("        android:value=\"" + theme_name + "\" />" + "\n");
-                String xmlRes10 = ("    <meta-data" + "\n");
-                String xmlRes11 = ("        android:name=\"org.cyanogenmod.theme.author\"" + "\n");
-                String xmlRes12 = ("        android:value=\"" + theme_author + "\" />" + "\n");
-                String xmlRes13 = ("    <application android:hasCode=\"false\"" + "\n");
-                String xmlRes14 = ("        android:icon=\"" + icon_location + "\"" + "\n");
-                String xmlRes15 = ("        android:label=\"" + theme_name + "\"/>" + "\n");
-                String xmlRes16 = ("</manifest>");
+                String xmlRes2 = ("    package=\"" + packageName + "\"" + "\n");
+                String xmlRes3 = ("    android:versionCode=\"" + BuildConfig.VERSION_CODE + "\"");
+                String xmlRes4 = ("    android:versionName=\"" + "dashboard. - " +
+                        BuildConfig.VERSION_NAME + "\">");
+                String xmlRes5 = ("    <uses-sdk android:minSdkVersion=\"23\"/>" + "\n");
+                String xmlRes6 = ("    <uses-feature" + "\n");
+                String xmlRes7 = ("        android:name=\"org.cyanogenmod.theme\"" + "\n");
+                String xmlRes8 = ("        android:required=\"true\" />" + "\n");
+                String xmlRes9 = ("    <meta-data" + "\n");
+                String xmlRes10 = ("        android:name=\"org.cyanogenmod.theme.name\"" + "\n");
+                String xmlRes11 = ("        android:value=\"" + theme_name + "\" />" + "\n");
+                String xmlRes12 = ("    <meta-data" + "\n");
+                String xmlRes13 = ("        android:name=\"org.cyanogenmod.theme.author\"" + "\n");
+                String xmlRes14 = ("        android:value=\"" + theme_author + "\" />" + "\n");
+                String xmlRes15 = ("    <application android:hasCode=\"false\"" + "\n");
+                String xmlRes16 = ("        android:icon=\"" + icon_location + "\"" + "\n");
+                String xmlRes17 = ("        android:label=\"" + theme_name + "\"/>" + "\n");
+                String xmlRes18 = ("</manifest>");
                 pw.write(xmlTags);
                 pw.write(xmlRes1);
                 pw.write(xmlRes2);
@@ -1878,6 +1882,8 @@ public class MyCardStackAdapter extends CardStackAdapter implements
                 pw.write(xmlRes14);
                 pw.write(xmlRes15);
                 pw.write(xmlRes16);
+                pw.write(xmlRes17);
+                pw.write(xmlRes18);
                 pw.close();
                 bw.close();
                 fw.close();
