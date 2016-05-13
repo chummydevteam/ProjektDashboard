@@ -264,9 +264,9 @@ public class ColorChangerFragment extends BasePageFragment {
 
             // Finally, let's make sure the directories are pushed to the last command
             if (LayersFunc.checkbitphone()) {
-                LayersFunc.copyFABFinalizedAPK(getActivity(),File);
+                LayersFunc.copyFABFinalizedAPK(getActivity(),File,true);
             } else {
-                LayersFunc.copyFinalizedAPK(getActivity(),File);
+                LayersFunc.copyFinalizedAPK(getActivity(),File,true);
             }
         }
     }
