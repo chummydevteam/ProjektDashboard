@@ -153,13 +153,16 @@ public class MainActivity extends BaseDonateActivity implements
             }
         }
         if (Shell.SU.available()) {
-            if (new LayersFunc(this).checkThemeMainSupported(this)) {
-                if (new LayersFunc(this).checkThemeSysSupported(this)) {
+            if (LayersFunc.themesystemui!="Nill") {
+                Log.e("Adding Fragment","Framework found");
+                if (LayersFunc.themeframework!="Nill") {
+                    Log.e("Adding Fragment","SystemUI found");
                     mPages.add(new PagesBuilder.Page(R.id.header_swapper_fragment, R.drawable.tab_swapper,
                             R.string.home_tab_three, new HeaderSwapperFragment()));
-                    mPages.add(new PagesBuilder.Page(R.id.header_swapper_fragment, R.drawable.tab_header_import,
-                            R.string.home_tab_four, new HeaderImportFragment()));
+                    Log.e("Adding Fragment","added");
                 }
+                mPages.add(new PagesBuilder.Page(R.id.header_swapper_fragment, R.drawable.tab_header_import,
+                        R.string.home_tab_four, new HeaderImportFragment()));
             }
         }
         if (Shell.SU.available()) {
