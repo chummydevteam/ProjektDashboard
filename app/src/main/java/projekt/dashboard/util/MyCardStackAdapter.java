@@ -73,6 +73,8 @@ public class MyCardStackAdapter extends CardStackAdapter implements
     public CircularFillableLoaders loader;
     public TextView loader_string;
 
+    public android.support.v7.widget.Toolbar framework_toolbar;
+    public android.support.v7.widget.Toolbar settings_toolbar;
     public ImageView main_color;
 
     // ==================================== Framework Tweaks ================================ //
@@ -205,8 +207,8 @@ public class MyCardStackAdapter extends CardStackAdapter implements
         CardView root = (CardView) mInflater.inflate(R.layout.framework_card, container, false);
         root.setCardBackgroundColor(ContextCompat.getColor(mContext, bgColorIds[0]));
 
-        final android.support.v7.widget.Toolbar framework_toolbar =
-                (android.support.v7.widget.Toolbar) root.findViewById(R.id.framework_toolbar);
+        framework_toolbar = (android.support.v7.widget.Toolbar)
+                root.findViewById(R.id.framework_toolbar);
         framework_toolbar.setNavigationIcon(R.drawable.ic_arrow_back_24dp);
 
         final Switch switch1 = (Switch) root.findViewById(R.id.switch_example);
@@ -401,6 +403,7 @@ public class MyCardStackAdapter extends CardStackAdapter implements
                         current_selected_system_main_color = color;
                         main_color.setColorFilter(color, PorterDuff.Mode.SRC_ATOP);
                         framework_toolbar.setBackgroundColor(color);
+                        settings_toolbar.setBackgroundColor(color);
                     }
                 });
                 cpd.show();
@@ -480,7 +483,8 @@ public class MyCardStackAdapter extends CardStackAdapter implements
 
         final ImageView wifiIcon = (ImageView) root.findViewById(R.id.wifiIcon);
         final TextView categoryHeader = (TextView) root.findViewById(R.id.categoryHeaderTitle);
-
+        settings_toolbar = (android.support.v7.widget.Toolbar)
+                root.findViewById(R.id.settings_toolbar);
 
         // Colorful DU/PN Tweaks Icon
 
@@ -874,8 +878,12 @@ public class MyCardStackAdapter extends CardStackAdapter implements
                         toast.show();
                     } else {
                         colorful_icon_switch.setVisibility(View.VISIBLE);
-                        current_selected_system_main_color = Color.argb(255, 33, 32, 33);
-                        main_color.setColorFilter(current_selected_system_main_color);
+                        if (current_selected_system_main_color == Color.argb(255, 0, 0, 0)) {
+                            current_selected_system_main_color = Color.argb(255, 33, 32, 33);
+                            main_color.setColorFilter(current_selected_system_main_color);
+                            framework_toolbar.setBackgroundColor(current_selected_system_main_color);
+                            settings_toolbar.setBackgroundColor(current_selected_system_main_color);
+                        }
                         current_cdt_theme = "com.chummy.jezebel.materialdark.donate";
                     }
                 }
@@ -889,8 +897,12 @@ public class MyCardStackAdapter extends CardStackAdapter implements
                         spinner1.setSelection(0);
                     } else {
                         colorful_icon_switch.setVisibility(View.VISIBLE);
-                        current_selected_system_main_color = Color.argb(255, 0, 0, 0);
-                        main_color.setColorFilter(current_selected_system_main_color);
+                        if (current_selected_system_main_color == Color.argb(255, 33, 32, 33)) {
+                            current_selected_system_main_color = Color.argb(255, 0, 0, 0);
+                            main_color.setColorFilter(current_selected_system_main_color);
+                            framework_toolbar.setBackgroundColor(current_selected_system_main_color);
+                            settings_toolbar.setBackgroundColor(current_selected_system_main_color);
+                        }
                         current_cdt_theme = "com.chummy.jezebel.blackedout.donate";
                     }
                 }
@@ -1441,7 +1453,7 @@ public class MyCardStackAdapter extends CardStackAdapter implements
             if (!dashboard_dividers) {
                 String source = mContext.getCacheDir().getAbsolutePath() +
                         "/creative_files/";
-                // Use v12 here just in case the user ticks this option after selecting a color
+                // Use v12 here just in case
                 String destination = mContext.getCacheDir().getAbsolutePath() +
                         "/creative_mode/assets/overlays/com.android.settings/res/values-v12/";
                 moveFile(source, "dashboard_dividers.xml", destination);
