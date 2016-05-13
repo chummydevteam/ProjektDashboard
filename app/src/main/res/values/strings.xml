@@ -284,6 +284,11 @@
     <string name="themeutilities_more_theme_utilities">more theme utilities</string>
     <string name="themeutilities_open_layers_manager">open layers manager</string>
     <string name="themeutilities_clear_allthemes">clear overlay folder</string>
+    <string name="anothertheme">Theme Other than Akzent found,would you like to install akzent.</string>
+    <string name="xhdpi">xhdpi</string>
+    <string name="xxhdpi">xxhdpi</string>
+    <string name="xxxhdpi">xxxhdpi</string>
+    <string name="selectyourdeviceconfiguration">select your device dpi</string>
 
     <string-array name="wallpaper_options">
         <item>@string/apply</item>
