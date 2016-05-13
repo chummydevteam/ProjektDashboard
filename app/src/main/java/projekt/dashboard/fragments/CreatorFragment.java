@@ -38,7 +38,7 @@ public class CreatorFragment extends BasePageFragment {
             mCardStackLayout.setShowInitAnimation(CardStackPrefs.isShowInitAnimationEnabled());
 
             mCardStackLayout.setParallaxEnabled(CardStackPrefs.isParallaxEnabled());
-            mCardStackLayout.setParallaxScale(CardStackPrefs.getParallaxScale(getActivity()));
+            mCardStackLayout.setParallaxScale(CardStackPrefs.getParallaxScale());
 
             mCardStackLayout.setCardGap(Units.dpToPx(getActivity(),
                     CardStackPrefs.getCardGap(getActivity())));
