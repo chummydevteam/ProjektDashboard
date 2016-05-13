@@ -22,12 +22,15 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.isseiaoki.simplecropview.CropImageView;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.LineIterator;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -51,7 +54,7 @@ public class HeaderSwapperFragment extends BasePageFragment {
     private static int RESULT_LOAD_IMAGE = 1;
     public ViewGroup inflation;
     public boolean is_all_selected, is_picture_selected, are_we_clearing_Files_after,
-            free_crop_mode, swap_contextual_header;
+            free_crop_mode, swap_contextual_header, is_radio_selected;
     public CropImageView cropImageView;
     public ImageView croppedImageView;
     public Bitmap croppedBitmap;
@@ -66,6 +69,9 @@ public class HeaderSwapperFragment extends BasePageFragment {
     public SharedPreferences prefs;
     public String vendor = "/system/vendor/overlay";
     public String mount = "/system";
+    public boolean xhdpi = false;
+    public boolean xxhdpi = true;
+    public boolean xxxhdpi = false;
 
     @Nullable
     @Override
@@ -108,6 +114,9 @@ public class HeaderSwapperFragment extends BasePageFragment {
                     }
                 });
 
+        final LinearLayout ln = (LinearLayout) inflation.findViewById(R.id.dpi);
+        ln.setVisibility(View.GONE);
+
         swapcontext = (CheckBox) inflation.findViewById(R.id.checkBox3);
         swapcontext.setOnCheckedChangeListener(
                 new CompoundButton.OnCheckedChangeListener() {
@@ -115,14 +124,46 @@ public class HeaderSwapperFragment extends BasePageFragment {
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                         if (isChecked) {
                             swap_contextual_header = true;
+                            ln.setVisibility(View.VISIBLE);
                             Log.e("CheckBox", "Universal variable to advanced log ENABLED.");
                         } else {
                             swap_contextual_header = false;
+                            ln.setVisibility(View.GONE);
                             Log.e("CheckBox", "Universal variable to advanced log DISABLED.");
                         }
                     }
                 });
-
+        RadioGroup radioGroup = (RadioGroup) inflation.findViewById(R.id.rg);
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                switch (checkedId) {
+                    case R.id.radio:
+                        xhdpi = true;
+                        xxhdpi = false;
+                        xxxhdpi = false;
+                        is_radio_selected = true;
+                        break;
+                    case R.id.radio2:
+                        xhdpi = false;
+                        xxhdpi = true;
+                        xxxhdpi = false;
+                        is_radio_selected = true;
+                        break;
+                    case R.id.radio3:
+                        xhdpi = false;
+                        xxhdpi = false;
+                        xxxhdpi = true;
+                        is_radio_selected = true;
+                        break;
+                }
+                if (swap_contextual_header && is_radio_selected) {
+                    apply_fab.show();
+                } else {
+                    apply_fab.hide();
+                }
+            }
+        });
         checkBoxInstructions = (TextView) inflation.findViewById(R.id.textView2);
         saveButton = (Button) inflation.findViewById(R.id.save_button);
 
@@ -167,13 +208,7 @@ public class HeaderSwapperFragment extends BasePageFragment {
     }
 
     public void letsGetStarted() {
-        boolean phone = checkbitphone();
-        if (phone == true) {
-            Log.e("colorswatch", "Found 64,Setting Vendor");
-            vendor = "/vendor/overlay";
-            mount = "/vendor";
-        }
-        String[] secondPhaseCommands = {vendor + "/Akzent_Framework.apk"};
+        String[] secondPhaseCommands = {LayersFunc.vendor + "/" + LayersFunc.themeframework + ".apk"};
         Log.e("letsGetStarted", secondPhaseCommands[0]);
 
         new secondPhaseAsyncTasks().execute(secondPhaseCommands);
@@ -187,40 +222,6 @@ public class HeaderSwapperFragment extends BasePageFragment {
         });
     }
 
-    public boolean checkbitphone() {
-        Log.e("Checkbitphone", "Function Called");
-        Log.e("Checkbitphone", "Function Started");
-        String[] bit = Build.SUPPORTED_32_BIT_ABIS;
-        String[] bit64 = Build.SUPPORTED_64_BIT_ABIS;
-        int flag = 0;
-        try {
-            if (bit64[0] != null) {
-                Log.e("Checkbitphone", "64 Found");
-                Log.e("Checkbitphone", "Checking if its one from FAB");
-                if (Build.DEVICE.equals("flounder") || Build.DEVICE.equals("flounder_lte") || Build.DEVICE.equals("angler") || Build.DEVICE.equals("bullhead")) {
-                    Log.e("64 bit Device ", Build.DEVICE + " Found,now returning");
-                    Log.e("Checkbitphone", "Function Stopped");
-                    return true;
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        try {
-            if (flag == 0) {
-                if (bit[0] != null) {
-                    Log.e("Checkbitphone", "32 Bit Active");
-                    Log.e("Checkbitphone", "Normal Phone Overlay Folder found");
-                    Log.e("Checkbitphone", "Function Stopped");
-                    return false;
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
-
     public void resetImageViews() {
         ImageView image_to_crop = (ImageView) inflation.findViewById(R.id.cropImageView);
         image_to_crop.setVisibility(View.GONE);
@@ -231,6 +232,7 @@ public class HeaderSwapperFragment extends BasePageFragment {
         saveButton.setVisibility(View.GONE);
         checkBoxInstructions.setVisibility(View.VISIBLE);
         freeCropMode.setVisibility(View.VISIBLE);
+        swapcontext.setVisibility(View.VISIBLE);
         is_picture_selected = false;
         changeFABaction();
     }
@@ -415,13 +417,13 @@ public class HeaderSwapperFragment extends BasePageFragment {
             String sourcePath = theme_dir;
             File source = new File(sourcePath);
             String destinationPath = getActivity().getFilesDir().getAbsolutePath() +
-                    "/Akzent_Framework.apk";
+                    "/" + LayersFunc.themeframework + ".apk";
             File destination = new File(destinationPath);
 
-            String sourcePathsys = vendor + "/Akzent_SystemUI";
+            String sourcePathsys = vendor + "/" + LayersFunc.themesystemui;
             File sourcesys = new File(sourcePathsys);
             String destinationPathsys = getActivity().getFilesDir().getAbsolutePath() +
-                    "/Akzent_SystemUI.apk";
+                    "/" + LayersFunc.themesystemui + ".apk";
             File destinationsys = new File(destinationPathsys);
 
             try {
@@ -453,9 +455,11 @@ public class HeaderSwapperFragment extends BasePageFragment {
                     "Mounting system as read-write as we prepare for some commands...");
             eu.chainfire.libsuperuser.Shell.SU.run("mount -o remount,rw /");
             eu.chainfire.libsuperuser.Shell.SU.run("mkdir /res/drawable");
-            eu.chainfire.libsuperuser.Shell.SU.run("mkdir /res/drawable-xhdpi-v4");
+            if(xhdpi){
+            eu.chainfire.libsuperuser.Shell.SU.run("mkdir /res/drawable-xhdpi-v4");}
             eu.chainfire.libsuperuser.Shell.SU.run("mkdir /res/drawable-xxhdpi-v4");
-            eu.chainfire.libsuperuser.Shell.SU.run("mkdir /res/drawable-xxxhdpi-v4");
+            if(xxxhdpi){
+            eu.chainfire.libsuperuser.Shell.SU.run("mkdir /res/drawable-xxxhdpi-v4");}
             eu.chainfire.libsuperuser.Shell.SU.run(
                     "cp " + getActivity().getFilesDir().getAbsolutePath() +
                             "/res/drawable/menuitem_background.png " +
@@ -480,7 +484,22 @@ public class HeaderSwapperFragment extends BasePageFragment {
                                     "/res/drawable-xxhdpi-v4/" + source.get(i) +
                                     " /res/drawable-xxhdpi-v4/" +
                                     source.get(i));
-                }
+                }if(xhdpi){
+                for (int i = 0; i < source.size(); i++) {
+                    eu.chainfire.libsuperuser.Shell.SU.run(
+                            "cp " + getActivity().getFilesDir().getAbsolutePath() +
+                                    "/res/drawable-xhdpi-v4/" + source.get(i) +
+                                    " /res/drawable-xhdpi-v4/" +
+                                    source.get(i));
+                }}
+                if(xxxhdpi){
+                for (int i = 0; i < source.size(); i++) {
+                    eu.chainfire.libsuperuser.Shell.SU.run(
+                            "cp " + getActivity().getFilesDir().getAbsolutePath() +
+                                    "/res/drawable-xxxhdpi-v4/" + source.get(i) +
+                                    " /res/drawable-xxxhdpi-v4/" +
+                                    source.get(i));
+                }}
                 Log.e("performAAPTonCommonsAPK",
                         "Successfully copied all drawables into the root folder.");
             }
@@ -492,28 +511,28 @@ public class HeaderSwapperFragment extends BasePageFragment {
             Process nativeApp3 = Runtime.getRuntime().exec(
                     "aapt remove " +
                             getActivity().getFilesDir().getAbsolutePath() +
-                            "/Akzent_Framework.apk res/drawable/menuitem_background.png");
+                            "/" + LayersFunc.themeframework + ".apk res/drawable/menuitem_background.png");
             Log.e("performAAPTonCommonsAPK",
                     "Deleted main drawable file!");
             nativeApp3.waitFor();
             Process nativeAppx = Runtime.getRuntime().exec(
                     "aapt remove " +
                             getActivity().getFilesDir().getAbsolutePath() +
-                            "/Akzent_Framework.apk res/drawable-xhdpi-v4/menuitem_background.png");
+                            "/" + LayersFunc.themeframework + ".apk res/drawable-xhdpi-v4/menuitem_background.png");
             Log.e("performAAPTonCommonsAPK",
                     "Deleted main drawable file!");
             nativeAppx.waitFor();
             Process nativeAppxx = Runtime.getRuntime().exec(
                     "aapt remove " +
                             getActivity().getFilesDir().getAbsolutePath() +
-                            "/Akzent_Framework.apk res/drawable-xxhdpi-v4/menuitem_background.png");
+                            "/" + LayersFunc.themeframework + ".apk res/drawable-xxhdpi-v4/menuitem_background.png");
             Log.e("performAAPTonCommonsAPK",
                     "Deleted main drawable file!");
             nativeAppxx.waitFor();
             Process nativeAppxxx = Runtime.getRuntime().exec(
                     "aapt remove " +
                             getActivity().getFilesDir().getAbsolutePath() +
-                            "/Akzent_Framework.apk res/drawable-xxxhdpi-v4/menuitem_background.png");
+                            "/" + LayersFunc.themeframework + ".apk res/drawable-xxxhdpi-v4/menuitem_background.png");
             Log.e("performAAPTonCommonsAPK",
                     "Deleted main drawable file!");
             nativeAppxxx.waitFor();
@@ -522,38 +541,73 @@ public class HeaderSwapperFragment extends BasePageFragment {
                 for (int i = 0; i < source.size(); i++) {
                     Process nativeApp1 = Runtime.getRuntime().exec(
                             "aapt remove " + getActivity().getFilesDir().getAbsolutePath() +
-                                    "/Akzent_SystemUI.apk " +
+                                    "/" + LayersFunc.themesystemui + ".apk " +
                                     "res/drawable-xxhdpi-v4" +
                                     source.get(i));
                     nativeApp1.waitFor();
-                }
+                }if (xhdpi){
+                for (int i = 0; i < source.size(); i++) {
+                    Process nativeApp1 = Runtime.getRuntime().exec(
+                            "aapt remove " + getActivity().getFilesDir().getAbsolutePath() +
+                                    "/" + LayersFunc.themesystemui + ".apk " +
+                                    "res/drawable-xhdpi-v4" +
+                                    source.get(i));
+                    nativeApp1.waitFor();
+                }}
+                if(xxxhdpi){
+                for (int i = 0; i < source.size(); i++) {
+                    Process nativeApp1 = Runtime.getRuntime().exec(
+                            "aapt remove " + getActivity().getFilesDir().getAbsolutePath() +
+                                    "/" + LayersFunc.themesystemui + ".apk " +
+                                    "res/drawable-xxxhdpi-v4" +
+                                    source.get(i));
+                    nativeApp1.waitFor();
+                }}
                 Log.e("performAAPTonCommonsAPK",
                         "Deleted all drawable files!");
             }
             eu.chainfire.libsuperuser.Shell.SU.run(
                     "aapt add " +
                             getActivity().getFilesDir().getAbsolutePath() +
-                            "/Akzent_Framework.apk res/drawable/menuitem_background.png");
+                            "/" + LayersFunc.themeframework + ".apk res/drawable/menuitem_background.png");
             eu.chainfire.libsuperuser.Shell.SU.run(
                     "aapt add " +
                             getActivity().getFilesDir().getAbsolutePath() +
-                            "/Akzent_Framework.apk res/drawable-xhdpi-v4/menuitem_background.png");
+                            "/" + LayersFunc.themeframework + ".apk res/drawable-xhdpi-v4/menuitem_background.png");
             eu.chainfire.libsuperuser.Shell.SU.run(
                     "aapt add " +
                             getActivity().getFilesDir().getAbsolutePath() +
-                            "/Akzent_Framework.apk res/drawable-xxhdpi-v4/menuitem_background.png");
+                            "/" + LayersFunc.themeframework + ".apk res/drawable-xxhdpi-v4/menuitem_background.png");
             eu.chainfire.libsuperuser.Shell.SU.run(
                     "aapt add " +
                             getActivity().getFilesDir().getAbsolutePath() +
-                            "/Akzent_Framework.apk res/drawable-xxxhdpi-v4/menuitem_background.png");
+                            "/" + LayersFunc.themeframework + ".apk res/drawable-xxxhdpi-v4/menuitem_background.png");
             if (swap_contextual_header) {
                 List source = processor();
                 for (int i = 0; i < source.size(); i++) {
                     eu.chainfire.libsuperuser.Shell.SU.run(
                             "aapt add " + getActivity().getFilesDir().getAbsolutePath() +
-                                    "/Akzent_SystemUI.apk " +
+                                    "/" + LayersFunc.themesystemui + ".apk " +
                                     "res/drawable-xxhdpi-v4" +
                                     source.get(i));
+                }
+                if (xhdpi) {
+                    for (int i = 0; i < source.size(); i++) {
+                        eu.chainfire.libsuperuser.Shell.SU.run(
+                                "aapt add " + getActivity().getFilesDir().getAbsolutePath() +
+                                        "/" + LayersFunc.themesystemui + ".apk " +
+                                        "res/drawable-xhdpi-v4" +
+                                        source.get(i));
+                    }
+                }
+                if (xxxhdpi) {
+                    for (int i = 0; i < source.size(); i++) {
+                        eu.chainfire.libsuperuser.Shell.SU.run(
+                                "aapt add " + getActivity().getFilesDir().getAbsolutePath() +
+                                        "/" + LayersFunc.themesystemui + ".apk " +
+                                        "res/drawable-xxxhdpi-v4" +
+                                        source.get(i));
+                    }
                 }
                 Log.e("performAAPTonCommonsAPK",
                         "Added freshly created photo files...ALL DONE!");
@@ -564,15 +618,15 @@ public class HeaderSwapperFragment extends BasePageFragment {
             eu.chainfire.libsuperuser.Shell.SU.run("mount -o remount,ro /");
             Log.e("performAAPTonCommonsAPK",
                     "Cleaned up root directory and remounted system as read-only.");
-            if (checkbitphone()) {
-                LayersFunc.copyFABFinalizedAPK(getActivity(),"Akzent_Framework");
-                if(swap_contextual_header){
-                    LayersFunc.copyFABFinalizedAPK(getActivity(),"Akzent_SystemUI");
+            if (LayersFunc.checkbitphone()) {
+                LayersFunc.copyFABFinalizedAPK(getActivity(), LayersFunc.themeframework, true);
+                if (swap_contextual_header) {
+                    LayersFunc.copyFABFinalizedAPK(getActivity(), LayersFunc.themesystemui, true);
                 }
             } else {
-                LayersFunc.copyFinalizedAPK(getActivity(),"Akzent_Framework");
-                if(swap_contextual_header){
-                    LayersFunc.copyFinalizedAPK(getActivity(),"Akzent_SystemUI");
+                LayersFunc.copyFinalizedAPK(getActivity(), LayersFunc.themeframework, true);
+                if (swap_contextual_header) {
+                    LayersFunc.copyFinalizedAPK(getActivity(), LayersFunc.themesystemui, true);
                 }
             }
             eu.chainfire.libsuperuser.Shell.SU.run("killall zygote");
