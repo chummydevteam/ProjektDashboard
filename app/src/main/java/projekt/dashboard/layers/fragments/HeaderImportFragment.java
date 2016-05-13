@@ -23,6 +23,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -53,7 +54,7 @@ import projekt.dashboard.layers.util.ReadXMLFile;
 public class HeaderImportFragment extends BasePageFragment {
 
     public ViewGroup inflation;
-    public boolean is_zip_spinner_activated, is_theme_selected;
+    public boolean is_zip_spinner_activated, is_radio_selected;
     public Spinner spinner, spinner2;
     public String theme_dir, package_name;
     public FloatingActionButton apply_fab;
@@ -62,9 +63,12 @@ public class HeaderImportFragment extends BasePageFragment {
     public int current_hour;
     public TextView currentTimeVariable;
     public SharedPreferences prefs;
+    public boolean xhdpi = false;
+    public boolean xxhdpi = true;
+    public boolean xxxhdpi = false;
 
     public void cleanTempFolder() {
-        File dir = getActivity().getFilesDir();
+        File dir = getActivity().getCacheDir();
         deleteRecursive(dir);
     }
 
@@ -86,7 +90,7 @@ public class HeaderImportFragment extends BasePageFragment {
                 "notifhead_sunset_xhdpi.png", "notifhead_sunset.png");
 
         File f2 = new File(
-                getActivity().getFilesDir().getAbsolutePath() + "/headers/");
+                getActivity().getCacheDir().getAbsolutePath() + "/headers/");
         File[] files2 = f2.listFiles();
         if (files2 != null) {
             for (File inFile2 : files2) {
@@ -148,10 +152,10 @@ public class HeaderImportFragment extends BasePageFragment {
 
             is_zip_spinner_activated = true;
 
-            if (is_zip_spinner_activated && is_theme_selected) {
+            if (is_zip_spinner_activated && is_radio_selected) {
                 apply_fab.show();
             } else {
-
+                apply_fab.hide();
             }
 
         } catch (ZipException e) {
@@ -160,10 +164,10 @@ public class HeaderImportFragment extends BasePageFragment {
             e.printStackTrace();
             is_zip_spinner_activated = false;
 
-            if (is_zip_spinner_activated && is_theme_selected) {
+            if (is_zip_spinner_activated && is_radio_selected) {
                 apply_fab.show();
             } else {
-
+                apply_fab.hide();
             }
         }
     }
@@ -198,6 +202,38 @@ public class HeaderImportFragment extends BasePageFragment {
             downloadButton.setVisibility(View.GONE);
         }
 
+        RadioGroup radioGroup = (RadioGroup) inflation.findViewById(R.id.rg);
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                switch (checkedId) {
+                    case R.id.radio:
+                        xhdpi = true;
+                        xxhdpi = false;
+                        xxxhdpi = false;
+                        is_radio_selected = true;
+                        break;
+                    case R.id.radio2:
+                        xhdpi = false;
+                        xxhdpi = true;
+                        xxxhdpi = false;
+                        is_radio_selected = true;
+                        break;
+                    case R.id.radio3:
+                        xhdpi = false;
+                        xxhdpi = false;
+                        xxxhdpi = true;
+                        is_radio_selected = true;
+                        break;
+                }
+                if (is_zip_spinner_activated && is_radio_selected) {
+                    apply_fab.show();
+                } else {
+                    apply_fab.hide();
+                }
+            }
+        });
+
         apply_fab = (FloatingActionButton) inflation.findViewById(R.id.apply_fab);
         if (prefs.getBoolean("blacked_out_enabled", true)) {
             apply_fab.setBackgroundTintList(ColorStateList.valueOf(
@@ -209,7 +245,7 @@ public class HeaderImportFragment extends BasePageFragment {
         apply_fab.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 String[] secondPhaseCommands = {
-                        LayersFunc.getvendor() + "/Akzent_SystemUI.apk",
+                        LayersFunc.getvendor() + "/"+LayersFunc.themesystemui+".apk",
                         Environment.getExternalStorageDirectory().getAbsolutePath()
                                 + "/dashboard./" + spinner2.getSelectedItem().toString()};
                 new secondPhaseAsyncTasks().execute(secondPhaseCommands);
@@ -267,7 +303,8 @@ public class HeaderImportFragment extends BasePageFragment {
                     checkWhetherZIPisValid(Environment.getExternalStorageDirectory().
                                     getAbsolutePath() +
                                     "/dashboard./" + spinner2.getSelectedItem(),
-                            getActivity().getFilesDir().getAbsolutePath() + "/headers");
+                            getActivity().getCacheDir().getAbsolutePath() + "/headers");
+                    is_zip_spinner_activated = true;
                 } else {
                     TextView headerPackName = (TextView)
                             inflation.findViewById(R.id.themeName);
@@ -296,9 +333,10 @@ public class HeaderImportFragment extends BasePageFragment {
 
                     is_zip_spinner_activated = false;
 
-                    if (is_zip_spinner_activated && is_theme_selected) {
+                    if (is_zip_spinner_activated && is_radio_selected) {
                         apply_fab.show();
                     } else {
+                        apply_fab.hide();
                     }
                 }
             }
@@ -379,14 +417,14 @@ public class HeaderImportFragment extends BasePageFragment {
             Log.e("CopyAkzent_SystemUIFile", "Function Started");
             String sourcePath = theme_dir;
             File source = new File(sourcePath);
-            String destinationPath = getActivity().getFilesDir().getAbsolutePath() +
-                    "/Akzent_SystemUI.apk";
+            String destinationPath = getActivity().getCacheDir().getAbsolutePath() +
+                    "/" + LayersFunc.themesystemui + ".apk";
             File destination = new File(destinationPath);
             try {
                 FileUtils.copyFile(source, destination);
                 unzip(header_zip);
                 Log.e("CopyAkzent_SystemUIFile",
-                        "Successfully copied Akzent_SystemUI apk from overlays folder to work directory");
+                        "Successfully copied "+LayersFunc.themesystemui+" apk from overlays folder to work directory");
                 Log.e("CopyAkzent_SystemUIFile", "Function Stopped");
             } catch (IOException e) {
                 Log.e("CopyAkzent_SystemUIFile",
@@ -398,7 +436,7 @@ public class HeaderImportFragment extends BasePageFragment {
 
         public void unzip(String source) {
             try {
-                String destination = getActivity().getFilesDir().getAbsolutePath() + "/headers/";
+                String destination = getActivity().getCacheDir().getAbsolutePath() + "/headers/";
 
                 net.lingala.zip4j.core.ZipFile zipFile = new net.lingala.zip4j.core.ZipFile(source);
                 Log.e("Unzip", "The ZIP has been located and will now be unzipped...");
@@ -423,7 +461,7 @@ public class HeaderImportFragment extends BasePageFragment {
             List<String> list = new ArrayList<String>();
 
             File f2 = new File(
-                    getActivity().getFilesDir().getAbsolutePath() + "/headers/");
+                    getActivity().getCacheDir().getAbsolutePath() + "/headers/");
             File[] files2 = f2.listFiles();
             if (files2 != null) {
                 for (File inFile2 : files2) {
@@ -453,42 +491,115 @@ public class HeaderImportFragment extends BasePageFragment {
                     "Mounting system as read-write as we prepare for some commands...");
             eu.chainfire.libsuperuser.Shell.SU.run("mount -o remount,rw /");
             eu.chainfire.libsuperuser.Shell.SU.run("mkdir /res/drawable-xxhdpi-v4/");
-
-            // Copy the files over
-            for (int i = 0; i < source.size(); i++) {
-                eu.chainfire.libsuperuser.Shell.SU.run(
-                        "cp " + getActivity().getFilesDir().getAbsolutePath() +
-                                "/headers/" + source.get(i) +
-                                " res/drawable-xxhdpi-v4/" +
-                                source.get(i));
-                try {
-                    Process nativeApp2 = Runtime.getRuntime().exec(
-                            "aapt remove " + getActivity().getFilesDir().getAbsolutePath() +
-                                    "/Akzent_SystemUI.apk " +
-                                    "res/drawable-xxhdpi-v4/" +
-                                    source.get(i));
-                    nativeApp2.waitFor();
-                    eu.chainfire.libsuperuser.Shell.SU.run(
-                            "aapt add " + getActivity().getFilesDir().getAbsolutePath() +
-                                    "/Akzent_SystemUI.apk " +
-                                    "res/drawable-xxhdpi-v4/" +
-                                    source.get(i));
-
-                } catch (Exception e) {
-                    //
-                }
+            if (xhdpi) {
+                eu.chainfire.libsuperuser.Shell.SU.run("mkdir /res/drawable-xhdpi-v4/");
+            }
+            if (xxxhdpi) {
+                eu.chainfire.libsuperuser.Shell.SU.run("mkdir /res/drawable-xxxhdpi-v4/");
             }
 
+            // Copy the files over
+            if (xxhdpi || xhdpi || xxxhdpi) {
+                for (int i = 0; i < source.size(); i++) {
+                    eu.chainfire.libsuperuser.Shell.SU.run(
+                            "cp " + getActivity().getCacheDir().getAbsolutePath() +
+                                    "/headers/" + source.get(i) +
+                                    " res/drawable-xxhdpi-v4/" +
+                                    source.get(i));
+                    Log.e("xxhdpi cp", source.get(i) + "");
+                    try {
+                        Process nativeApp2 = Runtime.getRuntime().exec(
+                                "aapt remove " + getActivity().getCacheDir().getAbsolutePath() +
+                                        "/" + LayersFunc.themesystemui + ".apk " +
+                                        "res/drawable-xxhdpi-v4/" +
+                                        source.get(i) + "");
+                        Log.e("xxhdpi rm", source.get(i) + "");
+                        nativeApp2.waitFor();
+                        eu.chainfire.libsuperuser.Shell.SU.run(
+                                "aapt add " + getActivity().getCacheDir().getAbsolutePath() +
+                                        "/" + LayersFunc.themesystemui + ".apk " +
+                                        "res/drawable-xxhdpi-v4/" +
+                                        source.get(i));
+                        Log.e("xxhdpi ad", source.get(i) + "");
+
+                    } catch (Exception e) {
+                        //
+                    }
+                }
+            }
+            if (xhdpi) {
+                for (int i = 0; i < source.size(); i++) {
+                    eu.chainfire.libsuperuser.Shell.SU.run(
+                            "cp " + getActivity().getCacheDir().getAbsolutePath() +
+                                    "/headers/" + source.get(i) +
+                                    " res/drawable-xhdpi-v4/" +
+                                    source.get(i));
+                    Log.e("xhdpi cp", source.get(i) + "");
+                    try {
+                        Process nativeApp2 = Runtime.getRuntime().exec(
+                                "aapt remove " + getActivity().getCacheDir().getAbsolutePath() +
+                                        "/" + LayersFunc.themesystemui + ".apk " +
+                                        "res/drawable-xhdpi-v4/" +
+                                        source.get(i));
+                        Log.e("xhdpi rm", source.get(i) + "");
+                        nativeApp2.waitFor();
+                        eu.chainfire.libsuperuser.Shell.SU.run(
+                                "aapt add " + getActivity().getCacheDir().getAbsolutePath() +
+                                        "/" + LayersFunc.themesystemui + ".apk " +
+                                        "res/drawable-xhdpi-v4/" +
+                                        source.get(i));
+                        Log.e("xhdpi ad", source.get(i) + "");
+
+                    } catch (Exception e) {
+                        //
+                    }
+                }
+            }
+            if (xxxhdpi) {
+                for (int i = 0; i < source.size(); i++) {
+                    eu.chainfire.libsuperuser.Shell.SU.run(
+                            "cp " + getActivity().getCacheDir().getAbsolutePath() +
+                                    "/headers/" + source.get(i) +
+                                    " res/drawable-xxxhdpi-v4/" +
+                                    source.get(i));
+                    Log.e("xxxhdpi cp", source.get(i) + "");
+                    try {
+                        Process nativeApp2 = Runtime.getRuntime().exec(
+                                "aapt remove " + getActivity().getCacheDir().getAbsolutePath() +
+                                        "/" + LayersFunc.themesystemui + ".apk " +
+                                        "res/drawable-xxxhdpi-v4/" +
+                                        source.get(i));
+                        Log.e("xxxhdpi rm", source.get(i) + "");
+                        nativeApp2.waitFor();
+                        eu.chainfire.libsuperuser.Shell.SU.run(
+                                "aapt add " + getActivity().getCacheDir().getAbsolutePath() +
+                                        "/" + LayersFunc.themesystemui + ".apk " +
+                                        "res/drawable-xxxhdpi-v4/" +
+                                        source.get(i));
+                        Log.e("xxxhdpi ad", source.get(i) + "");
+
+                    } catch (Exception e) {
+                        //
+                    }
+                }
+            }
             Log.e("performAAPTonCommonsAPK",
                     "Successfully performed all AAPT commands.");
             eu.chainfire.libsuperuser.Shell.SU.run("rm -r /res/drawable-xxhdpi-v4/");
+            if (xxxhdpi) {
+                eu.chainfire.libsuperuser.Shell.SU.run("rm -r /res/drawable-xxxhdpi-v4/");
+            }
+            if (xhdpi) {
+                eu.chainfire.libsuperuser.Shell.SU.run("rm -r /res/drawable-xhdpi-v4/");
+            }
             eu.chainfire.libsuperuser.Shell.SU.run("mount -o remount,ro /");
             if (LayersFunc.checkbitphone()) {
-                LayersFunc.copyFABFinalizedAPK(getActivity(),"Akzent_SystemUI");
+                LayersFunc.copyFABFinalizedAPK(getActivity(), LayersFunc.themesystemui, false);
             } else {
-                LayersFunc.copyFinalizedAPK(getActivity(),"Akzent_SystemUI");
+                LayersFunc.copyFinalizedAPK(getActivity(), LayersFunc.themesystemui, false);
             }
             eu.chainfire.libsuperuser.Shell.SU.run("killall zygote");
+
         }
 
         protected void onPreExecute() {
