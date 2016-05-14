@@ -382,8 +382,6 @@
     <!-- Final Card -->
     <string name="creation_name">Nom de la création :</string>
     <string name="creator_name">Nom du créateur :</string>
-    <string name="allowed_characters">0123456789.abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ</string>
-    <!-- Do not allow spaces in translations -->
 
     <string name="configuring_fun">Préparation de la fête !</string>
 

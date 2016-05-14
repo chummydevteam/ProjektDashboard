@@ -2208,9 +2208,16 @@ public class MyCardStackAdapter extends CardStackAdapter implements
         @Override
         protected String doInBackground(String... sUrl) {
             String packageName = spinnerItem;
-            packageName = packageName + "." + themeName;
 
+            // Parse Theme Name of all spaces and symbols
+            String parse1_themeName = themeName.replaceAll("\\s+", "");
+            String parse2_themeName = parse1_themeName.replaceAll("[^a-zA-Z0-9]+", "");
+            packageName = packageName + "." + parse2_themeName;
+
+            // Theme Name is now parsed
             String theme_name = themeName;
+
+            // No need to parse Theme Author, it should display all characters naturally
             String theme_author = themeAuthor;
 
             String filename = "AndroidManifest";

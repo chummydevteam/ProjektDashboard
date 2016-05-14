@@ -103,11 +103,6 @@
     <string name="creation_name">creation name:</string>
     <string name="creator_name">creator name:</string>
 
-    <string name="allowed_characters">0123456789._abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ</string>
-
-    <!-- Do not allow spaces or accents in translation for theme name -->
-    <string name="allowed_theme_name_characters" translatable="false">0123456789._abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ</string>
-
     <string name="creation_name_empty">please type a name for your theme&#8230;</string>
     <string name="creator_name_empty">if blank, username will be used&#8230;</string>
 </resources>

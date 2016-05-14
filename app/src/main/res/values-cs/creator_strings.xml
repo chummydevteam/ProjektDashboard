@@ -98,8 +98,6 @@
     <!-- Final Card -->
     <string name="creation_name">název stvoření:</string>
     <string name="creator_name">jméno tvůrce:</string>
-    <string name="allowed_characters">0123456789.-_/()(͡° ͜ʖ ͡°)aábcčd´deěéfghijklmnňoópqrřsštťuúůvwxyzžAÁBCČDĎEĚÉFGHIJKLMNŇOÓPQRŘSŠTŤUÚŮVWXYZŽ</string>
-    <!-- Do not allow spaces in translations -->
     <string name="creation_name_empty">prosím napiště název vašeho motivu&#8230;</string>
     <string name="creator_name_empty">pokud bude toto pole prázdné, bude použito standartní jméno&#8230;</string>
 </resources>
