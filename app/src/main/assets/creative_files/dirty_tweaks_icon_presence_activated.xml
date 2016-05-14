@@ -2,5 +2,5 @@
 <!--You are editing Settings' DU Specific Dimensions-->
 
 <resources>
-    <dimen name="header_icon_width">0dp</dimen>
+    <dimen name="header_icon_width">28dp</dimen>
 </resources>

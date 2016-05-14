@@ -100,7 +100,7 @@ public class MyCardStackAdapter extends CardStackAdapter implements
     public boolean category_title_bold = true;
     public boolean category_title_italics = true;
     public boolean dashboard_dividers = true;
-    public boolean dirtytweaks_iconpresence = true;
+    public boolean dirtytweaks_icon_presence = false;
     public int current_selected_dashboard_background_color = Color.argb(255, 33, 32, 33);
     public int current_selected_dashboard_category_background_color = Color.argb(255, 0, 0, 0);
     public int current_selected_settings_icon_color = Color.argb(255, 255, 255, 255);
@@ -683,11 +683,11 @@ public class MyCardStackAdapter extends CardStackAdapter implements
                     @Override
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                         if (isChecked) {
-                            dirtytweaks_iconpresence = true;
-                            Log.d("DU Tweaks Icon", dirtytweaks_iconpresence + "");
+                            dirtytweaks_icon_presence = true;
+                            Log.d("DU Tweaks Icon", dirtytweaks_icon_presence + "");
                         } else {
-                            dirtytweaks_iconpresence = false;
-                            Log.d("DU Tweaks Icon", dirtytweaks_iconpresence + "");
+                            dirtytweaks_icon_presence = false;
+                            Log.d("DU Tweaks Icon", dirtytweaks_icon_presence + "");
                         }
                         is_settings_dashboard_dirty_tweaks_icon_presence_changed = true;
                         dutweaks_icons.setTextColor(mContext.getColor(android.R.color.white));
@@ -1793,19 +1793,19 @@ public class MyCardStackAdapter extends CardStackAdapter implements
                         "/creative_mode/assets/overlays/com.android.settings/res/values-v12/";
                 moveFile(source, "dashboard_dividers_deactivated.xml", destination);
             }
-            if (dirtytweaks_iconpresence && is_settings_dashboard_dirty_tweaks_icon_presence_changed) {
-                String source = mContext.getCacheDir().getAbsolutePath() +
-                        "/creative_files/";
-                String destination = mContext.getCacheDir().getAbsolutePath() +
-                        "/creative_mode/assets/overlays/com.android.settings/res/values-v11/";
-                moveFile(source, "dirty_tweaks_icon_presence_deactivated.xml", destination);
-            }
-            if (!dirtytweaks_iconpresence && is_settings_dashboard_dirty_tweaks_icon_presence_changed) {
+            if (dirtytweaks_icon_presence && is_settings_dashboard_dirty_tweaks_icon_presence_changed) {
                 String source = mContext.getCacheDir().getAbsolutePath() +
                         "/creative_files/";
                 String destination = mContext.getCacheDir().getAbsolutePath() +
                         "/creative_mode/assets/overlays/com.android.settings/res/values-v11/";
                 moveFile(source, "dirty_tweaks_icon_presence_activated.xml", destination);
+            }
+            if (!dirtytweaks_icon_presence && is_settings_dashboard_dirty_tweaks_icon_presence_changed) {
+                String source = mContext.getCacheDir().getAbsolutePath() +
+                        "/creative_files/";
+                String destination = mContext.getCacheDir().getAbsolutePath() +
+                        "/creative_mode/assets/overlays/com.android.settings/res/values-v11/";
+                moveFile(source, "dirty_tweaks_icon_presence_deactivated.xml", destination);
             }
 
             // Add default theme icon if no traditional theme icon found

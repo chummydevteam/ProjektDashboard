@@ -99,7 +99,7 @@
                     style="@style/ShadowBlackTextWhite"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:checked="true"
+                    android:checked="false"
                     android:padding="16dp"
                     android:text="@string/settings_du_tweaks_icon_presence"
                     android:textColor="@color/creative_mode_text_disabled" />
