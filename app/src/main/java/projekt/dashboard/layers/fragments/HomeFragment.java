@@ -10,6 +10,7 @@ import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -66,34 +67,26 @@ public class HomeFragment extends BasePageFragment {
         } else {
             status_message.setTextColor(getResources().getColor(R.color.attention_color));
             status_message.setText(getResources().getString(R.string.homepage_rom_not_supported));
-            MaterialDialog md = new MaterialDialog.Builder(getActivity())
-                    .title("Layers ROM missing")
-                    .content("you are missing one of the below prerequisites:-\n1. Layers Rom\n2. Layers Manager")
-                    .positiveText("Download Layers Manager")
-                    .negativeText("Cancel")
-                    .onPositive(new MaterialDialog.SingleButtonCallback() {
-                        @Override
-                        public void onClick(MaterialDialog dialog, DialogAction which) {
-                            Intent intent_rrolayers = new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.lovejoy777.rroandlayersmanager"));
-                            startActivity(intent_rrolayers);
-                        }
-                    })
-                    .onNegative(new MaterialDialog.SingleButtonCallback() {
-                        @Override
-                        public void onClick(MaterialDialog dialog, DialogAction which) {
-                        }
-                    })
-                    .dismissListener(new DialogInterface.OnDismissListener() {
-                        @Override
-                        public void onDismiss(DialogInterface dialog) {
-                        }
-                    })
-                    .show();
+            AlertDialog.Builder ad = new AlertDialog.Builder(getActivity());
+            ad.setTitle("Layers ROM missing");
+            ad.setMessage("you are missing one of the below prerequisites:-\n1. Layers Rom\n2. Layers Manager");
+            ad.setPositiveButton("Download Layers Manager", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    Intent intent_rrolayers = new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.lovejoy777.rroandlayersmanager"));
+                    startActivity(intent_rrolayers);
+                }
+            });
+            ad.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                }
+            });
         }
 
         TextView theme_message = (TextView) inflation.findViewById(R.id.theme_message);
         if (LayersFunc.themesystemui != "Nill" && LayersFunc.themeframework != "Nill" && LayersFunc.downloaded) {
-            if (new LayersFunc(getActivity()).checkThemeMainSupported(getActivity())&&new LayersFunc(getActivity()).checkThemeSysSupported(getActivity())) {
+            if (new LayersFunc(getActivity()).checkThemeMainSupported(getActivity()) && new LayersFunc(getActivity()).checkThemeSysSupported(getActivity())) {
                 theme_message.setTextColor(getResources().getColor(R.color.attention_color_green));
                 theme_message.setText(getResources().getString(R.string.homepage_theme_full_supported));
                 Snackbar snack = Snackbar.make(inflation, prefs.getString("dashboard_username",
@@ -119,32 +112,24 @@ public class HomeFragment extends BasePageFragment {
                                 + " (" + BuildConfig.VERSION_NAME + ")",
                         Snackbar.LENGTH_SHORT);
                 snack.show();
-                MaterialDialog md = new MaterialDialog.Builder(getActivity())
-                        .title("Theme other than Akzent is found")
-                        .content("Changing colors over the fly ,without reboot.What do you think.But let me tell you something,its possible using akzent.")
-                        .positiveText("Download Akzent")
-                        .negativeText("Later")
-                        .onPositive(new MaterialDialog.SingleButtonCallback() {
-                            @Override
-                            public void onClick(MaterialDialog dialog, DialogAction which) {
-                                if (new LayersFunc(getActivity()).isAppInstalled(getActivity(), "com.chummy.aditya.materialdark.layers.donate")) {
-                                    startActivity(new Intent().setComponent(new ComponentName("com.lovejoy777.rroandlayersmanager", "com.lovejoy777.rroandlayersmanager.MainActivity")));
-                                } else {
-                                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.chummy.aditya.materialdark.layers.donate")));
-                                }
-                            }
-                        })
-                        .onNegative(new MaterialDialog.SingleButtonCallback() {
-                            @Override
-                            public void onClick(MaterialDialog dialog, DialogAction which) {
-                            }
-                        })
-                        .dismissListener(new DialogInterface.OnDismissListener() {
-                            @Override
-                            public void onDismiss(DialogInterface dialog) {
-                            }
-                        })
-                        .show();
+                AlertDialog.Builder ad = new AlertDialog.Builder(getActivity());
+                ad.setTitle("Theme other than Akzent is found");
+                ad.setMessage("Changing colors over the fly ,without reboot.Seems fictional right?But let me tell you something,its possible using akzent.");
+                ad.setPositiveButton("Download Akzent", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        if (new LayersFunc(getActivity()).isAppInstalled(getActivity(), "com.chummy.aditya.materialdark.layers.donate")) {
+                            startActivity(new Intent().setComponent(new ComponentName("com.lovejoy777.rroandlayersmanager", "com.lovejoy777.rroandlayersmanager.MainActivity")));
+                        } else {
+                            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.chummy.aditya.materialdark.layers.donate")));
+                        }
+                    }
+                });
+                ad.setNegativeButton("Later", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                });
             }
         } else if (new LayersFunc(getActivity()).checkThemeMainSupported(getActivity()) && LayersFunc.downloaded) {
             theme_message.setTextColor(getResources().getColor(R.color.attention_color));
