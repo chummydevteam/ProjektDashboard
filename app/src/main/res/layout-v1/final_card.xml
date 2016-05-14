@@ -110,7 +110,7 @@
                     android:layout_marginStart="5dp"
                     android:layout_marginTop="-11dp"
                     android:layout_toRightOf="@+id/tv2"
-                    android:digits="@string/allowed_characters"
+                    android:digits="@string/allowed_theme_name_characters"
                     android:hint="@string/creator_name_empty"
                     android:inputType="textNoSuggestions"
                     android:singleLine="true"
