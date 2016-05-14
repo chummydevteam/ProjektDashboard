@@ -80,7 +80,7 @@ public class MyCardStackAdapter extends CardStackAdapter implements
 
     public android.support.v7.widget.Toolbar framework_toolbar;
     public android.support.v7.widget.Toolbar settings_toolbar;
-    public ImageView main_color;
+    public ImageView main_color, qs_header, qs_notification, qs_panel_bg;
     public String header_pack_location = "";
 
     // ==================================== Framework Tweaks ================================ //
@@ -107,6 +107,9 @@ public class MyCardStackAdapter extends CardStackAdapter implements
     public int current_selected_settings_title_color = Color.argb(255, 255, 255, 255);
     public int current_selected_settings_switchbar_color = Color.argb(255, 55, 55, 55);
     // ==================================== SystemUI Tweaks ================================== //
+    public int current_selected_header_background_color = Color.argb(255, 31, 31, 31);
+    public int current_selected_notification_background_color = Color.argb(229, 33, 32, 33);
+    public int current_selected_qs_panel_background_color = Color.argb(204, 0, 0, 0);
     public int current_selected_qs_accent_color = Color.argb(255, 255, 255, 255);
     public int current_selected_qs_tile_color = Color.argb(255, 255, 255, 255);
     public int current_selected_qs_text_color = Color.argb(255, 255, 255, 255);
@@ -136,6 +139,9 @@ public class MyCardStackAdapter extends CardStackAdapter implements
     public Boolean is_settings_title_color_changed = false;
     public Boolean is_settings_switchbar_background_color_changed = false;
     public Boolean is_header_pack_chosen = false;
+    public Boolean is_systemui_header_color_changed = false;
+    public Boolean is_systemui_notification_background_color_changed = false;
+    public Boolean is_systemui_qs_panel_background_color_changed = false;
     public Boolean is_systemui_accent_color_changed = false;
     public Boolean is_systemui_qs_tile_color_changed = false;
     public Boolean is_systemui_qs_text_color_changed = false;
@@ -1037,6 +1043,83 @@ public class MyCardStackAdapter extends CardStackAdapter implements
             }
         });
 
+        // QS Header Colors
+
+        qs_header = (ImageView) root.findViewById(R.id.qs_header_colorpicker);
+        qs_header.setColorFilter(current_selected_header_background_color,
+                PorterDuff.Mode.SRC_ATOP);
+        final TextView qs_header_color = (TextView) root.findViewById(
+                R.id.qs_header_colorpicker_text);
+        qs_header.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                final ColorPickerDialog cpd = new ColorPickerDialog(
+                        mContext, current_selected_header_background_color);
+                cpd.setAlphaSliderVisible(true);
+                cpd.setOnColorChangedListener(new ColorPickerDialog.OnColorChangedListener() {
+                    @Override
+                    public void onColorChanged(int color) {
+                        current_selected_header_background_color = color;
+                        qs_header.setColorFilter(color, PorterDuff.Mode.SRC_ATOP);
+                        is_systemui_header_color_changed = true;
+                        qs_header_color.setTextColor(mContext.getColor(android.R.color.white));
+                    }
+                });
+                cpd.show();
+            }
+        });
+
+        // QS Notification Background Colors
+
+        qs_notification = (ImageView) root.findViewById(
+                R.id.system_notification_background_colorpicker);
+        qs_notification.setColorFilter(current_selected_notification_background_color,
+                PorterDuff.Mode.SRC_ATOP);
+        final TextView qs_notification_color = (TextView) root.findViewById(
+                R.id.system_notification_background_colorpicker_text);
+        qs_notification.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                final ColorPickerDialog cpd = new ColorPickerDialog(
+                        mContext, current_selected_notification_background_color);
+                cpd.setAlphaSliderVisible(true);
+                cpd.setOnColorChangedListener(new ColorPickerDialog.OnColorChangedListener() {
+                    @Override
+                    public void onColorChanged(int color) {
+                        current_selected_notification_background_color = color;
+                        qs_notification.setColorFilter(color, PorterDuff.Mode.SRC_ATOP);
+                        is_systemui_notification_background_color_changed = true;
+                        qs_notification_color.setTextColor(
+                                mContext.getColor(android.R.color.white));
+                    }
+                });
+                cpd.show();
+            }
+        });
+
+        // QS Panel Background Colors
+
+        qs_panel_bg = (ImageView) root.findViewById(R.id.qs_background_colorpicker);
+        qs_panel_bg.setColorFilter(current_selected_qs_panel_background_color,
+                PorterDuff.Mode.SRC_ATOP);
+        final TextView qs_panel_bg_color = (TextView) root.findViewById(
+                R.id.qs_background_colorpicker_text);
+        qs_panel_bg.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                final ColorPickerDialog cpd = new ColorPickerDialog(
+                        mContext, current_selected_qs_panel_background_color);
+                cpd.setAlphaSliderVisible(true);
+                cpd.setOnColorChangedListener(new ColorPickerDialog.OnColorChangedListener() {
+                    @Override
+                    public void onColorChanged(int color) {
+                        current_selected_qs_panel_background_color = color;
+                        qs_panel_bg.setColorFilter(color, PorterDuff.Mode.SRC_ATOP);
+                        is_systemui_qs_panel_background_color_changed = true;
+                        qs_panel_bg_color.setTextColor(mContext.getColor(android.R.color.white));
+                    }
+                });
+                cpd.show();
+            }
+        });
+
         // QS Icon Colors
 
         final ImageView qs_tile = (ImageView) root.findViewById(R.id.qs_tile_icon_colorpicker);
@@ -1170,6 +1253,18 @@ public class MyCardStackAdapter extends CardStackAdapter implements
                             framework_toolbar.setBackgroundColor(current_selected_system_main_color);
                             settings_toolbar.setBackgroundColor(current_selected_system_main_color);
                         }
+                        if (current_selected_header_background_color == Color.argb(255, 0, 0, 0)) {
+                            current_selected_header_background_color = Color.argb(255, 31, 31, 31);
+                            qs_header.setColorFilter(current_selected_header_background_color);
+                        }
+                        if (current_selected_notification_background_color == Color.argb(255, 0, 0, 0)) {
+                            current_selected_notification_background_color = Color.argb(229, 33, 32, 33);
+                            qs_notification.setColorFilter(current_selected_notification_background_color);
+                        }
+                        if (current_selected_qs_panel_background_color == Color.argb(255, 0, 0, 0)) {
+                            current_selected_qs_panel_background_color = Color.argb(204, 0, 0, 0);
+                            qs_panel_bg.setColorFilter(current_selected_qs_panel_background_color);
+                        }
                         current_cdt_theme = "com.chummy.jezebel.materialdark.donate";
                     }
                 }
@@ -1188,6 +1283,18 @@ public class MyCardStackAdapter extends CardStackAdapter implements
                             main_color.setColorFilter(current_selected_system_main_color);
                             framework_toolbar.setBackgroundColor(current_selected_system_main_color);
                             settings_toolbar.setBackgroundColor(current_selected_system_main_color);
+                        }
+                        if (current_selected_header_background_color == Color.argb(255, 31, 31, 31)) {
+                            current_selected_header_background_color = Color.argb(255, 0, 0, 0);
+                            qs_header.setColorFilter(current_selected_header_background_color);
+                        }
+                        if (current_selected_notification_background_color == Color.argb(229, 33, 32, 33)) {
+                            current_selected_notification_background_color = Color.argb(255, 0, 0, 0);
+                            qs_notification.setColorFilter(current_selected_notification_background_color);
+                        }
+                        if (current_selected_qs_panel_background_color == Color.argb(204, 0, 0, 0)) {
+                            current_selected_qs_panel_background_color = Color.argb(255, 0, 0, 0);
+                            qs_panel_bg.setColorFilter(current_selected_qs_panel_background_color);
                         }
                         current_cdt_theme = "com.chummy.jezebel.blackedout.donate";
                     }
@@ -1373,7 +1480,8 @@ public class MyCardStackAdapter extends CardStackAdapter implements
 
             if (is_framework_system_ripple_changed) {
                 Phase2_InjectAndMove ripple = new Phase2_InjectAndMove();
-                String ripple_color = "#" + Integer.toHexString(current_selected_system_ripple_color);
+                String ripple_color = "#" + Integer.toHexString(
+                        current_selected_system_ripple_color);
                 ripple.execute("ripple_dark", ripple_color, "theme_color_ripple_color",
                         mContext.getCacheDir().getAbsolutePath() +
                                 "/creative_mode/assets/overlays/common/res/values-v10/");
@@ -1388,7 +1496,8 @@ public class MyCardStackAdapter extends CardStackAdapter implements
                 settings_dashboard.execute("dashboard_background_color", settings_dashboard_color,
                         "theme_color_settings_dashboard_background",
                         mContext.getCacheDir().getAbsolutePath() +
-                                "/creative_mode/assets/overlays/com.android.settings/res/values-v11/");
+                                "/creative_mode/assets/overlays/com.android.settings/" +
+                                "res/values-v11/");
             }
 
             if (is_settings_dashboard_category_background_color_changed) {
@@ -1399,7 +1508,8 @@ public class MyCardStackAdapter extends CardStackAdapter implements
                         settings_dashboard_category_color,
                         "theme_color_settings_dashboard_category_background",
                         mContext.getCacheDir().getAbsolutePath() +
-                                "/creative_mode/assets/overlays/com.android.settings/res/values-v11/");
+                                "/creative_mode/assets/overlays/com.android.settings/" +
+                                "res/values-v11/");
             }
 
             if (is_settings_icon_color_changed) {
@@ -1419,33 +1529,69 @@ public class MyCardStackAdapter extends CardStackAdapter implements
                 settings_title.execute("theme_accent", settings_title_color,
                         "theme_color_settings_title_color",
                         mContext.getCacheDir().getAbsolutePath() +
-                                "/creative_mode/assets/overlays/com.android.settings/res/values-v11/");
+                                "/creative_mode/assets/overlays/com.android.settings/" +
+                                "res/values-v11/");
             }
 
             if (is_settings_switchbar_background_color_changed) {
                 Phase2_InjectAndMove switchbar_background = new Phase2_InjectAndMove();
                 String switchbar_background_color = "#" + Integer.toHexString(
                         current_selected_settings_switchbar_color);
-                switchbar_background.execute("switchbar_background_color", switchbar_background_color,
+                switchbar_background.execute("switchbar_background_color",
+                        switchbar_background_color,
                         "theme_color_settings_switchbar_background",
                         mContext.getCacheDir().getAbsolutePath() +
-                                "/creative_mode/assets/overlays/com.android.settings/res/values-v11/");
+                                "/creative_mode/assets/overlays/com.android.settings/" +
+                                "res/values-v11/");
             }
 
             // Begin going through all AsyncTasks for SystemUI (v12)
 
             if (is_systemui_accent_color_changed) {
                 Phase2_InjectAndMove sysui_accent = new Phase2_InjectAndMove();
-                String sysui_accent_color = "#" + Integer.toHexString(current_selected_qs_accent_color);
+                String sysui_accent_color = "#" + Integer.toHexString(
+                        current_selected_qs_accent_color);
                 sysui_accent.execute("system_accent_color", sysui_accent_color,
                         "theme_color_systemui_accent_color",
                         mContext.getCacheDir().getAbsolutePath() +
-                                "/creative_mode/assets/overlays/com.android.systemui/res/values-v12/");
+                                "/creative_mode/assets/overlays/com.android.systemui/" +
+                                "res/values-v12/");
+            }
+
+            if (is_systemui_header_color_changed) {
+                Phase2_InjectAndMove sysui_header = new Phase2_InjectAndMove();
+                String sysui_header_color = "#" + Integer.toHexString(
+                        current_selected_header_background_color);
+                sysui_header.execute("qs_header_color", sysui_header_color,
+                        "theme_color_systemui_header_color",
+                        mContext.getCacheDir().getAbsolutePath() +
+                                "/creative_mode/assets/overlays/common/res/values-v12/");
+            }
+
+            if (is_systemui_notification_background_color_changed) {
+                Phase2_InjectAndMove sysui_notif_bg = new Phase2_InjectAndMove();
+                String sysui_header_color = "#" + Integer.toHexString(
+                        current_selected_notification_background_color);
+                sysui_notif_bg.execute("notification_background", sysui_header_color,
+                        "theme_color_systemui_notifbg_color",
+                        mContext.getCacheDir().getAbsolutePath() +
+                                "/creative_mode/assets/overlays/common/res/values-v12/");
+            }
+
+            if (is_systemui_qs_panel_background_color_changed) {
+                Phase2_InjectAndMove sysui_panelbg = new Phase2_InjectAndMove();
+                String sysui_panelbg_color = "#" + Integer.toHexString(
+                        current_selected_qs_panel_background_color);
+                sysui_panelbg.execute("qs_background_color", sysui_panelbg_color,
+                        "theme_color_systemui_qs_bg_color",
+                        mContext.getCacheDir().getAbsolutePath() +
+                                "/creative_mode/assets/overlays/common/res/values-v12/");
             }
 
             if (is_systemui_qs_tile_color_changed) {
                 Phase2_InjectAndMove sysui_qs_tile = new Phase2_InjectAndMove();
-                String sysui_qs_tile_color = "#" + Integer.toHexString(current_selected_qs_tile_color);
+                String sysui_qs_tile_color = "#" + Integer.toHexString(
+                        current_selected_qs_tile_color);
                 sysui_qs_tile.execute("qs_icon_color", sysui_qs_tile_color,
                         "theme_color_systemui_qs_icon_color",
                         mContext.getCacheDir().getAbsolutePath() +
@@ -1456,7 +1602,8 @@ public class MyCardStackAdapter extends CardStackAdapter implements
                 Phase2_InjectAndMove sysui_qs_tile_disabled = new Phase2_InjectAndMove();
                 String sysui_qs_tile_disabled_color = "#4d" +
                         Integer.toHexString(current_selected_qs_tile_color).substring(2);
-                sysui_qs_tile_disabled.execute("qs_icon_color_disabled", sysui_qs_tile_disabled_color,
+                sysui_qs_tile_disabled.execute("qs_icon_color_disabled",
+                        sysui_qs_tile_disabled_color,
                         "theme_color_systemui_qs_icon_disabled_color",
                         mContext.getCacheDir().getAbsolutePath() +
                                 "/creative_mode/assets/overlays/common/res/values-v12/");

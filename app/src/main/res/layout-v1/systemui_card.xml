@@ -44,7 +44,6 @@
                     android:id="@+id/themeInformation"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/downloadButton"
                     android:layout_gravity="left"
                     android:layout_marginBottom="8dp"
                     android:layout_marginStart="18dp"
@@ -52,7 +51,6 @@
                     android:text="@string/contextualheaderimporter_information_header"
                     android:textAppearance="?android:attr/textAppearanceSmall"
                     android:textStyle="italic" />
-
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -185,6 +183,12 @@
                     android:layout_marginTop="10dp" />
 
                 <include layout="@layout/qs_accent_colorpicker" />
+
+                <include layout="@layout/qs_header_colorpicker" />
+
+                <include layout="@layout/qs_notification_background_colorpicker" />
+
+                <include layout="@layout/qs_background_colorpicker" />
 
                 <include layout="@layout/qs_tile_icon_colorpicker" />
 

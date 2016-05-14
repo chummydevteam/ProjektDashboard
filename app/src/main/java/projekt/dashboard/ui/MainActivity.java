@@ -81,7 +81,6 @@ public class MainActivity extends BaseDonateActivity implements
     LinearLayout mAppBarLinear;
     boolean doubleBackToExitPressedOnce = false;
     private PagesBuilder mPages;
-    private CardStackLayout mCardStackLayout;
 
     @Override
     public Toolbar getToolbar() {
