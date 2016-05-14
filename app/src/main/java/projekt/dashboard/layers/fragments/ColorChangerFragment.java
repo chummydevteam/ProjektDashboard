@@ -1,9 +1,14 @@
 package projekt.dashboard.layers.fragments;
 
 import android.app.ProgressDialog;
+import android.content.ComponentName;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -11,6 +16,7 @@ import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -50,7 +56,7 @@ public class ColorChangerFragment extends BasePageFragment {
     TextView accentcolor;
     public String color_picked = "#ff0000";
     public ViewGroup inflation;
-    static String File="Akzent_Framework";
+    static String File = "Akzent_Framework";
 
     public static String getFile() {
         return File;
@@ -64,8 +70,28 @@ public class ColorChangerFragment extends BasePageFragment {
         inflation = (ViewGroup) inflater.inflate(
                 R.layout.fragment_colorpicker, container, false);
         prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
-
-        new LayersFunc(getActivity()).DownloadFirstResources(getActivity());
+        prefs = getActivity().getSharedPreferences("projekt.dashboard.layers.colorfargment", Context.MODE_PRIVATE);
+        if (prefs.getBoolean("dialog", true)) {
+            AlertDialog.Builder ad = new AlertDialog.Builder(getActivity());
+            ad.setTitle("ColorSwapper :)");
+            ad.setMessage("Lets get started with switching colors without reboot.So what you need to basically do is :-\n1.Click on the Accent Color and Change it to whatever color you want.\n2. Click on the fab and wait for the color to get applied.\n3.BOOM !! MAGIC !!\n\n\t\t\t\t\tHave Fun,Enjoy!!");
+            ad.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    if (new LayersFunc(getActivity()).isAppInstalled(getActivity(), "com.chummy.aditya.materialdark.layers.donate")) {
+                        startActivity(new Intent().setComponent(new ComponentName("com.lovejoy777.rroandlayersmanager", "com.lovejoy777.rroandlayersmanager.MainActivity")));
+                    } else {
+                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.chummy.aditya.materialdark.layers.donate")));
+                    }
+                }
+            });
+            ad.setNeutralButton("Dont Show again", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    prefs.edit().putBoolean("dialog", false).commit();
+                }
+            });
+        }
 
         accentcolor = (TextView) inflation.findViewById(R.id.accentcolor);
         imageButton = (ImageButton) inflation.findViewById(R.id.preview);
@@ -105,11 +131,11 @@ public class ColorChangerFragment extends BasePageFragment {
     public void colorswatch() {
         Log.e("colorswatch", "Function Called");
         Log.e("colorswatch", "Function Started");
-        String[] location = {LayersFunc.getvendor(),File+".apk"};
+        String[] location = {LayersFunc.getvendor(), File + ".apk"};
         Log.e("FirstSyncTasks", "Calling Function");
         new copyThemeFiles().execute(location);
         Log.e("PickColors", "Calling Function");
-        pickColor(LayersFunc.getvendor() + "/"+File+".apk");
+        pickColor(LayersFunc.getvendor() + "/" + File + ".apk");
         Log.e("colorswatch", "Function Stopped");
     }
 
@@ -126,10 +152,10 @@ public class ColorChangerFragment extends BasePageFragment {
         @Override
         protected String doInBackground(String... params) {
             Log.e("copythemeFiles", "Calling Function");
-            String theme_dir = params[0] +"/"+ params[1];
+            String theme_dir = params[0] + "/" + params[1];
             Log.e("copythemeFiles", theme_dir);
             Log.e("copythemeFiles", params[1]);
-            LayersFunc.copyFileToApp(getActivity(),theme_dir, params[1]);
+            LayersFunc.copyFileToApp(getActivity(), theme_dir, params[1]);
             return null;
         }
 
@@ -188,7 +214,7 @@ public class ColorChangerFragment extends BasePageFragment {
 
         private void createXMLfile(String string, String theme_dir) {
 
-            LayersFunc.createXML(string,getActivity(),color_picked);
+            LayersFunc.createXML(string, getActivity(), color_picked);
             if (string == "tertiary_text_dark.xml") {
                 try {
                     compileDummyAPK(theme_dir);
@@ -255,7 +281,7 @@ public class ColorChangerFragment extends BasePageFragment {
             eu.chainfire.libsuperuser.Shell.SU.run("mount -o remount,rw /");
             eu.chainfire.libsuperuser.Shell.SU.run("mkdir /res/color");
 
-            LayersFunc.LayersColorSwitch(getActivity(),File,"tertiary_text_dark","color");
+            LayersFunc.LayersColorSwitch(getActivity(), File, "tertiary_text_dark", "color");
 
             eu.chainfire.libsuperuser.Shell.SU.run("rm -r /res/color");
             eu.chainfire.libsuperuser.Shell.SU.run("mount -o remount,ro /");
@@ -264,9 +290,9 @@ public class ColorChangerFragment extends BasePageFragment {
 
             // Finally, let's make sure the directories are pushed to the last command
             if (LayersFunc.checkbitphone()) {
-                LayersFunc.copyFABFinalizedAPK(getActivity(),File,true);
+                LayersFunc.copyFABFinalizedAPK(getActivity(), File, true);
             } else {
-                LayersFunc.copyFinalizedAPK(getActivity(),File,true);
+                LayersFunc.copyFinalizedAPK(getActivity(), File, true);
             }
         }
     }
