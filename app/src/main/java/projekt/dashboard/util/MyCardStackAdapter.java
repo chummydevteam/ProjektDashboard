@@ -1438,6 +1438,16 @@ public class MyCardStackAdapter extends CardStackAdapter implements
         return root;
     }
 
+    public Boolean checkIfPackageInstalled(String packagename, Context context) {
+        PackageManager pm = context.getPackageManager();
+        try {
+            pm.getPackageInfo(packagename, PackageManager.GET_ACTIVITIES);
+            return true;
+        } catch (PackageManager.NameNotFoundException e) {
+            return false;
+        }
+    }
+
     private class Phase1_UnzipAssets extends AsyncTask<String, Integer, String> {
 
         @Override
@@ -2212,8 +2222,13 @@ public class MyCardStackAdapter extends CardStackAdapter implements
             // Parse Theme Name of all spaces and symbols
             String parse1_themeName = themeName.replaceAll("\\s+", "");
             String parse2_themeName = parse1_themeName.replaceAll("[^a-zA-Z0-9]+", "");
+
             if (parse2_themeName.equals("")) {
-                packageName = packageName + "." + "dashboard";
+                int inputNumber = 1;
+                while (checkIfPackageInstalled(packageName + "." + "dashboard" + inputNumber, mContext)) {
+                    inputNumber += 1;
+                }
+                packageName = packageName + "." + "dashboard" + inputNumber;
             } else {
                 packageName = packageName + "." + parse2_themeName;
             }
