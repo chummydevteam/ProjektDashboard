@@ -82,6 +82,7 @@ public class MyCardStackAdapter extends CardStackAdapter implements
     public android.support.v7.widget.Toolbar settings_toolbar;
     public ImageView main_color, qs_header, qs_notification, qs_panel_bg;
     public String header_pack_location = "";
+    public View main_color_dark_view;
 
     // ==================================== Framework Tweaks ================================ //
     public int current_selected_system_accent_color = Color.argb(255, 255, 255, 255); // White
@@ -95,6 +96,7 @@ public class MyCardStackAdapter extends CardStackAdapter implements
     public int current_selected_system_notifications_secondary_color = Color.argb(255, 174, 174, 174); // Lighter grey
     public int current_selected_system_ripple_color = Color.argb(74, 119, 119, 119); // Medium Grey with Transparency
     public int current_selected_system_main_color = Color.argb(255, 33, 32, 33); // Main theme color
+    public int current_selected_system_main_dark_color = Color.argb(255, 33, 32, 33); // Main theme color dark
     // ==================================== Settings Tweaks ================================== //
     public boolean category_title_caps = true;
     public boolean category_title_bold = true;
@@ -124,6 +126,7 @@ public class MyCardStackAdapter extends CardStackAdapter implements
     public Boolean is_framework_dialog_background_dark_changed = false;
     public Boolean is_framework_dialog_background_light_changed = false;
     public Boolean is_framework_main_theme_color_changed = false;
+    public Boolean is_framework_main_theme_color_dark_changed = false;
     public Boolean is_framework_notifications_primary_changed = false;
     public Boolean is_framework_notifications_secondary_changed = false;
     public Boolean is_framework_system_ripple_changed = false;
@@ -262,6 +265,8 @@ public class MyCardStackAdapter extends CardStackAdapter implements
         framework_toolbar = (android.support.v7.widget.Toolbar)
                 root.findViewById(R.id.framework_toolbar);
         framework_toolbar.setNavigationIcon(R.drawable.ic_arrow_back_24dp);
+
+        main_color_dark_view = root.findViewById(R.id.main_color_dark_colorpicker);
 
         final Switch switch1 = (Switch) root.findViewById(R.id.switch_example);
         final Switch switch2 = (Switch) root.findViewById(R.id.switch_example2);
@@ -488,6 +493,30 @@ public class MyCardStackAdapter extends CardStackAdapter implements
                         settings_toolbar.setBackgroundColor(color);
                         is_framework_main_theme_color_changed = true;
                         main_color_text.setTextColor(mContext.getColor(android.R.color.white));
+                    }
+                });
+                cpd.show();
+            }
+        });
+
+        // Framework System Main Color Dark
+
+        final ImageView main_color_dark = (ImageView) root.findViewById(
+                R.id.system_main_dark_colorpicker);
+        final TextView main_color_dark_text = (TextView) root.findViewById(
+                R.id.system_main_dark_colorpicker_text);
+        main_color_dark.setColorFilter(current_selected_system_main_dark_color, PorterDuff.Mode.SRC_ATOP);
+        main_color_dark.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                final ColorPickerDialog cpd = new ColorPickerDialog(
+                        mContext, current_selected_system_main_dark_color);
+                cpd.setAlphaSliderVisible(true);
+                cpd.setOnColorChangedListener(new ColorPickerDialog.OnColorChangedListener() {
+                    @Override
+                    public void onColorChanged(int color) {
+                        current_selected_system_main_dark_color = color;
+                        is_framework_main_theme_color_dark_changed = true;
+                        main_color_dark_text.setTextColor(mContext.getColor(android.R.color.white));
                     }
                 });
                 cpd.show();
@@ -1232,6 +1261,7 @@ public class MyCardStackAdapter extends CardStackAdapter implements
                     Toast.LENGTH_LONG);
             toast.show();
         }
+
         ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(mContext,
                 android.R.layout.simple_spinner_item, list);
         // Specify the layout to use when the list of choices appears
@@ -1249,12 +1279,18 @@ public class MyCardStackAdapter extends CardStackAdapter implements
                                 Toast.LENGTH_LONG);
                         toast.show();
                     } else {
+                        Log.d("getFinalizedViewSpinner", "akZent has been selected, all options have been swapped!");
                         colorful_icon_switch.setVisibility(View.VISIBLE);
+                        main_color_dark_view.setVisibility(View.GONE);
+                        is_framework_main_theme_color_dark_changed = false;
                         if (current_selected_system_main_color == Color.argb(255, 0, 0, 0)) {
                             current_selected_system_main_color = Color.argb(255, 33, 32, 33);
                             main_color.setColorFilter(current_selected_system_main_color);
                             framework_toolbar.setBackgroundColor(current_selected_system_main_color);
                             settings_toolbar.setBackgroundColor(current_selected_system_main_color);
+                        }
+                        if (current_selected_system_main_dark_color == Color.argb(255, 0, 0, 0)) {
+                            current_selected_system_main_dark_color = Color.argb(255, 33, 32, 33);
                         }
                         if (current_selected_header_background_color == Color.argb(255, 0, 0, 0)) {
                             current_selected_header_background_color = Color.argb(255, 31, 31, 31);
@@ -1280,12 +1316,18 @@ public class MyCardStackAdapter extends CardStackAdapter implements
                         toast.show();
                         spinner1.setSelection(0);
                     } else {
+                        Log.d("getFinalizedViewSpinner", "blakZent has been selected, all options have been swapped!");
                         colorful_icon_switch.setVisibility(View.VISIBLE);
+                        main_color_dark_view.setVisibility(View.GONE);
+                        is_framework_main_theme_color_dark_changed = false;
                         if (current_selected_system_main_color == Color.argb(255, 33, 32, 33)) {
                             current_selected_system_main_color = Color.argb(255, 0, 0, 0);
                             main_color.setColorFilter(current_selected_system_main_color);
                             framework_toolbar.setBackgroundColor(current_selected_system_main_color);
                             settings_toolbar.setBackgroundColor(current_selected_system_main_color);
+                        }
+                        if (current_selected_system_main_dark_color == Color.argb(255, 33, 32, 33)) {
+                            current_selected_system_main_dark_color = Color.argb(255, 0, 0, 0);
                         }
                         if (current_selected_header_background_color == Color.argb(255, 31, 31, 31)) {
                             current_selected_header_background_color = Color.argb(255, 0, 0, 0);
@@ -1300,6 +1342,17 @@ public class MyCardStackAdapter extends CardStackAdapter implements
                             qs_panel_bg.setColorFilter(current_selected_qs_panel_background_color);
                         }
                         current_cdt_theme = "com.chummy.jezebel.blackedout.donate";
+                    }
+                } else {
+                    if (spinner1.getSelectedItem().toString().substring(0, 10).equals("com.chummy")
+                            || spinner1.getSelectedItem().toString().substring(0, 13).equals("projekt.klar")) {
+                        Log.d("getFinalizedViewSpinner", "a cdt theme derivative has been selected, several options have been changed!");
+                        main_color_dark_view.setVisibility(View.GONE);
+                        is_framework_main_theme_color_dark_changed = false;
+                    } else {
+                        if (!main_color_dark_view.isShown()) {
+                            main_color_dark_view.setVisibility(View.VISIBLE);
+                        }
                     }
                 }
             }
@@ -1459,6 +1512,14 @@ public class MyCardStackAdapter extends CardStackAdapter implements
                 Phase2_InjectAndMove theme_color = new Phase2_InjectAndMove();
                 String theme_color_ = "#" + Integer.toHexString(current_selected_system_main_color);
                 theme_color.execute("theme_color", theme_color_, "theme_color",
+                        mContext.getCacheDir().getAbsolutePath() +
+                                "/creative_mode/assets/overlays/common/res/values-v10/");
+            }
+
+            if (is_framework_main_theme_color_dark_changed) {
+                Phase2_InjectAndMove theme_color_dark = new Phase2_InjectAndMove();
+                String theme_color_dark_ = "#" + Integer.toHexString(current_selected_system_main_dark_color);
+                theme_color_dark.execute("theme_color_dark", theme_color_dark_, "theme_color_dark",
                         mContext.getCacheDir().getAbsolutePath() +
                                 "/creative_mode/assets/overlays/common/res/values-v10/");
             }

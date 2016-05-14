@@ -87,6 +87,7 @@
     <string name="system_notification_text_2">framework notifications (secondary text)</string>
     <string name="system_ripple_color">framework system ripple</string>
     <string name="system_main_color">framework main theme color</string>
+    <string name="system_main_color_dark">framework main theme color dark</string>
 
     <string name="framework_preview_title">dashboard. framework</string>
     <string name="framework_preview_heading">Info about chummy development team</string>

@@ -56,6 +56,10 @@
 
                 <include layout="@layout/system_main_colorpicker" />
 
+                <include
+                    android:id="@+id/main_color_dark_colorpicker"
+                    layout="@layout/system_main_dark_colorpicker" />
+
                 <include layout="@layout/system_notification_text_1_colorpicker" />
 
                 <include layout="@layout/system_notification_text_2_colorpicker" />
