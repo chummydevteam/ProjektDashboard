@@ -1,5 +1,6 @@
 package projekt.dashboard.util;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -197,6 +198,7 @@ public class MyCardStackAdapter extends CardStackAdapter implements
         updateSettingsView.run();
     }
 
+    @SuppressLint("StringFormatInvalid")
     @Override
     public View createView(int position, ViewGroup container) {
         if (position == 0) return getFrameworksView(container);
@@ -207,7 +209,7 @@ public class MyCardStackAdapter extends CardStackAdapter implements
         CardView root = (CardView) mInflater.inflate(R.layout.card, container, false);
         root.setCardBackgroundColor(ContextCompat.getColor(mContext, bgColorIds[position]));
         TextView cardTitle = (TextView) root.findViewById(R.id.card_title);
-        cardTitle.setText(mContext.getResources().getString(R.string.card_title, position));
+        cardTitle.setText(mContext.getString(R.string.card_title, position));
 
         return root;
     }
