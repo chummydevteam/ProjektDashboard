@@ -62,6 +62,7 @@
     <string name="wallpapers_json_url_customworx" formatted="false" translatable="false">http://pastebin.com/raw/dbCArLaF</string>
     <string name="wallpapers_json_url_gagan_du" formatted="false" translatable="false">http://pastebin.com/raw/CapPghtE</string>
     <string name="wallpapers_json_url_gagan" formatted="false" translatable="false">http://pastebin.com/raw/BwKeCHew</string>
+    <string name="wallpapers_json_url_syed" formatted="false" translatable="false">http://pastebin.com/raw/khkhcRRk</string>
     <string name="wallpapers_json_url_vignesh_du" formatted="false" translatable="false">http://pastebin.com/raw/Ksf8c4Tf</string>
     <string name="wallpapers_json_url_vignesh" formatted="false" translatable="false">http://pastebin.com/raw/9qAZ7ZhB</string>
 
@@ -161,6 +162,7 @@
         <item>customworx wallpaper pack</item>
         <item>gagan singh du wallpaper pack</item>
         <item>gagan singh wallpaper pack</item>
+        <item>syed sajid du wallpaper pack</item>
         <item>vignesh ravi du wallpaper pack</item>
         <item>vignesh ravi wallpaper pack</item>
     </string-array>

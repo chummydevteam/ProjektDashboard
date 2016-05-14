@@ -143,9 +143,12 @@ public class WallpapersFragment extends BasePageFragment implements
                     prefs.edit().putString("selected_wallpaper_source", "gagan").commit();
                 }
                 if (pos == 7) {
-                    prefs.edit().putString("selected_wallpaper_source", "vignesh_du").commit();
+                    prefs.edit().putString("selected_wallpaper_source", "syed").commit();
                 }
                 if (pos == 8) {
+                    prefs.edit().putString("selected_wallpaper_source", "vignesh_du").commit();
+                }
+                if (pos == 9) {
                     prefs.edit().putString("selected_wallpaper_source", "vignesh").commit();
                 }
             }
@@ -176,11 +179,14 @@ public class WallpapersFragment extends BasePageFragment implements
             if (mapTypeString.equals("gagan")) {
                 wallpaperSourcePicker.setSelection(6);
             }
-            if (mapTypeString.equals("vignesh_du")) {
+            if (mapTypeString.equals("syed")) {
                 wallpaperSourcePicker.setSelection(7);
             }
-            if (mapTypeString.equals("vignesh")) {
+            if (mapTypeString.equals("vignesh_du")) {
                 wallpaperSourcePicker.setSelection(8);
+            }
+            if (mapTypeString.equals("vignesh")) {
+                wallpaperSourcePicker.setSelection(9);
             }
         } else {
             wallpaperSourcePicker.setSelection(0);
