@@ -63,12 +63,13 @@
 
     <!-- SystemUI Tweaks -->
     <string name="contextual_header_pack">contextual header packs&#8230;</string>
-    <string name="qs_accent_color">systemui accent color</string>
-    <string name="qs_header_background_color">systemui header background color\n(only on themes with no drawable header)</string>
-    <string name="qs_notification_background_color">systemui notification background color</string>
-    <string name="qs_background_color">systemui qs panel background color</string>
-    <string name="qs_tile_icon_color">systemui qs tile colors</string>
-    <string name="qs_tile_text_color">systemui qs tile text colors</string>
+    <string name="qs_accent_color">accent color</string>
+    <string name="qs_header_background_color">header background color\n(only on themes with no drawable header)</string>
+    <string name="qs_notification_background_color">notification background color</string>
+    <string name="qs_background_color">qs panel background color</string>
+    <string name="qs_tile_icon_color">qs tile colors</string>
+    <string name="qs_tile_text_color">qs tile text colors</string>
+    <string name="recents_clear_all_icon_color">recents clear all fab icon color</string>
 
     <string name="systemui_preview_label_bt">Bluetooth</string>
     <string name="systemui_preview_label_wifi">Wifi</string>

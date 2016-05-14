@@ -115,6 +115,7 @@ public class MyCardStackAdapter extends CardStackAdapter implements
     public int current_selected_qs_accent_color = Color.argb(255, 255, 255, 255);
     public int current_selected_qs_tile_color = Color.argb(255, 255, 255, 255);
     public int current_selected_qs_text_color = Color.argb(255, 255, 255, 255);
+    public int current_selected_recents_clear_all_icon_color = Color.argb(255, 255, 255, 255);
     public Switch colorful_icon_switch;
     public String spinnerItem, themeName, themeAuthor;
     // ========================= On decision based color injection =========================== //
@@ -148,6 +149,7 @@ public class MyCardStackAdapter extends CardStackAdapter implements
     public Boolean is_systemui_accent_color_changed = false;
     public Boolean is_systemui_qs_tile_color_changed = false;
     public Boolean is_systemui_qs_text_color_changed = false;
+    public Boolean is_systemui_recents_clear_all_icon_color_changed = false;
 
     ProgressDialog mProgressDialog;
     private PowerManager.WakeLock mWakeLock;
@@ -1210,6 +1212,29 @@ public class MyCardStackAdapter extends CardStackAdapter implements
             }
         });
 
+
+        // QS Recents Clear All Icon Color
+
+        final ImageView qs_recents = (ImageView) root.findViewById(R.id.qs_recents_clear_all_icon_colorpicker);
+        final TextView qs_recents_text = (TextView) root.findViewById(
+                R.id.qs_recents_clear_all_icon_colorpicker_text);
+        qs_recents.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                final ColorPickerDialog cpd = new ColorPickerDialog(
+                        mContext, current_selected_recents_clear_all_icon_color);
+                cpd.setOnColorChangedListener(new ColorPickerDialog.OnColorChangedListener() {
+                    @Override
+                    public void onColorChanged(int color) {
+                        current_selected_recents_clear_all_icon_color = color;
+                        qs_recents.setColorFilter(color, PorterDuff.Mode.SRC_ATOP);
+                        is_systemui_recents_clear_all_icon_color_changed = true;
+                        qs_recents_text.setTextColor(mContext.getColor(android.R.color.white));
+                    }
+                });
+                cpd.show();
+            }
+        });
+
         return root;
     }
 
@@ -1683,6 +1708,16 @@ public class MyCardStackAdapter extends CardStackAdapter implements
                                 "/creative_mode/assets/overlays/common/res/values-v12/");
             }
 
+            if (is_systemui_recents_clear_all_icon_color_changed) {
+                Phase2_InjectAndMove sysui_recents = new Phase2_InjectAndMove();
+                String sysui_recents_color = "#" + Integer.toHexString(
+                        current_selected_recents_clear_all_icon_color);
+                sysui_recents.execute("floating_action_button_icon_color", sysui_recents_color,
+                        "theme_color_recents_clear_all_icon_color",
+                        mContext.getCacheDir().getAbsolutePath() +
+                                "/creative_mode/assets/overlays/com.android.systemui/" +
+                                "res/values-v12/");
+            }
 
             Phase3_MovePremadeFiles phase3 = new Phase3_MovePremadeFiles();
             phase3.execute();

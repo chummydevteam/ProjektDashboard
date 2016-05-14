@@ -194,6 +194,8 @@
 
                 <include layout="@layout/qs_tile_text_colorpicker" />
 
+                <include layout="@layout/qs_recents_clear_all_icon_colorpicker" />
+
             </LinearLayout>
         </ScrollView>
     </RelativeLayout>
