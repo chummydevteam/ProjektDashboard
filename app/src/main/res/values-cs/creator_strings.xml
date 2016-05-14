@@ -61,7 +61,6 @@
 
     <!-- SystemUI Tweaks -->
     <string name="qs_accent_color">hlavní barva systemui</string>
-	<string name="qs_accent_color">accent color</string>
     <string name="qs_header_background_color">barva pozadí záhlaví\n(jenom na motivech s žádným pozadím)</string>
     <string name="qs_notification_background_color">barva pozadí oznámení</string>
     <string name="qs_background_color">barva pozadí panelu rychlého nastavení</string>
