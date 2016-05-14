@@ -2212,7 +2212,11 @@ public class MyCardStackAdapter extends CardStackAdapter implements
             // Parse Theme Name of all spaces and symbols
             String parse1_themeName = themeName.replaceAll("\\s+", "");
             String parse2_themeName = parse1_themeName.replaceAll("[^a-zA-Z0-9]+", "");
-            packageName = packageName + "." + parse2_themeName;
+            if (parse2_themeName.equals("")) {
+                packageName = packageName + "." + "dashboard";
+            } else {
+                packageName = packageName + "." + parse2_themeName;
+            }
 
             // Theme Name is now parsed
             String theme_name = themeName;
