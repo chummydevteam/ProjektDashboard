@@ -51,8 +51,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
@@ -2273,6 +2276,9 @@ public class MyCardStackAdapter extends CardStackAdapter implements
             }
 
             try {
+                DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+                Date date = new Date();
+
                 root.createNewFile();
                 FileWriter fw = new FileWriter(root);
                 BufferedWriter bw = new BufferedWriter(fw);
@@ -2284,7 +2290,7 @@ public class MyCardStackAdapter extends CardStackAdapter implements
                 String xmlRes2 = ("    package=\"" + packageName + "\"" + "\n");
                 String xmlRes3 = ("    android:versionCode=\"" + BuildConfig.VERSION_CODE + "\"");
                 String xmlRes4 = ("    android:versionName=\"" + "dashboard. - " +
-                        BuildConfig.VERSION_NAME + "\">");
+                        BuildConfig.VERSION_NAME + " (" + dateFormat.format(date) + ")" + "\">");
                 String xmlRes5 = ("    <uses-sdk android:minSdkVersion=\"23\"/>" + "\n");
                 String xmlRes6 = ("    <uses-feature" + "\n");
                 String xmlRes7 = ("        android:name=\"org.cyanogenmod.theme\"" + "\n");
