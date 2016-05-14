@@ -2,6 +2,9 @@ package projekt.dashboard.layers.fragments;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.ComponentName;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
@@ -14,6 +17,7 @@ import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -82,7 +86,28 @@ public class HeaderSwapperFragment extends BasePageFragment {
                 R.layout.fragment_headerswapper, container, false);
 
         prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
-
+        prefs = getActivity().getSharedPreferences("projekt.dashboard.layers.headerswapper", Context.MODE_PRIVATE);
+        if (prefs.getBoolean("dialog", true)) {
+            AlertDialog.Builder ad = new AlertDialog.Builder(getActivity());
+            ad.setTitle("Header Swapper :)");
+            ad.setMessage("Woah Welcome to Header Swapper,a place where you can actually use your favourite moments,your memories, right next to your notifications.\nSo How to use it:-\n1. Lets Click on the Click on the Floating button\n2. And yes if your ROM supports contextual headers you can always click on swap contextual headers and swap them too.\n3. OK, So Now After clicking the Floating Button just choose and crop the image.\n4. Now click on Save Button and Let the Magic Begin.\n\nIMP :- The Phone Should Automatically Softreboot to make changes");
+            ad.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    if (new LayersFunc(getActivity()).isAppInstalled(getActivity(), "com.chummy.aditya.materialdark.layers.donate")) {
+                        startActivity(new Intent().setComponent(new ComponentName("com.lovejoy777.rroandlayersmanager", "com.lovejoy777.rroandlayersmanager.MainActivity")));
+                    } else {
+                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.chummy.aditya.materialdark.layers.donate")));
+                    }
+                }
+            });
+            ad.setNeutralButton("Dont Show again", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    prefs.edit().putBoolean("dialog", false).commit();
+                }
+            });
+        }
         apply_fab = (FloatingActionButton) inflation.findViewById(R.id.apply_fab);
         if (prefs.getBoolean("blacked_out_enabled", true)) {
             apply_fab.setBackgroundTintList(ColorStateList.valueOf(
