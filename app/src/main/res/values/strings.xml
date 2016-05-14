@@ -13,6 +13,7 @@
     <string name="copied_system_info">System Information</string>
     <string name="copied_system_info_to_clipboard">Successfully copied system information to clipboard!</string>
     <string name="vendor_fingerprint">Security Patch Level:</string>
+    <string name="double_click_back">Nooo! Don\'t leave me! I\'ll miss you!</string>
 
     <!-- Home Screen -->
     <string name="change_name_dialog_message">I assume you want me to call you something else, master?</string>

@@ -10,6 +10,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.Nullable;
@@ -23,6 +24,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewTreeObserver;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.afollestad.bridge.Bridge;
 import com.afollestad.materialdialogs.util.DialogUtils;
@@ -77,8 +79,8 @@ public class MainActivity extends BaseDonateActivity implements
     @Nullable
     @Bind(R.id.app_bar)
     LinearLayout mAppBarLinear;
+    boolean doubleBackToExitPressedOnce = false;
     private PagesBuilder mPages;
-
     private CardStackLayout mCardStackLayout;
 
     @Override
@@ -310,7 +312,21 @@ public class MainActivity extends BaseDonateActivity implements
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
+        if (doubleBackToExitPressedOnce) {
+            super.onBackPressed();
+            return;
+        }
+        this.doubleBackToExitPressedOnce = true;
+        Toast.makeText(this, getString(R.string.double_click_back), Toast.LENGTH_SHORT).show();
+
+        new Handler().postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                doubleBackToExitPressedOnce = false;
+            }
+        }, 2000);
+
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
