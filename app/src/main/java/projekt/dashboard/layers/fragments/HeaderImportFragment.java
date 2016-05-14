@@ -1,19 +1,23 @@
 package projekt.dashboard.layers.fragments;
 
 import android.app.ProgressDialog;
+import android.content.ComponentName;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.ColorStateList;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -189,6 +193,29 @@ public class HeaderImportFragment extends BasePageFragment {
                 R.layout.fragment_headersimporter, container, false);
 
         prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        prefs = getActivity().getSharedPreferences("projekt.dashboard.layers.headerimport", Context.MODE_PRIVATE);
+        if (prefs.getBoolean("dialog", true)) {
+            AlertDialog.Builder ad = new AlertDialog.Builder(getActivity());
+            ad.setTitle("Header Importer :)");
+            ad.setMessage("Woah Welcome to Header Importer,a place where you can actually use your favourite moments,your memories, right next to your notifications.\n" +
+                    "So How to use it:-\n1. Easy AF,Just Select and Download a Header Pack from the Online DataBase\n2. Select the zip \n3. Select a Device DPI\n4. Click The Floating Button and Wait for the Magic !!!");
+            ad.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    if (new LayersFunc(getActivity()).isAppInstalled(getActivity(), "com.chummy.aditya.materialdark.layers.donate")) {
+                        startActivity(new Intent().setComponent(new ComponentName("com.lovejoy777.rroandlayersmanager", "com.lovejoy777.rroandlayersmanager.MainActivity")));
+                    } else {
+                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.chummy.aditya.materialdark.layers.donate")));
+                    }
+                }
+            });
+            ad.setNeutralButton("Dont Show again", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    prefs.edit().putBoolean("dialog", false).commit();
+                }
+            });
+        }
 
         Button downloadButton = (Button) inflation.findViewById(R.id.downloadButton);
         if (isNetworkAvailable()) {
@@ -211,18 +238,21 @@ public class HeaderImportFragment extends BasePageFragment {
                         xhdpi = true;
                         xxhdpi = false;
                         xxxhdpi = false;
+                        Log.e("Devices Selected", xhdpi + " ," + xxhdpi + " ," + xxxhdpi);
                         is_radio_selected = true;
                         break;
                     case R.id.radio2:
                         xhdpi = false;
                         xxhdpi = true;
                         xxxhdpi = false;
+                        Log.e("Devices Selected", xhdpi + " ," + xxhdpi + " ," + xxxhdpi);
                         is_radio_selected = true;
                         break;
                     case R.id.radio3:
                         xhdpi = false;
                         xxhdpi = false;
                         xxxhdpi = true;
+                        Log.e("Devices Selected", xhdpi + " ," + xxhdpi + " ," + xxxhdpi);
                         is_radio_selected = true;
                         break;
                 }
@@ -245,7 +275,7 @@ public class HeaderImportFragment extends BasePageFragment {
         apply_fab.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 String[] secondPhaseCommands = {
-                        LayersFunc.getvendor() + "/"+LayersFunc.themesystemui+".apk",
+                        LayersFunc.getvendor() + "/" + LayersFunc.themesystemui + ".apk",
                         Environment.getExternalStorageDirectory().getAbsolutePath()
                                 + "/dashboard./" + spinner2.getSelectedItem().toString()};
                 new secondPhaseAsyncTasks().execute(secondPhaseCommands);
@@ -424,7 +454,7 @@ public class HeaderImportFragment extends BasePageFragment {
                 FileUtils.copyFile(source, destination);
                 unzip(header_zip);
                 Log.e("CopyAkzent_SystemUIFile",
-                        "Successfully copied "+LayersFunc.themesystemui+" apk from overlays folder to work directory");
+                        "Successfully copied " + LayersFunc.themesystemui + " apk from overlays folder to work directory");
                 Log.e("CopyAkzent_SystemUIFile", "Function Stopped");
             } catch (IOException e) {
                 Log.e("CopyAkzent_SystemUIFile",
@@ -499,32 +529,30 @@ public class HeaderImportFragment extends BasePageFragment {
             }
 
             // Copy the files over
-            if (xxhdpi || xhdpi || xxxhdpi) {
-                for (int i = 0; i < source.size(); i++) {
+            for (int i = 0; i < source.size(); i++) {
+                eu.chainfire.libsuperuser.Shell.SU.run(
+                        "cp " + getActivity().getCacheDir().getAbsolutePath() +
+                                "/headers/" + source.get(i) +
+                                " res/drawable-xxhdpi-v4/" +
+                                source.get(i));
+                Log.e("xxhdpi cp", source.get(i) + "");
+                try {
+                    Process nativeApp2 = Runtime.getRuntime().exec(
+                            "aapt remove " + getActivity().getCacheDir().getAbsolutePath() +
+                                    "/" + LayersFunc.themesystemui + ".apk " +
+                                    "res/drawable-xxhdpi-v4/" +
+                                    source.get(i) + "");
+                    Log.e("xxhdpi rm", source.get(i) + "");
+                    nativeApp2.waitFor();
                     eu.chainfire.libsuperuser.Shell.SU.run(
-                            "cp " + getActivity().getCacheDir().getAbsolutePath() +
-                                    "/headers/" + source.get(i) +
-                                    " res/drawable-xxhdpi-v4/" +
+                            "aapt add " + getActivity().getCacheDir().getAbsolutePath() +
+                                    "/" + LayersFunc.themesystemui + ".apk " +
+                                    "res/drawable-xxhdpi-v4/" +
                                     source.get(i));
-                    Log.e("xxhdpi cp", source.get(i) + "");
-                    try {
-                        Process nativeApp2 = Runtime.getRuntime().exec(
-                                "aapt remove " + getActivity().getCacheDir().getAbsolutePath() +
-                                        "/" + LayersFunc.themesystemui + ".apk " +
-                                        "res/drawable-xxhdpi-v4/" +
-                                        source.get(i) + "");
-                        Log.e("xxhdpi rm", source.get(i) + "");
-                        nativeApp2.waitFor();
-                        eu.chainfire.libsuperuser.Shell.SU.run(
-                                "aapt add " + getActivity().getCacheDir().getAbsolutePath() +
-                                        "/" + LayersFunc.themesystemui + ".apk " +
-                                        "res/drawable-xxhdpi-v4/" +
-                                        source.get(i));
-                        Log.e("xxhdpi ad", source.get(i) + "");
+                    Log.e("xxhdpi ad", source.get(i) + "");
 
-                    } catch (Exception e) {
-                        //
-                    }
+                } catch (Exception e) {
+                    //
                 }
             }
             if (xhdpi) {
