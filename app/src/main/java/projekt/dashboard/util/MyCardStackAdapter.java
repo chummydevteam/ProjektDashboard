@@ -1100,6 +1100,8 @@ public class MyCardStackAdapter extends CardStackAdapter implements
         qs_panel_bg = (ImageView) root.findViewById(R.id.qs_background_colorpicker);
         qs_panel_bg.setColorFilter(current_selected_qs_panel_background_color,
                 PorterDuff.Mode.SRC_ATOP);
+        final RelativeLayout qs_panel_bg_preview = (RelativeLayout) root.findViewById(R.id.systemui_preview);
+        qs_panel_bg_preview.setBackgroundColor(current_selected_qs_panel_background_color);
         final TextView qs_panel_bg_color = (TextView) root.findViewById(
                 R.id.qs_background_colorpicker_text);
         qs_panel_bg.setOnClickListener(new View.OnClickListener() {
@@ -1114,6 +1116,7 @@ public class MyCardStackAdapter extends CardStackAdapter implements
                         qs_panel_bg.setColorFilter(color, PorterDuff.Mode.SRC_ATOP);
                         is_systemui_qs_panel_background_color_changed = true;
                         qs_panel_bg_color.setTextColor(mContext.getColor(android.R.color.white));
+                        qs_panel_bg_preview.setBackgroundColor(current_selected_qs_panel_background_color);
                     }
                 });
                 cpd.show();
