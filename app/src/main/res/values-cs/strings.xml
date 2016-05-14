@@ -8,13 +8,13 @@
     <string name="welcome_back">eyyyy vítej zpátky</string>
     <string name="welcome_back_default_username">kámo</string>
     <string name="welcome_back_dialog_message">jak bych ti měl říkat?</string>
-    <string name="welcome_back_dialog_title">udělej dashboard tvoji!</string>
+    <string name="welcome_back_dialog_title">udělej dashboard svým!</string>
     <string name="welcome_back_dialog_confirm">Líbí se mi to!</string>
     <string name="username_welcome">vítej zpět</string>
     <string name="copied_system_info">Systémové Informace</string>
     <string name="copied_system_info_to_clipboard">Úspěšně zkopírovány informace o systému na nástěnku!</string>
     <string name="vendor_fingerprint">Úroveň oprav zabezpečení:</string>
-
+    <string name="double_click_back">Neee! Neopouštěj mě! Budeš mi chybět!</string>
     <!-- Home Screen -->
     <string name="change_name_dialog_message">Hádám, že chcete, abych Vám říkal jinak pane? (5. pád) </string>
     <string name="change_name_dialog_title">poď to změnit!</string>
@@ -143,6 +143,17 @@
         <item>balíček tapet od vigneshe raviho</item>
     </string-array>
 
+	<string name="settings_title">nastavení dashboard.</string>
+    <string name="settings_subtitle1">zobrazit/schovat dashboard. záložky</string>
+    <string name="settings_subtitle2">funkce aplikace</string>
+    <string name="settings_color_switcher_tab">zapnout záložku měniče barev</string>
+    <string name="settings_header_swapper_tab">zapnout záložku měniče záhlaví</string>
+    <string name="settings_header_importer_tab">zapnout záložku importérů balíčků záhlaví</string>
+    <string name="settings_theme_debugging_tab">zapnout záložku ladění motivů</string>
+    <string name="settings_wallpaper_tab">zápnout záložku tapet</string>
+    <string name="settings_blacked_out_mode">zapnout "začerněný mód"</string>
+    <string name="settings_clear_dashboard_folder">vyčistit složku dashboard.</string>
+	
     <string name="contextualheaderimporter">importér balíčku časového záhlaví</string>
     <string name="contextualheaderimporter_description">@string/contextualheaderimporter</string>
     <string name="contextualheaderimporter_description_secondary">toto je velmi experimentální funkce, která vám povoluje zvolit vlastní časové záhlaví pro vaši oznamovací oblast systemui, založená na předpřipravených zip souborech sdílených autory motivů. rychlý restart je vyžadován, protože měníme aktuální apk soubor instalovaný na vašem zařízení.\n\nNezapomeňte zapnout časové záhlaví (ne poly, hd) ve vašem nastavení ROM! pokud se záhlaví nenastaví po restartu, vymažte mezipamět systemui!\n</string>

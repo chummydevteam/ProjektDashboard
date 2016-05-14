@@ -12,8 +12,10 @@
     <string name="creative_mode_card_theme_selection">zvolte nainstalovaný motiv:</string>
     <string name="creative_mode_card_theme_attributes">nové vlastnosti motivu</string>
 
-
-    <string name="no_theme_selected">Prosím zvolte motiv ze spodní nabídky před kliknutím na tlačítko použít!</string>
+    <string name="no_theme_selected">Prosím zvolte motiv ze rolovací nabídky před kliknutím!</string>
+	<string name="default_username">Uživatel Dashboard</string>
+    <string name="begin_action_button">Začínáme!</string>
+	
     <string name="phase2_dialog_title">zpracovávám všechny vaše úpravy</string>
     <string name="phase3_dialog_title">přemisťuju speciální úpravy</string>
     <string name="phase4_dialog_title">vytvářím nová manifest</string>
@@ -22,6 +24,23 @@
     <string name="unzipping_assets_dialog_title">motiv se extrahuje&#8230;</string>
     <string name="unzipping_assets_small">čekejte prosím&#8230;</string>
     <string name="unzipping_assets_big">vybraný motiv je velký/nextrakce může chvíli trvat&#8230;</string>
+	
+	 <!-- Exception Catches -->
+    <string name="zipsigner_exception_toast">Nepodařilo se vytvořit nový motiv (Vyjímka: ZipSigner)</string>
+    <string name="unzipHeaderPacks_exception_toast">Nepodařilo se vytvořit nový motiv (Vyjímka: UnzipHeaderPacks)</string>
+    <string name="unzipNewAPK_exception_toast">Nepodařilo se vytvořit nový motiv (Vyjímka: UnzipNewAPK)</string>
+    <string name="UnsignedAPKCreator_exception_toast">Nepodařilo se vytvořit nový motiv (Vyjímka: UnsignedAPKCreator)</string>
+    <string name="createXMLFile_exception_toast">Nepodařilo se vytvořit nový motiv (Vyjímka: createXMLFile (IOException))</string>
+    <string name="moveFile_exception_toast">Nepodařilo se vytvořit nový motiv (Vyjímka: moveFile)</string>
+    <string name="moveFile_FNF_exception_toast">Nepodařilo se vytvořit nový motiv (Vyjímka: moveFile (FileNotFound))</string>
+    <string name="createSettingsTitleXML_exception_toast">Nepodařilo se vytvořit nový motiv (Vyjímka: createSettingsTitleXML (IOException))</string>
+    <string name="copyFile_exception_toast">Nepodařilo se vytvořit nový motiv (Vyjímka: copyFile)</string>
+    <string name="copyFileOrDir_exception_toast">Nepodařilo se vytvořit nový motiv (Vyjímka: copyFileOrDir (IOException))</string>
+    <string name="moveXMLfile_exception_toast">Nepodařilo se vytvořit nový motiv (Vyjímka: moveXMLfile)</string>
+    <string name="moveXMLfile_FNF_exception_toast">Nepodařilo se vytvořit nový motiv (Vyjímka: moveXMLfile (FileNotFound))</string>
+    <string name="unzip_exception_toast">Nepodařilo se vytvořit nový motiv (Vyjímka: unzip (IOException))</string>
+    <string name="process_IO_exception_toast">Nepodařilo se vytvořit nový motiv (Vyjímka: ProcessBuilder (IOException))</string>
+    <string name="process_Interrupted_exception_toast">Nepodařilo se vytvořit nový motiv (Vyjímka: ProcessBuilder (InterruptedException))</string>
 
     <!-- Settings Tweaks -->
     <string name="settings_rounded_corners">kategorie (zaoblené)</string>
@@ -42,6 +61,10 @@
 
     <!-- SystemUI Tweaks -->
     <string name="qs_accent_color">hlavní barva systemui</string>
+	<string name="qs_accent_color">accent color</string>
+    <string name="qs_header_background_color">barva pozadí záhlaví\n(jenom na motivech s žádným pozadím)</string>
+    <string name="qs_notification_background_color">barva pozadí oznámení</string>
+    <string name="qs_background_color">barva pozadí panelu rychlého nastavení</string>
     <string name="qs_tile_icon_color">barva přepínače rychlého nastevní</string>
     <string name="qs_tile_text_color">barva textu rychlého nastevní</string>
 
@@ -62,6 +85,7 @@
     <string name="system_notification_text_2">oznámení frameworku (vedlejší text)</string>
     <string name="system_ripple_color">barva efektu při dlouhém stisku</string>
     <string name="system_main_color">barva hlavního motivu frameworku</string>
+	<string name="system_main_color_dark">hlavní barva tmavého frameworku</string>
 
     <string name="framework_preview_title">framework dashboardu.</string>
     <string name="framework_preview_heading">Informace o chummy development team</string>
