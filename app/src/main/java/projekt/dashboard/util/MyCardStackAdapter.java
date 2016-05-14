@@ -1416,7 +1416,7 @@ public class MyCardStackAdapter extends CardStackAdapter implements
                 Phase2_InjectAndMove settings_title = new Phase2_InjectAndMove();
                 String settings_title_color = "#" + Integer.toHexString(
                         current_selected_settings_title_color);
-                settings_title.execute("settings_title_color", settings_title_color,
+                settings_title.execute("theme_accent", settings_title_color,
                         "theme_color_settings_title_color",
                         mContext.getCacheDir().getAbsolutePath() +
                                 "/creative_mode/assets/overlays/com.android.settings/res/values-v11/");
