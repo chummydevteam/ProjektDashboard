@@ -77,6 +77,16 @@ public class HeaderImportFragment extends BasePageFragment {
         fileOrDirectory.delete();
     }
 
+    public Boolean checkIfPackageInstalled(String packagename, Context context) {
+        PackageManager pm = context.getPackageManager();
+        try {
+            pm.getPackageInfo(packagename, PackageManager.GET_ACTIVITIES);
+            return true;
+        } catch (PackageManager.NameNotFoundException e) {
+            return false;
+        }
+    }
+
     public int countPNGs() {
         int count = 0;
 
@@ -241,8 +251,10 @@ public class HeaderImportFragment extends BasePageFragment {
                         if (!inFile.getAbsolutePath().substring(21).equals(
                                 "com.chummy.jezebel.materialdark.donate")) {
                             if (!inFile.getAbsolutePath().substring(21).equals("projekt.klar")) {
-                                list.add(inFile.getAbsolutePath().substring(21));
-                                counter += 1;
+                                if (checkIfPackageInstalled(inFile.getAbsolutePath().substring(21), getContext())) {
+                                    list.add(inFile.getAbsolutePath().substring(21));
+                                    counter += 1;
+                                }
                             }
                         } else {
                             counter += 1;

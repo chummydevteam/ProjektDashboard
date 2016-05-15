@@ -2,6 +2,7 @@ package projekt.dashboard.fragments;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -79,6 +80,16 @@ public class HeaderSwapperFragment extends BasePageFragment {
                 deleteRecursive(child);
 
         fileOrDirectory.delete();
+    }
+
+    public Boolean checkIfPackageInstalled(String packagename, Context context) {
+        PackageManager pm = context.getPackageManager();
+        try {
+            pm.getPackageInfo(packagename, PackageManager.GET_ACTIVITIES);
+            return true;
+        } catch (PackageManager.NameNotFoundException e) {
+            return false;
+        }
     }
 
     @Nullable
@@ -195,8 +206,10 @@ public class HeaderSwapperFragment extends BasePageFragment {
                         if (!inFile.getAbsolutePath().substring(21).equals(
                                 "com.chummy.jezebel.materialdark.donate")) {
                             if (!inFile.getAbsolutePath().substring(21).equals("projekt.klar")) {
-                                list.add(inFile.getAbsolutePath().substring(21));
-                                counter += 1;
+                                if (checkIfPackageInstalled(inFile.getAbsolutePath().substring(21), getContext())) {
+                                    list.add(inFile.getAbsolutePath().substring(21));
+                                    counter += 1;
+                                }
                             }
                         } else {
                             counter += 1;

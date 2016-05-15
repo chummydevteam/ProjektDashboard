@@ -1295,8 +1295,10 @@ public class MyCardStackAdapter extends CardStackAdapter implements
                         if (!inFile.getAbsolutePath().substring(21).equals(
                                 "com.chummy.jezebel.materialdark.donate")) {
                             if (!inFile.getAbsolutePath().substring(21).equals("projekt.klar")) {
-                                list.add(inFile.getAbsolutePath().substring(21));
-                                counter += 1;
+                                if (checkIfPackageInstalled(inFile.getAbsolutePath().substring(21), mContext)) {
+                                    list.add(inFile.getAbsolutePath().substring(21));
+                                    counter += 1;
+                                }
                             }
                         } else {
                             counter += 1;
