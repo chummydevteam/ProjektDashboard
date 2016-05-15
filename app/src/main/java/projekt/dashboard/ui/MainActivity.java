@@ -39,6 +39,7 @@ import projekt.dashboard.adapters.MainPagerAdapter;
 import projekt.dashboard.config.Config;
 import projekt.dashboard.fragments.ColorChangerFragment;
 import projekt.dashboard.fragments.CreatorFragment;
+import projekt.dashboard.fragments.HeaderCreatorFragment;
 import projekt.dashboard.fragments.HeaderImportFragment;
 import projekt.dashboard.fragments.HeaderSwapperFragment;
 import projekt.dashboard.fragments.HomeFragment;
@@ -163,6 +164,8 @@ public class MainActivity extends BaseDonateActivity implements
                 mPages.add(new PagesBuilder.Page(R.id.theme_utilities_fragment, R.drawable.tab_rebuild,
                         R.string.home_tab_five, new ThemeUtilitiesFragment()));
             }
+            mPages.add(new PagesBuilder.Page(R.id.header_swapper_fragment, R.drawable.tab_header_creator,
+                    R.string.home_tab_five, new HeaderCreatorFragment()));
         }
         if (isNetworkAvailable()) {
             if (prefs.getBoolean("wallpapers_enabled", true)) {

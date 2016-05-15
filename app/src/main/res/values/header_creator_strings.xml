@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="notifhead_afternoon">afternoon header</string>
+    <string name="notifhead_christmas">christmas header</string>
+    <string name="notifhead_morning">morning header</string>
+    <string name="notifhead_newyearseve">new years eve header</string>
+    <string name="notifhead_night">night header</string>
+    <string name="notifhead_noon">noon header</string>
+    <string name="notifhead_sunrise">sunrise header</string>
+    <string name="notifhead_sunset">sunset header</string>
+    <string name="final_card">sunset header</string>
+</resources>

@@ -53,5 +53,6 @@
             android:name=".viewer.ViewerActivity"
             android:screenOrientation="sensorPortrait"
             android:theme="@style/AppTheme.Viewer" />
+        <activity android:name="com.theartofdev.edmodo.cropper.CropImageActivity"/>
     </application>
 </manifest>

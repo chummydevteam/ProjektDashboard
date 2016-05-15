@@ -131,4 +131,7 @@ dependencies {
 
     // Dialogs
     compile 'com.mikhaellopez:circularfillableloaders:1.2.0'
+
+    // Image Croppers
+    compile 'com.theartofdev.edmodo:android-image-cropper:2.1.+'
 }
