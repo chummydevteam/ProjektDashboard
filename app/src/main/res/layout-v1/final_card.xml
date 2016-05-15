@@ -125,9 +125,9 @@
                     android:layout_below="@+id/edittext2"
                     android:layout_marginEnd="5dp"
                     android:layout_marginTop="5dp"
+                    android:textColor="@color/creative_mode_text_disabled"
                     android:checked="false"
-                    android:text="@string/commons_themable_google_apps"
-                    android:visibility="gone" />
+                    android:text="@string/commons_themable_google_apps" />
 
                 <Button
                     android:id="@+id/begin_action"
@@ -135,7 +135,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignEnd="@+id/edittext2"
                     android:layout_alignStart="@+id/tv2"
-                    android:layout_below="@+id/edittext2"
+                    android:layout_below="@+id/themable_gapps"
                     android:layout_marginBottom="8dp"
                     android:layout_marginRight="8dp"
                     android:layout_marginTop="20dp"

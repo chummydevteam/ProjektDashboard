@@ -154,6 +154,8 @@ public class MyCardStackAdapter extends CardStackAdapter implements
     public Boolean is_systemui_qs_tile_color_changed = false;
     public Boolean is_systemui_qs_text_color_changed = false;
     public Boolean is_systemui_recents_clear_all_icon_color_changed = false;
+    public Boolean use_themable_gapps = false;
+    public Boolean use_themable_gapps_changed = false;
 
     ProgressDialog mProgressDialog;
     private PowerManager.WakeLock mWakeLock;
@@ -1256,6 +1258,24 @@ public class MyCardStackAdapter extends CardStackAdapter implements
         final AnimatedEditText aet1 = (AnimatedEditText) root.findViewById(R.id.edittext1);
         final AnimatedEditText aet2 = (AnimatedEditText) root.findViewById(R.id.edittext2);
 
+        final Switch themable_gapps = (Switch) root.findViewById(R.id.themable_gapps);
+        themable_gapps.setOnCheckedChangeListener(
+                new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                        if (isChecked) {
+                            use_themable_gapps = true;
+                            Log.d("Use Themable Gapps", use_themable_gapps + "");
+                        } else {
+                            use_themable_gapps = false;
+                            Log.d("Use Themable Gapps", use_themable_gapps + "");
+                        }
+                        use_themable_gapps_changed = true;
+                        themable_gapps.setTextColor(mContext.getColor(android.R.color.white));
+                    }
+                });
+
+
         list.add(mContext.getResources().getString(R.string.contextualheaderswapper_select_theme));
         list.add("dark material // akZent");
         list.add("blacked out // blakZent");
@@ -2067,6 +2087,146 @@ public class MyCardStackAdapter extends CardStackAdapter implements
                 String destination = mContext.getCacheDir().getAbsolutePath() +
                         "/creative_mode/assets/overlays/com.android.settings/res/values-v11/";
                 moveFile(source, "dirty_tweaks_icon_presence_deactivated.xml", destination);
+            }
+
+            if (use_themable_gapps_changed) {
+                if (use_themable_gapps) {
+                    Boolean themable_gmail = new File(mContext.getCacheDir().getAbsolutePath() +
+                            "/creative_mode/assets/overlays/themable.gmail").exists();
+
+                    Boolean themable_google_app = new File(mContext.getCacheDir().getAbsolutePath() +
+                            "/creative_mode/assets/overlays/themable.google.app").exists();
+
+                    Boolean themable_contacts = new File(mContext.getCacheDir().getAbsolutePath() +
+                            "/creative_mode/assets/overlays/themable.google.contacts").exists();
+
+                    Boolean themable_dialer = new File(mContext.getCacheDir().getAbsolutePath() +
+                            "/creative_mode/assets/overlays/themable.google.dialer").exists();
+
+                    Boolean themable_plusOne = new File(mContext.getCacheDir().getAbsolutePath() +
+                            "/creative_mode/assets/overlays/themable.google.plus").exists();
+
+                    Boolean themable_hangouts = new File(mContext.getCacheDir().getAbsolutePath() +
+                            "/creative_mode/assets/overlays/themable.hangouts").exists();
+
+                    Boolean themable_vending = new File(mContext.getCacheDir().getAbsolutePath() +
+                            "/creative_mode/assets/overlays/themable.vending").exists();
+
+                    Boolean themable_youtube = new File(mContext.getCacheDir().getAbsolutePath() +
+                            "/creative_mode/assets/overlays/themable.youtube").exists();
+
+                    if (themable_gmail) {
+                        Log.d("MoveWhateverIsActivated", "Themable Gmail Overlay found! Hotswapping...");
+
+                        eu.chainfire.libsuperuser.Shell.SU.run(
+                                "rm -r " + mContext.getCacheDir().getAbsolutePath() +
+                                        "/creative_mode/assets/overlays/com.google.android.gm");
+
+                        File oldFolder = new File(mContext.getCacheDir().getAbsolutePath() +
+                                "/creative_mode/assets/overlays/themable.gmail");
+                        File newFolder = new File(mContext.getCacheDir().getAbsolutePath() +
+                                "/creative_mode/assets/overlays/com.google.android.gm");
+                        boolean success = oldFolder.renameTo(newFolder);
+                    }
+
+                    if (themable_google_app) {
+                        Log.d("MoveWhateverIsActivated", "Themable Google App Overlay found! Hotswapping...");
+
+                        eu.chainfire.libsuperuser.Shell.SU.run(
+                                "rm -r " + mContext.getCacheDir().getAbsolutePath() +
+                                        "/creative_mode/assets/overlays/com.google.android.googlequicksearchbox");
+
+                        File oldFolder = new File(mContext.getCacheDir().getAbsolutePath() +
+                                "/creative_mode/assets/overlays/themable.google.app");
+                        File newFolder = new File(mContext.getCacheDir().getAbsolutePath() +
+                                "/creative_mode/assets/overlays/com.google.android.googlequicksearchbox");
+                        boolean success = oldFolder.renameTo(newFolder);
+                    }
+
+                    if (themable_contacts) {
+                        Log.d("MoveWhateverIsActivated", "Themable Google Contacts Overlay found! Hotswapping...");
+
+                        eu.chainfire.libsuperuser.Shell.SU.run(
+                                "rm -r " + mContext.getCacheDir().getAbsolutePath() +
+                                        "/creative_mode/assets/overlays/com.google.android.contacts");
+
+                        File oldFolder = new File(mContext.getCacheDir().getAbsolutePath() +
+                                "/creative_mode/assets/overlays/themable.google.contacts");
+                        File newFolder = new File(mContext.getCacheDir().getAbsolutePath() +
+                                "/creative_mode/assets/overlays/com.google.android.contacts");
+                        boolean success = oldFolder.renameTo(newFolder);
+                    }
+
+                    if (themable_dialer) {
+                        Log.d("MoveWhateverIsActivated", "Themable Google Dialer Overlay found! Hotswapping...");
+
+                        eu.chainfire.libsuperuser.Shell.SU.run(
+                                "rm -r " + mContext.getCacheDir().getAbsolutePath() +
+                                        "/creative_mode/assets/overlays/com.google.android.dialer");
+
+                        File oldFolder = new File(mContext.getCacheDir().getAbsolutePath() +
+                                "/creative_mode/assets/overlays/themable.google.dialer");
+                        File newFolder = new File(mContext.getCacheDir().getAbsolutePath() +
+                                "/creative_mode/assets/overlays/com.google.android.dialer");
+                        boolean success = oldFolder.renameTo(newFolder);
+                    }
+
+                    if (themable_plusOne) {
+                        Log.d("MoveWhateverIsActivated", "Themable Google+ Overlay found! Hotswapping...");
+
+                        eu.chainfire.libsuperuser.Shell.SU.run(
+                                "rm -r " + mContext.getCacheDir().getAbsolutePath() +
+                                        "/creative_mode/assets/overlays/com.google.android.apps.plus");
+
+                        File oldFolder = new File(mContext.getCacheDir().getAbsolutePath() +
+                                "/creative_mode/assets/overlays/themable.google.plus");
+                        File newFolder = new File(mContext.getCacheDir().getAbsolutePath() +
+                                "/creative_mode/assets/overlays/com.google.android.apps.plus");
+                        boolean success = oldFolder.renameTo(newFolder);
+                    }
+
+                    if (themable_hangouts) {
+                        Log.d("MoveWhateverIsActivated", "Themable Hangouts Overlay found! Hotswapping...");
+
+                        eu.chainfire.libsuperuser.Shell.SU.run(
+                                "rm -r " + mContext.getCacheDir().getAbsolutePath() +
+                                        "/creative_mode/assets/overlays/com.google.android.talk");
+
+                        File oldFolder = new File(mContext.getCacheDir().getAbsolutePath() +
+                                "/creative_mode/assets/overlays/themable.hangouts");
+                        File newFolder = new File(mContext.getCacheDir().getAbsolutePath() +
+                                "/creative_mode/assets/overlays/com.google.android.talk");
+                        boolean success = oldFolder.renameTo(newFolder);
+                    }
+
+                    if (themable_vending) {
+                        Log.d("MoveWhateverIsActivated", "Themable Play Store Overlay found! Hotswapping...");
+
+                        eu.chainfire.libsuperuser.Shell.SU.run(
+                                "rm -r " + mContext.getCacheDir().getAbsolutePath() +
+                                        "/creative_mode/assets/overlays/com.android.vending");
+
+                        File oldFolder = new File(mContext.getCacheDir().getAbsolutePath() +
+                                "/creative_mode/assets/overlays/themable.vending");
+                        File newFolder = new File(mContext.getCacheDir().getAbsolutePath() +
+                                "/creative_mode/assets/overlays/com.android.vending");
+                        boolean success = oldFolder.renameTo(newFolder);
+                    }
+
+                    if (themable_youtube) {
+                        Log.d("MoveWhateverIsActivated", "Themable Youtube Overlay found! Hotswapping...");
+
+                        eu.chainfire.libsuperuser.Shell.SU.run(
+                                "rm -r " + mContext.getCacheDir().getAbsolutePath() +
+                                        "/creative_mode/assets/overlays/com.google.android.youtube");
+
+                        File oldFolder = new File(mContext.getCacheDir().getAbsolutePath() +
+                                "/creative_mode/assets/overlays/themable.vending");
+                        File newFolder = new File(mContext.getCacheDir().getAbsolutePath() +
+                                "/creative_mode/assets/overlays/com.google.android.youtube");
+                        boolean success = oldFolder.renameTo(newFolder);
+                    }
+                }
             }
 
             // Add default theme icon if no traditional theme icon found
