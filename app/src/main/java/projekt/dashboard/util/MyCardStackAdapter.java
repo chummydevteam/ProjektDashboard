@@ -1511,7 +1511,7 @@ public class MyCardStackAdapter extends CardStackAdapter implements
             if (is_framework_accent_changed) {
                 Phase2_InjectAndMove accent = new Phase2_InjectAndMove();
                 String accent_color = "#" + Integer.toHexString(current_selected_system_accent_color);
-                accent.execute("accent_color", accent_color, "theme_color_accent",
+                accent.execute("creative_mode_accent", accent_color, "creative_mode_accent",
                         mContext.getCacheDir().getAbsolutePath() +
                                 "/creative_mode/assets/overlays/common/res/values-v10/");
             }
@@ -1520,8 +1520,8 @@ public class MyCardStackAdapter extends CardStackAdapter implements
                 Phase2_InjectAndMove accent_secondary = new Phase2_InjectAndMove();
                 String accent_secondary_color = "#" + Integer.toHexString(
                         current_selected_system_accent_dual_color);
-                accent_secondary.execute("dialer_button_bar", accent_secondary_color,
-                        "theme_color_accent_secondary", mContext.getCacheDir().getAbsolutePath() +
+                accent_secondary.execute("creative_mode_accent_secondary", accent_secondary_color,
+                        "creative_mode_accent_secondary", mContext.getCacheDir().getAbsolutePath() +
                                 "/creative_mode/assets/overlays/common/res/values-v10/");
             }
 
@@ -1529,8 +1529,8 @@ public class MyCardStackAdapter extends CardStackAdapter implements
                 Phase2_InjectAndMove accent_light = new Phase2_InjectAndMove();
                 String accent_light_color = "#" + Integer.toHexString(
                         current_selected_system_accent_light_color);
-                accent_light.execute("accent_color_light", accent_light_color,
-                        "theme_color_accent_light",
+                accent_light.execute("creative_mode_accent_light", accent_light_color,
+                        "creative_mode_accent_light",
                         mContext.getCacheDir().getAbsolutePath() +
                                 "/creative_mode/assets/overlays/common/res/values-v10/");
             }
@@ -1538,7 +1538,7 @@ public class MyCardStackAdapter extends CardStackAdapter implements
             if (is_framework_app_background_changed) {
                 Phase2_InjectAndMove app_bg = new Phase2_InjectAndMove();
                 String app_bg_color = "#" + Integer.toHexString(current_selected_system_appbg_color);
-                app_bg.execute("app_background", app_bg_color, "theme_color_app_background",
+                app_bg.execute("creative_mode_app_background", app_bg_color, "creative_mode_app_background",
                         mContext.getCacheDir().getAbsolutePath() +
                                 "/creative_mode/assets/overlays/common/res/values-v10/");
             }
@@ -1547,8 +1547,8 @@ public class MyCardStackAdapter extends CardStackAdapter implements
                 Phase2_InjectAndMove app_bg_light = new Phase2_InjectAndMove();
                 String app_bg_light_color = "#" + Integer.toHexString(
                         current_selected_system_appbg_light_color);
-                app_bg_light.execute("light_background", app_bg_light_color,
-                        "theme_color_light_background",
+                app_bg_light.execute("creative_mode_light_background", app_bg_light_color,
+                        "creative_mode_light_background",
                         mContext.getCacheDir().getAbsolutePath() +
                                 "/creative_mode/assets/overlays/common/res/values-v10/");
             }
@@ -1557,7 +1557,7 @@ public class MyCardStackAdapter extends CardStackAdapter implements
                 Phase2_InjectAndMove dialog_dark = new Phase2_InjectAndMove();
                 String dialog_dark_color = "#" + Integer.toHexString(
                         current_selected_system_dialog_color);
-                dialog_dark.execute("dialog_color_dark", dialog_dark_color, "theme_color_dialog_dark",
+                dialog_dark.execute("creative_mode_dialog_color_dark", dialog_dark_color, "creative_mode_dialog_color_dark",
                         mContext.getCacheDir().getAbsolutePath() +
                                 "/creative_mode/assets/overlays/common/res/values-v10/");
             }
@@ -1566,15 +1566,15 @@ public class MyCardStackAdapter extends CardStackAdapter implements
                 Phase2_InjectAndMove dialog_light = new Phase2_InjectAndMove();
                 String dialog_light_color = "#" + Integer.toHexString(
                         current_selected_system_dialog_light_color);
-                dialog_light.execute("dialog_color_light", dialog_light_color,
-                        "theme_color_dialog_light", mContext.getCacheDir().getAbsolutePath() +
+                dialog_light.execute("creative_mode_dialog_color_light", dialog_light_color,
+                        "creative_mode_dialog_color_light", mContext.getCacheDir().getAbsolutePath() +
                                 "/creative_mode/assets/overlays/common/res/values-v10/");
             }
 
             if (is_framework_main_theme_color_changed) {
                 Phase2_InjectAndMove theme_color = new Phase2_InjectAndMove();
                 String theme_color_ = "#" + Integer.toHexString(current_selected_system_main_color);
-                theme_color.execute("theme_color", theme_color_, "theme_color",
+                theme_color.execute("creative_mode_main_color", theme_color_, "creative_mode_main_color",
                         mContext.getCacheDir().getAbsolutePath() +
                                 "/creative_mode/assets/overlays/common/res/values-v10/");
             }
@@ -1582,7 +1582,7 @@ public class MyCardStackAdapter extends CardStackAdapter implements
             if (is_framework_main_theme_color_dark_changed) {
                 Phase2_InjectAndMove theme_color_dark = new Phase2_InjectAndMove();
                 String theme_color_dark_ = "#" + Integer.toHexString(current_selected_system_main_dark_color);
-                theme_color_dark.execute("theme_color_dark", theme_color_dark_, "theme_color_dark",
+                theme_color_dark.execute("creative_mode_main_color_dark", theme_color_dark_, "creative_mode_main_color_dark",
                         mContext.getCacheDir().getAbsolutePath() +
                                 "/creative_mode/assets/overlays/common/res/values-v10/");
             }
@@ -1591,8 +1591,8 @@ public class MyCardStackAdapter extends CardStackAdapter implements
                 Phase2_InjectAndMove notification_primary = new Phase2_InjectAndMove();
                 String notification_primary_color = "#" + Integer.toHexString(
                         current_selected_system_notifications_primary_color);
-                notification_primary.execute("notification_primary", notification_primary_color,
-                        "theme_color_notification_primary", mContext.getCacheDir().getAbsolutePath() +
+                notification_primary.execute("creative_mode_notification_primary", notification_primary_color,
+                        "creative_mode_notification_primary", mContext.getCacheDir().getAbsolutePath() +
                                 "/creative_mode/assets/overlays/common/res/values-v10/");
             }
 
@@ -1600,8 +1600,8 @@ public class MyCardStackAdapter extends CardStackAdapter implements
                 Phase2_InjectAndMove notification_secondary = new Phase2_InjectAndMove();
                 String notification_secondary_color = "#" + Integer.toHexString(
                         current_selected_system_notifications_secondary_color);
-                notification_secondary.execute("notification_secondary", notification_secondary_color,
-                        "theme_color_notification_secondary", mContext.getCacheDir().getAbsolutePath() +
+                notification_secondary.execute("creative_mode_notification_secondary", notification_secondary_color,
+                        "creative_mode_notification_secondary", mContext.getCacheDir().getAbsolutePath() +
                                 "/creative_mode/assets/overlays/common/res/values-v10/");
             }
 
@@ -1609,7 +1609,7 @@ public class MyCardStackAdapter extends CardStackAdapter implements
                 Phase2_InjectAndMove ripple = new Phase2_InjectAndMove();
                 String ripple_color = "#" + Integer.toHexString(
                         current_selected_system_ripple_color);
-                ripple.execute("ripple_dark", ripple_color, "theme_color_ripple_color",
+                ripple.execute("creative_mode_ripple", ripple_color, "creative_mode_ripple",
                         mContext.getCacheDir().getAbsolutePath() +
                                 "/creative_mode/assets/overlays/common/res/values-v10/");
             }
@@ -1621,7 +1621,7 @@ public class MyCardStackAdapter extends CardStackAdapter implements
                 String settings_dashboard_color = "#" + Integer.toHexString(
                         current_selected_dashboard_background_color);
                 settings_dashboard.execute("dashboard_background_color", settings_dashboard_color,
-                        "theme_color_settings_dashboard_background",
+                        "creative_mode_settings_dashboard_background",
                         mContext.getCacheDir().getAbsolutePath() +
                                 "/creative_mode/assets/overlays/com.android.settings/" +
                                 "res/values-v11/");
@@ -1633,7 +1633,7 @@ public class MyCardStackAdapter extends CardStackAdapter implements
                         current_selected_dashboard_category_background_color);
                 settings_dashboard_category.execute("dashboard_category_background_color",
                         settings_dashboard_category_color,
-                        "theme_color_settings_dashboard_category_background",
+                        "creative_mode_settings_dashboard_category_background",
                         mContext.getCacheDir().getAbsolutePath() +
                                 "/creative_mode/assets/overlays/com.android.settings/" +
                                 "res/values-v11/");
@@ -1643,8 +1643,8 @@ public class MyCardStackAdapter extends CardStackAdapter implements
                 Phase2_InjectAndMove settings_icon = new Phase2_InjectAndMove();
                 String settings_icon_color = "#" + Integer.toHexString(
                         current_selected_settings_icon_color);
-                settings_icon.execute("settings_icon_tint", settings_icon_color,
-                        "theme_color_settings_icon_tint",
+                settings_icon.execute("creative_mode_settings_icon_tint", settings_icon_color,
+                        "creative_mode_settings_icon_tint",
                         mContext.getCacheDir().getAbsolutePath() +
                                 "/creative_mode/assets/overlays/common/res/values-v11/");
             }
@@ -1654,7 +1654,7 @@ public class MyCardStackAdapter extends CardStackAdapter implements
                 String settings_title_color = "#" + Integer.toHexString(
                         current_selected_settings_title_color);
                 settings_title.execute("theme_accent", settings_title_color,
-                        "theme_color_settings_title_color",
+                        "creative_mode_settings_title_color",
                         mContext.getCacheDir().getAbsolutePath() +
                                 "/creative_mode/assets/overlays/com.android.settings/" +
                                 "res/values-v11/");
@@ -1666,7 +1666,7 @@ public class MyCardStackAdapter extends CardStackAdapter implements
                         current_selected_settings_switchbar_color);
                 switchbar_background.execute("switchbar_background_color",
                         switchbar_background_color,
-                        "theme_color_settings_switchbar_background",
+                        "creative_mode_settings_switchbar_background",
                         mContext.getCacheDir().getAbsolutePath() +
                                 "/creative_mode/assets/overlays/com.android.settings/" +
                                 "res/values-v11/");
@@ -1679,7 +1679,7 @@ public class MyCardStackAdapter extends CardStackAdapter implements
                 String sysui_accent_color = "#" + Integer.toHexString(
                         current_selected_qs_accent_color);
                 sysui_accent.execute("system_accent_color", sysui_accent_color,
-                        "theme_color_systemui_accent_color",
+                        "creative_mode_systemui_accent_color",
                         mContext.getCacheDir().getAbsolutePath() +
                                 "/creative_mode/assets/overlays/com.android.systemui/" +
                                 "res/values-v12/");
@@ -1689,8 +1689,8 @@ public class MyCardStackAdapter extends CardStackAdapter implements
                 Phase2_InjectAndMove sysui_header = new Phase2_InjectAndMove();
                 String sysui_header_color = "#" + Integer.toHexString(
                         current_selected_header_background_color);
-                sysui_header.execute("qs_header_color", sysui_header_color,
-                        "theme_color_systemui_header_color",
+                sysui_header.execute("creative_mode_qs_header_color", sysui_header_color,
+                        "creative_mode_qs_header_color",
                         mContext.getCacheDir().getAbsolutePath() +
                                 "/creative_mode/assets/overlays/common/res/values-v12/");
             }
@@ -1699,8 +1699,8 @@ public class MyCardStackAdapter extends CardStackAdapter implements
                 Phase2_InjectAndMove sysui_notif_bg = new Phase2_InjectAndMove();
                 String sysui_header_color = "#" + Integer.toHexString(
                         current_selected_notification_background_color);
-                sysui_notif_bg.execute("notification_background", sysui_header_color,
-                        "theme_color_systemui_notifbg_color",
+                sysui_notif_bg.execute("creative_mode_notification_background", sysui_header_color,
+                        "creative_mode_notification_background",
                         mContext.getCacheDir().getAbsolutePath() +
                                 "/creative_mode/assets/overlays/common/res/values-v12/");
             }
@@ -1709,8 +1709,8 @@ public class MyCardStackAdapter extends CardStackAdapter implements
                 Phase2_InjectAndMove sysui_panelbg = new Phase2_InjectAndMove();
                 String sysui_panelbg_color = "#" + Integer.toHexString(
                         current_selected_qs_panel_background_color);
-                sysui_panelbg.execute("qs_background_color", sysui_panelbg_color,
-                        "theme_color_systemui_qs_bg_color",
+                sysui_panelbg.execute("creative_mode_qs_background_color", sysui_panelbg_color,
+                        "creative_mode_qs_background_color",
                         mContext.getCacheDir().getAbsolutePath() +
                                 "/creative_mode/assets/overlays/common/res/values-v12/");
             }
@@ -1719,8 +1719,8 @@ public class MyCardStackAdapter extends CardStackAdapter implements
                 Phase2_InjectAndMove sysui_qs_tile = new Phase2_InjectAndMove();
                 String sysui_qs_tile_color = "#" + Integer.toHexString(
                         current_selected_qs_tile_color);
-                sysui_qs_tile.execute("qs_icon_color", sysui_qs_tile_color,
-                        "theme_color_systemui_qs_icon_color",
+                sysui_qs_tile.execute("creative_mode_qs_icon_color", sysui_qs_tile_color,
+                        "creative_mode_qs_icon_color",
                         mContext.getCacheDir().getAbsolutePath() +
                                 "/creative_mode/assets/overlays/common/res/values-v12/");
             }
@@ -1729,9 +1729,9 @@ public class MyCardStackAdapter extends CardStackAdapter implements
                 Phase2_InjectAndMove sysui_qs_tile_disabled = new Phase2_InjectAndMove();
                 String sysui_qs_tile_disabled_color = "#4d" +
                         Integer.toHexString(current_selected_qs_tile_color).substring(2);
-                sysui_qs_tile_disabled.execute("qs_icon_color_disabled",
+                sysui_qs_tile_disabled.execute("creative_mode_qs_icon_color_disabled",
                         sysui_qs_tile_disabled_color,
-                        "theme_color_systemui_qs_icon_disabled_color",
+                        "creative_mode_qs_icon_color_disabled",
                         mContext.getCacheDir().getAbsolutePath() +
                                 "/creative_mode/assets/overlays/common/res/values-v12/");
             }
@@ -1740,8 +1740,8 @@ public class MyCardStackAdapter extends CardStackAdapter implements
                 Phase2_InjectAndMove sysui_qs_tile_text = new Phase2_InjectAndMove();
                 String sysui_qs_tile_text_color = "#" + Integer.toHexString(
                         current_selected_qs_text_color);
-                sysui_qs_tile_text.execute("qs_tile_text", sysui_qs_tile_text_color,
-                        "theme_color_systemui_qs_tile_text_color",
+                sysui_qs_tile_text.execute("creative_mode_qs_tile_text", sysui_qs_tile_text_color,
+                        "creative_mode_qs_tile_text",
                         mContext.getCacheDir().getAbsolutePath() +
                                 "/creative_mode/assets/overlays/common/res/values-v12/");
             }
@@ -1751,7 +1751,7 @@ public class MyCardStackAdapter extends CardStackAdapter implements
                 String sysui_recents_color = "#" + Integer.toHexString(
                         current_selected_recents_clear_all_icon_color);
                 sysui_recents.execute("floating_action_button_icon_color", sysui_recents_color,
-                        "theme_color_recents_clear_all_icon_color",
+                        "creative_mode_recents_clear_all_icon_color",
                         mContext.getCacheDir().getAbsolutePath() +
                                 "/creative_mode/assets/overlays/com.android.systemui/" +
                                 "res/values-v12/");
