@@ -1266,12 +1266,15 @@ public class MyCardStackAdapter extends CardStackAdapter implements
                         if (isChecked) {
                             use_themable_gapps = true;
                             Log.d("Use Themable Gapps", use_themable_gapps + "");
+                            use_themable_gapps_changed = true;
+                            themable_gapps.setTextColor(mContext.getColor(android.R.color.white));
                         } else {
                             use_themable_gapps = false;
                             Log.d("Use Themable Gapps", use_themable_gapps + "");
+                            use_themable_gapps_changed = false;
+                            themable_gapps.setTextColor(mContext.getColor(R.color.creative_mode_text_disabled));
                         }
-                        use_themable_gapps_changed = true;
-                        themable_gapps.setTextColor(mContext.getColor(android.R.color.white));
+
                     }
                 });
 

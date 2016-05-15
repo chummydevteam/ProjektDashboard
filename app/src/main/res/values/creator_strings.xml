@@ -97,7 +97,7 @@
     <string name="framework_preview_light">Light theme modifications example</string>
 
     <!-- Common Tweaks -->
-    <string name="commons_themable_google_apps">enable themable google apps theming</string>
+    <string name="commons_themable_google_apps">enable theme ready google app overlays\n(only if the theme supports it)</string>
 
     <!-- Final Card -->
     <string name="creation_name">creation name:</string>
