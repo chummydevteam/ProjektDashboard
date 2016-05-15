@@ -2401,6 +2401,11 @@ public class MyCardStackAdapter extends CardStackAdapter implements
             // Theme Name is now parsed
             String theme_name = themeName;
 
+            // Check themeName if it has a whitespace at the end of the name
+            if (themeName.endsWith(" ")) {
+                theme_name = theme_name.substring(0, theme_name.length() - 1);
+            }
+
             // No need to parse Theme Author, it should display all characters naturally
             String theme_author = themeAuthor;
 
