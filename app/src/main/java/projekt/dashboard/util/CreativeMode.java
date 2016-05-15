@@ -67,7 +67,7 @@ import projekt.dashboard.BuildConfig;
 import projekt.dashboard.R;
 import projekt.dashboard.colorpicker.ColorPickerDialog;
 
-public class MyCardStackAdapter extends CardStackAdapter implements
+public class CreativeMode extends CardStackAdapter implements
         CompoundButton.OnCheckedChangeListener {
     private static int[] bgColorIds;
     private final LayoutInflater mInflater;
@@ -159,9 +159,9 @@ public class MyCardStackAdapter extends CardStackAdapter implements
 
     ProgressDialog mProgressDialog;
     private PowerManager.WakeLock mWakeLock;
-    private Logger log = new Logger(MyCardStackAdapter.class.getSimpleName());
+    private Logger log = new Logger(CreativeMode.class.getSimpleName());
 
-    public MyCardStackAdapter(Activity activity) {
+    public CreativeMode(Activity activity) {
         super(activity);
         mContext = activity;
         mInflater = LayoutInflater.from(activity);

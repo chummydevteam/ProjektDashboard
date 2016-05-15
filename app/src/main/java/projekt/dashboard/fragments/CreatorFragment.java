@@ -15,7 +15,7 @@ import butterknife.ButterKnife;
 import projekt.dashboard.R;
 import projekt.dashboard.fragments.base.BasePageFragment;
 import projekt.dashboard.util.CardStackPrefs;
-import projekt.dashboard.util.MyCardStackAdapter;
+import projekt.dashboard.util.CreativeMode;
 
 /**
  * @author Nicholas Chum (nicholaschum)
@@ -45,7 +45,7 @@ public class CreatorFragment extends BasePageFragment {
             mCardStackLayout.setCardGapBottom(Units.dpToPx(getActivity(),
                     CardStackPrefs.getCardGapBottom(getActivity())));
 
-            mCardStackLayout.setAdapter(new MyCardStackAdapter(getActivity()));
+            mCardStackLayout.setAdapter(new CreativeMode(getActivity()));
         } else {
             Log.e("MainActivity", "Unable to locate cardStack...");
         }
