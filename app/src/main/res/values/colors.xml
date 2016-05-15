@@ -44,14 +44,4 @@
     <color name="card2_bg">#212021</color>
     <color name="card3_bg">#111111</color>
     <color name="card4_bg">#212021</color>
-
-    <color name="hc_card1_bg">#525252</color>
-    <color name="hc_card2_bg">#474747</color>
-    <color name="hc_card3_bg">#3d3d3d</color>
-    <color name="hc_card4_bg">#333333</color>
-    <color name="hc_card5_bg">#292929</color>
-    <color name="hc_card6_bg">#1f1f1f</color>
-    <color name="hc_card7_bg">#141414</color>
-    <color name="hc_card8_bg">#0a0a0a</color>
-    <color name="hc_card9_bg">#000000</color>
 </resources>
