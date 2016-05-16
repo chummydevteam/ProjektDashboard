@@ -492,7 +492,6 @@ public class CreativeMode extends CardStackAdapter implements
             public void onClick(View v) {
                 final ColorPickerDialog cpd = new ColorPickerDialog(
                         mContext, current_selected_system_main_color);
-                cpd.setAlphaSliderVisible(true);
                 cpd.setOnColorChangedListener(new ColorPickerDialog.OnColorChangedListener() {
                     @Override
                     public void onColorChanged(int color) {
@@ -519,7 +518,6 @@ public class CreativeMode extends CardStackAdapter implements
             public void onClick(View v) {
                 final ColorPickerDialog cpd = new ColorPickerDialog(
                         mContext, current_selected_system_main_dark_color);
-                cpd.setAlphaSliderVisible(true);
                 cpd.setOnColorChangedListener(new ColorPickerDialog.OnColorChangedListener() {
                     @Override
                     public void onColorChanged(int color) {
