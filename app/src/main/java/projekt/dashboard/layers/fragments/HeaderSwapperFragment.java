@@ -86,7 +86,6 @@ public class HeaderSwapperFragment extends BasePageFragment {
                 R.layout.fragment_headerswapper, container, false);
 
         prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        prefs = getActivity().getSharedPreferences("projekt.dashboard.layers.headerswapper", Context.MODE_PRIVATE);
         if (prefs.getBoolean("dialog", true)) {
             AlertDialog.Builder ad = new AlertDialog.Builder(getActivity());
             ad.setTitle("Header Swapper :)");
