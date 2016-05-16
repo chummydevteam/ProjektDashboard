@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--You are editing SystemUI's Colors-->
+
+<resources>
+	<!--App Based Light Status Bar Icon Colors-->
+		<color name="light_mode_icon_color_single_tone">#ffffffff</color>
+		<color name="light_mode_icon_color_dual_tone_background">#4dffffff</color>
+		<color name="light_mode_icon_color_dual_tone_fill">#ffffffff</color>
+
+	<!--App Based Dark Status Bar Icon Colors-->
+		<color name="dark_mode_icon_color_single_tone">#99000000</color>
+		<color name="dark_mode_icon_color_dual_tone_background">#3d000000</color>
+		<color name="dark_mode_icon_color_dual_tone_fill">#7a000000</color>
+
+	<color name="qs_detail_button">@*common:color/theme_color_accent_dark</color>
+
+	<color name="segmented_button_unselected">#ff9d9d9d</color>
+
+	<color name="volume_icon_color">@*common:color/theme_color_qs_icon_color</color>
+	<color name="volume_settings_icon_color">@*common:color/theme_color_qs_icon_color</color>
+	<color name="volume_slider_inactive">#ff9d9d9d</color>
+
+	<color name="zen_introduction_message_background">@*common:color/theme_color_common_color</color>
+</resources>

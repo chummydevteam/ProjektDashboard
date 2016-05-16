@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/* CDT Theme Base Colors Activator
+ *
+ * Copyright 2015-2016, chummy development team
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * This comment is not to be deleted from the original source, or will be
+ * reported to the appropriate authorities (XDA/Play Store and/or other sources).
+ * You may append your name after the team name, but deletions are strictly prohibited.
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+-->
+
+<resources>
+	<!--Main app theme accents-->
+		<color name="theme_color_common_color">@color/common_color</color>
+		<color name="theme_color_accent">@color/accent_color</color>
+		<color name="theme_color_accent_dark">@color/accent_color_dark</color>
+		<color name="theme_color_accent_light">@color/accent_color_light</color>
+		<color name="theme_color_light_color">@color/light_color</color>
+	<!--Framework modifications-->
+		<color name="theme_color_app_background">@color/app_background</color>
+		<color name="theme_color_light_background">@color/light_background</color>
+		<color name="theme_color_ripple_dark">@color/ripple_dark</color>
+		<color name="theme_color_ripple_light">@color/ripple_light</color>
+		<color name="theme_color_primary_text_material_dark">@color/primary_text_material_dark</color>
+		<color name="theme_color_secondary_text_material_dark">@color/secondary_text_material_dark</color>
+		<color name="theme_color_notification_primary">@color/notification_primary</color>
+		<color name="theme_color_notification_secondary">@color/notification_secondary</color>
+		<color name="theme_color_dialog_color_dark">@color/dialog_color_dark</color>
+		<color name="theme_color_dialog_color_light">@color/dialog_color_light</color>
+	<!--SystemUI modifications-->
+		<color name="theme_color_qs_background">@color/qs_background_color</color>
+		<color name="theme_color_qs_header">@color/qs_header_color</color>
+		<color name="theme_color_qs_tile_text">@color/qs_tile_text</color>
+		<color name="theme_color_qs_icon_color">@color/qs_icon_color</color>
+		<color name="theme_color_qs_icon_color_disabled">@color/qs_icon_color_disabled</color>
+		<color name="theme_color_notification_background">@color/notification_background</color>
+	<!--Settings modifications-->
+		<color name="theme_color_settings_icon_tint">@color/settings_icon_tint</color>
+	<!--Dialer modifications-->
+		<color name="theme_color_dialer_button_bar">@color/dialer_button_bar</color>
+	<!--Calculator modifications-->
+		<color name="theme_color_calculator_advanced">@color/calculator_advanced</color>
+		<color name="theme_color_calculator_background">@color/calculator_background</color>
+		<color name="theme_color_calculator_medium">@color/calculator_medium</color>
+	<!--Keyboard modifications-->
+		<color name="theme_color_keyboard_dark_text_color">@color/keyboard_dark_text_color</color>
+		<color name="theme_color_keyboard_light_text_color">@color/keyboard_light_text_color</color>
+		<color name="theme_color_keyboard_accent_dark">@color/keyboard_accent_dark</color>
+		<color name="theme_color_keyboard_accent_light">@color/keyboard_accent_light</color>
+	<!--Google Play Music modifications-->
+		<color name="theme_color_play_music_color">@color/play_music_color</color>
+		<color name="theme_color_play_music_color_transparent">@color/play_music_color_transparent</color>
+	<!--Google Now Launcher modifications-->
+		<color name="theme_color_launcher_background">@color/launcher_background</color>
+	<!--Play Store modifications-->
+		<color name="theme_color_play_store_primary">@color/play_store_primary</color>
+		<color name="theme_color_play_store_primary_disabled">@color/play_store_primary_disabled</color>
+	<!--Hangouts modifications-->
+		<color name="theme_color_hangouts_primary_color">@color/hangouts_primary_color</color>
+		<color name="theme_color_hangouts_secondary_color">@color/hangouts_secondary_color</color>
+		<color name="theme_color_hangouts_fab_pressed_color">@color/hangouts_fab_pressed_color</color>
+		<color name="theme_color_hangouts_selected_accent">@color/hangouts_selected_accent</color>
+		<color name="theme_color_hangouts_ripple">@color/hangouts_ripple</color>
+</resources>

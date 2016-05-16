@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--You are editing Settings' LiquidSmooth Specific Colors-->
+
+<resources>
+    <color name="Liquid_Main_Icon">@*common:color/theme_color_settings_icon_tint</color>
+    <color name="Liquid_Advanced_Icon">@*common:color/theme_color_settings_icon_tint</color>
+    <color name="Liquid_Equalizer_Icon">@*common:color/theme_color_settings_icon_tint</color>
+    <color name="Liquid_Interface_Icon">@*common:color/theme_color_settings_icon_tint</color>
+    <color name="Liquid_Lockscreen_Icon">@*common:color/theme_color_settings_icon_tint</color>
+    <color name="Liquid_Misc_Icon">@*common:color/theme_color_settings_icon_tint</color>
+    <color name="Liquid_Navigation_Icon">@*common:color/theme_color_settings_icon_tint</color>
+    <color name="Liquid_Notifications_Icon">@*common:color/theme_color_settings_icon_tint</color>
+    <color name="Liquid_Performance_Icon">@*common:color/theme_color_settings_icon_tint</color>
+    <color name="Liquid_Statusbar_Icon">@*common:color/theme_color_settings_icon_tint</color>
+    <color name="Liquid_SuperSU_Icon">@*common:color/theme_color_settings_icon_tint</color>
+</resources>

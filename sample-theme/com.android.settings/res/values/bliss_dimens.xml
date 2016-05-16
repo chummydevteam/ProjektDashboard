@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--You are editing Settings' Bliss Specific Dimensions-->
+
+<resources>
+    <!--Dashboard padding in its container-->
+		<dimen name="dashboard_padding_start">0dp</dimen>
+		<dimen name="dashboard_padding_end">0dp</dimen>
+		<dimen name="dashboard_padding_top">0dp</dimen>
+		<dimen name="dashboard_padding_bottom">0dp</dimen>
+
+    <!--Dashboard category padding start / end-->
+		<dimen name="dashboard_category_padding_start">0dp</dimen>
+		<dimen name="dashboard_category_padding_end">0dp</dimen>
+
+    <!--Dashboard category panel elevation-->
+		<dimen name="dashboard_category_elevation">4dp</dimen>
+
+    <!--Dashboard category title layout height-->
+		<dimen name="dashboard_category_title_height">48dp</dimen>
+
+    <!--Category border width-->
+		<dimen name="dashboard_border_width">0dip</dimen>
+
+    <!--Individual corner control-->
+		<dimen name="dashboard_radius_bottom_left">0dip</dimen>
+		<dimen name="dashboard_radius_bottom_right">0dip</dimen>
+		<dimen name="dashboard_radius_top_left">0dip</dimen>
+		<dimen name="dashboard_radius_top_right">0dip</dimen>
+	
+	<!--Divider-->
+		<dimen name="divider_height">3dip</dimen>
+		<dimen name="divider_margin_top">6dip</dimen>
+		<dimen name="divider_margin_bottom">7dip</dimen>
+		<dimen name="vert_divider_width">1dip</dimen>
+</resources>

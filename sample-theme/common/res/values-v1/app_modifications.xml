@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/* CDT Theme Base Colors Changer
+ *
+ * Copyright 2015-2016, chummy development team
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * This comment is not to be deleted from the original source, or will be
+ * reported to the appropriate authorities (XDA/Play Store and/or other sources).
+ * You may append your name after the team name, but deletions are strictly prohibited.
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+-->
+
+<resources>
+	<!--Dialer modifications-->
+		<color name="dialer_button_bar">@color/creative_mode_accent_secondary</color>
+	<!--Calculator modifications-->
+		<color name="calculator_advanced">@color/common_color</color>
+		<color name="calculator_background">@android:color/black</color>
+		<color name="calculator_medium">#ff454545</color>
+	<!--Keyboard modifications-->
+		<color name="keyboard_dark_text_color">@android:color/white</color>
+		<color name="keyboard_light_text_color">@android:color/black</color>
+		<color name="keyboard_accent_dark">#99ffffff</color>
+		<color name="keyboard_accent_light">@color/common_color</color>
+	<!--Google Play Music modifications-->
+		<color name="play_music_color">#ffef6c00</color>
+		<color name="play_music_color_transparent">#20f4842d</color>
+	<!--Google Now Launcher modifications-->
+		<color name="launcher_background">#80000000</color>
+	<!--Play Store modifications-->
+		<color name="play_store_primary">#ff03a758</color>
+		<color name="play_store_primary_disabled">#80009055</color>
+	<!--Hangouts modifications-->
+		<color name="hangouts_primary_color">#ff026459</color>
+		<color name="hangouts_secondary_color">#ff141314</color>
+		<color name="hangouts_fab_pressed_color">#ff037d6f</color>
+		<color name="hangouts_selected_accent">#ff01322d</color>
+		<color name="hangouts_ripple">#aa026459</color>
+</resources>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/* CDT Theme Base Colors Changer (Dashboard Creative Mode)
+ *
+ * Copyright 2015-2016, chummy development team
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * This comment is not to be deleted from the original source, or will be
+ * reported to the appropriate authorities (XDA/Play Store and/or other sources).
+ * You may append your name after the team name, but deletions are strictly prohibited.
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+-->
+
+<resources>
+	<!--Framework Modifications-->
+		<color name="creative_mode_accent">@android:color/white</color>
+		<color name="creative_mode_accent_secondary">@color/common_color</color>
+		<color name="creative_mode_accent_light">@color/common_color</color>
+		<color name="creative_mode_app_background">#ff000000</color>
+		<color name="creative_mode_light_background">#ffd7d7d7</color>
+		<color name="creative_mode_dialog_color_dark">#bf000000</color>
+		<color name="creative_mode_dialog_color_light">#bfeeeeee</color>
+		<color name="creative_mode_main_color">#ff212021</color>
+		<color name="creative_mode_notification_primary">@color/primary_text_material_dark</color>
+		<color name="creative_mode_notification_secondary">@color/secondary_text_material_dark</color>
+		<color name="creative_mode_ripple">#4a777777</color>
+	<!--Settings Modifications-->
+		<color name="creative_mode_settings_icon_tint">@color/accent_color</color>
+	<!--SystemUI modifications-->
+		<color name="creative_mode_qs_background_color">#cc000000</color>
+		<color name="creative_mode_qs_header_color">#ff1f1f1f</color>
+		<color name="creative_mode_qs_icon_color">#ffffffff</color>
+		<color name="creative_mode_qs_icon_color_disabled">#4dffffff</color>
+		<color name="creative_mode_qs_tile_text">@color/accent_color</color>
+		<color name="creative_mode_notification_background">#e6212021</color>
+</resources>

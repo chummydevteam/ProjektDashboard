@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--You are editing Settings' Bliss Specific Colors-->
+
+<resources>
+	<!--Bliss Extra info-->
+		<color name="extrainfo_separator">@android:color/black</color>
+		<color name="extrainfo_cat_background">@android:color/black</color>
+		<color name="extrainfo_cat_text">@android:color/white</color>
+		<color name="extrainfo_value_text">@android:color/white</color>
+	
+	<!-- DPI Alert Dialog Text Colors -->
+		<color name="dpi_text_color">@android:color/white</color>
+</resources>

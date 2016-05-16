@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--You are editing SystemUI's Colors-->
+
+<resources>
+	<color name="notification_guts_bg_color">@*common:color/black_color_alpha_90</color>
+</resources>

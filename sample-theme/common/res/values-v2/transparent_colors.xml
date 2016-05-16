@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/* CDT Theme Base Colors Activator
+ *
+ * Copyright 2015-2016, chummy development team
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * This comment is not to be deleted from the original source, or will be
+ * reported to the appropriate authorities (XDA/Play Store and/or other sources).
+ * You may append your name after the team name, but deletions are strictly prohibited.
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+-->
+
+<resources>
+	<color name="black_color_alpha_05">#0d000000</color>
+	<color name="black_color_alpha_10">#1a000000</color>
+	<color name="black_color_alpha_15">#26000000</color>
+	<color name="black_color_alpha_20">#33000000</color>
+	<color name="black_color_alpha_25">#40000000</color>
+	<color name="black_color_alpha_30">#4d000000</color>
+	<color name="black_color_alpha_35">#59000000</color>
+	<color name="black_color_alpha_40">#66000000</color>
+	<color name="black_color_alpha_45">#73000000</color>
+	<color name="black_color_alpha_50">#80000000</color>
+	<color name="black_color_alpha_55">#8c000000</color>
+	<color name="black_color_alpha_60">#99000000</color>
+	<color name="black_color_alpha_65">#a6000000</color>
+	<color name="black_color_alpha_70">#b3000000</color>
+	<color name="black_color_alpha_75">#bf000000</color>
+	<color name="black_color_alpha_80">#cc000000</color>
+	<color name="black_color_alpha_85">#d9000000</color>
+	<color name="black_color_alpha_90">#e6000000</color>
+	<color name="black_color_alpha_95">#f2000000</color>
+	
+	<color name="theme_color_transparent_05">@color/theme_color_alpha_05</color>
+	<color name="theme_color_transparent_10">@color/theme_color_alpha_10</color>
+	<color name="theme_color_transparent_15">@color/theme_color_alpha_15</color>
+	<color name="theme_color_transparent_20">@color/theme_color_alpha_20</color>
+	<color name="theme_color_transparent_25">@color/theme_color_alpha_25</color>
+	<color name="theme_color_transparent_30">@color/theme_color_alpha_30</color>
+	<color name="theme_color_transparent_35">@color/theme_color_alpha_35</color>
+	<color name="theme_color_transparent_40">@color/theme_color_alpha_40</color>
+	<color name="theme_color_transparent_45">@color/theme_color_alpha_45</color>
+	<color name="theme_color_transparent_50">@color/theme_color_alpha_50</color>
+	<color name="theme_color_transparent_55">@color/theme_color_alpha_55</color>
+	<color name="theme_color_transparent_60">@color/theme_color_alpha_60</color>
+	<color name="theme_color_transparent_65">@color/theme_color_alpha_65</color>
+	<color name="theme_color_transparent_70">@color/theme_color_alpha_70</color>
+	<color name="theme_color_transparent_75">@color/theme_color_alpha_75</color>
+	<color name="theme_color_transparent_80">@color/theme_color_alpha_80</color>
+	<color name="theme_color_transparent_85">@color/theme_color_alpha_85</color>
+	<color name="theme_color_transparent_90">@color/theme_color_alpha_90</color>
+	<color name="theme_color_transparent_95">@color/theme_color_alpha_95</color>
+
+	<color name="theme_color_accent_transparent_5">@color/theme_color_accent_alpha_05</color>
+	<color name="theme_color_accent_transparent_10">@color/theme_color_accent_alpha_10</color>
+	<color name="theme_color_accent_transparent_15">@color/theme_color_accent_alpha_15</color>
+	<color name="theme_color_accent_transparent_20">@color/theme_color_accent_alpha_20</color>
+	<color name="theme_color_accent_transparent_25">@color/theme_color_accent_alpha_25</color>
+	<color name="theme_color_accent_transparent_30">@color/theme_color_accent_alpha_30</color>
+	<color name="theme_color_accent_transparent_35">@color/theme_color_accent_alpha_35</color>
+	<color name="theme_color_accent_transparent_40">@color/theme_color_accent_alpha_40</color>
+	<color name="theme_color_accent_transparent_45">@color/theme_color_accent_alpha_45</color>
+	<color name="theme_color_accent_transparent_50">@color/theme_color_accent_alpha_50</color>
+	<color name="theme_color_accent_transparent_55">@color/theme_color_accent_alpha_55</color>
+	<color name="theme_color_accent_transparent_60">@color/theme_color_accent_alpha_60</color>
+	<color name="theme_color_accent_transparent_65">@color/theme_color_accent_alpha_65</color>
+	<color name="theme_color_accent_transparent_70">@color/theme_color_accent_alpha_70</color>
+	<color name="theme_color_accent_transparent_75">@color/theme_color_accent_alpha_75</color>
+	<color name="theme_color_accent_transparent_80">@color/theme_color_accent_alpha_80</color>
+	<color name="theme_color_accent_transparent_85">@color/theme_color_accent_alpha_85</color>
+	<color name="theme_color_accent_transparent_90">@color/theme_color_accent_alpha_90</color>
+	<color name="theme_color_accent_transparent_95">@color/theme_color_accent_alpha_95</color>
+</resources>

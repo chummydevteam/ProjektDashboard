@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--You are editing Settings' Carbon ROM Specific Colors-->
+
+<resources>
+	<color name="color_lollipop">@*common:color/theme_color_accent</color>
+</resources>

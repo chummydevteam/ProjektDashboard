@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--You are editing Settings' DU Specific Colors-->
+
+<resources>
+		<color name="battery_history_chart_color">@android:color/white</color>
+</resources>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--You are editing SystemUI's Styles-->
+
+<resources>
+    <style name="Animation.RecentsActivity" parent="@android:style/Animation.Activity">
+        <item name="android:activityOpenEnterAnimation">@anim/recents_launch_from_launcher_enter</item>
+        <item name="android:activityOpenExitAnimation">@anim/recents_launch_from_launcher_exit</item>
+        <item name="android:taskOpenEnterAnimation">@anim/recents_launch_from_launcher_enter</item>
+        <item name="android:taskOpenExitAnimation">@anim/recents_launch_from_launcher_exit</item>
+        <item name="android:taskToFrontEnterAnimation">@anim/recents_launch_from_launcher_enter</item>
+        <item name="android:taskToFrontExitAnimation">@anim/recents_launch_from_launcher_exit</item>
+        <item name="android:wallpaperOpenEnterAnimation">@anim/recents_launch_from_launcher_enter</item>
+        <item name="android:wallpaperOpenExitAnimation">@anim/recents_launch_from_launcher_exit</item>
+        <item name="android:wallpaperIntraOpenEnterAnimation">@anim/wallpaper_recents_launch_from_launcher_enter</item>
+        <item name="android:wallpaperIntraOpenExitAnimation">@anim/wallpaper_recents_launch_from_launcher_exit</item>
+    </style>
+    <style name="RecentsTheme" parent="@android:style/Theme.Material">
+        <item name="android:ambientShadowAlpha">0.35</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowAnimationStyle">@style/Animation.RecentsActivity</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:windowNoTitle">true</item>
+    </style>
+    <style name="TextAppearance" />
+    <style name="TextAppearance.Volume" parent="@style/TextAppearance">
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textColor">#ffffffff</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+    <style name="TextAppearance.Volume.ZenDetail" parent="@style/TextAppearance.Volume">
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textColor">@*common:color/theme_color_secondary_text_material_dark</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+</resources>

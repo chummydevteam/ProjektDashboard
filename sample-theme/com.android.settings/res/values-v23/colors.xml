@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--You are editing Settings' Colors-->
+
+<resources>
+	<!--Fingerprint-->
+		<color name="fingerprint_title_area_bg">@*common:color/theme_color</color>
+		<color name="fingerprint_title_color">@*common:color/theme_color_accent</color>
+		<color name="fingerprint_message_color">@android:color/white</color>
+		<color name="fingerprint_progress_ring">@*common:color/theme_color_accent</color>
+		<color name="fingerprint_progress_ring_bg">@*common:color/theme_color_common_color</color>
+		<color name="fingerprint_indicator_background_resting">@*common:color/theme_color_accent</color>
+	
+	<!--Credential Verification Background-->
+		<color name="confirm_device_credential_dark_background">@*common:color/theme_color</color>
+
+	<color name="card_background">@android:color/black</color>
+	<color name="icon_accent">@*common:color/theme_color_accent</color>
+</resources>

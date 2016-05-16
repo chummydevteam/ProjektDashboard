@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--You are editing Settings' DU Specific Colors-->
+
+<resources>
+	<color name="icon_tint_color">@*common:color/theme_color_settings_icon_tint</color>
+	<color name="material_deep_teal_500">@*common:color/theme_color_accent</color>
+</resources>
