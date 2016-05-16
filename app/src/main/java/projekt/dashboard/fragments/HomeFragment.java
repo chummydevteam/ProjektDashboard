@@ -105,6 +105,10 @@ public class HomeFragment extends BasePageFragment {
             current_rom = "OctOS";
             return "OctOS ✓";
         }
+        if (getProp("ro.pac.version") != "") {
+            current_rom = "PAC-ROM";
+            return "PAC-ROM ✓";
+        }
         if (getProp("ro.purenexus.version") != "") {
             current_rom = "PureNexus";
             return "Pure Nexus ✓";
