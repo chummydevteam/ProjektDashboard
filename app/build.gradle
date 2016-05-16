@@ -7,7 +7,7 @@ android {
     applicationVariants.all { variant ->
         variant.outputs.each { output ->
             output.outputFile = new File(
-                    output.outputFile.parent, "projekt_dashboard_cdt_beta_testers_" + versionCode + ".apk")
+                    output.outputFile.parent, "projekt.dashboard.layers-v" + versionCode + ".apk")
         }
     }
 
@@ -26,8 +26,8 @@ android {
         applicationId "projekt.dashboard.layers"
         minSdkVersion 21
         targetSdkVersion 23
-        versionCode 8
-        versionName "test8"
+        versionCode 9
+        versionName "test9"
         generatedDensities = []
     }
 
