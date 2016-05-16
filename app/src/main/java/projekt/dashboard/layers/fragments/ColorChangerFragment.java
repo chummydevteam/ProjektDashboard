@@ -70,7 +70,6 @@ public class ColorChangerFragment extends BasePageFragment {
         inflation = (ViewGroup) inflater.inflate(
                 R.layout.fragment_colorpicker, container, false);
         prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        prefs = getActivity().getSharedPreferences("projekt.dashboard.layers.colorfargment", Context.MODE_PRIVATE);
         if (prefs.getBoolean("dialog", true)) {
             AlertDialog.Builder ad = new AlertDialog.Builder(getActivity());
             ad.setTitle("ColorSwapper :)");
