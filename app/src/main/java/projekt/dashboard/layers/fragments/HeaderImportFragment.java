@@ -193,7 +193,6 @@ public class HeaderImportFragment extends BasePageFragment {
                 R.layout.fragment_headersimporter, container, false);
 
         prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        prefs = getActivity().getSharedPreferences("projekt.dashboard.layers.headerimport", Context.MODE_PRIVATE);
         if (prefs.getBoolean("dialog", true)) {
             AlertDialog.Builder ad = new AlertDialog.Builder(getActivity());
             ad.setTitle("Header Importer :)");
@@ -381,33 +380,6 @@ public class HeaderImportFragment extends BasePageFragment {
         return inflation;
     }
 
-    public boolean checkCurrentThemeSelection(String packageName) {
-        try {
-            getActivity().getPackageManager().getApplicationInfo(packageName, 0);
-            File directory1 = new File("/data/app/" + packageName + "-1/base.apk");
-            if (directory1.exists()) {
-                folder_directory = 1;
-                return true;
-            } else {
-                File directory2 = new File("/data/app/" + packageName + "-2/base.apk");
-                if (directory2.exists()) {
-                    folder_directory = 2;
-                    return true;
-                } else {
-                    File directory3 = new File("/data/app/" + packageName + "-3/base.apk");
-                    if (directory3.exists()) {
-                        folder_directory = 3;
-                        return true;
-                    } else {
-                        return false;
-                    }
-                }
-            }
-        } catch (PackageManager.NameNotFoundException e) {
-            return false;
-        }
-    }
-
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -521,12 +493,9 @@ public class HeaderImportFragment extends BasePageFragment {
                     "Mounting system as read-write as we prepare for some commands...");
             eu.chainfire.libsuperuser.Shell.SU.run("mount -o remount,rw /");
             eu.chainfire.libsuperuser.Shell.SU.run("mkdir /res/drawable-xxhdpi-v4/");
-            if (xhdpi) {
-                eu.chainfire.libsuperuser.Shell.SU.run("mkdir /res/drawable-xhdpi-v4/");
-            }
-            if (xxxhdpi) {
-                eu.chainfire.libsuperuser.Shell.SU.run("mkdir /res/drawable-xxxhdpi-v4/");
-            }
+            eu.chainfire.libsuperuser.Shell.SU.run("mkdir /res/drawable-xhdpi-v4/");
+            eu.chainfire.libsuperuser.Shell.SU.run("mkdir /res/drawable-xxxhdpi-v4/");
+
 
             // Copy the files over
             for (int i = 0; i < source.size(); i++) {
@@ -614,12 +583,11 @@ public class HeaderImportFragment extends BasePageFragment {
             Log.e("performAAPTonCommonsAPK",
                     "Successfully performed all AAPT commands.");
             eu.chainfire.libsuperuser.Shell.SU.run("rm -r /res/drawable-xxhdpi-v4/");
-            if (xxxhdpi) {
-                eu.chainfire.libsuperuser.Shell.SU.run("rm -r /res/drawable-xxxhdpi-v4/");
-            }
-            if (xhdpi) {
-                eu.chainfire.libsuperuser.Shell.SU.run("rm -r /res/drawable-xhdpi-v4/");
-            }
+
+            eu.chainfire.libsuperuser.Shell.SU.run("rm -r /res/drawable-xxxhdpi-v4/");
+
+            eu.chainfire.libsuperuser.Shell.SU.run("rm -r /res/drawable-xhdpi-v4/");
+
             eu.chainfire.libsuperuser.Shell.SU.run("mount -o remount,ro /");
             if (LayersFunc.checkbitphone()) {
                 LayersFunc.copyFABFinalizedAPK(getActivity(), LayersFunc.themesystemui, false);
