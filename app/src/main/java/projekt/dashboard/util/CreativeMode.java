@@ -2904,46 +2904,48 @@ public class CreativeMode extends CardStackAdapter implements
 
             // Let's clean up the dashboard cache for creative mode extraction zone
 
-            File[] fileList = new File(mContext.getCacheDir().getAbsolutePath() +
-                    "/creative_mode/").listFiles();
-            for (int i = 0; i < fileList.length; i++) {
-                if (!fileList[i].getName().equals("AndroidManifest.xml") &&
-                        !fileList[i].getName().equals("assets") &&
-                        !fileList[i].getName().equals("res")) {
-                    File file = new File(mContext.getCacheDir().getAbsolutePath() +
-                            "/creative_mode/" + fileList[i].getName());
-                    boolean deleted = file.delete();
-                    if (fileList[i].getName().equals("META-INF")) {
+            if (!header_creative_mode_activated) {
+                File[] fileList = new File(mContext.getCacheDir().getAbsolutePath() +
+                        "/creative_mode/").listFiles();
+                for (int i = 0; i < fileList.length; i++) {
+                    if (!fileList[i].getName().equals("AndroidManifest.xml") &&
+                            !fileList[i].getName().equals("assets") &&
+                            !fileList[i].getName().equals("res")) {
+                        File file = new File(mContext.getCacheDir().getAbsolutePath() +
+                                "/creative_mode/" + fileList[i].getName());
+                        boolean deleted = file.delete();
+                        if (fileList[i].getName().equals("META-INF")) {
+                            eu.chainfire.libsuperuser.Shell.SU.run(
+                                    "rm -r " + mContext.getCacheDir().getAbsolutePath() +
+                                            "/creative_mode/META-INF");
+                        }
+                        Log.d("FileDeletion", "Deleted file/folder: " + fileList[i].getName());
+                    }
+                }
+
+                File[] fileList2 = new File(mContext.getCacheDir().getAbsolutePath() +
+                        "/creative_mode/res/").listFiles();
+                for (int i = 0; i < fileList2.length; i++) {
+                    if (!fileList2[i].getName().equals("drawable-xhdpi") &&
+                            !fileList2[i].getName().equals("drawable-xhdpi-v4") &&
+                            !fileList2[i].getName().equals("drawable-xxhdpi") &&
+                            !fileList2[i].getName().equals("drawable-xxhdpi-v4") &&
+                            !fileList2[i].getName().equals("drawable-xxxhdpi") &&
+                            !fileList2[i].getName().equals("drawable-xxxhdpi-v4") &&
+                            !fileList2[i].getName().equals("mipmap-xhdpi") &&
+                            !fileList2[i].getName().equals("mipmap-xhdpi-v4") &&
+                            !fileList2[i].getName().equals("mipmap-xxhdpi") &&
+                            !fileList2[i].getName().equals("mipmap-xxhdpi-v4") &&
+                            !fileList2[i].getName().equals("mipmap-xxxhdpi") &&
+                            !fileList2[i].getName().equals("mipmap-xxxhdpi-v4")) {
+                        File file2 = new File(mContext.getCacheDir().getAbsolutePath() +
+                                "/creative_mode/" + fileList2[i].getName());
+                        boolean deleted2 = file2.delete();
                         eu.chainfire.libsuperuser.Shell.SU.run(
                                 "rm -r " + mContext.getCacheDir().getAbsolutePath() +
-                                        "/creative_mode/META-INF");
+                                        "/creative_mode/res/" + fileList2[i].getName());
+                        Log.d("FileDeletion", "Deleted file/folder: " + fileList2[i].getName());
                     }
-                    Log.d("FileDeletion", "Deleted file/folder: " + fileList[i].getName());
-                }
-            }
-
-            File[] fileList2 = new File(mContext.getCacheDir().getAbsolutePath() +
-                    "/creative_mode/res/").listFiles();
-            for (int i = 0; i < fileList2.length; i++) {
-                if (!fileList2[i].getName().equals("drawable-xhdpi") &&
-                        !fileList2[i].getName().equals("drawable-xhdpi-v4") &&
-                        !fileList2[i].getName().equals("drawable-xxhdpi") &&
-                        !fileList2[i].getName().equals("drawable-xxhdpi-v4") &&
-                        !fileList2[i].getName().equals("drawable-xxxhdpi") &&
-                        !fileList2[i].getName().equals("drawable-xxxhdpi-v4") &&
-                        !fileList2[i].getName().equals("mipmap-xhdpi") &&
-                        !fileList2[i].getName().equals("mipmap-xhdpi-v4") &&
-                        !fileList2[i].getName().equals("mipmap-xxhdpi") &&
-                        !fileList2[i].getName().equals("mipmap-xxhdpi-v4") &&
-                        !fileList2[i].getName().equals("mipmap-xxxhdpi") &&
-                        !fileList2[i].getName().equals("mipmap-xxxhdpi-v4")) {
-                    File file2 = new File(mContext.getCacheDir().getAbsolutePath() +
-                            "/creative_mode/" + fileList2[i].getName());
-                    boolean deleted2 = file2.delete();
-                    eu.chainfire.libsuperuser.Shell.SU.run(
-                            "rm -r " + mContext.getCacheDir().getAbsolutePath() +
-                                    "/creative_mode/res/" + fileList2[i].getName());
-                    Log.d("FileDeletion", "Deleted file/folder: " + fileList2[i].getName());
                 }
             }
 
