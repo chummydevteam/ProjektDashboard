@@ -10,6 +10,8 @@
     <string name="empty">">> nothing to see here&#8230;yet!"</string>
 
     <string name="creative_mode_card_theme_selection">select installed theme:</string>
+    <string name="creative_mode_card_header_selection">create header pack APK...</string>
+    <string name="creative_mode_card_header_selection_hint">automatically drawn fom header pack ZIP</string>
     <string name="creative_mode_card_theme_attributes">new theme attributes:</string>
 
     <string name="default_username">Dashboard User</string>
@@ -25,7 +27,9 @@
     <string name="phase3_dialog_title">moving special tweaks over</string>
     <string name="phase4_dialog_title">creating new manifest</string>
     <string name="phase5_dialog_title">unifying and compiling theme</string>
+    <string name="phase5_hp_dialog_title">unifying and compiling header pack</string>
     <string name="phase6_dialog_title">finalizing and signing theme</string>
+    <string name="phase6_hp_dialog_title">finalizing and signing header pack</string>
 
     <!-- Exception Catches -->
     <string name="zipsigner_exception_toast">Failed to create new theme (Exception: ZipSigner)</string>

@@ -14,6 +14,7 @@ import android.graphics.PorterDuff;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Environment;
+import android.os.Handler;
 import android.os.PowerManager;
 import android.preference.PreferenceManager;
 import android.support.v4.content.ContextCompat;
@@ -84,9 +85,20 @@ public class CreativeMode extends CardStackAdapter implements
 
     public android.support.v7.widget.Toolbar framework_toolbar;
     public android.support.v7.widget.Toolbar settings_toolbar;
-    public ImageView main_color, qs_header, qs_notification, qs_panel_bg;
     public String header_pack_location = "";
     public View main_color_dark_view;
+
+    public Boolean header_creative_mode_activated = false;
+    public String header_pack_name, header_pack_author;
+
+    public ImageView accent_universal, accent_secondary, accent_light, appbg_dark, appbg_light, dialog_dark, dialog_light, main_color, main_color_dark, notifications_primary, notifications_secondary, ripples;
+    public Switch colorful_icon_switch, categories_title_caps, categories_title_bold, categories_title_italics, dashboard_divider, dutweaks_icons;
+    public ImageView settings_dashboard_background_color, settings_dashboard_category_background_color, settings_icon_colors, settings_title_colors, settings_switchbar_background_color;
+    public ImageView qs_accents, qs_header, qs_notification, qs_panel_bg, qs_tile, qs_text, qs_recents;
+    public AnimatedEditText aet1, aet2;
+    public Switch themable_gapps;
+
+    public CardView framework_card, settings_card, systemui_card, final_card;
 
     // ==================================== Framework Tweaks ================================ //
     public int current_selected_system_accent_color = Color.argb(255, 255, 255, 255); // White
@@ -120,7 +132,6 @@ public class CreativeMode extends CardStackAdapter implements
     public int current_selected_qs_tile_color = Color.argb(255, 255, 255, 255);
     public int current_selected_qs_text_color = Color.argb(255, 255, 255, 255);
     public int current_selected_recents_clear_all_icon_color = Color.argb(255, 255, 255, 255);
-    public Switch colorful_icon_switch;
     public String spinnerItem, themeName, themeAuthor;
     // ========================= On decision based color injection =========================== //
     public Boolean is_framework_accent_changed = false;
@@ -268,25 +279,25 @@ public class CreativeMode extends CardStackAdapter implements
     }
 
     private View getFrameworksView(ViewGroup container) {
-        CardView root = (CardView) mInflater.inflate(R.layout.framework_card, container, false);
-        root.setCardBackgroundColor(ContextCompat.getColor(mContext, bgColorIds[0]));
+        framework_card = (CardView) mInflater.inflate(R.layout.framework_card, container, false);
+        framework_card.setCardBackgroundColor(ContextCompat.getColor(mContext, bgColorIds[0]));
 
         framework_toolbar = (android.support.v7.widget.Toolbar)
-                root.findViewById(R.id.framework_toolbar);
+                framework_card.findViewById(R.id.framework_toolbar);
         framework_toolbar.setNavigationIcon(R.drawable.ic_arrow_back_24dp);
 
-        main_color_dark_view = root.findViewById(R.id.main_color_dark_colorpicker);
+        main_color_dark_view = framework_card.findViewById(R.id.main_color_dark_colorpicker);
 
-        final Switch switch1 = (Switch) root.findViewById(R.id.switch_example);
-        final Switch switch2 = (Switch) root.findViewById(R.id.switch_example2);
+        final Switch switch1 = (Switch) framework_card.findViewById(R.id.switch_example);
+        final Switch switch2 = (Switch) framework_card.findViewById(R.id.switch_example2);
 
-        final RelativeLayout rl = (RelativeLayout) root.findViewById(R.id.main_relativeLayout);
+        final RelativeLayout rl = (RelativeLayout) framework_card.findViewById(R.id.main_relativeLayout);
 
         // Framework Accent (universal)
 
-        final ImageView accent_universal = (ImageView) root.findViewById(
+        accent_universal = (ImageView) framework_card.findViewById(
                 R.id.system_accent_colorpicker);
-        final TextView accent_universal_text = (TextView) root.findViewById(
+        final TextView accent_universal_text = (TextView) framework_card.findViewById(
                 R.id.system_accent_colorpicker_text);
         accent_universal.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -318,9 +329,9 @@ public class CreativeMode extends CardStackAdapter implements
 
         // Framework Accent (dual)
 
-        final ImageView accent_secondary = (ImageView) root.findViewById(
+        accent_secondary = (ImageView) framework_card.findViewById(
                 R.id.system_accent_dual_colorpicker);
-        final TextView accent_secondary_text = (TextView) root.findViewById(
+        final TextView accent_secondary_text = (TextView) framework_card.findViewById(
                 R.id.system_accent_dual_colorpicker_text);
         accent_secondary.setColorFilter(
                 current_selected_system_accent_dual_color, PorterDuff.Mode.SRC_ATOP);
@@ -343,9 +354,9 @@ public class CreativeMode extends CardStackAdapter implements
 
         // Framework Accent (light)
 
-        final ImageView accent_light = (ImageView) root.findViewById(
+        accent_light = (ImageView) framework_card.findViewById(
                 R.id.system_accent_light_colorpicker);
-        final TextView accent_light_text = (TextView) root.findViewById(
+        final TextView accent_light_text = (TextView) framework_card.findViewById(
                 R.id.system_accent_light_colorpicker_text);
         accent_light.setColorFilter(
                 current_selected_system_accent_light_color, PorterDuff.Mode.SRC_ATOP);
@@ -379,9 +390,9 @@ public class CreativeMode extends CardStackAdapter implements
 
         // Framework Appbg (dark)
 
-        final ImageView appbg_dark = (ImageView) root.findViewById(
+        appbg_dark = (ImageView) framework_card.findViewById(
                 R.id.system_appbg_colorpicker);
-        final TextView appbg_dark_text = (TextView) root.findViewById(
+        final TextView appbg_dark_text = (TextView) framework_card.findViewById(
                 R.id.system_appbg_colorpicker_text);
         rl.setBackgroundColor(current_selected_system_appbg_color);
         appbg_dark.setColorFilter(current_selected_system_appbg_color, PorterDuff.Mode.SRC_ATOP);
@@ -405,9 +416,9 @@ public class CreativeMode extends CardStackAdapter implements
 
         // Framework Appbg (light)
 
-        final ImageView appbg_light = (ImageView) root.findViewById(
+        appbg_light = (ImageView) framework_card.findViewById(
                 R.id.system_appbg_light_colorpicker);
-        final TextView appbg_light_text = (TextView) root.findViewById(
+        final TextView appbg_light_text = (TextView) framework_card.findViewById(
                 R.id.system_appbg_light_colorpicker_text);
         appbg_light.setColorFilter(
                 current_selected_system_appbg_light_color, PorterDuff.Mode.SRC_ATOP);
@@ -432,9 +443,9 @@ public class CreativeMode extends CardStackAdapter implements
 
         // Framework System Dialog Color (dark)
 
-        final ImageView dialog_dark = (ImageView) root.findViewById(
+        dialog_dark = (ImageView) framework_card.findViewById(
                 R.id.system_dialog_colorpicker);
-        final TextView dialog_dark_text = (TextView) root.findViewById(
+        final TextView dialog_dark_text = (TextView) framework_card.findViewById(
                 R.id.system_dialog_colorpicker_text);
         dialog_dark.setColorFilter(current_selected_system_dialog_color, PorterDuff.Mode.SRC_ATOP);
         dialog_dark.setOnClickListener(new View.OnClickListener() {
@@ -457,9 +468,9 @@ public class CreativeMode extends CardStackAdapter implements
 
         // Framework System Dialog Color (light)
 
-        final ImageView dialog_light = (ImageView) root.findViewById(
+        dialog_light = (ImageView) framework_card.findViewById(
                 R.id.system_dialog_light_colorpicker);
-        final TextView dialog_light_text = (TextView) root.findViewById(
+        final TextView dialog_light_text = (TextView) framework_card.findViewById(
                 R.id.system_dialog_light_colorpicker_text);
         dialog_light.setColorFilter(
                 current_selected_system_dialog_light_color, PorterDuff.Mode.SRC_ATOP);
@@ -483,9 +494,9 @@ public class CreativeMode extends CardStackAdapter implements
 
         // Framework System Main Color
 
-        main_color = (ImageView) root.findViewById(
+        main_color = (ImageView) framework_card.findViewById(
                 R.id.system_main_colorpicker);
-        final TextView main_color_text = (TextView) root.findViewById(
+        final TextView main_color_text = (TextView) framework_card.findViewById(
                 R.id.system_main_colorpicker_text);
         main_color.setColorFilter(current_selected_system_main_color, PorterDuff.Mode.SRC_ATOP);
         main_color.setOnClickListener(new View.OnClickListener() {
@@ -509,9 +520,9 @@ public class CreativeMode extends CardStackAdapter implements
 
         // Framework System Main Color Dark
 
-        final ImageView main_color_dark = (ImageView) root.findViewById(
+        main_color_dark = (ImageView) framework_card.findViewById(
                 R.id.system_main_dark_colorpicker);
-        final TextView main_color_dark_text = (TextView) root.findViewById(
+        final TextView main_color_dark_text = (TextView) framework_card.findViewById(
                 R.id.system_main_dark_colorpicker_text);
         main_color_dark.setColorFilter(current_selected_system_main_dark_color, PorterDuff.Mode.SRC_ATOP);
         main_color_dark.setOnClickListener(new View.OnClickListener() {
@@ -532,9 +543,9 @@ public class CreativeMode extends CardStackAdapter implements
 
         // Framework Notifications Primary Color
 
-        final ImageView notifications_primary = (ImageView) root.findViewById(
+        notifications_primary = (ImageView) framework_card.findViewById(
                 R.id.system_notification_text_1_colorpicker);
-        final TextView notifications_primary_text = (TextView) root.findViewById(
+        final TextView notifications_primary_text = (TextView) framework_card.findViewById(
                 R.id.system_notification_text_1_colorpicker_text);
         notifications_primary.setColorFilter(
                 current_selected_system_notifications_primary_color, PorterDuff.Mode.SRC_ATOP);
@@ -557,9 +568,9 @@ public class CreativeMode extends CardStackAdapter implements
 
         // Framework Notifications Secondary Color
 
-        final ImageView notifications_secondary = (ImageView) root.findViewById(
+        notifications_secondary = (ImageView) framework_card.findViewById(
                 R.id.system_notification_text_2_colorpicker);
-        final TextView notifications_secondary_text = (TextView) root.findViewById(
+        final TextView notifications_secondary_text = (TextView) framework_card.findViewById(
                 R.id.system_notification_text_2_colorpicker_text);
         notifications_secondary.setColorFilter(
                 current_selected_system_notifications_secondary_color, PorterDuff.Mode.SRC_ATOP);
@@ -582,9 +593,9 @@ public class CreativeMode extends CardStackAdapter implements
 
         // Framework Ripple Color
 
-        final ImageView ripples = (ImageView) root.findViewById(
+        ripples = (ImageView) framework_card.findViewById(
                 R.id.system_ripple_colorpicker);
-        final TextView ripples_text = (TextView) root.findViewById(
+        final TextView ripples_text = (TextView) framework_card.findViewById(
                 R.id.system_ripple_colorpicker_text);
         ripples.setColorFilter(current_selected_system_ripple_color, PorterDuff.Mode.SRC_ATOP);
         ripples.setOnClickListener(new View.OnClickListener() {
@@ -606,21 +617,21 @@ public class CreativeMode extends CardStackAdapter implements
         });
 
 
-        return root;
+        return framework_card;
     }
 
     private View getSettingsView(ViewGroup container) {
-        CardView root = (CardView) mInflater.inflate(R.layout.settings_card, container, false);
-        root.setCardBackgroundColor(ContextCompat.getColor(mContext, bgColorIds[1]));
+        settings_card = (CardView) mInflater.inflate(R.layout.settings_card, container, false);
+        settings_card.setCardBackgroundColor(ContextCompat.getColor(mContext, bgColorIds[1]));
 
-        final ImageView wifiIcon = (ImageView) root.findViewById(R.id.wifiIcon);
-        final TextView categoryHeader = (TextView) root.findViewById(R.id.categoryHeaderTitle);
+        final ImageView wifiIcon = (ImageView) settings_card.findViewById(R.id.wifiIcon);
+        final TextView categoryHeader = (TextView) settings_card.findViewById(R.id.categoryHeaderTitle);
         settings_toolbar = (android.support.v7.widget.Toolbar)
-                root.findViewById(R.id.settings_toolbar);
+                settings_card.findViewById(R.id.settings_toolbar);
 
         // Colorful DU/PN Tweaks Icon
 
-        colorful_icon_switch = (Switch) root.findViewById(R.id.colorful_icon);
+        colorful_icon_switch = (Switch) settings_card.findViewById(R.id.colorful_icon);
         colorful_icon_switch.setOnCheckedChangeListener(
                 new CompoundButton.OnCheckedChangeListener() {
                     @Override
@@ -640,7 +651,7 @@ public class CreativeMode extends CardStackAdapter implements
 
         // Dashboard Categories Title (All Caps)
 
-        final Switch categories_title_caps = (Switch) root.findViewById(
+        categories_title_caps = (Switch) settings_card.findViewById(
                 R.id.dashboard_title_allcaps);
         categories_title_caps.setOnCheckedChangeListener(
                 new CompoundButton.OnCheckedChangeListener() {
@@ -660,7 +671,7 @@ public class CreativeMode extends CardStackAdapter implements
 
         // Dashboard Categories Title (Bold)
 
-        final Switch categories_title_bold = (Switch) root.findViewById(
+        categories_title_bold = (Switch) settings_card.findViewById(
                 R.id.dashboard_title_bold);
         categories_title_bold.setOnCheckedChangeListener(
                 new CompoundButton.OnCheckedChangeListener() {
@@ -680,7 +691,7 @@ public class CreativeMode extends CardStackAdapter implements
 
         // Dashboard Categories Title (Italics)
 
-        final Switch categories_title_italics = (Switch) root.findViewById(
+        categories_title_italics = (Switch) settings_card.findViewById(
                 R.id.dashboard_title_italics);
         categories_title_italics.setOnCheckedChangeListener(
                 new CompoundButton.OnCheckedChangeListener() {
@@ -700,7 +711,7 @@ public class CreativeMode extends CardStackAdapter implements
 
         // Dashboard Dividers
 
-        final Switch dashboard_divider = (Switch) root.findViewById(R.id.dashboard_dividers);
+        dashboard_divider = (Switch) settings_card.findViewById(R.id.dashboard_dividers);
         dashboard_divider.setOnCheckedChangeListener(
                 new CompoundButton.OnCheckedChangeListener() {
                     @Override
@@ -719,7 +730,7 @@ public class CreativeMode extends CardStackAdapter implements
 
         // Dirty Tweaks Icon Presence
 
-        final Switch dutweaks_icons = (Switch) root.findViewById(R.id.dirty_tweaks_icons);
+        dutweaks_icons = (Switch) settings_card.findViewById(R.id.dirty_tweaks_icons);
         dutweaks_icons.setOnCheckedChangeListener(
                 new CompoundButton.OnCheckedChangeListener() {
                     @Override
@@ -738,9 +749,9 @@ public class CreativeMode extends CardStackAdapter implements
 
         // Settings Dashboard Background Color
 
-        final ImageView settings_dashboard_background_color = (ImageView) root.findViewById(
+        settings_dashboard_background_color = (ImageView) settings_card.findViewById(
                 R.id.settings_dashboard_background_colorpicker);
-        final TextView settings_dashboard_background_color_text = (TextView) root.findViewById(
+        final TextView settings_dashboard_background_color_text = (TextView) settings_card.findViewById(
                 R.id.settings_dashboard_background_colorpicker_text);
         settings_dashboard_background_color.setColorFilter(current_selected_dashboard_background_color, PorterDuff.Mode.SRC_ATOP);
         settings_dashboard_background_color.setOnClickListener(new View.OnClickListener() {
@@ -762,11 +773,11 @@ public class CreativeMode extends CardStackAdapter implements
 
         // Settings Dashboard Category Background Color
 
-        final ImageView settings_dashboard_category_background_color = (ImageView) root.findViewById(
+        settings_dashboard_category_background_color = (ImageView) settings_card.findViewById(
                 R.id.settings_dashboard_category_colorpicker);
-        final TextView settings_dashboard_category_background_color_text = (TextView) root.findViewById(
+        final TextView settings_dashboard_category_background_color_text = (TextView) settings_card.findViewById(
                 R.id.settings_dashboard_category_colorpicker_text);
-        final RelativeLayout settings_preview = (RelativeLayout) root.findViewById(R.id.settings_container);
+        final RelativeLayout settings_preview = (RelativeLayout) settings_card.findViewById(R.id.settings_container);
         settings_dashboard_category_background_color.setColorFilter(current_selected_dashboard_category_background_color,
                 PorterDuff.Mode.SRC_ATOP);
         settings_dashboard_category_background_color.setOnClickListener(new View.OnClickListener() {
@@ -790,9 +801,9 @@ public class CreativeMode extends CardStackAdapter implements
 
         // Settings Icons Colors
 
-        final ImageView settings_icon_colors = (ImageView) root.findViewById(
+        settings_icon_colors = (ImageView) settings_card.findViewById(
                 R.id.settings_icon_colorpicker);
-        final TextView settings_icon_colors_text = (TextView) root.findViewById(
+        final TextView settings_icon_colors_text = (TextView) settings_card.findViewById(
                 R.id.settings_icon_colorpicker_text);
         settings_icon_colors.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -814,9 +825,9 @@ public class CreativeMode extends CardStackAdapter implements
 
         // Settings Title Colors
 
-        final ImageView settings_title_colors = (ImageView) root.findViewById(
+        settings_title_colors = (ImageView) settings_card.findViewById(
                 R.id.settings_title_colorpicker);
-        final TextView settings_title_colors_text = (TextView) root.findViewById(
+        final TextView settings_title_colors_text = (TextView) settings_card.findViewById(
                 R.id.settings_title_colorpicker_text);
         settings_title_colors.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -838,9 +849,9 @@ public class CreativeMode extends CardStackAdapter implements
 
         // Settings Switchbar Background Color
 
-        final ImageView settings_switchbar_background_color = (ImageView) root.findViewById(
+        settings_switchbar_background_color = (ImageView) settings_card.findViewById(
                 R.id.settings_switchbar_background_colorpicker);
-        final TextView settings_switchbar_background_color_text = (TextView) root.findViewById(
+        final TextView settings_switchbar_background_color_text = (TextView) settings_card.findViewById(
                 R.id.settings_switchbar_background_colorpicker_text);
         settings_switchbar_background_color.setColorFilter(current_selected_settings_switchbar_color, PorterDuff.Mode.SRC_ATOP);
         settings_switchbar_background_color.setOnClickListener(new View.OnClickListener() {
@@ -860,7 +871,7 @@ public class CreativeMode extends CardStackAdapter implements
             }
         });
 
-        return root;
+        return settings_card;
     }
 
     public void checkWhetherZIPisValid(CardView root, String source, String destination) {
@@ -880,9 +891,11 @@ public class CreativeMode extends CardStackAdapter implements
 
             TextView headerPackName = (TextView) root.findViewById(R.id.themeName2);
             headerPackName.setText(newArray[0]);
+            header_pack_name = newArray[0];
 
             TextView headerPackAuthor = (TextView) root.findViewById(R.id.themeAuthor2);
             headerPackAuthor.setText(newArray[1]);
+            header_pack_author = newArray[1];
 
             TextView headerPackDevTeam = (TextView) root.findViewById(R.id.themeDevTeam2);
             headerPackDevTeam.setText(newArray[2]);
@@ -945,18 +958,18 @@ public class CreativeMode extends CardStackAdapter implements
     }
 
     private View getSystemUIView(ViewGroup container) {
-        final CardView root = (CardView) mInflater.inflate(R.layout.systemui_card, container, false);
-        root.setCardBackgroundColor(ContextCompat.getColor(mContext, bgColorIds[2]));
+        systemui_card = (CardView) mInflater.inflate(R.layout.systemui_card, container, false);
+        systemui_card.setCardBackgroundColor(ContextCompat.getColor(mContext, bgColorIds[2]));
 
         prefs = PreferenceManager.getDefaultSharedPreferences(mContext);
-        final TextView wifiLabel = (TextView) root.findViewById(R.id.wifiLabel);
-        final TextView bluetoothLabel = (TextView) root.findViewById(R.id.bluetoothLabel);
+        final TextView wifiLabel = (TextView) systemui_card.findViewById(R.id.wifiLabel);
+        final TextView bluetoothLabel = (TextView) systemui_card.findViewById(R.id.bluetoothLabel);
         wifiLabel.setText(prefs.getString("dashboard_username",
-                root.getResources().getString(R.string.systemui_preview_default_no_username)) +
-                root.getResources().getString(R.string.systemui_preview_label));
-        final SeekBar brightness = (SeekBar) root.findViewById(R.id.seekBar);
+                systemui_card.getResources().getString(R.string.systemui_preview_default_no_username)) +
+                systemui_card.getResources().getString(R.string.systemui_preview_label));
+        final SeekBar brightness = (SeekBar) systemui_card.findViewById(R.id.seekBar);
 
-        final Spinner spinner3 = (Spinner) root.findViewById(R.id.spinner3);
+        final Spinner spinner3 = (Spinner) systemui_card.findViewById(R.id.spinner3);
 
         List<String> zipsFound = new ArrayList<String>();
         zipsFound.add(mContext.getResources().getString(R.string.contextual_header_pack));
@@ -1004,7 +1017,7 @@ public class CreativeMode extends CardStackAdapter implements
             public void onItemSelected(AdapterView<?> arg0, View arg1,
                                        int pos, long id) {
                 if (pos != 0) {
-                    checkWhetherZIPisValid(root, Environment.getExternalStorageDirectory().
+                    checkWhetherZIPisValid(systemui_card, Environment.getExternalStorageDirectory().
                                     getAbsolutePath() +
                                     "/dashboard./" + spinner3.getSelectedItem(),
                             mContext.getCacheDir().getAbsolutePath() + "/headers");
@@ -1012,27 +1025,27 @@ public class CreativeMode extends CardStackAdapter implements
                     header_pack_location = "";
                     is_header_pack_chosen = false;
                     TextView headerPackName = (TextView)
-                            root.findViewById(R.id.themeName2);
+                            systemui_card.findViewById(R.id.themeName2);
                     headerPackName.setText(mContext.getResources().getString(
                             R.string.contextualheaderimporter_header_pack_na));
 
                     TextView headerPackAuthor = (TextView)
-                            root.findViewById(R.id.themeAuthor2);
+                            systemui_card.findViewById(R.id.themeAuthor2);
                     headerPackAuthor.setText(mContext.getResources().getString(
                             R.string.contextualheaderimporter_header_pack_na));
 
                     TextView headerPackDevTeam = (TextView)
-                            root.findViewById(R.id.themeDevTeam2);
+                            systemui_card.findViewById(R.id.themeDevTeam2);
                     headerPackDevTeam.setText(mContext.getResources().getString(
                             R.string.contextualheaderimporter_header_pack_na));
 
                     TextView headerPackVersion = (TextView)
-                            root.findViewById(R.id.themeVersion2);
+                            systemui_card.findViewById(R.id.themeVersion2);
                     headerPackVersion.setText(mContext.getResources().getString(
                             R.string.contextualheaderimporter_header_pack_na));
 
                     TextView headerPackCount = (TextView)
-                            root.findViewById(R.id.themeCount2);
+                            systemui_card.findViewById(R.id.themeCount2);
                     headerPackCount.setText(mContext.getResources().getString(
                             R.string.contextualheaderimporter_header_pack_na));
                 }
@@ -1047,8 +1060,8 @@ public class CreativeMode extends CardStackAdapter implements
 
         // QS Accent Colors
 
-        final ImageView qs_accents = (ImageView) root.findViewById(R.id.qs_accent_colorpicker);
-        final TextView qs_accents_text = (TextView) root.findViewById(
+        qs_accents = (ImageView) systemui_card.findViewById(R.id.qs_accent_colorpicker);
+        final TextView qs_accents_text = (TextView) systemui_card.findViewById(
                 R.id.qs_accent_colorpicker_text);
         qs_accents.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -1081,10 +1094,10 @@ public class CreativeMode extends CardStackAdapter implements
 
         // QS Header Colors
 
-        qs_header = (ImageView) root.findViewById(R.id.qs_header_colorpicker);
+        qs_header = (ImageView) systemui_card.findViewById(R.id.qs_header_colorpicker);
         qs_header.setColorFilter(current_selected_header_background_color,
                 PorterDuff.Mode.SRC_ATOP);
-        final TextView qs_header_color = (TextView) root.findViewById(
+        final TextView qs_header_color = (TextView) systemui_card.findViewById(
                 R.id.qs_header_colorpicker_text);
         qs_header.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -1106,11 +1119,11 @@ public class CreativeMode extends CardStackAdapter implements
 
         // QS Notification Background Colors
 
-        qs_notification = (ImageView) root.findViewById(
+        qs_notification = (ImageView) systemui_card.findViewById(
                 R.id.system_notification_background_colorpicker);
         qs_notification.setColorFilter(current_selected_notification_background_color,
                 PorterDuff.Mode.SRC_ATOP);
-        final TextView qs_notification_color = (TextView) root.findViewById(
+        final TextView qs_notification_color = (TextView) systemui_card.findViewById(
                 R.id.system_notification_background_colorpicker_text);
         qs_notification.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -1133,12 +1146,12 @@ public class CreativeMode extends CardStackAdapter implements
 
         // QS Panel Background Colors
 
-        qs_panel_bg = (ImageView) root.findViewById(R.id.qs_background_colorpicker);
+        qs_panel_bg = (ImageView) systemui_card.findViewById(R.id.qs_background_colorpicker);
         qs_panel_bg.setColorFilter(current_selected_qs_panel_background_color,
                 PorterDuff.Mode.SRC_ATOP);
-        final RelativeLayout qs_panel_bg_preview = (RelativeLayout) root.findViewById(R.id.systemui_preview);
+        final RelativeLayout qs_panel_bg_preview = (RelativeLayout) systemui_card.findViewById(R.id.systemui_preview);
         qs_panel_bg_preview.setBackgroundColor(current_selected_qs_panel_background_color);
-        final TextView qs_panel_bg_color = (TextView) root.findViewById(
+        final TextView qs_panel_bg_color = (TextView) systemui_card.findViewById(
                 R.id.qs_background_colorpicker_text);
         qs_panel_bg.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -1161,8 +1174,8 @@ public class CreativeMode extends CardStackAdapter implements
 
         // QS Icon Colors
 
-        final ImageView qs_tile = (ImageView) root.findViewById(R.id.qs_tile_icon_colorpicker);
-        final TextView qs_tile_text = (TextView) root.findViewById(
+        qs_tile = (ImageView) systemui_card.findViewById(R.id.qs_tile_icon_colorpicker);
+        final TextView qs_tile_text = (TextView) systemui_card.findViewById(
                 R.id.qs_tile_icon_colorpicker_text);
         qs_tile.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -1195,8 +1208,8 @@ public class CreativeMode extends CardStackAdapter implements
 
         // QS Title Colors
 
-        final ImageView qs_text = (ImageView) root.findViewById(R.id.qs_tile_text_colorpicker);
-        final TextView qs_text_text = (TextView) root.findViewById(
+        qs_text = (ImageView) systemui_card.findViewById(R.id.qs_tile_text_colorpicker);
+        final TextView qs_text_text = (TextView) systemui_card.findViewById(
                 R.id.qs_tile_text_colorpicker_text);
         qs_text.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -1220,8 +1233,8 @@ public class CreativeMode extends CardStackAdapter implements
 
         // QS Recents Clear All Icon Color
 
-        final ImageView qs_recents = (ImageView) root.findViewById(R.id.qs_recents_clear_all_icon_colorpicker);
-        final TextView qs_recents_text = (TextView) root.findViewById(
+        qs_recents = (ImageView) systemui_card.findViewById(R.id.qs_recents_clear_all_icon_colorpicker);
+        final TextView qs_recents_text = (TextView) systemui_card.findViewById(
                 R.id.qs_recents_clear_all_icon_colorpicker_text);
         qs_recents.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -1240,35 +1253,91 @@ public class CreativeMode extends CardStackAdapter implements
             }
         });
 
-        return root;
+        return systemui_card;
+    }
+
+    public void activateAllOptions(Boolean bool) {
+        // All Framework Modifications
+        accent_universal.setClickable(bool);
+        accent_secondary.setClickable(bool);
+        accent_light.setClickable(bool);
+        appbg_dark.setClickable(bool);
+        appbg_light.setClickable(bool);
+        dialog_dark.setClickable(bool);
+        dialog_light.setClickable(bool);
+        main_color.setClickable(bool);
+        main_color_dark.setClickable(bool);
+        notifications_primary.setClickable(bool);
+        notifications_secondary.setClickable(bool);
+        ripples.setClickable(bool);
+
+        // All Settings Modifications
+        colorful_icon_switch.setClickable(bool);
+        colorful_icon_switch.setVisibility(View.GONE);
+        categories_title_caps.setClickable(bool);
+        categories_title_bold.setClickable(bool);
+        categories_title_italics.setClickable(bool);
+        dashboard_divider.setClickable(bool);
+        dutweaks_icons.setClickable(bool);
+        settings_dashboard_background_color.setClickable(bool);
+        settings_dashboard_category_background_color.setClickable(bool);
+        settings_icon_colors.setClickable(bool);
+        settings_title_colors.setClickable(bool);
+        settings_switchbar_background_color.setClickable(bool);
+
+        // All SystemUI Modifications
+        qs_accents.setClickable(bool);
+        qs_header.setClickable(bool);
+        qs_notification.setClickable(bool);
+        qs_panel_bg.setClickable(bool);
+        qs_tile.setClickable(bool);
+        qs_text.setClickable(bool);
+        qs_recents.setClickable(bool);
+
+        // All Finalized Card Modifications
+        if (!bool) {
+            aet1.setHint(mContext.getString(R.string.creative_mode_card_header_selection_hint));
+            aet2.setHint(mContext.getString(R.string.creative_mode_card_header_selection_hint));
+        } else {
+            aet1.setHint(mContext.getString(R.string.creation_name_empty));
+            aet2.setHint(mContext.getString(R.string.creator_name_empty));
+        }
+        aet1.setEnabled(bool);
+        aet1.setFocusable(bool);
+        aet1.setFocusableInTouchMode(bool);
+
+        aet2.setEnabled(bool);
+        aet2.setFocusable(bool);
+        aet2.setFocusableInTouchMode(bool);
+        themable_gapps.setClickable(bool);
     }
 
     private View getFinalizedView(ViewGroup container) {
-        final CardView root = (CardView) mInflater.inflate(R.layout.final_card, container, false);
-        root.setCardBackgroundColor(ContextCompat.getColor(mContext, bgColorIds[3]));
+        final_card = (CardView) mInflater.inflate(R.layout.final_card, container, false);
+        final_card.setCardBackgroundColor(ContextCompat.getColor(mContext, bgColorIds[3]));
 
         int counter = 0;
 
-        final Spinner spinner1 = (Spinner) root.findViewById(R.id.spinner2);
+        final Spinner spinner1 = (Spinner) final_card.findViewById(R.id.spinner2);
         // Create an ArrayAdapter using the string array and a default spinner layout
         List<String> list = new ArrayList<String>();
 
-        final AnimatedEditText aet1 = (AnimatedEditText) root.findViewById(R.id.edittext1);
-        final AnimatedEditText aet2 = (AnimatedEditText) root.findViewById(R.id.edittext2);
+        aet1 = (AnimatedEditText) final_card.findViewById(R.id.edittext1);
+        aet2 = (AnimatedEditText) final_card.findViewById(R.id.edittext2);
 
-        final Switch themable_gapps = (Switch) root.findViewById(R.id.themable_gapps);
+        themable_gapps = (Switch) final_card.findViewById(R.id.themable_gapps);
         themable_gapps.setOnCheckedChangeListener(
                 new CompoundButton.OnCheckedChangeListener() {
                     @Override
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                         if (isChecked) {
                             use_themable_gapps = true;
-                            Log.d("Use Themable Gapps", use_themable_gapps + "");
+                            Log.d("Use Themable Gapps", "true");
                             use_themable_gapps_changed = true;
                             themable_gapps.setTextColor(mContext.getColor(android.R.color.white));
                         } else {
                             use_themable_gapps = false;
-                            Log.d("Use Themable Gapps", use_themable_gapps + "");
+                            Log.d("Use Themable Gapps", "false");
                             use_themable_gapps_changed = false;
                             themable_gapps.setTextColor(mContext.getColor(R.color.creative_mode_text_disabled));
                         }
@@ -1278,6 +1347,7 @@ public class CreativeMode extends CardStackAdapter implements
 
 
         list.add(mContext.getResources().getString(R.string.contextualheaderswapper_select_theme));
+        list.add(mContext.getString(R.string.creative_mode_card_header_selection));
         list.add("dark material // akZent");
         list.add("blacked out // blakZent");
 
@@ -1324,7 +1394,68 @@ public class CreativeMode extends CardStackAdapter implements
             @Override
             public void onItemSelected(AdapterView<?> arg0, View arg1,
                                        int pos, long id) {
+                if (pos == 0) {
+                    Log.d("getFinalizedViewSpinner", "header pack creation activated, all options have been disabled!");
+                    header_creative_mode_activated = false;
+                    activateAllOptions(true);
+                }
                 if (pos == 1) {
+                    Log.d("getFinalizedViewSpinner", "header pack creation activated, all options have been disabled!");
+                    header_creative_mode_activated = true;
+
+                    activateAllOptions(false);
+
+                    final Handler handler = new Handler();
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            systemui_card.setCardBackgroundColor(ContextCompat.getColor(mContext, bgColorIds[2]));
+                            final Handler handler = new Handler();
+                            handler.postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    systemui_card.setCardBackgroundColor(ContextCompat.getColor(mContext, bgColorIds[1]));
+                                    final Handler handler = new Handler();
+                                    handler.postDelayed(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            systemui_card.setCardBackgroundColor(ContextCompat.getColor(mContext, bgColorIds[2]));
+                                            final Handler handler = new Handler();
+                                            handler.postDelayed(new Runnable() {
+                                                @Override
+                                                public void run() {
+                                                    systemui_card.setCardBackgroundColor(ContextCompat.getColor(mContext, bgColorIds[1]));
+                                                    final Handler handler = new Handler();
+                                                    handler.postDelayed(new Runnable() {
+                                                        @Override
+                                                        public void run() {
+                                                            systemui_card.setCardBackgroundColor(ContextCompat.getColor(mContext, bgColorIds[2]));
+                                                            final Handler handler = new Handler();
+                                                            handler.postDelayed(new Runnable() {
+                                                                @Override
+                                                                public void run() {
+                                                                    systemui_card.setCardBackgroundColor(ContextCompat.getColor(mContext, bgColorIds[1]));
+                                                                    final Handler handler = new Handler();
+                                                                    handler.postDelayed(new Runnable() {
+                                                                        @Override
+                                                                        public void run() {
+                                                                            systemui_card.setCardBackgroundColor(ContextCompat.getColor(mContext, bgColorIds[2]));
+                                                                        }
+                                                                    }, 100);
+                                                                }
+                                                            }, 100);
+                                                        }
+                                                    }, 100);
+                                                }
+                                            }, 100);
+                                        }
+                                    }, 100);
+                                }
+                            }, 100);
+                        }
+                    }, 100);
+                }
+                if (pos == 2) {
                     if (!checkCurrentThemeSelection("com.chummy.jezebel.materialdark.donate")) {
                         Toast toast = Toast.makeText(mContext.getApplicationContext(),
                                 mContext.getResources().getString(
@@ -1359,8 +1490,10 @@ public class CreativeMode extends CardStackAdapter implements
                         }
                         current_cdt_theme = "com.chummy.jezebel.materialdark.donate";
                     }
+                    header_creative_mode_activated = false;
+                    activateAllOptions(true);
                 }
-                if (pos == 2) {
+                if (pos >= 3) {
                     if (!checkCurrentThemeSelection("com.chummy.jezebel.blackedout.donate")) {
                         Toast toast = Toast.makeText(mContext.getApplicationContext(),
                                 mContext.getResources().getString(
@@ -1396,15 +1529,26 @@ public class CreativeMode extends CardStackAdapter implements
                         }
                         current_cdt_theme = "com.chummy.jezebel.blackedout.donate";
                     }
-                } else {
+                    header_creative_mode_activated = false;
+                    activateAllOptions(true);
+
+                }
+
+                if (pos >= 3) {
+                    header_creative_mode_activated = false;
+                    activateAllOptions(true);
                     if (spinner1.getSelectedItem().toString().substring(0, 10).equals("com.chummy")
                             || spinner1.getSelectedItem().toString().substring(0, 13).equals("projekt.klar")) {
                         Log.d("getFinalizedViewSpinner", "a cdt theme derivative has been selected, several options have been changed!");
                         main_color_dark_view.setVisibility(View.GONE);
                         is_framework_main_theme_color_dark_changed = false;
                     } else {
+                        Log.d("getFinalizedViewSpinner", "header pack creation deactivated, all options have been re-enabled!");
                         if (!main_color_dark_view.isShown()) {
                             main_color_dark_view.setVisibility(View.VISIBLE);
+                        }
+                        if (colorful_icon_switch.isShown()) {
+                            colorful_icon_switch.setVisibility(View.GONE);
                         }
                     }
                 }
@@ -1421,46 +1565,62 @@ public class CreativeMode extends CardStackAdapter implements
 
         // Begin Creative Mode Functions
 
-        Button creative_mode_start = (Button) root.findViewById(R.id.begin_action);
+        mProgressDialog = new ProgressDialog(mContext, R.style.CreativeMode_ActivityTheme);
+        mProgressDialog.setIndeterminate(false);
+        mProgressDialog.setCancelable(false);
+
+        Button creative_mode_start = (Button) final_card.findViewById(R.id.begin_action);
         creative_mode_start.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                // We have to unzip the destination APK first
 
-                did_it_compile = true;  // Reset the checker
+                if (header_creative_mode_activated) {
+                    if (is_header_pack_chosen) {
+                        // We have to unzip the destination APK first
 
-                mProgressDialog = new ProgressDialog(mContext, R.style.CreativeMode_ActivityTheme);
-                mProgressDialog.setIndeterminate(false);
-                mProgressDialog.setCancelable(false);
+                        did_it_compile = true;  // Reset the checker
 
-                // Check that there is SOMETHING changed, let's decide on the theme at least
+                        // Check that there is SOMETHING changed, let's decide on the theme at least
 
-                if (spinner1.getSelectedItemPosition() != 0 && !aet1.getText().toString()
-                        .equals("")) {
-                    spinnerItem = spinner1.getSelectedItem().toString();
-                    if (spinnerItem.equals("dark material // akZent") ||
-                            spinnerItem.equals("blacked out // blakZent")) {
-                        spinnerItem = current_cdt_theme;
-                    } else {
-                        spinnerItem = spinner1.getSelectedItem().toString();
+                        Phase1_UnzipAssets unzipTask = new Phase1_UnzipAssets();
+                        unzipTask.execute(header_pack_location);
+
                     }
-                    themeName = aet1.getText().toString();
-                    themeAuthor = aet2.getText().toString();
-                    if (themeAuthor.equals("")) {
-                        themeAuthor = prefs.getString("dashboard_username",
-                                mContext.getResources().getString(R.string.default_username));
-                    }
-                    Phase1_UnzipAssets unzipTask = new Phase1_UnzipAssets();
-                    unzipTask.execute(spinnerItem);
+
                 } else {
-                    Toast toast = Toast.makeText(mContext.getApplicationContext(),
-                            mContext.getResources().getString(
-                                    R.string.no_theme_selected),
-                            Toast.LENGTH_LONG);
-                    toast.show();
+                    // We have to unzip the destination APK first
+
+                    did_it_compile = true;  // Reset the checker
+
+                    // Check that there is SOMETHING changed, let's decide on the theme at least
+
+                    if (spinner1.getSelectedItemPosition() != 0 && !aet1.getText().toString()
+                            .equals("")) {
+                        spinnerItem = spinner1.getSelectedItem().toString();
+                        if (spinnerItem.equals("dark material // akZent") ||
+                                spinnerItem.equals("blacked out // blakZent")) {
+                            spinnerItem = current_cdt_theme;
+                        } else {
+                            spinnerItem = spinner1.getSelectedItem().toString();
+                        }
+                        themeName = aet1.getText().toString();
+                        themeAuthor = aet2.getText().toString();
+                        if (themeAuthor.equals("")) {
+                            themeAuthor = prefs.getString("dashboard_username",
+                                    mContext.getResources().getString(R.string.default_username));
+                        }
+                        Phase1_UnzipAssets unzipTask = new Phase1_UnzipAssets();
+                        unzipTask.execute(spinnerItem);
+                    } else {
+                        Toast toast = Toast.makeText(mContext.getApplicationContext(),
+                                mContext.getResources().getString(
+                                        R.string.no_theme_selected),
+                                Toast.LENGTH_LONG);
+                        toast.show();
+                    }
                 }
             }
         });
-        return root;
+        return final_card;
     }
 
     public Boolean checkIfPackageInstalled(String packagename, Context context) {
@@ -1506,255 +1666,258 @@ public class CreativeMode extends CardStackAdapter implements
 
         public void startPhase2() {
 
-            // Begin going through all AsyncTasks for Framework (v10)
+            if (!header_creative_mode_activated) {
 
-            if (is_framework_accent_changed) {
-                Phase2_InjectAndMove accent = new Phase2_InjectAndMove();
-                String accent_color = "#" + Integer.toHexString(current_selected_system_accent_color);
-                accent.execute("creative_mode_accent", accent_color, "creative_mode_accent",
-                        mContext.getCacheDir().getAbsolutePath() +
-                                "/creative_mode/assets/overlays/common/res/values-v10/");
-            }
+                // Begin going through all AsyncTasks for Framework (v10)
 
-            if (is_framework_accent_secondary_changed) {
-                Phase2_InjectAndMove accent_secondary = new Phase2_InjectAndMove();
-                String accent_secondary_color = "#" + Integer.toHexString(
-                        current_selected_system_accent_dual_color);
-                accent_secondary.execute("creative_mode_accent_secondary", accent_secondary_color,
-                        "creative_mode_accent_secondary", mContext.getCacheDir().getAbsolutePath() +
-                                "/creative_mode/assets/overlays/common/res/values-v10/");
-            }
+                if (is_framework_accent_changed) {
+                    Phase2_InjectAndMove accent = new Phase2_InjectAndMove();
+                    String accent_color = "#" + Integer.toHexString(current_selected_system_accent_color);
+                    accent.execute("creative_mode_accent", accent_color, "creative_mode_accent",
+                            mContext.getCacheDir().getAbsolutePath() +
+                                    "/creative_mode/assets/overlays/common/res/values-v10/");
+                }
 
-            if (is_framework_accent_light_changed) {
-                Phase2_InjectAndMove accent_light = new Phase2_InjectAndMove();
-                String accent_light_color = "#" + Integer.toHexString(
-                        current_selected_system_accent_light_color);
-                accent_light.execute("creative_mode_accent_light", accent_light_color,
-                        "creative_mode_accent_light",
-                        mContext.getCacheDir().getAbsolutePath() +
-                                "/creative_mode/assets/overlays/common/res/values-v10/");
-            }
+                if (is_framework_accent_secondary_changed) {
+                    Phase2_InjectAndMove accent_secondary = new Phase2_InjectAndMove();
+                    String accent_secondary_color = "#" + Integer.toHexString(
+                            current_selected_system_accent_dual_color);
+                    accent_secondary.execute("creative_mode_accent_secondary", accent_secondary_color,
+                            "creative_mode_accent_secondary", mContext.getCacheDir().getAbsolutePath() +
+                                    "/creative_mode/assets/overlays/common/res/values-v10/");
+                }
 
-            if (is_framework_app_background_changed) {
-                Phase2_InjectAndMove app_bg = new Phase2_InjectAndMove();
-                String app_bg_color = "#" + Integer.toHexString(current_selected_system_appbg_color);
-                app_bg.execute("creative_mode_app_background", app_bg_color, "creative_mode_app_background",
-                        mContext.getCacheDir().getAbsolutePath() +
-                                "/creative_mode/assets/overlays/common/res/values-v10/");
-            }
+                if (is_framework_accent_light_changed) {
+                    Phase2_InjectAndMove accent_light = new Phase2_InjectAndMove();
+                    String accent_light_color = "#" + Integer.toHexString(
+                            current_selected_system_accent_light_color);
+                    accent_light.execute("creative_mode_accent_light", accent_light_color,
+                            "creative_mode_accent_light",
+                            mContext.getCacheDir().getAbsolutePath() +
+                                    "/creative_mode/assets/overlays/common/res/values-v10/");
+                }
 
-            if (is_framework_app_background_light_changed) {
-                Phase2_InjectAndMove app_bg_light = new Phase2_InjectAndMove();
-                String app_bg_light_color = "#" + Integer.toHexString(
-                        current_selected_system_appbg_light_color);
-                app_bg_light.execute("creative_mode_light_background", app_bg_light_color,
-                        "creative_mode_light_background",
-                        mContext.getCacheDir().getAbsolutePath() +
-                                "/creative_mode/assets/overlays/common/res/values-v10/");
-            }
+                if (is_framework_app_background_changed) {
+                    Phase2_InjectAndMove app_bg = new Phase2_InjectAndMove();
+                    String app_bg_color = "#" + Integer.toHexString(current_selected_system_appbg_color);
+                    app_bg.execute("creative_mode_app_background", app_bg_color, "creative_mode_app_background",
+                            mContext.getCacheDir().getAbsolutePath() +
+                                    "/creative_mode/assets/overlays/common/res/values-v10/");
+                }
 
-            if (is_framework_dialog_background_dark_changed) {
-                Phase2_InjectAndMove dialog_dark = new Phase2_InjectAndMove();
-                String dialog_dark_color = "#" + Integer.toHexString(
-                        current_selected_system_dialog_color);
-                dialog_dark.execute("creative_mode_dialog_color_dark", dialog_dark_color, "creative_mode_dialog_color_dark",
-                        mContext.getCacheDir().getAbsolutePath() +
-                                "/creative_mode/assets/overlays/common/res/values-v10/");
-            }
+                if (is_framework_app_background_light_changed) {
+                    Phase2_InjectAndMove app_bg_light = new Phase2_InjectAndMove();
+                    String app_bg_light_color = "#" + Integer.toHexString(
+                            current_selected_system_appbg_light_color);
+                    app_bg_light.execute("creative_mode_light_background", app_bg_light_color,
+                            "creative_mode_light_background",
+                            mContext.getCacheDir().getAbsolutePath() +
+                                    "/creative_mode/assets/overlays/common/res/values-v10/");
+                }
 
-            if (is_framework_dialog_background_light_changed) {
-                Phase2_InjectAndMove dialog_light = new Phase2_InjectAndMove();
-                String dialog_light_color = "#" + Integer.toHexString(
-                        current_selected_system_dialog_light_color);
-                dialog_light.execute("creative_mode_dialog_color_light", dialog_light_color,
-                        "creative_mode_dialog_color_light", mContext.getCacheDir().getAbsolutePath() +
-                                "/creative_mode/assets/overlays/common/res/values-v10/");
-            }
+                if (is_framework_dialog_background_dark_changed) {
+                    Phase2_InjectAndMove dialog_dark = new Phase2_InjectAndMove();
+                    String dialog_dark_color = "#" + Integer.toHexString(
+                            current_selected_system_dialog_color);
+                    dialog_dark.execute("creative_mode_dialog_color_dark", dialog_dark_color, "creative_mode_dialog_color_dark",
+                            mContext.getCacheDir().getAbsolutePath() +
+                                    "/creative_mode/assets/overlays/common/res/values-v10/");
+                }
 
-            if (is_framework_main_theme_color_changed) {
-                Phase2_InjectAndMove theme_color = new Phase2_InjectAndMove();
-                String theme_color_ = "#" + Integer.toHexString(current_selected_system_main_color);
-                theme_color.execute("creative_mode_main_color", theme_color_, "creative_mode_main_color",
-                        mContext.getCacheDir().getAbsolutePath() +
-                                "/creative_mode/assets/overlays/common/res/values-v10/");
-            }
+                if (is_framework_dialog_background_light_changed) {
+                    Phase2_InjectAndMove dialog_light = new Phase2_InjectAndMove();
+                    String dialog_light_color = "#" + Integer.toHexString(
+                            current_selected_system_dialog_light_color);
+                    dialog_light.execute("creative_mode_dialog_color_light", dialog_light_color,
+                            "creative_mode_dialog_color_light", mContext.getCacheDir().getAbsolutePath() +
+                                    "/creative_mode/assets/overlays/common/res/values-v10/");
+                }
 
-            if (is_framework_main_theme_color_dark_changed) {
-                Phase2_InjectAndMove theme_color_dark = new Phase2_InjectAndMove();
-                String theme_color_dark_ = "#" + Integer.toHexString(current_selected_system_main_dark_color);
-                theme_color_dark.execute("creative_mode_main_color_dark", theme_color_dark_, "creative_mode_main_color_dark",
-                        mContext.getCacheDir().getAbsolutePath() +
-                                "/creative_mode/assets/overlays/common/res/values-v10/");
-            }
+                if (is_framework_main_theme_color_changed) {
+                    Phase2_InjectAndMove theme_color = new Phase2_InjectAndMove();
+                    String theme_color_ = "#" + Integer.toHexString(current_selected_system_main_color);
+                    theme_color.execute("creative_mode_main_color", theme_color_, "creative_mode_main_color",
+                            mContext.getCacheDir().getAbsolutePath() +
+                                    "/creative_mode/assets/overlays/common/res/values-v10/");
+                }
 
-            if (is_framework_notifications_primary_changed) {
-                Phase2_InjectAndMove notification_primary = new Phase2_InjectAndMove();
-                String notification_primary_color = "#" + Integer.toHexString(
-                        current_selected_system_notifications_primary_color);
-                notification_primary.execute("creative_mode_notification_primary", notification_primary_color,
-                        "creative_mode_notification_primary", mContext.getCacheDir().getAbsolutePath() +
-                                "/creative_mode/assets/overlays/common/res/values-v10/");
-            }
+                if (is_framework_main_theme_color_dark_changed) {
+                    Phase2_InjectAndMove theme_color_dark = new Phase2_InjectAndMove();
+                    String theme_color_dark_ = "#" + Integer.toHexString(current_selected_system_main_dark_color);
+                    theme_color_dark.execute("creative_mode_main_color_dark", theme_color_dark_, "creative_mode_main_color_dark",
+                            mContext.getCacheDir().getAbsolutePath() +
+                                    "/creative_mode/assets/overlays/common/res/values-v10/");
+                }
 
-            if (is_framework_notifications_secondary_changed) {
-                Phase2_InjectAndMove notification_secondary = new Phase2_InjectAndMove();
-                String notification_secondary_color = "#" + Integer.toHexString(
-                        current_selected_system_notifications_secondary_color);
-                notification_secondary.execute("creative_mode_notification_secondary", notification_secondary_color,
-                        "creative_mode_notification_secondary", mContext.getCacheDir().getAbsolutePath() +
-                                "/creative_mode/assets/overlays/common/res/values-v10/");
-            }
+                if (is_framework_notifications_primary_changed) {
+                    Phase2_InjectAndMove notification_primary = new Phase2_InjectAndMove();
+                    String notification_primary_color = "#" + Integer.toHexString(
+                            current_selected_system_notifications_primary_color);
+                    notification_primary.execute("creative_mode_notification_primary", notification_primary_color,
+                            "creative_mode_notification_primary", mContext.getCacheDir().getAbsolutePath() +
+                                    "/creative_mode/assets/overlays/common/res/values-v10/");
+                }
 
-            if (is_framework_system_ripple_changed) {
-                Phase2_InjectAndMove ripple = new Phase2_InjectAndMove();
-                String ripple_color = "#" + Integer.toHexString(
-                        current_selected_system_ripple_color);
-                ripple.execute("creative_mode_ripple", ripple_color, "creative_mode_ripple",
-                        mContext.getCacheDir().getAbsolutePath() +
-                                "/creative_mode/assets/overlays/common/res/values-v10/");
-            }
+                if (is_framework_notifications_secondary_changed) {
+                    Phase2_InjectAndMove notification_secondary = new Phase2_InjectAndMove();
+                    String notification_secondary_color = "#" + Integer.toHexString(
+                            current_selected_system_notifications_secondary_color);
+                    notification_secondary.execute("creative_mode_notification_secondary", notification_secondary_color,
+                            "creative_mode_notification_secondary", mContext.getCacheDir().getAbsolutePath() +
+                                    "/creative_mode/assets/overlays/common/res/values-v10/");
+                }
 
-            // Begin going through all AsyncTasks for Settings (v11)
+                if (is_framework_system_ripple_changed) {
+                    Phase2_InjectAndMove ripple = new Phase2_InjectAndMove();
+                    String ripple_color = "#" + Integer.toHexString(
+                            current_selected_system_ripple_color);
+                    ripple.execute("creative_mode_ripple", ripple_color, "creative_mode_ripple",
+                            mContext.getCacheDir().getAbsolutePath() +
+                                    "/creative_mode/assets/overlays/common/res/values-v10/");
+                }
 
-            if (is_settings_dashboard_background_color_changed) {
-                Phase2_InjectAndMove settings_dashboard = new Phase2_InjectAndMove();
-                String settings_dashboard_color = "#" + Integer.toHexString(
-                        current_selected_dashboard_background_color);
-                settings_dashboard.execute("dashboard_background_color", settings_dashboard_color,
-                        "creative_mode_settings_dashboard_background",
-                        mContext.getCacheDir().getAbsolutePath() +
-                                "/creative_mode/assets/overlays/com.android.settings/" +
-                                "res/values-v11/");
-            }
+                // Begin going through all AsyncTasks for Settings (v11)
 
-            if (is_settings_dashboard_category_background_color_changed) {
-                Phase2_InjectAndMove settings_dashboard_category = new Phase2_InjectAndMove();
-                String settings_dashboard_category_color = "#" + Integer.toHexString(
-                        current_selected_dashboard_category_background_color);
-                settings_dashboard_category.execute("dashboard_category_background_color",
-                        settings_dashboard_category_color,
-                        "creative_mode_settings_dashboard_category_background",
-                        mContext.getCacheDir().getAbsolutePath() +
-                                "/creative_mode/assets/overlays/com.android.settings/" +
-                                "res/values-v11/");
-            }
+                if (is_settings_dashboard_background_color_changed) {
+                    Phase2_InjectAndMove settings_dashboard = new Phase2_InjectAndMove();
+                    String settings_dashboard_color = "#" + Integer.toHexString(
+                            current_selected_dashboard_background_color);
+                    settings_dashboard.execute("dashboard_background_color", settings_dashboard_color,
+                            "creative_mode_settings_dashboard_background",
+                            mContext.getCacheDir().getAbsolutePath() +
+                                    "/creative_mode/assets/overlays/com.android.settings/" +
+                                    "res/values-v11/");
+                }
 
-            if (is_settings_icon_color_changed) {
-                Phase2_InjectAndMove settings_icon = new Phase2_InjectAndMove();
-                String settings_icon_color = "#" + Integer.toHexString(
-                        current_selected_settings_icon_color);
-                settings_icon.execute("creative_mode_settings_icon_tint", settings_icon_color,
-                        "creative_mode_settings_icon_tint",
-                        mContext.getCacheDir().getAbsolutePath() +
-                                "/creative_mode/assets/overlays/common/res/values-v11/");
-            }
+                if (is_settings_dashboard_category_background_color_changed) {
+                    Phase2_InjectAndMove settings_dashboard_category = new Phase2_InjectAndMove();
+                    String settings_dashboard_category_color = "#" + Integer.toHexString(
+                            current_selected_dashboard_category_background_color);
+                    settings_dashboard_category.execute("dashboard_category_background_color",
+                            settings_dashboard_category_color,
+                            "creative_mode_settings_dashboard_category_background",
+                            mContext.getCacheDir().getAbsolutePath() +
+                                    "/creative_mode/assets/overlays/com.android.settings/" +
+                                    "res/values-v11/");
+                }
 
-            if (is_settings_title_color_changed) {
-                Phase2_InjectAndMove settings_title = new Phase2_InjectAndMove();
-                String settings_title_color = "#" + Integer.toHexString(
-                        current_selected_settings_title_color);
-                settings_title.execute("theme_accent", settings_title_color,
-                        "creative_mode_settings_title_color",
-                        mContext.getCacheDir().getAbsolutePath() +
-                                "/creative_mode/assets/overlays/com.android.settings/" +
-                                "res/values-v11/");
-            }
+                if (is_settings_icon_color_changed) {
+                    Phase2_InjectAndMove settings_icon = new Phase2_InjectAndMove();
+                    String settings_icon_color = "#" + Integer.toHexString(
+                            current_selected_settings_icon_color);
+                    settings_icon.execute("creative_mode_settings_icon_tint", settings_icon_color,
+                            "creative_mode_settings_icon_tint",
+                            mContext.getCacheDir().getAbsolutePath() +
+                                    "/creative_mode/assets/overlays/common/res/values-v11/");
+                }
 
-            if (is_settings_switchbar_background_color_changed) {
-                Phase2_InjectAndMove switchbar_background = new Phase2_InjectAndMove();
-                String switchbar_background_color = "#" + Integer.toHexString(
-                        current_selected_settings_switchbar_color);
-                switchbar_background.execute("switchbar_background_color",
-                        switchbar_background_color,
-                        "creative_mode_settings_switchbar_background",
-                        mContext.getCacheDir().getAbsolutePath() +
-                                "/creative_mode/assets/overlays/com.android.settings/" +
-                                "res/values-v11/");
-            }
+                if (is_settings_title_color_changed) {
+                    Phase2_InjectAndMove settings_title = new Phase2_InjectAndMove();
+                    String settings_title_color = "#" + Integer.toHexString(
+                            current_selected_settings_title_color);
+                    settings_title.execute("theme_accent", settings_title_color,
+                            "creative_mode_settings_title_color",
+                            mContext.getCacheDir().getAbsolutePath() +
+                                    "/creative_mode/assets/overlays/com.android.settings/" +
+                                    "res/values-v11/");
+                }
 
-            // Begin going through all AsyncTasks for SystemUI (v12)
+                if (is_settings_switchbar_background_color_changed) {
+                    Phase2_InjectAndMove switchbar_background = new Phase2_InjectAndMove();
+                    String switchbar_background_color = "#" + Integer.toHexString(
+                            current_selected_settings_switchbar_color);
+                    switchbar_background.execute("switchbar_background_color",
+                            switchbar_background_color,
+                            "creative_mode_settings_switchbar_background",
+                            mContext.getCacheDir().getAbsolutePath() +
+                                    "/creative_mode/assets/overlays/com.android.settings/" +
+                                    "res/values-v11/");
+                }
 
-            if (is_systemui_accent_color_changed) {
-                Phase2_InjectAndMove sysui_accent = new Phase2_InjectAndMove();
-                String sysui_accent_color = "#" + Integer.toHexString(
-                        current_selected_qs_accent_color);
-                sysui_accent.execute("system_accent_color", sysui_accent_color,
-                        "creative_mode_systemui_accent_color",
-                        mContext.getCacheDir().getAbsolutePath() +
-                                "/creative_mode/assets/overlays/com.android.systemui/" +
-                                "res/values-v12/");
-            }
+                // Begin going through all AsyncTasks for SystemUI (v12)
 
-            if (is_systemui_header_color_changed) {
-                Phase2_InjectAndMove sysui_header = new Phase2_InjectAndMove();
-                String sysui_header_color = "#" + Integer.toHexString(
-                        current_selected_header_background_color);
-                sysui_header.execute("creative_mode_qs_header_color", sysui_header_color,
-                        "creative_mode_qs_header_color",
-                        mContext.getCacheDir().getAbsolutePath() +
-                                "/creative_mode/assets/overlays/common/res/values-v12/");
-            }
+                if (is_systemui_accent_color_changed) {
+                    Phase2_InjectAndMove sysui_accent = new Phase2_InjectAndMove();
+                    String sysui_accent_color = "#" + Integer.toHexString(
+                            current_selected_qs_accent_color);
+                    sysui_accent.execute("system_accent_color", sysui_accent_color,
+                            "creative_mode_systemui_accent_color",
+                            mContext.getCacheDir().getAbsolutePath() +
+                                    "/creative_mode/assets/overlays/com.android.systemui/" +
+                                    "res/values-v12/");
+                }
 
-            if (is_systemui_notification_background_color_changed) {
-                Phase2_InjectAndMove sysui_notif_bg = new Phase2_InjectAndMove();
-                String sysui_header_color = "#" + Integer.toHexString(
-                        current_selected_notification_background_color);
-                sysui_notif_bg.execute("creative_mode_notification_background", sysui_header_color,
-                        "creative_mode_notification_background",
-                        mContext.getCacheDir().getAbsolutePath() +
-                                "/creative_mode/assets/overlays/common/res/values-v12/");
-            }
+                if (is_systemui_header_color_changed) {
+                    Phase2_InjectAndMove sysui_header = new Phase2_InjectAndMove();
+                    String sysui_header_color = "#" + Integer.toHexString(
+                            current_selected_header_background_color);
+                    sysui_header.execute("creative_mode_qs_header_color", sysui_header_color,
+                            "creative_mode_qs_header_color",
+                            mContext.getCacheDir().getAbsolutePath() +
+                                    "/creative_mode/assets/overlays/common/res/values-v12/");
+                }
 
-            if (is_systemui_qs_panel_background_color_changed) {
-                Phase2_InjectAndMove sysui_panelbg = new Phase2_InjectAndMove();
-                String sysui_panelbg_color = "#" + Integer.toHexString(
-                        current_selected_qs_panel_background_color);
-                sysui_panelbg.execute("creative_mode_qs_background_color", sysui_panelbg_color,
-                        "creative_mode_qs_background_color",
-                        mContext.getCacheDir().getAbsolutePath() +
-                                "/creative_mode/assets/overlays/common/res/values-v12/");
-            }
+                if (is_systemui_notification_background_color_changed) {
+                    Phase2_InjectAndMove sysui_notif_bg = new Phase2_InjectAndMove();
+                    String sysui_header_color = "#" + Integer.toHexString(
+                            current_selected_notification_background_color);
+                    sysui_notif_bg.execute("creative_mode_notification_background", sysui_header_color,
+                            "creative_mode_notification_background",
+                            mContext.getCacheDir().getAbsolutePath() +
+                                    "/creative_mode/assets/overlays/common/res/values-v12/");
+                }
 
-            if (is_systemui_qs_tile_color_changed) {
-                Phase2_InjectAndMove sysui_qs_tile = new Phase2_InjectAndMove();
-                String sysui_qs_tile_color = "#" + Integer.toHexString(
-                        current_selected_qs_tile_color);
-                sysui_qs_tile.execute("creative_mode_qs_icon_color", sysui_qs_tile_color,
-                        "creative_mode_qs_icon_color",
-                        mContext.getCacheDir().getAbsolutePath() +
-                                "/creative_mode/assets/overlays/common/res/values-v12/");
-            }
+                if (is_systemui_qs_panel_background_color_changed) {
+                    Phase2_InjectAndMove sysui_panelbg = new Phase2_InjectAndMove();
+                    String sysui_panelbg_color = "#" + Integer.toHexString(
+                            current_selected_qs_panel_background_color);
+                    sysui_panelbg.execute("creative_mode_qs_background_color", sysui_panelbg_color,
+                            "creative_mode_qs_background_color",
+                            mContext.getCacheDir().getAbsolutePath() +
+                                    "/creative_mode/assets/overlays/common/res/values-v12/");
+                }
 
-            if (is_systemui_qs_tile_color_changed) {
-                Phase2_InjectAndMove sysui_qs_tile_disabled = new Phase2_InjectAndMove();
-                String sysui_qs_tile_disabled_color = "#4d" +
-                        Integer.toHexString(current_selected_qs_tile_color).substring(2);
-                sysui_qs_tile_disabled.execute("creative_mode_qs_icon_color_disabled",
-                        sysui_qs_tile_disabled_color,
-                        "creative_mode_qs_icon_color_disabled",
-                        mContext.getCacheDir().getAbsolutePath() +
-                                "/creative_mode/assets/overlays/common/res/values-v12/");
-            }
+                if (is_systemui_qs_tile_color_changed) {
+                    Phase2_InjectAndMove sysui_qs_tile = new Phase2_InjectAndMove();
+                    String sysui_qs_tile_color = "#" + Integer.toHexString(
+                            current_selected_qs_tile_color);
+                    sysui_qs_tile.execute("creative_mode_qs_icon_color", sysui_qs_tile_color,
+                            "creative_mode_qs_icon_color",
+                            mContext.getCacheDir().getAbsolutePath() +
+                                    "/creative_mode/assets/overlays/common/res/values-v12/");
+                }
 
-            if (is_systemui_qs_text_color_changed) {
-                Phase2_InjectAndMove sysui_qs_tile_text = new Phase2_InjectAndMove();
-                String sysui_qs_tile_text_color = "#" + Integer.toHexString(
-                        current_selected_qs_text_color);
-                sysui_qs_tile_text.execute("creative_mode_qs_tile_text", sysui_qs_tile_text_color,
-                        "creative_mode_qs_tile_text",
-                        mContext.getCacheDir().getAbsolutePath() +
-                                "/creative_mode/assets/overlays/common/res/values-v12/");
-            }
+                if (is_systemui_qs_tile_color_changed) {
+                    Phase2_InjectAndMove sysui_qs_tile_disabled = new Phase2_InjectAndMove();
+                    String sysui_qs_tile_disabled_color = "#4d" +
+                            Integer.toHexString(current_selected_qs_tile_color).substring(2);
+                    sysui_qs_tile_disabled.execute("creative_mode_qs_icon_color_disabled",
+                            sysui_qs_tile_disabled_color,
+                            "creative_mode_qs_icon_color_disabled",
+                            mContext.getCacheDir().getAbsolutePath() +
+                                    "/creative_mode/assets/overlays/common/res/values-v12/");
+                }
 
-            if (is_systemui_recents_clear_all_icon_color_changed) {
-                Phase2_InjectAndMove sysui_recents = new Phase2_InjectAndMove();
-                String sysui_recents_color = "#" + Integer.toHexString(
-                        current_selected_recents_clear_all_icon_color);
-                sysui_recents.execute("floating_action_button_icon_color", sysui_recents_color,
-                        "creative_mode_recents_clear_all_icon_color",
-                        mContext.getCacheDir().getAbsolutePath() +
-                                "/creative_mode/assets/overlays/com.android.systemui/" +
-                                "res/values-v12/");
+                if (is_systemui_qs_text_color_changed) {
+                    Phase2_InjectAndMove sysui_qs_tile_text = new Phase2_InjectAndMove();
+                    String sysui_qs_tile_text_color = "#" + Integer.toHexString(
+                            current_selected_qs_text_color);
+                    sysui_qs_tile_text.execute("creative_mode_qs_tile_text", sysui_qs_tile_text_color,
+                            "creative_mode_qs_tile_text",
+                            mContext.getCacheDir().getAbsolutePath() +
+                                    "/creative_mode/assets/overlays/common/res/values-v12/");
+                }
+
+                if (is_systemui_recents_clear_all_icon_color_changed) {
+                    Phase2_InjectAndMove sysui_recents = new Phase2_InjectAndMove();
+                    String sysui_recents_color = "#" + Integer.toHexString(
+                            current_selected_recents_clear_all_icon_color);
+                    sysui_recents.execute("floating_action_button_icon_color", sysui_recents_color,
+                            "creative_mode_recents_clear_all_icon_color",
+                            mContext.getCacheDir().getAbsolutePath() +
+                                    "/creative_mode/assets/overlays/com.android.systemui/" +
+                                    "res/values-v12/");
+                }
             }
 
             Phase3_MovePremadeFiles phase3 = new Phase3_MovePremadeFiles();
@@ -1778,60 +1941,107 @@ public class CreativeMode extends CardStackAdapter implements
         }
 
         public void unzip(String package_identifier) throws IOException {
-            // Let's check where it is first
 
-            Boolean is_valid = checkCurrentThemeSelection(package_identifier);
+            if (!header_creative_mode_activated) {
+                // Let's check where it is first
 
-            // After checking package identifier validity, check for exact folder number
-            if (is_valid) {
-                int folder_abbreviation = checkCurrentThemeSelectionLocation(package_identifier);
-                if (folder_abbreviation != 0) {
-                    String source = "/data/app/" + package_identifier + "-" +
-                            folder_abbreviation + "/base.apk";
-                    String destination = mContext.getCacheDir().getAbsolutePath() +
-                            "/creative_mode/";
+                Boolean is_valid = checkCurrentThemeSelection(package_identifier);
 
-                    File checkFile = new File(source);
-                    long fileSize = checkFile.length();
-                    if (fileSize > 50000000) { // Picking 50mb to be the threshold of large themes
-                        loader_string.setText(mContext.getResources().getString(R.string.unzipping_assets_big));
-                    }
-                    File myDir = new File(mContext.getCacheDir(), "creative_mode");
-                    if (!myDir.exists()) {
-                        myDir.mkdir();
-                    }
+                // After checking package identifier validity, check for exact folder number
+                if (is_valid) {
+                    int folder_abbreviation = checkCurrentThemeSelectionLocation(package_identifier);
+                    if (folder_abbreviation != 0) {
+                        String source = "/data/app/" + package_identifier + "-" +
+                                folder_abbreviation + "/base.apk";
+                        String destination = mContext.getCacheDir().getAbsolutePath() +
+                                "/creative_mode/";
 
-                    ZipInputStream inputStream = new ZipInputStream(
-                            new BufferedInputStream(new FileInputStream(source)));
-                    try {
-                        ZipEntry zipEntry;
-                        int count;
-                        byte[] buffer = new byte[8192];
-                        while ((zipEntry = inputStream.getNextEntry()) != null) {
-                            File file = new File(destination, zipEntry.getName());
-                            File dir = zipEntry.isDirectory() ? file : file.getParentFile();
-                            if (!dir.isDirectory() && !dir.mkdirs())
-                                throw new FileNotFoundException("Failed to ensure directory: " +
-                                        dir.getAbsolutePath());
-                            if (zipEntry.isDirectory())
-                                continue;
-                            FileOutputStream outputStream = new FileOutputStream(file);
-                            try {
-                                while ((count = inputStream.read(buffer)) != -1)
-                                    outputStream.write(buffer, 0, count);
-                            } finally {
-                                outputStream.close();
-                            }
+                        File checkFile = new File(source);
+                        long fileSize = checkFile.length();
+                        if (fileSize > 50000000) { // Picking 50mb to be the threshold of large themes
+                            loader_string.setText(mContext.getResources().getString(R.string.unzipping_assets_big));
                         }
-                    } finally {
-                        inputStream.close();
+                        File myDir = new File(mContext.getCacheDir(), "creative_mode");
+                        if (!myDir.exists()) {
+                            myDir.mkdir();
+                        }
+
+                        ZipInputStream inputStream = new ZipInputStream(
+                                new BufferedInputStream(new FileInputStream(source)));
+                        try {
+                            ZipEntry zipEntry;
+                            int count;
+                            byte[] buffer = new byte[8192];
+                            while ((zipEntry = inputStream.getNextEntry()) != null) {
+                                File file = new File(destination, zipEntry.getName());
+                                File dir = zipEntry.isDirectory() ? file : file.getParentFile();
+                                if (!dir.isDirectory() && !dir.mkdirs())
+                                    throw new FileNotFoundException("Failed to ensure directory: " +
+                                            dir.getAbsolutePath());
+                                if (zipEntry.isDirectory())
+                                    continue;
+                                FileOutputStream outputStream = new FileOutputStream(file);
+                                try {
+                                    while ((count = inputStream.read(buffer)) != -1)
+                                        outputStream.write(buffer, 0, count);
+                                } finally {
+                                    outputStream.close();
+                                }
+                            }
+                        } finally {
+                            inputStream.close();
+                        }
+                    } else {
+                        Log.d("Unzip",
+                                "There is no valid package name under this abbreviated folder count.");
                     }
                 } else {
-                    Log.d("Unzip",
-                            "There is no valid package name under this abbreviated folder count.");
+                    Log.d("Unzip", "Package name chosen is invalid.");
                 }
             } else {
-                Log.d("Unzip", "Package name chosen is invalid.");
+                String source = header_pack_location;  // This is already the absolute path
+                String destination = mContext.getCacheDir().getAbsolutePath() +
+                        "/creative_mode/assets/overlays/com.android.systemui/res/drawable-xxhdpi";
+
+                File checkFile = new File(source);
+                long fileSize = checkFile.length();
+                if (fileSize > 50000000) { // Picking 50mb to be the threshold of large themes
+                    loader_string.setText(mContext.getResources().getString(R.string.unzipping_assets_big));
+                }
+                File myDir = new File(mContext.getCacheDir(), "creative_mode");
+                if (!myDir.exists()) {
+                    myDir.mkdir();
+                }
+
+                ZipInputStream inputStream = new ZipInputStream(
+                        new BufferedInputStream(new FileInputStream(source)));
+                try {
+                    ZipEntry zipEntry;
+                    int count;
+                    byte[] buffer = new byte[8192];
+                    while ((zipEntry = inputStream.getNextEntry()) != null) {
+                        File file = new File(destination, zipEntry.getName());
+                        File dir = zipEntry.isDirectory() ? file : file.getParentFile();
+                        if (!dir.isDirectory() && !dir.mkdirs())
+                            throw new FileNotFoundException("Failed to ensure directory: " +
+                                    dir.getAbsolutePath());
+                        if (zipEntry.isDirectory())
+                            continue;
+                        FileOutputStream outputStream = new FileOutputStream(file);
+                        try {
+                            while ((count = inputStream.read(buffer)) != -1)
+                                outputStream.write(buffer, 0, count);
+                        } finally {
+                            outputStream.close();
+                        }
+                    }
+                } finally {
+                    File headers_xml = new File(mContext.getCacheDir().getAbsolutePath() +
+                            "/creative_mode/assets/overlays/com.android.systemui/res/" +
+                            "drawable-xxhdpi/headers.xml");
+                    boolean deleted = headers_xml.delete();
+                    inputStream.close();
+                }
             }
         }
     }
@@ -2038,207 +2248,226 @@ public class CreativeMode extends CardStackAdapter implements
         }
 
         private void MoveWhateverIsActivated() {
-            if (!colorful_icon && is_settings_colorful_icon_color_changed) {
-                String source_colorful_du = mContext.getCacheDir().getAbsolutePath() +
-                        "/creative_files/";
-                String destination_colorful_du = mContext.getCacheDir().getAbsolutePath() +
-                        "/creative_mode/assets/overlays/com.android.settings/res/drawable-v11/";
-                String source_colorful_pn = mContext.getCacheDir().getAbsolutePath() +
-                        "/creative_files/";
-                String destination_colorful_pn = mContext.getCacheDir().getAbsolutePath() +
-                        "/creative_mode/assets/overlays/com.android.settings/res/drawable-v11/";
+            if (!header_creative_mode_activated) {
+                if (!colorful_icon && is_settings_colorful_icon_color_changed) {
+                    String source_colorful_du = mContext.getCacheDir().getAbsolutePath() +
+                            "/creative_files/";
+                    String destination_colorful_du = mContext.getCacheDir().getAbsolutePath() +
+                            "/creative_mode/assets/overlays/com.android.settings/res/drawable-v11/";
+                    String source_colorful_pn = mContext.getCacheDir().getAbsolutePath() +
+                            "/creative_files/";
+                    String destination_colorful_pn = mContext.getCacheDir().getAbsolutePath() +
+                            "/creative_mode/assets/overlays/com.android.settings/res/drawable-v11/";
 
-                moveFile(source_colorful_du, "ic_dirtytweaks.xml", destination_colorful_du);
-                moveFile(source_colorful_pn, "ic_settings_purenexus.xml", destination_colorful_pn);
-            }
-            if (is_settings_dashboard_category_title_caps_changed ||
-                    is_settings_dashboard_category_title_bold_changed ||
-                    is_settings_dashboard_category_title_italics_changed) {
-                if (category_title_bold || category_title_italics || category_title_caps) {
-                    createSettingsTitleXML("settings_title_style",
-                            mContext.getCacheDir().getAbsolutePath() +
-                                    "/creative_mode/assets/overlays/com.android.settings/" +
-                                    "res/values-v11/");
+                    moveFile(source_colorful_du, "ic_dirtytweaks.xml", destination_colorful_du);
+                    moveFile(source_colorful_pn, "ic_settings_purenexus.xml", destination_colorful_pn);
                 }
-            }
-            if (dashboard_dividers && is_settings_dashboard_dividers_changed) {
-                String source = mContext.getCacheDir().getAbsolutePath() +
-                        "/creative_files/";
-                // Use v12 here just in case
-                String destination = mContext.getCacheDir().getAbsolutePath() +
-                        "/creative_mode/assets/overlays/com.android.settings/res/values-v12/";
-                moveFile(source, "dashboard_dividers_activated.xml", destination);
-            }
-            if (!dashboard_dividers && is_settings_dashboard_dividers_changed) {
-                String source = mContext.getCacheDir().getAbsolutePath() +
-                        "/creative_files/";
-                // Use v12 here just in case
-                String destination = mContext.getCacheDir().getAbsolutePath() +
-                        "/creative_mode/assets/overlays/com.android.settings/res/values-v12/";
-                moveFile(source, "dashboard_dividers_deactivated.xml", destination);
-            }
-            if (dirtytweaks_icon_presence && is_settings_dashboard_dirty_tweaks_icon_presence_changed) {
-                String source = mContext.getCacheDir().getAbsolutePath() +
-                        "/creative_files/";
-                String destination = mContext.getCacheDir().getAbsolutePath() +
-                        "/creative_mode/assets/overlays/com.android.settings/res/values-v11/";
-                moveFile(source, "dirty_tweaks_icon_presence_activated.xml", destination);
-            }
-            if (!dirtytweaks_icon_presence && is_settings_dashboard_dirty_tweaks_icon_presence_changed) {
-                String source = mContext.getCacheDir().getAbsolutePath() +
-                        "/creative_files/";
-                String destination = mContext.getCacheDir().getAbsolutePath() +
-                        "/creative_mode/assets/overlays/com.android.settings/res/values-v11/";
-                moveFile(source, "dirty_tweaks_icon_presence_deactivated.xml", destination);
-            }
-
-            if (use_themable_gapps_changed) {
-                if (use_themable_gapps) {
-                    Boolean themable_gmail = new File(mContext.getCacheDir().getAbsolutePath() +
-                            "/creative_mode/assets/overlays/themable.gmail").exists();
-
-                    Boolean themable_google_app = new File(mContext.getCacheDir().getAbsolutePath() +
-                            "/creative_mode/assets/overlays/themable.google.app").exists();
-
-                    Boolean themable_contacts = new File(mContext.getCacheDir().getAbsolutePath() +
-                            "/creative_mode/assets/overlays/themable.google.contacts").exists();
-
-                    Boolean themable_dialer = new File(mContext.getCacheDir().getAbsolutePath() +
-                            "/creative_mode/assets/overlays/themable.google.dialer").exists();
-
-                    Boolean themable_plusOne = new File(mContext.getCacheDir().getAbsolutePath() +
-                            "/creative_mode/assets/overlays/themable.google.plus").exists();
-
-                    Boolean themable_hangouts = new File(mContext.getCacheDir().getAbsolutePath() +
-                            "/creative_mode/assets/overlays/themable.hangouts").exists();
-
-                    Boolean themable_vending = new File(mContext.getCacheDir().getAbsolutePath() +
-                            "/creative_mode/assets/overlays/themable.vending").exists();
-
-                    Boolean themable_youtube = new File(mContext.getCacheDir().getAbsolutePath() +
-                            "/creative_mode/assets/overlays/themable.youtube").exists();
-
-                    if (themable_gmail) {
-                        Log.d("MoveWhateverIsActivated", "Themable Gmail Overlay found! Hotswapping...");
-
-                        eu.chainfire.libsuperuser.Shell.SU.run(
-                                "rm -r " + mContext.getCacheDir().getAbsolutePath() +
-                                        "/creative_mode/assets/overlays/com.google.android.gm");
-
-                        File oldFolder = new File(mContext.getCacheDir().getAbsolutePath() +
-                                "/creative_mode/assets/overlays/themable.gmail");
-                        File newFolder = new File(mContext.getCacheDir().getAbsolutePath() +
-                                "/creative_mode/assets/overlays/com.google.android.gm");
-                        boolean success = oldFolder.renameTo(newFolder);
-                    }
-
-                    if (themable_google_app) {
-                        Log.d("MoveWhateverIsActivated", "Themable Google App Overlay found! Hotswapping...");
-
-                        eu.chainfire.libsuperuser.Shell.SU.run(
-                                "rm -r " + mContext.getCacheDir().getAbsolutePath() +
-                                        "/creative_mode/assets/overlays/com.google.android.googlequicksearchbox");
-
-                        File oldFolder = new File(mContext.getCacheDir().getAbsolutePath() +
-                                "/creative_mode/assets/overlays/themable.google.app");
-                        File newFolder = new File(mContext.getCacheDir().getAbsolutePath() +
-                                "/creative_mode/assets/overlays/com.google.android.googlequicksearchbox");
-                        boolean success = oldFolder.renameTo(newFolder);
-                    }
-
-                    if (themable_contacts) {
-                        Log.d("MoveWhateverIsActivated", "Themable Google Contacts Overlay found! Hotswapping...");
-
-                        eu.chainfire.libsuperuser.Shell.SU.run(
-                                "rm -r " + mContext.getCacheDir().getAbsolutePath() +
-                                        "/creative_mode/assets/overlays/com.google.android.contacts");
-
-                        File oldFolder = new File(mContext.getCacheDir().getAbsolutePath() +
-                                "/creative_mode/assets/overlays/themable.google.contacts");
-                        File newFolder = new File(mContext.getCacheDir().getAbsolutePath() +
-                                "/creative_mode/assets/overlays/com.google.android.contacts");
-                        boolean success = oldFolder.renameTo(newFolder);
-                    }
-
-                    if (themable_dialer) {
-                        Log.d("MoveWhateverIsActivated", "Themable Google Dialer Overlay found! Hotswapping...");
-
-                        eu.chainfire.libsuperuser.Shell.SU.run(
-                                "rm -r " + mContext.getCacheDir().getAbsolutePath() +
-                                        "/creative_mode/assets/overlays/com.google.android.dialer");
-
-                        File oldFolder = new File(mContext.getCacheDir().getAbsolutePath() +
-                                "/creative_mode/assets/overlays/themable.google.dialer");
-                        File newFolder = new File(mContext.getCacheDir().getAbsolutePath() +
-                                "/creative_mode/assets/overlays/com.google.android.dialer");
-                        boolean success = oldFolder.renameTo(newFolder);
-                    }
-
-                    if (themable_plusOne) {
-                        Log.d("MoveWhateverIsActivated", "Themable Google+ Overlay found! Hotswapping...");
-
-                        eu.chainfire.libsuperuser.Shell.SU.run(
-                                "rm -r " + mContext.getCacheDir().getAbsolutePath() +
-                                        "/creative_mode/assets/overlays/com.google.android.apps.plus");
-
-                        File oldFolder = new File(mContext.getCacheDir().getAbsolutePath() +
-                                "/creative_mode/assets/overlays/themable.google.plus");
-                        File newFolder = new File(mContext.getCacheDir().getAbsolutePath() +
-                                "/creative_mode/assets/overlays/com.google.android.apps.plus");
-                        boolean success = oldFolder.renameTo(newFolder);
-                    }
-
-                    if (themable_hangouts) {
-                        Log.d("MoveWhateverIsActivated", "Themable Hangouts Overlay found! Hotswapping...");
-
-                        eu.chainfire.libsuperuser.Shell.SU.run(
-                                "rm -r " + mContext.getCacheDir().getAbsolutePath() +
-                                        "/creative_mode/assets/overlays/com.google.android.talk");
-
-                        File oldFolder = new File(mContext.getCacheDir().getAbsolutePath() +
-                                "/creative_mode/assets/overlays/themable.hangouts");
-                        File newFolder = new File(mContext.getCacheDir().getAbsolutePath() +
-                                "/creative_mode/assets/overlays/com.google.android.talk");
-                        boolean success = oldFolder.renameTo(newFolder);
-                    }
-
-                    if (themable_vending) {
-                        Log.d("MoveWhateverIsActivated", "Themable Play Store Overlay found! Hotswapping...");
-
-                        eu.chainfire.libsuperuser.Shell.SU.run(
-                                "rm -r " + mContext.getCacheDir().getAbsolutePath() +
-                                        "/creative_mode/assets/overlays/com.android.vending");
-
-                        File oldFolder = new File(mContext.getCacheDir().getAbsolutePath() +
-                                "/creative_mode/assets/overlays/themable.vending");
-                        File newFolder = new File(mContext.getCacheDir().getAbsolutePath() +
-                                "/creative_mode/assets/overlays/com.android.vending");
-                        boolean success = oldFolder.renameTo(newFolder);
-                    }
-
-                    if (themable_youtube) {
-                        Log.d("MoveWhateverIsActivated", "Themable Youtube Overlay found! Hotswapping...");
-
-                        eu.chainfire.libsuperuser.Shell.SU.run(
-                                "rm -r " + mContext.getCacheDir().getAbsolutePath() +
-                                        "/creative_mode/assets/overlays/com.google.android.youtube");
-
-                        File oldFolder = new File(mContext.getCacheDir().getAbsolutePath() +
-                                "/creative_mode/assets/overlays/themable.vending");
-                        File newFolder = new File(mContext.getCacheDir().getAbsolutePath() +
-                                "/creative_mode/assets/overlays/com.google.android.youtube");
-                        boolean success = oldFolder.renameTo(newFolder);
+                if (is_settings_dashboard_category_title_caps_changed ||
+                        is_settings_dashboard_category_title_bold_changed ||
+                        is_settings_dashboard_category_title_italics_changed) {
+                    if (category_title_bold || category_title_italics || category_title_caps) {
+                        createSettingsTitleXML("settings_title_style",
+                                mContext.getCacheDir().getAbsolutePath() +
+                                        "/creative_mode/assets/overlays/com.android.settings/" +
+                                        "res/values-v11/");
                     }
                 }
+                if (dashboard_dividers && is_settings_dashboard_dividers_changed) {
+                    String source = mContext.getCacheDir().getAbsolutePath() +
+                            "/creative_files/";
+                    // Use v12 here just in case
+                    String destination = mContext.getCacheDir().getAbsolutePath() +
+                            "/creative_mode/assets/overlays/com.android.settings/res/values-v12/";
+                    moveFile(source, "dashboard_dividers_activated.xml", destination);
+                }
+                if (!dashboard_dividers && is_settings_dashboard_dividers_changed) {
+                    String source = mContext.getCacheDir().getAbsolutePath() +
+                            "/creative_files/";
+                    // Use v12 here just in case
+                    String destination = mContext.getCacheDir().getAbsolutePath() +
+                            "/creative_mode/assets/overlays/com.android.settings/res/values-v12/";
+                    moveFile(source, "dashboard_dividers_deactivated.xml", destination);
+                }
+                if (dirtytweaks_icon_presence && is_settings_dashboard_dirty_tweaks_icon_presence_changed) {
+                    String source = mContext.getCacheDir().getAbsolutePath() +
+                            "/creative_files/";
+                    String destination = mContext.getCacheDir().getAbsolutePath() +
+                            "/creative_mode/assets/overlays/com.android.settings/res/values-v11/";
+                    moveFile(source, "dirty_tweaks_icon_presence_activated.xml", destination);
+                }
+                if (!dirtytweaks_icon_presence && is_settings_dashboard_dirty_tweaks_icon_presence_changed) {
+                    String source = mContext.getCacheDir().getAbsolutePath() +
+                            "/creative_files/";
+                    String destination = mContext.getCacheDir().getAbsolutePath() +
+                            "/creative_mode/assets/overlays/com.android.settings/res/values-v11/";
+                    moveFile(source, "dirty_tweaks_icon_presence_deactivated.xml", destination);
+                }
+
+                if (use_themable_gapps_changed) {
+                    if (use_themable_gapps) {
+                        Boolean themable_gmail = new File(mContext.getCacheDir().getAbsolutePath() +
+                                "/creative_mode/assets/overlays/themable.gmail").exists();
+
+                        Boolean themable_google_app = new File(mContext.getCacheDir().getAbsolutePath() +
+                                "/creative_mode/assets/overlays/themable.google.app").exists();
+
+                        Boolean themable_contacts = new File(mContext.getCacheDir().getAbsolutePath() +
+                                "/creative_mode/assets/overlays/themable.google.contacts").exists();
+
+                        Boolean themable_dialer = new File(mContext.getCacheDir().getAbsolutePath() +
+                                "/creative_mode/assets/overlays/themable.google.dialer").exists();
+
+                        Boolean themable_plusOne = new File(mContext.getCacheDir().getAbsolutePath() +
+                                "/creative_mode/assets/overlays/themable.google.plus").exists();
+
+                        Boolean themable_hangouts = new File(mContext.getCacheDir().getAbsolutePath() +
+                                "/creative_mode/assets/overlays/themable.hangouts").exists();
+
+                        Boolean themable_vending = new File(mContext.getCacheDir().getAbsolutePath() +
+                                "/creative_mode/assets/overlays/themable.vending").exists();
+
+                        Boolean themable_youtube = new File(mContext.getCacheDir().getAbsolutePath() +
+                                "/creative_mode/assets/overlays/themable.youtube").exists();
+
+                        if (themable_gmail) {
+                            Log.d("MoveWhateverIsActivated", "Themable Gmail Overlay found! Hotswapping...");
+
+                            eu.chainfire.libsuperuser.Shell.SU.run(
+                                    "rm -r " + mContext.getCacheDir().getAbsolutePath() +
+                                            "/creative_mode/assets/overlays/com.google.android.gm");
+
+                            File oldFolder = new File(mContext.getCacheDir().getAbsolutePath() +
+                                    "/creative_mode/assets/overlays/themable.gmail");
+                            File newFolder = new File(mContext.getCacheDir().getAbsolutePath() +
+                                    "/creative_mode/assets/overlays/com.google.android.gm");
+                            boolean success = oldFolder.renameTo(newFolder);
+                        }
+
+                        if (themable_google_app) {
+                            Log.d("MoveWhateverIsActivated", "Themable Google App Overlay found! Hotswapping...");
+
+                            eu.chainfire.libsuperuser.Shell.SU.run(
+                                    "rm -r " + mContext.getCacheDir().getAbsolutePath() +
+                                            "/creative_mode/assets/overlays/com.google.android.googlequicksearchbox");
+
+                            File oldFolder = new File(mContext.getCacheDir().getAbsolutePath() +
+                                    "/creative_mode/assets/overlays/themable.google.app");
+                            File newFolder = new File(mContext.getCacheDir().getAbsolutePath() +
+                                    "/creative_mode/assets/overlays/com.google.android.googlequicksearchbox");
+                            boolean success = oldFolder.renameTo(newFolder);
+                        }
+
+                        if (themable_contacts) {
+                            Log.d("MoveWhateverIsActivated", "Themable Google Contacts Overlay found! Hotswapping...");
+
+                            eu.chainfire.libsuperuser.Shell.SU.run(
+                                    "rm -r " + mContext.getCacheDir().getAbsolutePath() +
+                                            "/creative_mode/assets/overlays/com.google.android.contacts");
+
+                            File oldFolder = new File(mContext.getCacheDir().getAbsolutePath() +
+                                    "/creative_mode/assets/overlays/themable.google.contacts");
+                            File newFolder = new File(mContext.getCacheDir().getAbsolutePath() +
+                                    "/creative_mode/assets/overlays/com.google.android.contacts");
+                            boolean success = oldFolder.renameTo(newFolder);
+                        }
+
+                        if (themable_dialer) {
+                            Log.d("MoveWhateverIsActivated", "Themable Google Dialer Overlay found! Hotswapping...");
+
+                            eu.chainfire.libsuperuser.Shell.SU.run(
+                                    "rm -r " + mContext.getCacheDir().getAbsolutePath() +
+                                            "/creative_mode/assets/overlays/com.google.android.dialer");
+
+                            File oldFolder = new File(mContext.getCacheDir().getAbsolutePath() +
+                                    "/creative_mode/assets/overlays/themable.google.dialer");
+                            File newFolder = new File(mContext.getCacheDir().getAbsolutePath() +
+                                    "/creative_mode/assets/overlays/com.google.android.dialer");
+                            boolean success = oldFolder.renameTo(newFolder);
+                        }
+
+                        if (themable_plusOne) {
+                            Log.d("MoveWhateverIsActivated", "Themable Google+ Overlay found! Hotswapping...");
+
+                            eu.chainfire.libsuperuser.Shell.SU.run(
+                                    "rm -r " + mContext.getCacheDir().getAbsolutePath() +
+                                            "/creative_mode/assets/overlays/com.google.android.apps.plus");
+
+                            File oldFolder = new File(mContext.getCacheDir().getAbsolutePath() +
+                                    "/creative_mode/assets/overlays/themable.google.plus");
+                            File newFolder = new File(mContext.getCacheDir().getAbsolutePath() +
+                                    "/creative_mode/assets/overlays/com.google.android.apps.plus");
+                            boolean success = oldFolder.renameTo(newFolder);
+                        }
+
+                        if (themable_hangouts) {
+                            Log.d("MoveWhateverIsActivated", "Themable Hangouts Overlay found! Hotswapping...");
+
+                            eu.chainfire.libsuperuser.Shell.SU.run(
+                                    "rm -r " + mContext.getCacheDir().getAbsolutePath() +
+                                            "/creative_mode/assets/overlays/com.google.android.talk");
+
+                            File oldFolder = new File(mContext.getCacheDir().getAbsolutePath() +
+                                    "/creative_mode/assets/overlays/themable.hangouts");
+                            File newFolder = new File(mContext.getCacheDir().getAbsolutePath() +
+                                    "/creative_mode/assets/overlays/com.google.android.talk");
+                            boolean success = oldFolder.renameTo(newFolder);
+                        }
+
+                        if (themable_vending) {
+                            Log.d("MoveWhateverIsActivated", "Themable Play Store Overlay found! Hotswapping...");
+
+                            eu.chainfire.libsuperuser.Shell.SU.run(
+                                    "rm -r " + mContext.getCacheDir().getAbsolutePath() +
+                                            "/creative_mode/assets/overlays/com.android.vending");
+
+                            File oldFolder = new File(mContext.getCacheDir().getAbsolutePath() +
+                                    "/creative_mode/assets/overlays/themable.vending");
+                            File newFolder = new File(mContext.getCacheDir().getAbsolutePath() +
+                                    "/creative_mode/assets/overlays/com.android.vending");
+                            boolean success = oldFolder.renameTo(newFolder);
+                        }
+
+                        if (themable_youtube) {
+                            Log.d("MoveWhateverIsActivated", "Themable Youtube Overlay found! Hotswapping...");
+
+                            eu.chainfire.libsuperuser.Shell.SU.run(
+                                    "rm -r " + mContext.getCacheDir().getAbsolutePath() +
+                                            "/creative_mode/assets/overlays/com.google.android.youtube");
+
+                            File oldFolder = new File(mContext.getCacheDir().getAbsolutePath() +
+                                    "/creative_mode/assets/overlays/themable.vending");
+                            File newFolder = new File(mContext.getCacheDir().getAbsolutePath() +
+                                    "/creative_mode/assets/overlays/com.google.android.youtube");
+                            boolean success = oldFolder.renameTo(newFolder);
+                        }
+                    }
+                }
+
+                // Add default theme icon if no traditional theme icon found
+
+                String source = mContext.getCacheDir().getAbsolutePath() +
+                        "/creative_files/";
+                String destination = mContext.getCacheDir().getAbsolutePath() +
+                        "/creative_mode/res/drawable-xxhdpi/";
+                moveFile(source, "dashboard_default.png", destination);
+            } else {
+                // Add default theme icon if no traditional theme icon found
+
+                String source = mContext.getCacheDir().getAbsolutePath() +
+                        "/creative_files/";
+                String destination = mContext.getCacheDir().getAbsolutePath() +
+                        "/creative_mode/res/drawable-xxhdpi/";
+                moveFile(source, "dashboard_default.png", destination);
+
+                // Now add Theme Engine Header Whitelist
+
+                String source2 = mContext.getCacheDir().getAbsolutePath() +
+                        "/creative_files/";
+                String destination2 = mContext.getCacheDir().getAbsolutePath() +
+                        "/creative_mode/res/values/";
+                moveFile(source2, "headers_whitelist.xml", destination2);
+
             }
-
-            // Add default theme icon if no traditional theme icon found
-
-            String source = mContext.getCacheDir().getAbsolutePath() +
-                    "/creative_files/";
-            String destination = mContext.getCacheDir().getAbsolutePath() +
-                    "/creative_mode/res/drawable-xxhdpi/";
-            moveFile(source, "dashboard_default.png", destination);
 
             Phase4_ManifestCreation createManifest = new Phase4_ManifestCreation();
             createManifest.execute();
@@ -2382,154 +2611,256 @@ public class CreativeMode extends CardStackAdapter implements
 
         @Override
         protected String doInBackground(String... sUrl) {
-            String packageName = spinnerItem;
+            if (!header_creative_mode_activated) {
+                String packageName = spinnerItem;
 
-            // Parse Theme Name of all spaces and symbols
-            String parse1_themeName = themeName.replaceAll("\\s+", "");
-            String parse2_themeName = parse1_themeName.replaceAll("[^a-zA-Z0-9]+", "");
+                // Parse Theme Name of all spaces and symbols
+                String parse1_themeName = themeName.replaceAll("\\s+", "");
+                String parse2_themeName = parse1_themeName.replaceAll("[^a-zA-Z0-9]+", "");
 
-            if (parse2_themeName.equals("")) {
-                int inputNumber = 1;
-                while (checkIfPackageInstalled(packageName + "." + "dashboard" + inputNumber, mContext)) {
-                    inputNumber += 1;
+                if (parse2_themeName.equals("")) {
+                    int inputNumber = 1;
+                    while (checkIfPackageInstalled(packageName + "." + "dashboard" + inputNumber, mContext)) {
+                        inputNumber += 1;
+                    }
+                    packageName = packageName + "." + "dashboard" + inputNumber;
+                } else {
+                    packageName = packageName + "." + parse2_themeName;
                 }
-                packageName = packageName + "." + "dashboard" + inputNumber;
+
+                // Theme Name is now parsed
+                String theme_name = themeName;
+
+                // Check themeName if it has a whitespace at the end of the name
+                if (themeName.endsWith(" ")) {
+                    theme_name = theme_name.substring(0, theme_name.length() - 1);
+                }
+
+                // No need to parse Theme Author, it should display all characters naturally
+                String theme_author = themeAuthor;
+
+                String filename = "AndroidManifest";
+
+                createXMLfile(packageName, theme_name, theme_author, filename);
             } else {
-                packageName = packageName + "." + parse2_themeName;
+                String packageName = "chummy.dashboard";
+
+                String author = "";
+
+                // Parse Header Author of all spaces and symbols
+                String parse1_authorName = header_pack_author.replaceAll("\\s+", "");
+                String parse2_authorName = parse1_authorName.replaceAll("[^a-zA-Z0-9]+", "");
+
+                if (parse2_authorName.equals("")) {
+                    author = "header_creator";
+                } else {
+                    author = parse2_authorName;
+                }
+
+                // Parse Header Name of all spaces and symbols
+                String parse1_themeName = header_pack_name.replaceAll("\\s+", "");
+                String parse2_themeName = parse1_themeName.replaceAll("[^a-zA-Z0-9]+", "");
+
+                if (parse2_themeName.equals("")) {
+                    int inputNumber = 1;
+                    while (checkIfPackageInstalled(packageName + "." + author + "." + "headerpack" + inputNumber, mContext)) {
+                        inputNumber += 1;
+                    }
+                    packageName = packageName + "." + author + "." + "headerpack" + inputNumber;
+                } else {
+                    packageName = packageName + "." + author + "." + parse2_themeName;
+                }
+
+                String filename = "AndroidManifest";
+
+                createXMLfile(packageName, parse2_themeName, author, filename);
             }
 
-            // Theme Name is now parsed
-            String theme_name = themeName;
-
-            // Check themeName if it has a whitespace at the end of the name
-            if (themeName.endsWith(" ")) {
-                theme_name = theme_name.substring(0, theme_name.length() - 1);
-            }
-
-            // No need to parse Theme Author, it should display all characters naturally
-            String theme_author = themeAuthor;
-
-            String filename = "AndroidManifest";
-
-            createXMLfile(packageName, theme_name, theme_author, filename);
             return null;
         }
 
         private void createXMLfile(String packageName, String theme_name, String theme_author,
                                    String filename) {
 
-            File root = new File(
-                    mContext.getCacheDir().getAbsolutePath() + "/creative_mode/" +
-                            filename + ".xml");
+            if (!header_creative_mode_activated) {
+                File root = new File(
+                        mContext.getCacheDir().getAbsolutePath() + "/creative_mode/" +
+                                filename + ".xml");
 
-            String icon_location;
+                String icon_location;
 
-            File iconChecker1 = new File(mContext.getCacheDir().getAbsolutePath() +
-                    "/creative_mode/res/drawable-xhdpi/ic_launcher.png");
-            File iconChecker1_ = new File(mContext.getCacheDir().getAbsolutePath() +
-                    "/creative_mode/res/drawable-xhdpi-v4/ic_launcher.png");
-            File iconChecker2 = new File(mContext.getCacheDir().getAbsolutePath() +
-                    "/creative_mode/res/mipmap-xhdpi/ic_launcher.png");
-            File iconChecker2_ = new File(mContext.getCacheDir().getAbsolutePath() +
-                    "/creative_mode/res/mipmap-xhdpi-v4/ic_launcher.png");
-            File iconChecker3 = new File(mContext.getCacheDir().getAbsolutePath() +
-                    "/creative_mode/res/drawable-xhdpi/cdt.png");
-            File iconChecker3_ = new File(mContext.getCacheDir().getAbsolutePath() +
-                    "/creative_mode/res/drawable-xhdpi-v4/cdt.png");
+                File iconChecker1 = new File(mContext.getCacheDir().getAbsolutePath() +
+                        "/creative_mode/res/drawable-xhdpi/ic_launcher.png");
+                File iconChecker1_ = new File(mContext.getCacheDir().getAbsolutePath() +
+                        "/creative_mode/res/drawable-xhdpi-v4/ic_launcher.png");
+                File iconChecker2 = new File(mContext.getCacheDir().getAbsolutePath() +
+                        "/creative_mode/res/mipmap-xhdpi/ic_launcher.png");
+                File iconChecker2_ = new File(mContext.getCacheDir().getAbsolutePath() +
+                        "/creative_mode/res/mipmap-xhdpi-v4/ic_launcher.png");
+                File iconChecker3 = new File(mContext.getCacheDir().getAbsolutePath() +
+                        "/creative_mode/res/drawable-xhdpi/cdt.png");
+                File iconChecker3_ = new File(mContext.getCacheDir().getAbsolutePath() +
+                        "/creative_mode/res/drawable-xhdpi-v4/cdt.png");
 
-            // Now check for the icon on non -v4 folders
+                // Now check for the icon on non -v4 folders
 
-            if (iconChecker1.exists()) {
-                icon_location = "@drawable/ic_launcher";
-            } else {
-                if (iconChecker2.exists()) {
-                    icon_location = "@mipmap/ic_launcher";
+                if (iconChecker1.exists()) {
+                    icon_location = "@drawable/ic_launcher";
                 } else {
-                    if (iconChecker3.exists()) {
-                        icon_location = "@drawable/cdt";
+                    if (iconChecker2.exists()) {
+                        icon_location = "@mipmap/ic_launcher";
                     } else {
-                        icon_location = "@drawable/dashboard_default";
+                        if (iconChecker3.exists()) {
+                            icon_location = "@drawable/cdt";
+                        } else {
+                            icon_location = "@drawable/dashboard_default";
 
+                        }
                     }
                 }
-            }
 
-            // Now check for the icon on -v4 folders
+                // Now check for the icon on -v4 folders
 
-            if (iconChecker1_.exists()) {
-                icon_location = "@drawable/ic_launcher";
-            } else {
-                if (iconChecker2_.exists()) {
-                    icon_location = "@mipmap/ic_launcher";
+                if (iconChecker1_.exists()) {
+                    icon_location = "@drawable/ic_launcher";
                 } else {
-                    if (iconChecker3_.exists()) {
-                        icon_location = "@drawable/cdt";
+                    if (iconChecker2_.exists()) {
+                        icon_location = "@mipmap/ic_launcher";
                     } else {
-                        icon_location = "@drawable/dashboard_default";
+                        if (iconChecker3_.exists()) {
+                            icon_location = "@drawable/cdt";
+                        } else {
+                            icon_location = "@drawable/dashboard_default";
 
+                        }
                     }
                 }
-            }
 
-            try {
-                DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-                Date date = new Date();
+                try {
+                    DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+                    Date date = new Date();
 
-                root.createNewFile();
-                FileWriter fw = new FileWriter(root);
-                BufferedWriter bw = new BufferedWriter(fw);
-                PrintWriter pw = new PrintWriter(bw);
-                String xmlTags = ("<?xml version=\"1.0\" encoding=\"utf-8\" " +
-                        "standalone=\"no\"?>" + "\n");
-                String xmlRes1 = ("<manifest xmlns:android=\"http://schemas.android.com/" +
-                        "apk/res/android\"" + "\n");
-                String xmlRes2 = ("    package=\"" + packageName + "\"" + "\n");
-                String xmlRes3 = ("    android:versionCode=\"" + BuildConfig.VERSION_CODE + "\"");
-                String xmlRes4 = ("    android:versionName=\"" + "dashboard. - " +
-                        BuildConfig.VERSION_NAME + " (" + dateFormat.format(date) + ")" + "\">");
-                String xmlRes5 = ("    <uses-sdk android:minSdkVersion=\"23\"/>" + "\n");
-                String xmlRes6 = ("    <uses-feature" + "\n");
-                String xmlRes7 = ("        android:name=\"org.cyanogenmod.theme\"" + "\n");
-                String xmlRes8 = ("        android:required=\"true\" />" + "\n");
-                String xmlRes9 = ("    <meta-data" + "\n");
-                String xmlRes10 = ("        android:name=\"org.cyanogenmod.theme.name\"" + "\n");
-                String xmlRes11 = ("        android:value=\"" + theme_name + "\" />" + "\n");
-                String xmlRes12 = ("    <meta-data" + "\n");
-                String xmlRes13 = ("        android:name=\"org.cyanogenmod.theme.author\"" + "\n");
-                String xmlRes14 = ("        android:value=\"" + theme_author + "\" />" + "\n");
-                String xmlRes15 = ("    <application android:hasCode=\"false\"" + "\n");
-                String xmlRes16 = ("        android:icon=\"" + icon_location + "\"" + "\n");
-                String xmlRes17 = ("        android:label=\"" + theme_name + "\"/>" + "\n");
-                String xmlRes18 = ("</manifest>");
-                pw.write(xmlTags);
-                pw.write(xmlRes1);
-                pw.write(xmlRes2);
-                pw.write(xmlRes3);
-                pw.write(xmlRes4);
-                pw.write(xmlRes5);
-                pw.write(xmlRes6);
-                pw.write(xmlRes7);
-                pw.write(xmlRes8);
-                pw.write(xmlRes9);
-                pw.write(xmlRes10);
-                pw.write(xmlRes11);
-                pw.write(xmlRes12);
-                pw.write(xmlRes13);
-                pw.write(xmlRes14);
-                pw.write(xmlRes15);
-                pw.write(xmlRes16);
-                pw.write(xmlRes17);
-                pw.write(xmlRes18);
-                pw.close();
-                bw.close();
-                fw.close();
-            } catch (IOException e) {
-                did_it_compile = false;
-                Toast toast = Toast.makeText(mContext.getApplicationContext(),
-                        mContext.getResources().getString(
-                                R.string.createXMLFile_exception_toast),
-                        Toast.LENGTH_LONG);
-                toast.show();
+                    root.createNewFile();
+                    FileWriter fw = new FileWriter(root);
+                    BufferedWriter bw = new BufferedWriter(fw);
+                    PrintWriter pw = new PrintWriter(bw);
+                    String xmlTags = ("<?xml version=\"1.0\" encoding=\"utf-8\" " +
+                            "standalone=\"no\"?>" + "\n");
+                    String xmlRes1 = ("<manifest xmlns:android=\"http://schemas.android.com/" +
+                            "apk/res/android\"" + "\n");
+                    String xmlRes2 = ("    package=\"" + packageName + "\"" + "\n");
+                    String xmlRes3 = ("    android:versionCode=\"" + BuildConfig.VERSION_CODE + "\"");
+                    String xmlRes4 = ("    android:versionName=\"" + "dashboard. - " +
+                            BuildConfig.VERSION_NAME + " (" + dateFormat.format(date) + ")" + "\">");
+                    String xmlRes5 = ("    <uses-sdk android:minSdkVersion=\"23\"/>" + "\n");
+                    String xmlRes6 = ("    <uses-feature" + "\n");
+                    String xmlRes7 = ("        android:name=\"org.cyanogenmod.theme\"" + "\n");
+                    String xmlRes8 = ("        android:required=\"true\" />" + "\n");
+                    String xmlRes9 = ("    <meta-data" + "\n");
+                    String xmlRes10 = ("        android:name=\"org.cyanogenmod.theme.name\"" + "\n");
+                    String xmlRes11 = ("        android:value=\"" + theme_name + "\" />" + "\n");
+                    String xmlRes12 = ("    <meta-data" + "\n");
+                    String xmlRes13 = ("        android:name=\"org.cyanogenmod.theme.author\"" + "\n");
+                    String xmlRes14 = ("        android:value=\"" + theme_author + "\" />" + "\n");
+                    String xmlRes15 = ("    <application android:hasCode=\"false\"" + "\n");
+                    String xmlRes16 = ("        android:icon=\"" + icon_location + "\"" + "\n");
+                    String xmlRes17 = ("        android:label=\"" + theme_name + "\"/>" + "\n");
+                    String xmlRes18 = ("</manifest>");
+                    pw.write(xmlTags);
+                    pw.write(xmlRes1);
+                    pw.write(xmlRes2);
+                    pw.write(xmlRes3);
+                    pw.write(xmlRes4);
+                    pw.write(xmlRes5);
+                    pw.write(xmlRes6);
+                    pw.write(xmlRes7);
+                    pw.write(xmlRes8);
+                    pw.write(xmlRes9);
+                    pw.write(xmlRes10);
+                    pw.write(xmlRes11);
+                    pw.write(xmlRes12);
+                    pw.write(xmlRes13);
+                    pw.write(xmlRes14);
+                    pw.write(xmlRes15);
+                    pw.write(xmlRes16);
+                    pw.write(xmlRes17);
+                    pw.write(xmlRes18);
+                    pw.close();
+                    bw.close();
+                    fw.close();
+                } catch (IOException e) {
+                    did_it_compile = false;
+                    Toast toast = Toast.makeText(mContext.getApplicationContext(),
+                            mContext.getResources().getString(
+                                    R.string.createXMLFile_exception_toast),
+                            Toast.LENGTH_LONG);
+                    toast.show();
+                }
+            } else {
+                File root = new File(
+                        mContext.getCacheDir().getAbsolutePath() + "/creative_mode/" +
+                                filename + ".xml");
+
+                try {
+                    DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+                    Date date = new Date();
+
+                    root.createNewFile();
+                    FileWriter fw = new FileWriter(root);
+                    BufferedWriter bw = new BufferedWriter(fw);
+                    PrintWriter pw = new PrintWriter(bw);
+                    String xmlTags = ("<?xml version=\"1.0\" encoding=\"utf-8\" " +
+                            "standalone=\"no\"?>" + "\n");
+                    String xmlRes1 = ("<manifest xmlns:android=\"http://schemas.android.com/" +
+                            "apk/res/android\"" + "\n");
+                    String xmlRes2 = ("    package=\"" + packageName + "\"" + "\n");
+                    String xmlRes3 = ("    android:versionCode=\"" + BuildConfig.VERSION_CODE + "\"");
+                    String xmlRes4 = ("    android:versionName=\"" + "dashboard. - " +
+                            BuildConfig.VERSION_NAME + " (" + dateFormat.format(date) + ")" + "\">");
+                    String xmlRes5 = ("    <uses-sdk android:minSdkVersion=\"23\"/>" + "\n");
+                    String xmlRes6 = ("    <uses-feature" + "\n");
+                    String xmlRes7 = ("        android:name=\"org.cyanogenmod.theme.extensions\"" + "\n");
+                    String xmlRes8 = ("        android:required=\"true\" />" + "\n");
+                    String xmlRes9 = ("    <meta-data" + "\n");
+                    String xmlRes10 = ("        android:name=\"org.cyanogenmod.theme.name\"" + "\n");
+                    String xmlRes11 = ("        android:value=\"" + theme_name + "\" />" + "\n");
+                    String xmlRes12 = ("    <meta-data" + "\n");
+                    String xmlRes13 = ("        android:name=\"org.cyanogenmod.theme.author\"" + "\n");
+                    String xmlRes14 = ("        android:value=\"" + theme_author + "\" />" + "\n");
+                    String xmlRes15 = ("    <application android:hasCode=\"false\"" + "\n");
+                    String xmlRes16 = ("        android:icon=\"" + "@drawable/dashboard_default" + "\"" + "\n");
+                    String xmlRes17 = ("        android:label=\"" + theme_name + "\"/>" + "\n");
+                    String xmlRes18 = ("</manifest>");
+                    pw.write(xmlTags);
+                    pw.write(xmlRes1);
+                    pw.write(xmlRes2);
+                    pw.write(xmlRes3);
+                    pw.write(xmlRes4);
+                    pw.write(xmlRes5);
+                    pw.write(xmlRes6);
+                    pw.write(xmlRes7);
+                    pw.write(xmlRes8);
+                    pw.write(xmlRes9);
+                    pw.write(xmlRes10);
+                    pw.write(xmlRes11);
+                    pw.write(xmlRes12);
+                    pw.write(xmlRes13);
+                    pw.write(xmlRes14);
+                    pw.write(xmlRes15);
+                    pw.write(xmlRes16);
+                    pw.write(xmlRes17);
+                    pw.write(xmlRes18);
+                    pw.close();
+                    bw.close();
+                    fw.close();
+                } catch (IOException e) {
+                    did_it_compile = false;
+                    Toast toast = Toast.makeText(mContext.getApplicationContext(),
+                            mContext.getResources().getString(
+                                    R.string.createXMLFile_exception_toast),
+                            Toast.LENGTH_LONG);
+                    toast.show();
+                }
             }
         }
     }
@@ -2540,7 +2871,11 @@ public class CreativeMode extends CardStackAdapter implements
         protected void onPreExecute() {
             Log.d("Phase 5", "This phase has started it's asynchronous task.");
             loader.setProgress(50);
-            loader_string.setText(mContext.getResources().getString(R.string.phase5_dialog_title));
+            if (!header_creative_mode_activated) {
+                loader_string.setText(mContext.getResources().getString(R.string.phase5_dialog_title));
+            } else {
+                loader_string.setText(mContext.getResources().getString(R.string.phase5_hp_dialog_title));
+            }
             super.onPreExecute();
         }
 
@@ -2618,7 +2953,7 @@ public class CreativeMode extends CardStackAdapter implements
 
                 // APK should now be built, good for us, now let's break it apart
                 try {
-                    if (is_header_pack_chosen) {
+                    if (is_header_pack_chosen && !header_creative_mode_activated) {
                         unzipHeaderPacks();
                     }
                     unzipNewAPK();
@@ -2769,7 +3104,11 @@ public class CreativeMode extends CardStackAdapter implements
         protected void onPreExecute() {
             Log.d("Phase 6", "This phase has started it's asynchronous task.");
             loader.setProgress(10);
-            loader_string.setText(mContext.getResources().getString(R.string.phase6_dialog_title));
+            if (!header_creative_mode_activated) {
+                loader_string.setText(mContext.getResources().getString(R.string.phase6_dialog_title));
+            } else {
+                loader_string.setText(mContext.getResources().getString(R.string.phase6_hp_dialog_title));
+            }
             super.onPreExecute();
         }
 
