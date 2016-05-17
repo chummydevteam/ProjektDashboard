@@ -1403,6 +1403,13 @@ public class CreativeMode extends CardStackAdapter implements
                     Log.d("getFinalizedViewSpinner", "header pack creation activated, all options have been disabled!");
                     header_creative_mode_activated = true;
 
+                    if (!aet1.getText().equals("")) {
+                        aet1.getText().clear();
+                    }
+                    if (!aet2.getText().equals("")) {
+                        aet2.getText().clear();
+                    }
+
                     activateAllOptions(false);
 
                     final Handler handler = new Handler();
@@ -1584,6 +1591,12 @@ public class CreativeMode extends CardStackAdapter implements
                         Phase1_UnzipAssets unzipTask = new Phase1_UnzipAssets();
                         unzipTask.execute(header_pack_location);
 
+                    } else {
+                        Toast toast = Toast.makeText(mContext.getApplicationContext(),
+                                mContext.getResources().getString(
+                                        R.string.no_header_pack_selected),
+                                Toast.LENGTH_LONG);
+                        toast.show();
                     }
 
                 } else {
