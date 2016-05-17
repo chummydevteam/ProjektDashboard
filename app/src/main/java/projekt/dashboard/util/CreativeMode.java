@@ -2686,7 +2686,7 @@ public class CreativeMode extends CardStackAdapter implements
 
                 String filename = "AndroidManifest";
 
-                createXMLfile(packageName, parse2_themeName, author, filename);
+                createXMLfile(packageName, header_pack_name, header_pack_author, filename);
             }
 
             return null;
