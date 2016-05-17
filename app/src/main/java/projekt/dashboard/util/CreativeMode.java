@@ -1414,7 +1414,7 @@ public class CreativeMode extends CardStackAdapter implements
                             handler.postDelayed(new Runnable() {
                                 @Override
                                 public void run() {
-                                    systemui_card.setCardBackgroundColor(ContextCompat.getColor(mContext, bgColorIds[1]));
+                                    systemui_card.setCardBackgroundColor(ContextCompat.getColor(mContext, R.color.card_highlight));
                                     final Handler handler = new Handler();
                                     handler.postDelayed(new Runnable() {
                                         @Override
@@ -1424,7 +1424,7 @@ public class CreativeMode extends CardStackAdapter implements
                                             handler.postDelayed(new Runnable() {
                                                 @Override
                                                 public void run() {
-                                                    systemui_card.setCardBackgroundColor(ContextCompat.getColor(mContext, bgColorIds[1]));
+                                                    systemui_card.setCardBackgroundColor(ContextCompat.getColor(mContext, R.color.card_highlight));
                                                     final Handler handler = new Handler();
                                                     handler.postDelayed(new Runnable() {
                                                         @Override
@@ -1434,7 +1434,7 @@ public class CreativeMode extends CardStackAdapter implements
                                                             handler.postDelayed(new Runnable() {
                                                                 @Override
                                                                 public void run() {
-                                                                    systemui_card.setCardBackgroundColor(ContextCompat.getColor(mContext, bgColorIds[1]));
+                                                                    systemui_card.setCardBackgroundColor(ContextCompat.getColor(mContext, R.color.card_highlight));
                                                                     final Handler handler = new Handler();
                                                                     handler.postDelayed(new Runnable() {
                                                                         @Override
