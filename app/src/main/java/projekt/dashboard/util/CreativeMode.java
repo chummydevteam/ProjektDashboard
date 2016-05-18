@@ -1504,7 +1504,7 @@ public class CreativeMode extends CardStackAdapter implements
                     header_creative_mode_activated = false;
                     activateAllOptions(true);
                 }
-                if (pos >= 3) {
+                if (pos == 3) {
                     if (!checkCurrentThemeSelection("com.chummy.jezebel.blackedout.donate")) {
                         Toast toast = Toast.makeText(mContext.getApplicationContext(),
                                 mContext.getResources().getString(
@@ -1545,7 +1545,7 @@ public class CreativeMode extends CardStackAdapter implements
 
                 }
 
-                if (pos >= 3) {
+                if (pos > 3) {
                     header_creative_mode_activated = false;
                     activateAllOptions(true);
                     if (spinner1.getSelectedItem().toString().substring(0, 10).equals("com.chummy")
