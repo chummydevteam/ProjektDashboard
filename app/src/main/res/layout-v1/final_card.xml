@@ -125,9 +125,9 @@
                     android:layout_below="@+id/edittext2"
                     android:layout_marginEnd="5dp"
                     android:layout_marginTop="5dp"
-                    android:textColor="@color/creative_mode_text_disabled"
                     android:checked="false"
-                    android:text="@string/commons_themable_google_apps" />
+                    android:text="@string/commons_themable_google_apps"
+                    android:textColor="@color/creative_mode_text_disabled" />
 
                 <Button
                     android:id="@+id/begin_action"

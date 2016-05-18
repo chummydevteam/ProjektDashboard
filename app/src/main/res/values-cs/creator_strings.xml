@@ -13,9 +13,9 @@
     <string name="creative_mode_card_theme_attributes">nové vlastnosti motivu</string>
 
     <string name="no_theme_selected">Prosím zvolte motiv ze rolovací nabídky před kliknutím!</string>
-	<string name="default_username">Uživatel Dashboard</string>
+    <string name="default_username">Uživatel Dashboard</string>
     <string name="begin_action_button">Začínáme!</string>
-	
+
     <string name="phase2_dialog_title">zpracovávám všechny vaše úpravy</string>
     <string name="phase3_dialog_title">přemisťuju speciální úpravy</string>
     <string name="phase4_dialog_title">vytvářím nová manifest</string>
@@ -24,8 +24,8 @@
     <string name="unzipping_assets_dialog_title">motiv se extrahuje&#8230;</string>
     <string name="unzipping_assets_small">čekejte prosím&#8230;</string>
     <string name="unzipping_assets_big">vybraný motiv je velký/nextrakce může chvíli trvat&#8230;</string>
-	
-	 <!-- Exception Catches -->
+
+    <!-- Exception Catches -->
     <string name="zipsigner_exception_toast">Nepodařilo se vytvořit nový motiv (Vyjímka: ZipSigner)</string>
     <string name="unzipHeaderPacks_exception_toast">Nepodařilo se vytvořit nový motiv (Vyjímka: UnzipHeaderPacks)</string>
     <string name="unzipNewAPK_exception_toast">Nepodařilo se vytvořit nový motiv (Vyjímka: UnzipNewAPK)</string>
@@ -84,7 +84,7 @@
     <string name="system_notification_text_2">oznámení frameworku (vedlejší text)</string>
     <string name="system_ripple_color">barva efektu při dlouhém stisku</string>
     <string name="system_main_color">barva hlavního motivu frameworku</string>
-	<string name="system_main_color_dark">hlavní barva tmavého frameworku</string>
+    <string name="system_main_color_dark">hlavní barva tmavého frameworku</string>
 
     <string name="framework_preview_title">framework dashboardu.</string>
     <string name="framework_preview_heading">Informace o chummy development team</string>

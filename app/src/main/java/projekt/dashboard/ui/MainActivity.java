@@ -24,12 +24,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewTreeObserver;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.afollestad.bridge.Bridge;
 import com.afollestad.materialdialogs.util.DialogUtils;
-import com.mutualmobile.cardstack.CardStackLayout;
 import com.tramsun.libs.prefcompat.Pref;
 
 import butterknife.Bind;

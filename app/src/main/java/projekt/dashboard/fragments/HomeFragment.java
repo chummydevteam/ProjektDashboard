@@ -158,7 +158,7 @@ public class HomeFragment extends BasePageFragment {
 
                 alert.setCancelable(false);
                 alert.setPositiveButton(getResources().getString(
-                                R.string.change_name_dialog_confirm),
+                        R.string.change_name_dialog_confirm),
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int whichButton) {
                                 String string_processor = textBox.getText().toString();
@@ -174,7 +174,7 @@ public class HomeFragment extends BasePageFragment {
                             }
                         });
                 alert.setNegativeButton(getResources().getString(
-                                R.string.downloader_dialog_cancel),
+                        R.string.downloader_dialog_cancel),
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int whichButton) {
                                 //

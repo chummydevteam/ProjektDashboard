@@ -108,10 +108,10 @@ public class WallpaperAdapter extends RecyclerView.Adapter<WallpaperAdapter.Wall
             Glide.with(holder.itemView.getContext())
                     .load(wallpaper.getListingImageUrl())
                     .listener(GlidePalette.with(wallpaper.getListingImageUrl())
-                                    .use(GlidePalette.Profile.VIBRANT)
-                                    .intoBackground(holder.colorFrame)
-                                    .intoTextColor(holder.name, GlidePalette.Swatch.TITLE_TEXT_COLOR)
-                                    .intoTextColor(holder.author, GlidePalette.Swatch.BODY_TEXT_COLOR)
+                            .use(GlidePalette.Profile.VIBRANT)
+                            .intoBackground(holder.colorFrame)
+                            .intoTextColor(holder.name, GlidePalette.Swatch.TITLE_TEXT_COLOR)
+                            .intoTextColor(holder.author, GlidePalette.Swatch.BODY_TEXT_COLOR)
                     ).into(holder.image);
         }
     }
