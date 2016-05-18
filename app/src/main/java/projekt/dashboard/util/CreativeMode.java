@@ -1367,9 +1367,11 @@ public class CreativeMode extends CardStackAdapter implements
                         if (!inFile.getAbsolutePath().substring(21).equals(
                                 "com.chummy.jezebel.materialdark.donate")) {
                             if (!inFile.getAbsolutePath().substring(21).equals("projekt.klar")) {
-                                if (checkIfPackageInstalled(inFile.getAbsolutePath().substring(21), mContext)) {
-                                    list.add(inFile.getAbsolutePath().substring(21));
-                                    counter += 1;
+                                if (!inFile.getAbsolutePath().substring(21, 37).equals("chummy.dashboard")) {
+                                    if (checkIfPackageInstalled(inFile.getAbsolutePath().substring(21), mContext)) {
+                                        list.add(inFile.getAbsolutePath().substring(21));
+                                        counter += 1;
+                                    }
                                 }
                             }
                         } else {
