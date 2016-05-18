@@ -67,6 +67,6 @@ public class CreatorFragment extends BasePageFragment {
 
     @Override
     public int getTitle() {
-        return R.string.home;
+        return R.string.home_tab_seven;
     }
 }

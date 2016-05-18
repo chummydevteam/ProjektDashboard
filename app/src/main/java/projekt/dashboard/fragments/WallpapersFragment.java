@@ -92,7 +92,7 @@ public class WallpapersFragment extends BasePageFragment implements
 
     @Override
     public int getTitle() {
-        return R.string.wallpapers;
+        return R.string.home_tab_six;
     }
 
     @Override
@@ -195,8 +195,8 @@ public class WallpapersFragment extends BasePageFragment implements
         ImageButton restartActivity = (ImageButton) inflation.findViewById(R.id.restart);
         restartActivity.setOnClickListener((new View.OnClickListener() {
             public void onClick(View v) {
-                getActivity().finish();
-                getActivity().startActivity(new Intent(getActivity(), MainActivity.class));
+                mWallpapers = null;
+                load(false);
             }
         }));
 
@@ -205,28 +205,11 @@ public class WallpapersFragment extends BasePageFragment implements
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.wallpapers, menu);
         super.onCreateOptionsMenu(menu, inflater);
-        MenuItem mSearchItem = menu.findItem(R.id.search);
-        SearchView mSearchView = (SearchView) MenuItemCompat.getActionView(mSearchItem);
-        mSearchView.setQueryHint(getString(R.string.search_wallpapers));
-        mSearchView.setOnQueryTextListener(this);
-        mSearchView.setOnCloseListener(this);
-        mSearchView.setImeOptions(EditorInfo.IME_ACTION_DONE);
-
-        if (getActivity() != null) {
-            final MainActivity act = (MainActivity) getActivity();
-            TintUtils.themeSearchView(act.getToolbar(), mSearchView, DialogUtils.resolveColor(act, R.attr.tab_icon_color));
-        }
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.reload) {
-            mWallpapers = null;
-            load(false);
-            return true;
-        }
         return super.onOptionsItemSelected(item);
     }
 

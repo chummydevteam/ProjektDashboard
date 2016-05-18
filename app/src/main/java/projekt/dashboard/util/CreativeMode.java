@@ -68,6 +68,10 @@ import projekt.dashboard.BuildConfig;
 import projekt.dashboard.R;
 import projekt.dashboard.colorpicker.ColorPickerDialog;
 
+/**
+ * @author Nicholas Chum (nicholaschum)
+ */
+
 public class CreativeMode extends CardStackAdapter implements
         CompoundButton.OnCheckedChangeListener {
     private static int[] bgColorIds;
