@@ -53,6 +53,7 @@ public class AppIntroduction extends AppIntro {
                 getApplicationContext());
         prefs.edit().putBoolean("first_run", false).commit();
         prefs.edit().putBoolean("blacked_out_enabled", false).commit();
+        prefs.edit().putBoolean("extended_actionbar_enabled", false).commit();
         prefs.edit().putBoolean("advanced_mode_enabled", false).commit();
 
         prefs.edit().putBoolean("color_switcher_enabled", true).commit();

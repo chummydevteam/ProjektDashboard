@@ -24,6 +24,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewTreeObserver;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.afollestad.bridge.Bridge;
@@ -95,6 +96,13 @@ public class MainActivity extends BaseDonateActivity implements
         prefs = PreferenceManager.getDefaultSharedPreferences(this);
 
         ButterKnife.bind(this);
+
+        if (prefs.getBoolean("extended_actionbar_enabled", true)) {
+            LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) mToolbar.getLayoutParams();
+            layoutParams.height = 150;
+            mToolbar.setLayoutParams(layoutParams);
+        }
+
         setSupportActionBar(mToolbar);
 
         setupPages();

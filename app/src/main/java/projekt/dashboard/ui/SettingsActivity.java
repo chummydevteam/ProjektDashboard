@@ -177,6 +177,25 @@ public class SettingsActivity extends AppCompatActivity {
             }
         });
 
+        Switch extendedActionBar = (Switch) findViewById(R.id.enable_extended_actionbar);
+        if (prefs.getBoolean("extended_actionbar_enabled", true)) {
+            extendedActionBar.setChecked(true);
+        } else {
+            extendedActionBar.setChecked(false);
+        }
+        extendedActionBar.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    has_modified_anything = true;
+                    prefs.edit().putBoolean("extended_actionbar_enabled", true).commit();
+                } else {
+                    has_modified_anything = true;
+                    prefs.edit().putBoolean("extended_actionbar_enabled", false).commit();
+                }
+            }
+        });
+
         Switch blacked_out = (Switch) findViewById(R.id.enable_blacked_out);
         if (prefs.getBoolean("blacked_out_enabled", true)) {
             blacked_out.setChecked(true);
