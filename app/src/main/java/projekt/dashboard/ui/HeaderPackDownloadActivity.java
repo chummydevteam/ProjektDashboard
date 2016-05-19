@@ -5,6 +5,8 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
@@ -29,14 +31,13 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.squareup.picasso.Picasso;
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -138,9 +139,12 @@ public class HeaderPackDownloadActivity extends AppCompatActivity {
         headerPackSourcePicker.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> arg0, View arg1,
-                                       int pos, long id) {}
+                                       int pos, long id) {
+            }
+
             @Override
-            public void onNothingSelected(AdapterView<?> arg0) {}
+            public void onNothingSelected(AdapterView<?> arg0) {
+            }
         });
 
         ImageButton restartActivity = (ImageButton) findViewById(R.id.restartDownloadSources);
@@ -280,15 +284,20 @@ public class HeaderPackDownloadActivity extends AppCompatActivity {
                     View dialogLayout = inflater.inflate(R.layout.header_preview_dialog, null);
                     dialog.setView(dialogLayout);
                     dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                    ImageView i = (ImageView) dialogLayout.findViewById(R.id.dialogImage);
-                    Picasso.with(getApplicationContext()).load(newArray.get(itemValue +
-                            "-preview")).into(i);
-                    dialog.setCancelable(false);
-                    dialog.show();
-                    dialog.getButton(dialog.BUTTON_NEGATIVE).
-                            setTextColor(getResources().getColor(android.R.color.white));
-                    dialog.getButton(dialog.BUTTON_POSITIVE).
-                            setTextColor(getResources().getColor(android.R.color.white));
+                    try {
+                        ImageView i = (ImageView) dialogLayout.findViewById(R.id.dialogImage);
+                        Bitmap bitmap = BitmapFactory.decodeStream((InputStream) new URL(
+                                newArray.get(itemValue + "-preview")).getContent());
+                        i.setImageBitmap(bitmap);
+                        dialog.setCancelable(false);
+                        dialog.show();
+                        dialog.getButton(dialog.BUTTON_NEGATIVE).
+                                setTextColor(getResources().getColor(android.R.color.white));
+                        dialog.getButton(dialog.BUTTON_POSITIVE).
+                                setTextColor(getResources().getColor(android.R.color.white));
+                    } catch (MalformedURLException mue) {
+                    } catch (IOException ioe) {
+                    }
                 }
 
                 return false;
