@@ -74,40 +74,9 @@ public class WallpaperUtils {
         }
 
         try {
-            String defaultSource = "";
             SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-            String mapTypeString = prefs.getString("selected_wallpaper_source", "default");
-            if (!mapTypeString.equals("default")) {
-                if (mapTypeString.equals("customworx_du")) {
-                    defaultSource = context.getString(R.string.wallpapers_json_url_customworx_du);
-                }
-                if (mapTypeString.equals("customworx_octos")) {
-                    defaultSource = context.getString(R.string.wallpapers_json_url_customworx_octOS);
-                }
-                if (mapTypeString.equals("customworx_screwd")) {
-                    defaultSource = context.getString(R.string.wallpapers_json_url_customworx_screwd);
-                }
-                if (mapTypeString.equals("customworx")) {
-                    defaultSource = context.getString(R.string.wallpapers_json_url_customworx);
-                }
-                if (mapTypeString.equals("gagan_du")) {
-                    defaultSource = context.getString(R.string.wallpapers_json_url_gagan_du);
-                }
-                if (mapTypeString.equals("gagan")) {
-                    defaultSource = context.getString(R.string.wallpapers_json_url_gagan);
-                }
-                if (mapTypeString.equals("syed")) {
-                    defaultSource = context.getString(R.string.wallpapers_json_url_syed);
-                }
-                if (mapTypeString.equals("vignesh_du")) {
-                    defaultSource = context.getString(R.string.wallpapers_json_url_vignesh_du);
-                }
-                if (mapTypeString.equals("vignesh")) {
-                    defaultSource = context.getString(R.string.wallpapers_json_url_vignesh);
-                }
-            } else {
-                defaultSource = context.getString(R.string.wallpapers_json_url);
-            }
+            String mapTypeString = prefs.getString("selected_wallpaper_source", context.getString(R.string.no_wallpapers_url));
+            String defaultSource = mapTypeString;
 
             WallpapersHolder holder = Bridge.get(defaultSource)
                     .tag(WallpapersFragment.class.getName())
@@ -168,41 +137,9 @@ public class WallpaperUtils {
         } catch (Throwable t) {
             t.printStackTrace();
         }
-
-        String defaultSource = "";
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-        String mapTypeString = prefs.getString("selected_wallpaper_source", "default");
-        if (!mapTypeString.equals("default")) {
-            if (mapTypeString.equals("customworx_du")) {
-                defaultSource = context.getString(R.string.wallpapers_json_url_customworx_du);
-            }
-            if (mapTypeString.equals("customworx_octos")) {
-                defaultSource = context.getString(R.string.wallpapers_json_url_customworx_octOS);
-            }
-            if (mapTypeString.equals("customworx_screwd")) {
-                defaultSource = context.getString(R.string.wallpapers_json_url_customworx_screwd);
-            }
-            if (mapTypeString.equals("customworx")) {
-                defaultSource = context.getString(R.string.wallpapers_json_url_customworx);
-            }
-            if (mapTypeString.equals("gagan_du")) {
-                defaultSource = context.getString(R.string.wallpapers_json_url_gagan_du);
-            }
-            if (mapTypeString.equals("gagan")) {
-                defaultSource = context.getString(R.string.wallpapers_json_url_gagan);
-            }
-            if (mapTypeString.equals("syed")) {
-                defaultSource = context.getString(R.string.wallpapers_json_url_syed);
-            }
-            if (mapTypeString.equals("vignesh_du")) {
-                defaultSource = context.getString(R.string.wallpapers_json_url_vignesh_du);
-            }
-            if (mapTypeString.equals("vignesh")) {
-                defaultSource = context.getString(R.string.wallpapers_json_url_vignesh);
-            }
-        } else {
-            defaultSource = context.getString(R.string.wallpapers_json_url);
-        }
+        String mapTypeString = prefs.getString("selected_wallpaper_source", context.getString(R.string.no_wallpapers_url));
+        String defaultSource = mapTypeString;
 
         Bridge.get(defaultSource)
                 .tag(WallpapersFragment.class.getName())

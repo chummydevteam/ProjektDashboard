@@ -110,43 +110,19 @@ public class WallpapersFragment extends BasePageFragment implements
         final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(
                 getActivity());
 
-        Spinner wallpaperSourcePicker = (Spinner) inflation.findViewById(R.id.sourcePicker);
+        final Spinner wallpaperSourcePicker = (Spinner) inflation.findViewById(R.id.sourcePicker);
+        final String[] wallpaperSourcePickerURLs = getResources().getStringArray(R.array.wallpaper_sources_urls);
         ArrayAdapter<String> spinnerCountShoesArrayAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item, getResources().getStringArray(R.array.wallpaper_sources));
         wallpaperSourcePicker.setAdapter(spinnerCountShoesArrayAdapter);
         wallpaperSourcePicker.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> arg0, View arg1,
                                        int pos, long id) {
-                if (pos == 0) {
-                    prefs.edit().putString("selected_wallpaper_source", "default").commit();
-                }
-                if (pos == 1) {
-                    prefs.edit().putString("selected_wallpaper_source", "customworx_du").commit();
-                }
-                if (pos == 2) {
-                    prefs.edit().putString("selected_wallpaper_source", "customworx_octos").commit();
-                }
-                if (pos == 3) {
-                    prefs.edit().putString("selected_wallpaper_source", "customworx_screwd").commit();
-                }
-                if (pos == 4) {
-                    prefs.edit().putString("selected_wallpaper_source", "customworx").commit();
-                }
-                if (pos == 5) {
-                    prefs.edit().putString("selected_wallpaper_source", "gagan_du").commit();
-                }
-                if (pos == 6) {
-                    prefs.edit().putString("selected_wallpaper_source", "gagan").commit();
-                }
-                if (pos == 7) {
-                    prefs.edit().putString("selected_wallpaper_source", "syed").commit();
-                }
-                if (pos == 8) {
-                    prefs.edit().putString("selected_wallpaper_source", "vignesh_du").commit();
-                }
-                if (pos == 9) {
-                    prefs.edit().putString("selected_wallpaper_source", "vignesh").commit();
-                }
+                prefs.edit().putString("selected_wallpaper_source",
+                        wallpaperSourcePickerURLs[wallpaperSourcePicker.
+                                getSelectedItemPosition()]).apply();
+                prefs.edit().putInt("selected_wallpaper_source_position",
+                        wallpaperSourcePicker.getSelectedItemPosition()).apply();
             }
 
             @Override
@@ -155,38 +131,8 @@ public class WallpapersFragment extends BasePageFragment implements
 
             }
         });
-        String mapTypeString = prefs.getString("selected_wallpaper_source", "default");
-        if (!mapTypeString.equals("default")) {
-            if (mapTypeString.equals("customworx_du")) {
-                wallpaperSourcePicker.setSelection(1);
-            }
-            if (mapTypeString.equals("customworx_octos")) {
-                wallpaperSourcePicker.setSelection(2);
-            }
-            if (mapTypeString.equals("customworx_screwd")) {
-                wallpaperSourcePicker.setSelection(3);
-            }
-            if (mapTypeString.equals("customworx")) {
-                wallpaperSourcePicker.setSelection(4);
-            }
-            if (mapTypeString.equals("gagan_du")) {
-                wallpaperSourcePicker.setSelection(5);
-            }
-            if (mapTypeString.equals("gagan")) {
-                wallpaperSourcePicker.setSelection(6);
-            }
-            if (mapTypeString.equals("syed")) {
-                wallpaperSourcePicker.setSelection(7);
-            }
-            if (mapTypeString.equals("vignesh_du")) {
-                wallpaperSourcePicker.setSelection(8);
-            }
-            if (mapTypeString.equals("vignesh")) {
-                wallpaperSourcePicker.setSelection(9);
-            }
-        } else {
-            wallpaperSourcePicker.setSelection(0);
-        }
+        int mapTypeString = prefs.getInt("selected_wallpaper_source_position", 0);
+        wallpaperSourcePicker.setSelection(mapTypeString);
 
         ImageButton restartActivity = (ImageButton) inflation.findViewById(R.id.restart);
         restartActivity.setOnClickListener((new View.OnClickListener() {

@@ -177,20 +177,26 @@
         <item>gagan singh du wallpaper pack</item>
         <item>gagan singh wallpaper pack</item>
         <item>syed sajid du wallpaper pack</item>
+        <item>syed sajid wallpaper pack</item>
         <item>vignesh ravi du wallpaper pack</item>
         <item>vignesh ravi wallpaper pack</item>
     </string-array>
 
-    <string name="wallpapers_json_url" formatted="false" translatable="false">https://raw.githubusercontent.com/nicholaschum/ProjektDashboard/resources/dashboard_welcome.js</string>
-    <string name="wallpapers_json_url_customworx_du" formatted="false" translatable="false">http://pastebin.com/raw/7bP1Qp5C</string>
-    <string name="wallpapers_json_url_customworx_octOS" formatted="false" translatable="false">http://pastebin.com/raw/ia93pUKu</string>
-    <string name="wallpapers_json_url_customworx_screwd" formatted="false" translatable="false">http://pastebin.com/raw/5MMtyesr</string>
-    <string name="wallpapers_json_url_customworx" formatted="false" translatable="false">http://pastebin.com/raw/dbCArLaF</string>
-    <string name="wallpapers_json_url_gagan_du" formatted="false" translatable="false">http://pastebin.com/raw/CapPghtE</string>
-    <string name="wallpapers_json_url_gagan" formatted="false" translatable="false">http://pastebin.com/raw/BwKeCHew</string>
-    <string name="wallpapers_json_url_syed" formatted="false" translatable="false">http://pastebin.com/raw/khkhcRRk</string>
-    <string name="wallpapers_json_url_vignesh_du" formatted="false" translatable="false">http://pastebin.com/raw/Ksf8c4Tf</string>
-    <string name="wallpapers_json_url_vignesh" formatted="false" translatable="false">http://pastebin.com/raw/9qAZ7ZhB</string>
+    <string-array name="wallpaper_sources_urls">
+        <item>https://raw.githubusercontent.com/nicholaschum/ProjektDashboard/resources/dashboard_welcome.js</item>
+        <item>http://pastebin.com/raw/7bP1Qp5C</item>
+        <item>http://pastebin.com/raw/ia93pUKu</item>
+        <item>http://pastebin.com/raw/5MMtyesr</item>
+        <item>http://pastebin.com/raw/dbCArLaF</item>
+        <item>http://pastebin.com/raw/CapPghtE</item>
+        <item>http://pastebin.com/raw/BwKeCHew</item>
+        <item>http://pastebin.com/raw/FrrSS0De</item>
+        <item>http://pastebin.com/raw/khkhcRRk</item>
+        <item>http://pastebin.com/raw/Ksf8c4Tf</item>
+        <item>http://pastebin.com/raw/9qAZ7ZhB</item>
+    </string-array>
+
+    <string name="no_wallpapers_url">https://raw.githubusercontent.com/nicholaschum/ProjektDashboard/resources/dashboard_welcome.js</string>
 
     <string name="settings_title">dashboard. preferences</string>
     <string name="settings_subtitle1">show/hide dashboard. tabs</string>
