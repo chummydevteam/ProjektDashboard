@@ -1401,7 +1401,6 @@ public class CreativeMode extends CardStackAdapter implements
             public void onItemSelected(AdapterView<?> arg0, View arg1,
                                        int pos, long id) {
                 if (pos == 0) {
-                    Log.d("getFinalizedViewSpinner", "header pack creation activated, all options have been disabled!");
                     header_creative_mode_activated = false;
                     activateAllOptions(true);
                 }

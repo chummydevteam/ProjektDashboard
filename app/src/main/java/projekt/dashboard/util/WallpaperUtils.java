@@ -217,8 +217,8 @@ public class WallpaperUtils {
                                 return;
                             }
                             try {
-                                Log.d("WallpaperUtils", String.format("Loaded %d wallpapers from web.", holder.length()));
                                 if (holder.length() > 0) {
+                                    Log.d("WallpaperUtils", String.format("Loaded %d wallpapers from web.", holder.length()));
                                     try {
                                         Inquiry.init(context, DATABASE_NAME, DATABASE_VERSION);
                                         Inquiry.get().insertInto(TABLE_NAME, Wallpaper.class)
@@ -227,6 +227,8 @@ public class WallpaperUtils {
                                     } catch (Throwable t) {
                                         t.printStackTrace();
                                     }
+                                } else {
+                                    Log.d("WallpaperUtils", "There are no wallpapers needed to be loaded.");
                                 }
                                 callback.onRetrievedWallpapers(holder, null, false);
                             } catch (Throwable e1) {
