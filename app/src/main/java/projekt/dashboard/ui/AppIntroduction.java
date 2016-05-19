@@ -55,6 +55,7 @@ public class AppIntroduction extends AppIntro {
         prefs.edit().putBoolean("blacked_out_enabled", false).commit();
         prefs.edit().putBoolean("extended_actionbar_enabled", false).commit();
         prefs.edit().putBoolean("advanced_mode_enabled", true).commit();
+        prefs.edit().putBoolean("header_downloader_low_power_mode", false).commit();
 
         prefs.edit().putBoolean("color_switcher_enabled", true).commit();
         prefs.edit().putBoolean("header_swapper_enabled", true).commit();

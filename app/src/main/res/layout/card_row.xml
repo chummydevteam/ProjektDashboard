@@ -31,7 +31,7 @@
             android:layout_gravity="center"
             android:layout_marginBottom="20dp"
             android:layout_marginStart="15dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="20dp"
             android:text="PLACEHOLDER_TEXT"
             android:textColor="@android:color/white"
             android:textSize="18sp"

@@ -200,8 +200,8 @@
     <string name="settings_blacked_out_mode">enable blacked out mode</string>
     <string name="settings_creative_mode">enable creative mode</string>
     <string name="settings_extended_actionbar">enable extended actionbar mode</string>
+    <string name="settings_header_low_power_mode">enable downloader low power mode</string>
     <string name="settings_clear_dashboard_folder">clear dashboard. folder</string>
-
 
     <string name="contextualheaderimporter">contextual header pack importer</string>
     <string name="contextualheaderimporter_description">@string/contextualheaderimporter</string>

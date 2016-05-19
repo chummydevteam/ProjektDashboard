@@ -1,6 +1,8 @@
 package projekt.dashboard.adapters;
 
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -39,7 +41,13 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.ViewHolder> {
     public void onBindViewHolder(ViewHolder viewHolder, int i) {
 
         viewHolder.textView.setText(headers.get(i).getHeaderPackName());
-        Picasso.with(context).load(headers.get(i).getHeaderPackURL()).into(viewHolder.imageView);
+
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(
+                context);
+        if (!prefs.getBoolean("header_downloader_low_power_mode", true)) {
+            Picasso.with(context).load(headers.get(i).getHeaderPackURL()).into(viewHolder.imageView);
+        }
+
     }
 
     @Override
@@ -53,9 +61,15 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.ViewHolder> {
 
         public ViewHolder(View view) {
             super(view);
+            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(
+                    context);
 
             textView = (TextView) view.findViewById(R.id.headerPackName);
             imageView = (ImageView) view.findViewById(R.id.headerPackPreview);
+
+            if (prefs.getBoolean("header_downloader_low_power_mode", true)) {
+                imageView.setVisibility(View.GONE);
+            }
         }
     }
 }

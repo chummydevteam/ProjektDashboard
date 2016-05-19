@@ -235,6 +235,24 @@ public class SettingsActivity extends AppCompatActivity {
             }
         });
 
+        Switch header_low_power_mode = (Switch) findViewById(R.id.enable_low_power_mode);
+        if (prefs.getBoolean("header_downloader_low_power_mode", true)) {
+            header_low_power_mode.setChecked(true);
+        } else {
+            header_low_power_mode.setChecked(false);
+        }
+        header_low_power_mode.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    prefs.edit().putBoolean("header_downloader_low_power_mode", true).commit();
+
+                } else {
+                    prefs.edit().putBoolean("header_downloader_low_power_mode", false).commit();
+                }
+            }
+        });
+
         LinearLayout linearLayout = (LinearLayout) findViewById(R.id.clear_dashboard_folder);
         linearLayout.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
