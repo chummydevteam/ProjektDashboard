@@ -25,10 +25,13 @@
     <color name="card_background_blacked_out">#ff000000</color>
     <color name="card_background_dark_material">#ff1e1e1e</color>
 
+    <color name="cardview_dark_background">#ff212021</color>
+
     <color name="accent_1_dark">@android:color/white</color>
     <color name="accent_2_dark">@android:color/white</color>
     <color name="material_deep_teal_200">@android:color/white</color>
 
+    <color name="material_grey_800">#ff212021</color>
     <color name="material_grey_850">@android:color/black</color>
 
     <color name="window_bg_cards_dark">#ff000000</color>
