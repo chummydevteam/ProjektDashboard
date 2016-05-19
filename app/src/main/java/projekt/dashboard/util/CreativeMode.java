@@ -2742,7 +2742,35 @@ public class CreativeMode extends CardStackAdapter implements
                 File iconChecker3_ = new File(mContext.getCacheDir().getAbsolutePath() +
                         "/creative_mode/res/drawable-xhdpi-v4/cdt.png");
 
+                File iconChecker4 = new File(mContext.getCacheDir().getAbsolutePath() +
+                        "/creative_mode/res/drawable-xxhdpi/ic_launcher.png");
+                File iconChecker4_ = new File(mContext.getCacheDir().getAbsolutePath() +
+                        "/creative_mode/res/drawable-xxhdpi-v4/ic_launcher.png");
+                File iconChecker5 = new File(mContext.getCacheDir().getAbsolutePath() +
+                        "/creative_mode/res/mipmap-xxhdpi/ic_launcher.png");
+                File iconChecker5_ = new File(mContext.getCacheDir().getAbsolutePath() +
+                        "/creative_mode/res/mipmap-xxhdpi-v4/ic_launcher.png");
+                File iconChecker6 = new File(mContext.getCacheDir().getAbsolutePath() +
+                        "/creative_mode/res/drawable-xxhdpi/cdt.png");
+                File iconChecker6_ = new File(mContext.getCacheDir().getAbsolutePath() +
+                        "/creative_mode/res/drawable-xxhdpi-v4/cdt.png");
+
+                File iconChecker7 = new File(mContext.getCacheDir().getAbsolutePath() +
+                        "/creative_mode/res/drawable-xxxhdpi/ic_launcher.png");
+                File iconChecker7_ = new File(mContext.getCacheDir().getAbsolutePath() +
+                        "/creative_mode/res/drawable-xxxhdpi-v4/ic_launcher.png");
+                File iconChecker8 = new File(mContext.getCacheDir().getAbsolutePath() +
+                        "/creative_mode/res/mipmap-xxxhdpi/ic_launcher.png");
+                File iconChecker8_ = new File(mContext.getCacheDir().getAbsolutePath() +
+                        "/creative_mode/res/mipmap-xxxhdpi-v4/ic_launcher.png");
+                File iconChecker9 = new File(mContext.getCacheDir().getAbsolutePath() +
+                        "/creative_mode/res/drawable-xxxhdpi/cdt.png");
+                File iconChecker9_ = new File(mContext.getCacheDir().getAbsolutePath() +
+                        "/creative_mode/res/drawable-xxxhdpi-v4/cdt.png");
+
                 // Now check for the icon on non -v4 folders
+
+                icon_location = "";
 
                 if (iconChecker1.exists()) {
                     icon_location = "@drawable/ic_launcher";
@@ -2753,8 +2781,9 @@ public class CreativeMode extends CardStackAdapter implements
                         if (iconChecker3.exists()) {
                             icon_location = "@drawable/cdt";
                         } else {
-                            icon_location = "@drawable/dashboard_default";
-
+                            if (!icon_location.equals("@drawable/dashboard_default")) {
+                                icon_location = "@drawable/dashboard_default";
+                            }
                         }
                     }
                 }
@@ -2770,8 +2799,82 @@ public class CreativeMode extends CardStackAdapter implements
                         if (iconChecker3_.exists()) {
                             icon_location = "@drawable/cdt";
                         } else {
-                            icon_location = "@drawable/dashboard_default";
+                            if (!icon_location.equals("@drawable/dashboard_default")) {
+                                icon_location = "@drawable/dashboard_default";
+                            }
+                        }
+                    }
+                }
 
+
+                // Now check for the icon on non -v4 folders
+
+                if (iconChecker4.exists()) {
+                    icon_location = "@drawable/ic_launcher";
+                } else {
+                    if (iconChecker5.exists()) {
+                        icon_location = "@mipmap/ic_launcher";
+                    } else {
+                        if (iconChecker6.exists()) {
+                            icon_location = "@drawable/cdt";
+                        } else {
+                            if (!icon_location.equals("@drawable/dashboard_default")) {
+                                icon_location = "@drawable/dashboard_default";
+                            }
+                        }
+                    }
+                }
+
+                // Now check for the icon on -v4 folders
+
+                if (iconChecker4_.exists()) {
+                    icon_location = "@drawable/ic_launcher";
+                } else {
+                    if (iconChecker5_.exists()) {
+                        icon_location = "@mipmap/ic_launcher";
+                    } else {
+                        if (iconChecker6_.exists()) {
+                            icon_location = "@drawable/cdt";
+                        } else {
+                            if (!icon_location.equals("@drawable/dashboard_default")) {
+                                icon_location = "@drawable/dashboard_default";
+                            }
+                        }
+                    }
+                }
+
+                // Now check for the icon on non -v4 folders
+
+                if (iconChecker7.exists()) {
+                    icon_location = "@drawable/ic_launcher";
+                } else {
+                    if (iconChecker8.exists()) {
+                        icon_location = "@mipmap/ic_launcher";
+                    } else {
+                        if (iconChecker9.exists()) {
+                            icon_location = "@drawable/cdt";
+                        } else {
+                            if (!icon_location.equals("@drawable/dashboard_default")) {
+                                icon_location = "@drawable/dashboard_default";
+                            }
+                        }
+                    }
+                }
+
+                // Now check for the icon on -v4 folders
+
+                if (iconChecker7_.exists()) {
+                    icon_location = "@drawable/ic_launcher";
+                } else {
+                    if (iconChecker8_.exists()) {
+                        icon_location = "@mipmap/ic_launcher";
+                    } else {
+                        if (iconChecker9_.exists()) {
+                            icon_location = "@drawable/cdt";
+                        } else {
+                            if (!icon_location.equals("@drawable/dashboard_default")) {
+                                icon_location = "@drawable/dashboard_default";
+                            }
                         }
                     }
                 }
@@ -2972,6 +3075,128 @@ public class CreativeMode extends CardStackAdapter implements
                                 "rm -r " + mContext.getCacheDir().getAbsolutePath() +
                                         "/creative_mode/res/" + fileList2[i].getName());
                         Log.d("FileDeletion", "Deleted file/folder: " + fileList2[i].getName());
+                    }
+                }
+
+                // Begin filtering out the drawable resolution folders (visible to AAPT)
+
+                File[] fileList3 = new File(mContext.getCacheDir().getAbsolutePath() +
+                        "/creative_mode/res/drawable-xhdpi/").listFiles();
+                File fileList3checker = new File(mContext.getCacheDir().getAbsolutePath() +
+                        "/creative_mode/res/drawable-xhdpi/");
+                if (fileList3checker.exists()) {
+                    for (int i = 0; i < fileList3.length; i++) {
+                        if (!fileList3[i].getName().equals("cdt.png") &&
+                                !fileList3[i].getName().equals("dashboard_default.png") &&
+                                !fileList3[i].getName().equals("ic_launcher.png")) {
+                            File drawable_file = new File(mContext.getCacheDir().getAbsolutePath() +
+                                    "/creative_mode/res/drawable-xhdpi/" + fileList3[i].getName());
+                            boolean deleted = drawable_file.delete();
+                            eu.chainfire.libsuperuser.Shell.SU.run(
+                                    "rm -r " + mContext.getCacheDir().getAbsolutePath() +
+                                            "/creative_mode/res/drawable-xhdpi/" + fileList3[i].getName());
+                            Log.d("FileDeletion", "Deleted file/folder: " + fileList3[i].getName());
+                        }
+                    }
+                }
+
+                File[] fileList4 = new File(mContext.getCacheDir().getAbsolutePath() +
+                        "/creative_mode/res/drawable-xhdpi-v4/").listFiles();
+                File fileList4checker = new File(mContext.getCacheDir().getAbsolutePath() +
+                        "/creative_mode/res/drawable-xhdpi-v4/");
+                if (fileList4checker.exists()) {
+                    for (int i = 0; i < fileList4.length; i++) {
+                        if (!fileList4[i].getName().equals("cdt.png") &&
+                                !fileList4[i].getName().equals("dashboard_default.png") &&
+                                !fileList4[i].getName().equals("ic_launcher.png")) {
+                            File drawable_file = new File(mContext.getCacheDir().getAbsolutePath() +
+                                    "/creative_mode/res/drawable-xhdpi-v4/" + fileList4[i].getName());
+                            boolean deleted = drawable_file.delete();
+                            eu.chainfire.libsuperuser.Shell.SU.run(
+                                    "rm -r " + mContext.getCacheDir().getAbsolutePath() +
+                                            "/creative_mode/res/drawable-xhdpi-v4/" + fileList4[i].getName());
+                            Log.d("FileDeletion", "Deleted file/folder: " + fileList4[i].getName());
+                        }
+                    }
+                }
+
+                File[] fileList5 = new File(mContext.getCacheDir().getAbsolutePath() +
+                        "/creative_mode/res/drawable-xxhdpi/").listFiles();
+                File fileList5checker = new File(mContext.getCacheDir().getAbsolutePath() +
+                        "/creative_mode/res/drawable-xxhdpi/");
+                if (fileList5checker.exists()) {
+                    for (int i = 0; i < fileList5.length; i++) {
+                        if (!fileList5[i].getName().equals("cdt.png") &&
+                                !fileList5[i].getName().equals("dashboard_default.png") &&
+                                !fileList5[i].getName().equals("ic_launcher.png")) {
+                            File drawable_file = new File(mContext.getCacheDir().getAbsolutePath() +
+                                    "/creative_mode/res/drawable-xxhdpi/" + fileList5[i].getName());
+                            boolean deleted = drawable_file.delete();
+                            eu.chainfire.libsuperuser.Shell.SU.run(
+                                    "rm -r " + mContext.getCacheDir().getAbsolutePath() +
+                                            "/creative_mode/res/drawable-xxhdpi/" + fileList5[i].getName());
+                            Log.d("FileDeletion", "Deleted file/folder: " + fileList5[i].getName());
+                        }
+                    }
+                }
+
+                File[] fileList6 = new File(mContext.getCacheDir().getAbsolutePath() +
+                        "/creative_mode/res/drawable-xxhdpi-v4/").listFiles();
+                File fileList6checker = new File(mContext.getCacheDir().getAbsolutePath() +
+                        "/creative_mode/res/drawable-xxhdpi-v4/");
+                if (fileList6checker.exists()) {
+                    for (int i = 0; i < fileList6.length; i++) {
+                        if (!fileList6[i].getName().equals("cdt.png") &&
+                                !fileList6[i].getName().equals("dashboard_default.png") &&
+                                !fileList6[i].getName().equals("ic_launcher.png")) {
+                            File drawable_file = new File(mContext.getCacheDir().getAbsolutePath() +
+                                    "/creative_mode/res/drawable-xxhdpi-v4/" + fileList6[i].getName());
+                            boolean deleted = drawable_file.delete();
+                            eu.chainfire.libsuperuser.Shell.SU.run(
+                                    "rm -r " + mContext.getCacheDir().getAbsolutePath() +
+                                            "/creative_mode/res/drawable-xxhdpi-v4/" + fileList6[i].getName());
+                            Log.d("FileDeletion", "Deleted file/folder: " + fileList6[i].getName());
+                        }
+                    }
+                }
+
+                File[] fileList7 = new File(mContext.getCacheDir().getAbsolutePath() +
+                        "/creative_mode/res/drawable-xxxhdpi/").listFiles();
+                File fileList7checker = new File(mContext.getCacheDir().getAbsolutePath() +
+                        "/creative_mode/res/drawable-xxxhdpi/");
+                if (fileList7checker.exists()) {
+                    for (int i = 0; i < fileList7.length; i++) {
+                        if (!fileList7[i].getName().equals("cdt.png") &&
+                                !fileList7[i].getName().equals("dashboard_default.png") &&
+                                !fileList7[i].getName().equals("ic_launcher.png")) {
+                            File drawable_file = new File(mContext.getCacheDir().getAbsolutePath() +
+                                    "/creative_mode/res/drawable-xxxhdpi/" + fileList7[i].getName());
+                            boolean deleted = drawable_file.delete();
+                            eu.chainfire.libsuperuser.Shell.SU.run(
+                                    "rm -r " + mContext.getCacheDir().getAbsolutePath() +
+                                            "/creative_mode/res/drawable-xxxhdpi/" + fileList7[i].getName());
+                            Log.d("FileDeletion", "Deleted file/folder: " + fileList7[i].getName());
+                        }
+                    }
+                }
+
+                File[] fileList8 = new File(mContext.getCacheDir().getAbsolutePath() +
+                        "/creative_mode/res/drawable-xxxhdpi-v4/").listFiles();
+                File fileList8checker = new File(mContext.getCacheDir().getAbsolutePath() +
+                        "/creative_mode/res/drawable-xxxhdpi-v4/");
+                if (fileList8checker.exists()) {
+                    for (int i = 0; i < fileList8.length; i++) {
+                        if (!fileList8[i].getName().equals("cdt.png") &&
+                                !fileList8[i].getName().equals("dashboard_default.png") &&
+                                !fileList8[i].getName().equals("ic_launcher.png")) {
+                            File drawable_file = new File(mContext.getCacheDir().getAbsolutePath() +
+                                    "/creative_mode/res/drawable-xxxhdpi-v4/" + fileList8[i].getName());
+                            boolean deleted = drawable_file.delete();
+                            eu.chainfire.libsuperuser.Shell.SU.run(
+                                    "rm -r " + mContext.getCacheDir().getAbsolutePath() +
+                                            "/creative_mode/res/drawable-xxxhdpi-v4/" + fileList8[i].getName());
+                            Log.d("FileDeletion", "Deleted file/folder: " + fileList8[i].getName());
+                        }
                     }
                 }
             }
