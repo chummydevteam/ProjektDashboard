@@ -54,6 +54,7 @@ import projekt.dashboard.util.ReadCloudXMLFile;
 public class HeaderPackDownloadActivity extends AppCompatActivity {
 
     public boolean has_downloaded_anything = false;
+    public String current_source_pack;
     ProgressDialog mProgressDialog;
     private PowerManager.WakeLock mWakeLock;
     private ArrayList<String> headerNames, headerPreviews;
@@ -116,7 +117,7 @@ public class HeaderPackDownloadActivity extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.downloader);
+        setContentView(R.layout.downloader_activity);
 
         android.support.v7.widget.Toolbar toolbar =
                 (android.support.v7.widget.Toolbar) findViewById(R.id.toolbar);
@@ -150,15 +151,20 @@ public class HeaderPackDownloadActivity extends AppCompatActivity {
         ImageButton restartActivity = (ImageButton) findViewById(R.id.restartDownloadSources);
         restartActivity.setOnClickListener((new View.OnClickListener() {
             public void onClick(View v) {
-
-                downloadResources downloadTask = new downloadResources();
-                downloadTask.execute(
-                        headerPackSources[headerPackSourcePicker.getSelectedItemPosition()],
-                        "addons.xml");
-                refreshLayout();
+                if (!current_source_pack.equals(headerPackSources[headerPackSourcePicker.getSelectedItemPosition()])) {
+                    current_source_pack = headerPackSources[headerPackSourcePicker.getSelectedItemPosition()];
+                    downloadResources downloadTask = new downloadResources();
+                    downloadTask.execute(
+                            headerPackSources[headerPackSourcePicker.getSelectedItemPosition()],
+                            "addons.xml");
+                    refreshLayout();
+                } else {
+                    Log.d("DownloadActivity", "There is no need to restart the activity's sources!");
+                }
             }
         }));
 
+        current_source_pack = headerPackSources[headerPackSourcePicker.getSelectedItemPosition()];
         downloadResources downloadTask = new downloadResources();
         downloadTask.execute(
                 headerPackSources[headerPackSourcePicker.getSelectedItemPosition()],

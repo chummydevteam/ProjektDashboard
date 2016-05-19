@@ -62,6 +62,7 @@
             android:id="@+id/NoDownloadsAvailable"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/sourcePickerHeaderPacks"
             android:gravity="center"
             android:text="@string/downloader_empty"
             android:visibility="gone" />
