@@ -55,17 +55,6 @@
     <string name="zipfile_checker_success">file chosen: </string>
     <string name="zipfile_checker_error">File chosen was not a valid ZIP!</string>
 
-    <string name="wallpapers_json_url" formatted="false" translatable="false">https://raw.githubusercontent.com/nicholaschum/ProjektDashboard/resources/dashboard_welcome.js</string>
-    <string name="wallpapers_json_url_customworx_du" formatted="false" translatable="false">http://pastebin.com/raw/7bP1Qp5C</string>
-    <string name="wallpapers_json_url_customworx_octOS" formatted="false" translatable="false">http://pastebin.com/raw/ia93pUKu</string>
-    <string name="wallpapers_json_url_customworx_screwd" formatted="false" translatable="false">http://pastebin.com/raw/5MMtyesr</string>
-    <string name="wallpapers_json_url_customworx" formatted="false" translatable="false">http://pastebin.com/raw/dbCArLaF</string>
-    <string name="wallpapers_json_url_gagan_du" formatted="false" translatable="false">http://pastebin.com/raw/CapPghtE</string>
-    <string name="wallpapers_json_url_gagan" formatted="false" translatable="false">http://pastebin.com/raw/BwKeCHew</string>
-    <string name="wallpapers_json_url_syed" formatted="false" translatable="false">http://pastebin.com/raw/khkhcRRk</string>
-    <string name="wallpapers_json_url_vignesh_du" formatted="false" translatable="false">http://pastebin.com/raw/Ksf8c4Tf</string>
-    <string name="wallpapers_json_url_vignesh" formatted="false" translatable="false">http://pastebin.com/raw/9qAZ7ZhB</string>
-
     <string name="downloader_button">Online Header Packs Database</string>
     <string name="downloader_dialog_accept">Download</string>
     <string name="downloader_dialog_cancel">Cancel</string>
@@ -154,6 +143,28 @@
         <item>Hello. Cupid called. He says to tell you that he needs my heart back.</item>
     </string-array>
 
+    <string-array name="header_pack_sources">
+        <item>customworx (cdt) header packs</item>
+        <item>elmorapz header packs</item>
+        <item>jayrod header packs</item>
+        <item>matthew whitehurst header packs</item>
+        <item>nicholas chum (cdt) header packs</item>
+        <item>paul walls header packs</item>
+        <item>syed sajid header packs</item>
+        <item>vignesh ravi header packs</item>
+    </string-array>
+
+    <string-array name="header_pack_urls">
+        <item>http://pastebin.com/raw/7Wgby6SB</item>
+        <item>http://pastebin.com/raw/ZFfSAmeu</item>
+        <item>http://pastebin.com/raw/JHbTURbM</item>
+        <item>http://pastebin.com/raw/3j8cpA9M</item>
+        <item>http://pastebin.com/raw/fiDf6p3L</item>
+        <item>http://pastebin.com/raw/cgQcAS6f</item>
+        <item>http://pastebin.com/raw/mPP82GSg</item>
+        <item>http://pastebin.com/raw/1wV8FHym</item>
+    </string-array>
+
     <string-array name="wallpaper_sources">
         <item>please select a wallpaper pack&#8230;</item>
         <item>customworx du wallpaper pack</item>
@@ -166,6 +177,17 @@
         <item>vignesh ravi du wallpaper pack</item>
         <item>vignesh ravi wallpaper pack</item>
     </string-array>
+
+    <string name="wallpapers_json_url" formatted="false" translatable="false">https://raw.githubusercontent.com/nicholaschum/ProjektDashboard/resources/dashboard_welcome.js</string>
+    <string name="wallpapers_json_url_customworx_du" formatted="false" translatable="false">http://pastebin.com/raw/7bP1Qp5C</string>
+    <string name="wallpapers_json_url_customworx_octOS" formatted="false" translatable="false">http://pastebin.com/raw/ia93pUKu</string>
+    <string name="wallpapers_json_url_customworx_screwd" formatted="false" translatable="false">http://pastebin.com/raw/5MMtyesr</string>
+    <string name="wallpapers_json_url_customworx" formatted="false" translatable="false">http://pastebin.com/raw/dbCArLaF</string>
+    <string name="wallpapers_json_url_gagan_du" formatted="false" translatable="false">http://pastebin.com/raw/CapPghtE</string>
+    <string name="wallpapers_json_url_gagan" formatted="false" translatable="false">http://pastebin.com/raw/BwKeCHew</string>
+    <string name="wallpapers_json_url_syed" formatted="false" translatable="false">http://pastebin.com/raw/khkhcRRk</string>
+    <string name="wallpapers_json_url_vignesh_du" formatted="false" translatable="false">http://pastebin.com/raw/Ksf8c4Tf</string>
+    <string name="wallpapers_json_url_vignesh" formatted="false" translatable="false">http://pastebin.com/raw/9qAZ7ZhB</string>
 
     <string name="settings_title">dashboard. preferences</string>
     <string name="settings_subtitle1">show/hide dashboard. tabs</string>

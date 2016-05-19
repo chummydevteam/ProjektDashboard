@@ -16,7 +16,7 @@
             android:layout_gravity="center"
             android:text="@string/downloader_title"
             android:textColor="@android:color/white"
-            android:textSize="20dp"
+            android:textSize="20sp"
             android:textStyle="italic" />
 
 
@@ -32,10 +32,31 @@
         android:padding="@dimen/content_inset_less"
         android:weightSum="1">
 
+        <Spinner
+            android:id="@+id/sourcePickerHeaderPacks"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="@dimen/content_inset"
+            android:layout_toStartOf="@+id/restartDownloadSources" />
+
+        <ImageButton
+            android:id="@+id/restartDownloadSources"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="5dp"
+            android:backgroundTint="@android:color/transparent"
+            android:clickable="true"
+            android:foreground="?android:selectableItemBackground"
+            android:src="@drawable/ic_cached_24dp" />
+
         <android.support.v7.widget.RecyclerView
             android:id="@+id/list_item"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/sourcePickerHeaderPacks" />
 
         <TextView
             android:id="@+id/NoDownloadsAvailable"

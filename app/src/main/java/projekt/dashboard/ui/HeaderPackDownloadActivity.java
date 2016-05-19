@@ -21,7 +21,11 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -126,9 +130,34 @@ public class HeaderPackDownloadActivity extends AppCompatActivity {
         mProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
         mProgressDialog.setCancelable(false);
 
+        final String[] headerPackSources = getResources().getStringArray(R.array.header_pack_urls);
+        final Spinner headerPackSourcePicker = (Spinner) findViewById(R.id.sourcePickerHeaderPacks);
+        ArrayAdapter<String> spinnerCountShoesArrayAdapter = new ArrayAdapter<String>(getApplicationContext(),
+                android.R.layout.simple_spinner_dropdown_item, getResources().getStringArray(R.array.header_pack_sources));
+        headerPackSourcePicker.setAdapter(spinnerCountShoesArrayAdapter);
+        headerPackSourcePicker.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> arg0, View arg1,
+                                       int pos, long id) {}
+            @Override
+            public void onNothingSelected(AdapterView<?> arg0) {}
+        });
+
+        ImageButton restartActivity = (ImageButton) findViewById(R.id.restartDownloadSources);
+        restartActivity.setOnClickListener((new View.OnClickListener() {
+            public void onClick(View v) {
+
+                downloadResources downloadTask = new downloadResources();
+                downloadTask.execute(
+                        headerPackSources[headerPackSourcePicker.getSelectedItemPosition()],
+                        "addons.xml");
+                refreshLayout();
+            }
+        }));
+
         downloadResources downloadTask = new downloadResources();
         downloadTask.execute(
-                "http://pastebin.com/raw/eCmQhEwM",
+                headerPackSources[headerPackSourcePicker.getSelectedItemPosition()],
                 "addons.xml");
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
