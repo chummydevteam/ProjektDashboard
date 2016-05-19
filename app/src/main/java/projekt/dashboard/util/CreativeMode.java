@@ -529,6 +529,7 @@ public class CreativeMode extends CardStackAdapter implements
         final TextView main_color_dark_text = (TextView) framework_card.findViewById(
                 R.id.system_main_dark_colorpicker_text);
         main_color_dark.setColorFilter(current_selected_system_main_dark_color, PorterDuff.Mode.SRC_ATOP);
+        main_color_dark.setColorFilter(current_selected_system_main_dark_color, PorterDuff.Mode.SRC_ATOP);
         main_color_dark.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 final ColorPickerDialog cpd = new ColorPickerDialog(
@@ -537,6 +538,7 @@ public class CreativeMode extends CardStackAdapter implements
                     @Override
                     public void onColorChanged(int color) {
                         current_selected_system_main_dark_color = color;
+                        main_color_dark.setColorFilter(current_selected_system_main_dark_color, PorterDuff.Mode.SRC_ATOP);
                         is_framework_main_theme_color_dark_changed = true;
                         main_color_dark_text.setTextColor(mContext.getColor(android.R.color.white));
                     }
