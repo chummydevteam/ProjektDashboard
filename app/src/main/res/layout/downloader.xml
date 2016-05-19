@@ -32,7 +32,7 @@
         android:padding="@dimen/content_inset_less"
         android:weightSum="1">
 
-        <ListView
+        <android.support.v7.widget.RecyclerView
             android:id="@+id/list_item"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content" />

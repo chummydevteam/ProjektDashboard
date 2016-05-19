@@ -131,4 +131,7 @@ dependencies {
 
     // Dialogs
     compile 'com.mikhaellopez:circularfillableloaders:1.2.0'
+
+    // Image Downloading and Caching
+    compile 'com.squareup.picasso:picasso:2.5.2'
 }

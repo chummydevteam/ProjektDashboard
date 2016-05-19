@@ -5,25 +5,27 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.PowerManager;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.squareup.picasso.Picasso;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -31,13 +33,14 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Arrays;
 import java.util.Map;
 
 import projekt.dashboard.R;
+import projekt.dashboard.adapters.DataAdapter;
+import projekt.dashboard.util.HeaderParser;
 import projekt.dashboard.util.ReadCloudXMLFile;
 
 /**
@@ -48,6 +51,8 @@ public class HeaderPackDownloadActivity extends AppCompatActivity {
     public boolean has_downloaded_anything = false;
     ProgressDialog mProgressDialog;
     private PowerManager.WakeLock mWakeLock;
+    private ArrayList<String> headerNames, headerPreviews;
+    private String[] headerNamesArray, headerPreviewsArray;
 
     void DeleteRecursive(File fileOrDirectory) {
 
@@ -130,14 +135,32 @@ public class HeaderPackDownloadActivity extends AppCompatActivity {
         StrictMode.setThreadPolicy(policy);
     }
 
+    private ArrayList<HeaderParser> prepareData() {
+
+        ArrayList<HeaderParser> headers = new ArrayList<>();
+        for (int i = 0; i < headerNamesArray.length; i++) {
+            HeaderParser headerParser = new HeaderParser();
+            headerParser.setHeaderPackName(headerNamesArray[i]);
+            headerParser.setHeaderPackURL(headerPreviewsArray[i]);
+            headers.add(headerParser);
+        }
+        return headers;
+    }
+
     public void refreshLayout() {
         int counter = 0;
 
         // Get ListView object from xml
-        final ListView listView = (ListView) findViewById(R.id.list_item);
+        //final ListView listView = (ListView) findViewById(R.id.list_item);
+
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.list_item);
+        recyclerView.setHasFixedSize(true);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
+        recyclerView.setLayoutManager(layoutManager);
 
         // Defined Array values to show in ListView
-        List<String> values = new ArrayList<String>();
+        headerNames = new ArrayList<>();
+        headerPreviews = new ArrayList<>();
 
         String[] checkerCommands = {getApplicationContext().getFilesDir() + "/addons.xml"};
         final Map<String, String> newArray = ReadCloudXMLFile.main(checkerCommands);
@@ -150,78 +173,108 @@ public class HeaderPackDownloadActivity extends AppCompatActivity {
             if (!f.exists()) {
                 if (key.toLowerCase().contains("-preview".toLowerCase())) {
                     System.out.println("Preview file detected, ignoring it from the TreeMap");
+                    String checker = key.substring(0, key.length() - 8);
+
+                    // Unlike the previous implementation, we have to filter out already installed
+                    // header packs including their preview images.
+
+                    Boolean checkIfExist = new File(Environment.getExternalStorageDirectory().
+                            getAbsolutePath() +
+                            "/dashboard./" + checker + ".zip").exists();
+                    if (!checkIfExist) {
+                        headerPreviews.add(newArray.get(key));
+                    }
                 } else {
-                    values.add(key);
+                    headerNames.add(key);
                     counter += 1;
                 }
+            } else {
+                Log.e("It exists!", f.getAbsolutePath());
             }
         }
-
         if (counter == 0) {
             TextView noDownloadsAvailable = (TextView) findViewById(R.id.NoDownloadsAvailable);
             noDownloadsAvailable.setVisibility(View.VISIBLE);
-            listView.setVisibility(View.GONE);
+            recyclerView.setVisibility(View.GONE);
         }
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(),
-                R.layout.list_row, R.id.title, values);
+        headerNamesArray = headerNames.toArray(new String[headerNames.size()]);
+        Arrays.sort(headerNamesArray);
+        headerPreviewsArray = headerPreviews.toArray(new String[headerPreviews.size()]);
 
+        ArrayList<HeaderParser> headerParsers = prepareData();
+        DataAdapter adapter = new DataAdapter(getApplicationContext(), headerParsers);
         // Assign adapter to ListView
-        listView.setAdapter(adapter);
+        recyclerView.setAdapter(adapter);
         // ListView Item Click Listener
-        listView.setOnItemClickListener(
-                new AdapterView.OnItemClickListener() {
+        recyclerView.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {
+            GestureDetector gestureDetector = new GestureDetector(getApplicationContext(),
+                    new GestureDetector.SimpleOnGestureListener() {
 
-                    @Override
-                    public void onItemClick(AdapterView<?> parent, View view,
-                                            final int position, long id) {
-                        // ListView Clicked item value
-                        final String itemValue = (String) listView.getItemAtPosition(position);
-
-                        AlertDialog.Builder builder = new AlertDialog.Builder(
-                                HeaderPackDownloadActivity.this);
-                        builder.setPositiveButton(getResources().getString(
-                                R.string.downloader_dialog_accept), new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                // execute this when the downloader must be fired
-                                final downloadResources downloadTask = new downloadResources();
-                                downloadTask.execute(newArray.get(itemValue), itemValue);
-                            }
-                        }).setNegativeButton(
-                                getResources().getString(R.string.downloader_dialog_cancel),
-                                new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                    }
-                                });
-                        final AlertDialog dialog = builder.create();
-                        LayoutInflater inflater = getLayoutInflater();
-                        View dialogLayout = inflater.inflate(R.layout.header_preview_dialog, null);
-                        dialog.setView(dialogLayout);
-                        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                        try {
-                            ImageView i = (ImageView) dialogLayout.findViewById(R.id.dialogImage);
-                            Bitmap bitmap = BitmapFactory.decodeStream((InputStream) new URL(
-                                    newArray.get(itemValue + "-preview")).getContent());
-                            i.setImageBitmap(bitmap);
-                        } catch (MalformedURLException e) {
-                            e.printStackTrace();
-                        } catch (IOException e) {
-                            e.printStackTrace();
+                        @Override
+                        public boolean onSingleTapUp(MotionEvent e) {
+                            return true;
                         }
-                        dialog.setCancelable(false);
-                        dialog.show();
-                        dialog.getButton(dialog.BUTTON_NEGATIVE).
-                                setTextColor(getResources().getColor(android.R.color.white));
-                        dialog.getButton(dialog.BUTTON_POSITIVE).
-                                setTextColor(getResources().getColor(android.R.color.white));
-                    }
 
+                    });
 
+            @Override
+            public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e) {
+
+                View child = rv.findChildViewUnder(e.getX(), e.getY());
+                if (child != null && gestureDetector.onTouchEvent(e)) {
+                    // ListView Clicked item value
+                    int position = rv.getChildAdapterPosition(child);
+
+                    final String itemValue = headerNames.get(position);
+
+                    AlertDialog.Builder builder = new AlertDialog.Builder(
+                            HeaderPackDownloadActivity.this);
+                    builder.setPositiveButton(getResources().getString(
+                            R.string.downloader_dialog_accept), new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            // execute this when the downloader must be fired
+                            final downloadResources downloadTask = new downloadResources();
+                            downloadTask.execute(newArray.get(itemValue), itemValue);
+                        }
+                    }).setNegativeButton(
+                            getResources().getString(R.string.downloader_dialog_cancel),
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    Log.i("HeaderPackDownloader", "User cancelled the download activity.");
+                                }
+                            });
+                    final AlertDialog dialog = builder.create();
+                    LayoutInflater inflater = getLayoutInflater();
+                    View dialogLayout = inflater.inflate(R.layout.header_preview_dialog, null);
+                    dialog.setView(dialogLayout);
+                    dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                    ImageView i = (ImageView) dialogLayout.findViewById(R.id.dialogImage);
+                    Picasso.with(getApplicationContext()).load(newArray.get(itemValue +
+                            "-preview")).into(i);
+                    dialog.setCancelable(false);
+                    dialog.show();
+                    dialog.getButton(dialog.BUTTON_NEGATIVE).
+                            setTextColor(getResources().getColor(android.R.color.white));
+                    dialog.getButton(dialog.BUTTON_POSITIVE).
+                            setTextColor(getResources().getColor(android.R.color.white));
                 }
 
-        );
+                return false;
+            }
+
+            @Override
+            public void onTouchEvent(RecyclerView rv, MotionEvent e) {
+
+            }
+
+            @Override
+            public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
+
+            }
+        });
         mProgressDialog.setMessage(getResources().getString(R.string.downloader_dialog_two));
     }
 
