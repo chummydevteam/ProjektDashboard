@@ -157,7 +157,10 @@ public class HeaderPackDownloadActivity extends AppCompatActivity {
                     downloadTask.execute(
                             headerPackSources[headerPackSourcePicker.getSelectedItemPosition()],
                             "addons.xml");
-                    refreshLayout();
+                    RecyclerView recyclerView = (RecyclerView) findViewById(R.id.list_item);
+                    TextView noDownloadsAvailable = (TextView) findViewById(R.id.NoDownloadsAvailable);
+                    noDownloadsAvailable.setVisibility(View.GONE);
+                    recyclerView.setVisibility(View.VISIBLE);
                 } else {
                     Log.d("DownloadActivity", "There is no need to restart the activity's sources!");
                 }
