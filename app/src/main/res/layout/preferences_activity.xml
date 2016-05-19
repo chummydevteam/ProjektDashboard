@@ -113,16 +113,26 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/app_theme_title"
-            android:checked="true"
+            android:checked="false"
             android:padding="16dp"
             android:text="@string/settings_blacked_out_mode" />
+
+        <Switch
+            android:id="@+id/enable_creative_mode"
+            style="@style/ShadowBlackTextWhite"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/enable_blacked_out"
+            android:checked="true"
+            android:padding="16dp"
+            android:text="@string/settings_creative_mode" />
 
         <Switch
             android:id="@+id/enable_extended_actionbar"
             style="@style/ShadowBlackTextWhite"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/enable_blacked_out"
+            android:layout_below="@id/enable_creative_mode"
             android:checked="false"
             android:padding="16dp"
             android:text="@string/settings_extended_actionbar" />
@@ -149,7 +159,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="/storage/0/dashboard./"
+                android:text="/storage/emulated/0/dashboard./"
                 android:textSize="@dimen/content_inset_less"></TextView>
         </LinearLayout>
 

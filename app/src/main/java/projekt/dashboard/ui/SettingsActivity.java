@@ -215,6 +215,26 @@ public class SettingsActivity extends AppCompatActivity {
             }
         });
 
+        Switch creative_mode = (Switch) findViewById(R.id.enable_creative_mode);
+        if (prefs.getBoolean("advanced_mode_enabled", true)) {
+            creative_mode.setChecked(true);
+        } else {
+            creative_mode.setChecked(false);
+        }
+        creative_mode.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    has_modified_anything = true;
+                    prefs.edit().putBoolean("advanced_mode_enabled", true).commit();
+
+                } else {
+                    has_modified_anything = true;
+                    prefs.edit().putBoolean("advanced_mode_enabled", false).commit();
+                }
+            }
+        });
+
         LinearLayout linearLayout = (LinearLayout) findViewById(R.id.clear_dashboard_folder);
         linearLayout.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {

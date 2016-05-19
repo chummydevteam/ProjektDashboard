@@ -198,6 +198,7 @@
     <string name="settings_theme_debugging_tab">enable theme debugging tab</string>
     <string name="settings_wallpaper_tab">enable wallpaper tab</string>
     <string name="settings_blacked_out_mode">enable blacked out mode</string>
+    <string name="settings_creative_mode">enable creative mode</string>
     <string name="settings_extended_actionbar">enable extended actionbar mode</string>
     <string name="settings_clear_dashboard_folder">clear dashboard. folder</string>
 
