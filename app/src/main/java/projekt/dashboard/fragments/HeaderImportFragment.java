@@ -251,7 +251,7 @@ public class HeaderImportFragment extends BasePageFragment {
                         if (!inFile.getAbsolutePath().substring(21).equals(
                                 "com.chummy.jezebel.materialdark.donate")) {
                             if (!inFile.getAbsolutePath().substring(21).equals("projekt.klar")) {
-                                if (!inFile.getAbsolutePath().substring(21, 37).equals("chummy.dashboard")) {
+                                if (!inFile.getAbsolutePath().substring(21).contains("chummy.dashboard")) {
                                     if (checkIfPackageInstalled(inFile.getAbsolutePath().substring(21), getContext())) {
                                         list.add(inFile.getAbsolutePath().substring(21));
                                         counter += 1;
