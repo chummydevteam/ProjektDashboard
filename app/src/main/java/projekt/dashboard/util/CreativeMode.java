@@ -28,6 +28,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.Spinner;
@@ -95,6 +96,7 @@ public class CreativeMode extends CardStackAdapter implements
     public Boolean header_creative_mode_activated = false;
     public String header_pack_name, header_pack_author;
 
+    public LinearLayout framework_toolbar_dark;
     public ImageView accent_universal, accent_secondary, accent_light, appbg_dark, appbg_light, dialog_dark, dialog_light, main_color, main_color_dark, notifications_primary, notifications_secondary, ripples;
     public Switch colorful_icon_switch, categories_title_caps, categories_title_bold, categories_title_italics, dashboard_divider, dutweaks_icons;
     public ImageView settings_dashboard_background_color, settings_dashboard_category_background_color, settings_icon_colors, settings_title_colors, settings_switchbar_background_color;
@@ -524,6 +526,7 @@ public class CreativeMode extends CardStackAdapter implements
 
         // Framework System Main Color Dark
 
+        framework_toolbar_dark = (LinearLayout) framework_card.findViewById(R.id.framework_toolbar_dark);
         main_color_dark = (ImageView) framework_card.findViewById(
                 R.id.system_main_dark_colorpicker);
         final TextView main_color_dark_text = (TextView) framework_card.findViewById(
@@ -537,8 +540,10 @@ public class CreativeMode extends CardStackAdapter implements
                 cpd.setOnColorChangedListener(new ColorPickerDialog.OnColorChangedListener() {
                     @Override
                     public void onColorChanged(int color) {
+                        framework_toolbar_dark.setVisibility(View.VISIBLE);
                         current_selected_system_main_dark_color = color;
                         main_color_dark.setColorFilter(current_selected_system_main_dark_color, PorterDuff.Mode.SRC_ATOP);
+                        framework_toolbar_dark.setBackgroundColor(current_selected_system_main_dark_color);
                         is_framework_main_theme_color_dark_changed = true;
                         main_color_dark_text.setTextColor(mContext.getColor(android.R.color.white));
                     }
@@ -1403,10 +1408,16 @@ public class CreativeMode extends CardStackAdapter implements
             public void onItemSelected(AdapterView<?> arg0, View arg1,
                                        int pos, long id) {
                 if (pos == 0) {
+                    if (framework_toolbar_dark.getVisibility() == View.GONE) {
+                        framework_toolbar_dark.setVisibility(View.VISIBLE);
+                    }
                     header_creative_mode_activated = false;
                     activateAllOptions(true);
                 }
                 if (pos == 1) {
+                    if (framework_toolbar_dark.getVisibility() == View.VISIBLE) {
+                        framework_toolbar_dark.setVisibility(View.GONE);
+                    }
                     Log.d("getFinalizedViewSpinner", "header pack creation activated, all options have been disabled!");
                     header_creative_mode_activated = true;
 
@@ -1470,6 +1481,9 @@ public class CreativeMode extends CardStackAdapter implements
                     }, 100);
                 }
                 if (pos == 2) {
+                    if (framework_toolbar_dark.getVisibility() == View.VISIBLE) {
+                        framework_toolbar_dark.setVisibility(View.GONE);
+                    }
                     if (!checkCurrentThemeSelection("com.chummy.jezebel.materialdark.donate")) {
                         Toast toast = Toast.makeText(mContext.getApplicationContext(),
                                 mContext.getResources().getString(
@@ -1508,6 +1522,9 @@ public class CreativeMode extends CardStackAdapter implements
                     activateAllOptions(true);
                 }
                 if (pos == 3) {
+                    if (framework_toolbar_dark.getVisibility() == View.VISIBLE) {
+                        framework_toolbar_dark.setVisibility(View.GONE);
+                    }
                     if (!checkCurrentThemeSelection("com.chummy.jezebel.blackedout.donate")) {
                         Toast toast = Toast.makeText(mContext.getApplicationContext(),
                                 mContext.getResources().getString(
@@ -1549,6 +1566,9 @@ public class CreativeMode extends CardStackAdapter implements
                 }
 
                 if (pos > 3) {
+                    if (framework_toolbar_dark.getVisibility() == View.GONE) {
+                        framework_toolbar_dark.setVisibility(View.VISIBLE);
+                    }
                     header_creative_mode_activated = false;
                     activateAllOptions(true);
                     if (spinner1.getSelectedItem().toString().substring(0, 10).equals("com.chummy")
