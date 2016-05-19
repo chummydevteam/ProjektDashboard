@@ -1411,6 +1411,9 @@ public class CreativeMode extends CardStackAdapter implements
                     if (framework_toolbar_dark.getVisibility() == View.GONE) {
                         framework_toolbar_dark.setVisibility(View.VISIBLE);
                     }
+                    if (main_color_dark_view.getVisibility() == View.GONE) {
+                        main_color_dark_view.setVisibility(View.VISIBLE);
+                    }
                     header_creative_mode_activated = false;
                     activateAllOptions(true);
                 }
