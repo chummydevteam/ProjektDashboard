@@ -55,6 +55,9 @@ public class HeaderPackDownloadActivity extends AppCompatActivity {
 
     public boolean has_downloaded_anything = false;
     public String current_source_pack;
+    public RecyclerView recyclerView;
+    public RecyclerView.LayoutManager layoutManager;
+    public Boolean is_dialog_open = false;
     ProgressDialog mProgressDialog;
     private PowerManager.WakeLock mWakeLock;
     private ArrayList<String> headerNames, headerPreviews;
@@ -149,23 +152,25 @@ public class HeaderPackDownloadActivity extends AppCompatActivity {
         });
 
         ImageButton restartActivity = (ImageButton) findViewById(R.id.restartDownloadSources);
-        restartActivity.setOnClickListener((new View.OnClickListener() {
-            public void onClick(View v) {
-                if (!current_source_pack.equals(headerPackSources[headerPackSourcePicker.getSelectedItemPosition()])) {
-                    current_source_pack = headerPackSources[headerPackSourcePicker.getSelectedItemPosition()];
-                    downloadResources downloadTask = new downloadResources();
-                    downloadTask.execute(
-                            headerPackSources[headerPackSourcePicker.getSelectedItemPosition()],
-                            "addons.xml");
-                    RecyclerView recyclerView = (RecyclerView) findViewById(R.id.list_item);
-                    TextView noDownloadsAvailable = (TextView) findViewById(R.id.NoDownloadsAvailable);
-                    noDownloadsAvailable.setVisibility(View.GONE);
-                    recyclerView.setVisibility(View.VISIBLE);
-                } else {
-                    Log.d("DownloadActivity", "There is no need to restart the activity's sources!");
+        if (restartActivity != null) {
+            restartActivity.setOnClickListener((new View.OnClickListener() {
+                public void onClick(View v) {
+                    if (!current_source_pack.equals(headerPackSources[headerPackSourcePicker.getSelectedItemPosition()])) {
+                        current_source_pack = headerPackSources[headerPackSourcePicker.getSelectedItemPosition()];
+                        downloadResources downloadTask = new downloadResources();
+                        downloadTask.execute(
+                                headerPackSources[headerPackSourcePicker.getSelectedItemPosition()],
+                                "addons.xml");
+                        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.list_item);
+                        TextView noDownloadsAvailable = (TextView) findViewById(R.id.NoDownloadsAvailable);
+                        noDownloadsAvailable.setVisibility(View.GONE);
+                        recyclerView.setVisibility(View.VISIBLE);
+                    } else {
+                        Log.d("DownloadActivity", "There is no need to restart the activity's sources!");
+                    }
                 }
-            }
-        }));
+            }));
+        }
 
         current_source_pack = headerPackSources[headerPackSourcePicker.getSelectedItemPosition()];
         downloadResources downloadTask = new downloadResources();
@@ -173,8 +178,18 @@ public class HeaderPackDownloadActivity extends AppCompatActivity {
                 headerPackSources[headerPackSourcePicker.getSelectedItemPosition()],
                 "addons.xml");
 
+
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
+
+        recyclerView = (RecyclerView) findViewById(R.id.list_item);
+        recyclerView.setHasFixedSize(true);
+        if (recyclerView.getAdapter() != null) {
+            Log.d("refreshLayout", "The RecyclerView is not null, setting it to null...");
+            recyclerView.setAdapter(null);
+        }
+        layoutManager = new LinearLayoutManager(getApplicationContext());
+        recyclerView.setLayoutManager(layoutManager);
     }
 
     private ArrayList<HeaderParser> prepareData() {
@@ -192,13 +207,10 @@ public class HeaderPackDownloadActivity extends AppCompatActivity {
     public void refreshLayout() {
         int counter = 0;
 
-        // Get ListView object from xml
-        //final ListView listView = (ListView) findViewById(R.id.list_item);
-
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.list_item);
-        recyclerView.setHasFixedSize(true);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
-        recyclerView.setLayoutManager(layoutManager);
+        if (recyclerView.getAdapter() != null) {
+            Log.d("refreshLayout", "The RecyclerView is not null, setting it to null...");
+            recyclerView.setAdapter(null);
+        }
 
         // Defined Array values to show in ListView
         headerNames = new ArrayList<>();
@@ -207,14 +219,13 @@ public class HeaderPackDownloadActivity extends AppCompatActivity {
         String[] checkerCommands = {getApplicationContext().getFilesDir() + "/addons.xml"};
         final Map<String, String> newArray = ReadCloudXMLFile.main(checkerCommands);
         for (String key : newArray.keySet()) {
-            System.out.println("key : " + key);
-            System.out.println("value : " + newArray.get(key));
+            if (!key.toLowerCase().contains("-preview".toLowerCase()))
+                System.out.println("Loading Header Pack : " + key);
 
             File f = new File(Environment.getExternalStorageDirectory().getAbsolutePath() +
                     "/dashboard./" + key + ".zip");
             if (!f.exists()) {
                 if (key.toLowerCase().contains("-preview".toLowerCase())) {
-                    System.out.println("Preview file detected, ignoring it from the TreeMap");
                     String checker = key.substring(0, key.length() - 8);
 
                     // Unlike the previous implementation, we have to filter out already installed
@@ -231,12 +242,14 @@ public class HeaderPackDownloadActivity extends AppCompatActivity {
                     counter += 1;
                 }
             } else {
-                Log.e("It exists!", f.getAbsolutePath());
+                System.out.println("Header Pack Located : " + f.getAbsolutePath());
             }
         }
         if (counter == 0) {
             TextView noDownloadsAvailable = (TextView) findViewById(R.id.NoDownloadsAvailable);
-            noDownloadsAvailable.setVisibility(View.VISIBLE);
+            if (noDownloadsAvailable != null) {
+                noDownloadsAvailable.setVisibility(View.VISIBLE);
+            }
             recyclerView.setVisibility(View.GONE);
         }
 
@@ -246,9 +259,9 @@ public class HeaderPackDownloadActivity extends AppCompatActivity {
 
         ArrayList<HeaderParser> headerParsers = prepareData();
         DataAdapter adapter = new DataAdapter(getApplicationContext(), headerParsers);
-        // Assign adapter to ListView
+        // Assign adapter to RecyclerView
         recyclerView.setAdapter(adapter);
-        // ListView Item Click Listener
+        // RecyclerView Item Click Listener
         recyclerView.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {
             GestureDetector gestureDetector = new GestureDetector(getApplicationContext(),
                     new GestureDetector.SimpleOnGestureListener() {
@@ -262,48 +275,49 @@ public class HeaderPackDownloadActivity extends AppCompatActivity {
 
             @Override
             public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e) {
-
                 View child = rv.findChildViewUnder(e.getX(), e.getY());
                 if (child != null && gestureDetector.onTouchEvent(e)) {
-                    // ListView Clicked item value
-                    int position = rv.getChildAdapterPosition(child);
-
-                    final String itemValue = headerNames.get(position);
-
-                    AlertDialog.Builder builder = new AlertDialog.Builder(
-                            HeaderPackDownloadActivity.this);
-                    builder.setPositiveButton(getResources().getString(
-                            R.string.downloader_dialog_accept), new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            // execute this when the downloader must be fired
-                            final downloadResources downloadTask = new downloadResources();
-                            downloadTask.execute(newArray.get(itemValue), itemValue);
-                        }
-                    }).setNegativeButton(
-                            getResources().getString(R.string.downloader_dialog_cancel),
-                            new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    Log.i("HeaderPackDownloader", "User cancelled the download activity.");
-                                }
-                            });
-                    final AlertDialog dialog = builder.create();
-                    LayoutInflater inflater = getLayoutInflater();
-                    View dialogLayout = inflater.inflate(R.layout.header_preview_dialog, null);
-                    dialog.setView(dialogLayout);
-                    dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                    // RecyclerView Clicked item value
                     try {
+                        int position = rv.getChildAdapterPosition(child);
+                        final String itemValue = headerNames.get(position);
+                        AlertDialog.Builder builder = new AlertDialog.Builder(
+                                HeaderPackDownloadActivity.this);
+                        builder.setPositiveButton(getResources().getString(
+                                R.string.downloader_dialog_accept), new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                // execute this when the downloader must be fired
+                                final downloadResources downloadTask = new downloadResources();
+                                downloadTask.execute(newArray.get(itemValue), itemValue);
+                                is_dialog_open = false;
+                            }
+                        }).setNegativeButton(
+                                getResources().getString(R.string.downloader_dialog_cancel),
+                                new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        is_dialog_open = false;
+                                    }
+                                });
+                        LayoutInflater inflater = getLayoutInflater();
+                        View dialogLayout = inflater.inflate(R.layout.header_preview_dialog, null);
                         ImageView i = (ImageView) dialogLayout.findViewById(R.id.dialogImage);
                         Bitmap bitmap = BitmapFactory.decodeStream((InputStream) new URL(
                                 newArray.get(itemValue + "-preview")).getContent());
                         i.setImageBitmap(bitmap);
+                        final AlertDialog dialog = builder.create();
+                        dialog.setView(dialogLayout);
+                        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
                         dialog.setCancelable(false);
-                        dialog.show();
-                        dialog.getButton(dialog.BUTTON_NEGATIVE).
-                                setTextColor(getResources().getColor(android.R.color.white));
-                        dialog.getButton(dialog.BUTTON_POSITIVE).
-                                setTextColor(getResources().getColor(android.R.color.white));
+                        if (!dialog.isShowing() && !is_dialog_open) {
+                            dialog.show();
+                            is_dialog_open = true;
+                            dialog.getButton(dialog.BUTTON_NEGATIVE).
+                                    setTextColor(getColor(android.R.color.white));
+                            dialog.getButton(dialog.BUTTON_POSITIVE).
+                                    setTextColor(getColor(android.R.color.white));
+                        }
                     } catch (MalformedURLException mue) {
                     } catch (IOException ioe) {
                     }
