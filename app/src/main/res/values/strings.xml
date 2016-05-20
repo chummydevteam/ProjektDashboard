@@ -149,6 +149,7 @@
     <string-array name="header_pack_sources">
         <item>customworx (cdt) header packs</item>
         <item>elmorapz header packs</item>
+        <item>federico porcu header packs</item>
         <item>jayrod header packs</item>
         <item>matthew whitehurst header packs</item>
         <item>natsu header packs</item>
@@ -161,6 +162,7 @@
     <string-array name="header_pack_urls">
         <item>http://pastebin.com/raw/7Wgby6SB</item>
         <item>http://pastebin.com/raw/ZFfSAmeu</item>
+        <item>http://pastebin.com/raw/zH59gUcd</item>
         <item>http://pastebin.com/raw/JHbTURbM</item>
         <item>http://pastebin.com/raw/3j8cpA9M</item>
         <item>http://pastebin.com/raw/k8UYCgbv</item>
