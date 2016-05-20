@@ -139,6 +139,8 @@ public class CreativeMode extends CardStackAdapter implements
     public int current_selected_qs_text_color = Color.argb(255, 255, 255, 255);
     public int current_selected_recents_clear_all_icon_color = Color.argb(255, 255, 255, 255);
     public String spinnerItem, themeName, themeAuthor;
+    public Boolean is_png_enabled = false;
+    public Boolean is_vector_enabled = false;
     // ========================= On decision based color injection =========================== //
     public Boolean is_framework_accent_changed = false;
     public Boolean is_framework_accent_secondary_changed = false;
@@ -915,20 +917,63 @@ public class CreativeMode extends CardStackAdapter implements
             headerPackVersion.setText(newArray[3]);
 
             TextView headerPackCount = (TextView) root.findViewById(R.id.themeCount2);
+
+
+            // Begin PNG drawable checking
             int how_many_themed = countPNGs();
             if (how_many_themed == 10) {
-                headerPackCount.setText(mContext.getResources().getString(
+                headerPackCount.setText(mContext.getString(
                         R.string.contextualheaderimporter_all_themed));
             } else {
                 if (how_many_themed == 1) {
                     headerPackCount.setText(
-                            how_many_themed + " " + mContext.getResources().getString(
+                            how_many_themed + " " + mContext.getString(
                                     R.string.contextualheaderimporter_only_one_themed));
                 } else {
                     headerPackCount.setText(
-                            how_many_themed + " " + mContext.getResources().getString(
+                            how_many_themed + " " + mContext.getString(
                                     R.string.contextualheaderimporter_not_all_themed));
                 }
+            }
+            if (how_many_themed > 0) {
+                is_png_enabled = true;
+                is_vector_enabled = false;
+            } else {
+                if (how_many_themed == 0) {
+                    // Begin vector checking
+                    how_many_themed = countVectors();
+                    if (how_many_themed == 10) {
+                        headerPackCount.setText(mContext.getString(
+                                R.string.contextualheaderimporter_all_themed));
+                    } else {
+                        if (how_many_themed == 1) {
+                            headerPackCount.setText(
+                                    how_many_themed + " " + mContext.getString(
+                                            R.string.contextualheaderimporter_only_one_themed));
+                        } else {
+                            headerPackCount.setText(
+                                    how_many_themed + " " + mContext.getString(
+                                            R.string.contextualheaderimporter_not_all_themed));
+                        }
+                    }
+                }
+                if ((how_many_themed > 0)) {
+                    is_png_enabled = false;
+                    is_vector_enabled = true;
+                }
+            }
+
+            if (is_png_enabled) {
+                TextView drawableType = (TextView)
+                        root.findViewById(R.id.drawableType2);
+                drawableType.setText(mContext.getString(
+                        R.string.contextualheaderimporter_header_pack_drawableTypeTitlePNG));
+            }
+            if (is_vector_enabled) {
+                TextView drawableType = (TextView)
+                        root.findViewById(R.id.drawableType2);
+                drawableType.setText(mContext.getString(
+                        R.string.contextualheaderimporter_header_pack_drawableTypeTitleXML));
             }
 
             cleanTempFolder();
@@ -948,6 +993,34 @@ public class CreativeMode extends CardStackAdapter implements
                 "notifhead_newyearseve.png", "notifhead_night.png", "notifhead_noon.png",
                 "notifhead_sunrise.png", "notifhead_sunset_hdpi.png",
                 "notifhead_sunset_xhdpi.png", "notifhead_sunset.png");
+
+        File f2 = new File(
+                mContext.getCacheDir().getAbsolutePath() + "/headers/");
+        File[] files2 = f2.listFiles();
+        if (files2 != null) {
+            for (File inFile2 : files2) {
+                if (inFile2.isFile()) {
+                    // Filter out filenames of which were unzipped earlier
+                    String filenameParse[] = inFile2.getAbsolutePath().split("/");
+                    String filename = filenameParse[filenameParse.length - 1];
+
+                    if (filenamePNGs.contains(filename)) {
+                        count += 1;
+                    }
+                }
+            }
+        }
+        return count;
+    }
+
+    public int countVectors() {
+        int count = 0;
+
+        List<String> filenamePNGs = Arrays.asList(
+                "notifhead_afternoon.xml", "notifhead_christmas.xml", "notifhead_morning.xml",
+                "notifhead_newyearseve.xml", "notifhead_night.xml", "notifhead_noon.xml",
+                "notifhead_sunrise.xml", "notifhead_sunset_hdpi.xml",
+                "notifhead_sunset_xhdpi.xml", "notifhead_sunset.xml");
 
         File f2 = new File(
                 mContext.getCacheDir().getAbsolutePath() + "/headers/");
@@ -2043,8 +2116,16 @@ public class CreativeMode extends CardStackAdapter implements
                 }
             } else {
                 String source = header_pack_location;  // This is already the absolute path
-                String destination = mContext.getCacheDir().getAbsolutePath() +
-                        "/creative_mode/assets/overlays/com.android.systemui/res/drawable-xxhdpi";
+
+                String destination;
+
+                if (is_png_enabled) {
+                    destination = mContext.getCacheDir().getAbsolutePath() +
+                            "/creative_mode/assets/overlays/com.android.systemui/res/drawable-xxhdpi";
+                } else {
+                    destination = mContext.getCacheDir().getAbsolutePath() +
+                            "/creative_mode/assets/overlays/com.android.systemui/res/drawable";
+                }
 
                 File checkFile = new File(source);
                 long fileSize = checkFile.length();
@@ -2079,9 +2160,7 @@ public class CreativeMode extends CardStackAdapter implements
                         }
                     }
                 } finally {
-                    File headers_xml = new File(mContext.getCacheDir().getAbsolutePath() +
-                            "/creative_mode/assets/overlays/com.android.systemui/res/" +
-                            "drawable-xxhdpi/headers.xml");
+                    File headers_xml = new File(destination + "/headers.xml");
                     boolean deleted = headers_xml.delete();
                     inputStream.close();
                 }

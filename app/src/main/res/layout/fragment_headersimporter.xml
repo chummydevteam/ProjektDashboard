@@ -191,10 +191,33 @@
                 android:textColor="@android:color/white" />
 
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/drawableTypeTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/themeCountTitle"
+                android:layout_gravity="left"
+                android:layout_marginLeft="8dp"
+                android:text="@string/contextualheaderimporter_header_pack_drawableTypeTitle"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textStyle="italic" />
+
+            <TextView
+                android:id="@+id/drawableType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/themeCountTitle"
+                android:layout_gravity="left"
+                android:layout_marginLeft="8dp"
+                android:layout_toRightOf="@id/drawableTypeTitle"
+                android:text="@string/contextualheaderimporter_header_pack_na"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="@android:color/white" />
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/drawableTypeTitle"
                 android:layout_gravity="left"
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="16dp"

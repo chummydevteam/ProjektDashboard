@@ -63,6 +63,7 @@ public class HeaderImportFragment extends BasePageFragment {
     public TextView currentTimeVariable;
     public CheckBox autoClearSystemUICache;
     public SharedPreferences prefs;
+    public Boolean is_png_enabled, is_vector_enabled;
 
     public void cleanTempFolder() {
         File dir = getActivity().getCacheDir();
@@ -115,6 +116,34 @@ public class HeaderImportFragment extends BasePageFragment {
         return count;
     }
 
+    public int countVectors() {
+        int count = 0;
+
+        List<String> filenamePNGs = Arrays.asList(
+                "notifhead_afternoon.xml", "notifhead_christmas.xml", "notifhead_morning.xml",
+                "notifhead_newyearseve.xml", "notifhead_night.xml", "notifhead_noon.xml",
+                "notifhead_sunrise.xml", "notifhead_sunset_hdpi.xml",
+                "notifhead_sunset_xhdpi.xml", "notifhead_sunset.xml");
+
+        File f2 = new File(
+                getActivity().getCacheDir().getAbsolutePath() + "/headers/");
+        File[] files2 = f2.listFiles();
+        if (files2 != null) {
+            for (File inFile2 : files2) {
+                if (inFile2.isFile()) {
+                    // Filter out filenames of which were unzipped earlier
+                    String filenameParse[] = inFile2.getAbsolutePath().split("/");
+                    String filename = filenameParse[filenameParse.length - 1];
+
+                    if (filenamePNGs.contains(filename)) {
+                        count += 1;
+                    }
+                }
+            }
+        }
+        return count;
+    }
+
     public void checkWhetherZIPisValid(String source, String destination) {
         try {
             net.lingala.zip4j.core.ZipFile zipFile = new net.lingala.zip4j.core.ZipFile(source);
@@ -122,6 +151,11 @@ public class HeaderImportFragment extends BasePageFragment {
             zipFile.extractAll(destination);
             Log.d("Unzip",
                     "Successfully unzipped the file to the corresponding directory!");
+
+            // Reinitialize the global booleans
+
+            is_png_enabled = false;
+            is_vector_enabled = false;
 
             String[] checkerCommands = {destination + "/headers.xml"};
             String[] newArray = ReadXMLFile.main(checkerCommands);
@@ -139,6 +173,8 @@ public class HeaderImportFragment extends BasePageFragment {
             headerPackVersion.setText(newArray[3]);
 
             TextView headerPackCount = (TextView) inflation.findViewById(R.id.themeCount);
+
+            // Begin PNG drawable checking
             int how_many_themed = countPNGs();
             if (how_many_themed == 10) {
                 headerPackCount.setText(getResources().getString(
@@ -153,6 +189,46 @@ public class HeaderImportFragment extends BasePageFragment {
                             how_many_themed + " " + getResources().getString(
                                     R.string.contextualheaderimporter_not_all_themed));
                 }
+            }
+            if (how_many_themed > 0) {
+                is_png_enabled = true;
+                is_vector_enabled = false;
+            } else {
+                if (how_many_themed == 0) {
+                    // Begin vector checking
+                    how_many_themed = countVectors();
+                    if (how_many_themed == 10) {
+                        headerPackCount.setText(getResources().getString(
+                                R.string.contextualheaderimporter_all_themed));
+                    } else {
+                        if (how_many_themed == 1) {
+                            headerPackCount.setText(
+                                    how_many_themed + " " + getResources().getString(
+                                            R.string.contextualheaderimporter_only_one_themed));
+                        } else {
+                            headerPackCount.setText(
+                                    how_many_themed + " " + getResources().getString(
+                                            R.string.contextualheaderimporter_not_all_themed));
+                        }
+                    }
+                }
+                if ((how_many_themed > 0)) {
+                    is_png_enabled = false;
+                    is_vector_enabled = true;
+                }
+            }
+
+            if (is_png_enabled) {
+                TextView drawableType = (TextView)
+                        inflation.findViewById(R.id.drawableType);
+                drawableType.setText(getResources().getString(
+                        R.string.contextualheaderimporter_header_pack_drawableTypeTitlePNG));
+            }
+            if (is_vector_enabled) {
+                TextView drawableType = (TextView)
+                        inflation.findViewById(R.id.drawableType);
+                drawableType.setText(getResources().getString(
+                        R.string.contextualheaderimporter_header_pack_drawableTypeTitleXML));
             }
 
             cleanTempFolder();
@@ -452,6 +528,11 @@ public class HeaderImportFragment extends BasePageFragment {
                     headerPackCount.setText(getResources().getString(
                             R.string.contextualheaderimporter_header_pack_na));
 
+                    TextView headerType = (TextView)
+                            inflation.findViewById(R.id.drawableType);
+                    headerType.setText(getResources().getString(
+                            R.string.contextualheaderimporter_header_pack_na));
+
                     is_zip_spinner_activated = false;
 
                     if (is_zip_spinner_activated && is_theme_selected) {
@@ -588,33 +669,65 @@ public class HeaderImportFragment extends BasePageFragment {
         }
 
         public List processor() {
-            List<String> filenamePNGs = Arrays.asList(
-                    "notifhead_afternoon.png", "notifhead_christmas.png", "notifhead_morning.png",
-                    "notifhead_newyearseve.png", "notifhead_night.png", "notifhead_noon.png",
-                    "notifhead_sunrise.png", "notifhead_sunset_hdpi.png",
-                    "notifhead_sunset_xhdpi.png", "notifhead_sunset.png");
+            if (is_png_enabled) {
+                List<String> filenamePNGs = Arrays.asList(
+                        "notifhead_afternoon.png", "notifhead_christmas.png", "notifhead_morning.png",
+                        "notifhead_newyearseve.png", "notifhead_night.png", "notifhead_noon.png",
+                        "notifhead_sunrise.png", "notifhead_sunset_hdpi.png",
+                        "notifhead_sunset_xhdpi.png", "notifhead_sunset.png");
 
-            List<String> list = new ArrayList<String>();
+                List<String> list = new ArrayList<String>();
 
-            File f2 = new File(
-                    getActivity().getCacheDir().getAbsolutePath() + "/headers/");
-            File[] files2 = f2.listFiles();
-            if (files2 != null) {
-                for (File inFile2 : files2) {
-                    if (inFile2.isFile()) {
-                        // Filter out filenames of which were unzipped earlier
-                        String filenameParse[] = inFile2.getAbsolutePath().split("/");
-                        String filename = filenameParse[filenameParse.length - 1];
+                File f2 = new File(
+                        getActivity().getCacheDir().getAbsolutePath() + "/headers/");
+                File[] files2 = f2.listFiles();
+                if (files2 != null) {
+                    for (File inFile2 : files2) {
+                        if (inFile2.isFile()) {
+                            // Filter out filenames of which were unzipped earlier
+                            String filenameParse[] = inFile2.getAbsolutePath().split("/");
+                            String filename = filenameParse[filenameParse.length - 1];
 
-                        if (filenamePNGs.contains(filename)) {
-                            list.add(filename);
+                            if (filenamePNGs.contains(filename)) {
+                                list.add(filename);
+                            }
                         }
                     }
+                    for (int i = 0; i < list.size(); i++) {
+                        System.out.println(list.get(i));
+                    }
+                    return list;
                 }
-                for (int i = 0; i < list.size(); i++) {
-                    System.out.println(list.get(i));
+            }
+            if (is_vector_enabled) {
+                List<String> filenameVectors = Arrays.asList(
+                        "notifhead_afternoon.xml", "notifhead_christmas.xml", "notifhead_morning.xml",
+                        "notifhead_newyearseve.xml", "notifhead_night.xml", "notifhead_noon.xml",
+                        "notifhead_sunrise.xml", "notifhead_sunset_hdpi.xml",
+                        "notifhead_sunset_xhdpi.xml", "notifhead_sunset.xml");
+
+                List<String> list = new ArrayList<String>();
+
+                File f2 = new File(
+                        getActivity().getCacheDir().getAbsolutePath() + "/headers/");
+                File[] files2 = f2.listFiles();
+                if (files2 != null) {
+                    for (File inFile2 : files2) {
+                        if (inFile2.isFile()) {
+                            // Filter out filenames of which were unzipped earlier
+                            String filenameParse[] = inFile2.getAbsolutePath().split("/");
+                            String filename = filenameParse[filenameParse.length - 1];
+
+                            if (filenameVectors.contains(filename)) {
+                                list.add(filename);
+                            }
+                        }
+                    }
+                    for (int i = 0; i < list.size(); i++) {
+                        System.out.println(list.get(i));
+                    }
+                    return list;
                 }
-                return list;
             }
             return null;
         }
@@ -625,6 +738,18 @@ public class HeaderImportFragment extends BasePageFragment {
 
             Log.d("postProcess",
                     "Mounting system as read-write as we prepare for some commands...");
+
+            String directory = "";
+            String directory_depth = "";
+
+            if (is_png_enabled) {
+                directory = "/assets/overlays/com.android.systemui/res/drawable-xxhdpi-v22";
+                directory_depth = "res/drawable-xxhdpi-v22/";
+            } else {
+                directory = "/assets/overlays/com.android.systemui/res/drawable-v23";
+                directory_depth = "res/drawable-v23/";
+            }
+
             eu.chainfire.libsuperuser.Shell.SU.run("mount -o remount,rw /");
             eu.chainfire.libsuperuser.Shell.SU.run("mkdir /assets");
             eu.chainfire.libsuperuser.Shell.SU.run("mkdir /assets/overlays");
@@ -632,7 +757,7 @@ public class HeaderImportFragment extends BasePageFragment {
             eu.chainfire.libsuperuser.Shell.SU.run(
                     "mkdir /assets/overlays/com.android.systemui/res");
             eu.chainfire.libsuperuser.Shell.SU.run(
-                    "mkdir /assets/overlays/com.android.systemui/res/drawable-xxhdpi-v23");
+                    "mkdir " + directory);
 
             // Copy the files over
             for (int i = 0; i < source.size(); i++) {
@@ -640,14 +765,14 @@ public class HeaderImportFragment extends BasePageFragment {
                         "cp " + getActivity().getCacheDir().getAbsolutePath() +
                                 "/headers/" + source.get(i) +
                                 " /assets/overlays/com.android.systemui/" +
-                                "res/drawable-xxhdpi-v23/" +
+                                directory_depth +
                                 source.get(i));
                 try {
                     Process nativeApp2 = Runtime.getRuntime().exec(
                             "aapt remove " + getActivity().getCacheDir().getAbsolutePath() +
                                     "/new_header_apk.apk " +
                                     "assets/overlays/com.android.systemui/" +
-                                    "res/drawable-xxhdpi-v23/" +
+                                    directory_depth +
                                     source.get(i));
                     nativeApp2.waitFor();
 
@@ -655,7 +780,7 @@ public class HeaderImportFragment extends BasePageFragment {
                             "aapt add " + getActivity().getCacheDir().getAbsolutePath() +
                                     "/new_header_apk.apk " +
                                     "assets/overlays/com.android.systemui/" +
-                                    "res/drawable-xxhdpi-v23/" +
+                                    directory_depth +
                                     source.get(i));
                 } catch (IOException e) {
                     //
