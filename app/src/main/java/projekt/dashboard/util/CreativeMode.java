@@ -1016,7 +1016,7 @@ public class CreativeMode extends CardStackAdapter implements
     public int countVectors() {
         int count = 0;
 
-        List<String> filenamePNGs = Arrays.asList(
+        List<String> filenameXMLs = Arrays.asList(
                 "notifhead_afternoon.xml", "notifhead_christmas.xml", "notifhead_morning.xml",
                 "notifhead_newyearseve.xml", "notifhead_night.xml", "notifhead_noon.xml",
                 "notifhead_sunrise.xml", "notifhead_sunset_hdpi.xml",
@@ -1032,7 +1032,7 @@ public class CreativeMode extends CardStackAdapter implements
                     String filenameParse[] = inFile2.getAbsolutePath().split("/");
                     String filename = filenameParse[filenameParse.length - 1];
 
-                    if (filenamePNGs.contains(filename)) {
+                    if (filenameXMLs.contains(filename)) {
                         count += 1;
                     }
                 }
