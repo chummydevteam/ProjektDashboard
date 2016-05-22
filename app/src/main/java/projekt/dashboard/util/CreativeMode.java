@@ -1076,7 +1076,7 @@ public class CreativeMode extends CardStackAdapter implements
         // filter.
 
         File f2 = new File(
-                Environment.getExternalStorageDirectory().getAbsolutePath() + "/dashboard./");
+                Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + mContext.getString(R.string.dashboard_header_directory) + "/");
         File[] files2 = f2.listFiles();
         if (files2 != null) {
             for (File inFile2 : files2) {
@@ -1090,7 +1090,7 @@ public class CreativeMode extends CardStackAdapter implements
 
                             ZipFile zipFile = new ZipFile(
                                     Environment.getExternalStorageDirectory().
-                                            getAbsolutePath() + "/dashboard./" + filename);
+                                            getAbsolutePath() + "/" + mContext.getString(R.string.dashboard_header_directory) + "/" + filename);
                             ZipEntry entry = zipFile.getEntry("headers.xml");
                             if (entry != null) {
                                 // headers.xml was found in the file, so add it into the spinner
@@ -1116,7 +1116,7 @@ public class CreativeMode extends CardStackAdapter implements
                 if (pos != 0) {
                     checkWhetherZIPisValid(systemui_card, Environment.getExternalStorageDirectory().
                                     getAbsolutePath() +
-                                    "/dashboard./" + spinner3.getSelectedItem(),
+                                    "/" + mContext.getString(R.string.dashboard_header_directory) + "/" + spinner3.getSelectedItem(),
                             mContext.getCacheDir().getAbsolutePath() + "/headers");
                 } else {
                     header_pack_location = "";
@@ -1884,7 +1884,7 @@ public class CreativeMode extends CardStackAdapter implements
         }
 
         try {
-            String[] commands = {"systemui_notification_background_color", location};
+            String[] commands = {"systemui_notification_background_color", location, "alpha"};
             String savedColor = ReadProfile.main(commands);
             if (Color.parseColor(savedColor) != current_selected_notification_background_color) {
                 current_selected_notification_background_color = Color.parseColor(savedColor);
@@ -1900,7 +1900,7 @@ public class CreativeMode extends CardStackAdapter implements
         }
 
         try {
-            String[] commands = {"systemui_qs_panel_background_color", location};
+            String[] commands = {"systemui_qs_panel_background_color", location, "alpha"};
             String savedColor = ReadProfile.main(commands);
             if (Color.parseColor(savedColor) != current_selected_qs_panel_background_color) {
                 current_selected_qs_panel_background_color = Color.parseColor(savedColor);
@@ -2062,12 +2062,12 @@ public class CreativeMode extends CardStackAdapter implements
     }
 
     public void backupProfile(String filename, String theme_name) {
-        File myDir = new File(Environment.getExternalStorageDirectory(), "dashboard_profiles");
+        File myDir = new File(Environment.getExternalStorageDirectory(), mContext.getString(R.string.dashboard_profile_directory));
         if (!myDir.exists()) {
             myDir.mkdirs();
         }
         File root = new File(
-                Environment.getExternalStorageDirectory().getAbsolutePath() + "/dashboard_profiles/" + filename + ".dashboard");
+                Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + mContext.getString(R.string.dashboard_profile_directory) + "/" + filename + ".dashboard");
         try {
             root.createNewFile();
             FileWriter fw = new FileWriter(root);
@@ -2120,7 +2120,7 @@ public class CreativeMode extends CardStackAdapter implements
             bw.close();
             fw.close();
             String formatted = String.format(mContext.getResources().getString(
-                    R.string.restore_profile_spinner_saved_toast), "/storage/emulated/0/dashboard_profiles/" + filename + ".dashboard");
+                    R.string.restore_profile_spinner_saved_toast), "/storage/emulated/0/" + mContext.getString(R.string.dashboard_profile_directory) + "/" + filename + ".dashboard");
             Toast toast = Toast.makeText(mContext.getApplicationContext(), formatted,
                     Toast.LENGTH_LONG);
             toast.show();
@@ -2139,12 +2139,12 @@ public class CreativeMode extends CardStackAdapter implements
 
         list2.add(mContext.getString(R.string.restore_profile_spinner_default));
 
-        File f2 = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/dashboard_profiles/");
+        File f2 = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + mContext.getString(R.string.dashboard_profile_directory) + "/");
         File[] files2 = f2.listFiles();
         if (files2 != null) {
             for (File inFile2 : files2) {
-                if (!inFile2.isDirectory() && inFile2.toString().contains(".dashboard")) {
-                    list2.add(inFile2.getAbsolutePath().substring(39));
+                if (!inFile2.isDirectory() && inFile2.toString().contains(".dashboard") && inFile2.toString().substring(inFile2.toString().length() - 10).equals(".dashboard")) {
+                    list2.add(inFile2.getAbsolutePath().substring(40));
                 }
             }
         }
@@ -2162,7 +2162,7 @@ public class CreativeMode extends CardStackAdapter implements
         // filter.
 
         File f2 = new File(
-                Environment.getExternalStorageDirectory().getAbsolutePath() + "/dashboard./");
+                Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + mContext.getString(R.string.dashboard_header_directory) + "/");
         File[] files2 = f2.listFiles();
         if (files2 != null) {
             for (File inFile2 : files2) {
@@ -2176,7 +2176,7 @@ public class CreativeMode extends CardStackAdapter implements
 
                             ZipFile zipFile = new ZipFile(
                                     Environment.getExternalStorageDirectory().
-                                            getAbsolutePath() + "/dashboard./" + filename);
+                                            getAbsolutePath() + "/" + mContext.getString(R.string.dashboard_header_directory) + "/" + filename);
                             ZipEntry entry = zipFile.getEntry("headers.xml");
                             if (entry != null) {
                                 // headers.xml was found in the file, so add it into the spinner
@@ -2546,14 +2546,12 @@ public class CreativeMode extends CardStackAdapter implements
 
         list2.add(mContext.getString(R.string.restore_profile_spinner_default));
 
-        // Now lets add all the located themes found that aren't cdt themes
-        File f2 = new File(Environment.getExternalStorageDirectory().getAbsolutePath() +
-                "/dashboard_profiles/");
+        File f2 = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + mContext.getString(R.string.dashboard_profile_directory) + "/");
         File[] files2 = f2.listFiles();
         if (files2 != null) {
             for (File inFile2 : files2) {
-                if (!inFile2.isDirectory() && inFile2.toString().contains(".dashboard")) {
-                    list2.add(inFile2.getAbsolutePath().substring(39));
+                if (!inFile2.isDirectory() && inFile2.toString().contains(".dashboard") && inFile2.toString().substring(inFile2.toString().length() - 10).equals(".dashboard")) {
+                    list2.add(inFile2.getAbsolutePath().substring(40));
                 }
             }
         }
@@ -2586,7 +2584,7 @@ public class CreativeMode extends CardStackAdapter implements
             public void onClick(View v) {
                 if (loadProfile.getSelectedItemPosition() != 0) {
                     String location = Environment.getExternalStorageDirectory().getAbsolutePath() +
-                            "/dashboard_profiles/" + loadProfile.getSelectedItem();
+                            "/" + mContext.getString(R.string.dashboard_profile_directory) + "/" + loadProfile.getSelectedItem();
                     restoreProfile(location);
                 } else {
                     Toast toast = Toast.makeText(mContext.getApplicationContext(),

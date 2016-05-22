@@ -79,7 +79,7 @@ public class HeaderPackDownloadActivity extends AppCompatActivity {
                 return true;
             case R.id.abandon_dashboard_work_area:
                 File f = new File(Environment.getExternalStorageDirectory().getAbsolutePath() +
-                        "/dashboard./");
+                        "/" + getString(R.string.dashboard_header_directory) + "/");
                 DeleteRecursive(f);
                 Intent i = getBaseContext().getPackageManager()
                         .getLaunchIntentForPackage(getBaseContext().getPackageName());
@@ -120,6 +120,11 @@ public class HeaderPackDownloadActivity extends AppCompatActivity {
         mProgressDialog.setIndeterminate(false);
         mProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
         mProgressDialog.setCancelable(false);
+
+        File myDir = new File(Environment.getExternalStorageDirectory(), getString(R.string.dashboard_header_directory));
+        if (!myDir.exists()) {
+            myDir.mkdir();
+        }
 
         final String[] headerPackSources = getResources().getStringArray(R.array.header_pack_urls);
         final Spinner headerPackSourcePicker = (Spinner) findViewById(R.id.sourcePickerHeaderPacks);
@@ -202,6 +207,11 @@ public class HeaderPackDownloadActivity extends AppCompatActivity {
         headerNames = new ArrayList<>();
         headerPreviews = new ArrayList<>();
 
+        File myDir = new File(Environment.getExternalStorageDirectory(), getString(R.string.dashboard_header_directory));
+        if (!myDir.exists()) {
+            myDir.mkdir();
+        }
+
         String[] checkerCommands = {getApplicationContext().getFilesDir() + "/addons.xml"};
         final Map<String, String> newArray = ReadCloudXMLFile.main(checkerCommands);
         for (String key : newArray.keySet()) {
@@ -209,7 +219,7 @@ public class HeaderPackDownloadActivity extends AppCompatActivity {
                 System.out.println("Loading Header Pack : " + key);
 
             File f = new File(Environment.getExternalStorageDirectory().getAbsolutePath() +
-                    "/dashboard./" + key + ".zip");
+                    "/" + getString(R.string.dashboard_header_directory) + "/" + key + ".zip");
             if (!f.exists()) {
                 if (key.toLowerCase().contains("-preview".toLowerCase())) {
                     String checker = key.substring(0, key.length() - 8);
@@ -219,7 +229,7 @@ public class HeaderPackDownloadActivity extends AppCompatActivity {
 
                     Boolean checkIfExist = new File(Environment.getExternalStorageDirectory().
                             getAbsolutePath() +
-                            "/dashboard./" + checker + ".zip").exists();
+                            "/" + getString(R.string.dashboard_header_directory) + "/" + checker + ".zip").exists();
                     if (!checkIfExist) {
                         headerPreviews.add(newArray.get(key));
                     }
@@ -391,7 +401,7 @@ public class HeaderPackDownloadActivity extends AppCompatActivity {
                 } else {
                     output = new FileOutputStream(
                             Environment.getExternalStorageDirectory().getAbsolutePath() +
-                                    "/dashboard./" + sUrl[1] + ".zip");
+                                    "/" + getString(R.string.dashboard_header_directory) + "/" + sUrl[1] + ".zip");
                 }
                 byte data[] = new byte[4096];
                 long total = 0;

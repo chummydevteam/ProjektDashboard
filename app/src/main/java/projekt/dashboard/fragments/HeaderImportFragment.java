@@ -312,7 +312,7 @@ public class HeaderImportFragment extends BasePageFragment {
                 String[] secondPhaseCommands = {
                         theme_dir,
                         Environment.getExternalStorageDirectory().getAbsolutePath()
-                                + "/dashboard./" + spinner2.getSelectedItem().toString()};
+                                + "/" + getString(R.string.dashboard_header_directory) + "/" + spinner2.getSelectedItem().toString()};
                 new secondPhaseAsyncTasks().execute(secondPhaseCommands);
             }
         });
@@ -465,12 +465,12 @@ public class HeaderImportFragment extends BasePageFragment {
         zipsFound = new ArrayList<String>();
         zipsFound.add(getResources().getString(R.string.contextualheaderswapper_select_zip));
 
-        // Function that filters out all zip files within /storage/0/dashboard., but not only that,
+        // Function that filters out all zip files within /storage/0/dashboard./headers, but not only that,
         // it checks the zip file and sees if there is headers.xml found inside so that it's a
         // filter.
 
         File f2 = new File(
-                Environment.getExternalStorageDirectory().getAbsolutePath() + "/dashboard./");
+                Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + getString(R.string.dashboard_header_directory) + "/");
         File[] files2 = f2.listFiles();
         if (files2 != null) {
             for (File inFile2 : files2) {
@@ -484,7 +484,7 @@ public class HeaderImportFragment extends BasePageFragment {
 
                             ZipFile zipFile = new ZipFile(
                                     Environment.getExternalStorageDirectory().
-                                            getAbsolutePath() + "/dashboard./" + filename);
+                                            getAbsolutePath() + "/" + getString(R.string.dashboard_header_directory) + "/" + filename);
                             ZipEntry entry = zipFile.getEntry("headers.xml");
                             if (entry != null) {
                                 // headers.xml was found in the file, so add it into the spinner
@@ -510,7 +510,7 @@ public class HeaderImportFragment extends BasePageFragment {
                 if (pos != 0) {
                     checkWhetherZIPisValid(Environment.getExternalStorageDirectory().
                                     getAbsolutePath() +
-                                    "/dashboard./" + spinner2.getSelectedItem(),
+                                    "/" + getString(R.string.dashboard_header_directory) + "/" + spinner2.getSelectedItem(),
                             getActivity().getCacheDir().getAbsolutePath() + "/headers");
                 } else {
                     TextView headerPackName = (TextView)
@@ -592,7 +592,7 @@ public class HeaderImportFragment extends BasePageFragment {
         // filter.
 
         File f2 = new File(
-                Environment.getExternalStorageDirectory().getAbsolutePath() + "/dashboard./");
+                Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + getString(R.string.dashboard_header_directory) + "/");
         File[] files2 = f2.listFiles();
         if (files2 != null) {
             for (File inFile2 : files2) {
@@ -606,7 +606,7 @@ public class HeaderImportFragment extends BasePageFragment {
 
                             ZipFile zipFile = new ZipFile(
                                     Environment.getExternalStorageDirectory().
-                                            getAbsolutePath() + "/dashboard./" + filename);
+                                            getAbsolutePath() + "/" + getString(R.string.dashboard_header_directory) + "/" + filename);
                             ZipEntry entry = zipFile.getEntry("headers.xml");
                             if (entry != null) {
                                 // headers.xml was found in the file, so add it into the spinner

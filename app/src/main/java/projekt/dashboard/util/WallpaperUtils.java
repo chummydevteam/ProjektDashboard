@@ -44,7 +44,7 @@ import projekt.dashboard.fragments.WallpapersFragment;
  */
 public class WallpaperUtils {
 
-    public static final String TABLE_NAME = "polar_wallpapers";
+    public static final String TABLE_NAME = "dashboard_wallpapers";
     public static final String DATABASE_NAME = "data_cache";
     public static final int DATABASE_VERSION = 1;
     private static Activity mContextCache;
@@ -209,7 +209,7 @@ public class WallpaperUtils {
             return;
         }
 
-        final File saveFolder = new File(Environment.getExternalStorageDirectory(), context.getString(R.string.app_name));
+        final File saveFolder = new File(Environment.getExternalStorageDirectory(), context.getString(R.string.dashboard_wallpaper_directory));
         //noinspection ResultOfMethodCallIgnored
         saveFolder.mkdirs();
 

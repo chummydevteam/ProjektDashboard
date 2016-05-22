@@ -221,7 +221,7 @@
     <string name="contextualheaderimporter">contextual header pack importer</string>
     <string name="contextualheaderimporter_description">@string/contextualheaderimporter</string>
     <string name="contextualheaderimporter_description_secondary">this is a highly experimental feature to allow you to set your own custom contextual headers for your systemui notification shade based on pre-made zip files shared by themers. a soft reboot is required for the system to take your changes as we are modifying the actual apk installed on your phone.\n\ndon\'t forget to enable contextual headers (non-poly/hd) in your rom\'s settings! if headers aren\'t set after a soft reboot, clear your systemui cache!\n</string>
-    <string name="contextualheaderimporter_select_downloaded_zip">select downloaded pack in \'/storage/emulated/0/dashboard.\':</string>
+    <string name="contextualheaderimporter_select_downloaded_zip">select header pack in \'/storage/emulated/0/dashboard./headers\':</string>
     <string name="contextualheaderimporter_all_themed">all headers themed</string>
     <string name="contextualheaderimporter_information_header">information about the selected header pack</string>
     <string name="contextualheaderimporter_header_pack_name">pack name: </string>
@@ -304,6 +304,10 @@
     <string name="permission_not_granted_dialog_message">Please grant dashboard storage permissions
         or the app will not function properly!</string>
     <string name="dialog_ok">OK</string>
+
+    <string name="dashboard_header_directory">dashboard./headers</string>
+    <string name="dashboard_profile_directory">dashboard./profiles</string>
+    <string name="dashboard_wallpaper_directory">dashboard./wallpapers</string>
 
     <!-- App Strings -->
     <string name="home">dashboard.</string>
