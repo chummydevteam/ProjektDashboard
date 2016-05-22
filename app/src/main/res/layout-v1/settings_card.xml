@@ -48,7 +48,8 @@
                     android:checked="true"
                     android:padding="16dp"
                     android:text="@string/settings_colorful_tweaks_icon"
-                    android:textColor="@color/creative_mode_text_disabled" />
+                    android:textColor="@color/creative_mode_text_disabled"
+                    android:visibility="gone" />
 
                 <include layout="@layout/settings_dashboard_colorpicker" />
 

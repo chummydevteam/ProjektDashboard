@@ -19,6 +19,13 @@
     <string name="no_header_pack_selected">You must select a header pack from the spinner dropdown in "SystemUI modifications" before clicking me!</string>
     <string name="begin_action_button">Let\'s get started!</string>
 
+    <string name="restore_package_installed">restored profile for \"%s\"</string>
+    <string name="restore_package_not_installed">\"%s\" profile restored but theme not installed!</string>
+    <string name="restore_profile_failure">profile restored with some errors!</string>
+    <string name="restore_profile_success">profile restored successfully!</string>
+    <string name="restore_profile_title">backup/restore options:</string>
+    <string name="restore_profile_spinner_default">select a profile (optional):</string>
+
     <!-- Dialog Messages -->
     <string name="unzipping_assets_dialog_title">theme is extracting&#8230;</string>
     <string name="unzipping_assets_small">preparing theme&#8230;</string>

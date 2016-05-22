@@ -106,6 +106,24 @@ public class CreativeMode extends CardStackAdapter implements
 
     public CardView framework_card, settings_card, systemui_card, final_card;
 
+    public Switch accent_dark_switch, accent_light_switch;
+    public RelativeLayout framework_background;
+    public RelativeLayout settings_preview;
+    public ImageView wifiIcon;
+    public TextView categoryHeader;
+    public RelativeLayout qs_panel_bg_preview;
+    public TextView wifiLabel, bluetoothLabel;
+    public SeekBar brightness;
+
+    public String current_selected_theme;
+    public String current_selected_profile;
+    public List<String> list, list2;
+    public ArrayAdapter<String> adapter2;
+
+    public TextView accent_universal_text, accent_secondary_text, accent_light_text, appbg_dark_text, appbg_light_text, dialog_dark_text, dialog_light_text, main_color_text, main_color_dark_text, notifications_primary_text, notifications_secondary_text, ripples_text;
+    public TextView settings_dashboard_background_color_text, settings_dashboard_category_background_color_text, settings_icon_colors_text, settings_title_colors_text, settings_switchbar_background_color_text;
+    public TextView qs_accents_text, qs_header_color, qs_notification_color, qs_panel_bg_color, qs_tile_text, qs_text_text, qs_recents_text;
+
     // ==================================== Framework Tweaks ================================ //
     public int current_selected_system_accent_color = Color.argb(255, 255, 255, 255); // White
     public int current_selected_system_accent_dual_color = Color.argb(255, 119, 119, 119); // Medium Grey
@@ -212,7 +230,7 @@ public class CreativeMode extends CardStackAdapter implements
 
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-        log.d("onCheckedChanged() called with: " + "buttonView = [" + buttonView + "], " +
+        log.d("onCheckedChanged() called with: " + " buttonView = [" + buttonView + "], " +
                 "isChecked = [" + isChecked + "]");
         Pref.putBoolean(CardStackPrefs.PARALLAX_ENABLED, isChecked);
         Pref.putBoolean(CardStackPrefs.SHOW_INIT_ANIMATION, isChecked);
@@ -296,16 +314,16 @@ public class CreativeMode extends CardStackAdapter implements
 
         main_color_dark_view = framework_card.findViewById(R.id.main_color_dark_colorpicker);
 
-        final Switch switch1 = (Switch) framework_card.findViewById(R.id.switch_example);
-        final Switch switch2 = (Switch) framework_card.findViewById(R.id.switch_example2);
+        accent_dark_switch = (Switch) framework_card.findViewById(R.id.switch_example);
+        accent_light_switch = (Switch) framework_card.findViewById(R.id.switch_example2);
 
-        final RelativeLayout rl = (RelativeLayout) framework_card.findViewById(R.id.main_relativeLayout);
+        framework_background = (RelativeLayout) framework_card.findViewById(R.id.main_relativeLayout);
 
         // Framework Accent (universal)
 
         accent_universal = (ImageView) framework_card.findViewById(
                 R.id.system_accent_colorpicker);
-        final TextView accent_universal_text = (TextView) framework_card.findViewById(
+        accent_universal_text = (TextView) framework_card.findViewById(
                 R.id.system_accent_colorpicker_text);
         accent_universal.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -325,8 +343,8 @@ public class CreativeMode extends CardStackAdapter implements
                                         color, color
                                 }
                         );
-                        switch1.setTrackTintList(csl);
-                        switch1.setThumbTintList(csl);
+                        accent_dark_switch.setTrackTintList(csl);
+                        accent_dark_switch.setThumbTintList(csl);
                         is_framework_accent_changed = true;
                         accent_universal_text.setTextColor(mContext.getColor(android.R.color.white));
                     }
@@ -339,7 +357,7 @@ public class CreativeMode extends CardStackAdapter implements
 
         accent_secondary = (ImageView) framework_card.findViewById(
                 R.id.system_accent_dual_colorpicker);
-        final TextView accent_secondary_text = (TextView) framework_card.findViewById(
+        accent_secondary_text = (TextView) framework_card.findViewById(
                 R.id.system_accent_dual_colorpicker_text);
         accent_secondary.setColorFilter(
                 current_selected_system_accent_dual_color, PorterDuff.Mode.SRC_ATOP);
@@ -364,7 +382,7 @@ public class CreativeMode extends CardStackAdapter implements
 
         accent_light = (ImageView) framework_card.findViewById(
                 R.id.system_accent_light_colorpicker);
-        final TextView accent_light_text = (TextView) framework_card.findViewById(
+        accent_light_text = (TextView) framework_card.findViewById(
                 R.id.system_accent_light_colorpicker_text);
         accent_light.setColorFilter(
                 current_selected_system_accent_light_color, PorterDuff.Mode.SRC_ATOP);
@@ -386,8 +404,8 @@ public class CreativeMode extends CardStackAdapter implements
                                         color, color
                                 }
                         );
-                        switch2.setTrackTintList(csl);
-                        switch2.setThumbTintList(csl);
+                        accent_light_switch.setTrackTintList(csl);
+                        accent_light_switch.setThumbTintList(csl);
                         is_framework_accent_light_changed = true;
                         accent_light_text.setTextColor(mContext.getColor(android.R.color.white));
                     }
@@ -400,9 +418,9 @@ public class CreativeMode extends CardStackAdapter implements
 
         appbg_dark = (ImageView) framework_card.findViewById(
                 R.id.system_appbg_colorpicker);
-        final TextView appbg_dark_text = (TextView) framework_card.findViewById(
+        appbg_dark_text = (TextView) framework_card.findViewById(
                 R.id.system_appbg_colorpicker_text);
-        rl.setBackgroundColor(current_selected_system_appbg_color);
+        framework_background.setBackgroundColor(current_selected_system_appbg_color);
         appbg_dark.setColorFilter(current_selected_system_appbg_color, PorterDuff.Mode.SRC_ATOP);
         appbg_dark.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -413,7 +431,7 @@ public class CreativeMode extends CardStackAdapter implements
                     public void onColorChanged(int color) {
                         current_selected_system_appbg_color = color;
                         appbg_dark.setColorFilter(color, PorterDuff.Mode.SRC_ATOP);
-                        rl.setBackgroundColor(color);
+                        framework_background.setBackgroundColor(color);
                         is_framework_app_background_changed = true;
                         appbg_dark_text.setTextColor(mContext.getColor(android.R.color.white));
                     }
@@ -426,11 +444,11 @@ public class CreativeMode extends CardStackAdapter implements
 
         appbg_light = (ImageView) framework_card.findViewById(
                 R.id.system_appbg_light_colorpicker);
-        final TextView appbg_light_text = (TextView) framework_card.findViewById(
+        appbg_light_text = (TextView) framework_card.findViewById(
                 R.id.system_appbg_light_colorpicker_text);
         appbg_light.setColorFilter(
                 current_selected_system_appbg_light_color, PorterDuff.Mode.SRC_ATOP);
-        switch2.setBackgroundColor(current_selected_system_appbg_light_color);
+        accent_light_switch.setBackgroundColor(current_selected_system_appbg_light_color);
         appbg_light.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 final ColorPickerDialog cpd = new ColorPickerDialog(
@@ -440,7 +458,7 @@ public class CreativeMode extends CardStackAdapter implements
                     public void onColorChanged(int color) {
                         current_selected_system_appbg_light_color = color;
                         appbg_light.setColorFilter(color, PorterDuff.Mode.SRC_ATOP);
-                        switch2.setBackgroundColor(color);
+                        accent_light_switch.setBackgroundColor(color);
                         is_framework_app_background_light_changed = true;
                         appbg_light_text.setTextColor(mContext.getColor(android.R.color.white));
                     }
@@ -453,7 +471,7 @@ public class CreativeMode extends CardStackAdapter implements
 
         dialog_dark = (ImageView) framework_card.findViewById(
                 R.id.system_dialog_colorpicker);
-        final TextView dialog_dark_text = (TextView) framework_card.findViewById(
+        dialog_dark_text = (TextView) framework_card.findViewById(
                 R.id.system_dialog_colorpicker_text);
         dialog_dark.setColorFilter(current_selected_system_dialog_color, PorterDuff.Mode.SRC_ATOP);
         dialog_dark.setOnClickListener(new View.OnClickListener() {
@@ -478,7 +496,7 @@ public class CreativeMode extends CardStackAdapter implements
 
         dialog_light = (ImageView) framework_card.findViewById(
                 R.id.system_dialog_light_colorpicker);
-        final TextView dialog_light_text = (TextView) framework_card.findViewById(
+        dialog_light_text = (TextView) framework_card.findViewById(
                 R.id.system_dialog_light_colorpicker_text);
         dialog_light.setColorFilter(
                 current_selected_system_dialog_light_color, PorterDuff.Mode.SRC_ATOP);
@@ -504,7 +522,7 @@ public class CreativeMode extends CardStackAdapter implements
 
         main_color = (ImageView) framework_card.findViewById(
                 R.id.system_main_colorpicker);
-        final TextView main_color_text = (TextView) framework_card.findViewById(
+        main_color_text = (TextView) framework_card.findViewById(
                 R.id.system_main_colorpicker_text);
         main_color.setColorFilter(current_selected_system_main_color, PorterDuff.Mode.SRC_ATOP);
         main_color.setOnClickListener(new View.OnClickListener() {
@@ -531,7 +549,7 @@ public class CreativeMode extends CardStackAdapter implements
         framework_toolbar_dark = (LinearLayout) framework_card.findViewById(R.id.framework_toolbar_dark);
         main_color_dark = (ImageView) framework_card.findViewById(
                 R.id.system_main_dark_colorpicker);
-        final TextView main_color_dark_text = (TextView) framework_card.findViewById(
+        main_color_dark_text = (TextView) framework_card.findViewById(
                 R.id.system_main_dark_colorpicker_text);
         main_color_dark.setColorFilter(current_selected_system_main_dark_color, PorterDuff.Mode.SRC_ATOP);
         main_color_dark.setColorFilter(current_selected_system_main_dark_color, PorterDuff.Mode.SRC_ATOP);
@@ -558,7 +576,7 @@ public class CreativeMode extends CardStackAdapter implements
 
         notifications_primary = (ImageView) framework_card.findViewById(
                 R.id.system_notification_text_1_colorpicker);
-        final TextView notifications_primary_text = (TextView) framework_card.findViewById(
+        notifications_primary_text = (TextView) framework_card.findViewById(
                 R.id.system_notification_text_1_colorpicker_text);
         notifications_primary.setColorFilter(
                 current_selected_system_notifications_primary_color, PorterDuff.Mode.SRC_ATOP);
@@ -583,7 +601,7 @@ public class CreativeMode extends CardStackAdapter implements
 
         notifications_secondary = (ImageView) framework_card.findViewById(
                 R.id.system_notification_text_2_colorpicker);
-        final TextView notifications_secondary_text = (TextView) framework_card.findViewById(
+        notifications_secondary_text = (TextView) framework_card.findViewById(
                 R.id.system_notification_text_2_colorpicker_text);
         notifications_secondary.setColorFilter(
                 current_selected_system_notifications_secondary_color, PorterDuff.Mode.SRC_ATOP);
@@ -608,7 +626,7 @@ public class CreativeMode extends CardStackAdapter implements
 
         ripples = (ImageView) framework_card.findViewById(
                 R.id.system_ripple_colorpicker);
-        final TextView ripples_text = (TextView) framework_card.findViewById(
+        ripples_text = (TextView) framework_card.findViewById(
                 R.id.system_ripple_colorpicker_text);
         ripples.setColorFilter(current_selected_system_ripple_color, PorterDuff.Mode.SRC_ATOP);
         ripples.setOnClickListener(new View.OnClickListener() {
@@ -637,8 +655,8 @@ public class CreativeMode extends CardStackAdapter implements
         settings_card = (CardView) mInflater.inflate(R.layout.settings_card, container, false);
         settings_card.setCardBackgroundColor(ContextCompat.getColor(mContext, bgColorIds[1]));
 
-        final ImageView wifiIcon = (ImageView) settings_card.findViewById(R.id.wifiIcon);
-        final TextView categoryHeader = (TextView) settings_card.findViewById(R.id.categoryHeaderTitle);
+        wifiIcon = (ImageView) settings_card.findViewById(R.id.wifiIcon);
+        categoryHeader = (TextView) settings_card.findViewById(R.id.categoryHeaderTitle);
         settings_toolbar = (android.support.v7.widget.Toolbar)
                 settings_card.findViewById(R.id.settings_toolbar);
 
@@ -651,16 +669,13 @@ public class CreativeMode extends CardStackAdapter implements
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                         if (isChecked) {
                             colorful_icon = true;
-                            Log.d("Switch Colorful Icon", colorful_icon + "");
                         } else {
                             colorful_icon = false;
-                            Log.d("Switch Colorful Icon", colorful_icon + "");
                         }
                         is_settings_colorful_icon_color_changed = true;
                         colorful_icon_switch.setTextColor(mContext.getColor(android.R.color.white));
                     }
                 });
-        colorful_icon_switch.setVisibility(View.GONE);
 
         // Dashboard Categories Title (All Caps)
 
@@ -672,10 +687,8 @@ public class CreativeMode extends CardStackAdapter implements
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                         if (isChecked) {
                             category_title_caps = true;
-                            Log.d("Categories Title (Caps)", category_title_caps + "");
                         } else {
                             category_title_caps = false;
-                            Log.d("Categories Title (Caps)", category_title_caps + "");
                         }
                         is_settings_dashboard_category_title_caps_changed = true;
                         categories_title_caps.setTextColor(mContext.getColor(android.R.color.white));
@@ -692,10 +705,8 @@ public class CreativeMode extends CardStackAdapter implements
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                         if (isChecked) {
                             category_title_bold = true;
-                            Log.d("Categories Title (Bold)", category_title_bold + "");
                         } else {
                             category_title_bold = false;
-                            Log.d("Categories Title (Bold)", category_title_bold + "");
                         }
                         is_settings_dashboard_category_title_bold_changed = true;
                         categories_title_bold.setTextColor(mContext.getColor(android.R.color.white));
@@ -712,10 +723,8 @@ public class CreativeMode extends CardStackAdapter implements
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                         if (isChecked) {
                             category_title_italics = true;
-                            Log.d("Categories Title (Ita)", category_title_italics + "");
                         } else {
                             category_title_italics = false;
-                            Log.d("Categories Title (Ita)", category_title_italics + "");
                         }
                         is_settings_dashboard_category_title_italics_changed = true;
                         categories_title_italics.setTextColor(mContext.getColor(android.R.color.white));
@@ -731,10 +740,8 @@ public class CreativeMode extends CardStackAdapter implements
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                         if (isChecked) {
                             dashboard_dividers = true;
-                            Log.d("Dashboard Dividers", dashboard_dividers + "");
                         } else {
                             dashboard_dividers = false;
-                            Log.d("Dashboard Dividers", dashboard_dividers + "");
                         }
                         is_settings_dashboard_dividers_changed = true;
                         dashboard_divider.setTextColor(mContext.getColor(android.R.color.white));
@@ -750,10 +757,8 @@ public class CreativeMode extends CardStackAdapter implements
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                         if (isChecked) {
                             dirtytweaks_icon_presence = true;
-                            Log.d("DU Tweaks Icon", dirtytweaks_icon_presence + "");
                         } else {
                             dirtytweaks_icon_presence = false;
-                            Log.d("DU Tweaks Icon", dirtytweaks_icon_presence + "");
                         }
                         is_settings_dashboard_dirty_tweaks_icon_presence_changed = true;
                         dutweaks_icons.setTextColor(mContext.getColor(android.R.color.white));
@@ -764,7 +769,7 @@ public class CreativeMode extends CardStackAdapter implements
 
         settings_dashboard_background_color = (ImageView) settings_card.findViewById(
                 R.id.settings_dashboard_background_colorpicker);
-        final TextView settings_dashboard_background_color_text = (TextView) settings_card.findViewById(
+        settings_dashboard_background_color_text = (TextView) settings_card.findViewById(
                 R.id.settings_dashboard_background_colorpicker_text);
         settings_dashboard_background_color.setColorFilter(current_selected_dashboard_background_color, PorterDuff.Mode.SRC_ATOP);
         settings_dashboard_background_color.setOnClickListener(new View.OnClickListener() {
@@ -788,9 +793,9 @@ public class CreativeMode extends CardStackAdapter implements
 
         settings_dashboard_category_background_color = (ImageView) settings_card.findViewById(
                 R.id.settings_dashboard_category_colorpicker);
-        final TextView settings_dashboard_category_background_color_text = (TextView) settings_card.findViewById(
+        settings_dashboard_category_background_color_text = (TextView) settings_card.findViewById(
                 R.id.settings_dashboard_category_colorpicker_text);
-        final RelativeLayout settings_preview = (RelativeLayout) settings_card.findViewById(R.id.settings_container);
+        settings_preview = (RelativeLayout) settings_card.findViewById(R.id.settings_container);
         settings_dashboard_category_background_color.setColorFilter(current_selected_dashboard_category_background_color,
                 PorterDuff.Mode.SRC_ATOP);
         settings_dashboard_category_background_color.setOnClickListener(new View.OnClickListener() {
@@ -816,7 +821,7 @@ public class CreativeMode extends CardStackAdapter implements
 
         settings_icon_colors = (ImageView) settings_card.findViewById(
                 R.id.settings_icon_colorpicker);
-        final TextView settings_icon_colors_text = (TextView) settings_card.findViewById(
+        settings_icon_colors_text = (TextView) settings_card.findViewById(
                 R.id.settings_icon_colorpicker_text);
         settings_icon_colors.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -840,7 +845,7 @@ public class CreativeMode extends CardStackAdapter implements
 
         settings_title_colors = (ImageView) settings_card.findViewById(
                 R.id.settings_title_colorpicker);
-        final TextView settings_title_colors_text = (TextView) settings_card.findViewById(
+        settings_title_colors_text = (TextView) settings_card.findViewById(
                 R.id.settings_title_colorpicker_text);
         settings_title_colors.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -864,7 +869,7 @@ public class CreativeMode extends CardStackAdapter implements
 
         settings_switchbar_background_color = (ImageView) settings_card.findViewById(
                 R.id.settings_switchbar_background_colorpicker);
-        final TextView settings_switchbar_background_color_text = (TextView) settings_card.findViewById(
+        settings_switchbar_background_color_text = (TextView) settings_card.findViewById(
                 R.id.settings_switchbar_background_colorpicker_text);
         settings_switchbar_background_color.setColorFilter(current_selected_settings_switchbar_color, PorterDuff.Mode.SRC_ATOP);
         settings_switchbar_background_color.setOnClickListener(new View.OnClickListener() {
@@ -1046,12 +1051,12 @@ public class CreativeMode extends CardStackAdapter implements
         systemui_card.setCardBackgroundColor(ContextCompat.getColor(mContext, bgColorIds[2]));
 
         prefs = PreferenceManager.getDefaultSharedPreferences(mContext);
-        final TextView wifiLabel = (TextView) systemui_card.findViewById(R.id.wifiLabel);
-        final TextView bluetoothLabel = (TextView) systemui_card.findViewById(R.id.bluetoothLabel);
+        wifiLabel = (TextView) systemui_card.findViewById(R.id.wifiLabel);
+        bluetoothLabel = (TextView) systemui_card.findViewById(R.id.bluetoothLabel);
         wifiLabel.setText(prefs.getString("dashboard_username",
                 systemui_card.getResources().getString(R.string.systemui_preview_default_no_username)) +
                 systemui_card.getResources().getString(R.string.systemui_preview_label));
-        final SeekBar brightness = (SeekBar) systemui_card.findViewById(R.id.seekBar);
+        brightness = (SeekBar) systemui_card.findViewById(R.id.seekBar);
 
         final Spinner spinner3 = (Spinner) systemui_card.findViewById(R.id.spinner3);
 
@@ -1145,7 +1150,7 @@ public class CreativeMode extends CardStackAdapter implements
         // QS Accent Colors
 
         qs_accents = (ImageView) systemui_card.findViewById(R.id.qs_accent_colorpicker);
-        final TextView qs_accents_text = (TextView) systemui_card.findViewById(
+        qs_accents_text = (TextView) systemui_card.findViewById(
                 R.id.qs_accent_colorpicker_text);
         qs_accents.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -1181,7 +1186,7 @@ public class CreativeMode extends CardStackAdapter implements
         qs_header = (ImageView) systemui_card.findViewById(R.id.qs_header_colorpicker);
         qs_header.setColorFilter(current_selected_header_background_color,
                 PorterDuff.Mode.SRC_ATOP);
-        final TextView qs_header_color = (TextView) systemui_card.findViewById(
+        qs_header_color = (TextView) systemui_card.findViewById(
                 R.id.qs_header_colorpicker_text);
         qs_header.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -1207,7 +1212,7 @@ public class CreativeMode extends CardStackAdapter implements
                 R.id.system_notification_background_colorpicker);
         qs_notification.setColorFilter(current_selected_notification_background_color,
                 PorterDuff.Mode.SRC_ATOP);
-        final TextView qs_notification_color = (TextView) systemui_card.findViewById(
+        qs_notification_color = (TextView) systemui_card.findViewById(
                 R.id.system_notification_background_colorpicker_text);
         qs_notification.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -1233,9 +1238,9 @@ public class CreativeMode extends CardStackAdapter implements
         qs_panel_bg = (ImageView) systemui_card.findViewById(R.id.qs_background_colorpicker);
         qs_panel_bg.setColorFilter(current_selected_qs_panel_background_color,
                 PorterDuff.Mode.SRC_ATOP);
-        final RelativeLayout qs_panel_bg_preview = (RelativeLayout) systemui_card.findViewById(R.id.systemui_preview);
+        qs_panel_bg_preview = (RelativeLayout) systemui_card.findViewById(R.id.systemui_preview);
         qs_panel_bg_preview.setBackgroundColor(current_selected_qs_panel_background_color);
-        final TextView qs_panel_bg_color = (TextView) systemui_card.findViewById(
+        qs_panel_bg_color = (TextView) systemui_card.findViewById(
                 R.id.qs_background_colorpicker_text);
         qs_panel_bg.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -1259,7 +1264,7 @@ public class CreativeMode extends CardStackAdapter implements
         // QS Icon Colors
 
         qs_tile = (ImageView) systemui_card.findViewById(R.id.qs_tile_icon_colorpicker);
-        final TextView qs_tile_text = (TextView) systemui_card.findViewById(
+        qs_tile_text = (TextView) systemui_card.findViewById(
                 R.id.qs_tile_icon_colorpicker_text);
         qs_tile.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -1293,7 +1298,7 @@ public class CreativeMode extends CardStackAdapter implements
         // QS Title Colors
 
         qs_text = (ImageView) systemui_card.findViewById(R.id.qs_tile_text_colorpicker);
-        final TextView qs_text_text = (TextView) systemui_card.findViewById(
+        qs_text_text = (TextView) systemui_card.findViewById(
                 R.id.qs_tile_text_colorpicker_text);
         qs_text.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -1318,7 +1323,7 @@ public class CreativeMode extends CardStackAdapter implements
         // QS Recents Clear All Icon Color
 
         qs_recents = (ImageView) systemui_card.findViewById(R.id.qs_recents_clear_all_icon_colorpicker);
-        final TextView qs_recents_text = (TextView) systemui_card.findViewById(
+        qs_recents_text = (TextView) systemui_card.findViewById(
                 R.id.qs_recents_clear_all_icon_colorpicker_text);
         qs_recents.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -1357,7 +1362,11 @@ public class CreativeMode extends CardStackAdapter implements
 
         // All Settings Modifications
         colorful_icon_switch.setClickable(bool);
-        colorful_icon_switch.setVisibility(View.GONE);
+        if (bool.equals(true)) {
+            colorful_icon_switch.setVisibility(View.VISIBLE);
+        } else {
+            colorful_icon_switch.setVisibility(View.GONE);
+        }
         categories_title_caps.setClickable(bool);
         categories_title_bold.setClickable(bool);
         categories_title_italics.setClickable(bool);
@@ -1396,6 +1405,728 @@ public class CreativeMode extends CardStackAdapter implements
         themable_gapps.setClickable(bool);
     }
 
+    public void restoreProfile(String location) {
+        int error_counter = 0;
+
+        // Begin importing each color from framework
+
+        try {
+            String[] commands = {"framework_accent_dark", location};
+            String savedColor = ReadProfile.main(commands);
+            if (Color.parseColor(savedColor) != current_selected_system_accent_color) {
+                current_selected_system_accent_color = Color.parseColor(savedColor);
+                ColorStateList csl = new ColorStateList(
+                        new int[][]{
+                                new int[]{android.R.attr.state_checked},
+                                new int[]{}
+                        },
+                        new int[]{
+                                current_selected_system_accent_color, current_selected_system_accent_color
+                        }
+                );
+                accent_dark_switch.setTrackTintList(csl);
+                accent_dark_switch.setThumbTintList(csl);
+                accent_universal.setColorFilter(current_selected_system_accent_color, PorterDuff.Mode.SRC_ATOP);
+                accent_universal_text.setTextColor(mContext.getColor(android.R.color.white));
+                is_framework_accent_changed = true;
+            } else {
+                Log.d("RestoreBackup", "There is no need to restore this color : " + " framework_accent_dark");
+            }
+        } catch (Exception e) {
+            Log.e("RestoreBackup", "There seems to be an issue restoring   : " + " framework_accent_dark");
+            error_counter += 1;
+        }
+
+        try {
+            String[] commands = {"framework_accent_secondary", location};
+            String savedColor = ReadProfile.main(commands);
+            if (Color.parseColor(savedColor) != current_selected_system_accent_dual_color) {
+                current_selected_system_accent_dual_color = Color.parseColor(savedColor);
+                accent_secondary.setColorFilter(current_selected_system_accent_dual_color, PorterDuff.Mode.SRC_ATOP);
+                accent_secondary_text.setTextColor(mContext.getColor(android.R.color.white));
+                is_framework_accent_secondary_changed = true;
+            } else {
+                Log.d("RestoreBackup", "There is no need to restore this color : " + " framework_accent_secondary");
+            }
+        } catch (Exception e) {
+            Log.e("RestoreBackup", "There seems to be an issue restoring   : " + " framework_accent_secondary");
+            error_counter += 1;
+        }
+
+        try {
+            String[] commands = {"framework_accent_light", location};
+            String savedColor = ReadProfile.main(commands);
+            if (Color.parseColor(savedColor) != current_selected_system_accent_light_color) {
+                current_selected_system_accent_light_color = Color.parseColor(savedColor);
+                ColorStateList csl = new ColorStateList(
+                        new int[][]{
+                                new int[]{android.R.attr.state_checked},
+                                new int[]{}
+                        },
+                        new int[]{
+                                current_selected_system_accent_light_color, current_selected_system_accent_light_color
+                        }
+                );
+                accent_light_switch.setTrackTintList(csl);
+                accent_light_switch.setThumbTintList(csl);
+                accent_light.setColorFilter(current_selected_system_accent_light_color, PorterDuff.Mode.SRC_ATOP);
+                accent_light_text.setTextColor(mContext.getColor(android.R.color.white));
+                is_framework_accent_light_changed = true;
+            } else {
+                Log.d("RestoreBackup", "There is no need to restore this color : " + " framework_accent_light");
+            }
+        } catch (Exception e) {
+            Log.e("RestoreBackup", "There seems to be an issue restoring   : " + " framework_accent_light");
+            error_counter += 1;
+        }
+
+        try {
+            String[] commands = {"framework_app_background_dark", location};
+            String savedColor = ReadProfile.main(commands);
+            if (Color.parseColor(savedColor) != current_selected_system_appbg_color) {
+                current_selected_system_appbg_color = Color.parseColor(savedColor);
+                framework_background.setBackgroundColor(current_selected_system_appbg_color);
+                appbg_dark.setColorFilter(current_selected_system_appbg_color, PorterDuff.Mode.SRC_ATOP);
+                appbg_dark_text.setTextColor(mContext.getColor(android.R.color.white));
+                is_framework_app_background_changed = true;
+            } else {
+                Log.d("RestoreBackup", "There is no need to restore this color : " + " framework_app_background_dark");
+            }
+        } catch (Exception e) {
+            Log.e("RestoreBackup", "There seems to be an issue restoring   : " + " framework_app_background_dark");
+            error_counter += 1;
+        }
+
+        try {
+            String[] commands = {"framework_app_background_light", location};
+            String savedColor = ReadProfile.main(commands);
+            if (Color.parseColor(savedColor) != current_selected_system_appbg_light_color) {
+                current_selected_system_appbg_light_color = Color.parseColor(savedColor);
+                accent_light_switch.setBackgroundColor(current_selected_system_appbg_light_color);
+                appbg_light.setColorFilter(current_selected_system_appbg_light_color, PorterDuff.Mode.SRC_ATOP);
+                appbg_light_text.setTextColor(mContext.getColor(android.R.color.white));
+                is_framework_app_background_light_changed = true;
+            } else {
+                Log.d("RestoreBackup", "There is no need to restore this color : " + " framework_app_background_light");
+            }
+        } catch (Exception e) {
+            Log.e("RestoreBackup", "There seems to be an issue restoring   : " + " framework_app_background_light");
+            error_counter += 1;
+        }
+
+        try {
+            String[] commands = {"framework_dialog_background_dark", location, "alpha"};
+            String savedColor = ReadProfile.main(commands);
+            if (Color.parseColor(savedColor) != current_selected_system_dialog_color) {
+                current_selected_system_dialog_color = Color.parseColor(savedColor);
+                dialog_dark.setColorFilter(current_selected_system_dialog_color, PorterDuff.Mode.SRC_ATOP);
+                dialog_dark_text.setTextColor(mContext.getColor(android.R.color.white));
+                is_framework_dialog_background_dark_changed = true;
+            } else {
+                Log.d("RestoreBackup", "There is no need to restore this color : " + " framework_dialog_background_dark");
+            }
+        } catch (Exception e) {
+            Log.e("RestoreBackup", "There seems to be an issue restoring   : " + " framework_dialog_background_dark");
+            error_counter += 1;
+        }
+
+        try {
+            String[] commands = {"framework_dialog_background_light", location, "alpha"};
+            String savedColor = ReadProfile.main(commands);
+            if (Color.parseColor(savedColor) != current_selected_system_dialog_light_color) {
+                current_selected_system_dialog_light_color = Color.parseColor(savedColor);
+                dialog_light.setColorFilter(current_selected_system_dialog_light_color, PorterDuff.Mode.SRC_ATOP);
+                dialog_light_text.setTextColor(mContext.getColor(android.R.color.white));
+                is_framework_dialog_background_light_changed = true;
+            } else {
+                Log.d("RestoreBackup", "There is no need to restore this color : " + " framework_dialog_background_light");
+            }
+        } catch (Exception e) {
+            Log.e("RestoreBackup", "There seems to be an issue restoring   : " + " framework_dialog_background_light");
+            error_counter += 1;
+        }
+
+        try {
+            String[] commands = {"framework_main_theme_color", location};
+            String savedColor = ReadProfile.main(commands);
+            if (Color.parseColor(savedColor) != current_selected_system_main_color) {
+                current_selected_system_main_color = Color.parseColor(savedColor);
+                framework_toolbar.setBackgroundColor(current_selected_system_main_color);
+                settings_toolbar.setBackgroundColor(current_selected_system_main_color);
+                main_color.setColorFilter(current_selected_system_main_color, PorterDuff.Mode.SRC_ATOP);
+                main_color_text.setTextColor(mContext.getColor(android.R.color.white));
+                is_framework_main_theme_color_changed = true;
+            } else {
+                Log.d("RestoreBackup", "There is no need to restore this color : " + " framework_main_theme_color");
+            }
+        } catch (Exception e) {
+            Log.e("RestoreBackup", "There seems to be an issue restoring   : " + " framework_main_theme_color");
+            error_counter += 1;
+        }
+
+        try {
+            String[] commands = {"framework_main_theme_color_dark", location};
+            String savedColor = ReadProfile.main(commands);
+            if (Color.parseColor(savedColor) != current_selected_system_main_dark_color) {
+                current_selected_system_main_dark_color = Color.parseColor(savedColor);
+                framework_toolbar_dark.setBackgroundColor(current_selected_system_main_dark_color);
+                main_color_dark.setColorFilter(current_selected_system_main_dark_color, PorterDuff.Mode.SRC_ATOP);
+                main_color_dark_text.setTextColor(mContext.getColor(android.R.color.white));
+                is_framework_main_theme_color_dark_changed = true;
+            } else {
+                Log.d("RestoreBackup", "There is no need to restore this color : " + " framework_main_theme_color_dark");
+            }
+        } catch (Exception e) {
+            Log.e("RestoreBackup", "There seems to be an issue restoring   : " + " framework_main_theme_color_dark");
+            error_counter += 1;
+        }
+
+        try {
+            String[] commands = {"framework_notifications_primary", location};
+            String savedColor = ReadProfile.main(commands);
+            if (Color.parseColor(savedColor) != current_selected_system_notifications_primary_color) {
+                current_selected_system_notifications_primary_color = Color.parseColor(savedColor);
+                notifications_primary.setColorFilter(current_selected_system_notifications_primary_color, PorterDuff.Mode.SRC_ATOP);
+                notifications_primary_text.setTextColor(mContext.getColor(android.R.color.white));
+                is_framework_notifications_primary_changed = true;
+            } else {
+                Log.d("RestoreBackup", "There is no need to restore this color : " + " framework_notifications_primary");
+            }
+        } catch (Exception e) {
+            Log.e("RestoreBackup", "There seems to be an issue restoring   : " + " framework_notifications_primary");
+            error_counter += 1;
+        }
+
+        try {
+            String[] commands = {"framework_notifications_secondary", location};
+            String savedColor = ReadProfile.main(commands);
+            if (Color.parseColor(savedColor) != current_selected_system_notifications_secondary_color) {
+                current_selected_system_notifications_secondary_color = Color.parseColor(savedColor);
+                notifications_secondary.setColorFilter(current_selected_system_notifications_secondary_color, PorterDuff.Mode.SRC_ATOP);
+                notifications_secondary_text.setTextColor(mContext.getColor(android.R.color.white));
+                is_framework_notifications_secondary_changed = true;
+            } else {
+                Log.d("RestoreBackup", "There is no need to restore this color : " + " framework_notifications_secondary");
+            }
+        } catch (Exception e) {
+            Log.e("RestoreBackup", "There seems to be an issue restoring   : " + " framework_notifications_secondary");
+            error_counter += 1;
+        }
+
+        try {
+            String[] commands = {"framework_system_ripple", location, "alpha"};
+            String savedColor = ReadProfile.main(commands);
+            if (Color.parseColor(savedColor) != current_selected_system_ripple_color) {
+                current_selected_system_ripple_color = Color.parseColor(savedColor);
+                ripples.setColorFilter(current_selected_system_ripple_color, PorterDuff.Mode.SRC_ATOP);
+                ripples_text.setTextColor(mContext.getColor(android.R.color.white));
+                is_framework_system_ripple_changed = true;
+            } else {
+                Log.d("RestoreBackup", "There is no need to restore this color : " + " framework_system_ripple");
+            }
+        } catch (Exception e) {
+            Log.e("RestoreBackup", "There seems to be an issue restoring   : " + " framework_system_ripple");
+            error_counter += 1;
+        }
+
+
+        // Begin importing each color from Settings
+
+        try {
+            String[] commands = {"settings_colorful_icon", location, "boolean"};
+            String savedBoolean = ReadProfile.main(commands);
+            if (savedBoolean.equals(null)) {
+                throw new Exception();
+            }
+            if (Boolean.parseBoolean(savedBoolean) != colorful_icon) {
+                colorful_icon = Boolean.parseBoolean(savedBoolean);
+                colorful_icon_switch.setChecked(colorful_icon);
+                colorful_icon_switch.setTextColor(mContext.getColor(android.R.color.white));
+                is_settings_colorful_icon_color_changed = true;
+            } else {
+                Log.d("RestoreBackup", "There is no need to restore this bool  : " + " settings_colorful_icon");
+            }
+        } catch (Exception e) {
+            Log.e("RestoreBackup", "There seems to be an issue restoring   : " + " settings_colorful_icon");
+            error_counter += 1;
+        }
+
+        try {
+            String[] commands = {"settings_dashboard_background_color", location};
+            String savedColor = ReadProfile.main(commands);
+            if (Color.parseColor(savedColor) != current_selected_dashboard_background_color) {
+                current_selected_dashboard_background_color = Color.parseColor(savedColor);
+                settings_dashboard_background_color.setColorFilter(current_selected_dashboard_background_color, PorterDuff.Mode.SRC_ATOP);
+                settings_dashboard_background_color_text.setTextColor(mContext.getColor(android.R.color.white));
+                is_settings_dashboard_background_color_changed = true;
+            } else {
+                Log.d("RestoreBackup", "There is no need to restore this color : " + " settings_dashboard_background_color");
+            }
+        } catch (Exception e) {
+            Log.e("RestoreBackup", "There seems to be an issue restoring   : " + " settings_dashboard_background_color");
+            error_counter += 1;
+        }
+
+        try {
+            String[] commands = {"settings_dashboard_category_background_color", location};
+            String savedColor = ReadProfile.main(commands);
+            if (Color.parseColor(savedColor) != current_selected_dashboard_category_background_color) {
+                current_selected_dashboard_category_background_color = Color.parseColor(savedColor);
+                settings_preview.setBackgroundColor(current_selected_dashboard_category_background_color);
+                settings_dashboard_category_background_color.setColorFilter(current_selected_dashboard_category_background_color, PorterDuff.Mode.SRC_ATOP);
+                settings_dashboard_category_background_color_text.setTextColor(mContext.getColor(android.R.color.white));
+                is_settings_dashboard_category_background_color_changed = true;
+            } else {
+                Log.d("RestoreBackup", "There is no need to restore this color : " + " settings_dashboard_category_background_color");
+            }
+        } catch (Exception e) {
+            Log.e("RestoreBackup", "There seems to be an issue restoring   : " + " settings_dashboard_category_background_color");
+            error_counter += 1;
+        }
+
+        try {
+            String[] commands = {"settings_category_title_caps", location, "boolean"};
+            String savedBoolean = ReadProfile.main(commands);
+            if (savedBoolean.equals(null)) {
+                throw new Exception();
+            }
+            if (Boolean.parseBoolean(savedBoolean) != category_title_caps) {
+                category_title_caps = Boolean.parseBoolean(savedBoolean);
+                categories_title_caps.setChecked(category_title_caps);
+                categories_title_caps.setTextColor(mContext.getColor(android.R.color.white));
+                is_settings_dashboard_category_title_caps_changed = true;
+            } else {
+                Log.d("RestoreBackup", "There is no need to restore this bool  : " + " settings_category_title_caps");
+            }
+        } catch (Exception e) {
+            Log.e("RestoreBackup", "There seems to be an issue restoring   : " + " settings_category_title_caps");
+            error_counter += 1;
+        }
+
+        try {
+            String[] commands = {"settings_category_title_bold", location, "boolean"};
+            String savedBoolean = ReadProfile.main(commands);
+            if (savedBoolean.equals(null)) {
+                throw new Exception();
+            }
+            if (Boolean.parseBoolean(savedBoolean) != category_title_bold) {
+                category_title_bold = Boolean.parseBoolean(savedBoolean);
+                categories_title_bold.setChecked(category_title_bold);
+                categories_title_bold.setTextColor(mContext.getColor(android.R.color.white));
+                is_settings_dashboard_category_title_bold_changed = true;
+            } else {
+                Log.d("RestoreBackup", "There is no need to restore this bool  : " + " settings_category_title_bold");
+            }
+        } catch (Exception e) {
+            Log.e("RestoreBackup", "There seems to be an issue restoring   : " + " settings_category_title_bold");
+            error_counter += 1;
+        }
+
+        try {
+            String[] commands = {"settings_category_title_italics", location, "boolean"};
+            String savedBoolean = ReadProfile.main(commands);
+            if (savedBoolean.equals(null)) {
+                throw new Exception();
+            }
+            if (Boolean.parseBoolean(savedBoolean) != category_title_italics) {
+                category_title_italics = Boolean.parseBoolean(savedBoolean);
+                categories_title_italics.setChecked(category_title_italics);
+                categories_title_italics.setTextColor(mContext.getColor(android.R.color.white));
+                is_settings_dashboard_category_title_italics_changed = true;
+            } else {
+                Log.d("RestoreBackup", "There is no need to restore this bool  : " + " settings_category_title_italics");
+            }
+        } catch (Exception e) {
+            Log.e("RestoreBackup", "There seems to be an issue restoring   : " + " settings_category_title_italics");
+            error_counter += 1;
+        }
+
+        try {
+            String[] commands = {"settings_dashboard_dividers", location, "boolean"};
+            String savedBoolean = ReadProfile.main(commands);
+            if (savedBoolean.equals(null)) {
+                throw new Exception();
+            }
+            if (Boolean.parseBoolean(savedBoolean) != dashboard_dividers) {
+                dashboard_dividers = Boolean.parseBoolean(savedBoolean);
+                dashboard_divider.setChecked(dashboard_dividers);
+                dashboard_divider.setTextColor(mContext.getColor(android.R.color.white));
+                is_settings_dashboard_dividers_changed = true;
+            } else {
+                Log.d("RestoreBackup", "There is no need to restore this bool  : " + " settings_dashboard_dividers");
+            }
+        } catch (Exception e) {
+            Log.e("RestoreBackup", "There seems to be an issue restoring   : " + " settings_dashboard_dividers");
+            error_counter += 1;
+        }
+
+        try {
+            String[] commands = {"settings_dirty_tweaks_icon_presence", location, "boolean"};
+            String savedBoolean = ReadProfile.main(commands);
+            if (savedBoolean.equals(null)) {
+                throw new Exception();
+            }
+            if (Boolean.parseBoolean(savedBoolean) != dirtytweaks_icon_presence) {
+                dirtytweaks_icon_presence = Boolean.parseBoolean(savedBoolean);
+                dutweaks_icons.setChecked(dirtytweaks_icon_presence);
+                dutweaks_icons.setTextColor(mContext.getColor(android.R.color.white));
+                is_settings_dashboard_dirty_tweaks_icon_presence_changed = true;
+            } else {
+                Log.d("RestoreBackup", "There is no need to restore this bool  : " + " settings_dirty_tweaks_icon_presence");
+            }
+        } catch (Exception e) {
+            Log.e("RestoreBackup", "There seems to be an issue restoring   : " + " settings_dirty_tweaks_icon_presence");
+            error_counter += 1;
+        }
+
+        try {
+            String[] commands = {"settings_icon_colors", location};
+            String savedColor = ReadProfile.main(commands);
+            if (Color.parseColor(savedColor) != current_selected_settings_icon_color) {
+                current_selected_settings_icon_color = Color.parseColor(savedColor);
+                wifiIcon.setColorFilter(current_selected_settings_icon_color, PorterDuff.Mode.SRC_ATOP);
+                settings_icon_colors.setColorFilter(current_selected_settings_icon_color, PorterDuff.Mode.SRC_ATOP);
+                settings_icon_colors_text.setTextColor(mContext.getColor(android.R.color.white));
+                is_settings_icon_color_changed = true;
+            } else {
+                Log.d("RestoreBackup", "There is no need to restore this color : " + " settings_icon_colors");
+            }
+        } catch (Exception e) {
+            Log.e("RestoreBackup", "There seems to be an issue restoring   : " + " settings_icon_colors");
+            error_counter += 1;
+        }
+
+        try {
+            String[] commands = {"settings_title_colors", location};
+            String savedColor = ReadProfile.main(commands);
+            if (Color.parseColor(savedColor) != current_selected_settings_title_color) {
+                current_selected_settings_title_color = Color.parseColor(savedColor);
+                categoryHeader.setTextColor(current_selected_settings_title_color);
+                settings_title_colors.setColorFilter(current_selected_settings_title_color, PorterDuff.Mode.SRC_ATOP);
+                settings_title_colors_text.setTextColor(mContext.getColor(android.R.color.white));
+                is_settings_title_color_changed = true;
+            } else {
+                Log.d("RestoreBackup", "There is no need to restore this color : " + " settings_title_colors");
+            }
+        } catch (Exception e) {
+            Log.e("RestoreBackup", "There seems to be an issue restoring   : " + " settings_title_colors");
+            error_counter += 1;
+        }
+
+        try {
+            String[] commands = {"settings_switchbar_background_color", location};
+            String savedColor = ReadProfile.main(commands);
+            if (Color.parseColor(savedColor) != current_selected_settings_switchbar_color) {
+                current_selected_settings_switchbar_color = Color.parseColor(savedColor);
+                settings_switchbar_background_color.setColorFilter(current_selected_settings_switchbar_color, PorterDuff.Mode.SRC_ATOP);
+                settings_switchbar_background_color_text.setTextColor(mContext.getColor(android.R.color.white));
+                is_settings_switchbar_background_color_changed = true;
+            } else {
+                Log.d("RestoreBackup", "There is no need to restore this color : " + " settings_switchbar_background_color");
+            }
+        } catch (Exception e) {
+            Log.e("RestoreBackup", "There seems to be an issue restoring   : " + " settings_switchbar_background_color");
+            error_counter += 1;
+        }
+
+        // Begin importing each color from SystemUI
+
+        try {
+            String[] commands = {"systemui_accent", location};
+            String savedColor = ReadProfile.main(commands);
+            if (Color.parseColor(savedColor) != current_selected_system_accent_color) {
+                current_selected_system_accent_color = Color.parseColor(savedColor);
+                ColorStateList csl = new ColorStateList(
+                        new int[][]{
+                                new int[]{android.R.attr.state_pressed},
+                                new int[]{android.R.attr.state_focused},
+                                new int[]{}
+                        },
+                        new int[]{
+                                current_selected_system_accent_color, current_selected_system_accent_color, current_selected_system_accent_color
+                        }
+                );
+                brightness.setProgressTintList(csl);
+                brightness.setThumbTintList(csl);
+                qs_accents.setColorFilter(current_selected_system_accent_color, PorterDuff.Mode.SRC_ATOP);
+                qs_accents_text.setTextColor(mContext.getColor(android.R.color.white));
+                is_systemui_accent_color_changed = true;
+            } else {
+                Log.d("RestoreBackup", "There is no need to restore this color : " + " systemui_accent");
+            }
+        } catch (Exception e) {
+            Log.e("RestoreBackup", "There seems to be an issue restoring   : " + " systemui_accent");
+            error_counter += 1;
+        }
+
+        try {
+            String[] commands = {"systemui_header_background_color", location};
+            String savedColor = ReadProfile.main(commands);
+            if (Color.parseColor(savedColor) != current_selected_header_background_color) {
+                current_selected_header_background_color = Color.parseColor(savedColor);
+                qs_header.setColorFilter(current_selected_header_background_color, PorterDuff.Mode.SRC_ATOP);
+                qs_header_color.setTextColor(mContext.getColor(android.R.color.white));
+                is_systemui_header_color_changed = true;
+            } else {
+                Log.d("RestoreBackup", "There is no need to restore this color : " + " systemui_header_background_color");
+            }
+        } catch (Exception e) {
+            Log.e("RestoreBackup", "There seems to be an issue restoring   : " + " systemui_header_background_color");
+            error_counter += 1;
+        }
+
+        try {
+            String[] commands = {"systemui_notification_background_color", location};
+            String savedColor = ReadProfile.main(commands);
+            if (Color.parseColor(savedColor) != current_selected_notification_background_color) {
+                current_selected_notification_background_color = Color.parseColor(savedColor);
+                qs_notification.setColorFilter(current_selected_notification_background_color, PorterDuff.Mode.SRC_ATOP);
+                qs_notification_color.setTextColor(mContext.getColor(android.R.color.white));
+                is_systemui_notification_background_color_changed = true;
+            } else {
+                Log.d("RestoreBackup", "There is no need to restore this color : " + " systemui_notification_background_color");
+            }
+        } catch (Exception e) {
+            Log.e("RestoreBackup", "There seems to be an issue restoring   : " + " systemui_notification_background_color");
+            error_counter += 1;
+        }
+
+        try {
+            String[] commands = {"systemui_qs_panel_background_color", location};
+            String savedColor = ReadProfile.main(commands);
+            if (Color.parseColor(savedColor) != current_selected_qs_panel_background_color) {
+                current_selected_qs_panel_background_color = Color.parseColor(savedColor);
+                qs_panel_bg_preview.setBackgroundColor(current_selected_qs_panel_background_color);
+                qs_panel_bg.setColorFilter(current_selected_qs_panel_background_color, PorterDuff.Mode.SRC_ATOP);
+                qs_panel_bg_color.setTextColor(mContext.getColor(android.R.color.white));
+                is_systemui_qs_panel_background_color_changed = true;
+            } else {
+                Log.d("RestoreBackup", "There is no need to restore this color : " + " systemui_qs_panel_background_color");
+            }
+        } catch (Exception e) {
+            Log.e("RestoreBackup", "There seems to be an issue restoring   : " + " systemui_qs_panel_background_color");
+            error_counter += 1;
+        }
+
+        try {
+            String[] commands = {"systemui_qs_tile_color", location};
+            String savedColor = ReadProfile.main(commands);
+            if (Color.parseColor(savedColor) != current_selected_qs_tile_color) {
+                current_selected_qs_tile_color = Color.parseColor(savedColor);
+                ColorStateList csl = new ColorStateList(
+                        new int[][]{
+                                new int[]{android.R.attr.state_pressed},
+                                new int[]{android.R.attr.state_focused},
+                                new int[]{}
+                        },
+                        new int[]{
+                                current_selected_qs_tile_color, current_selected_qs_tile_color, current_selected_qs_tile_color
+                        }
+                );
+                bluetoothLabel.setCompoundDrawableTintList(csl);
+                wifiLabel.setCompoundDrawableTintList(csl);
+                qs_tile.setColorFilter(current_selected_qs_tile_color, PorterDuff.Mode.SRC_ATOP);
+                qs_tile_text.setTextColor(mContext.getColor(android.R.color.white));
+                is_systemui_qs_tile_color_changed = true;
+            } else {
+                Log.d("RestoreBackup", "There is no need to restore this color : " + " systemui_qs_tile_color");
+            }
+        } catch (Exception e) {
+            Log.e("RestoreBackup", "There seems to be an issue restoring   : " + " systemui_qs_tile_color");
+            error_counter += 1;
+        }
+
+        try {
+            String[] commands = {"systemui_qs_text_color", location};
+            String savedColor = ReadProfile.main(commands);
+            if (Color.parseColor(savedColor) != current_selected_qs_text_color) {
+                current_selected_qs_text_color = Color.parseColor(savedColor);
+                wifiLabel.setTextColor(current_selected_qs_text_color);
+                bluetoothLabel.setTextColor(current_selected_qs_text_color);
+                qs_text.setColorFilter(current_selected_qs_text_color, PorterDuff.Mode.SRC_ATOP);
+                qs_text_text.setTextColor(mContext.getColor(android.R.color.white));
+                is_systemui_qs_text_color_changed = true;
+            } else {
+                Log.d("RestoreBackup", "There is no need to restore this color : " + " systemui_qs_text_color");
+            }
+        } catch (Exception e) {
+            Log.e("RestoreBackup", "There seems to be an issue restoring   : " + " systemui_qs_text_color");
+            error_counter += 1;
+        }
+
+        try {
+            String[] commands = {"systemui_recents_clear_all_fab_icon_color", location};
+            String savedColor = ReadProfile.main(commands);
+            if (Color.parseColor(savedColor) != current_selected_recents_clear_all_icon_color) {
+                current_selected_recents_clear_all_icon_color = Color.parseColor(savedColor);
+                qs_recents.setColorFilter(current_selected_recents_clear_all_icon_color, PorterDuff.Mode.SRC_ATOP);
+                qs_recents_text.setTextColor(mContext.getColor(android.R.color.white));
+                is_systemui_recents_clear_all_icon_color_changed = true;
+            } else {
+                Log.d("RestoreBackup", "There is no need to restore this color : " + " systemui_recents_clear_all_fab_icon_color");
+            }
+        } catch (Exception e) {
+            Log.e("RestoreBackup", "There seems to be an issue restoring   : " + " systemui_recents_clear_all_fab_icon_color");
+            error_counter += 1;
+        }
+
+        // Begin importing final card elements
+
+        try {
+            String[] commands = {"theme_name", location, "id"};
+            String theme_name = ReadProfile.main(commands);
+            if (!theme_name.equals("")) {
+                aet1.setText(theme_name);
+            } else {
+                throw new Exception();
+            }
+        } catch (Exception e) {
+            Log.e("RestoreBackup", "There seems to be an issue restoring   : " + " theme_name");
+            error_counter += 1;
+        }
+
+        try {
+            String[] commands = {"dashboard_username", location, "unformatted"};
+            String username = ReadProfile.main(commands);
+            if (username != prefs.getString("dashboard_username", "default")) {
+                if (!username.equals("")) {
+                    aet2.setText(username);
+                } else {
+                    throw new Exception();
+                }
+            } else {
+                Log.d("RestoreBackup", "You made me, master!");
+            }
+        } catch (Exception e) {
+            Log.e("RestoreBackup", "There seems to be an issue restoring   : " + " dashboard_username");
+            error_counter += 1;
+        }
+
+        try {
+            String[] commands = {"theme_identifier", location, "unformatted"};
+            String theme_identifier = ReadProfile.main(commands);
+            if (!theme_identifier.equals("")) {
+                boolean installed = checkIfPackageInstalled(theme_identifier, mContext);
+                if (installed) {
+                    String formatted = String.format(mContext.getResources().getString(
+                            R.string.restore_package_installed), theme_identifier);
+                    Toast toast = Toast.makeText(mContext.getApplicationContext(), formatted,
+                            Toast.LENGTH_LONG);
+                    toast.show();
+                } else {
+                    String formatted = String.format(mContext.getResources().getString(
+                            R.string.restore_package_not_installed), theme_identifier);
+                    Toast toast = Toast.makeText(mContext.getApplicationContext(), formatted,
+                            Toast.LENGTH_LONG);
+                    toast.show();
+                }
+            } else {
+                throw new Exception();
+            }
+        } catch (Exception e) {
+            Log.e("RestoreBackup", "There seems to be an issue restoring   : " + " theme_identifier");
+            error_counter += 1;
+        }
+
+        if (error_counter > 0) {
+            Log.e("RestoreBackup", "Restoring of profile finished successfully with some errors!");
+            Toast toast = Toast.makeText(mContext.getApplicationContext(), mContext.getString(R.string.restore_profile_failure),
+                    Toast.LENGTH_LONG);
+            toast.show();
+        } else {
+            Log.d("RestoreBackup", "Restoring of profile finished successfully!");
+            Toast toast = Toast.makeText(mContext.getApplicationContext(), mContext.getString(R.string.restore_profile_success),
+                    Toast.LENGTH_LONG);
+            toast.show();
+        }
+    }
+
+    public void backupProfile(String filename, String theme_name) {
+        File myDir = new File(Environment.getExternalStorageDirectory(), "dashboard_profiles");
+        if (!myDir.exists()) {
+            myDir.mkdirs();
+        }
+        File root = new File(
+                Environment.getExternalStorageDirectory().getAbsolutePath() + "/dashboard_profiles/" + filename + ".dashboard");
+        try {
+            root.createNewFile();
+            FileWriter fw = new FileWriter(root);
+            BufferedWriter bw = new BufferedWriter(fw);
+            PrintWriter pw = new PrintWriter(bw);
+            String profile = ("" +
+                    "<?xml version=\"1.0\"?>\n" +
+                    "<dashboard>\n" +
+                    "    <profile id=\"" + theme_name + "\">\n" +
+                    "        <dashboard_username>" + prefs.getString("dashboard_username", mContext.getString(R.string.default_username)) + "</dashboard_username>\n" +
+                    "        <theme_identifier>" + current_selected_theme + "</theme_identifier>\n" +
+                    "\n" +
+                    "        <framework_accent_dark>#" + Integer.toHexString(current_selected_system_accent_color) + "</framework_accent_dark>\n" +
+                    "        <framework_accent_secondary>#" + Integer.toHexString(current_selected_system_accent_dual_color) + "</framework_accent_secondary>\n" +
+                    "        <framework_accent_light>#" + Integer.toHexString(current_selected_system_accent_light_color) + "</framework_accent_light>\n" +
+                    "        <framework_app_background_dark>#" + Integer.toHexString(current_selected_system_appbg_color) + "</framework_app_background_dark>\n" +
+                    "        <framework_app_background_light>#" + Integer.toHexString(current_selected_system_appbg_light_color) + "</framework_app_background_light>\n" +
+                    "        <framework_dialog_background_dark>#" + Integer.toHexString(current_selected_system_dialog_color) + "</framework_dialog_background_dark>\n" +
+                    "        <framework_dialog_background_light>#" + Integer.toHexString(current_selected_system_dialog_light_color) + "</framework_dialog_background_light>\n" +
+                    "        <framework_main_theme_color>#" + Integer.toHexString(current_selected_system_main_color) + "</framework_main_theme_color>\n" +
+                    "        <framework_main_theme_color_dark>#" + Integer.toHexString(current_selected_system_main_dark_color) + "</framework_main_theme_color_dark>\n" +
+                    "        <framework_notifications_primary>#" + Integer.toHexString(current_selected_system_notifications_primary_color) + "</framework_notifications_primary>\n" +
+                    "        <framework_notifications_secondary>#" + Integer.toHexString(current_selected_system_notifications_secondary_color) + "</framework_notifications_secondary>\n" +
+                    "        <framework_system_ripple>#" + Integer.toHexString(current_selected_system_ripple_color) + "</framework_system_ripple>\n" +
+                    "\n" +
+                    "        <settings_colorful_icon>" + Boolean.toString(colorful_icon) + "</settings_colorful_icon>\n" +
+                    "        <settings_dashboard_background_color>#" + Integer.toHexString(current_selected_dashboard_background_color) + "</settings_dashboard_background_color>\n" +
+                    "        <settings_dashboard_category_background_color>#" + Integer.toHexString(current_selected_dashboard_category_background_color) + "</settings_dashboard_category_background_color>\n" +
+                    "        <settings_category_title_caps>" + Boolean.toString(category_title_caps) + "</settings_category_title_caps>\n" +
+                    "        <settings_category_title_bold>" + Boolean.toString(category_title_bold) + "</settings_category_title_bold>\n" +
+                    "        <settings_category_title_italics>" + Boolean.toString(category_title_italics) + "</settings_category_title_italics>\n" +
+                    "        <settings_dashboard_dividers>" + Boolean.toString(dashboard_dividers) + "</settings_dashboard_dividers>\n" +
+                    "        <settings_dirty_tweaks_icon_presence>" + Boolean.toString(dirtytweaks_icon_presence) + "</settings_dirty_tweaks_icon_presence>\n" +
+                    "        <settings_icon_colors>#" + Integer.toHexString(current_selected_settings_icon_color) + "</settings_icon_colors>\n" +
+                    "        <settings_title_colors>#" + Integer.toHexString(current_selected_settings_title_color) + "</settings_title_colors>\n" +
+                    "        <settings_switchbar_background_color>#" + Integer.toHexString(current_selected_settings_switchbar_color) + "</settings_switchbar_background_color>\n" +
+                    "\n" +
+                    "        <systemui_accent>#" + Integer.toHexString(current_selected_qs_accent_color) + "</systemui_accent>\n" +
+                    "        <systemui_header_background_color>#" + Integer.toHexString(current_selected_header_background_color) + "</systemui_header_background_color>\n" +
+                    "        <systemui_notification_background_color>#" + Integer.toHexString(current_selected_notification_background_color) + "</systemui_notification_background_color>\n" +
+                    "        <systemui_qs_panel_background_color>#" + Integer.toHexString(current_selected_qs_panel_background_color) + "</systemui_qs_panel_background_color>\n" +
+                    "        <systemui_qs_tile_color>#" + Integer.toHexString(current_selected_qs_tile_color) + "</systemui_qs_tile_color>\n" +
+                    "        <systemui_qs_text_color>#" + Integer.toHexString(current_selected_qs_text_color) + "</systemui_qs_text_color>\n" +
+                    "        <systemui_recents_clear_all_fab_icon_color>#" + Integer.toHexString(current_selected_recents_clear_all_icon_color) + "</systemui_recents_clear_all_fab_icon_color>\n" +
+                    "    </profile>\n" +
+                    "</dashboard>");
+
+            pw.write(profile);
+            pw.close();
+            bw.close();
+            fw.close();
+            RefreshProfileSpinner();
+        } catch (IOException e) {
+            Toast toast = Toast.makeText(mContext.getApplicationContext(),
+                    mContext.getResources().getString(
+                            R.string.createXMLFile_exception_toast),
+                    Toast.LENGTH_LONG);
+            toast.show();
+        }
+    }
+
+    public void RefreshProfileSpinner() {
+        list2.clear();
+
+        list2.add(mContext.getString(R.string.restore_profile_spinner_default));
+
+        File f2 = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/dashboard_profiles/");
+        File[] files2 = f2.listFiles();
+        if (files2 != null) {
+            for (File inFile2 : files2) {
+                if (!inFile2.isDirectory() && inFile2.toString().contains(".dashboard")) {
+                    list2.add(inFile2.getAbsolutePath().substring(39));
+                }
+            }
+        }
+
+        adapter2.notifyDataSetChanged();
+    }
+
     private View getFinalizedView(ViewGroup container) {
         final_card = (CardView) mInflater.inflate(R.layout.final_card, container, false);
         final_card.setCardBackgroundColor(ContextCompat.getColor(mContext, bgColorIds[3]));
@@ -1404,7 +2135,8 @@ public class CreativeMode extends CardStackAdapter implements
 
         final Spinner spinner1 = (Spinner) final_card.findViewById(R.id.spinner2);
         // Create an ArrayAdapter using the string array and a default spinner layout
-        List<String> list = new ArrayList<String>();
+        list = new ArrayList<>();
+        list2 = new ArrayList<>();
 
         aet1 = (AnimatedEditText) final_card.findViewById(R.id.edittext1);
         aet2 = (AnimatedEditText) final_card.findViewById(R.id.edittext2);
@@ -1428,7 +2160,6 @@ public class CreativeMode extends CardStackAdapter implements
 
                     }
                 });
-
 
         list.add(mContext.getResources().getString(R.string.contextualheaderswapper_select_theme));
         list.add(mContext.getString(R.string.creative_mode_card_header_selection));
@@ -1481,6 +2212,7 @@ public class CreativeMode extends CardStackAdapter implements
             public void onItemSelected(AdapterView<?> arg0, View arg1,
                                        int pos, long id) {
                 if (pos == 0) {
+                    current_selected_theme = "";
                     if (framework_toolbar_dark.getVisibility() == View.GONE) {
                         framework_toolbar_dark.setVisibility(View.VISIBLE);
                     }
@@ -1491,6 +2223,7 @@ public class CreativeMode extends CardStackAdapter implements
                     activateAllOptions(true);
                 }
                 if (pos == 1) {
+                    current_selected_theme = "";
                     if (framework_toolbar_dark.getVisibility() == View.VISIBLE) {
                         framework_toolbar_dark.setVisibility(View.GONE);
                     }
@@ -1557,6 +2290,7 @@ public class CreativeMode extends CardStackAdapter implements
                     }, 100);
                 }
                 if (pos == 2) {
+                    current_selected_theme = "com.chummy.jezebel.materialdark.donate";
                     if (framework_toolbar_dark.getVisibility() == View.VISIBLE) {
                         framework_toolbar_dark.setVisibility(View.GONE);
                     }
@@ -1598,6 +2332,7 @@ public class CreativeMode extends CardStackAdapter implements
                     activateAllOptions(true);
                 }
                 if (pos == 3) {
+                    current_selected_theme = "com.chummy.jezebel.blackedout.donate";
                     if (framework_toolbar_dark.getVisibility() == View.VISIBLE) {
                         framework_toolbar_dark.setVisibility(View.GONE);
                     }
@@ -1652,6 +2387,7 @@ public class CreativeMode extends CardStackAdapter implements
                         Log.d("getFinalizedViewSpinner", "a cdt theme derivative has been selected, several options have been changed!");
                         main_color_dark_view.setVisibility(View.GONE);
                         is_framework_main_theme_color_dark_changed = false;
+                        current_selected_theme = spinner1.getSelectedItem().toString();
                     } else {
                         Log.d("getFinalizedViewSpinner", "header pack creation deactivated, all options have been re-enabled!");
                         if (!main_color_dark_view.isShown()) {
@@ -1660,6 +2396,7 @@ public class CreativeMode extends CardStackAdapter implements
                         if (colorful_icon_switch.isShown()) {
                             colorful_icon_switch.setVisibility(View.GONE);
                         }
+                        current_selected_theme = spinner1.getSelectedItem().toString();
                     }
                 }
             }
@@ -1736,6 +2473,71 @@ public class CreativeMode extends CardStackAdapter implements
                 }
             }
         });
+
+        final Spinner loadProfile = (Spinner) final_card.findViewById(R.id.spinner3);
+
+        list2.add(mContext.getString(R.string.restore_profile_spinner_default));
+
+        // Now lets add all the located themes found that aren't cdt themes
+        File f2 = new File(Environment.getExternalStorageDirectory().getAbsolutePath() +
+                "/dashboard_profiles/");
+        File[] files2 = f2.listFiles();
+        if (files2 != null) {
+            for (File inFile2 : files2) {
+                if (!inFile2.isDirectory() && inFile2.toString().contains(".dashboard")) {
+                    list2.add(inFile2.getAbsolutePath().substring(39));
+                }
+            }
+        }
+
+        adapter2 = new ArrayAdapter<String>(mContext,
+                android.R.layout.simple_spinner_item, list2);
+        // Specify the layout to use when the list of choices appears
+        adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        loadProfile.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> arg0, View arg1,
+                                       int pos, long id) {
+                if (pos == 0) {
+                    current_selected_profile = "";
+                } else {
+                    current_selected_profile = loadProfile.getSelectedItem().toString();
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> arg0) {
+                //
+            }
+        });
+
+        loadProfile.setAdapter(adapter2);
+
+        Button restoreBackup = (Button) final_card.findViewById(R.id.restoreButton);
+        restoreBackup.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                String location = Environment.getExternalStorageDirectory().getAbsolutePath() +
+                        "/dashboard_profiles/" + loadProfile.getSelectedItem();
+                restoreProfile(location);
+            }
+        });
+
+        Button backup = (Button) final_card.findViewById(R.id.backupButton);
+        backup.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                if (!current_selected_theme.equals("") && !aet1.getText().toString().equals("")) {
+                    backupProfile(aet1.getText().toString(), aet1.getText().toString());
+                } else {
+                    Toast toast = Toast.makeText(mContext.getApplicationContext(),
+                            mContext.getResources().getString(
+                                    R.string.no_theme_selected),
+                            Toast.LENGTH_LONG);
+                    toast.show();
+                }
+
+            }
+        });
+
         return final_card;
     }
 

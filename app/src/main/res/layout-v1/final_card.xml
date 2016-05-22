@@ -129,16 +129,62 @@
                     android:text="@string/commons_themable_google_apps"
                     android:textColor="@color/creative_mode_text_disabled" />
 
+                <TextView
+                    android:id="@+id/backup_restore_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/themable_gapps"
+                    android:layout_gravity="left"
+                    android:layout_marginTop="15dp"
+                    android:text="@string/restore_profile_title"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textStyle="italic" />
+
+                <Spinner
+                    android:id="@+id/spinner3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/backup_restore_title"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="@dimen/content_inset"
+                    android:layout_marginEnd="-15dp"
+                    android:layout_marginStart="-8dp" />
+
+                <Button
+                    android:id="@+id/restoreButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignEnd="@+id/edittext1"
+                    android:layout_alignStart="@+id/backup_restore_title"
+                    android:layout_below="@+id/spinner3"
+                    android:layout_marginTop="5dp"
+                    android:background="@color/card1_bg"
+                    android:clickable="true"
+                    android:foreground="?android:selectableItemBackground"
+                    android:text="LOAD SAVED PROFILE" />
+
+                <Button
+                    android:id="@+id/backupButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignEnd="@+id/edittext1"
+                    android:layout_alignStart="@+id/backup_restore_title"
+                    android:layout_below="@+id/restoreButton"
+                    android:layout_marginTop="5dp"
+                    android:background="@color/card2_bg"
+                    android:clickable="true"
+                    android:foreground="?android:selectableItemBackground"
+                    android:text="BACKUP CURRENT STATE" />
+
                 <Button
                     android:id="@+id/begin_action"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignEnd="@+id/edittext2"
-                    android:layout_alignStart="@+id/tv2"
-                    android:layout_below="@+id/themable_gapps"
+                    android:layout_alignEnd="@+id/edittext1"
+                    android:layout_alignStart="@+id/backup_restore_title"
+                    android:layout_below="@+id/backupButton"
                     android:layout_marginBottom="8dp"
-                    android:layout_marginRight="8dp"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="5dp"
                     android:background="@color/card3_bg"
                     android:clickable="true"
                     android:foreground="?android:selectableItemBackground"
