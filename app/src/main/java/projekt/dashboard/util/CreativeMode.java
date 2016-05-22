@@ -2287,6 +2287,7 @@ public class CreativeMode extends CardStackAdapter implements
                     }
                     header_creative_mode_activated = false;
                     activateAllOptions(true);
+                    colorful_icon_switch.setVisibility(View.GONE);
                 }
                 if (pos == 1) {
                     current_selected_theme = "";
@@ -2454,6 +2455,7 @@ public class CreativeMode extends CardStackAdapter implements
                         main_color_dark_view.setVisibility(View.GONE);
                         is_framework_main_theme_color_dark_changed = false;
                         current_selected_theme = spinner1.getSelectedItem().toString();
+                        colorful_icon_switch.setVisibility(View.VISIBLE);
                     } else {
                         Log.d("getFinalizedViewSpinner", "header pack creation deactivated, all options have been re-enabled!");
                         if (!main_color_dark_view.isShown()) {
