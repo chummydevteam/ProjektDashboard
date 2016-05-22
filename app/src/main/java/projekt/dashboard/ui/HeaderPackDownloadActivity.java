@@ -121,11 +121,6 @@ public class HeaderPackDownloadActivity extends AppCompatActivity {
         mProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
         mProgressDialog.setCancelable(false);
 
-        File myDir = new File(Environment.getExternalStorageDirectory(), getString(R.string.dashboard_header_directory));
-        if (!myDir.exists()) {
-            myDir.mkdir();
-        }
-
         final String[] headerPackSources = getResources().getStringArray(R.array.header_pack_urls);
         final Spinner headerPackSourcePicker = (Spinner) findViewById(R.id.sourcePickerHeaderPacks);
         ArrayAdapter<String> spinnerCountShoesArrayAdapter = new ArrayAdapter<String>(getApplicationContext(),
@@ -206,11 +201,6 @@ public class HeaderPackDownloadActivity extends AppCompatActivity {
         // Defined Array values to show in ListView
         headerNames = new ArrayList<>();
         headerPreviews = new ArrayList<>();
-
-        File myDir = new File(Environment.getExternalStorageDirectory(), getString(R.string.dashboard_header_directory));
-        if (!myDir.exists()) {
-            myDir.mkdir();
-        }
 
         String[] checkerCommands = {getApplicationContext().getFilesDir() + "/addons.xml"};
         final Map<String, String> newArray = ReadCloudXMLFile.main(checkerCommands);
@@ -375,6 +365,12 @@ public class HeaderPackDownloadActivity extends AppCompatActivity {
             InputStream input = null;
             OutputStream output = null;
             HttpURLConnection connection = null;
+
+            File myDir = new File(Environment.getExternalStorageDirectory(), getString(R.string.dashboard_header_directory));
+            if (!myDir.exists()) {
+                myDir.mkdir();
+            }
+
             try {
                 URL url = new URL(sUrl[0]);
                 connection = (HttpURLConnection) url.openConnection();
