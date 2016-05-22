@@ -57,6 +57,21 @@ public class SplashScreenActivity extends Activity implements
             if (!directory.exists()) {
                 directory.mkdirs();
             }
+            File directory2 = new File(Environment.getExternalStorageDirectory(),
+                    "/" + getResources().getString(R.string.dashboard_header_directory) + "/");
+            if (!directory2.exists()) {
+                directory2.mkdirs();
+            }
+            File directory3 = new File(Environment.getExternalStorageDirectory(),
+                    "/" + getResources().getString(R.string.dashboard_profile_directory) + "/");
+            if (!directory3.exists()) {
+                directory3.mkdirs();
+            }
+            File directory4 = new File(Environment.getExternalStorageDirectory(),
+                    "/" + getResources().getString(R.string.dashboard_wallpaper_directory) + "/");
+            if (!directory4.exists()) {
+                directory4.mkdirs();
+            }
             cleanTempFolder();
             StartAnimations();
         } else {
@@ -78,6 +93,21 @@ public class SplashScreenActivity extends Activity implements
                             "/dashboard./");
                     if (!directory.exists()) {
                         directory.mkdirs();
+                    }
+                    File directory2 = new File(Environment.getExternalStorageDirectory(),
+                            "/" + getResources().getString(R.string.dashboard_header_directory) + "/");
+                    if (!directory2.exists()) {
+                        directory2.mkdirs();
+                    }
+                    File directory3 = new File(Environment.getExternalStorageDirectory(),
+                            "/" + getResources().getString(R.string.dashboard_profile_directory) + "/");
+                    if (!directory3.exists()) {
+                        directory3.mkdirs();
+                    }
+                    File directory4 = new File(Environment.getExternalStorageDirectory(),
+                            "/" + getResources().getString(R.string.dashboard_wallpaper_directory) + "/");
+                    if (!directory4.exists()) {
+                        directory4.mkdirs();
                     }
                     cleanTempFolder();
                     StartAnimations();
