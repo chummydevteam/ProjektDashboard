@@ -26,7 +26,7 @@
     <string name="restore_profile_failure">profile restored with some errors!</string>
     <string name="restore_profile_success">profile restored successfully!</string>
     <string name="restore_profile_title">backup/restore options:</string>
-    <string name="restore_profile_spinner_default">select a profile (optional):</string>
+    <string name="restore_profile_spinner_default">select a profile (optional)</string>
     <string name="restore_profile_spinner_saved_toast">your profile has been saved to \"%s\"</string>
     <string name="no_profile_selected">no profile selected, please select one before using me!</string>
     <string name="cdt_theme_detected">no profile selected, please select one before using me!</string>
