@@ -23,6 +23,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -64,6 +65,8 @@ public class HeaderImportFragment extends BasePageFragment {
     public CheckBox autoClearSystemUICache;
     public SharedPreferences prefs;
     public Boolean is_png_enabled, is_vector_enabled;
+    public List<String> zipsFound;
+    public ArrayAdapter<String> adapter2;
 
     public void cleanTempFolder() {
         File dir = getActivity().getCacheDir();
@@ -277,6 +280,13 @@ public class HeaderImportFragment extends BasePageFragment {
 
         prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
 
+        ImageButton refreshSpinner = (ImageButton) inflation.findViewById(R.id.restartHeaderSpinner);
+        refreshSpinner.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                RefreshHeaderSpinner();
+            }
+        });
+
         Button downloadButton = (Button) inflation.findViewById(R.id.downloadButton);
         if (isNetworkAvailable()) {
             downloadButton.setOnClickListener(new View.OnClickListener() {
@@ -452,7 +462,7 @@ public class HeaderImportFragment extends BasePageFragment {
 
         spinner2 = (Spinner) inflation.findViewById(R.id.zipSpinner);
 
-        List<String> zipsFound = new ArrayList<String>();
+        zipsFound = new ArrayList<String>();
         zipsFound.add(getResources().getString(R.string.contextualheaderswapper_select_zip));
 
         // Function that filters out all zip files within /storage/0/dashboard., but not only that,
@@ -489,7 +499,7 @@ public class HeaderImportFragment extends BasePageFragment {
             }
         }
         // Create an ArrayAdapter using the string array and a default spinner layout
-        ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(getActivity(),
+        adapter2 = new ArrayAdapter<String>(getActivity(),
                 android.R.layout.simple_spinner_item, zipsFound);
         // Specify the layout to use when the list of choices appears
         adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -570,6 +580,47 @@ public class HeaderImportFragment extends BasePageFragment {
                 });
 
         return inflation;
+    }
+
+    public void RefreshHeaderSpinner() {
+        zipsFound.clear();
+
+        zipsFound.add(getResources().getString(R.string.contextualheaderswapper_select_zip));
+
+        // Function that filters out all zip files within /storage/0/dashboard., but not only that,
+        // it checks the zip file and sees if there is headers.xml found inside so that it's a
+        // filter.
+
+        File f2 = new File(
+                Environment.getExternalStorageDirectory().getAbsolutePath() + "/dashboard./");
+        File[] files2 = f2.listFiles();
+        if (files2 != null) {
+            for (File inFile2 : files2) {
+                if (inFile2.isFile()) {
+                    String filenameArray[] = inFile2.toString().split("\\.");
+                    String extension = filenameArray[filenameArray.length - 1];
+                    if (extension.equals("zip")) {
+                        try {
+                            String filenameParse[] = inFile2.getAbsolutePath().split("/");
+                            String filename = filenameParse[filenameParse.length - 1];
+
+                            ZipFile zipFile = new ZipFile(
+                                    Environment.getExternalStorageDirectory().
+                                            getAbsolutePath() + "/dashboard./" + filename);
+                            ZipEntry entry = zipFile.getEntry("headers.xml");
+                            if (entry != null) {
+                                // headers.xml was found in the file, so add it into the spinner
+                                zipsFound.add(filename);
+                            }
+                        } catch (IOException e) {
+                            System.out.println(
+                                    "There was an IOException within the filter function");
+                        }
+                    }
+                }
+            }
+        }
+        adapter2.notifyDataSetChanged();
     }
 
     public boolean checkCurrentThemeSelection(String packageName) {

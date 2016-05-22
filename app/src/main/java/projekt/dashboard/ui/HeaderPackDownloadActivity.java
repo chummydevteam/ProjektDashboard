@@ -29,7 +29,6 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -53,7 +52,6 @@ import projekt.dashboard.util.ReadCloudXMLFile;
  */
 public class HeaderPackDownloadActivity extends AppCompatActivity {
 
-    public boolean has_downloaded_anything = false;
     public String current_source_pack;
     public RecyclerView recyclerView;
     public RecyclerView.LayoutManager layoutManager;
@@ -77,12 +75,6 @@ public class HeaderPackDownloadActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                if (has_downloaded_anything) {
-                    Intent i = getBaseContext().getPackageManager()
-                            .getLaunchIntentForPackage(getBaseContext().getPackageName());
-                    i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    startActivity(i);
-                }
                 this.finish();
                 return true;
             case R.id.abandon_dashboard_work_area:
@@ -102,12 +94,6 @@ public class HeaderPackDownloadActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        if (has_downloaded_anything) {
-            Intent i = getBaseContext().getPackageManager()
-                    .getLaunchIntentForPackage(getBaseContext().getPackageName());
-            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            startActivity(i);
-        }
     }
 
     @Override
@@ -435,20 +421,6 @@ public class HeaderPackDownloadActivity extends AppCompatActivity {
 
                 if (connection != null)
                     connection.disconnect();
-
-                if (!sUrl[1].equals("addons.xml")) {
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            Toast toast = Toast.makeText(
-                                    HeaderPackDownloadActivity.this.getApplicationContext(),
-                                    getResources().getString(R.string.downloader_toast_exit),
-                                    Toast.LENGTH_LONG);
-                            toast.show();
-                        }
-                    });
-                    has_downloaded_anything = true;
-                }
             }
             return null;
         }

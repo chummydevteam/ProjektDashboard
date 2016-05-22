@@ -219,6 +219,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/drawableTypeTitle"
                 android:layout_gravity="left"
+                android:layout_marginBottom="10dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="16dp"
                 android:text="@string/contextualheaderimporter_select_downloaded_zip"
@@ -232,7 +233,20 @@
                 android:layout_below="@id/textView"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="@dimen/content_inset"
+                android:layout_toLeftOf="@+id/restartHeaderSpinner"
                 android:visibility="visible" />
+
+            <ImageButton
+                android:id="@+id/restartHeaderSpinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/textView"
+                android:layout_marginTop="-8dp"
+                android:backgroundTint="@android:color/transparent"
+                android:clickable="true"
+                android:foreground="?android:selectableItemBackground"
+                android:src="@drawable/ic_cached_24dp" />
 
             <TextView
                 android:id="@+id/textView1"
@@ -241,6 +255,7 @@
                 android:layout_below="@id/zipSpinner"
                 android:layout_gravity="left"
                 android:layout_marginLeft="8dp"
+                android:layout_marginTop="10dp"
                 android:text="@string/contextualheaderswapper_select_installed_theme"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:textStyle="italic" />

@@ -27,6 +27,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -117,8 +118,8 @@ public class CreativeMode extends CardStackAdapter implements
 
     public String current_selected_theme;
     public String current_selected_profile;
-    public List<String> list, list2;
-    public ArrayAdapter<String> adapter2;
+    public List<String> list, list2, zipsFound;
+    public ArrayAdapter<String> adapter2, adapter3;
 
     public TextView accent_universal_text, accent_secondary_text, accent_light_text, appbg_dark_text, appbg_light_text, dialog_dark_text, dialog_light_text, main_color_text, main_color_dark_text, notifications_primary_text, notifications_secondary_text, ripples_text;
     public TextView settings_dashboard_background_color_text, settings_dashboard_category_background_color_text, settings_icon_colors_text, settings_title_colors_text, settings_switchbar_background_color_text;
@@ -1058,9 +1059,16 @@ public class CreativeMode extends CardStackAdapter implements
                 systemui_card.getResources().getString(R.string.systemui_preview_label));
         brightness = (SeekBar) systemui_card.findViewById(R.id.seekBar);
 
+        ImageButton refreshSpinner = (ImageButton) systemui_card.findViewById(R.id.restartHeaderSpinnerCreative);
+        refreshSpinner.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                RefreshHeaderSpinner();
+            }
+        });
+
         final Spinner spinner3 = (Spinner) systemui_card.findViewById(R.id.spinner3);
 
-        List<String> zipsFound = new ArrayList<String>();
+        zipsFound = new ArrayList<String>();
         zipsFound.add(mContext.getResources().getString(R.string.contextual_header_pack));
 
         // Function that filters out all zip files within /storage/0/dashboard., but not only that,
@@ -1097,7 +1105,7 @@ public class CreativeMode extends CardStackAdapter implements
             }
         }
         // Create an ArrayAdapter using the string array and a default spinner layout
-        final ArrayAdapter<String> adapter3 = new ArrayAdapter<String>(mContext,
+        adapter3 = new ArrayAdapter<String>(mContext,
                 android.R.layout.simple_spinner_item, zipsFound);
         // Specify the layout to use when the list of choices appears
         adapter3.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -2125,6 +2133,47 @@ public class CreativeMode extends CardStackAdapter implements
         }
 
         adapter2.notifyDataSetChanged();
+    }
+
+    public void RefreshHeaderSpinner() {
+        zipsFound.clear();
+
+        zipsFound.add(mContext.getResources().getString(R.string.contextual_header_pack));
+
+        // Function that filters out all zip files within /storage/0/dashboard., but not only that,
+        // it checks the zip file and sees if there is headers.xml found inside so that it's a
+        // filter.
+
+        File f2 = new File(
+                Environment.getExternalStorageDirectory().getAbsolutePath() + "/dashboard./");
+        File[] files2 = f2.listFiles();
+        if (files2 != null) {
+            for (File inFile2 : files2) {
+                if (inFile2.isFile()) {
+                    String filenameArray[] = inFile2.toString().split("\\.");
+                    String extension = filenameArray[filenameArray.length - 1];
+                    if (extension.equals("zip")) {
+                        try {
+                            String filenameParse[] = inFile2.getAbsolutePath().split("/");
+                            String filename = filenameParse[filenameParse.length - 1];
+
+                            ZipFile zipFile = new ZipFile(
+                                    Environment.getExternalStorageDirectory().
+                                            getAbsolutePath() + "/dashboard./" + filename);
+                            ZipEntry entry = zipFile.getEntry("headers.xml");
+                            if (entry != null) {
+                                // headers.xml was found in the file, so add it into the spinner
+                                zipsFound.add(filename);
+                            }
+                        } catch (IOException e) {
+                            System.out.println(
+                                    "There was an IOException within the filter function");
+                        }
+                    }
+                }
+            }
+        }
+        adapter3.notifyDataSetChanged();
     }
 
     private View getFinalizedView(ViewGroup container) {

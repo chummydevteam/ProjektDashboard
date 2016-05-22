@@ -55,6 +55,7 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_marginBottom="10dp"
                     android:layout_marginStart="10dp">
 
                     <TextView
@@ -187,21 +188,35 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@id/themeCountTitle"
                         android:layout_gravity="left"
+                        android:layout_marginBottom="10dp"
                         android:layout_marginLeft="8dp"
                         android:layout_toRightOf="@id/drawableTypeTitle"
                         android:text="@string/contextualheaderimporter_header_pack_na"
                         android:textAppearance="?android:attr/textAppearanceSmall"
                         android:textColor="@android:color/white" />
-                </RelativeLayout>
 
-                <Spinner
-                    android:id="@+id/spinner3"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginBottom="@dimen/content_inset"
-                    android:layout_marginStart="7dp"
-                    android:layout_marginTop="10dp" />
+                    <Spinner
+                        android:id="@+id/spinner3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/drawableTypeTitle"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginBottom="@dimen/content_inset"
+                        android:layout_marginTop="10dp"
+                        android:layout_toLeftOf="@+id/restartHeaderSpinnerCreative" />
+
+                    <ImageButton
+                        android:id="@+id/restartHeaderSpinnerCreative"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_below="@+id/drawableTypeTitle"
+                        android:layout_marginEnd="15dp"
+                        android:backgroundTint="@android:color/transparent"
+                        android:clickable="true"
+                        android:foreground="?android:selectableItemBackground"
+                        android:src="@drawable/ic_cached_24dp" />
+                </RelativeLayout>
 
                 <include layout="@layout/qs_accent_colorpicker" />
 
