@@ -19,12 +19,17 @@
     <string name="no_header_pack_selected">You must select a header pack from the spinner dropdown in "SystemUI modifications" before clicking me!</string>
     <string name="begin_action_button">Let\'s get started!</string>
 
-    <string name="restore_package_installed">restored profile for \"%s\"</string>
+    <string name="restore_package_installed">profile restored for \"%s\"!</string>
+    <string name="restore_package_installed_cdt">a cdt theme based profile locked and loaded!</string>
+    <string name="restore_package_installed_cdt_not_installed">unfortunately, a cdt theme profile was restored but there are no cdt themes installed! :(</string>
     <string name="restore_package_not_installed">\"%s\" profile restored but theme not installed!</string>
     <string name="restore_profile_failure">profile restored with some errors!</string>
     <string name="restore_profile_success">profile restored successfully!</string>
     <string name="restore_profile_title">backup/restore options:</string>
     <string name="restore_profile_spinner_default">select a profile (optional):</string>
+    <string name="restore_profile_spinner_saved_toast">your profile has been saved to \"%s\"</string>
+    <string name="no_profile_selected">no profile selected, please select one before using me!</string>
+    <string name="cdt_theme_detected">no profile selected, please select one before using me!</string>
 
     <!-- Dialog Messages -->
     <string name="unzipping_assets_dialog_title">theme is extracting&#8230;</string>

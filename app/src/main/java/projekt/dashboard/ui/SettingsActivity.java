@@ -263,5 +263,15 @@ public class SettingsActivity extends AppCompatActivity {
             }
         });
 
+        LinearLayout linearLayout2 = (LinearLayout) findViewById(R.id.clear_dashboard_profiles_folder);
+        linearLayout2.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                File f = new File(Environment.getExternalStorageDirectory().getAbsolutePath() +
+                        "/dashboard_profiles/");
+                DeleteRecursive(f);
+                has_modified_anything = true;
+            }
+        });
+
     }
 }

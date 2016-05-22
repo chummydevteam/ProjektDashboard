@@ -2016,17 +2016,29 @@ public class CreativeMode extends CardStackAdapter implements
             if (!theme_identifier.equals("")) {
                 boolean installed = checkIfPackageInstalled(theme_identifier, mContext);
                 if (installed) {
-                    String formatted = String.format(mContext.getResources().getString(
-                            R.string.restore_package_installed), theme_identifier);
-                    Toast toast = Toast.makeText(mContext.getApplicationContext(), formatted,
-                            Toast.LENGTH_LONG);
-                    toast.show();
+                    if (theme_identifier.contains("com.chummy")) {
+                        Toast toast = Toast.makeText(mContext.getApplicationContext(), mContext.getString(R.string.restore_package_installed_cdt),
+                                Toast.LENGTH_LONG);
+                        toast.show();
+                    } else {
+                        String formatted = String.format(mContext.getResources().getString(
+                                R.string.restore_package_installed), theme_identifier);
+                        Toast toast = Toast.makeText(mContext.getApplicationContext(), formatted,
+                                Toast.LENGTH_LONG);
+                        toast.show();
+                    }
                 } else {
-                    String formatted = String.format(mContext.getResources().getString(
-                            R.string.restore_package_not_installed), theme_identifier);
-                    Toast toast = Toast.makeText(mContext.getApplicationContext(), formatted,
-                            Toast.LENGTH_LONG);
-                    toast.show();
+                    if (theme_identifier.contains("com.chummy")) {
+                        Toast toast = Toast.makeText(mContext.getApplicationContext(), mContext.getString(R.string.restore_package_installed_cdt_not_installed),
+                                Toast.LENGTH_LONG);
+                        toast.show();
+                    } else {
+                        String formatted = String.format(mContext.getResources().getString(
+                                R.string.restore_package_not_installed), theme_identifier);
+                        Toast toast = Toast.makeText(mContext.getApplicationContext(), formatted,
+                                Toast.LENGTH_LONG);
+                        toast.show();
+                    }
                 }
             } else {
                 throw new Exception();
@@ -2107,6 +2119,11 @@ public class CreativeMode extends CardStackAdapter implements
             pw.close();
             bw.close();
             fw.close();
+            String formatted = String.format(mContext.getResources().getString(
+                    R.string.restore_profile_spinner_saved_toast), "/storage/emulated/0/dashboard_profiles/" + filename + ".dashboard");
+            Toast toast = Toast.makeText(mContext.getApplicationContext(), formatted,
+                    Toast.LENGTH_LONG);
+            toast.show();
             RefreshProfileSpinner();
         } catch (IOException e) {
             Toast toast = Toast.makeText(mContext.getApplicationContext(),
@@ -2565,9 +2582,17 @@ public class CreativeMode extends CardStackAdapter implements
         Button restoreBackup = (Button) final_card.findViewById(R.id.restoreButton);
         restoreBackup.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                String location = Environment.getExternalStorageDirectory().getAbsolutePath() +
-                        "/dashboard_profiles/" + loadProfile.getSelectedItem();
-                restoreProfile(location);
+                if (loadProfile.getSelectedItemPosition() != 0) {
+                    String location = Environment.getExternalStorageDirectory().getAbsolutePath() +
+                            "/dashboard_profiles/" + loadProfile.getSelectedItem();
+                    restoreProfile(location);
+                } else {
+                    Toast toast = Toast.makeText(mContext.getApplicationContext(),
+                            mContext.getResources().getString(
+                                    R.string.no_profile_selected),
+                            Toast.LENGTH_LONG);
+                    toast.show();
+                }
             }
         });
 

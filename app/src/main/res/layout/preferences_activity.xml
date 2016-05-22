@@ -173,6 +173,32 @@
                 android:textSize="@dimen/content_inset_less"></TextView>
         </LinearLayout>
 
+        <LinearLayout
+            android:id="@+id/clear_dashboard_profiles_folder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/clear_dashboard_folder"
+            android:layout_marginEnd="15dp"
+            android:layout_marginStart="15dp"
+            android:clickable="true"
+            android:foreground="?android:selectableItemBackground"
+            android:orientation="vertical"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/settings_clear_dashboard_profiles_folder"
+                android:textColor="@android:color/white"></TextView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="/storage/emulated/0/dashboard_profiles/"
+                android:textSize="@dimen/content_inset_less"></TextView>
+        </LinearLayout>
+
     </RelativeLayout>
 
 </com.pluscubed.insetsdispatcher.view.InsetsDispatcherFrameLayout>
