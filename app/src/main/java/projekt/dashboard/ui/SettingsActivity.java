@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.Switch;
+import android.widget.Toast;
 
 import java.io.File;
 
@@ -253,13 +254,16 @@ public class SettingsActivity extends AppCompatActivity {
             }
         });
 
-        LinearLayout linearLayout = (LinearLayout) findViewById(R.id.clear_dashboard_folder);
+        LinearLayout linearLayout = (LinearLayout) findViewById(R.id.clear_dashboard_headers_folder);
         linearLayout.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 File f = new File(Environment.getExternalStorageDirectory().getAbsolutePath() +
-                        "/dashboard./");
+                        "/" + getString(R.string.dashboard_header_directory) + "/");
                 DeleteRecursive(f);
                 has_modified_anything = true;
+                Toast toast = Toast.makeText(getApplicationContext().getApplicationContext(), getString(R.string.settings_clear_dashboard_headers_toast),
+                        Toast.LENGTH_LONG);
+                toast.show();
             }
         });
 
@@ -267,9 +271,24 @@ public class SettingsActivity extends AppCompatActivity {
         linearLayout2.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 File f = new File(Environment.getExternalStorageDirectory().getAbsolutePath() +
-                        "/dashboard_profiles/");
+                        "/" + getString(R.string.dashboard_profile_directory) + "/");
                 DeleteRecursive(f);
                 has_modified_anything = true;
+                Toast toast = Toast.makeText(getApplicationContext().getApplicationContext(), getString(R.string.settings_clear_dashboard_profiles_toast),
+                        Toast.LENGTH_LONG);
+                toast.show();
+            }
+        });
+
+        LinearLayout linearLayout3 = (LinearLayout) findViewById(R.id.clear_dashboard_wallpapers_folder);
+        linearLayout3.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                File f = new File(Environment.getExternalStorageDirectory().getAbsolutePath() +
+                        "/" + getString(R.string.dashboard_wallpaper_directory) + "/");
+                DeleteRecursive(f);
+                Toast toast = Toast.makeText(getApplicationContext().getApplicationContext(), getString(R.string.settings_clear_dashboard_wallpapers_toast),
+                        Toast.LENGTH_LONG);
+                toast.show();
             }
         });
 

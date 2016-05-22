@@ -2,203 +2,254 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/overlay_window_bg"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
-
-        <TextView
-            android:id="@+id/toolbar_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="@string/settings_title"
-            android:textColor="@android:color/white"
-            android:textSize="20dp"
-            android:textStyle="italic" />
-
-
-    </android.support.v7.widget.Toolbar>
-
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
-        android:clipToPadding="false"
-        android:gravity="center"
-        android:orientation="vertical"
-        android:padding="@dimen/content_inset_less"
-        android:weightSum="1">
+        android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/tab_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="left"
-            android:layout_marginStart="10dp"
-            android:paddingBottom="10dp"
-            android:text="@string/settings_subtitle1"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:textStyle="italic" />
-
-        <Switch
-            android:id="@+id/enable_color_switcher"
-            style="@style/ShadowBlackTextWhite"
+        <android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/tab_title"
-            android:checked="true"
-            android:padding="16dp"
-            android:text="@string/settings_color_switcher_tab" />
-
-        <Switch
-            android:id="@+id/enable_header_swapper"
-            style="@style/ShadowBlackTextWhite"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/enable_color_switcher"
-            android:checked="true"
-            android:padding="16dp"
-            android:text="@string/settings_header_swapper_tab" />
-
-        <Switch
-            android:id="@+id/enable_header_importer"
-            style="@style/ShadowBlackTextWhite"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/enable_header_swapper"
-            android:checked="true"
-            android:padding="16dp"
-            android:text="@string/settings_header_importer_tab" />
-
-        <Switch
-            android:id="@+id/enable_theme_utilities"
-            style="@style/ShadowBlackTextWhite"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/enable_header_importer"
-            android:checked="true"
-            android:padding="16dp"
-            android:text="@string/settings_theme_debugging_tab" />
-
-
-        <Switch
-            android:id="@+id/enable_wallpapers"
-            style="@style/ShadowBlackTextWhite"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/enable_theme_utilities"
-            android:checked="true"
-            android:padding="16dp"
-            android:text="@string/settings_wallpaper_tab" />
-
-        <TextView
-            android:id="@+id/app_theme_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/enable_wallpapers"
-            android:layout_gravity="left"
-            android:layout_marginStart="10dp"
-            android:paddingBottom="10dp"
-            android:paddingTop="20dp"
-            android:text="@string/settings_subtitle2"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:textStyle="italic" />
-
-        <Switch
-            android:id="@+id/enable_blacked_out"
-            style="@style/ShadowBlackTextWhite"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/app_theme_title"
-            android:checked="false"
-            android:padding="16dp"
-            android:text="@string/settings_blacked_out_mode" />
-
-        <Switch
-            android:id="@+id/enable_creative_mode"
-            style="@style/ShadowBlackTextWhite"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/enable_blacked_out"
-            android:checked="true"
-            android:padding="16dp"
-            android:text="@string/settings_creative_mode" />
-
-        <Switch
-            android:id="@+id/enable_extended_actionbar"
-            style="@style/ShadowBlackTextWhite"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/enable_creative_mode"
-            android:checked="false"
-            android:padding="16dp"
-            android:text="@string/settings_extended_actionbar" />
-
-        <Switch
-            android:id="@+id/enable_low_power_mode"
-            style="@style/ShadowBlackTextWhite"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/enable_extended_actionbar"
-            android:checked="false"
-            android:padding="16dp"
-            android:text="@string/settings_header_low_power_mode" />
-
-        <LinearLayout
-            android:id="@+id/clear_dashboard_folder"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/enable_low_power_mode"
-            android:layout_marginEnd="15dp"
-            android:layout_marginStart="15dp"
-            android:clickable="true"
-            android:foreground="?android:selectableItemBackground"
-            android:orientation="vertical"
-            android:paddingBottom="10dp"
-            android:paddingTop="10dp">
+            android:background="@color/overlay_window_bg"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
             <TextView
+                android:id="@+id/toolbar_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/settings_clear_dashboard_folder"
-                android:textColor="@android:color/white"></TextView>
+                android:layout_gravity="center"
+                android:text="@string/settings_title"
+                android:textColor="@android:color/white"
+                android:textSize="20sp"
+                android:textStyle="italic" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="/storage/emulated/0/dashboard./"
-                android:textSize="@dimen/content_inset_less"></TextView>
-        </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/clear_dashboard_profiles_folder"
+        </android.support.v7.widget.Toolbar>
+
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/clear_dashboard_folder"
-            android:layout_marginEnd="15dp"
-            android:layout_marginStart="15dp"
-            android:clickable="true"
-            android:foreground="?android:selectableItemBackground"
-            android:orientation="vertical"
-            android:paddingBottom="10dp"
-            android:paddingTop="10dp">
+            android:layout_height="match_parent"
+            android:layout_below="@+id/toolbar">
 
-            <TextView
-                android:layout_width="wrap_content"
+            <RelativeLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/settings_clear_dashboard_profiles_folder"
-                android:textColor="@android:color/white"></TextView>
+                android:clipToPadding="false"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="@dimen/content_inset_less"
+                android:weightSum="1">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="/storage/emulated/0/dashboard_profiles/"
-                android:textSize="@dimen/content_inset_less"></TextView>
-        </LinearLayout>
 
+                <TextView
+                    android:id="@+id/tab_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:layout_marginStart="10dp"
+                    android:paddingBottom="10dp"
+                    android:text="@string/settings_subtitle1"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textStyle="italic" />
+
+                <Switch
+                    android:id="@+id/enable_color_switcher"
+                    style="@style/ShadowBlackTextWhite"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tab_title"
+                    android:checked="true"
+                    android:padding="16dp"
+                    android:text="@string/settings_color_switcher_tab" />
+
+                <Switch
+                    android:id="@+id/enable_header_swapper"
+                    style="@style/ShadowBlackTextWhite"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/enable_color_switcher"
+                    android:checked="true"
+                    android:padding="16dp"
+                    android:text="@string/settings_header_swapper_tab" />
+
+                <Switch
+                    android:id="@+id/enable_header_importer"
+                    style="@style/ShadowBlackTextWhite"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/enable_header_swapper"
+                    android:checked="true"
+                    android:padding="16dp"
+                    android:text="@string/settings_header_importer_tab" />
+
+                <Switch
+                    android:id="@+id/enable_theme_utilities"
+                    style="@style/ShadowBlackTextWhite"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/enable_header_importer"
+                    android:checked="true"
+                    android:padding="16dp"
+                    android:text="@string/settings_theme_debugging_tab" />
+
+
+                <Switch
+                    android:id="@+id/enable_wallpapers"
+                    style="@style/ShadowBlackTextWhite"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/enable_theme_utilities"
+                    android:checked="true"
+                    android:padding="16dp"
+                    android:text="@string/settings_wallpaper_tab" />
+
+                <TextView
+                    android:id="@+id/app_theme_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/enable_wallpapers"
+                    android:layout_gravity="start"
+                    android:layout_marginStart="10dp"
+                    android:paddingBottom="10dp"
+                    android:paddingTop="20dp"
+                    android:text="@string/settings_subtitle2"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textStyle="italic" />
+
+                <Switch
+                    android:id="@+id/enable_blacked_out"
+                    style="@style/ShadowBlackTextWhite"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/app_theme_title"
+                    android:checked="false"
+                    android:padding="16dp"
+                    android:text="@string/settings_blacked_out_mode" />
+
+                <Switch
+                    android:id="@+id/enable_creative_mode"
+                    style="@style/ShadowBlackTextWhite"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/enable_blacked_out"
+                    android:checked="true"
+                    android:padding="16dp"
+                    android:text="@string/settings_creative_mode" />
+
+                <Switch
+                    android:id="@+id/enable_extended_actionbar"
+                    style="@style/ShadowBlackTextWhite"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/enable_creative_mode"
+                    android:checked="false"
+                    android:padding="16dp"
+                    android:text="@string/settings_extended_actionbar" />
+
+                <Switch
+                    android:id="@+id/enable_low_power_mode"
+                    style="@style/ShadowBlackTextWhite"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/enable_extended_actionbar"
+                    android:checked="false"
+                    android:padding="16dp"
+                    android:text="@string/settings_header_low_power_mode" />
+
+                <TextView
+                    android:id="@+id/clearing_utilities"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/enable_low_power_mode"
+                    android:layout_gravity="start"
+                    android:layout_marginStart="10dp"
+                    android:paddingBottom="10dp"
+                    android:paddingTop="20dp"
+                    android:text="@string/settings_subtitle3"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textStyle="italic" />
+
+
+                <LinearLayout
+                    android:id="@+id/clear_dashboard_headers_folder"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/clearing_utilities"
+                    android:layout_marginEnd="15dp"
+                    android:layout_marginStart="15dp"
+                    android:clickable="true"
+                    android:foreground="?android:selectableItemBackground"
+                    android:orientation="vertical"
+                    android:paddingBottom="10dp"
+                    android:paddingTop="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/settings_clear_dashboard_headers_folder"
+                        android:textColor="@android:color/white" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="/storage/emulated/0/dashboard./headers/"
+                        android:textSize="@dimen/content_inset_less" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/clear_dashboard_profiles_folder"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/clear_dashboard_headers_folder"
+                    android:layout_marginEnd="15dp"
+                    android:layout_marginStart="15dp"
+                    android:clickable="true"
+                    android:foreground="?android:selectableItemBackground"
+                    android:orientation="vertical"
+                    android:paddingBottom="10dp"
+                    android:paddingTop="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/settings_clear_dashboard_profiles_folder"
+                        android:textColor="@android:color/white" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="/storage/emulated/0/dashboard./profiles/"
+                        android:textSize="@dimen/content_inset_less" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/clear_dashboard_wallpapers_folder"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/clear_dashboard_profiles_folder"
+                    android:layout_marginEnd="15dp"
+                    android:layout_marginStart="15dp"
+                    android:clickable="true"
+                    android:foreground="?android:selectableItemBackground"
+                    android:orientation="vertical"
+                    android:paddingBottom="10dp"
+                    android:paddingTop="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/settings_clear_dashboard_wallpapers_folder"
+                        android:textColor="@android:color/white" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="/storage/emulated/0/dashboard./wallpapers/"
+                        android:textSize="@dimen/content_inset_less" />
+                </LinearLayout>
+
+            </RelativeLayout>
+        </ScrollView>
     </RelativeLayout>
 
 </com.pluscubed.insetsdispatcher.view.InsetsDispatcherFrameLayout>

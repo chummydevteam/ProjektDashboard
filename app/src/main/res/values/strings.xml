@@ -64,8 +64,8 @@
     <string name="downloader_dialog_one">downloading cloud database&#8230;</string>
     <string name="downloader_dialog_two">downloading header pack&#8230;</string>
     <string name="downloader_title">dashboard certified header packs</string>
-    <string name="downloader_empty">you have downloaded all available header packs from this source!\n\nif you would like to clear your dashboard downloads folder, click the overflow menu and select "delete dashboard. folder and restart".</string>
-    <string name="delete_dashboard_folder_restart">delete dashboard. folder and restart</string>
+    <string name="downloader_empty">you have downloaded all available header packs from this source!\n\nif you would like to clear your dashboard downloads folder, click the overflow menu and select \"delete header storage and restart\".</string>
+    <string name="delete_dashboard_folder_restart">delete header storage and restart</string>
 
     <string-array name="contextual_headers">
         <item>all headers</item>
@@ -206,6 +206,7 @@
     <string name="settings_title">dashboard. preferences</string>
     <string name="settings_subtitle1">show/hide dashboard. tabs</string>
     <string name="settings_subtitle2">application utilities</string>
+    <string name="settings_subtitle3">storage management</string>
     <string name="settings_color_switcher_tab">enable color switcher tab</string>
     <string name="settings_header_swapper_tab">enable header swapper tab</string>
     <string name="settings_header_importer_tab">enable header pack importer tab</string>
@@ -215,8 +216,12 @@
     <string name="settings_creative_mode">enable creative mode</string>
     <string name="settings_extended_actionbar">enable extended actionbar mode</string>
     <string name="settings_header_low_power_mode">enable downloader low power mode</string>
-    <string name="settings_clear_dashboard_folder">clear dashboard. folder</string>
+    <string name="settings_clear_dashboard_headers_folder">clear dashboard. headers folder</string>
     <string name="settings_clear_dashboard_profiles_folder">clear dashboard. profiles folder</string>
+    <string name="settings_clear_dashboard_wallpapers_folder">clear dashboard. wallpapers folder</string>
+    <string name="settings_clear_dashboard_headers_toast">dashboard headers folder cleared!</string>
+    <string name="settings_clear_dashboard_profiles_toast">dashboard profiles folder cleared!</string>
+    <string name="settings_clear_dashboard_wallpapers_toast">dashboard wallpapers folder cleared!</string>
 
     <string name="contextualheaderimporter">contextual header pack importer</string>
     <string name="contextualheaderimporter_description">@string/contextualheaderimporter</string>
