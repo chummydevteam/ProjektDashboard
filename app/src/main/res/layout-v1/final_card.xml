@@ -161,7 +161,7 @@
                     android:background="@color/card1_bg"
                     android:clickable="true"
                     android:foreground="?android:selectableItemBackground"
-                    android:text="LOAD SAVED PROFILE" />
+                    android:text="@string/restore_button" />
 
                 <Button
                     android:id="@+id/backupButton"
@@ -174,7 +174,7 @@
                     android:background="@color/card2_bg"
                     android:clickable="true"
                     android:foreground="?android:selectableItemBackground"
-                    android:text="BACKUP CURRENT STATE" />
+                    android:text="@string/backup_button" />
 
                 <Button
                     android:id="@+id/begin_action"

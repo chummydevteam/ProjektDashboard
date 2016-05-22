@@ -19,6 +19,8 @@
     <string name="no_header_pack_selected">You must select a header pack from the spinner dropdown in "SystemUI modifications" before clicking me!</string>
     <string name="begin_action_button">Let\'s get started!</string>
 
+    <string name="backup_button">BACKUP CURRENT STATE</string>
+    <string name="restore_button">RESTORE SAVED PROFILE</string>
     <string name="restore_package_installed">profile restored for \"%s\"!</string>
     <string name="restore_package_installed_cdt">a cdt theme based profile locked and loaded!</string>
     <string name="restore_package_installed_cdt_not_installed">unfortunately, a cdt theme profile was restored but there are no cdt themes installed! :(</string>
