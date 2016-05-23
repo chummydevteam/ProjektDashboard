@@ -1,0 +1,258 @@
+<resources>
+
+    <!-- AppIntroduction -->
+    <string name="first_slide_title">Bienvenue dans Dashboard.</string>
+    <string name="first_slide_description">Dashboard est une extension pour le moteur de thème Cyanogenmod, développée par Chummy Development Team, vous permettant d\'étendre les possibilités des thèmes CM, et plus particulièrement des thème cdt.</string>
+
+    <string name="second_slide_title">Modifier les couleurs</string>
+    <string name="second_slide_description">Dashboard est livré avec un sélecteur de couleur permettant le remplacement à chaud des couleurs !\nVeuillez l\'autoriser à télécharger automatiquement un fichier correctif avant d\'interrompre votre connexion Internet.</string>
+
+    <string name="third_slide_title">Modifier l\'en-tête contextuel</string>
+    <string name="third_slide_description">Dashboard est également livré avec un outil vous permettant de définir vos propres en-têtes contextuels pour personnaliser davantage votre appareil sans passer par l\'utilisation d\'extensions Xposed inutiles ou par la création de thème !</string>
+
+    <string name="fourth_slide_title">Le moteur de thème a besoin d\'être diagnostiqué ?</string>
+    <string name="fourth_slide_description">Dashboard est également livré avec des outils vous offrant une grande quantité d\'options pour vous aider à réparer votre moteur de thème directement depuis votre appareil !\n\n</string>
+
+    <string name="fifth_slide_title">Cette application a besoin d\'un accès root !</string>
+    <string name="fifth_slide_description">Pour utiliser toutes les fonctionnalités de l\'application, votre appareil doit absolument être rooté, avec une ROM alternative incluant les l\'en-têtes contextuels !</string>
+
+    <string name="last_slide_title">Êtes-vous prêt ?</string>
+    <string name="last_slide_description">Veuillez lire tout ce qui apparaît à l\'écran lorsque vous utilisez cette application. Des informations cruciales sont affichées, comme par exemple le redémarrage logiciel après avoir effectué certains réglages, pour empêcher votre appareil de subir des redémarrages en boucle !</string>
+
+    <string name="advanced_mode_enabled">Saupoudrage de quelques fonctionnalités supplémentaires&#8230;</string>
+
+    <string name="skip_button">PASSER</string>
+    <string name="done_button">OK</string>
+
+    <!-- Splash Screen -->
+    <string name="loadingText">Vérification de sécurité en cours&#8230;</string>
+    <string name="root_verified">Activation de l\'ensemble des fonctionnalités&#8230;</string>
+    <string name="root_unverified">Activation des fonctionnalités ne nécessitant pas d\'accès root&#8230;</string>
+    <string name="initial_run">Vous êtes nouveau ici !\nBienvenue à la fête !</string>
+    <string name="welcome_back">Bon retour</string>
+    <string name="welcome_back_default_username">mon pote</string>
+    <string name="welcome_back_dialog_message">Comment dois-je vous appeler à partir de maintenant ?</string>
+    <string name="welcome_back_dialog_title">Personnalisez dashboard !</string>
+    <string name="welcome_back_dialog_confirm">Ça me plaît !</string>
+    <string name="username_welcome">Bon retour</string>
+    <string name="copied_system_info">Informations système</string>
+    <string name="copied_system_info_to_clipboard">Les informations système ont correctement été copiées dans le presse-papiers !</string>
+    <string name="vendor_fingerprint">Niveau du correctif de sécurité :</string>
+
+    <!-- Home Screen -->
+    <string name="change_name_dialog_message">Je suppose que vous voulez que je vous appelle autrement, Maître ?</string>
+    <string name="change_name_dialog_title">Changeons cela !</string>
+    <string name="change_name_dialog_confirm">Beaucoup mieux !</string>
+
+    <!-- App Home -->
+    <string name="homepage_description">Le moteur de thème Cyanogenmod amélioré !</string>
+    <string name="homepage_description_secondary">Vous êtes-vous déjà demandé jusqu\'où les développeurs pourraient aller avec le moteur de thème de Cyanogenmod ? Nous nous mettons au défi de réinventer la roue, en créant une application tout-en-un regroupant tous nos réglages.\n\nToute fois, cette application peut ne pas fonctionner sur tous les appareils, donc si vous voyez un message en rouge de non prise en charge ci-dessous, ne tentez pas d\'exécuter cette application sauf si vous êtes prêt à vous transformer en cochon d\'Inde :)</string>
+    <string name="homepage_rom_not_supported">ROM NON PRISE EN CHARGE ✘</string>
+    <string name="homepage_rom_not_officially_supported">ROM PAS OFFICIELLEMENT PRISE EN CHARGE</string>
+    <string name="homepage_dashboard_app_development_status_default_username">Salut</string>
+
+    <!-- App Color Switcher -->
+    <string name="colorpicker_description">Modifier les couleurs</string>
+    <string name="colorpicker_description_secondary">Il s\'agit d\'une fonctionnalité hautement expérimentale vous permettant de remplacer les couleurs principales à la volé (ce qui signifie qu\'un redémarrage complet n\'est pas nécessaire et ne nécessite pas la création et l\'installation d\'un nouveau fichier APK)\n\nIl n\'y a aucun effet secondaire, mais en fonction des réglages choisis, vous devrez peut-être vider la liste de vos applications récentes, après avoir effectué le changement de couleur.\n</string>
+
+    <string name="layout_fragment_colorpicker_installed_color_switchable_themes">Thèmes installés permettant le changement de couleur :</string>
+
+    <!-- App Contextual Header Swapper -->
+    <string-array name="contextual_headers">
+        <item>Tous les en-têtes</item>
+        <item>notifhead_afternoon.png</item>
+        <item>notifhead_christmas.png</item>
+        <item>notifhead_morning.png</item>
+        <item>notifhead_newyearseve.png</item>
+        <item>notifhead_night.png</item>
+        <item>notifhead_noon.png</item>
+        <item>notifhead_sunrise.png</item>
+        <item>notifhead_sunset_hdpi.png</item>
+        <item>notifhead_sunset_xhdpi.png</item>
+        <item>notifhead_sunset.png</item>
+    </string-array>
+
+    <string name="contextualheaderswapper">En-tête contextuel</string>
+    <string name="contextualheaderswapper_description">Modifier l\'en-tête contextuel</string>
+    <string name="contextualheaderswapper_description_secondary">Il s\'agit d\'une fonctionnalité hautement expérimentale vous permettant de définir vos propres en-têtes contextuels. Un redémarrage logiciel est nécessaire pour que les modifications soient prises en compte, puisque nous modifions l\'application actuellement installée sur votre appareil.\n\nN\'oubliez pas d\'activer les en-têtes contextuels (Images normales ou HD Polygraphiques) dans les paramètres de votre ROM ! Si les en-têtes contextuels ne sont pas affichés après un redémarrage logiciel, videz le cache de l\'affichage !\n</string>
+
+    <string name="contextualheaderswapper_options_before_choosing_picture">Options disponibles avant de choisir une image :</string>
+    <string name="contextualheaderswapper_free_crop_mode">Rognage de l\'image libre</string>
+    <string name="contextualheaderswapper_soft_reboot_after_modifications">Appuyez ici pour effectuer un redémarrage logiciel après toutes les modifications</string>
+
+    <string name="contextualheaderswapper_crop_image">Rogner l\'image</string>
+    <string name="contextualheaderswapper_save_set_image">Enregistrer et définir l\'image</string>
+
+    <!-- App Contextual Header Importer -->
+
+    <string name="downloader_button">Paquets d\'en-têtes contextuels en ligne</string>
+    <string name="downloader_dialog_accept">Télécharger</string>
+    <string name="downloader_dialog_cancel">Annuler</string>
+    <string name="downloader_dialog_one">Téléchargement de la base de données en cours&#8230;</string>
+    <string name="downloader_dialog_two">Téléchargement du paquet d\'en-têtes contextuels en cours&#8230;</string>
+    <string name="downloader_title">Paquets d\'en-têtes contextuels certifiés</string>
+    <string name="downloader_empty">Vous avez téléchargé tous les paquets d\'en-têtes contextuels disponibles.\n\nSi vous souhaitez effacer votre dossier de téléchargement de dashboard, cliquez sur le menu et sélectionnez \"Supprimer le dossier et redémarrer\".</string>
+    <string name="downloader_toast_exit">Relancer l\'application avec vos nouveaux paquets d\'en-tête, en utilisant le bouton retour.</string>
+    <string name="delete_dashboard_folder_restart">Supprimer le dossier et redémarrer</string>
+
+    <string name="contextualheaderimporter">Importer des en-têtes contextuels</string>
+    <string name="contextualheaderimporter_description">Importer des en-têtes contextuels</string>
+    <string name="contextualheaderimporter_description_secondary">Il s\'agit d\'une fonctionnalité hautement expérimentale vous permettant de définir vos propres en-têtes contextuels à partir de paquets \".zip\" spécialement conçues par les créateurs de thème. Un redémarrage logiciel est nécessaire pour que les modifications soient prises en compte, puisque nous modifions l\'application actuellement installée sur votre appareil.\n\nN\'oubliez pas d\'activer les en-têtes contextuels (Images normales ou HD Polygraphiques) dans les paramètres de votre ROM ! Si les en-têtes contextuels ne sont pas affichés après un redémarrage logiciel, videz le cache de l\'affichage !\n</string>
+    <string name="contextualheaderimporter_select_downloaded_zip">Veuillez sélectionner un paquet d\'en-têtes contextuels depuis \"/storage/0/dashboard.\" :</string>
+    <string name="contextualheaderswapper_select_zip">Sélectionner un paquet...</string>
+    <string name="contextualheaderimporter_all_themed">Importés</string>
+    <string name="contextualheaderimporter_information_header">Informations sur le paquet d\'en-têtes contextuels sélectionné</string>
+    <string name="contextualheaderimporter_header_pack_name">Nom : </string>
+    <string name="contextualheaderimporter_header_pack_author">Auteur : </string>
+    <string name="contextualheaderimporter_header_pack_team">Équipe : </string>
+    <string name="contextualheaderimporter_header_pack_version">Version : </string>
+    <string name="contextualheaderimporter_header_pack_theme_count">En-têtes contextuels : </string>
+    <string name="contextualheaderimporter_header_pack_na">Sans objet</string>
+    <string name="contextualheaderimporter_not_all_themed">En-têtes contextuels appliqués</string>
+    <string name="contextualheaderimporter_only_one_themed">En-tête contextuel appliqué</string>
+
+    <!-- App Theme Utilities -->
+    <string name="themeutilities_description">Quelque chose est-il arrivé ?</string>
+    <string name="themeutilities_description_secondary">Voici une collection de réglages du moteur de thème utiles, que vous pouvez utiliser si vous rencontrez des problèmes, ou tout simplement pour faire un peu de nettoyage sur votre appareil.\n</string>
+    <string name="themeutilities_basic_theme_utilities">Réglages du moteur de thème :</string>
+    <string name="themeutilities_perform_systemui_restart">Effectuer un redémarrage de l\'affichage</string>
+    <string name="themeutilities_perform_soft_reboot">Effectuer un redémarrage logiciel</string>
+    <string name="themeutilities_perform_complete_system_reboot">Effectuer un redémarrage complet de l\'appareil</string>
+    <string name="themeutilities_perform_action">Appliquer</string>
+
+    <!-- App Wallpapers -->
+    <string-array name="wallpaper_sources">
+        <item>Sélectionnez un paquet&#8230;</item>
+        <item>Fonds d\'écran DU Customworx</item>
+        <item>Fonds d\'écran Octos Customworx</item>
+        <item>Fonds d\'écran Screw\'d Customworx</item>
+        <item>Fonds d\'écran Customworx</item>
+        <item>Fonds d\'écran DU Gagan Singh</item>
+        <item>Fonds d\'écran Gagan Singh</item>
+        <item>Fonds d\'écran DU Vignesh Ravi</item>
+        <item>Fonds d\'écran Vignesh Ravi</item>
+    </string-array>
+
+    <string name="settings_title">Préférences</string>
+    <string name="settings_subtitle1">Afficher les onglets</string>
+    <string name="settings_subtitle2">Utilitaires</string>
+    <string name="settings_color_switcher_tab">Modifier les couleurs</string>
+    <string name="settings_header_swapper_tab">Modifier l\'en-tête contextuel</string>
+    <string name="settings_header_importer_tab">Importer des en-têtes contextuels</string>
+    <string name="settings_theme_debugging_tab">Mode de débogage</string>
+    <string name="settings_wallpaper_tab">Fonds d\'écran</string>
+    <string name="settings_blacked_out_mode">Mode Blacked Out</string>
+    <string name="settings_clear_dashboard_folder">Supprimer le contenu du dossier dashboard.</string>
+
+    <!-- dashboard. General Strings -->
+    <string name="home">dashboard.</string>
+    <string name="app_name">dashboard.</string>
+    <string name="home_tab_one">dashboard</string>
+    <string name="home_tab_two">Modifier les couleurs</string>
+    <string name="home_tab_three">Modifier l\'en-tête contextuel</string>
+    <string name="home_tab_four">Importer des en-têtes contextuels</string>
+    <string name="home_tab_five">Utilitaires pour thème</string>
+    <string name="home_tab_six">Fonds d\'écran</string>
+    <string name="permission_not_granted_dialog_title">Autorisations non accordées</string>
+    <string name="permission_not_granted_dialog_message">Veuillez accorder l\'autorisation de stockage à dashboard ou l\'application ne fonctionnera pas correctement !</string>
+    <string name="dialog_ok">OK</string>
+    <string name="write_storage_permission_denied">Autorisation d\'écriture sur la mémoire de stockage externe refusée !</string>
+    <string name="intro_wallpapers">Sélectionnez une source de fonds d\'écran ci-dessus et cliquez sur l\'icône de redémarrage pour commencer le chargement des fonds d\'écran au démarrage de dashboard !</string>
+    <string-array name="dialog_responses">
+        <item>Saupoudrage d\'un peu de magie par ici&#8230; et par là&#8230;</item>
+        <item>ERREUR L337 : Programme interrompu par des erreurs....jk.</item>
+        <item>J\'espère que vous avez fait votre lecture, parce que vous devez être prêt pour d\'époustouflantes choses !</item>
+        <item>J\'espère que vous n\'avez pas de bogue à signaler&#8230; je vous en prie, non.</item>
+        <item>Je n\'ai pas de carte de bibliothèque, mais est-ce que cela vous dérange si je vérifie ?</item>
+        <item>Il me semble avoir perdu mon numéro de téléphone. Puis-je avoir le vôtre ?</item>
+        <item>Êtes-vous croyant ? Parce que vous êtes la réponse à toutes mes prières.</item>
+        <item>Étiez-vous assis sur un tas de bonbons ? Parce que vos fesses ont un goût sucré.</item>
+        <item>Vivez-vous dans un champ de maïs parce que je vous harcèle ?</item>
+        <item>Vous avez l\'air d\'avoir froid. Voulez-vous m\'utiliser comme couverture ?</item>
+        <item>Puis-je vous prendre en photo afin de prouver à tous mes amis que les anges existent ?</item>
+        <item>Est-ce que je peux avoir votre photo ? C\’est pour montrer au Père-Noël ce que je veux comme cadeau.</item>
+        <item>Si j\'étais un chat, je passerais mes neuf vies avec vous.</item>
+        <item>Êtes-vous prêt pour un peu&#8230; d\'amusement ?</item>
+        <item>Je vais vous traiter comme mes devoirs : vous claquez sur la table et vous faire toute la nuit !</item>
+        <item>Savez-vous pourquoi je ressemble à un écureuil ? Parce que je veux enfouir mes noisettes en vous.</item>
+        <item>Vous êtes plus chaud que le dessous de mon ordinateur portable.</item>
+        <item>Avez-vous un pansement ? Parce que je viens d\'écorcher mon genou en tombant sur vous.</item>
+        <item>Connaissez-vous la matière de ma chemise ? @android:style/Theme.Material.</item>
+        <item>Avez-vous inventé l\'avion ? Parce que, pour moi, vous ressemblez à Clément Agnès Ader.</item>
+        <item>Si Dieu a fait quelque chose de plus beau que vous, je suis sûr qu\'il le garderait pour lui.</item>
+        <item>Avez-vous une carte ? Je me suis perdu dans vos yeux.</item>
+        <item>Mince, il y a un truc qui cloche avec mon téléphone. Il manque votre numéro dedans</item>
+        <item>J\'arrêterai de vous aimer lorsqu\'une pomme poussera sur un manguier, un 30 février.</item>
+        <item>Salut, je m\'appelle JDizzle. Quelle est le vôtre ?</item>
+        <item>Aimez-vous danser ? Génial, allez-y pendant que je parle à votre copine</item>
+        <item>Pourriez-vous m\'indiquer la direction&#8230; de votre cœur ?</item>
+        <item>Je ne suis pas saoul, je suis simplement enivré par VOUS.</item>
+        <item>Votre corps est composé à 65% d\'eau et j\'ai très soif.</item>
+        <item>Êtes-vous croyante ? Parce que vous semblez être la réponse à toutes mes prières</item>
+        <item>Oubliez Spiderman, Superman et Batman. Je serai votre \"Man\".</item>
+        <item>Puis-je vous suivre chez vous ? Mes parents m\’ont toujours encouragé à poursuivre mes rêves.</item>
+        <item>Pendant un moment, je pensais que j\'étais mort et arrivé au paradis. Maintenant, je vois que je suis bien vivant, et que le paradis m\'a été apporté .</item>
+        <item>Êtes-vous magicienne ? Parce que quand je vous regarde, tout le reste disparaît !</item>
+        <item>Mince, si être sexy était un crime, vous seriez coupable !</item>
+        <item>J\'ai fait de mon mieux pour ne rien ressentir pour vous, mais j\'ai échoué</item>
+        <item>Je vous connais ? Parce que vous ressemblez étrangement à ma prochaine petite amie.</item>
+        <item>Ravi de vous rencontrer ! Je suis Nicholas et vous êtes... Magnifique !</item>
+        <item>Désolé, mais vous me devez un verre. Parce que lorsque je vous ai aperçu, j\'ai fait tomber le mien !</item>
+        <item>Allez-vous m\'embrasser, ou dois-je mentir à mon journal intime ?</item>
+        <item>En plus d\'être sexy, que faites-vous dans la vie ?</item>
+        <item>Il n\'y a aucun mot dans le dictionnaire pour décrire votre beauté.</item>
+        <item>Excusez-moi, mais je pense que j\'ai laissé tomber quelque chose : ma mâchoire.</item>
+        <item>Soyez unique et différente : dites-moi \"Oui\" !</item>
+        <item>De toutes les courbes magnifiques de votre corps, votre sourire est ma préférée.</item>
+        <item>Je ne suis pas donneur d\'organes, mais je serais heureux de vous donner mon cœur.</item>
+        <item>Croyez-vous au coup de cœur au premier regard, ou dois-je repasser ?</item>
+        <item>La vie sans vous serait comme un crayon cassé... inutile.</item>
+        <item>Embrassez-moi si je me trompe, mais les dinosaures existent toujours, non ?</item>
+        <item>Vous devez être fatiguée, à force de courir dans ma tête !</item>
+        <item>Je me demande bien quelles histoires mon cœur pourrait vous raconter, si vous colliez votre oreille sur mon torse.</item>
+        <item>Je ne savais pas que les anges pouvaient voler si bas !</item>
+        <item>Mon nom est Stéphane. C\'est pour que vous sachiez quoi crier ce soir quand on sera au lit ensemble...</item>
+        <item>Les gens m\'appellent Kévin, mais vous pouvez m\'appeler ce soir.</item>
+        <item>Comme la marque d\'assouplissant, faisons un Câlin.</item>
+        <item>Avez-vous déjà été arrêtée par la police ? Ça doit être illégal d\'être aussi belle.</item>
+        <item>Vous êtes la raison pour laquelle les hommes tombent amoureux.</item>
+        <item>Mince alors, vous avez plus de courbes qu\'un circuit de formule 1.</item>
+        <item>Je ne crois pas en Dieu mais depuis que je vous connais, je crois au paradis</item>
+        <item>Est-ce que votre père est un voleur ? Parce qu\'il a pris les plus belles étoiles, et les a placé dans vos yeux. </item>
+        <item>Cupidon vient de m\'appeler. Il te demande de me rendre mon cœur immédiatement</item>
+    </string-array>
+
+    <!-- App Uncategorized Strings -->
+    <string name="unable_to_contact_server">Serveur indisponible ! Vérifiez votre connexion Internet.</string>
+    <string name="thank_you_donation">Nous vous remercions de votre générosité !</string>
+    <string name="request_cancelled">Demande annulée</string>
+    <string name="color_changer">Modifier les couleurs</string>
+    <string name="theme_utils">Utilitaires pour thème</string>
+    <string name="wallpaper">Fond d\'écran</string>
+    <string name="saved_to_x">Enregistré dans %1$s !</string>
+    <string name="wallpaper_set">Fond d\'écran défini !</string>
+    <string name="apply">Appliquer</string>
+    <string name="save_to_device">Enregistrer sur l\'appareil</string>
+    <string name="press_color_to_apply">Choisissez votre couleur !</string>
+    <string name="error">Erreur</string>
+    <string name="downloading_wallpaper">Téléchargement du fond d\'écran en cours…</string>
+    <string name="set_wallpaper_using">Définir le fond d\'écran avec…</string>
+    <string name="download_cancelled">Téléchargement annulé !</string>
+
+    <!-- creator_strings.xml -->
+
+    <!-- Exception Catches -->
+
+    <!-- Settings Tweaks -->
+
+    <!-- SystemUI Tweaks -->
+
+    <!-- Framework Tweaks -->
+
+    <!-- Common Tweaks -->
+
+    <!-- Final Card -->
+
+    <!-- end of creator_strings.xml -->
+
+</resources>

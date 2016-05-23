@@ -9,50 +9,44 @@
     <string name="welcome_back_dialog_message">what shall I call you from now on?</string>
     <string name="welcome_back_dialog_title">make dashboard yours!</string>
     <string name="welcome_back_dialog_confirm">I like it!</string>
+    <string name="username_welcome">welcome back</string>
+    <string name="copied_system_info">System Information</string>
+    <string name="copied_system_info_to_clipboard">Successfully copied system information to clipboard!</string>
+    <string name="vendor_fingerprint">Security Patch Level:</string>
+    <string name="double_click_back">Nooo! Don\'t leave me! I\'ll miss you!</string>
+
+    <!-- Home Screen -->
+    <string name="change_name_dialog_message">I assume you want me to call you something else, master?</string>
+    <string name="change_name_dialog_title">let\'s change it up!</string>
+    <string name="change_name_dialog_confirm">Much better!</string>
 
     <!-- AppIntroduction -->
-    <string name="first_slide_title">welcome to dashboard.layers</string>
+    <string name="first_slide_title">welcome to dashboard.</string>
     <string name="first_slide_description">dashboard is a cm theme engine addon by chummy development team that allows you to expand the possibilities of all cdt themes, as well as extras for other themes as well.</string>
 
     <string name="second_slide_title">color picker</string>
     <string name="second_slide_description">dashboard comes with a built in color picker for hotswapping of colors!\nplease allow it to automatically download a small patch file for itself before you leave your internet connection.</string>
 
-    <string name="third_slide_title">notification header swapper</string>
-    <string name="third_slide_description">dashboard also comes with a built in notification header swapper to customize your phone further without the use of useless xposed plugins or making a theme yourself!</string>
+    <string name="third_slide_title">creative mode, activated!</string>
+    <string name="third_slide_description">with creative mode, you could theoretically modify any theme with color, style and drawable tweaks. these themes need dashboard-specific values for complete support.</string>
 
-    <string name="fourth_slide_title">diagnosing?</string>
-    <string name="fourth_slide_description">dashboard also comes with built in theme utilities to offer you a plethora of options to help you fix your layers directly on your phone!\n\n</string>
+    <string name="fourth_slide_title">contextual header swapping</string>
+    <string name="fourth_slide_description">dashboard also comes with a built in contextual header swapper and importer to customize your phone further with dashboard certified packs or your own images!</string>
 
-    <string name="fifth_slide_title">this app needs root!</string>
-    <string name="fifth_slide_description">to use all the functions of the app, your phone must definitely have root enabled, as well as a custom rom flashed if you would like to have a notification header!</string>
+    <string name="fifth_slide_title">theme engine in need of diagnosing?</string>
+    <string name="fifth_slide_description">dashboard also comes with built in theme utilities to offer you a plethora of options to help you fix your theme engine directly on your phone!\n\n</string>
+
+    <string name="sixth_slide_title">this app needs root!</string>
+    <string name="sixth_slide_description">to use all the functions of the app, your phone must definitely have root enabled, as well as a custom rom flashed if you would like to have a contextual header!</string>
 
     <string name="last_slide_title">are you ready?</string>
     <string name="last_slide_description">please read everything that pops up while you use this app. crucial information to prevent you from bootlooping such as soft rebooting after setting an action is key!</string>
 
-    <string name="secret_feature_enabled">enthusiast mode activated</string>
-    <string name="secret_feature_disabled">enthusiast mode deactivated</string>
-
     <string name="advanced_mode_enabled">sprinkling some extra features&#8230;</string>
 
     <!-- App -->
-    <string name="layout_fragment_colorpicker_select_tweaks">select tweaks:</string>
-    <string name="layout_fragment_colorpicker_color_swap_restart_systemui">color swap + restart systemui</string>
-    <string name="layout_fragment_colorpicker_color_swap_soft_reboot">color swap + soft reboot</string>
-    <string name="layout_fragment_colorpicker_debugging_mode">debugging mode (advanced logs)</string>
-    <string name="layout_fragment_colorpicker_force_update_patched_resource">force update patched resource file</string>
-    <string name="layout_fragment_colorpicker_installed_color_switchable_themes">switch akzent color :</string>
 
-    <string name="zipfile_checker_success">file chosen: </string>
-    <string name="zipfile_checker_error">File chosen was not a valid ZIP!</string>
-
-    <string name="wallpapers_json_url" formatted="false" translatable="false">http://pastebin.com/raw/R0fhp7vd</string>
-    <string name="wallpapers_json_url_customworx_du" formatted="false" translatable="false">http://pastebin.com/raw/7bP1Qp5C</string>
-    <string name="wallpapers_json_url_customworx_octOS" formatted="false" translatable="false">http://pastebin.com/raw/ia93pUKu</string>
-    <string name="wallpapers_json_url_customworx_screwd" formatted="false" translatable="false">http://pastebin.com/raw/5MMtyesr</string>
-    <string name="wallpapers_json_url_customworx" formatted="false" translatable="false">http://pastebin.com/raw/dbCArLaF</string>
-    <string name="wallpapers_json_url_gagan" formatted="false" translatable="false">http://pastebin.com/raw/BwKeCHew</string>
-    <string name="wallpapers_json_url_vignesh" formatted="false" translatable="false">http://pastebin.com/raw/9qAZ7ZhB</string>
-    <string name="wallpapers_json_url_vignesh_headers" formatted="false" translatable="false">http://pastebin.com/raw/gu68kNdq</string>
+    <string name="layout_fragment_colorpicker_installed_color_switchable_themes">installed color switchable themes:</string>
 
     <string name="downloader_button">Online Header Packs Database</string>
     <string name="downloader_dialog_accept">Download</string>
@@ -60,8 +54,8 @@
     <string name="downloader_dialog_one">downloading cloud database&#8230;</string>
     <string name="downloader_dialog_two">downloading header pack&#8230;</string>
     <string name="downloader_title">dashboard certified header packs</string>
-    <string name="downloader_empty">you have downloaded all available header packs\n\nif you would like to clear your dashboard downloads folder, click the overflow menu and select "delete dashboard. folder and restart".</string>
-    <string name="downloader_toast_exit">the back button will now automatically close out and relaunch the application with your newly downloaded header packs in the correct spinners.</string>
+    <string name="downloader_empty">you have downloaded all available header packs from this source!\n\nif you would like to clear your dashboard downloads folder, click the overflow menu and select "delete dashboard. folder and restart".</string>
+    <string name="downloader_toast_exit">the back button will relaunch dashboard with your newly downloaded packs added to all spinners!</string>
     <string name="delete_dashboard_folder_restart">delete dashboard. folder and restart</string>
 
     <string-array name="contextual_headers">
@@ -142,16 +136,139 @@
         <item>Hello. Cupid called. He says to tell you that he needs my heart back.</item>
     </string-array>
 
+    <string-array name="header_pack_sources">
+        <item>customworx (cdt) header packs</item>
+        <item>elmorapz header packs</item>
+        <item>federico porcu header packs</item>
+        <item>jayrod header packs</item>
+        <item>matthew whitehurst header packs</item>
+        <item>natsu header packs</item>
+        <item>nicholas chum (cdt) header packs</item>
+        <item>paul walls header packs</item>
+        <item>syed sajid header packs</item>
+        <item>vignesh ravi header packs</item>
+    </string-array>
+
+    <string-array name="header_pack_urls">
+        <item>http://pastebin.com/raw/7Wgby6SB</item>
+        <item>http://pastebin.com/raw/ZFfSAmeu</item>
+        <item>http://pastebin.com/raw/zH59gUcd</item>
+        <item>http://pastebin.com/raw/JHbTURbM</item>
+        <item>http://pastebin.com/raw/3j8cpA9M</item>
+        <item>http://pastebin.com/raw/k8UYCgbv</item>
+        <item>http://pastebin.com/raw/fiDf6p3L</item>
+        <item>http://pastebin.com/raw/cgQcAS6f</item>
+        <item>http://pastebin.com/raw/mPP82GSg</item>
+        <item>http://pastebin.com/raw/1wV8FHym</item>
+    </string-array>
+
     <string-array name="wallpaper_sources">
-        <item>default wallpaper pack</item>
+        <item>please select a wallpaper pack&#8230;</item>
         <item>customworx du wallpaper pack</item>
         <item>customworx octos wallpaper pack</item>
         <item>customworx screw\'d wallpaper pack</item>
         <item>customworx wallpaper pack</item>
+        <item>elmorapz wallpaper pack</item>
+        <item>gagan singh du wallpaper pack</item>
         <item>gagan singh wallpaper pack</item>
-        <item>vignesh ravi header pack</item>
+        <item>syed sajid du wallpaper pack</item>
+        <item>syed sajid wallpaper pack</item>
+        <item>vignesh ravi du wallpaper pack</item>
         <item>vignesh ravi wallpaper pack</item>
     </string-array>
+
+    <string-array name="wallpaper_sources_urls">
+        <item>https://raw.githubusercontent.com/nicholaschum/ProjektDashboard/resources/dashboard_welcome.js</item>
+        <item>http://pastebin.com/raw/7bP1Qp5C</item>
+        <item>http://pastebin.com/raw/ia93pUKu</item>
+        <item>http://pastebin.com/raw/5MMtyesr</item>
+        <item>http://pastebin.com/raw/dbCArLaF</item>
+        <item>http://pastebin.com/raw/jwwNqvkn</item>
+        <item>http://pastebin.com/raw/CapPghtE</item>
+        <item>http://pastebin.com/raw/BwKeCHew</item>
+        <item>http://pastebin.com/raw/FrrSS0De</item>
+        <item>http://pastebin.com/raw/khkhcRRk</item>
+        <item>http://pastebin.com/raw/Ksf8c4Tf</item>
+        <item>http://pastebin.com/raw/9qAZ7ZhB</item>
+    </string-array>
+
+    <string name="no_wallpapers_url">https://raw.githubusercontent.com/nicholaschum/ProjektDashboard/resources/dashboard_welcome.js</string>
+
+    <string name="settings_title">dashboard. preferences</string>
+    <string name="settings_subtitle1">show/hide dashboard. tabs</string>
+    <string name="settings_subtitle2">application utilities</string>
+    <string name="settings_color_switcher_tab">enable color switcher tab</string>
+    <string name="settings_header_swapper_tab">enable header swapper tab</string>
+    <string name="settings_header_importer_tab">enable header pack importer tab</string>
+    <string name="settings_theme_debugging_tab">enable theme debugging tab</string>
+    <string name="settings_wallpaper_tab">enable wallpaper tab</string>
+    <string name="settings_blacked_out_mode">enable blacked out mode</string>
+    <string name="settings_extended_actionbar">enable extended actionbar mode</string>
+    <string name="settings_header_low_power_mode">enable downloader low power mode</string>
+    <string name="settings_clear_dashboard_folder">clear dashboard. folder</string>
+
+    <string name="themeutilities_description">theme utilities</string>
+    <string name="themeutilities_description_secondary">here you have a collection of useful
+        tweaks that you could use if you are encountering issues, or just felt like doing
+        some sunday afternoon cleaning on your phone.\n</string>
+    <string name="themeutilities_basic_theme_utilities">basic theme utilities:</string>
+    <string name="themeutilities_perform_systemui_restart">perform systemui restart</string>
+    <string name="themeutilities_perform_soft_reboot">perform soft reboot</string>
+    <string name="themeutilities_perform_complete_system_reboot">perform complete system reboot</string>
+    <string name="themeutilities_perform_action">perform action</string>
+
+    <string name="home_tab_one">dashboard</string>
+    <string name="home_tab_two">color switcher</string>
+    <string name="home_tab_three">@string/contextualheaderswapper</string>
+    <string name="home_tab_four">@string/contextualheaderimporter_description</string>
+    <string name="home_tab_five">theme utilities</string>
+    <string name="home_tab_six">wallpapers</string>
+
+    <string name="permission_not_granted_dialog_title">Permissions not granted</string>
+    <string name="permission_not_granted_dialog_message">Please grant dashboard storage permissions
+        or the app will not function properly!</string>
+    <string name="dialog_ok">OK</string>
+
+    <string name="colorpicker_description">color switcher</string>
+    <string name="colorpicker_description_secondary">this is a highly experimental feature to hotswap your accent colors at runtime (meaning that a full reboot isn\'t necessary and will not require creating and installing a new APK file)\n\nthis has no side effects except battery stats force closing, so to regain battery stats again just install the theme again.you may need to clear out your recents after performing the color swap.\n</string>
+
+    <!-- App Strings -->
+    <string name="home">dashboard.layers</string>
+    <string name="app_name">dashboard.layers</string>
+    <string name="unable_to_contact_server">Unable to contact the server! Check your internet
+        connection.</string>
+    <string name="thank_you_donation">Thank you for your generosity!</string>
+    <string name="request_cancelled">Request cancelled</string>
+
+    <string name="color_changer">color switcher</string>
+    <string name="theme_utils">theme utilities</string>
+    <string name="wallpaper">Wallpaper</string>
+    <string name="saved_to_x">Saved to %1$s!</string>
+    <string name="wallpaper_set">Wallpaper set!</string>
+    <string name="apply">Apply</string>
+    <string name="save_to_device">Save to Device</string>
+
+    <string name="press_color_to_apply">Pick your color!</string>
+
+    <string name="error">Error</string>
+
+    <string name="write_storage_permission_denied">Write external storage permission
+        denied!</string>
+    <string name="intro_wallpapers">select a wallpaper source above and click the restart icon to begin loading wallpapers at launch of dashboard!</string>
+    <string name="downloading_wallpaper">Downloading wallpaper…</string>
+
+    <string name="set_wallpaper_using">Set wallpaper using…</string>
+
+    <string name="download_cancelled">Download cancelled</string>
+
+    <string-array name="wallpaper_options">
+        <item>@string/apply</item>
+        <item>@string/save_to_device</item>
+    </string-array>
+
+    <string name="skip_button">SKIP</string>
+    <string name="done_button">DONE</string>
+
 
     <string name="contextualheaderimporter">notification header importer</string>
     <string name="contextualheaderimporter_description">notification header importer</string>
@@ -167,132 +284,27 @@
     <string name="contextualheaderimporter_header_pack_na">n/a</string>
     <string name="contextualheaderimporter_not_all_themed">headers themed</string>
     <string name="contextualheaderimporter_only_one_themed">header themed</string>
-    <string name="contextualheaderimporter_options_before_choosing_picture">advanced options:</string>
-    <string name="contextualheaderswapper_supportcontextual">swap contextual headers too</string>
     <string name="contextualheaderswapper">notification header swapper</string>
     <string name="contextualheaderswapper_description">notification header swapper</string>
     <string name="contextualheaderswapper_description_secondary">this is a highly experimental feature to allow you to set your own custom notification headers for your systemui notification shade.</string>
-    <string name="contextualheaderswapper_current_time_image">current time image:</string>
-    <string name="contextualheaderswapper_modifying_contextual_header_file">modifying notification header file:</string>
-    <string name="contextualheaderswapper_select_installed_theme">select installed theme:</string>
     <string name="contextualheaderswapper_options_before_choosing_picture">options available before choosing a picture:</string>
-    <string name="contextualheaderswapper_autoclear_systemui_cache">autoclear systemui cache</string>
     <string name="contextualheaderswapper_free_crop_mode">free crop mode</string>
-    <string name="contextualheaderswapper_debugging_mode">debugging mode (advanced logs)</string>
     <string name="contextualheaderswapper_soft_reboot_after_modifications">Click here to soft reboot after all modifications</string>
     <string name="contextualheaderswapper_crop_image">Crop Image</string>
     <string name="contextualheaderswapper_save_set_image">Save and Set Image</string>
-    <string name="contextualheaderswapper_toast_cache_empty_reboot_first">Woah there, your cache is currently empty! Please do a reboot first! If you believe this is wrong, try to rebuild your entire cache.</string>
-    <string name="contextualheaderswapper_select_theme">please select a theme...</string>
     <string name="contextualheaderswapper_select_zip">please select a premade zip...</string>
 
-    <string name="colorpicker_description">color switcher</string>
-    <string name="colorpicker_description_secondary">this is a highly experimental feature to hotswap your accent colors at runtime (meaning that a full reboot isn\'t necessary and will not require creating and installing a new APK file)\n\nthis has no side effects except battery stats force closing, so to regain battery stats again just install the theme again.you may need to clear out your recents after performing the color swap.\n</string>
-    <string name="colorpicker_toast_disable_hot_reboot_switch_systemui_restart">This feature disables you from enabling both SystemUI restart and Hot Reboot. Disable Hot Reboot to switch to SystemUI Restart</string>
-
-    <string name="akzent_title">dark material // akZent</string>
-    <string name="akzent_description">click here to change colors for akZent</string>
-    <string name="akzent_toast_install_before_using">Please install dark material // akZent before using!</string>
-
-    <string name="blakzent_title">blacked out // blakZent</string>
-    <string name="blakzent_description">click here to change colors for blakZent</string>
-    <string name="blakzent_toast_install_before_using">Please install blacked out // blakZent before using!</string>
-
-    <string name="projektklar_title">projekt // klar</string>
-    <string name="projektklar_description">click here to change colors for projekt // klar</string>
-
-    <string name="themeutilities_description">theme utilities</string>
-    <string name="themeutilities_description_secondary">here you have a collection of useful
-        tweaks that you could use if you are encountering issues, or just felt like doing
-        some sunday afternoon cleaning on your phone.\n</string>
-    <string name="themeutilities_basic_theme_utilities">basic theme utilities:</string>
-    <string name="themeutilities_perform_systemui_restart">perform systemui restart</string>
-    <string name="themeutilities_perform_soft_reboot">perform soft reboot</string>
-    <string name="themeutilities_perform_complete_system_reboot">perform complete system reboot</string>
-    <string name="themeutilities_perform_action">perform action</string>
-    <string name="themeutilities_rebuild_dark_material">rebuild dark material // akzent</string>
-    <string name="themeutilities_rebuild_blacked_out">rebuild blacked out // blakzent</string>
-    <string name="themeutilities_rebuild_projekt">rebuild projekt // klar</string>
-    <string name="themeutilities_rebuild_rebuild_all_color_switch_themes">rebuild all color switch themes</string>
-    <string name="themeutilities_rebuild_rebuild_all_chummydevteam_themes">rebuild all chummydevteam themes</string>
-    <string name="themeutilities_rebuild_rebuild_all_themes_installed_device">rebuild all themes installed on the device</string>
-
     <string name="homepage_description">Welcome to CDT dashboard.layers</string>
-    <string name="homepage_description_secondary">ever wondered how far devs could go with the Layers Theme Engine? we challenged ourselves to reinvent the wheel, so we created an app to house all our tweaks in an all-in-one package.\n\nhowever this app may not work on all devices, so if you see an unsupported message above in red, do not attempt to run this app unless you are ready to be a guinea pig :)</string>
+    <string name="homepage_description_secondary">ever wondered how far devs could go with the Layers Theming ? we challenged ourselves to reinvent the wheel, so we created an app to house all our tweaks in an all-in-one package.\n\nhowever this app may not work on all devices, so if you see an unsupported message above in red, do not attempt to run this app unless you are ready to be a guinea pig :)</string>
     <string name="homepage_rom_supported">SUPPORTED √</string>
     <string name="homepage_rom_not_supported">NOT SUPPORTED ✘</string>
     <string name="homepage_dashboard_app_development_status">, welcome back to the dashboard beta program! </string>
     <string name="homepage_dashboard_app_development_status_default_username">Hey there</string>
 
-    <string name="home_tab_one">dashboard</string>
-    <string name="home_tab_two">color switcher</string>
-    <string name="home_tab_three">notification header swapper</string>
-    <string name="home_tab_four">notification header importer</string>
-    <string name="home_tab_five">theme utilities</string>
-    <string name="home_tab_six">wallpapers</string>
-    <string name="home_tab_seven">theme creator</string>
-    <string name="home_tab_eight">theme creator</string>
-
-    <string name="permission_not_granted_dialog_title">Permissions not granted</string>
-    <string name="permission_not_granted_dialog_message">Please grant dashboard storage permissions
-        or the app will not function properly!</string>
-    <string name="dialog_ok">OK</string>
-
-    <!-- App Strings -->
-    <string name="home">dashboard.layers</string>
-    <string name="app_name">dashboard.layers</string>
-    <string name="app_name_wallpaper">cdt walls</string>
-    <string name="unable_to_contact_server">Unable to contact the server! Check your internet
-        connection.</string>
-    <string name="thank_you_donation">Thank you for your generosity!</string>
-    <string name="request_cancelled">Request cancelled</string>
-
-    <string name="color_changer">color switcher</string>
-    <string name="theme_utils">theme utilities</string>
-    <string name="wallpapers">Wallpapers</string>
-    <string name="wallpaper">Wallpaper</string>
-    <string name="saved_to_x">Saved to %1$s!</string>
-    <string name="wallpaper_set">Wallpaper set!</string>
-    <string name="apply">Apply</string>
-    <string name="save_to_device">Save to Device</string>
-
-    <string name="press_color_to_apply">Pick your color!</string>
-
-    <string name="dismiss">Dismiss</string>
-    <string name="error">Error</string>
-
-    <string name="write_storage_permission_denied">Write external storage permission
-        denied!</string>
-    <string name="no_wallpapers">No wallpapers</string>
-    <string name="search_wallpapers">Search wallpapers…</string>
-    <string name="reload_from_web">Reload from Web</string>
-    <string name="downloading_wallpaper">Downloading wallpaper…</string>
-
-    <string name="cool">Cool</string>
-
-    <string name="invalid_drawable_error"><![CDATA[Invalid drawable <b>%1$s</b>, the developer
-    needs to fix this in <b>/res/xml/drawable.xml</b> and <b>/assets/drawable.xml</b>.]]></string>
-    <string name="set_wallpaper_using">Set wallpaper using…</string>
-
-    <string name="download_cancelled">Download cancelled</string>
     <string name="homepage_theme_full_supported">You are good to go</string>
     <string name="homepage_theme_half_supported">theme is not completely installed,please reinstall</string>
     <string name="homepage_theme_not_supported">theme is not installed</string>
     <string name="theme_full_snack">You have not installed the theme correctly yet,click here to get yourself redirected to the main theme page</string>
     <string name="theme_half_snack">It seems you missed some overlays while installing the overlay,click here to complete the installation</string>
     <string name="theme_not_snack">Theme is not Installed , Please Click to install it</string>
-    <string name="themeutilities_more_theme_utilities">more theme utilities</string>
-    <string name="themeutilities_open_layers_manager">open layers manager</string>
-    <string name="themeutilities_clear_allthemes">clear overlay folder</string>
-    <string name="anothertheme">Theme Other than Akzent found,would you like to install akzent.</string>
-    <string name="xhdpi">xhdpi</string>
-    <string name="xxhdpi">xxhdpi</string>
-    <string name="xxxhdpi">xxxhdpi</string>
-    <string name="selectyourdeviceconfiguration">select your device dpi</string>
-
-    <string-array name="wallpaper_options">
-        <item>@string/apply</item>
-        <item>@string/save_to_device</item>
-    </string-array>
-
 </resources>
