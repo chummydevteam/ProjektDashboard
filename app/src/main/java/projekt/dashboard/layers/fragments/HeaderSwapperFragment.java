@@ -76,6 +76,7 @@ public class HeaderSwapperFragment extends BasePageFragment {
     public boolean xhdpi = false;
     public boolean xxhdpi = true;
     public boolean xxxhdpi = false;
+    boolean log = true;
 
     @Nullable
     @Override
@@ -401,6 +402,7 @@ public class HeaderSwapperFragment extends BasePageFragment {
         protected void onPostExecute(Void result) {
             pd.dismiss();
             eu.chainfire.libsuperuser.Shell.SU.run("busybox killall com.android.systemui");
+
         }
 
         public List processor() {
@@ -474,32 +476,42 @@ public class HeaderSwapperFragment extends BasePageFragment {
 
         }
 
-        private void performAAPTonCommonsAPK() throws Exception {
+        private void performAAPTonCommonsAPK() {
             Log.e("performAAPTonCommonsAPK",
                     "Mounting system as read-write as we prepare for some commands...");
+            try{
             eu.chainfire.libsuperuser.Shell.SU.run("mount -o remount,rw /");
-            eu.chainfire.libsuperuser.Shell.SU.run("mkdir /res/drawable");
-            if(xhdpi){
-            eu.chainfire.libsuperuser.Shell.SU.run("mkdir /res/drawable-xhdpi-v4");}
+            eu.chainfire.libsuperuser.Shell.SU.run("mkdir /res");
+                eu.chainfire.libsuperuser.Shell.SU.run("mkdir /res/drawable");
+            if (xhdpi) {
+                eu.chainfire.libsuperuser.Shell.SU.run("mkdir /res/drawable-xhdpi-v4");
+            }
             eu.chainfire.libsuperuser.Shell.SU.run("mkdir /res/drawable-xxhdpi-v4");
-            if(xxxhdpi){
-            eu.chainfire.libsuperuser.Shell.SU.run("mkdir /res/drawable-xxxhdpi-v4");}
+            if (xxxhdpi) {
+                eu.chainfire.libsuperuser.Shell.SU.run("mkdir /res/drawable-xxxhdpi-v4");
+            }Log.e("Made Directory","Made");
             eu.chainfire.libsuperuser.Shell.SU.run(
                     "cp " + getActivity().getFilesDir().getAbsolutePath() +
                             "/res/drawable/menuitem_background.png " +
                             "/res/drawable/menuitem_background.png");
+                Log.e("drawable","dr");
+
+
             eu.chainfire.libsuperuser.Shell.SU.run(
                     "cp " + getActivity().getFilesDir().getAbsolutePath() +
                             "/res/drawable/menuitem_background.png " +
                             "/res/drawable-xhdpi-v4/menuitem_background.png");
+                Log.e("drawable","x");
             eu.chainfire.libsuperuser.Shell.SU.run(
                     "cp " + getActivity().getFilesDir().getAbsolutePath() +
                             "/res/drawable/menuitem_background.png " +
                             "/res/drawable-xxhdpi-v4/menuitem_background.png");
+                Log.e("drawable","xx");
             eu.chainfire.libsuperuser.Shell.SU.run(
                     "cp " + getActivity().getFilesDir().getAbsolutePath() +
                             "/res/drawable/menuitem_background.png " +
                             "/res/drawable-xxxhdpi-v4/menuitem_background.png");
+                Log.e("drawable","xxx");
             if (swap_contextual_header) {
                 List source = processor();
                 for (int i = 0; i < source.size(); i++) {
@@ -508,22 +520,25 @@ public class HeaderSwapperFragment extends BasePageFragment {
                                     "/res/drawable-xxhdpi-v4/" + source.get(i) +
                                     " /res/drawable-xxhdpi-v4/" +
                                     source.get(i));
-                }if(xhdpi){
-                for (int i = 0; i < source.size(); i++) {
-                    eu.chainfire.libsuperuser.Shell.SU.run(
-                            "cp " + getActivity().getFilesDir().getAbsolutePath() +
-                                    "/res/drawable-xhdpi-v4/" + source.get(i) +
-                                    " /res/drawable-xhdpi-v4/" +
-                                    source.get(i));
-                }}
-                if(xxxhdpi){
-                for (int i = 0; i < source.size(); i++) {
-                    eu.chainfire.libsuperuser.Shell.SU.run(
-                            "cp " + getActivity().getFilesDir().getAbsolutePath() +
-                                    "/res/drawable-xxxhdpi-v4/" + source.get(i) +
-                                    " /res/drawable-xxxhdpi-v4/" +
-                                    source.get(i));
-                }}
+                }
+                if (xhdpi) {
+                    for (int i = 0; i < source.size(); i++) {
+                        eu.chainfire.libsuperuser.Shell.SU.run(
+                                "cp " + getActivity().getFilesDir().getAbsolutePath() +
+                                        "/res/drawable-xhdpi-v4/" + source.get(i) +
+                                        " /res/drawable-xhdpi-v4/" +
+                                        source.get(i));
+                    }
+                }
+                if (xxxhdpi) {
+                    for (int i = 0; i < source.size(); i++) {
+                        eu.chainfire.libsuperuser.Shell.SU.run(
+                                "cp " + getActivity().getFilesDir().getAbsolutePath() +
+                                        "/res/drawable-xxxhdpi-v4/" + source.get(i) +
+                                        " /res/drawable-xxxhdpi-v4/" +
+                                        source.get(i));
+                    }
+                }
                 Log.e("performAAPTonCommonsAPK",
                         "Successfully copied all drawables into the root folder.");
             }
@@ -569,24 +584,27 @@ public class HeaderSwapperFragment extends BasePageFragment {
                                     "res/drawable-xxhdpi-v4" +
                                     source.get(i));
                     nativeApp1.waitFor();
-                }if (xhdpi){
-                for (int i = 0; i < source.size(); i++) {
-                    Process nativeApp1 = Runtime.getRuntime().exec(
-                            "aapt remove " + getActivity().getFilesDir().getAbsolutePath() +
-                                    "/" + LayersFunc.themesystemui + ".apk " +
-                                    "res/drawable-xhdpi-v4" +
-                                    source.get(i));
-                    nativeApp1.waitFor();
-                }}
-                if(xxxhdpi){
-                for (int i = 0; i < source.size(); i++) {
-                    Process nativeApp1 = Runtime.getRuntime().exec(
-                            "aapt remove " + getActivity().getFilesDir().getAbsolutePath() +
-                                    "/" + LayersFunc.themesystemui + ".apk " +
-                                    "res/drawable-xxxhdpi-v4" +
-                                    source.get(i));
-                    nativeApp1.waitFor();
-                }}
+                }
+                if (xhdpi) {
+                    for (int i = 0; i < source.size(); i++) {
+                        Process nativeApp1 = Runtime.getRuntime().exec(
+                                "aapt remove " + getActivity().getFilesDir().getAbsolutePath() +
+                                        "/" + LayersFunc.themesystemui + ".apk " +
+                                        "res/drawable-xhdpi-v4" +
+                                        source.get(i));
+                        nativeApp1.waitFor();
+                    }
+                }
+                if (xxxhdpi) {
+                    for (int i = 0; i < source.size(); i++) {
+                        Process nativeApp1 = Runtime.getRuntime().exec(
+                                "aapt remove " + getActivity().getFilesDir().getAbsolutePath() +
+                                        "/" + LayersFunc.themesystemui + ".apk " +
+                                        "res/drawable-xxxhdpi-v4" +
+                                        source.get(i));
+                        nativeApp1.waitFor();
+                    }
+                }
                 Log.e("performAAPTonCommonsAPK",
                         "Deleted all drawable files!");
             }
@@ -653,7 +671,11 @@ public class HeaderSwapperFragment extends BasePageFragment {
                     LayersFunc.copyFinalizedAPK(getActivity(), LayersFunc.themesystemui, true);
                 }
             }
-            eu.chainfire.libsuperuser.Shell.SU.run("killall zygote");
+
+              eu.chainfire.libsuperuser.Shell.SU.run("killall zygote");
+
+            }catch(Exception e){
+            e.printStackTrace();}
         }
 
 
