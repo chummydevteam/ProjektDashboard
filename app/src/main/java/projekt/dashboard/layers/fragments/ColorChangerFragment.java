@@ -2,7 +2,6 @@ package projekt.dashboard.layers.fragments;
 
 import android.app.ProgressDialog;
 import android.content.ComponentName;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -10,9 +9,7 @@ import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -26,20 +23,15 @@ import android.widget.TextView;
 
 import net.lingala.zip4j.core.ZipFile;
 import net.lingala.zip4j.exception.ZipException;
+import net.margaritov.preference.colorpicker.ColorPickerDialog;
+import net.margaritov.preference.colorpicker.ColorPickerPreference;
 
 import org.apache.commons.io.IOUtils;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.Random;
 
 import butterknife.ButterKnife;
 import projekt.dashboard.layers.R;
-import projekt.dashboard.layers.colorpicker.ColorPickerDialog;
-import projekt.dashboard.layers.colorpicker.ColorPickerPreference;
 import projekt.dashboard.layers.fragments.base.BasePageFragment;
 import projekt.dashboard.layers.util.LayersFunc;
 
@@ -77,7 +69,7 @@ public class ColorChangerFragment extends BasePageFragment {
             ad.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    if (new LayersFunc(getActivity()).isAppInstalled(getActivity(), "com.chummy.aditya.materialdark.layers.donate")) {
+                    if (LayersFunc.isAppInstalled(getActivity(), "com.chummy.aditya.materialdark.layers.donate")) {
                         startActivity(new Intent().setComponent(new ComponentName("com.lovejoy777.rroandlayersmanager", "com.lovejoy777.rroandlayersmanager.MainActivity")));
                     } else {
                         startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.chummy.aditya.materialdark.layers.donate")));
@@ -87,7 +79,7 @@ public class ColorChangerFragment extends BasePageFragment {
             ad.setNeutralButton("Dont Show again", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    prefs.edit().putBoolean("dialog", false).commit();
+                    prefs.edit().putBoolean("dialog", false).apply();
                 }
             });
         }
@@ -206,6 +198,11 @@ public class ColorChangerFragment extends BasePageFragment {
         }
 
         protected void onPostExecute(Void result) {
+            if (LayersFunc.checkbitphone()) {
+                LayersFunc.copyFABFinalizedAPK(getActivity(), File, true);
+            } else {
+                LayersFunc.copyFinalizedAPK(getActivity(), File, true);
+            }
             pd.dismiss();
             eu.chainfire.libsuperuser.Shell.SU.run("busybox killall com.android.systemui");
             Log.e("SecondPhaseTasks", "Function Stopped");
@@ -214,9 +211,9 @@ public class ColorChangerFragment extends BasePageFragment {
         private void createXMLfile(String string, String theme_dir) {
 
             LayersFunc.createXML(string, getActivity(), color_picked);
-            if (string == "tertiary_text_dark.xml") {
+            if (string.equals("tertiary_text_dark.xml")) {
                 try {
-                    compileDummyAPK(theme_dir);
+                    compileDummyAPK();
                 } catch (Exception e) {
                     Log.e("CreateXMLFileException",
                             "Could not create Dummy APK (EXCEPTION)");
@@ -224,7 +221,7 @@ public class ColorChangerFragment extends BasePageFragment {
             }
         }
 
-        private void compileDummyAPK(String theme_dir) throws Exception {
+        private void compileDummyAPK() throws Exception {
 
             Log.e("CompileDummyAPK", "Beginning to compile dummy APK...");
 
@@ -240,15 +237,13 @@ public class ColorChangerFragment extends BasePageFragment {
                             "system/framework/framework-res.apk -F " +
                             getActivity().getFilesDir().getAbsolutePath() +
                             "/color-resources.apk\n");
-            IOUtils.toString(nativeApp.getInputStream());
-            IOUtils.toString(nativeApp.getErrorStream());
             nativeApp.waitFor();
             Log.e("CompileDummyAPK",
                     "Successfully compiled dummy apk!");
-            unzip(theme_dir);
+            unzip();
         }
 
-        public void unzip(String theme_dir) {
+        public void unzip() {
             String source =
                     getActivity().getFilesDir().getAbsolutePath() + "/color-resources.apk";
             String destination =
@@ -266,32 +261,32 @@ public class ColorChangerFragment extends BasePageFragment {
                 e.printStackTrace();
             } finally {
                 try {
-                    performAAPTonCommonsAPK(theme_dir);
+                    performAAPTonCommonsAPK();
                 } catch (Exception e) {
                     //
                 }
             }
         }
 
-        private void performAAPTonCommonsAPK(String theme_dir)
-                throws Exception {
-            Log.e("performAAPTonCommonsAPK",
-                    "Mounting system as read-write as we prepare for some commands...");
-            eu.chainfire.libsuperuser.Shell.SU.run("mount -o remount,rw /");
-            eu.chainfire.libsuperuser.Shell.SU.run("mkdir /res/color");
+        private void performAAPTonCommonsAPK() {
+            try {
+                Log.e("performAAPTonCommonsAPK",
+                        "Mounting system as read-write as we prepare for some commands...");
+                eu.chainfire.libsuperuser.Shell.SU.run("mount -o remount,rw /");
+                eu.chainfire.libsuperuser.Shell.SU.run("mkdir /res");
+                eu.chainfire.libsuperuser.Shell.SU.run("mkdir /res/color");
 
-            LayersFunc.LayersColorSwitch(getActivity(), File, "tertiary_text_dark", "color");
+                LayersFunc.LayersColorSwitch(getActivity(), File, "tertiary_text_dark", "color");
 
-            eu.chainfire.libsuperuser.Shell.SU.run("rm -r /res/color");
-            eu.chainfire.libsuperuser.Shell.SU.run("mount -o remount,ro /");
-            Log.e("performAAPTonCommonsAPK",
-                    "Cleaned up root directory and remounted system as read-only.");
+                eu.chainfire.libsuperuser.Shell.SU.run("rm -r /res/color");
+                eu.chainfire.libsuperuser.Shell.SU.run("mount -o remount,ro /");
+                Log.e("performAAPTonCommonsAPK",
+                        "Cleaned up root directory and remounted system as read-only.");
 
-            // Finally, let's make sure the directories are pushed to the last command
-            if (LayersFunc.checkbitphone()) {
-                LayersFunc.copyFABFinalizedAPK(getActivity(), File, true);
-            } else {
-                LayersFunc.copyFinalizedAPK(getActivity(), File, true);
+                // Finally, let's make sure the directories are pushed to the last command
+
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         }
     }
