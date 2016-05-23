@@ -57,6 +57,7 @@ public class SplashScreenActivity extends Activity implements
             if (!directory.exists()) {
                 directory.mkdirs();
             }
+            cleanTempFolder();
             StartAnimations();
         } else {
             ActivityCompat.requestPermissions(this,
@@ -78,6 +79,7 @@ public class SplashScreenActivity extends Activity implements
                     if (!directory.exists()) {
                         directory.mkdirs();
                     }
+                    cleanTempFolder();
                     StartAnimations();
                 } else {
                     // permission was not granted, show closing dialog
@@ -101,17 +103,11 @@ public class SplashScreenActivity extends Activity implements
     private void StartAnimations() {
         tv = (TextView) findViewById(R.id.loadingText);
 
-        Animation anim = AnimationUtils.loadAnimation(this, R.anim.shake);
-        Animation anim2 = AnimationUtils.loadAnimation(this, R.anim.spin);
+        Animation anim = AnimationUtils.loadAnimation(this, R.anim.spin);
         anim.reset();
-        anim2.reset();
-        ImageView iv = (ImageView) findViewById(R.id.splash);
-        ImageView iv2 = (ImageView) findViewById(R.id.spinnerWheel);
+        ImageView iv = (ImageView) findViewById(R.id.spinnerWheel);
         iv.clearAnimation();
-        iv2.clearAnimation();
-        //iv.startAnimation(anim);
-        iv2.startAnimation(anim2);
-
+        iv.startAnimation(anim);
 
         splashThread = new Thread() {
             @Override
@@ -119,7 +115,7 @@ public class SplashScreenActivity extends Activity implements
                 final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(
                         getApplicationContext());
                 try {
-                    sleep(300);
+                    sleep(500);
                     if (Shell.SU.available()) {
                         runOnUiThread(new Runnable() {
                             @Override
@@ -135,12 +131,7 @@ public class SplashScreenActivity extends Activity implements
                             }
                         });
                     }
-                    int waited = 0;
-                    // Splash screen pause time
-                    while (waited < 2500) {
-                        sleep(100);
-                        waited += 100;
-                    }
+                    sleep(1000);
                     if (prefs.getBoolean("first_run", true)) {
                         runOnUiThread(new Runnable() {
                             @Override
@@ -148,9 +139,8 @@ public class SplashScreenActivity extends Activity implements
                                 tv.setText(getResources().getString(R.string.initial_run));
                             }
                         });
-                        sleep(3000);
+                        sleep(2000);
                         startActivity(new Intent(SplashScreenActivity.this, AppIntroduction.class));
-                        finish();
                     } else {
                         if (prefs.getBoolean("advanced_mode_enabled", true)) {
                             runOnUiThread(new Runnable() {
@@ -160,9 +150,8 @@ public class SplashScreenActivity extends Activity implements
                                             R.string.advanced_mode_enabled));
                                 }
                             });
-                            sleep(1500);
+                            sleep(1200);
                         }
-
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
@@ -171,19 +160,30 @@ public class SplashScreenActivity extends Activity implements
                                         getString(R.string.welcome_back_default_username)) + "!");
                             }
                         });
-                        sleep(300);
                         startActivity(new Intent(SplashScreenActivity.this, MainActivity.class));
-                        finish();
                     }
                 } catch (InterruptedException e) {
                     // do nothing
                 } finally {
-                    SplashScreenActivity.this.finish();
+                    finish();
                 }
             }
         };
         splashThread.start();
 
+    }
+
+    public void cleanTempFolder() {
+        File dir = getApplicationContext().getCacheDir();
+        deleteRecursive(dir);
+    }
+
+    private void deleteRecursive(File fileOrDirectory) {
+        if (fileOrDirectory.isDirectory())
+            for (File child : fileOrDirectory.listFiles())
+                deleteRecursive(child);
+
+        fileOrDirectory.delete();
     }
 
 }
