@@ -3,6 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="projekt.dashboard.layers">
 
+    <uses-feature
+        android:name="org.cyanogenmod.theme"
+        android:required="true" />
+
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -33,18 +37,21 @@
         </activity>
         <activity
             android:name=".ui.AppIntroduction"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="sensorPortrait" />
         <activity
             android:name=".ui.HeaderPackDownloadActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.Overlay"/>
+            android:screenOrientation="sensorPortrait"
+            android:theme="@style/AppTheme.Overlay" />
+        <activity
+            android:name=".ui.SettingsActivity"
+            android:screenOrientation="sensorPortrait"
+            android:theme="@style/AppTheme.Overlay" />
         <activity
             android:name=".ui.MainActivity"
-            android:theme="@style/AppTheme.BlackedOut"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="sensorPortrait" />
         <activity
             android:name=".viewer.ViewerActivity"
-            android:screenOrientation="portrait"
+            android:screenOrientation="sensorPortrait"
             android:theme="@style/AppTheme.Viewer" />
     </application>
 </manifest>
