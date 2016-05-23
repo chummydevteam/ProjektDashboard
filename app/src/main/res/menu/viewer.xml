@@ -9,7 +9,6 @@
         app:showAsAction="always" />
 
     <item
-        android:id="@+id/save"
         android:icon="@drawable/ic_action_save"
         android:title="@string/save_to_device"
         app:showAsAction="ifRoom" />
