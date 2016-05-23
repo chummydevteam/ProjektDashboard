@@ -1,15 +1,19 @@
 package projekt.dashboard.layers.ui;
 
 import android.annotation.TargetApi;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.Nullable;
@@ -24,22 +28,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewTreeObserver;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.afollestad.bridge.Bridge;
 import com.afollestad.materialdialogs.util.DialogUtils;
-
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.DefaultHttpClient;
-
-import java.io.BufferedInputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
+import com.tramsun.libs.prefcompat.Pref;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -68,28 +61,21 @@ import static projekt.dashboard.layers.viewer.ViewerActivity.STATE_CURRENT_POSIT
 /**
  * @author Aidan Follestad (afollestad)
  */
-public class MainActivity extends BaseDonateActivity implements
-        NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends BaseDonateActivity {
 
     public RecyclerView mRecyclerView;
     public SharedPreferences prefs;
-
     @Bind(R.id.toolbar)
     Toolbar mToolbar;
     @Nullable
     @Bind(R.id.tabs)
     TabLayout mTabs;
-    @Nullable
-    @Bind(R.id.navigation_view)
-    NavigationView mNavView;
-    @Nullable
-    @Bind(R.id.drawer)
-    DrawerLayout mDrawer;
     @Bind(R.id.pager)
     DisableableViewPager mPager;
     @Nullable
     @Bind(R.id.app_bar)
     LinearLayout mAppBarLinear;
+    boolean doubleBackToExitPressedOnce = false;
     private PagesBuilder mPages;
 
     @Override
@@ -102,20 +88,25 @@ public class MainActivity extends BaseDonateActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        new LayersFunc(this).DownloadFirstResources(this);
-
         prefs = PreferenceManager.getDefaultSharedPreferences(this);
+
+        new LayersFunc(this).DownloadFirstResources(this);
 
         ButterKnife.bind(this);
 
-        Toolbar tool = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(tool);
+        if (prefs.getBoolean("extended_actionbar_enabled", true)) {
+            LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) mToolbar.getLayoutParams();
+            layoutParams.height = 150;
+            mToolbar.setLayoutParams(layoutParams);
+        }
+
+        setSupportActionBar(mToolbar);
 
         setupPages();
         setupPager();
         setupTabs();
-        prefs = PreferenceManager.getDefaultSharedPreferences(this);
 
+        Pref.init(this);
 
         // Restore last selected page, tab/nav-drawer-item
         if (Config.get().persistSelectedPage()) {
@@ -123,7 +114,6 @@ public class MainActivity extends BaseDonateActivity implements
                     .getInt("last_selected_page", 0);
             if (lastPage > mPager.getAdapter().getCount() - 1) lastPage = 0;
             mPager.setCurrentItem(lastPage);
-            if (mNavView != null) invalidateNavViewSelection(lastPage);
         }
         processIntent(getIntent());
     }
@@ -142,10 +132,20 @@ public class MainActivity extends BaseDonateActivity implements
         }
     }
 
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) this.getSystemService(
+                Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
+
     private void setupPages() {
         mPages = new PagesBuilder(6);
+
         mPages.add(new PagesBuilder.Page(R.id.home_fragment, R.drawable.tab_home,
                 R.string.home_tab_one, new HomeFragment()));
+
         if (Shell.SU.available()) {
             if (new LayersFunc(this).checkThemeMainSupported(this)) {
                 mPages.add(new PagesBuilder.Page(R.id.color_changer_fragment, R.drawable.tab_palette,
@@ -166,8 +166,14 @@ public class MainActivity extends BaseDonateActivity implements
             }
         }
         if (Shell.SU.available()) {
-            mPages.add(new PagesBuilder.Page(R.id.theme_utilities_fragment, R.drawable.tab_creator,
+            mPages.add(new PagesBuilder.Page(R.id.theme_utilities_fragment, R.drawable.tab_rebuild,
                     R.string.home_tab_five, new ThemeUtilitiesFragment()));
+        }
+        if (isNetworkAvailable()) {
+            if (prefs.getBoolean("wallpapers_enabled", true)) {
+                mPages.add(new PagesBuilder.Page(R.id.theme_utilities_fragment, R.drawable.tab_wallpapers,
+                        R.string.home_tab_six, new WallpapersFragment()));
+            }
         }
     }
 
@@ -183,7 +189,7 @@ public class MainActivity extends BaseDonateActivity implements
         if(id==R.id.share){
             Intent sharingIntent = new Intent(Intent.ACTION_SEND);
             sharingIntent.setType("text/plain");
-            String shareBody = "Check out Dashboard by Chummy Development Team !\n\nDownload it here!: " + "https://play.google.com/store/apps/details?id=com.chummy.jezebel.material.dark";
+            String shareBody = "Check out Dashboard by Chummy Development Team !\n\nDownload it here!: " + "https://play.google.com/store/apps/details?id=projekt.dashboard.layers";
             sharingIntent.putExtra(Intent.EXTRA_TEXT, shareBody);
             startActivity(Intent.createChooser(sharingIntent, "Share :-"));
         }else if(id==R.id.contact){
@@ -208,17 +214,6 @@ public class MainActivity extends BaseDonateActivity implements
             startActivity(Intent.createChooser(intent, "Lets Talk Using :-"));
         }
         return true;
-    }
-
-    void invalidateNavViewSelection(int position) {
-        assert mNavView != null;
-        final int selectedId = mPages.get(position).drawerId;
-        mNavView.post(new Runnable() {
-            @Override
-            public void run() {
-                mNavView.setCheckedItem(selectedId);
-            }
-        });
     }
 
     private void setupPager() {
@@ -296,15 +291,6 @@ public class MainActivity extends BaseDonateActivity implements
         }
     }
 
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        ((DrawerLayout) findViewById(R.id.drawer)).closeDrawers();
-        final int index = mPages.findPositionForItem(item);
-        if (index > -1)
-            mPager.setCurrentItem(index, false);
-        return false;
-    }
-
     private void addTab(@DrawableRes int icon) {
         assert mTabs != null;
         TabLayout.Tab tab = mTabs.newTab().setIcon(icon);
@@ -339,7 +325,21 @@ public class MainActivity extends BaseDonateActivity implements
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
+        if (doubleBackToExitPressedOnce) {
+            super.onBackPressed();
+            return;
+        }
+        this.doubleBackToExitPressedOnce = true;
+        Toast.makeText(this, getString(R.string.double_click_back), Toast.LENGTH_SHORT).show();
+
+        new Handler().postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                doubleBackToExitPressedOnce = false;
+            }
+        }, 2000);
+
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
@@ -350,11 +350,6 @@ public class MainActivity extends BaseDonateActivity implements
             WallpapersFragment.showToast(this, R.string.wallpaper_set);
             WallpaperUtils.resetOptionCache(true);
         } else if (requestCode == RQ_VIEWWALLPAPER) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP && mDrawer != null) {
-                getWindow().setStatusBarColor(Color.TRANSPARENT);
-                mDrawer.setStatusBarBackgroundColor(DialogUtils.resolveColor(
-                        this, R.attr.colorPrimaryDark));
-            }
             if (mRecyclerView != null) {
                 mRecyclerView.requestFocus();
                 final int currentPos = data.getIntExtra(STATE_CURRENT_POSITION, 0);
