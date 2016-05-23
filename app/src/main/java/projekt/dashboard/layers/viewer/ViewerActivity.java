@@ -99,7 +99,7 @@ public class ViewerActivity extends AssentActivity {
         pager.setCurrentItem(mCurrentPosition);
 
         // When the view pager is swiped, fragments are notified if they're active or not
-        // And the menu_main updates based on the color mode (light or dark).
+        // And the menu updates based on the color mode (light or dark).
         pager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
 
             int previousState;
