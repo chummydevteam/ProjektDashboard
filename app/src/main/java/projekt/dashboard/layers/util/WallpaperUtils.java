@@ -74,34 +74,9 @@ public class WallpaperUtils {
         }
 
         try {
-            String defaultSource = "";
             SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-            String mapTypeString = prefs.getString("selected_wallpaper_source", "default");
-            if (!mapTypeString.equals("default")) {
-                if (mapTypeString.equals("customworx_du")) {
-                    defaultSource = context.getString(R.string.wallpapers_json_url_customworx_du);
-                }
-                if (mapTypeString.equals("customworx_octos")) {
-                    defaultSource = context.getString(R.string.wallpapers_json_url_customworx_octOS);
-                }
-                if (mapTypeString.equals("customworx_screwd")) {
-                    defaultSource = context.getString(R.string.wallpapers_json_url_customworx_screwd);
-                }
-                if (mapTypeString.equals("customworx")) {
-                    defaultSource = context.getString(R.string.wallpapers_json_url_customworx);
-                }
-                if (mapTypeString.equals("gagan")) {
-                    defaultSource = context.getString(R.string.wallpapers_json_url_gagan);
-                }
-                if (mapTypeString.equals("vignesh")) {
-                    defaultSource = context.getString(R.string.wallpapers_json_url_vignesh);
-                }
-                if (mapTypeString.equals("vignesh_headers")) {
-                    defaultSource = context.getString(R.string.wallpapers_json_url_vignesh_headers);
-                }
-            } else {
-                defaultSource = context.getString(R.string.wallpapers_json_url);
-            }
+            String mapTypeString = prefs.getString("selected_wallpaper_source", context.getString(R.string.no_wallpapers_url));
+            String defaultSource = mapTypeString;
 
             WallpapersHolder holder = Bridge.get(defaultSource)
                     .tag(WallpapersFragment.class.getName())
@@ -162,35 +137,9 @@ public class WallpaperUtils {
         } catch (Throwable t) {
             t.printStackTrace();
         }
-
-        String defaultSource = "";
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-        String mapTypeString = prefs.getString("selected_wallpaper_source", "default");
-        if (!mapTypeString.equals("default")) {
-            if (mapTypeString.equals("customworx_du")) {
-                defaultSource = context.getString(R.string.wallpapers_json_url_customworx_du);
-            }
-            if (mapTypeString.equals("customworx_octos")) {
-                defaultSource = context.getString(R.string.wallpapers_json_url_customworx_octOS);
-            }
-            if (mapTypeString.equals("customworx_screwd")) {
-                defaultSource = context.getString(R.string.wallpapers_json_url_customworx_screwd);
-            }
-            if (mapTypeString.equals("customworx")) {
-                defaultSource = context.getString(R.string.wallpapers_json_url_customworx);
-            }
-            if (mapTypeString.equals("gagan")) {
-                defaultSource = context.getString(R.string.wallpapers_json_url_gagan);
-            }
-            if (mapTypeString.equals("vignesh")) {
-                defaultSource = context.getString(R.string.wallpapers_json_url_vignesh);
-            }
-            if (mapTypeString.equals("vignesh_headers")) {
-                defaultSource = context.getString(R.string.wallpapers_json_url_vignesh_headers);
-            }
-        } else {
-            defaultSource = context.getString(R.string.wallpapers_json_url);
-        }
+        String mapTypeString = prefs.getString("selected_wallpaper_source", context.getString(R.string.no_wallpapers_url));
+        String defaultSource = mapTypeString;
 
         Bridge.get(defaultSource)
                 .tag(WallpapersFragment.class.getName())
@@ -205,8 +154,8 @@ public class WallpaperUtils {
                                 return;
                             }
                             try {
-                                Log.d("WallpaperUtils", String.format("Loaded %d wallpapers from web.", holder.length()));
                                 if (holder.length() > 0) {
+                                    Log.d("WallpaperUtils", String.format("Loaded %d wallpapers from web.", holder.length()));
                                     try {
                                         Inquiry.init(context, DATABASE_NAME, DATABASE_VERSION);
                                         Inquiry.get().insertInto(TABLE_NAME, Wallpaper.class)
@@ -215,6 +164,8 @@ public class WallpaperUtils {
                                     } catch (Throwable t) {
                                         t.printStackTrace();
                                     }
+                                } else {
+                                    Log.d("WallpaperUtils", "There are no wallpapers needed to be loaded.");
                                 }
                                 callback.onRetrievedWallpapers(holder, null, false);
                             } catch (Throwable e1) {
