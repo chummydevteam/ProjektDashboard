@@ -105,13 +105,13 @@ public class ThemeUtilitiesFragment extends BasePageFragment {
         basicUtilitiesButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if (sysui) {
-                    eu.chainfire.libsuperuser.Shell.SU.run("busybox killall com.android.systemui");
+                    Shell.SU.run("busybox killall com.android.systemui");
                 }
                 if (softreboot) {
-                    eu.chainfire.libsuperuser.Shell.SU.run("killall zygote");
+                    Shell.SU.run("killall zygote");
                 }
                 if (reboot) {
-                    eu.chainfire.libsuperuser.Shell.SU.run("reboot");
+                    Shell.SU.run("reboot");
                 }
             }
         });
@@ -121,7 +121,7 @@ public class ThemeUtilitiesFragment extends BasePageFragment {
             @Override
             public void onClick(View v) {
                 Log.e("Changing Activity", "Layers Manager");
-                startActivity(new Intent().setComponent(new ComponentName("com.lovejoy777.rroandlayersmanager", "com.lovejoy777.rroandlayersmanager.MainActivity")));
+                startActivity(new Intent(getActivity().getPackageManager().getLaunchIntentForPackage("com.lovejoy777.rroandlayersmanager")));
             }
         });
 
@@ -145,13 +145,13 @@ public class ThemeUtilitiesFragment extends BasePageFragment {
         String remountsys = new String("mount -o remount,ro "+mount);
 
         String command =new String("rm -r "+vendor);
-        eu.chainfire.libsuperuser.Shell.SU.run(mountsys);
+        Shell.SU.run(mountsys);
         Log.e("clear",mountsys);
-        eu.chainfire.libsuperuser.Shell.SU.run(command);
+        Shell.SU.run(command);
         Log.e("clear",command);
-        eu.chainfire.libsuperuser.Shell.SU.run("mkdir "+vendor);
+        Shell.SU.run("mkdir "+vendor);
         Log.e("clear","mkdir");
-        eu.chainfire.libsuperuser.Shell.SU.run(remountsys);
+        Shell.SU.run(remountsys);
         Log.e("clear",remountsys);
     }
 
