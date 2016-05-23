@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="themes_supported">
+        <item>Akzent_Framework</item>
+        <item>Beltz_Framework</item>
+    </string-array>
+
+
+    <string name="contextualheaderswapper_supportcontextual">swap contextual headers too</string>
+    <string name="xhdpi">xhdpi</string>
+    <string name="xxhdpi">xxhdpi</string>
+    <string name="xxxhdpi">xxxhdpi</string>
+    <string name="selectyourdeviceconfiguration">select your device dpi</string>
+    <string name="themeutilities_more_theme_utilities">more theme utilities</string>
+    <string name="themeutilities_open_layers_manager">open layers manager</string>
+    <string name="themeutilities_clear_allthemes">clear overlay folder</string>
+</resources>
