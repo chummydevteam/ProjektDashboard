@@ -237,6 +237,8 @@ public class ColorChangerFragment extends BasePageFragment {
                             "system/framework/framework-res.apk -F " +
                             getActivity().getFilesDir().getAbsolutePath() +
                             "/color-resources.apk\n");
+            IOUtils.toString(nativeApp.getInputStream());
+            IOUtils.toString(nativeApp.getErrorStream());
             nativeApp.waitFor();
             Log.e("CompileDummyAPK",
                     "Successfully compiled dummy apk!");
