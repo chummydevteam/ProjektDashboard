@@ -29,7 +29,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="20dp"
                 android:layout_marginTop="10dp"
-                android:src="@drawable/splashscreen_logo" />
+                android:src="@drawable/splashscreen_logo_big" />
 
             <ImageView
                 android:id="@+id/spinnerWheel"
@@ -38,7 +38,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="50dp"
-                android:src="@drawable/splashscreen_spinner" />
+                android:src="@drawable/splashscreen_spinner_big" />
 
             <ImageView
                 android:id="@+id/landingIcon"
@@ -74,11 +74,14 @@
                 android:fontFamily="sans-serif-light"
                 android:gravity="center"
                 android:lineSpacingMultiplier="1.2"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
                 android:text="« ROM_SUPPORTED_MESSAGE »"
                 android:textAllCaps="true"
                 android:textColor="?android:textColorPrimary"
                 android:textSize="@dimen/text_ultrasmall"
                 android:textStyle="bold" />
+
             <TextView
                 android:id="@+id/theme_message"
                 android:layout_marginTop="3dp"
@@ -94,11 +97,29 @@
                 android:textColor="?android:textColorPrimary"
                 android:textSize="17dp"
                 android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/MarqueeText"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/theme_message"
+                android:ellipsize="marquee"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:freezesText="false"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:paddingBottom="10dp"
+                android:paddingLeft="15dip"
+                android:paddingRight="15dip"
+                android:paddingTop="10dp"
+                android:scrollHorizontally="true"
+                android:singleLine="true" />
+
             <TextView
                 android:id="@+id/landingMessageSecondary"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/theme_message"
+                android:layout_below="@+id/MarqueeText"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="@dimen/content_inset_less"
                 android:fontFamily="sans-serif-light"
@@ -110,4 +131,61 @@
         </RelativeLayout>
 
     </ScrollView>
+
+    <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.michaldrabik.tapbarmenulib.TapBarMenu
+            android:id="@+id/tapBarMenu"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="24dp"
+            app:tbm_backgroundColor="?attr/card_background">
+
+            <ImageView
+                android:id="@+id/item1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
+                android:src="@drawable/tap_bar_googleplus" />
+
+            <ImageView
+                android:id="@+id/item2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
+                android:src="@drawable/tap_bar_xda" />
+
+            <Space
+                android:layout_width="100dp"
+                android:layout_height="match_parent" />
+
+            <ImageView
+                android:id="@+id/item3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
+                android:src="@drawable/tap_bar_rename" />
+
+            <ImageView
+                android:id="@+id/item4"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
+                android:src="@drawable/tap_bar_settings" />
+
+        </com.michaldrabik.tapbarmenulib.TapBarMenu>
+
+    </android.support.design.widget.CoordinatorLayout>
+
 </com.pluscubed.insetsdispatcher.view.InsetsDispatcherFrameLayout>

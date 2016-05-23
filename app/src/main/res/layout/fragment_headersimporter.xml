@@ -211,7 +211,6 @@
                 android:visibility="visible" />
 
             <View
-                android:id="@+id/fakeView"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_centerInParent="true" />
@@ -269,7 +268,6 @@
     </ScrollView>
 
     <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/clayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
