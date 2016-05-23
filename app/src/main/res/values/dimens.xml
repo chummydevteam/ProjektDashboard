@@ -1,10 +1,7 @@
 <resources>
 
-    <dimen name="nav_drawer_item_hor_pad">24dp</dimen>
-
     <dimen name="card_elevation">2dp</dimen>
 
-    <dimen name="content_inset_quarter">4dp</dimen>
     <!-- Minus 2 for negative margin on cards -->
     <dimen name="content_inset_half_card">6dp</dimen>
     <dimen name="content_inset_half">8dp</dimen>
@@ -13,26 +10,13 @@
     <dimen name="content_inset">16dp</dimen>
     <dimen name="content_inset_more">24dp</dimen>
 
-    <dimen name="cards_margin">12dp</dimen>
-    <dimen name="finalcard_margin">14dp</dimen>
-    <dimen name="cards_elevation">3dp</dimen>
-    <dimen name="cards_padding">16dp</dimen>
-    <dimen name="cards_text_margin">5dp</dimen>
-    <dimen name="card_corner_radius">4dp</dimen>
-
     <!-- Texts Sizes -->
-    <dimen name="text_big">20sp</dimen>
-    <dimen name="text_med">18sp</dimen>
-    <dimen name="text_small">16sp</dimen>
     <dimen name="text_ultrasmall">12sp</dimen>
 
-    <dimen name="fab_horizontal_margin">16dp</dimen>
-    <dimen name="fab_bottom_margin">16dp</dimen>
     <dimen name="list_with_fab_bottom_margin">84dp</dimen>
 
     <dimen name="toolbar_elevation">4dp</dimen>
     <dimen name="grid_margin">4dp</dimen>
-    <dimen name="grid_margin_icons">8dp</dimen>
 
     <dimen name="card_sides_margin">1.41dp</dimen>
     <dimen name="card_vertical_margin">0.41dp</dimen>
@@ -44,14 +28,7 @@
     <dimen name="content_text_size">16sp</dimen>
     <dimen name="body_text_size">14sp</dimen>
 
-    <dimen name="quickapply_card_minheight">64dp</dimen>
-    <dimen name="apply_title_minheight">44dp</dimen>
-
-    <dimen name="drawer_header_height">196dp</dimen>
-    <dimen name="landing_page_icon_size">128dp</dimen>
-
     <dimen name="second_keyline">72dp</dimen>
     <dimen name="toolbar_horizontal_padding">4dp</dimen>
-    <dimen name="button_height">48dp</dimen>
 
 </resources>
