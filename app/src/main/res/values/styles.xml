@@ -112,6 +112,25 @@
         <item name="cardUseCompatPadding">true</item>
     </style>
 
+    <style name="CreativeMode.ActivityTheme" parent="@android:style/Theme.Material">
+        <item name="android:windowAnimationStyle">@style/CreativeMode.WindowAnimation</item>
+        <item name="android:windowBackground">@color/window_bg_glass</item>
+        <item name="android:windowTranslucentStatus">true</item>
+    </style>
+
+    <style name="CreativeMode.WindowAnimation" parent="@android:style/Animation.Dialog">
+        <item name="android:windowEnterAnimation">@anim/fade_in</item>
+        <item name="android:windowExitAnimation">@anim/fade_out</item>
+    </style>
+
+    <style name="ShadowBlackTextWhite">
+        <item name="android:shadowColor">@android:color/black</item>
+        <item name="android:shadowDx">1</item>
+        <item name="android:shadowDy">1</item>
+        <item name="android:shadowRadius">2</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
     <declare-styleable name="WindowInsetsLayout_Layout">
         <attr name="layout_windowInsets">
             <flag name="top" value="0x1" />
@@ -119,6 +138,7 @@
         </attr>
         <attr name="layout_windowInsetsUseMargin" format="boolean" />
     </declare-styleable>
+
     <declare-styleable name="WindowInsetsLayout">
         <attr name="windowInsets">
             <flag name="top" value="0x1" />
