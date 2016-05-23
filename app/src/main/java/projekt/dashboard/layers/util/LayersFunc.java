@@ -53,6 +53,7 @@ public class LayersFunc {
     public static boolean downloaded = true;
     public static String themeframework = "Nill";
     public static String themesystemui = "Nill";
+    public static String framework="Akzent_Framework";
 
     public LayersFunc(Context contextxyz) {
         context = contextxyz;
@@ -62,6 +63,7 @@ public class LayersFunc {
         changeVendorAndMount();
         findFrameworkFile();
         findSystemUIFile();
+        checkThemeMainSupported(context);
         Log.e("Final Framework", themeframework);
         Log.e("Final SystemUI", themesystemui);
         File aa = new File("/system/bin/aapt");
@@ -191,6 +193,10 @@ public class LayersFunc {
         return vendor;
     }
 
+    public String getframework() {
+        return framework;
+    }
+
     private static class downloadResources extends AsyncTask<String, Integer, String> {
 
         private ProgressDialog pd = new ProgressDialog(context);
@@ -303,20 +309,42 @@ public class LayersFunc {
         }
     }
 
-    final public static boolean checkThemeMainSupported(Context context) {
+    final public static boolean checkThemeSysSupported(Context context) {
 
-        File f2 = new File(vendor, "Akzent_Framework.apk");
+        File f2 = new File(vendor, "Akzent_SystemUI.apk");
         if (f2.exists()) {
             return true;
         }
         return false;
     }
 
-    final public static boolean checkThemeSysSupported(Context context) {
 
-        File f2 = new File(vendor, "Akzent_SystemUI.apk");
-        if (f2.exists()) {
-            return true;
+    final public static boolean checkThemeMainSupported(Context context) {
+
+        try {
+            String array[]=context.getResources().getStringArray(R.array.themes_supported);
+            for(int i=0;i<array.length;i++) {
+                File f2 = new File(vendor + "/");
+                File[] files2 = f2.listFiles();
+                if (files2 != null) {
+                    for (File inFile2 : files2) {
+                        if (inFile2.isFile()) {
+                            Log.e("Bhadwa", "Mila " + inFile2);
+                            String filenameParse[] = inFile2.getAbsolutePath().split("/");
+                            String last = filenameParse[filenameParse.length - 1];
+                            StringTokenizer stringTokenizer = new StringTokenizer(last, ".");
+                            String finalname = stringTokenizer.nextToken();
+                            if (finalname.equalsIgnoreCase(array[i])) {
+                                Log.e("MILA", finalname);
+                                framework=array[i];
+                                return true;
+                            }
+                        }
+                    }
+                }
+            }
+        } catch (Exception e) {
+            return false;
         }
         return false;
     }
@@ -577,5 +605,9 @@ public class LayersFunc {
         } catch (Exception e) {
 
         }
+    }
+
+    public static void findthemingframework(){
+
     }
 }
