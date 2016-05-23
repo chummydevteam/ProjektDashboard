@@ -5,12 +5,10 @@
     <color name="attention_color_orange">#ffff9500</color>
     <color name="colorAccent">@android:color/white</color>
     <color name="resetButton">#ff006f</color>
-    <color name="disabled_text">#ff777777</color>
     <color name="viewer_overlay">#40000000</color>
     <color name="overlay_window_bg">#cc000000</color>
-    <color name="material_deep_teal_200">@android:color/white</color>
-    <color name="material_grey_850">@android:color/black</color>
-    // Theme Switcher
+
+    <!-- Theme Changer -->
     <color name="primary_1_blacked_out">#ff000000</color>
     <color name="primary_2_blacked_out">#ff000000</color>
 
@@ -20,14 +18,22 @@
     <color name="card_background_blacked_out">#ff000000</color>
     <color name="card_background_dark_material">#ff1e1e1e</color>
 
+    <color name="cardview_dark_background">#ff212021</color>
+
     <color name="accent_1_dark">@android:color/white</color>
     <color name="accent_2_dark">@android:color/white</color>
+    <color name="material_deep_teal_200">@android:color/white</color>
+
+    <color name="material_grey_800">#ff212021</color>
+    <color name="material_grey_850">@android:color/black</color>
 
     <color name="window_bg_cards_dark">#ff000000</color>
+    <color name="window_bg_glass">#99000000</color>
 
     <color name="tab_indicator_color_dark">@android:color/white</color>
     <color name="tab_icon_color_dark">@android:color/white</color>
 
     <color name="toolbar_title_color_dark">@android:color/white</color>
     <color name="toolbar_icons_color_dark">@android:color/white</color>
+
 </resources>
