@@ -13,15 +13,21 @@ import android.os.Environment;
 import android.os.PowerManager;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,10 +40,12 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Arrays;
 import java.util.Map;
 
 import projekt.dashboard.layers.R;
+import projekt.dashboard.layers.adapters.DataAdapter;
+import projekt.dashboard.layers.util.HeaderParser;
 import projekt.dashboard.layers.util.ReadCloudXMLFile;
 
 /**
@@ -46,15 +54,23 @@ import projekt.dashboard.layers.util.ReadCloudXMLFile;
 public class HeaderPackDownloadActivity extends AppCompatActivity {
 
     public boolean has_downloaded_anything = false;
+    public String current_source_pack;
+    public RecyclerView recyclerView;
+    public RecyclerView.LayoutManager layoutManager;
+    public Boolean is_dialog_open = false;
     ProgressDialog mProgressDialog;
     private PowerManager.WakeLock mWakeLock;
+    private ArrayList<String> headerNames, headerPreviews;
+    private String[] headerNamesArray, headerPreviewsArray;
 
     void DeleteRecursive(File fileOrDirectory) {
 
         if (fileOrDirectory.isDirectory())
             for (File child : fileOrDirectory.listFiles())
                 DeleteRecursive(child);
+
         fileOrDirectory.delete();
+
     }
 
     @Override
@@ -96,7 +112,7 @@ public class HeaderPackDownloadActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu_main; this adds items to the action bar if it is present.
+        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.download_menu, menu);
         return true;
     }
@@ -104,7 +120,7 @@ public class HeaderPackDownloadActivity extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.downloader);
+        setContentView(R.layout.downloader_activity);
 
         android.support.v7.widget.Toolbar toolbar =
                 (android.support.v7.widget.Toolbar) findViewById(R.id.toolbar);
@@ -119,63 +135,152 @@ public class HeaderPackDownloadActivity extends AppCompatActivity {
         mProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
         mProgressDialog.setCancelable(false);
 
+        final String[] headerPackSources = getResources().getStringArray(R.array.header_pack_urls);
+        final Spinner headerPackSourcePicker = (Spinner) findViewById(R.id.sourcePickerHeaderPacks);
+        ArrayAdapter<String> spinnerCountShoesArrayAdapter = new ArrayAdapter<String>(getApplicationContext(),
+                android.R.layout.simple_spinner_dropdown_item, getResources().getStringArray(R.array.header_pack_sources));
+        headerPackSourcePicker.setAdapter(spinnerCountShoesArrayAdapter);
+        headerPackSourcePicker.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> arg0, View arg1,
+                                       int pos, long id) {
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> arg0) {
+            }
+        });
+
+        ImageButton restartActivity = (ImageButton) findViewById(R.id.restartDownloadSources);
+        if (restartActivity != null) {
+            restartActivity.setOnClickListener((new View.OnClickListener() {
+                public void onClick(View v) {
+                    if (!current_source_pack.equals(headerPackSources[headerPackSourcePicker.getSelectedItemPosition()])) {
+                        current_source_pack = headerPackSources[headerPackSourcePicker.getSelectedItemPosition()];
+                        downloadResources downloadTask = new downloadResources();
+                        downloadTask.execute(
+                                headerPackSources[headerPackSourcePicker.getSelectedItemPosition()],
+                                "addons.xml");
+                        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.list_item);
+                        TextView noDownloadsAvailable = (TextView) findViewById(R.id.NoDownloadsAvailable);
+                        noDownloadsAvailable.setVisibility(View.GONE);
+                        recyclerView.setVisibility(View.VISIBLE);
+                    } else {
+                        Log.d("DownloadActivity", "There is no need to restart the activity's sources!");
+                    }
+                }
+            }));
+        }
+
+        current_source_pack = headerPackSources[headerPackSourcePicker.getSelectedItemPosition()];
         downloadResources downloadTask = new downloadResources();
         downloadTask.execute(
-                "http://pastebin.com/raw/eCmQhEwM",
+                headerPackSources[headerPackSourcePicker.getSelectedItemPosition()],
                 "addons.xml");
+
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
+
+        recyclerView = (RecyclerView) findViewById(R.id.list_item);
+        recyclerView.setHasFixedSize(true);
+        if (recyclerView.getAdapter() != null) {
+            Log.d("refreshLayout", "The RecyclerView is not null, setting it to null...");
+            recyclerView.setAdapter(null);
+        }
+        layoutManager = new LinearLayoutManager(getApplicationContext());
+        recyclerView.setLayoutManager(layoutManager);
+    }
+
+    private ArrayList<HeaderParser> prepareData() {
+
+        ArrayList<HeaderParser> headers = new ArrayList<>();
+        for (int i = 0; i < headerNamesArray.length; i++) {
+            HeaderParser headerParser = new HeaderParser();
+            headerParser.setHeaderPackName(headerNamesArray[i]);
+            headerParser.setHeaderPackURL(headerPreviewsArray[i]);
+            headers.add(headerParser);
+        }
+        return headers;
     }
 
     public void refreshLayout() {
         int counter = 0;
 
-        // Get ListView object from xml
-        final ListView listView = (ListView) findViewById(R.id.list_item);
+        if (recyclerView.getAdapter() != null) {
+            Log.d("refreshLayout", "The RecyclerView is not null, setting it to null...");
+            recyclerView.setAdapter(null);
+        }
 
         // Defined Array values to show in ListView
-        List<String> values = new ArrayList<String>();
+        headerNames = new ArrayList<>();
+        headerPreviews = new ArrayList<>();
 
         String[] checkerCommands = {getApplicationContext().getFilesDir() + "/addons.xml"};
         final Map<String, String> newArray = ReadCloudXMLFile.main(checkerCommands);
         for (String key : newArray.keySet()) {
-            System.out.println("key : " + key);
-            System.out.println("value : " + newArray.get(key));
+            if (!key.toLowerCase().contains("-preview".toLowerCase()))
+                System.out.println("Loading Header Pack : " + key);
 
             File f = new File(Environment.getExternalStorageDirectory().getAbsolutePath() +
                     "/dashboard./" + key + ".zip");
             if (!f.exists()) {
                 if (key.toLowerCase().contains("-preview".toLowerCase())) {
-                    System.out.println("Preview file detected, ignoring it from the TreeMap");
+                    String checker = key.substring(0, key.length() - 8);
+
+                    // Unlike the previous implementation, we have to filter out already installed
+                    // header packs including their preview images.
+
+                    Boolean checkIfExist = new File(Environment.getExternalStorageDirectory().
+                            getAbsolutePath() +
+                            "/dashboard./" + checker + ".zip").exists();
+                    if (!checkIfExist) {
+                        headerPreviews.add(newArray.get(key));
+                    }
                 } else {
-                    values.add(key);
+                    headerNames.add(key);
                     counter += 1;
                 }
+            } else {
+                System.out.println("Header Pack Located : " + f.getAbsolutePath());
             }
         }
-
         if (counter == 0) {
             TextView noDownloadsAvailable = (TextView) findViewById(R.id.NoDownloadsAvailable);
-            noDownloadsAvailable.setVisibility(View.VISIBLE);
-            listView.setVisibility(View.GONE);
+            if (noDownloadsAvailable != null) {
+                noDownloadsAvailable.setVisibility(View.VISIBLE);
+            }
+            recyclerView.setVisibility(View.GONE);
         }
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(),
-                R.layout.list_row, R.id.title, values);
+        headerNamesArray = headerNames.toArray(new String[headerNames.size()]);
+        Arrays.sort(headerNamesArray);
+        headerPreviewsArray = headerPreviews.toArray(new String[headerPreviews.size()]);
 
-        // Assign adapter to ListView
-        listView.setAdapter(adapter);
-        // ListView Item Click Listener
-        listView.setOnItemClickListener(
-                new AdapterView.OnItemClickListener() {
+        ArrayList<HeaderParser> headerParsers = prepareData();
+        DataAdapter adapter = new DataAdapter(getApplicationContext(), headerParsers);
+        // Assign adapter to RecyclerView
+        recyclerView.setAdapter(adapter);
+        // RecyclerView Item Click Listener
+        recyclerView.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {
+            GestureDetector gestureDetector = new GestureDetector(getApplicationContext(),
+                    new GestureDetector.SimpleOnGestureListener() {
 
-                    @Override
-                    public void onItemClick(AdapterView<?> parent, View view,
-                                            final int position, long id) {
-                        // ListView Clicked item value
-                        final String itemValue = (String) listView.getItemAtPosition(position);
+                        @Override
+                        public boolean onSingleTapUp(MotionEvent e) {
+                            return true;
+                        }
 
+                    });
+
+            @Override
+            public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e) {
+                View child = rv.findChildViewUnder(e.getX(), e.getY());
+                if (child != null && gestureDetector.onTouchEvent(e)) {
+                    // RecyclerView Clicked item value
+                    try {
+                        int position = rv.getChildAdapterPosition(child);
+                        final String itemValue = headerNames.get(position);
                         AlertDialog.Builder builder = new AlertDialog.Builder(
                                 HeaderPackDownloadActivity.this);
                         builder.setPositiveButton(getResources().getString(
@@ -185,41 +290,52 @@ public class HeaderPackDownloadActivity extends AppCompatActivity {
                                 // execute this when the downloader must be fired
                                 final downloadResources downloadTask = new downloadResources();
                                 downloadTask.execute(newArray.get(itemValue), itemValue);
+                                is_dialog_open = false;
                             }
                         }).setNegativeButton(
                                 getResources().getString(R.string.downloader_dialog_cancel),
                                 new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
+                                        is_dialog_open = false;
                                     }
                                 });
-                        final AlertDialog dialog = builder.create();
                         LayoutInflater inflater = getLayoutInflater();
                         View dialogLayout = inflater.inflate(R.layout.header_preview_dialog, null);
+                        ImageView i = (ImageView) dialogLayout.findViewById(R.id.dialogImage);
+                        Bitmap bitmap = BitmapFactory.decodeStream((InputStream) new URL(
+                                newArray.get(itemValue + "-preview")).getContent());
+                        i.setImageBitmap(bitmap);
+                        final AlertDialog dialog = builder.create();
                         dialog.setView(dialogLayout);
                         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                        try {
-                            ImageView i = (ImageView) dialogLayout.findViewById(R.id.dialogImage);
-                            Bitmap bitmap = BitmapFactory.decodeStream((InputStream) new URL(
-                                    newArray.get(itemValue + "-preview")).getContent());
-                            i.setImageBitmap(bitmap);
-                        } catch (MalformedURLException e) {
-                            e.printStackTrace();
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
                         dialog.setCancelable(false);
-                        dialog.show();
-                        dialog.getButton(dialog.BUTTON_NEGATIVE).
-                                setTextColor(getResources().getColor(android.R.color.white));
-                        dialog.getButton(dialog.BUTTON_POSITIVE).
-                                setTextColor(getResources().getColor(android.R.color.white));
+                        if (!dialog.isShowing() && !is_dialog_open) {
+                            dialog.show();
+                            is_dialog_open = true;
+                            dialog.getButton(dialog.BUTTON_NEGATIVE).
+                                    setTextColor(getColor(android.R.color.white));
+                            dialog.getButton(dialog.BUTTON_POSITIVE).
+                                    setTextColor(getColor(android.R.color.white));
+                        }
+                    } catch (MalformedURLException mue) {
+                    } catch (IOException ioe) {
                     }
-
-
                 }
 
-        );
+                return false;
+            }
+
+            @Override
+            public void onTouchEvent(RecyclerView rv, MotionEvent e) {
+
+            }
+
+            @Override
+            public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
+
+            }
+        });
         mProgressDialog.setMessage(getResources().getString(R.string.downloader_dialog_two));
     }
 
