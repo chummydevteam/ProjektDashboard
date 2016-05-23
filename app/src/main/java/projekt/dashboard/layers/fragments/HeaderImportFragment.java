@@ -70,6 +70,8 @@ public class HeaderImportFragment extends BasePageFragment {
     public boolean xhdpi = false;
     public boolean xxhdpi = true;
     public boolean xxxhdpi = false;
+    public List<String> zipsFound;
+    public ArrayAdapter<String> adapter2;
 
     public void cleanTempFolder() {
         File dir = getActivity().getCacheDir();
@@ -80,7 +82,6 @@ public class HeaderImportFragment extends BasePageFragment {
         if (fileOrDirectory.isDirectory())
             for (File child : fileOrDirectory.listFiles())
                 deleteRecursive(child);
-
         fileOrDirectory.delete();
     }
 
@@ -202,7 +203,7 @@ public class HeaderImportFragment extends BasePageFragment {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     if (new LayersFunc(getActivity()).isAppInstalled(getActivity(), "com.chummy.aditya.materialdark.layers.donate")) {
-                        startActivity(new Intent().setComponent(new ComponentName("com.lovejoy777.rroandlayersmanager", "com.lovejoy777.rroandlayersmanager.MainActivity")));
+                        startActivity(new Intent(getActivity().getPackageManager().getLaunchIntentForPackage("com.lovejoy777.rroandlayersmanager")));
                     } else {
                         startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.chummy.aditya.materialdark.layers.donate")));
                     }
@@ -418,17 +419,15 @@ public class HeaderImportFragment extends BasePageFragment {
             Log.e("CopyAkzent_SystemUIFile", "Function Called");
             Log.e("CopyAkzent_SystemUIFile", "Function Started");
             String sourcePath = theme_dir;
-            File source = new File(sourcePath);
             String destinationPath = getActivity().getCacheDir().getAbsolutePath() +
                     "/" + LayersFunc.themesystemui + ".apk";
-            File destination = new File(destinationPath);
             try {
-                FileUtils.copyFile(source, destination);
+                eu.chainfire.libsuperuser.Shell.SU.run("cp "+sourcePath+" "+destinationPath);
                 unzip(header_zip);
                 Log.e("CopyAkzent_SystemUIFile",
                         "Successfully copied " + LayersFunc.themesystemui + " apk from overlays folder to work directory");
                 Log.e("CopyAkzent_SystemUIFile", "Function Stopped");
-            } catch (IOException e) {
+            } catch (Exception e) {
                 Log.e("CopyAkzent_SystemUIFile",
                         "Failed to copy Akzent_SystemUI apk from resource-cache to work directory");
                 Log.e("CopyAkzent_SystemUIFile", "Function Stopped");
@@ -495,7 +494,6 @@ public class HeaderImportFragment extends BasePageFragment {
             eu.chainfire.libsuperuser.Shell.SU.run("mkdir /res/drawable-xxhdpi-v4/");
             eu.chainfire.libsuperuser.Shell.SU.run("mkdir /res/drawable-xhdpi-v4/");
             eu.chainfire.libsuperuser.Shell.SU.run("mkdir /res/drawable-xxxhdpi-v4/");
-
 
             // Copy the files over
             for (int i = 0; i < source.size(); i++) {
@@ -595,7 +593,6 @@ public class HeaderImportFragment extends BasePageFragment {
                 LayersFunc.copyFinalizedAPK(getActivity(), LayersFunc.themesystemui, false);
             }
             eu.chainfire.libsuperuser.Shell.SU.run("killall zygote");
-
         }
 
         protected void onPreExecute() {
@@ -615,6 +612,7 @@ public class HeaderImportFragment extends BasePageFragment {
         protected void onPostExecute(Void result) {
             pd.dismiss();
             eu.chainfire.libsuperuser.Shell.SU.run("busybox killall com.android.systemui");
+
         }
     }
 
