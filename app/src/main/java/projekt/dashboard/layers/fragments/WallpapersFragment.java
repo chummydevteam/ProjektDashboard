@@ -10,7 +10,6 @@ import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
-import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
@@ -21,7 +20,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
@@ -43,8 +41,6 @@ import projekt.dashboard.layers.R;
 import projekt.dashboard.layers.adapters.WallpaperAdapter;
 import projekt.dashboard.layers.config.Config;
 import projekt.dashboard.layers.fragments.base.BasePageFragment;
-import projekt.dashboard.layers.ui.MainActivity;
-import projekt.dashboard.layers.util.TintUtils;
 import projekt.dashboard.layers.util.WallpaperUtils;
 import projekt.dashboard.layers.viewer.ViewerActivity;
 
@@ -92,7 +88,7 @@ public class WallpapersFragment extends BasePageFragment implements
 
     @Override
     public int getTitle() {
-        return R.string.wallpapers;
+        return R.string.home_tab_six;
     }
 
     @Override
@@ -114,37 +110,19 @@ public class WallpapersFragment extends BasePageFragment implements
         final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(
                 getActivity());
 
-        Spinner wallpaperSourcePicker = (Spinner) inflation.findViewById(R.id.sourcePicker);
+        final Spinner wallpaperSourcePicker = (Spinner) inflation.findViewById(R.id.sourcePicker);
+        final String[] wallpaperSourcePickerURLs = getResources().getStringArray(R.array.wallpaper_sources_urls);
         ArrayAdapter<String> spinnerCountShoesArrayAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item, getResources().getStringArray(R.array.wallpaper_sources));
         wallpaperSourcePicker.setAdapter(spinnerCountShoesArrayAdapter);
         wallpaperSourcePicker.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> arg0, View arg1,
                                        int pos, long id) {
-                if (pos == 0) {
-                    prefs.edit().putString("selected_wallpaper_source", "default").commit();
-                }
-                if (pos == 1) {
-                    prefs.edit().putString("selected_wallpaper_source", "customworx_du").commit();
-                }
-                if (pos == 2) {
-                    prefs.edit().putString("selected_wallpaper_source", "customworx_octos").commit();
-                }
-                if (pos == 3) {
-                    prefs.edit().putString("selected_wallpaper_source", "customworx_screwd").commit();
-                }
-                if (pos == 4) {
-                    prefs.edit().putString("selected_wallpaper_source", "customworx").commit();
-                }
-                if (pos == 5) {
-                    prefs.edit().putString("selected_wallpaper_source", "gagan").commit();
-                }
-                if (pos == 6) {
-                    prefs.edit().putString("selected_wallpaper_source", "vignesh_headers").commit();
-                }
-                if (pos == 7) {
-                    prefs.edit().putString("selected_wallpaper_source", "vignesh").commit();
-                }
+                prefs.edit().putString("selected_wallpaper_source",
+                        wallpaperSourcePickerURLs[wallpaperSourcePicker.
+                                getSelectedItemPosition()]).apply();
+                prefs.edit().putInt("selected_wallpaper_source_position",
+                        wallpaperSourcePicker.getSelectedItemPosition()).apply();
             }
 
             @Override
@@ -153,38 +131,14 @@ public class WallpapersFragment extends BasePageFragment implements
 
             }
         });
-        String mapTypeString = prefs.getString("selected_wallpaper_source", "default");
-        if (!mapTypeString.equals("default")) {
-            if (mapTypeString.equals("customworx_du")) {
-                wallpaperSourcePicker.setSelection(1);
-            }
-            if (mapTypeString.equals("customworx_octos")) {
-                wallpaperSourcePicker.setSelection(2);
-            }
-            if (mapTypeString.equals("customworx_screwd")) {
-                wallpaperSourcePicker.setSelection(3);
-            }
-            if (mapTypeString.equals("customworx")) {
-                wallpaperSourcePicker.setSelection(4);
-            }
-            if (mapTypeString.equals("gagan")) {
-                wallpaperSourcePicker.setSelection(5);
-            }
-            if (mapTypeString.equals("vignesh_headers")) {
-                wallpaperSourcePicker.setSelection(6);
-            }
-            if (mapTypeString.equals("vignesh")) {
-                wallpaperSourcePicker.setSelection(7);
-            }
-        } else {
-            wallpaperSourcePicker.setSelection(0);
-        }
+        int mapTypeString = prefs.getInt("selected_wallpaper_source_position", 0);
+        wallpaperSourcePicker.setSelection(mapTypeString);
 
         ImageButton restartActivity = (ImageButton) inflation.findViewById(R.id.restart);
         restartActivity.setOnClickListener((new View.OnClickListener() {
             public void onClick(View v) {
-                getActivity().finish();
-                getActivity().startActivity(new Intent(getActivity(), MainActivity.class));
+                mWallpapers = null;
+                load(false);
             }
         }));
 
@@ -193,28 +147,11 @@ public class WallpapersFragment extends BasePageFragment implements
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.wallpapers, menu);
         super.onCreateOptionsMenu(menu, inflater);
-        MenuItem mSearchItem = menu.findItem(R.id.search);
-        SearchView mSearchView = (SearchView) MenuItemCompat.getActionView(mSearchItem);
-        mSearchView.setQueryHint(getString(R.string.search_wallpapers));
-        mSearchView.setOnQueryTextListener(this);
-        mSearchView.setOnCloseListener(this);
-        mSearchView.setImeOptions(EditorInfo.IME_ACTION_DONE);
-
-        if (getActivity() != null) {
-            final MainActivity act = (MainActivity) getActivity();
-            TintUtils.themeSearchView(act.getToolbar(), mSearchView, DialogUtils.resolveColor(act, R.attr.tab_icon_color));
-        }
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.reload) {
-            mWallpapers = null;
-            load(false);
-            return true;
-        }
         return super.onOptionsItemSelected(item);
     }
 
@@ -339,7 +276,7 @@ public class WallpapersFragment extends BasePageFragment implements
                         mEmpty.setText(error.getMessage());
                     }
                 } else {
-                    mEmpty.setText(cancelled ? R.string.request_cancelled : R.string.no_wallpapers);
+                    mEmpty.setText(cancelled ? R.string.request_cancelled : R.string.intro_wallpapers);
                     mWallpapers = wallpapers;
                     mAdapter.set(mWallpapers);
                 }
