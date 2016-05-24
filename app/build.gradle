@@ -32,12 +32,13 @@ android {
     }
 
     buildTypes {
-//        debug {
-//            signingConfig signingConfigs.production
-//        }
+        debug {
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
         release {
-//            signingConfig signingConfigs.production
-            minifyEnabled false
+            minifyEnabled true
             shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
