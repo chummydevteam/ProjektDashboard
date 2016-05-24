@@ -25,7 +25,7 @@
     <string name="restore_package_installed_cdt">a cdt theme based profile locked and loaded!</string>
     <string name="restore_package_installed_cdt_not_installed">unfortunately, a cdt theme profile was restored but there are no cdt themes installed! :(</string>
     <string name="restore_package_not_installed">\"%s\" profile restored but theme not installed!</string>
-    <string name="restore_profile_failure">profile restored with some errors!</string>
+    <string name="restore_profile_failure">profile restored with some errors (was the profile created by an older dashboard version?)!</string>
     <string name="restore_profile_success">profile restored successfully!</string>
     <string name="restore_profile_title">backup/restore options:</string>
     <string name="restore_profile_spinner_default">select a profile (optional)</string>
