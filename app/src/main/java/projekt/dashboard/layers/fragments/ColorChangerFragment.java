@@ -23,8 +23,6 @@ import android.widget.TextView;
 
 import net.lingala.zip4j.core.ZipFile;
 import net.lingala.zip4j.exception.ZipException;
-import net.margaritov.preference.colorpicker.ColorPickerDialog;
-import net.margaritov.preference.colorpicker.ColorPickerPreference;
 
 import org.apache.commons.io.IOUtils;
 
@@ -32,6 +30,8 @@ import java.util.Random;
 
 import butterknife.ButterKnife;
 import projekt.dashboard.layers.R;
+import projekt.dashboard.layers.colorpicker.ColorPickerDialog;
+import projekt.dashboard.layers.colorpicker.ColorPickerPreference;
 import projekt.dashboard.layers.fragments.base.BasePageFragment;
 import projekt.dashboard.layers.util.LayersFunc;
 
