@@ -47,5 +47,7 @@
     <color name="card2_bg">#0d0d0d</color>
     <color name="card3_bg">#171617</color>
     <color name="card4_bg">#212021</color>
+    <color name="card_button">#333333</color>
+    <color name="card_button_final">#404040</color>
     <color name="card_highlight">#3f3d3f</color>
 </resources>

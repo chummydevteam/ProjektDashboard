@@ -151,30 +151,40 @@
                     android:layout_marginStart="-8dp" />
 
                 <Button
+                    android:id="@+id/backupButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignEnd="@+id/fakeView"
+                    android:layout_alignLeft="@+id/fakeView"
+                    android:layout_alignStart="@+id/backup_restore_title"
+                    android:layout_below="@+id/spinner3"
+                    android:layout_marginEnd="2.5dp"
+                    android:layout_marginTop="5dp"
+                    android:background="@color/card_button"
+                    android:clickable="true"
+                    android:foreground="?android:selectableItemBackground"
+                    android:text="@string/backup_button" />
+
+                <View
+                    android:id="@+id/fakeView"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_centerInParent="true" />
+
+                <Button
                     android:id="@+id/restoreButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignEnd="@+id/edittext1"
-                    android:layout_alignStart="@+id/backup_restore_title"
+                    android:layout_alignRight="@+id/fakeView"
+                    android:layout_alignStart="@+id/fakeView"
                     android:layout_below="@+id/spinner3"
+                    android:layout_marginStart="2.5dp"
                     android:layout_marginTop="5dp"
-                    android:background="@color/card1_bg"
+                    android:background="@color/card_button"
                     android:clickable="true"
                     android:foreground="?android:selectableItemBackground"
                     android:text="@string/restore_button" />
-
-                <Button
-                    android:id="@+id/backupButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignEnd="@+id/edittext1"
-                    android:layout_alignStart="@+id/backup_restore_title"
-                    android:layout_below="@+id/restoreButton"
-                    android:layout_marginTop="5dp"
-                    android:background="@color/card2_bg"
-                    android:clickable="true"
-                    android:foreground="?android:selectableItemBackground"
-                    android:text="@string/backup_button" />
 
                 <Button
                     android:id="@+id/begin_action"
@@ -185,7 +195,7 @@
                     android:layout_below="@+id/backupButton"
                     android:layout_marginBottom="8dp"
                     android:layout_marginTop="5dp"
-                    android:background="@color/card3_bg"
+                    android:background="@color/card_button_final"
                     android:clickable="true"
                     android:foreground="?android:selectableItemBackground"
                     android:text="@string/begin_action_button" />
