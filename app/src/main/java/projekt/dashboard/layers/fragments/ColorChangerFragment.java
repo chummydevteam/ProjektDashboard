@@ -42,13 +42,13 @@ import projekt.dashboard.layers.util.LayersFunc;
 
 public class ColorChangerFragment extends BasePageFragment {
 
+    static String File = "Akzent_Framework";
+    public String color_picked = "#ff0000";
+    public ViewGroup inflation;
     SharedPreferences prefs;
     FloatingActionButton fab;
     ImageButton imageButton;
     TextView accentcolor;
-    public String color_picked = "#ff0000";
-    public ViewGroup inflation;
-    static String File = "Akzent_Framework";
 
     public static String getFile() {
         return File;
@@ -137,6 +137,23 @@ public class ColorChangerFragment extends BasePageFragment {
         new secondPhaseAsyncTasks().execute(directory);
         Log.e("PickColors", "Function Stopped");
 
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        ButterKnife.bind(this, view);
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        ButterKnife.unbind(this);
+    }
+
+    @Override
+    public int getTitle() {
+        return R.string.color_changer;
     }
 
     public class copyThemeFiles extends AsyncTask<String, String, String> {
@@ -291,23 +308,6 @@ public class ColorChangerFragment extends BasePageFragment {
                 e.printStackTrace();
             }
         }
-    }
-
-    @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        ButterKnife.bind(this, view);
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        ButterKnife.unbind(this);
-    }
-
-    @Override
-    public int getTitle() {
-        return R.string.color_changer;
     }
 
 }

@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -17,10 +16,8 @@ import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.Nullable;
-import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.graphics.drawable.DrawableCompat;
-import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -153,13 +150,13 @@ public class MainActivity extends BaseDonateActivity {
             }
         }
         if (Shell.SU.available()) {
-            if (LayersFunc.themesystemui!="Nill") {
-                Log.e("Adding Fragment","Framework found");
-                if (LayersFunc.themeframework!="Nill") {
-                    Log.e("Adding Fragment","SystemUI found");
+            if (LayersFunc.themesystemui != "Nill") {
+                Log.e("Adding Fragment", "Framework found");
+                if (LayersFunc.themeframework != "Nill") {
+                    Log.e("Adding Fragment", "SystemUI found");
                     mPages.add(new PagesBuilder.Page(R.id.header_swapper_fragment, R.drawable.tab_swapper,
                             R.string.home_tab_three, new HeaderSwapperFragment()));
-                    Log.e("Adding Fragment","added");
+                    Log.e("Adding Fragment", "added");
                 }
                 mPages.add(new PagesBuilder.Page(R.id.header_swapper_fragment, R.drawable.tab_header_import,
                         R.string.home_tab_four, new HeaderImportFragment()));
@@ -186,13 +183,13 @@ public class MainActivity extends BaseDonateActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if(id==R.id.share){
+        if (id == R.id.share) {
             Intent sharingIntent = new Intent(Intent.ACTION_SEND);
             sharingIntent.setType("text/plain");
             String shareBody = "Check out Dashboard by Chummy Development Team !\n\nDownload it here!: " + "https://play.google.com/store/apps/details?id=projekt.dashboard.layers";
             sharingIntent.putExtra(Intent.EXTRA_TEXT, shareBody);
             startActivity(Intent.createChooser(sharingIntent, "Share :-"));
-        }else if(id==R.id.contact){
+        } else if (id == R.id.contact) {
             StringBuilder emailBuilder = new StringBuilder();
             Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("mailto:" + "ebizeraditya@gmail.com"));
             intent.putExtra(Intent.EXTRA_SUBJECT, "Dashboard.Layers Talk");

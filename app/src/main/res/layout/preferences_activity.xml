@@ -115,17 +115,17 @@
             android:checked="false"
             android:padding="16dp"
             android:text="@string/settings_blacked_out_mode" />
-<!--
-        <Switch
-            android:id="@+id/enable_creative_mode"
-            style="@style/ShadowBlackTextWhite"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/enable_blacked_out"
-            android:checked="true"
-            android:padding="16dp"
-            android:text="@string/settings_creative_mode" />
--->
+        <!--
+                <Switch
+                    android:id="@+id/enable_creative_mode"
+                    style="@style/ShadowBlackTextWhite"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/enable_blacked_out"
+                    android:checked="true"
+                    android:padding="16dp"
+                    android:text="@string/settings_creative_mode" />
+        -->
         <Switch
             android:id="@+id/enable_extended_actionbar"
             style="@style/ShadowBlackTextWhite"

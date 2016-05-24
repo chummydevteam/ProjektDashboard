@@ -3,7 +3,6 @@ package projekt.dashboard.layers.fragments;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.ComponentName;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -11,7 +10,6 @@ import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.provider.MediaStore;
@@ -34,7 +32,6 @@ import android.widget.TextView;
 import com.isseiaoki.simplecropview.CropImageView;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.LineIterator;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -479,203 +476,205 @@ public class HeaderSwapperFragment extends BasePageFragment {
         private void performAAPTonCommonsAPK() {
             Log.e("performAAPTonCommonsAPK",
                     "Mounting system as read-write as we prepare for some commands...");
-            try{
-            eu.chainfire.libsuperuser.Shell.SU.run("mount -o remount,rw /");
-            eu.chainfire.libsuperuser.Shell.SU.run("mkdir /res");
+            try {
+                eu.chainfire.libsuperuser.Shell.SU.run("mount -o remount,rw /");
+                eu.chainfire.libsuperuser.Shell.SU.run("mkdir /res");
                 eu.chainfire.libsuperuser.Shell.SU.run("mkdir /res/drawable");
-            if (xhdpi) {
-                eu.chainfire.libsuperuser.Shell.SU.run("mkdir /res/drawable-xhdpi-v4");
-            }
-            eu.chainfire.libsuperuser.Shell.SU.run("mkdir /res/drawable-xxhdpi-v4");
-            if (xxxhdpi) {
-                eu.chainfire.libsuperuser.Shell.SU.run("mkdir /res/drawable-xxxhdpi-v4");
-            }Log.e("Made Directory","Made");
-            eu.chainfire.libsuperuser.Shell.SU.run(
-                    "cp " + getActivity().getFilesDir().getAbsolutePath() +
-                            "/res/drawable/menuitem_background.png " +
-                            "/res/drawable/menuitem_background.png");
-                Log.e("drawable","dr");
-
-
-            eu.chainfire.libsuperuser.Shell.SU.run(
-                    "cp " + getActivity().getFilesDir().getAbsolutePath() +
-                            "/res/drawable/menuitem_background.png " +
-                            "/res/drawable-xhdpi-v4/menuitem_background.png");
-                Log.e("drawable","x");
-            eu.chainfire.libsuperuser.Shell.SU.run(
-                    "cp " + getActivity().getFilesDir().getAbsolutePath() +
-                            "/res/drawable/menuitem_background.png " +
-                            "/res/drawable-xxhdpi-v4/menuitem_background.png");
-                Log.e("drawable","xx");
-            eu.chainfire.libsuperuser.Shell.SU.run(
-                    "cp " + getActivity().getFilesDir().getAbsolutePath() +
-                            "/res/drawable/menuitem_background.png " +
-                            "/res/drawable-xxxhdpi-v4/menuitem_background.png");
-                Log.e("drawable","xxx");
-            if (swap_contextual_header) {
-                List source = processor();
-                for (int i = 0; i < source.size(); i++) {
-                    eu.chainfire.libsuperuser.Shell.SU.run(
-                            "cp " + getActivity().getFilesDir().getAbsolutePath() +
-                                    "/res/drawable-xxhdpi-v4/" + source.get(i) +
-                                    " /res/drawable-xxhdpi-v4/" +
-                                    source.get(i));
-                }
                 if (xhdpi) {
-                    for (int i = 0; i < source.size(); i++) {
-                        eu.chainfire.libsuperuser.Shell.SU.run(
-                                "cp " + getActivity().getFilesDir().getAbsolutePath() +
-                                        "/res/drawable-xhdpi-v4/" + source.get(i) +
-                                        " /res/drawable-xhdpi-v4/" +
-                                        source.get(i));
-                    }
+                    eu.chainfire.libsuperuser.Shell.SU.run("mkdir /res/drawable-xhdpi-v4");
                 }
+                eu.chainfire.libsuperuser.Shell.SU.run("mkdir /res/drawable-xxhdpi-v4");
                 if (xxxhdpi) {
+                    eu.chainfire.libsuperuser.Shell.SU.run("mkdir /res/drawable-xxxhdpi-v4");
+                }
+                Log.e("Made Directory", "Made");
+                eu.chainfire.libsuperuser.Shell.SU.run(
+                        "cp " + getActivity().getFilesDir().getAbsolutePath() +
+                                "/res/drawable/menuitem_background.png " +
+                                "/res/drawable/menuitem_background.png");
+                Log.e("drawable", "dr");
+
+
+                eu.chainfire.libsuperuser.Shell.SU.run(
+                        "cp " + getActivity().getFilesDir().getAbsolutePath() +
+                                "/res/drawable/menuitem_background.png " +
+                                "/res/drawable-xhdpi-v4/menuitem_background.png");
+                Log.e("drawable", "x");
+                eu.chainfire.libsuperuser.Shell.SU.run(
+                        "cp " + getActivity().getFilesDir().getAbsolutePath() +
+                                "/res/drawable/menuitem_background.png " +
+                                "/res/drawable-xxhdpi-v4/menuitem_background.png");
+                Log.e("drawable", "xx");
+                eu.chainfire.libsuperuser.Shell.SU.run(
+                        "cp " + getActivity().getFilesDir().getAbsolutePath() +
+                                "/res/drawable/menuitem_background.png " +
+                                "/res/drawable-xxxhdpi-v4/menuitem_background.png");
+                Log.e("drawable", "xxx");
+                if (swap_contextual_header) {
+                    List source = processor();
                     for (int i = 0; i < source.size(); i++) {
                         eu.chainfire.libsuperuser.Shell.SU.run(
                                 "cp " + getActivity().getFilesDir().getAbsolutePath() +
-                                        "/res/drawable-xxxhdpi-v4/" + source.get(i) +
-                                        " /res/drawable-xxxhdpi-v4/" +
+                                        "/res/drawable-xxhdpi-v4/" + source.get(i) +
+                                        " /res/drawable-xxhdpi-v4/" +
                                         source.get(i));
                     }
+                    if (xhdpi) {
+                        for (int i = 0; i < source.size(); i++) {
+                            eu.chainfire.libsuperuser.Shell.SU.run(
+                                    "cp " + getActivity().getFilesDir().getAbsolutePath() +
+                                            "/res/drawable-xhdpi-v4/" + source.get(i) +
+                                            " /res/drawable-xhdpi-v4/" +
+                                            source.get(i));
+                        }
+                    }
+                    if (xxxhdpi) {
+                        for (int i = 0; i < source.size(); i++) {
+                            eu.chainfire.libsuperuser.Shell.SU.run(
+                                    "cp " + getActivity().getFilesDir().getAbsolutePath() +
+                                            "/res/drawable-xxxhdpi-v4/" + source.get(i) +
+                                            " /res/drawable-xxxhdpi-v4/" +
+                                            source.get(i));
+                        }
+                    }
+                    Log.e("performAAPTonCommonsAPK",
+                            "Successfully copied all drawables into the root folder.");
                 }
                 Log.e("performAAPTonCommonsAPK",
-                        "Successfully copied all drawables into the root folder.");
-            }
-            Log.e("performAAPTonCommonsAPK",
-                    "Successfully copied drawable into the root folder.");
+                        "Successfully copied drawable into the root folder.");
 
-            Log.e("performAAPTonCommonsAPK",
-                    "Preparing for clean up on resources...");
-            Process nativeApp3 = Runtime.getRuntime().exec(
-                    "aapt remove " +
-                            getActivity().getFilesDir().getAbsolutePath() +
-                            "/" + LayersFunc.themeframework + ".apk res/drawable/menuitem_background.png");
-            Log.e("performAAPTonCommonsAPK",
-                    "Deleted main drawable file!");
-            nativeApp3.waitFor();
-            Process nativeAppx = Runtime.getRuntime().exec(
-                    "aapt remove " +
-                            getActivity().getFilesDir().getAbsolutePath() +
-                            "/" + LayersFunc.themeframework + ".apk res/drawable-xhdpi-v4/menuitem_background.png");
-            Log.e("performAAPTonCommonsAPK",
-                    "Deleted main drawable file!");
-            nativeAppx.waitFor();
-            Process nativeAppxx = Runtime.getRuntime().exec(
-                    "aapt remove " +
-                            getActivity().getFilesDir().getAbsolutePath() +
-                            "/" + LayersFunc.themeframework + ".apk res/drawable-xxhdpi-v4/menuitem_background.png");
-            Log.e("performAAPTonCommonsAPK",
-                    "Deleted main drawable file!");
-            nativeAppxx.waitFor();
-            Process nativeAppxxx = Runtime.getRuntime().exec(
-                    "aapt remove " +
-                            getActivity().getFilesDir().getAbsolutePath() +
-                            "/" + LayersFunc.themeframework + ".apk res/drawable-xxxhdpi-v4/menuitem_background.png");
-            Log.e("performAAPTonCommonsAPK",
-                    "Deleted main drawable file!");
-            nativeAppxxx.waitFor();
-            if (swap_contextual_header) {
-                List source = processor();
-                for (int i = 0; i < source.size(); i++) {
-                    Process nativeApp1 = Runtime.getRuntime().exec(
-                            "aapt remove " + getActivity().getFilesDir().getAbsolutePath() +
-                                    "/" + LayersFunc.themesystemui + ".apk " +
-                                    "res/drawable-xxhdpi-v4" +
-                                    source.get(i));
-                    nativeApp1.waitFor();
-                }
-                if (xhdpi) {
+                Log.e("performAAPTonCommonsAPK",
+                        "Preparing for clean up on resources...");
+                Process nativeApp3 = Runtime.getRuntime().exec(
+                        "aapt remove " +
+                                getActivity().getFilesDir().getAbsolutePath() +
+                                "/" + LayersFunc.themeframework + ".apk res/drawable/menuitem_background.png");
+                Log.e("performAAPTonCommonsAPK",
+                        "Deleted main drawable file!");
+                nativeApp3.waitFor();
+                Process nativeAppx = Runtime.getRuntime().exec(
+                        "aapt remove " +
+                                getActivity().getFilesDir().getAbsolutePath() +
+                                "/" + LayersFunc.themeframework + ".apk res/drawable-xhdpi-v4/menuitem_background.png");
+                Log.e("performAAPTonCommonsAPK",
+                        "Deleted main drawable file!");
+                nativeAppx.waitFor();
+                Process nativeAppxx = Runtime.getRuntime().exec(
+                        "aapt remove " +
+                                getActivity().getFilesDir().getAbsolutePath() +
+                                "/" + LayersFunc.themeframework + ".apk res/drawable-xxhdpi-v4/menuitem_background.png");
+                Log.e("performAAPTonCommonsAPK",
+                        "Deleted main drawable file!");
+                nativeAppxx.waitFor();
+                Process nativeAppxxx = Runtime.getRuntime().exec(
+                        "aapt remove " +
+                                getActivity().getFilesDir().getAbsolutePath() +
+                                "/" + LayersFunc.themeframework + ".apk res/drawable-xxxhdpi-v4/menuitem_background.png");
+                Log.e("performAAPTonCommonsAPK",
+                        "Deleted main drawable file!");
+                nativeAppxxx.waitFor();
+                if (swap_contextual_header) {
+                    List source = processor();
                     for (int i = 0; i < source.size(); i++) {
                         Process nativeApp1 = Runtime.getRuntime().exec(
                                 "aapt remove " + getActivity().getFilesDir().getAbsolutePath() +
                                         "/" + LayersFunc.themesystemui + ".apk " +
-                                        "res/drawable-xhdpi-v4" +
+                                        "res/drawable-xxhdpi-v4" +
                                         source.get(i));
                         nativeApp1.waitFor();
                     }
-                }
-                if (xxxhdpi) {
-                    for (int i = 0; i < source.size(); i++) {
-                        Process nativeApp1 = Runtime.getRuntime().exec(
-                                "aapt remove " + getActivity().getFilesDir().getAbsolutePath() +
-                                        "/" + LayersFunc.themesystemui + ".apk " +
-                                        "res/drawable-xxxhdpi-v4" +
-                                        source.get(i));
-                        nativeApp1.waitFor();
+                    if (xhdpi) {
+                        for (int i = 0; i < source.size(); i++) {
+                            Process nativeApp1 = Runtime.getRuntime().exec(
+                                    "aapt remove " + getActivity().getFilesDir().getAbsolutePath() +
+                                            "/" + LayersFunc.themesystemui + ".apk " +
+                                            "res/drawable-xhdpi-v4" +
+                                            source.get(i));
+                            nativeApp1.waitFor();
+                        }
                     }
+                    if (xxxhdpi) {
+                        for (int i = 0; i < source.size(); i++) {
+                            Process nativeApp1 = Runtime.getRuntime().exec(
+                                    "aapt remove " + getActivity().getFilesDir().getAbsolutePath() +
+                                            "/" + LayersFunc.themesystemui + ".apk " +
+                                            "res/drawable-xxxhdpi-v4" +
+                                            source.get(i));
+                            nativeApp1.waitFor();
+                        }
+                    }
+                    Log.e("performAAPTonCommonsAPK",
+                            "Deleted all drawable files!");
                 }
-                Log.e("performAAPTonCommonsAPK",
-                        "Deleted all drawable files!");
-            }
-            eu.chainfire.libsuperuser.Shell.SU.run(
-                    "aapt add " +
-                            getActivity().getFilesDir().getAbsolutePath() +
-                            "/" + LayersFunc.themeframework + ".apk res/drawable/menuitem_background.png");
-            eu.chainfire.libsuperuser.Shell.SU.run(
-                    "aapt add " +
-                            getActivity().getFilesDir().getAbsolutePath() +
-                            "/" + LayersFunc.themeframework + ".apk res/drawable-xhdpi-v4/menuitem_background.png");
-            eu.chainfire.libsuperuser.Shell.SU.run(
-                    "aapt add " +
-                            getActivity().getFilesDir().getAbsolutePath() +
-                            "/" + LayersFunc.themeframework + ".apk res/drawable-xxhdpi-v4/menuitem_background.png");
-            eu.chainfire.libsuperuser.Shell.SU.run(
-                    "aapt add " +
-                            getActivity().getFilesDir().getAbsolutePath() +
-                            "/" + LayersFunc.themeframework + ".apk res/drawable-xxxhdpi-v4/menuitem_background.png");
-            if (swap_contextual_header) {
-                List source = processor();
-                for (int i = 0; i < source.size(); i++) {
-                    eu.chainfire.libsuperuser.Shell.SU.run(
-                            "aapt add " + getActivity().getFilesDir().getAbsolutePath() +
-                                    "/" + LayersFunc.themesystemui + ".apk " +
-                                    "res/drawable-xxhdpi-v4" +
-                                    source.get(i));
-                }
-                if (xhdpi) {
+                eu.chainfire.libsuperuser.Shell.SU.run(
+                        "aapt add " +
+                                getActivity().getFilesDir().getAbsolutePath() +
+                                "/" + LayersFunc.themeframework + ".apk res/drawable/menuitem_background.png");
+                eu.chainfire.libsuperuser.Shell.SU.run(
+                        "aapt add " +
+                                getActivity().getFilesDir().getAbsolutePath() +
+                                "/" + LayersFunc.themeframework + ".apk res/drawable-xhdpi-v4/menuitem_background.png");
+                eu.chainfire.libsuperuser.Shell.SU.run(
+                        "aapt add " +
+                                getActivity().getFilesDir().getAbsolutePath() +
+                                "/" + LayersFunc.themeframework + ".apk res/drawable-xxhdpi-v4/menuitem_background.png");
+                eu.chainfire.libsuperuser.Shell.SU.run(
+                        "aapt add " +
+                                getActivity().getFilesDir().getAbsolutePath() +
+                                "/" + LayersFunc.themeframework + ".apk res/drawable-xxxhdpi-v4/menuitem_background.png");
+                if (swap_contextual_header) {
+                    List source = processor();
                     for (int i = 0; i < source.size(); i++) {
                         eu.chainfire.libsuperuser.Shell.SU.run(
                                 "aapt add " + getActivity().getFilesDir().getAbsolutePath() +
                                         "/" + LayersFunc.themesystemui + ".apk " +
-                                        "res/drawable-xhdpi-v4" +
+                                        "res/drawable-xxhdpi-v4" +
                                         source.get(i));
                     }
-                }
-                if (xxxhdpi) {
-                    for (int i = 0; i < source.size(); i++) {
-                        eu.chainfire.libsuperuser.Shell.SU.run(
-                                "aapt add " + getActivity().getFilesDir().getAbsolutePath() +
-                                        "/" + LayersFunc.themesystemui + ".apk " +
-                                        "res/drawable-xxxhdpi-v4" +
-                                        source.get(i));
+                    if (xhdpi) {
+                        for (int i = 0; i < source.size(); i++) {
+                            eu.chainfire.libsuperuser.Shell.SU.run(
+                                    "aapt add " + getActivity().getFilesDir().getAbsolutePath() +
+                                            "/" + LayersFunc.themesystemui + ".apk " +
+                                            "res/drawable-xhdpi-v4" +
+                                            source.get(i));
+                        }
                     }
+                    if (xxxhdpi) {
+                        for (int i = 0; i < source.size(); i++) {
+                            eu.chainfire.libsuperuser.Shell.SU.run(
+                                    "aapt add " + getActivity().getFilesDir().getAbsolutePath() +
+                                            "/" + LayersFunc.themesystemui + ".apk " +
+                                            "res/drawable-xxxhdpi-v4" +
+                                            source.get(i));
+                        }
+                    }
+                    Log.e("performAAPTonCommonsAPK",
+                            "Added freshly created photo files...ALL DONE!");
                 }
                 Log.e("performAAPTonCommonsAPK",
-                        "Added freshly created photo files...ALL DONE!");
-            }
-            Log.e("performAAPTonCommonsAPK",
-                    "Added freshly created drawable file...ALL DONE!");
-            eu.chainfire.libsuperuser.Shell.SU.run("rm -r /res/drawable");
-            eu.chainfire.libsuperuser.Shell.SU.run("mount -o remount,ro /");
-            Log.e("performAAPTonCommonsAPK",
-                    "Cleaned up root directory and remounted system as read-only.");
-            if (LayersFunc.checkbitphone()) {
-                LayersFunc.copyFABFinalizedAPK(getActivity(), LayersFunc.themeframework, true);
-                if (swap_contextual_header) {
-                    LayersFunc.copyFABFinalizedAPK(getActivity(), LayersFunc.themesystemui, true);
+                        "Added freshly created drawable file...ALL DONE!");
+                eu.chainfire.libsuperuser.Shell.SU.run("rm -r /res/drawable");
+                eu.chainfire.libsuperuser.Shell.SU.run("mount -o remount,ro /");
+                Log.e("performAAPTonCommonsAPK",
+                        "Cleaned up root directory and remounted system as read-only.");
+                if (LayersFunc.checkbitphone()) {
+                    LayersFunc.copyFABFinalizedAPK(getActivity(), LayersFunc.themeframework, true);
+                    if (swap_contextual_header) {
+                        LayersFunc.copyFABFinalizedAPK(getActivity(), LayersFunc.themesystemui, true);
+                    }
+                } else {
+                    LayersFunc.copyFinalizedAPK(getActivity(), LayersFunc.themeframework, true);
+                    if (swap_contextual_header) {
+                        LayersFunc.copyFinalizedAPK(getActivity(), LayersFunc.themesystemui, true);
+                    }
                 }
-            } else {
-                LayersFunc.copyFinalizedAPK(getActivity(), LayersFunc.themeframework, true);
-                if (swap_contextual_header) {
-                    LayersFunc.copyFinalizedAPK(getActivity(), LayersFunc.themesystemui, true);
-                }
+
+                eu.chainfire.libsuperuser.Shell.SU.run("killall zygote");
+
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-
-              eu.chainfire.libsuperuser.Shell.SU.run("killall zygote");
-
-            }catch(Exception e){
-            e.printStackTrace();}
         }
 
 

@@ -1,9 +1,7 @@
 package projekt.dashboard.layers.fragments;
 
-import android.content.ComponentName;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Environment;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,11 +10,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
-
-import java.io.File;
-import java.io.IOException;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipFile;
 
 import butterknife.ButterKnife;
 import eu.chainfire.libsuperuser.Shell;
@@ -141,18 +134,18 @@ public class ThemeUtilitiesFragment extends BasePageFragment {
             vendor = "/vendor/overlay/";
             mount = "/vendor";
         }
-        String mountsys = new String("mount -o remount,rw "+mount);
-        String remountsys = new String("mount -o remount,ro "+mount);
+        String mountsys = new String("mount -o remount,rw " + mount);
+        String remountsys = new String("mount -o remount,ro " + mount);
 
-        String command =new String("rm -r "+vendor);
+        String command = new String("rm -r " + vendor);
         Shell.SU.run(mountsys);
-        Log.e("clear",mountsys);
+        Log.e("clear", mountsys);
         Shell.SU.run(command);
-        Log.e("clear",command);
-        Shell.SU.run("mkdir "+vendor);
-        Log.e("clear","mkdir");
+        Log.e("clear", command);
+        Shell.SU.run("mkdir " + vendor);
+        Log.e("clear", "mkdir");
         Shell.SU.run(remountsys);
-        Log.e("clear",remountsys);
+        Log.e("clear", remountsys);
     }
 
     @Override

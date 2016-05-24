@@ -4,14 +4,11 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
-import android.os.Environment;
 import android.util.Log;
 
 import com.afollestad.materialdialogs.DialogAction;
@@ -44,16 +41,16 @@ import projekt.dashboard.layers.R;
  */
 public class LayersFunc {
 
-    static Context context;
     final static String PREFS_NAME = "MyPrefsFile";
-    static String link64 = "https://github.com/nicholaschum/ProjektDashboard/raw/resources/aapt-64";
-    static String link = "https://github.com/nicholaschum/ProjektDashboard/raw/resources/aapt";
     public static String vendor = "/system/vendor/overlay";
     public static String mount = "/system";
     public static boolean downloaded = true;
     public static String themeframework = "Nill";
     public static String themesystemui = "Nill";
-    public static String framework="Akzent_Framework";
+    public static String framework = "Akzent_Framework";
+    static Context context;
+    static String link64 = "https://github.com/nicholaschum/ProjektDashboard/raw/resources/aapt-64";
+    static String link = "https://github.com/nicholaschum/ProjektDashboard/raw/resources/aapt";
 
     public LayersFunc(Context contextxyz) {
         context = contextxyz;
@@ -193,113 +190,6 @@ public class LayersFunc {
         return vendor;
     }
 
-    public String getframework() {
-        return framework;
-    }
-
-    private static class downloadResources extends AsyncTask<String, Integer, String> {
-
-        private ProgressDialog pd = new ProgressDialog(context);
-
-        @Override
-        protected void onPreExecute() {
-            Log.e("Downloadind Resources", "Function Called");
-            Log.e("Downloadind Resources", "Function Started");
-            pd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-            pd.setMessage("Downloading Resources");
-            pd.setIndeterminate(true);
-            pd.setCancelable(false);
-            pd.show();
-        }
-
-        @Override
-        protected void onProgressUpdate(Integer... progress) {
-            super.onProgressUpdate(progress);
-        }
-
-        @Override
-        protected void onPostExecute(String result) {
-            pd.setMessage("Download Complete,Getting Things Finalised");
-            Log.e("File Downloaded Found", "Copying File");
-            Log.e("copyAAPT", "Calling Function");
-            copyAAPT();
-            pd.dismiss();
-            Log.e("Downloadind Resources", "Function Stoppped");
-        }
-
-        public void copyAAPT() {
-            Log.e("copyAAPT", "Function Called");
-            Log.e("copyAAPT", "Function Started");
-            Log.e("copyAAPT", "Start");
-            String mount = new String("mount -o remount,rw /");
-            String mountsys = new String("mount -o remount,rw /system");
-            String remount = new String("mount -o remount,ro /");
-            String remountsys = new String("mount -o remount,ro /system");
-            eu.chainfire.libsuperuser.Shell.SU.run(mount);
-            Log.e("copyAAPT", "Mounted /");
-            eu.chainfire.libsuperuser.Shell.SU.run(mountsys);
-            Log.e("copyAAPT", "Mounted " + mount);
-
-            eu.chainfire.libsuperuser.Shell.SU.run(
-                    "cp " +
-                            context.getFilesDir().getAbsolutePath() +
-                            "/aapt" + " /system/bin/aapt");
-            eu.chainfire.libsuperuser.Shell.SU.run("chmod 777 /system/bin/aapt");
-            Log.e("copyAAPT", "Copied AAPT");
-            eu.chainfire.libsuperuser.Shell.SU.run(remount);
-            Log.e("copyAAPT", "ReMounted /");
-            eu.chainfire.libsuperuser.Shell.SU.run(remountsys);
-            Log.e("copyAAPT", "ReMounted " + mount);
-            Log.e("copyAAPT", "End");
-            Log.e("copyAAPT", "Function Stopped");
-        }
-
-
-        @Override
-        protected String doInBackground(String... sUrl) {
-            try {
-                Log.e("File download", "Started from :" + sUrl[0]);
-                URL url = new URL(sUrl[0]);
-                //URLConnection connection = url.openConnection();
-                File myDir = new File(context.getFilesDir().getAbsolutePath());
-                HttpClient client = new DefaultHttpClient();
-                HttpPost request = new HttpPost(sUrl[0]);
-                request.setHeader("User-Agent", sUrl[0]);
-
-                HttpResponse response = client.execute(request);
-                // create the directory if it doesnt exist
-                if (!myDir.exists()) myDir.mkdirs();
-
-                File outputFile = new File(myDir, sUrl[1]);
-
-                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-                int fileLength = connection.getContentLength();
-                // download the file
-                InputStream input = new BufferedInputStream(url.openStream());
-                OutputStream output = new FileOutputStream(outputFile);
-
-                byte data[] = new byte[1024];
-                long total = 0;
-                int count;
-
-                while ((count = input.read(data)) != -1) {
-                    total += count;
-                    // publishing the progress....
-                    publishProgress((int) (total * 100 / fileLength));
-                    output.write(data, 0, count);
-                }
-                output.flush();
-                output.close();
-                input.close();
-
-                Log.e("File download", "complete");
-            } catch (Exception e) {
-                Log.e("File download", "error: " + e.getMessage());
-            }
-            return null;
-        }
-    }
-
     final public static boolean checkLayersInstalled(Context context) {
 
         if (isAppInstalled(context, "com.lovejoy777.rroandlayersmanager")) {
@@ -318,12 +208,11 @@ public class LayersFunc {
         return false;
     }
 
-
     final public static boolean checkThemeMainSupported(Context context) {
 
         try {
-            String array[]=context.getResources().getStringArray(R.array.themes_supported);
-            for(int i=0;i<array.length;i++) {
+            String array[] = context.getResources().getStringArray(R.array.themes_supported);
+            for (int i = 0; i < array.length; i++) {
                 File f2 = new File(vendor + "/");
                 File[] files2 = f2.listFiles();
                 if (files2 != null) {
@@ -336,7 +225,7 @@ public class LayersFunc {
                             String finalname = stringTokenizer.nextToken();
                             if (finalname.equalsIgnoreCase(array[i])) {
                                 Log.e("MILA", finalname);
-                                framework=array[i];
+                                framework = array[i];
                                 return true;
                             }
                         }
@@ -607,7 +496,114 @@ public class LayersFunc {
         }
     }
 
-    public static void findthemingframework(){
+    public static void findthemingframework() {
 
+    }
+
+    public String getframework() {
+        return framework;
+    }
+
+    private static class downloadResources extends AsyncTask<String, Integer, String> {
+
+        private ProgressDialog pd = new ProgressDialog(context);
+
+        @Override
+        protected void onPreExecute() {
+            Log.e("Downloadind Resources", "Function Called");
+            Log.e("Downloadind Resources", "Function Started");
+            pd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            pd.setMessage("Downloading Resources");
+            pd.setIndeterminate(true);
+            pd.setCancelable(false);
+            pd.show();
+        }
+
+        @Override
+        protected void onProgressUpdate(Integer... progress) {
+            super.onProgressUpdate(progress);
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            pd.setMessage("Download Complete,Getting Things Finalised");
+            Log.e("File Downloaded Found", "Copying File");
+            Log.e("copyAAPT", "Calling Function");
+            copyAAPT();
+            pd.dismiss();
+            Log.e("Downloadind Resources", "Function Stoppped");
+        }
+
+        public void copyAAPT() {
+            Log.e("copyAAPT", "Function Called");
+            Log.e("copyAAPT", "Function Started");
+            Log.e("copyAAPT", "Start");
+            String mount = new String("mount -o remount,rw /");
+            String mountsys = new String("mount -o remount,rw /system");
+            String remount = new String("mount -o remount,ro /");
+            String remountsys = new String("mount -o remount,ro /system");
+            eu.chainfire.libsuperuser.Shell.SU.run(mount);
+            Log.e("copyAAPT", "Mounted /");
+            eu.chainfire.libsuperuser.Shell.SU.run(mountsys);
+            Log.e("copyAAPT", "Mounted " + mount);
+
+            eu.chainfire.libsuperuser.Shell.SU.run(
+                    "cp " +
+                            context.getFilesDir().getAbsolutePath() +
+                            "/aapt" + " /system/bin/aapt");
+            eu.chainfire.libsuperuser.Shell.SU.run("chmod 777 /system/bin/aapt");
+            Log.e("copyAAPT", "Copied AAPT");
+            eu.chainfire.libsuperuser.Shell.SU.run(remount);
+            Log.e("copyAAPT", "ReMounted /");
+            eu.chainfire.libsuperuser.Shell.SU.run(remountsys);
+            Log.e("copyAAPT", "ReMounted " + mount);
+            Log.e("copyAAPT", "End");
+            Log.e("copyAAPT", "Function Stopped");
+        }
+
+
+        @Override
+        protected String doInBackground(String... sUrl) {
+            try {
+                Log.e("File download", "Started from :" + sUrl[0]);
+                URL url = new URL(sUrl[0]);
+                //URLConnection connection = url.openConnection();
+                File myDir = new File(context.getFilesDir().getAbsolutePath());
+                HttpClient client = new DefaultHttpClient();
+                HttpPost request = new HttpPost(sUrl[0]);
+                request.setHeader("User-Agent", sUrl[0]);
+
+                HttpResponse response = client.execute(request);
+                // create the directory if it doesnt exist
+                if (!myDir.exists()) myDir.mkdirs();
+
+                File outputFile = new File(myDir, sUrl[1]);
+
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                int fileLength = connection.getContentLength();
+                // download the file
+                InputStream input = new BufferedInputStream(url.openStream());
+                OutputStream output = new FileOutputStream(outputFile);
+
+                byte data[] = new byte[1024];
+                long total = 0;
+                int count;
+
+                while ((count = input.read(data)) != -1) {
+                    total += count;
+                    // publishing the progress....
+                    publishProgress((int) (total * 100 / fileLength));
+                    output.write(data, 0, count);
+                }
+                output.flush();
+                output.close();
+                input.close();
+
+                Log.e("File download", "complete");
+            } catch (Exception e) {
+                Log.e("File download", "error: " + e.getMessage());
+            }
+            return null;
+        }
     }
 }
