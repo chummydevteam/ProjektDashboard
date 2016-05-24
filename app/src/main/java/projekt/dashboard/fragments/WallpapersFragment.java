@@ -22,7 +22,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -127,6 +126,8 @@ public class WallpapersFragment extends BasePageFragment implements
                                 getSelectedItemPosition()]).apply();
                 prefs.edit().putInt("selected_wallpaper_source_position",
                         wallpaperSourcePicker.getSelectedItemPosition()).apply();
+                mWallpapers = null;
+                load(false);
             }
 
             @Override
@@ -137,14 +138,6 @@ public class WallpapersFragment extends BasePageFragment implements
         });
         int mapTypeString = prefs.getInt("selected_wallpaper_source_position", 0);
         wallpaperSourcePicker.setSelection(mapTypeString);
-
-        ImageButton restartActivity = (ImageButton) inflation.findViewById(R.id.restart);
-        restartActivity.setOnClickListener((new View.OnClickListener() {
-            public void onClick(View v) {
-                mWallpapers = null;
-                load(false);
-            }
-        }));
 
         return inflation;
     }

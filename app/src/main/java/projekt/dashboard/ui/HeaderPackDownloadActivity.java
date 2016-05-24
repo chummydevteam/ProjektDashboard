@@ -25,7 +25,6 @@ import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -133,37 +132,29 @@ public class HeaderPackDownloadActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> arg0, View arg1,
                                        int pos, long id) {
+                if (!current_source_pack.equals(headerPackSources[headerPackSourcePicker
+                        .getSelectedItemPosition()])) {
+                    current_source_pack = headerPackSources[headerPackSourcePicker
+                            .getSelectedItemPosition()];
+                    downloadResources downloadTask = new downloadResources();
+                    downloadTask.execute(
+                            headerPackSources[headerPackSourcePicker.getSelectedItemPosition()],
+                            "addons.xml");
+                    RecyclerView recyclerView = (RecyclerView) findViewById(R.id.list_item);
+                    TextView noDownloadsAvailable = (TextView) findViewById(R.id
+                            .NoDownloadsAvailable);
+                    noDownloadsAvailable.setVisibility(View.GONE);
+                    recyclerView.setVisibility(View.VISIBLE);
+                } else {
+                    Log.d("DownloadActivity", "There is no need to restart the activity's " +
+                            "sources!");
+                }
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> arg0) {
             }
         });
-
-        ImageButton restartActivity = (ImageButton) findViewById(R.id.restartDownloadSources);
-        if (restartActivity != null) {
-            restartActivity.setOnClickListener((new View.OnClickListener() {
-                public void onClick(View v) {
-                    if (!current_source_pack.equals(headerPackSources[headerPackSourcePicker
-                            .getSelectedItemPosition()])) {
-                        current_source_pack = headerPackSources[headerPackSourcePicker
-                                .getSelectedItemPosition()];
-                        downloadResources downloadTask = new downloadResources();
-                        downloadTask.execute(
-                                headerPackSources[headerPackSourcePicker.getSelectedItemPosition()],
-                                "addons.xml");
-                        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.list_item);
-                        TextView noDownloadsAvailable = (TextView) findViewById(R.id
-                                .NoDownloadsAvailable);
-                        noDownloadsAvailable.setVisibility(View.GONE);
-                        recyclerView.setVisibility(View.VISIBLE);
-                    } else {
-                        Log.d("DownloadActivity", "There is no need to restart the activity's " +
-                                "sources!");
-                    }
-                }
-            }));
-        }
 
         current_source_pack = headerPackSources[headerPackSourcePicker.getSelectedItemPosition()];
         downloadResources downloadTask = new downloadResources();
