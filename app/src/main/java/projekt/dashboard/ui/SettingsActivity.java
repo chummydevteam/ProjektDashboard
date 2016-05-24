@@ -94,10 +94,10 @@ public class SettingsActivity extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
                     has_modified_anything = true;
-                    prefs.edit().putBoolean("color_switcher_enabled", true).commit();
+                    prefs.edit().putBoolean("color_switcher_enabled", true).apply();
                 } else {
                     has_modified_anything = true;
-                    prefs.edit().putBoolean("color_switcher_enabled", false).commit();
+                    prefs.edit().putBoolean("color_switcher_enabled", false).apply();
                 }
             }
         });
@@ -113,10 +113,10 @@ public class SettingsActivity extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
                     has_modified_anything = true;
-                    prefs.edit().putBoolean("header_swapper_enabled", true).commit();
+                    prefs.edit().putBoolean("header_swapper_enabled", true).apply();
                 } else {
                     has_modified_anything = true;
-                    prefs.edit().putBoolean("header_swapper_enabled", false).commit();
+                    prefs.edit().putBoolean("header_swapper_enabled", false).apply();
                 }
             }
         });
@@ -132,10 +132,10 @@ public class SettingsActivity extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
                     has_modified_anything = true;
-                    prefs.edit().putBoolean("header_importer_enabled", true).commit();
+                    prefs.edit().putBoolean("header_importer_enabled", true).apply();
                 } else {
                     has_modified_anything = true;
-                    prefs.edit().putBoolean("header_importer_enabled", false).commit();
+                    prefs.edit().putBoolean("header_importer_enabled", false).apply();
                 }
             }
         });
@@ -151,10 +151,10 @@ public class SettingsActivity extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
                     has_modified_anything = true;
-                    prefs.edit().putBoolean("theme_debugging_enabled", true).commit();
+                    prefs.edit().putBoolean("theme_debugging_enabled", true).apply();
                 } else {
                     has_modified_anything = true;
-                    prefs.edit().putBoolean("theme_debugging_enabled", false).commit();
+                    prefs.edit().putBoolean("theme_debugging_enabled", false).apply();
                 }
             }
         });
@@ -170,10 +170,10 @@ public class SettingsActivity extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
                     has_modified_anything = true;
-                    prefs.edit().putBoolean("wallpapers_enabled", true).commit();
+                    prefs.edit().putBoolean("wallpapers_enabled", true).apply();
                 } else {
                     has_modified_anything = true;
-                    prefs.edit().putBoolean("wallpapers_enabled", false).commit();
+                    prefs.edit().putBoolean("wallpapers_enabled", false).apply();
                 }
             }
         });
@@ -189,10 +189,10 @@ public class SettingsActivity extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
                     has_modified_anything = true;
-                    prefs.edit().putBoolean("extended_actionbar_enabled", true).commit();
+                    prefs.edit().putBoolean("extended_actionbar_enabled", true).apply();
                 } else {
                     has_modified_anything = true;
-                    prefs.edit().putBoolean("extended_actionbar_enabled", false).commit();
+                    prefs.edit().putBoolean("extended_actionbar_enabled", false).apply();
                 }
             }
         });
@@ -208,10 +208,10 @@ public class SettingsActivity extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
                     has_modified_anything = true;
-                    prefs.edit().putBoolean("blacked_out_enabled", true).commit();
+                    prefs.edit().putBoolean("blacked_out_enabled", true).apply();
                 } else {
                     has_modified_anything = true;
-                    prefs.edit().putBoolean("blacked_out_enabled", false).commit();
+                    prefs.edit().putBoolean("blacked_out_enabled", false).apply();
                 }
             }
         });
@@ -227,11 +227,11 @@ public class SettingsActivity extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
                     has_modified_anything = true;
-                    prefs.edit().putBoolean("advanced_mode_enabled", true).commit();
+                    prefs.edit().putBoolean("advanced_mode_enabled", true).apply();
 
                 } else {
                     has_modified_anything = true;
-                    prefs.edit().putBoolean("advanced_mode_enabled", false).commit();
+                    prefs.edit().putBoolean("advanced_mode_enabled", false).apply();
                 }
             }
         });
@@ -247,10 +247,10 @@ public class SettingsActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    prefs.edit().putBoolean("header_downloader_low_power_mode", true).commit();
+                    prefs.edit().putBoolean("header_downloader_low_power_mode", true).apply();
 
                 } else {
-                    prefs.edit().putBoolean("header_downloader_low_power_mode", false).commit();
+                    prefs.edit().putBoolean("header_downloader_low_power_mode", false).apply();
                 }
             }
         });

@@ -229,7 +229,7 @@ public class ColorChangerFragment extends BasePageFragment {
                             new restorePhaseAsyncTasks().execute(firstPhaseCommands);
                             SharedPreferences settings = PreferenceManager.
                                     getDefaultSharedPreferences(getContext());
-                            settings.edit().remove("akzent").commit();
+                            settings.edit().remove("akzent").apply();
                             return true;
                         } else {
                             new MaterialDialog.Builder(getActivity())
@@ -252,7 +252,7 @@ public class ColorChangerFragment extends BasePageFragment {
                         new restorePhaseAsyncTasks().execute(firstPhaseCommands);
                         SharedPreferences settings = PreferenceManager.
                                 getDefaultSharedPreferences(getContext());
-                        settings.edit().remove("akzent").commit();
+                        settings.edit().remove("akzent").apply();
                         return true;
                     }
                 } else {
@@ -344,7 +344,7 @@ public class ColorChangerFragment extends BasePageFragment {
                             new restorePhaseAsyncTasks().execute(firstPhaseCommands);
                             SharedPreferences settings = PreferenceManager.
                                     getDefaultSharedPreferences(getContext());
-                            settings.edit().remove("blakzent").commit();
+                            settings.edit().remove("blakzent").apply();
                             return true;
                         } else {
                             new MaterialDialog.Builder(getActivity())
@@ -367,7 +367,7 @@ public class ColorChangerFragment extends BasePageFragment {
                         new restorePhaseAsyncTasks().execute(firstPhaseCommands);
                         SharedPreferences settings = PreferenceManager.
                                 getDefaultSharedPreferences(getContext());
-                        settings.edit().remove("blakzent").commit();
+                        settings.edit().remove("blakzent").apply();
                         return true;
                     }
                 } else {
@@ -430,7 +430,7 @@ public class ColorChangerFragment extends BasePageFragment {
             @Override
             public void onColorChanged(int color) {
                 color_picked = ColorPickerPreference.convertToRGB(color);
-                editor.putString(theme_name, color_picked).commit();
+                editor.putString(theme_name, color_picked).apply();
                 String[] secondPhaseCommands = {theme_dir};
                 new secondPhaseAsyncTasks().execute(secondPhaseCommands);
             }

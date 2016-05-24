@@ -56,7 +56,7 @@ public class AppIntroduction extends AppIntro {
     public void onSkipPressed() {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(
                 getApplicationContext());
-        prefs.edit().putBoolean("first_run", false).commit();
+        prefs.edit().putBoolean("first_run", false).apply();
         Intent intent = new Intent(AppIntroduction.this, MainActivity.class);
         startActivity(intent);
         finish();
@@ -66,17 +66,17 @@ public class AppIntroduction extends AppIntro {
     public void onDonePressed() {
         final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(
                 getApplicationContext());
-        prefs.edit().putBoolean("first_run", false).commit();
-        prefs.edit().putBoolean("blacked_out_enabled", false).commit();
-        prefs.edit().putBoolean("extended_actionbar_enabled", false).commit();
-        prefs.edit().putBoolean("advanced_mode_enabled", true).commit();
-        prefs.edit().putBoolean("header_downloader_low_power_mode", false).commit();
+        prefs.edit().putBoolean("first_run", false).apply();
+        prefs.edit().putBoolean("blacked_out_enabled", false).apply();
+        prefs.edit().putBoolean("extended_actionbar_enabled", false).apply();
+        prefs.edit().putBoolean("advanced_mode_enabled", true).apply();
+        prefs.edit().putBoolean("header_downloader_low_power_mode", false).apply();
 
-        prefs.edit().putBoolean("color_switcher_enabled", true).commit();
-        prefs.edit().putBoolean("header_swapper_enabled", true).commit();
-        prefs.edit().putBoolean("header_importer_enabled", true).commit();
-        prefs.edit().putBoolean("theme_debugging_enabled", true).commit();
-        prefs.edit().putBoolean("wallpapers_enabled", true).commit();
+        prefs.edit().putBoolean("color_switcher_enabled", true).apply();
+        prefs.edit().putBoolean("header_swapper_enabled", true).apply();
+        prefs.edit().putBoolean("header_importer_enabled", true).apply();
+        prefs.edit().putBoolean("theme_debugging_enabled", true).apply();
+        prefs.edit().putBoolean("wallpapers_enabled", true).apply();
 
         AlertDialog.Builder alert = new AlertDialog.Builder(AppIntroduction.this);
 
@@ -96,7 +96,7 @@ public class AppIntroduction extends AppIntro {
                             string_processor = string_processor.substring(0,
                                     string_processor.length() - 1);
                         }
-                        prefs.edit().putString("dashboard_username", string_processor).commit();
+                        prefs.edit().putString("dashboard_username", string_processor).apply();
                         startActivity(new Intent(AppIntroduction.this, MainActivity.class));
                         finish();
                     }

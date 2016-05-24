@@ -313,7 +313,7 @@ public class MainActivity extends BaseDonateActivity implements
         super.onPause();
         if (Config.get().persistSelectedPage()) {
             PreferenceManager.getDefaultSharedPreferences(MainActivity.this)
-                    .edit().putInt("last_selected_page", mPager.getCurrentItem()).commit();
+                    .edit().putInt("last_selected_page", mPager.getCurrentItem()).apply();
         }
         if (isFinishing()) {
             Config.deinit();

@@ -179,7 +179,7 @@ public class HomeFragment extends BasePageFragment {
                                             0, string_processor.length() - 1);
                                 }
                                 prefs.edit().putString(
-                                        "dashboard_username", string_processor).commit();
+                                        "dashboard_username", string_processor).apply();
                                 startActivity(new Intent(
                                         getActivity(), SplashScreenActivity.class));
                                 getActivity().finish();
