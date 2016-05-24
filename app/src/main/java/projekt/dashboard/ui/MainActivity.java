@@ -95,7 +95,7 @@ public class MainActivity extends BaseDonateActivity implements
 
         ButterKnife.bind(this);
 
-        if (!prefs.getBoolean("extended_actionbar_enabled", true)) {
+        if (!prefs.getBoolean("extended_actionbar_enabled", false)) {
             LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) mToolbar.getLayoutParams();
             layoutParams.height = 0;
             mToolbar.setLayoutParams(layoutParams);
