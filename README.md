@@ -2,7 +2,9 @@
 
 [logo]: http://i.imgur.com/fzK5HKl.jpg
 
-# ProjektDashboard.Layers 
+# ProjektDashboard.Layers
+[![Build Status](https://travis-ci.org/nicholaschum/ProjektDashboard.svg?branch=layers)](https://travis-ci.org/nicholaschum/ProjektDashboard)
+
 projekt dashboard.layers is a Layers utility for chummy development team themes; a Notification Header Swapper for chummy development themes out there on Play Store and a set of tools to help you diagnose and clean up your device.
 
 ### _Instructions: Color Switcher (cdt themes ONLY)_
