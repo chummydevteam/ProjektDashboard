@@ -61,7 +61,8 @@ public class PagesBuilder implements Iterable<PagesBuilder.Page> {
         @NonNull
         public final Fragment fragment;
 
-        public Page(@IdRes int drawerId, @DrawableRes int iconRes, @StringRes int titleRes, @NonNull Fragment fragment) {
+        public Page(@IdRes int drawerId, @DrawableRes int iconRes, @StringRes int titleRes,
+                    @NonNull Fragment fragment) {
             this.drawerId = drawerId;
             this.iconRes = iconRes;
             this.titleRes = titleRes;

@@ -150,7 +150,8 @@ public class HomeFragment extends BasePageFragment {
                 break;
             case R.id.item2:
                 Intent xda = new Intent(Intent.ACTION_VIEW, Uri.parse(
-                        "http://forum.xda-developers.com/android/themes/cdt-projektdashboard-t3348297"));
+                        "http://forum.xda-developers" +
+                                ".com/android/themes/cdt-projektdashboard-t3348297"));
                 startActivity(xda);
                 break;
             case R.id.item3:
@@ -161,7 +162,8 @@ public class HomeFragment extends BasePageFragment {
                 LayoutInflater inflater = getActivity().getLayoutInflater();
                 final View dialogView = inflater.inflate(R.layout.name_picker_dialog, null);
                 alert.setView(dialogView);
-                final AnimatedEditText textBox = (AnimatedEditText) dialogView.findViewById(R.id.editText);
+                final AnimatedEditText textBox = (AnimatedEditText) dialogView.findViewById(R.id
+                        .editText);
 
                 alert.setMessage(getResources().getString(R.string.change_name_dialog_message));
                 alert.setTitle(getResources().getString(R.string.change_name_dialog_title));

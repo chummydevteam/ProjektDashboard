@@ -28,7 +28,8 @@ public class Logger implements Serializable {
             String className = fullClassName.substring(fullClassName.lastIndexOf(".") + 1);
             String methodName = e.getMethodName();
             int lineNumber = e.getLineNumber();
-            return "(" + className.split("\\$")[0] + ".java:" + lineNumber + ") " + methodName + "()";
+            return "(" + className.split("\\$")[0] + ".java:" + lineNumber + ") " + methodName +
+                    "()";
         } else {
             return TAG;
         }

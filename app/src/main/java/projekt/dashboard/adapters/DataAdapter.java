@@ -33,7 +33,8 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.ViewHolder> {
 
     @Override
     public DataAdapter.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.card_row, viewGroup, false);
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.card_row,
+                viewGroup, false);
         return new ViewHolder(view);
     }
 
@@ -45,7 +46,8 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.ViewHolder> {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(
                 context);
         if (!prefs.getBoolean("header_downloader_low_power_mode", true)) {
-            Picasso.with(context).load(headers.get(i).getHeaderPackURL()).into(viewHolder.imageView);
+            Picasso.with(context).load(headers.get(i).getHeaderPackURL()).into(viewHolder
+                    .imageView);
         }
 
     }

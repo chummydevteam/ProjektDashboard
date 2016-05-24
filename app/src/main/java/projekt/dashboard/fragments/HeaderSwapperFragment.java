@@ -206,7 +206,8 @@ public class HeaderSwapperFragment extends BasePageFragment {
                         if (!inFile.getAbsolutePath().substring(21).equals(
                                 "com.chummy.jezebel.materialdark.donate")) {
                             if (!inFile.getAbsolutePath().substring(21).equals("projekt.klar")) {
-                                if (checkIfPackageInstalled(inFile.getAbsolutePath().substring(21), getContext())) {
+                                if (checkIfPackageInstalled(inFile.getAbsolutePath().substring
+                                        (21), getContext())) {
                                     list.add(inFile.getAbsolutePath().substring(21));
                                     counter += 1;
                                 }
@@ -221,7 +222,8 @@ public class HeaderSwapperFragment extends BasePageFragment {
             }
         }
         if (counter == 0) {
-            Toast toast = Toast.makeText(getActivity().getApplicationContext(), getResources().getString(R.string.contextualheaderswapper_toast_cache_empty_reboot_first),
+            Toast toast = Toast.makeText(getActivity().getApplicationContext(), getResources()
+                    .getString(R.string.contextualheaderswapper_toast_cache_empty_reboot_first),
                     Toast.LENGTH_LONG);
             toast.show();
         }
@@ -244,7 +246,9 @@ public class HeaderSwapperFragment extends BasePageFragment {
                         package_name = "com.chummy.jezebel.materialdark.donate";
                         apply_fab.show();
                     } else {
-                        Toast toast = Toast.makeText(getActivity().getApplicationContext(), getResources().getString(R.string.akzent_toast_install_before_using),
+                        Toast toast = Toast.makeText(getActivity().getApplicationContext(),
+                                getResources().getString(R.string
+                                        .akzent_toast_install_before_using),
                                 Toast.LENGTH_LONG);
                         toast.show();
                         apply_fab.hide();
@@ -257,7 +261,9 @@ public class HeaderSwapperFragment extends BasePageFragment {
                         package_name = "com.chummy.jezebel.blackedout.donate";
                         apply_fab.show();
                     } else {
-                        Toast toast = Toast.makeText(getActivity().getApplicationContext(), getResources().getString(R.string.blakzent_toast_install_before_using),
+                        Toast toast = Toast.makeText(getActivity().getApplicationContext(),
+                                getResources().getString(R.string
+                                        .blakzent_toast_install_before_using),
                                 Toast.LENGTH_LONG);
                         toast.show();
                         spinner1.setSelection(0);
@@ -431,7 +437,8 @@ public class HeaderSwapperFragment extends BasePageFragment {
             Bitmap bitmap;
 
             try {
-                bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), selectedImage);
+                bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(),
+                        selectedImage);
             } catch (IOException e) {
                 e.printStackTrace();
                 return;

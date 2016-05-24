@@ -30,7 +30,8 @@ public final class TintUtils {
     private TintUtils() {
     }
 
-    public static Drawable createTintedDrawable(@NonNull Context context, @DrawableRes int drawable, @ColorInt int color) {
+    public static Drawable createTintedDrawable(@NonNull Context context, @DrawableRes int
+            drawable, @ColorInt int color) {
         return createTintedDrawable(ContextCompat.getDrawable(context, drawable), color);
     }
 
@@ -38,7 +39,8 @@ public final class TintUtils {
     @Nullable
     public static Drawable createTintedDrawable(@Nullable Drawable drawable, @ColorInt int color) {
         if (drawable == null) return null;
-        else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP && drawable instanceof VectorDrawable) {
+        else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP && drawable instanceof
+                VectorDrawable) {
             drawable.setColorFilter(color, PorterDuff.Mode.SRC_IN);
             return drawable;
         }
@@ -56,7 +58,8 @@ public final class TintUtils {
             imageView.setImageDrawable(createTintedDrawable(imageView.getDrawable(), tintColor));
     }
 
-    public static void themeSearchView(@NonNull Toolbar toolbar, @NonNull SearchView searchView, @ColorInt int tintColor) {
+    public static void themeSearchView(@NonNull Toolbar toolbar, @NonNull SearchView searchView,
+                                       @ColorInt int tintColor) {
         final Class<?> cls = searchView.getClass();
         try {
             final Field mCollapseIconField = toolbar.getClass().getDeclaredField("mCollapseIcon");
@@ -90,11 +93,13 @@ public final class TintUtils {
     public static boolean isColorLight(@ColorInt int color) {
         if (color == Color.BLACK) return false;
         else if (color == Color.WHITE || color == Color.TRANSPARENT) return true;
-        final double darkness = 1 - (0.299 * Color.red(color) + 0.587 * Color.green(color) + 0.114 * Color.blue(color)) / 255;
+        final double darkness = 1 - (0.299 * Color.red(color) + 0.587 * Color.green(color) + 0.114
+                * Color.blue(color)) / 255;
         return darkness < 0.4;
     }
 
-    public static int adjustAlpha(@ColorInt int color, @FloatRange(from = 0.0, to = 1.0) float factor) {
+    public static int adjustAlpha(@ColorInt int color, @FloatRange(from = 0.0, to = 1.0) float
+            factor) {
         int alpha = Math.round(Color.alpha(color) * factor);
         int red = Color.red(color);
         int green = Color.green(color);

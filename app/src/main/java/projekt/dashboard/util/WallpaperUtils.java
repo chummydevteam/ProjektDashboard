@@ -56,13 +56,15 @@ public class WallpaperUtils {
     private WallpaperUtils() {
     }
 
-    public static WallpapersHolder getAll(final Context context, boolean allowCached) throws Exception {
+    public static WallpapersHolder getAll(final Context context, boolean allowCached) throws
+            Exception {
         Inquiry.init(context, DATABASE_NAME, DATABASE_VERSION);
         try {
             if (allowCached) {
                 Wallpaper[] cache = Inquiry.get().selectFrom(TABLE_NAME, Wallpaper.class).all();
                 if (cache != null && cache.length > 0) {
-                    Log.d("WallpaperUtils", String.format("Loaded %d wallpapers from cache.", cache.length));
+                    Log.d("WallpaperUtils", String.format("Loaded %d wallpapers from cache.",
+                            cache.length));
                     return new WallpapersHolder(cache);
                 }
             } else {
@@ -75,7 +77,8 @@ public class WallpaperUtils {
 
         try {
             SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-            String mapTypeString = prefs.getString("selected_wallpaper_source", context.getString(R.string.no_wallpapers_url));
+            String mapTypeString = prefs.getString("selected_wallpaper_source", context.getString
+                    (R.string.no_wallpapers_url));
             String defaultSource = mapTypeString;
 
             WallpapersHolder holder = Bridge.get(defaultSource)
@@ -83,7 +86,8 @@ public class WallpaperUtils {
                     .asClass(WallpapersHolder.class);
             if (holder == null)
                 throw new Exception("No wallpapers returned.");
-            Log.d("WallpaperUtils", String.format("Loaded %d wallpapers from web.", holder.length()));
+            Log.d("WallpaperUtils", String.format("Loaded %d wallpapers from web.", holder.length
+                    ()));
             if (holder.length() > 0) {
                 try {
                     Inquiry.init(context, DATABASE_NAME, DATABASE_VERSION);
@@ -96,14 +100,16 @@ public class WallpaperUtils {
             }
             return holder;
         } catch (Exception e1) {
-            Log.d("WallpaperUtils", String.format("Failed to load wallpapers... %s", e1.getMessage()));
+            Log.d("WallpaperUtils", String.format("Failed to load wallpapers... %s", e1
+                    .getMessage()));
             throw e1;
         } finally {
             Inquiry.deinit();
         }
     }
 
-    public static void saveDb(@Nullable final Context context, @Nullable final WallpapersHolder holder) {
+    public static void saveDb(@Nullable final Context context, @Nullable final WallpapersHolder
+            holder) {
         if (context == null || holder == null || holder.length() == 0) return;
         Inquiry.init(context, DATABASE_NAME, DATABASE_VERSION);
         try {
@@ -121,13 +127,15 @@ public class WallpaperUtils {
         }
     }
 
-    public static void getAll(final Context context, boolean allowCached, final WallpapersCallback callback) {
+    public static void getAll(final Context context, boolean allowCached, final
+    WallpapersCallback callback) {
         Inquiry.init(context, DATABASE_NAME, DATABASE_VERSION);
         try {
             if (allowCached) {
                 Wallpaper[] cache = Inquiry.get().selectFrom(TABLE_NAME, Wallpaper.class).all();
                 if (cache != null && cache.length > 0) {
-                    Log.d("WallpaperUtils", String.format("Loaded %d wallpapers from cache.", cache.length));
+                    Log.d("WallpaperUtils", String.format("Loaded %d wallpapers from cache.",
+                            cache.length));
                     callback.onRetrievedWallpapers(new WallpapersHolder(cache), null, false);
                     return;
                 }
@@ -138,24 +146,29 @@ public class WallpaperUtils {
             t.printStackTrace();
         }
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-        String mapTypeString = prefs.getString("selected_wallpaper_source", context.getString(R.string.no_wallpapers_url));
+        String mapTypeString = prefs.getString("selected_wallpaper_source", context.getString(R
+                .string.no_wallpapers_url));
         String defaultSource = mapTypeString;
 
         Bridge.get(defaultSource)
                 .tag(WallpapersFragment.class.getName())
                 .asClass(WallpapersHolder.class, new ResponseConvertCallback<WallpapersHolder>() {
                     @Override
-                    public void onResponse(@NonNull Response response, @Nullable WallpapersHolder holder, @Nullable BridgeException e) {
+                    public void onResponse(@NonNull Response response, @Nullable WallpapersHolder
+                            holder, @Nullable BridgeException e) {
                         if (e != null) {
-                            callback.onRetrievedWallpapers(null, e, e.reason() == BridgeException.REASON_REQUEST_CANCELLED);
+                            callback.onRetrievedWallpapers(null, e, e.reason() == BridgeException
+                                    .REASON_REQUEST_CANCELLED);
                         } else {
                             if (holder == null) {
-                                callback.onRetrievedWallpapers(null, new Exception("No wallpapers returned."), false);
+                                callback.onRetrievedWallpapers(null, new Exception("No wallpapers" +
+                                        " returned."), false);
                                 return;
                             }
                             try {
                                 if (holder.length() > 0) {
-                                    Log.d("WallpaperUtils", String.format("Loaded %d wallpapers from web.", holder.length()));
+                                    Log.d("WallpaperUtils", String.format("Loaded %d wallpapers " +
+                                            "from web.", holder.length()));
                                     try {
                                         Inquiry.init(context, DATABASE_NAME, DATABASE_VERSION);
                                         Inquiry.get().insertInto(TABLE_NAME, Wallpaper.class)
@@ -165,11 +178,13 @@ public class WallpaperUtils {
                                         t.printStackTrace();
                                     }
                                 } else {
-                                    Log.d("WallpaperUtils", "There are no wallpapers needed to be loaded.");
+                                    Log.d("WallpaperUtils", "There are no wallpapers needed to be" +
+                                            " loaded.");
                                 }
                                 callback.onRetrievedWallpapers(holder, null, false);
                             } catch (Throwable e1) {
-                                Log.d("WallpaperUtils", String.format("Failed to load wallpapers... %s", e1.getMessage()));
+                                Log.d("WallpaperUtils", String.format("Failed to load " +
+                                        "wallpapers... %s", e1.getMessage()));
                                 if (e1 instanceof Exception)
                                     callback.onRetrievedWallpapers(null, (Exception) e1, false);
                             } finally {
@@ -191,7 +206,8 @@ public class WallpaperUtils {
         mToast.show();
     }
 
-    public static void download(final Activity context, final Wallpaper wallpaper, final boolean apply) {
+    public static void download(final Activity context, final Wallpaper wallpaper, final boolean
+            apply) {
         mContextCache = context;
         mWallpaperCache = wallpaper;
         mApplyCache = apply;
@@ -203,18 +219,21 @@ public class WallpaperUtils {
                     if (permissionResultSet.isGranted(Assent.WRITE_EXTERNAL_STORAGE))
                         download(mContextCache, mWallpaperCache, mApplyCache);
                     else
-                        Toast.makeText(context, R.string.write_storage_permission_denied, Toast.LENGTH_LONG).show();
+                        Toast.makeText(context, R.string.write_storage_permission_denied, Toast
+                                .LENGTH_LONG).show();
                 }
             }, 69, Assent.WRITE_EXTERNAL_STORAGE);
             return;
         }
 
-        final File saveFolder = new File(Environment.getExternalStorageDirectory(), context.getString(R.string.dashboard_wallpaper_directory));
+        final File saveFolder = new File(Environment.getExternalStorageDirectory(), context
+                .getString(R.string.dashboard_wallpaper_directory));
         //noinspection ResultOfMethodCallIgnored
         saveFolder.mkdirs();
 
         final String name;
-        final String extension = wallpaper.url.toLowerCase(Locale.getDefault()).endsWith(".png") ? "png" : "jpg";
+        final String extension = wallpaper.url.toLowerCase(Locale.getDefault()).endsWith(".png")
+                ? "png" : "jpg";
         if (apply) {
             // Crop/Apply
             name = String.format("%s_%s_wallpaper.%s",
@@ -250,7 +269,8 @@ public class WallpaperUtils {
                     .tag(WallpaperUtils.class.getName())
                     .request(new Callback() {
                         @Override
-                        public void response(Request request, Response response, BridgeException e) {
+                        public void response(Request request, Response response, BridgeException
+                                e) {
                             if (e != null) {
                                 dialog.dismiss();
                                 if (e.reason() == BridgeException.REASON_REQUEST_CANCELLED) return;
@@ -271,7 +291,8 @@ public class WallpaperUtils {
         }
     }
 
-    private static void finishOption(final Activity context, boolean apply, @Nullable final MaterialDialog dialog) {
+    private static void finishOption(final Activity context, boolean apply, @Nullable final
+    MaterialDialog dialog) {
         MediaScannerConnection.scanFile(context,
                 new String[]{mFileCache.getAbsolutePath()}, null,
                 new MediaScannerConnection.OnScanCompletedListener() {
@@ -288,12 +309,14 @@ public class WallpaperUtils {
             final Intent intent = new Intent(Intent.ACTION_ATTACH_DATA)
                     .setDataAndType(Uri.fromFile(mFileCache), "image/*")
                     .putExtra("mimeType", "image/*");
-            context.startActivity(Intent.createChooser(intent, context.getString(R.string.set_wallpaper_using)));
+            context.startActivity(Intent.createChooser(intent, context.getString(R.string
+                    .set_wallpaper_using)));
         } else {
             // Save
             if (dialog != null)
                 dialog.dismiss();
-            showToast(context, context.getString(R.string.saved_to_x, mFileCache.getAbsolutePath()));
+            showToast(context, context.getString(R.string.saved_to_x, mFileCache.getAbsolutePath
+                    ()));
             resetOptionCache(false);
         }
     }

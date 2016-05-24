@@ -19,7 +19,8 @@ import android.widget.LinearLayout;
 
 import projekt.dashboard.R;
 
-public class ColorPickerPreference extends Preference implements Preference.OnPreferenceClickListener,
+public class ColorPickerPreference extends Preference implements Preference
+        .OnPreferenceClickListener,
         ColorPickerDialog.OnColorChangedListener, CompoundButton.OnCheckedChangeListener {
     View mView;
     ColorPickerDialog mDialog;
@@ -109,7 +110,8 @@ public class ColorPickerPreference extends Preference implements Preference.OnPr
     @Override
     protected void onSetInitialValue(boolean restoreValue, Object defaultValue) {
         if (restoreValue)
-            mPickerEnabled = !mShowCheckBox || getSharedPreferences().getBoolean(getKey() + "_chkbx", mPickerEnabled);
+            mPickerEnabled = !mShowCheckBox || getSharedPreferences().getBoolean(getKey() +
+                    "_chkbx", mPickerEnabled);
         onColorChanged(restoreValue ? getPersistedInt(mValue) : (Integer) defaultValue);
     }
 
@@ -119,7 +121,8 @@ public class ColorPickerPreference extends Preference implements Preference.OnPr
         if (attrs != null) {
             mAlphaSliderEnabled = attrs.getAttributeBooleanValue(null, "alphaSlider", false);
             mShowCheckBox = attrs.getAttributeBooleanValue(null, "showCheckBox", false);
-            mPickerEnabled = !mShowCheckBox || attrs.getAttributeBooleanValue(null, "enabledByDefault", false);
+            mPickerEnabled = !mShowCheckBox || attrs.getAttributeBooleanValue(null,
+                    "enabledByDefault", false);
             mHexValueEnabled = attrs.getAttributeBooleanValue(null, "hexValue", false);
         }
     }
@@ -146,7 +149,8 @@ public class ColorPickerPreference extends Preference implements Preference.OnPr
             cbPickerEnabled.setOnCheckedChangeListener(this);
         }
         ImageView iView = new ImageView(getContext());
-        LinearLayout widgetFrameView = ((LinearLayout) mView.findViewById(android.R.id.widget_frame));
+        LinearLayout widgetFrameView = ((LinearLayout) mView.findViewById(android.R.id
+                .widget_frame));
         if (widgetFrameView == null) return;
         widgetFrameView.setVisibility(View.VISIBLE);
         widgetFrameView.setPadding(
@@ -284,7 +288,8 @@ public class ColorPickerPreference extends Preference implements Preference.OnPr
 
     private static class SavedState extends BaseSavedState {
         @SuppressWarnings("unused")
-        public static final Parcelable.Creator<SavedState> CREATOR = new Parcelable.Creator<SavedState>() {
+        public static final Parcelable.Creator<SavedState> CREATOR = new Parcelable
+                .Creator<SavedState>() {
             public SavedState createFromParcel(Parcel in) {
                 return new SavedState(in);
             }

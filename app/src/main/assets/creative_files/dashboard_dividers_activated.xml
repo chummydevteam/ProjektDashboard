@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--You are editing Settings' Colors-->
 
 <resources>
-		<dimen name="dashboard_category_elevation">0dp</dimen>
+    <dimen name="dashboard_category_elevation">0dp</dimen>
 </resources>

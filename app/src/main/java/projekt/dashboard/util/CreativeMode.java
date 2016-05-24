@@ -98,10 +98,16 @@ public class CreativeMode extends CardStackAdapter implements
     public String header_pack_name, header_pack_author;
 
     public LinearLayout framework_toolbar_dark;
-    public ImageView accent_universal, accent_secondary, accent_light, appbg_dark, appbg_light, dialog_dark, dialog_light, main_color, main_color_dark, notifications_primary, notifications_secondary, ripples;
-    public Switch colorful_icon_switch, categories_title_caps, categories_title_bold, categories_title_italics, dashboard_divider, dutweaks_icons;
-    public ImageView settings_dashboard_background_color, settings_dashboard_category_background_color, settings_icon_colors, settings_title_colors, settings_switchbar_background_color;
-    public ImageView qs_accents, qs_header, qs_notification, qs_panel_bg, qs_tile, qs_text, qs_recents;
+    public ImageView accent_universal, accent_secondary, accent_light, appbg_dark, appbg_light,
+            dialog_dark, dialog_light, main_color, main_color_dark, notifications_primary,
+            notifications_secondary, ripples;
+    public Switch colorful_icon_switch, categories_title_caps, categories_title_bold,
+            categories_title_italics, dashboard_divider, dutweaks_icons;
+    public ImageView settings_dashboard_background_color,
+            settings_dashboard_category_background_color, settings_icon_colors,
+            settings_title_colors, settings_switchbar_background_color;
+    public ImageView qs_accents, qs_header, qs_notification, qs_panel_bg, qs_tile, qs_text,
+            qs_recents;
     public AnimatedEditText aet1, aet2;
     public Switch themable_gapps;
 
@@ -121,23 +127,38 @@ public class CreativeMode extends CardStackAdapter implements
     public List<String> list, list2, zipsFound;
     public ArrayAdapter<String> adapter2, adapter3;
 
-    public TextView accent_universal_text, accent_secondary_text, accent_light_text, appbg_dark_text, appbg_light_text, dialog_dark_text, dialog_light_text, main_color_text, main_color_dark_text, notifications_primary_text, notifications_secondary_text, ripples_text;
-    public TextView settings_dashboard_background_color_text, settings_dashboard_category_background_color_text, settings_icon_colors_text, settings_title_colors_text, settings_switchbar_background_color_text;
-    public TextView qs_accents_text, qs_header_color, qs_notification_color, qs_panel_bg_color, qs_tile_text, qs_text_text, qs_recents_text;
+    public TextView accent_universal_text, accent_secondary_text, accent_light_text,
+            appbg_dark_text, appbg_light_text, dialog_dark_text, dialog_light_text,
+            main_color_text, main_color_dark_text, notifications_primary_text,
+            notifications_secondary_text, ripples_text;
+    public TextView settings_dashboard_background_color_text,
+            settings_dashboard_category_background_color_text, settings_icon_colors_text,
+            settings_title_colors_text, settings_switchbar_background_color_text;
+    public TextView qs_accents_text, qs_header_color, qs_notification_color, qs_panel_bg_color,
+            qs_tile_text, qs_text_text, qs_recents_text;
 
     // ==================================== Framework Tweaks ================================ //
     public int current_selected_system_accent_color = Color.argb(255, 255, 255, 255); // White
-    public int current_selected_system_accent_dual_color = Color.argb(255, 119, 119, 119); // Medium Grey
-    public int current_selected_system_accent_light_color = Color.argb(255, 119, 119, 119); // Medium grey
+    public int current_selected_system_accent_dual_color = Color.argb(255, 119, 119, 119); //
+    // Medium Grey
+    public int current_selected_system_accent_light_color = Color.argb(255, 119, 119, 119); //
+    // Medium grey
     public int current_selected_system_appbg_color = Color.argb(255, 0, 0, 0); // Black
-    public int current_selected_system_appbg_light_color = Color.argb(255, 215, 215, 215); // Light grey
-    public int current_selected_system_dialog_color = Color.argb(191, 0, 0, 0); // Black with Transparency
-    public int current_selected_system_dialog_light_color = Color.argb(191, 238, 238, 238); // Light Grey with Transparency
-    public int current_selected_system_notifications_primary_color = Color.argb(255, 255, 255, 255); // White
-    public int current_selected_system_notifications_secondary_color = Color.argb(255, 174, 174, 174); // Lighter grey
-    public int current_selected_system_ripple_color = Color.argb(74, 119, 119, 119); // Medium Grey with Transparency
+    public int current_selected_system_appbg_light_color = Color.argb(255, 215, 215, 215); //
+    // Light grey
+    public int current_selected_system_dialog_color = Color.argb(191, 0, 0, 0); // Black with
+    // Transparency
+    public int current_selected_system_dialog_light_color = Color.argb(191, 238, 238, 238); //
+    // Light Grey with Transparency
+    public int current_selected_system_notifications_primary_color = Color.argb(255, 255, 255,
+            255); // White
+    public int current_selected_system_notifications_secondary_color = Color.argb(255, 174, 174,
+            174); // Lighter grey
+    public int current_selected_system_ripple_color = Color.argb(74, 119, 119, 119); // Medium
+    // Grey with Transparency
     public int current_selected_system_main_color = Color.argb(255, 33, 32, 33); // Main theme color
-    public int current_selected_system_main_dark_color = Color.argb(255, 33, 32, 33); // Main theme color dark
+    public int current_selected_system_main_dark_color = Color.argb(255, 33, 32, 33); // Main
+    // theme color dark
     // ==================================== Settings Tweaks ================================== //
     public boolean category_title_caps = true;
     public boolean category_title_bold = true;
@@ -318,7 +339,8 @@ public class CreativeMode extends CardStackAdapter implements
         accent_dark_switch = (Switch) framework_card.findViewById(R.id.switch_example);
         accent_light_switch = (Switch) framework_card.findViewById(R.id.switch_example2);
 
-        framework_background = (RelativeLayout) framework_card.findViewById(R.id.main_relativeLayout);
+        framework_background = (RelativeLayout) framework_card.findViewById(R.id
+                .main_relativeLayout);
 
         // Framework Accent (universal)
 
@@ -347,7 +369,8 @@ public class CreativeMode extends CardStackAdapter implements
                         accent_dark_switch.setTrackTintList(csl);
                         accent_dark_switch.setThumbTintList(csl);
                         is_framework_accent_changed = true;
-                        accent_universal_text.setTextColor(mContext.getColor(android.R.color.white));
+                        accent_universal_text.setTextColor(mContext.getColor(android.R.color
+                                .white));
                     }
                 });
                 cpd.show();
@@ -372,7 +395,8 @@ public class CreativeMode extends CardStackAdapter implements
                         current_selected_system_accent_dual_color = color;
                         accent_secondary.setColorFilter(color, PorterDuff.Mode.SRC_ATOP);
                         is_framework_accent_secondary_changed = true;
-                        accent_secondary_text.setTextColor(mContext.getColor(android.R.color.white));
+                        accent_secondary_text.setTextColor(mContext.getColor(android.R.color
+                                .white));
                     }
                 });
                 cpd.show();
@@ -547,13 +571,16 @@ public class CreativeMode extends CardStackAdapter implements
 
         // Framework System Main Color Dark
 
-        framework_toolbar_dark = (LinearLayout) framework_card.findViewById(R.id.framework_toolbar_dark);
+        framework_toolbar_dark = (LinearLayout) framework_card.findViewById(R.id
+                .framework_toolbar_dark);
         main_color_dark = (ImageView) framework_card.findViewById(
                 R.id.system_main_dark_colorpicker);
         main_color_dark_text = (TextView) framework_card.findViewById(
                 R.id.system_main_dark_colorpicker_text);
-        main_color_dark.setColorFilter(current_selected_system_main_dark_color, PorterDuff.Mode.SRC_ATOP);
-        main_color_dark.setColorFilter(current_selected_system_main_dark_color, PorterDuff.Mode.SRC_ATOP);
+        main_color_dark.setColorFilter(current_selected_system_main_dark_color, PorterDuff.Mode
+                .SRC_ATOP);
+        main_color_dark.setColorFilter(current_selected_system_main_dark_color, PorterDuff.Mode
+                .SRC_ATOP);
         main_color_dark.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 final ColorPickerDialog cpd = new ColorPickerDialog(
@@ -563,8 +590,10 @@ public class CreativeMode extends CardStackAdapter implements
                     public void onColorChanged(int color) {
                         framework_toolbar_dark.setVisibility(View.VISIBLE);
                         current_selected_system_main_dark_color = color;
-                        main_color_dark.setColorFilter(current_selected_system_main_dark_color, PorterDuff.Mode.SRC_ATOP);
-                        framework_toolbar_dark.setBackgroundColor(current_selected_system_main_dark_color);
+                        main_color_dark.setColorFilter(current_selected_system_main_dark_color,
+                                PorterDuff.Mode.SRC_ATOP);
+                        framework_toolbar_dark.setBackgroundColor
+                                (current_selected_system_main_dark_color);
                         is_framework_main_theme_color_dark_changed = true;
                         main_color_dark_text.setTextColor(mContext.getColor(android.R.color.white));
                     }
@@ -591,7 +620,8 @@ public class CreativeMode extends CardStackAdapter implements
                         current_selected_system_notifications_primary_color = color;
                         notifications_primary.setColorFilter(color, PorterDuff.Mode.SRC_ATOP);
                         is_framework_notifications_primary_changed = true;
-                        notifications_primary_text.setTextColor(mContext.getColor(android.R.color.white));
+                        notifications_primary_text.setTextColor(mContext.getColor(android.R.color
+                                .white));
                     }
                 });
                 cpd.show();
@@ -616,7 +646,8 @@ public class CreativeMode extends CardStackAdapter implements
                         current_selected_system_notifications_secondary_color = color;
                         notifications_secondary.setColorFilter(color, PorterDuff.Mode.SRC_ATOP);
                         is_framework_notifications_secondary_changed = true;
-                        notifications_secondary_text.setTextColor(mContext.getColor(android.R.color.white));
+                        notifications_secondary_text.setTextColor(mContext.getColor(android.R
+                                .color.white));
                     }
                 });
                 cpd.show();
@@ -692,7 +723,8 @@ public class CreativeMode extends CardStackAdapter implements
                             category_title_caps = false;
                         }
                         is_settings_dashboard_category_title_caps_changed = true;
-                        categories_title_caps.setTextColor(mContext.getColor(android.R.color.white));
+                        categories_title_caps.setTextColor(mContext.getColor(android.R.color
+                                .white));
                     }
                 });
 
@@ -710,7 +742,8 @@ public class CreativeMode extends CardStackAdapter implements
                             category_title_bold = false;
                         }
                         is_settings_dashboard_category_title_bold_changed = true;
-                        categories_title_bold.setTextColor(mContext.getColor(android.R.color.white));
+                        categories_title_bold.setTextColor(mContext.getColor(android.R.color
+                                .white));
                     }
                 });
 
@@ -728,7 +761,8 @@ public class CreativeMode extends CardStackAdapter implements
                             category_title_italics = false;
                         }
                         is_settings_dashboard_category_title_italics_changed = true;
-                        categories_title_italics.setTextColor(mContext.getColor(android.R.color.white));
+                        categories_title_italics.setTextColor(mContext.getColor(android.R.color
+                                .white));
                     }
                 });
 
@@ -772,7 +806,8 @@ public class CreativeMode extends CardStackAdapter implements
                 R.id.settings_dashboard_background_colorpicker);
         settings_dashboard_background_color_text = (TextView) settings_card.findViewById(
                 R.id.settings_dashboard_background_colorpicker_text);
-        settings_dashboard_background_color.setColorFilter(current_selected_dashboard_background_color, PorterDuff.Mode.SRC_ATOP);
+        settings_dashboard_background_color.setColorFilter
+                (current_selected_dashboard_background_color, PorterDuff.Mode.SRC_ATOP);
         settings_dashboard_background_color.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 final ColorPickerDialog cpd = new ColorPickerDialog(
@@ -781,9 +816,11 @@ public class CreativeMode extends CardStackAdapter implements
                     @Override
                     public void onColorChanged(int color) {
                         current_selected_dashboard_background_color = color;
-                        settings_dashboard_background_color.setColorFilter(color, PorterDuff.Mode.SRC_ATOP);
+                        settings_dashboard_background_color.setColorFilter(color, PorterDuff.Mode
+                                .SRC_ATOP);
                         is_settings_dashboard_background_color_changed = true;
-                        settings_dashboard_background_color_text.setTextColor(mContext.getColor(android.R.color.white));
+                        settings_dashboard_background_color_text.setTextColor(mContext.getColor
+                                (android.R.color.white));
                     }
                 });
                 cpd.show();
@@ -797,8 +834,9 @@ public class CreativeMode extends CardStackAdapter implements
         settings_dashboard_category_background_color_text = (TextView) settings_card.findViewById(
                 R.id.settings_dashboard_category_colorpicker_text);
         settings_preview = (RelativeLayout) settings_card.findViewById(R.id.settings_container);
-        settings_dashboard_category_background_color.setColorFilter(current_selected_dashboard_category_background_color,
-                PorterDuff.Mode.SRC_ATOP);
+        settings_dashboard_category_background_color.setColorFilter
+                (current_selected_dashboard_category_background_color,
+                        PorterDuff.Mode.SRC_ATOP);
         settings_dashboard_category_background_color.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 final ColorPickerDialog cpd = new ColorPickerDialog(
@@ -811,7 +849,8 @@ public class CreativeMode extends CardStackAdapter implements
                                 PorterDuff.Mode.SRC_ATOP);
                         settings_preview.setBackgroundColor(color);
                         is_settings_dashboard_category_background_color_changed = true;
-                        settings_dashboard_category_background_color_text.setTextColor(mContext.getColor(android.R.color.white));
+                        settings_dashboard_category_background_color_text.setTextColor(mContext
+                                .getColor(android.R.color.white));
                     }
                 });
                 cpd.show();
@@ -835,7 +874,8 @@ public class CreativeMode extends CardStackAdapter implements
                         settings_icon_colors.setColorFilter(color, PorterDuff.Mode.SRC_ATOP);
                         wifiIcon.setColorFilter(color, PorterDuff.Mode.SRC_ATOP);
                         is_settings_icon_color_changed = true;
-                        settings_icon_colors_text.setTextColor(mContext.getColor(android.R.color.white));
+                        settings_icon_colors_text.setTextColor(mContext.getColor(android.R.color
+                                .white));
                     }
                 });
                 cpd.show();
@@ -859,7 +899,8 @@ public class CreativeMode extends CardStackAdapter implements
                         settings_title_colors.setColorFilter(color, PorterDuff.Mode.SRC_ATOP);
                         categoryHeader.setTextColor(color);
                         is_settings_title_color_changed = true;
-                        settings_title_colors_text.setTextColor(mContext.getColor(android.R.color.white));
+                        settings_title_colors_text.setTextColor(mContext.getColor(android.R.color
+                                .white));
                     }
                 });
                 cpd.show();
@@ -872,7 +913,8 @@ public class CreativeMode extends CardStackAdapter implements
                 R.id.settings_switchbar_background_colorpicker);
         settings_switchbar_background_color_text = (TextView) settings_card.findViewById(
                 R.id.settings_switchbar_background_colorpicker_text);
-        settings_switchbar_background_color.setColorFilter(current_selected_settings_switchbar_color, PorterDuff.Mode.SRC_ATOP);
+        settings_switchbar_background_color.setColorFilter
+                (current_selected_settings_switchbar_color, PorterDuff.Mode.SRC_ATOP);
         settings_switchbar_background_color.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 final ColorPickerDialog cpd = new ColorPickerDialog(
@@ -881,9 +923,11 @@ public class CreativeMode extends CardStackAdapter implements
                     @Override
                     public void onColorChanged(int color) {
                         current_selected_settings_switchbar_color = color;
-                        settings_switchbar_background_color.setColorFilter(color, PorterDuff.Mode.SRC_ATOP);
+                        settings_switchbar_background_color.setColorFilter(color, PorterDuff.Mode
+                                .SRC_ATOP);
                         is_settings_switchbar_background_color_changed = true;
-                        settings_switchbar_background_color_text.setTextColor(mContext.getColor(android.R.color.white));
+                        settings_switchbar_background_color_text.setTextColor(mContext.getColor
+                                (android.R.color.white));
                     }
                 });
                 cpd.show();
@@ -1055,11 +1099,13 @@ public class CreativeMode extends CardStackAdapter implements
         wifiLabel = (TextView) systemui_card.findViewById(R.id.wifiLabel);
         bluetoothLabel = (TextView) systemui_card.findViewById(R.id.bluetoothLabel);
         wifiLabel.setText(prefs.getString("dashboard_username",
-                systemui_card.getResources().getString(R.string.systemui_preview_default_no_username)) +
+                systemui_card.getResources().getString(R.string
+                        .systemui_preview_default_no_username)) +
                 systemui_card.getResources().getString(R.string.systemui_preview_label));
         brightness = (SeekBar) systemui_card.findViewById(R.id.seekBar);
 
-        ImageButton refreshSpinner = (ImageButton) systemui_card.findViewById(R.id.restartHeaderSpinnerCreative);
+        ImageButton refreshSpinner = (ImageButton) systemui_card.findViewById(R.id
+                .restartHeaderSpinnerCreative);
         refreshSpinner.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 RefreshHeaderSpinner();
@@ -1076,7 +1122,8 @@ public class CreativeMode extends CardStackAdapter implements
         // filter.
 
         File f2 = new File(
-                Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + mContext.getString(R.string.dashboard_header_directory) + "/");
+                Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + mContext
+                        .getString(R.string.dashboard_header_directory) + "/");
         File[] files2 = f2.listFiles();
         if (files2 != null) {
             for (File inFile2 : files2) {
@@ -1090,7 +1137,8 @@ public class CreativeMode extends CardStackAdapter implements
 
                             ZipFile zipFile = new ZipFile(
                                     Environment.getExternalStorageDirectory().
-                                            getAbsolutePath() + "/" + mContext.getString(R.string.dashboard_header_directory) + "/" + filename);
+                                            getAbsolutePath() + "/" + mContext.getString(R.string
+                                            .dashboard_header_directory) + "/" + filename);
                             ZipEntry entry = zipFile.getEntry("headers.xml");
                             if (entry != null) {
                                 // headers.xml was found in the file, so add it into the spinner
@@ -1116,7 +1164,8 @@ public class CreativeMode extends CardStackAdapter implements
                 if (pos != 0) {
                     checkWhetherZIPisValid(systemui_card, Environment.getExternalStorageDirectory().
                                     getAbsolutePath() +
-                                    "/" + mContext.getString(R.string.dashboard_header_directory) + "/" + spinner3.getSelectedItem(),
+                                    "/" + mContext.getString(R.string.dashboard_header_directory)
+                                    + "/" + spinner3.getSelectedItem(),
                             mContext.getCacheDir().getAbsolutePath() + "/headers");
                 } else {
                     header_pack_location = "";
@@ -1262,7 +1311,8 @@ public class CreativeMode extends CardStackAdapter implements
                         qs_panel_bg.setColorFilter(color, PorterDuff.Mode.SRC_ATOP);
                         is_systemui_qs_panel_background_color_changed = true;
                         qs_panel_bg_color.setTextColor(mContext.getColor(android.R.color.white));
-                        qs_panel_bg_preview.setBackgroundColor(current_selected_qs_panel_background_color);
+                        qs_panel_bg_preview.setBackgroundColor
+                                (current_selected_qs_panel_background_color);
                     }
                 });
                 cpd.show();
@@ -1330,7 +1380,8 @@ public class CreativeMode extends CardStackAdapter implements
 
         // QS Recents Clear All Icon Color
 
-        qs_recents = (ImageView) systemui_card.findViewById(R.id.qs_recents_clear_all_icon_colorpicker);
+        qs_recents = (ImageView) systemui_card.findViewById(R.id
+                .qs_recents_clear_all_icon_colorpicker);
         qs_recents_text = (TextView) systemui_card.findViewById(
                 R.id.qs_recents_clear_all_icon_colorpicker_text);
         qs_recents.setOnClickListener(new View.OnClickListener() {
@@ -1429,19 +1480,23 @@ public class CreativeMode extends CardStackAdapter implements
                                 new int[]{}
                         },
                         new int[]{
-                                current_selected_system_accent_color, current_selected_system_accent_color
+                                current_selected_system_accent_color,
+                                current_selected_system_accent_color
                         }
                 );
                 accent_dark_switch.setTrackTintList(csl);
                 accent_dark_switch.setThumbTintList(csl);
-                accent_universal.setColorFilter(current_selected_system_accent_color, PorterDuff.Mode.SRC_ATOP);
+                accent_universal.setColorFilter(current_selected_system_accent_color, PorterDuff
+                        .Mode.SRC_ATOP);
                 accent_universal_text.setTextColor(mContext.getColor(android.R.color.white));
                 is_framework_accent_changed = true;
             } else {
-                Log.d("RestoreBackup", "There is no need to restore this color : " + " framework_accent_dark");
+                Log.d("RestoreBackup", "There is no need to restore this color : " + " " +
+                        "framework_accent_dark");
             }
         } catch (Exception e) {
-            Log.e("RestoreBackup", "There seems to be an issue restoring   : " + " framework_accent_dark");
+            Log.e("RestoreBackup", "There seems to be an issue restoring   : " + " " +
+                    "framework_accent_dark");
             error_counter += 1;
         }
 
@@ -1450,14 +1505,17 @@ public class CreativeMode extends CardStackAdapter implements
             String savedColor = ReadProfile.main(commands);
             if (Color.parseColor(savedColor) != current_selected_system_accent_dual_color) {
                 current_selected_system_accent_dual_color = Color.parseColor(savedColor);
-                accent_secondary.setColorFilter(current_selected_system_accent_dual_color, PorterDuff.Mode.SRC_ATOP);
+                accent_secondary.setColorFilter(current_selected_system_accent_dual_color,
+                        PorterDuff.Mode.SRC_ATOP);
                 accent_secondary_text.setTextColor(mContext.getColor(android.R.color.white));
                 is_framework_accent_secondary_changed = true;
             } else {
-                Log.d("RestoreBackup", "There is no need to restore this color : " + " framework_accent_secondary");
+                Log.d("RestoreBackup", "There is no need to restore this color : " + " " +
+                        "framework_accent_secondary");
             }
         } catch (Exception e) {
-            Log.e("RestoreBackup", "There seems to be an issue restoring   : " + " framework_accent_secondary");
+            Log.e("RestoreBackup", "There seems to be an issue restoring   : " + " " +
+                    "framework_accent_secondary");
             error_counter += 1;
         }
 
@@ -1472,19 +1530,23 @@ public class CreativeMode extends CardStackAdapter implements
                                 new int[]{}
                         },
                         new int[]{
-                                current_selected_system_accent_light_color, current_selected_system_accent_light_color
+                                current_selected_system_accent_light_color,
+                                current_selected_system_accent_light_color
                         }
                 );
                 accent_light_switch.setTrackTintList(csl);
                 accent_light_switch.setThumbTintList(csl);
-                accent_light.setColorFilter(current_selected_system_accent_light_color, PorterDuff.Mode.SRC_ATOP);
+                accent_light.setColorFilter(current_selected_system_accent_light_color,
+                        PorterDuff.Mode.SRC_ATOP);
                 accent_light_text.setTextColor(mContext.getColor(android.R.color.white));
                 is_framework_accent_light_changed = true;
             } else {
-                Log.d("RestoreBackup", "There is no need to restore this color : " + " framework_accent_light");
+                Log.d("RestoreBackup", "There is no need to restore this color : " + " " +
+                        "framework_accent_light");
             }
         } catch (Exception e) {
-            Log.e("RestoreBackup", "There seems to be an issue restoring   : " + " framework_accent_light");
+            Log.e("RestoreBackup", "There seems to be an issue restoring   : " + " " +
+                    "framework_accent_light");
             error_counter += 1;
         }
 
@@ -1494,14 +1556,17 @@ public class CreativeMode extends CardStackAdapter implements
             if (Color.parseColor(savedColor) != current_selected_system_appbg_color) {
                 current_selected_system_appbg_color = Color.parseColor(savedColor);
                 framework_background.setBackgroundColor(current_selected_system_appbg_color);
-                appbg_dark.setColorFilter(current_selected_system_appbg_color, PorterDuff.Mode.SRC_ATOP);
+                appbg_dark.setColorFilter(current_selected_system_appbg_color, PorterDuff.Mode
+                        .SRC_ATOP);
                 appbg_dark_text.setTextColor(mContext.getColor(android.R.color.white));
                 is_framework_app_background_changed = true;
             } else {
-                Log.d("RestoreBackup", "There is no need to restore this color : " + " framework_app_background_dark");
+                Log.d("RestoreBackup", "There is no need to restore this color : " + " " +
+                        "framework_app_background_dark");
             }
         } catch (Exception e) {
-            Log.e("RestoreBackup", "There seems to be an issue restoring   : " + " framework_app_background_dark");
+            Log.e("RestoreBackup", "There seems to be an issue restoring   : " + " " +
+                    "framework_app_background_dark");
             error_counter += 1;
         }
 
@@ -1511,14 +1576,17 @@ public class CreativeMode extends CardStackAdapter implements
             if (Color.parseColor(savedColor) != current_selected_system_appbg_light_color) {
                 current_selected_system_appbg_light_color = Color.parseColor(savedColor);
                 accent_light_switch.setBackgroundColor(current_selected_system_appbg_light_color);
-                appbg_light.setColorFilter(current_selected_system_appbg_light_color, PorterDuff.Mode.SRC_ATOP);
+                appbg_light.setColorFilter(current_selected_system_appbg_light_color, PorterDuff
+                        .Mode.SRC_ATOP);
                 appbg_light_text.setTextColor(mContext.getColor(android.R.color.white));
                 is_framework_app_background_light_changed = true;
             } else {
-                Log.d("RestoreBackup", "There is no need to restore this color : " + " framework_app_background_light");
+                Log.d("RestoreBackup", "There is no need to restore this color : " + " " +
+                        "framework_app_background_light");
             }
         } catch (Exception e) {
-            Log.e("RestoreBackup", "There seems to be an issue restoring   : " + " framework_app_background_light");
+            Log.e("RestoreBackup", "There seems to be an issue restoring   : " + " " +
+                    "framework_app_background_light");
             error_counter += 1;
         }
 
@@ -1527,14 +1595,17 @@ public class CreativeMode extends CardStackAdapter implements
             String savedColor = ReadProfile.main(commands);
             if (Color.parseColor(savedColor) != current_selected_system_dialog_color) {
                 current_selected_system_dialog_color = Color.parseColor(savedColor);
-                dialog_dark.setColorFilter(current_selected_system_dialog_color, PorterDuff.Mode.SRC_ATOP);
+                dialog_dark.setColorFilter(current_selected_system_dialog_color, PorterDuff.Mode
+                        .SRC_ATOP);
                 dialog_dark_text.setTextColor(mContext.getColor(android.R.color.white));
                 is_framework_dialog_background_dark_changed = true;
             } else {
-                Log.d("RestoreBackup", "There is no need to restore this color : " + " framework_dialog_background_dark");
+                Log.d("RestoreBackup", "There is no need to restore this color : " + " " +
+                        "framework_dialog_background_dark");
             }
         } catch (Exception e) {
-            Log.e("RestoreBackup", "There seems to be an issue restoring   : " + " framework_dialog_background_dark");
+            Log.e("RestoreBackup", "There seems to be an issue restoring   : " + " " +
+                    "framework_dialog_background_dark");
             error_counter += 1;
         }
 
@@ -1543,14 +1614,17 @@ public class CreativeMode extends CardStackAdapter implements
             String savedColor = ReadProfile.main(commands);
             if (Color.parseColor(savedColor) != current_selected_system_dialog_light_color) {
                 current_selected_system_dialog_light_color = Color.parseColor(savedColor);
-                dialog_light.setColorFilter(current_selected_system_dialog_light_color, PorterDuff.Mode.SRC_ATOP);
+                dialog_light.setColorFilter(current_selected_system_dialog_light_color,
+                        PorterDuff.Mode.SRC_ATOP);
                 dialog_light_text.setTextColor(mContext.getColor(android.R.color.white));
                 is_framework_dialog_background_light_changed = true;
             } else {
-                Log.d("RestoreBackup", "There is no need to restore this color : " + " framework_dialog_background_light");
+                Log.d("RestoreBackup", "There is no need to restore this color : " + " " +
+                        "framework_dialog_background_light");
             }
         } catch (Exception e) {
-            Log.e("RestoreBackup", "There seems to be an issue restoring   : " + " framework_dialog_background_light");
+            Log.e("RestoreBackup", "There seems to be an issue restoring   : " + " " +
+                    "framework_dialog_background_light");
             error_counter += 1;
         }
 
@@ -1561,14 +1635,17 @@ public class CreativeMode extends CardStackAdapter implements
                 current_selected_system_main_color = Color.parseColor(savedColor);
                 framework_toolbar.setBackgroundColor(current_selected_system_main_color);
                 settings_toolbar.setBackgroundColor(current_selected_system_main_color);
-                main_color.setColorFilter(current_selected_system_main_color, PorterDuff.Mode.SRC_ATOP);
+                main_color.setColorFilter(current_selected_system_main_color, PorterDuff.Mode
+                        .SRC_ATOP);
                 main_color_text.setTextColor(mContext.getColor(android.R.color.white));
                 is_framework_main_theme_color_changed = true;
             } else {
-                Log.d("RestoreBackup", "There is no need to restore this color : " + " framework_main_theme_color");
+                Log.d("RestoreBackup", "There is no need to restore this color : " + " " +
+                        "framework_main_theme_color");
             }
         } catch (Exception e) {
-            Log.e("RestoreBackup", "There seems to be an issue restoring   : " + " framework_main_theme_color");
+            Log.e("RestoreBackup", "There seems to be an issue restoring   : " + " " +
+                    "framework_main_theme_color");
             error_counter += 1;
         }
 
@@ -1578,46 +1655,60 @@ public class CreativeMode extends CardStackAdapter implements
             if (Color.parseColor(savedColor) != current_selected_system_main_dark_color) {
                 current_selected_system_main_dark_color = Color.parseColor(savedColor);
                 framework_toolbar_dark.setBackgroundColor(current_selected_system_main_dark_color);
-                main_color_dark.setColorFilter(current_selected_system_main_dark_color, PorterDuff.Mode.SRC_ATOP);
+                main_color_dark.setColorFilter(current_selected_system_main_dark_color,
+                        PorterDuff.Mode.SRC_ATOP);
                 main_color_dark_text.setTextColor(mContext.getColor(android.R.color.white));
                 is_framework_main_theme_color_dark_changed = true;
             } else {
-                Log.d("RestoreBackup", "There is no need to restore this color : " + " framework_main_theme_color_dark");
+                Log.d("RestoreBackup", "There is no need to restore this color : " + " " +
+                        "framework_main_theme_color_dark");
             }
         } catch (Exception e) {
-            Log.e("RestoreBackup", "There seems to be an issue restoring   : " + " framework_main_theme_color_dark");
+            Log.e("RestoreBackup", "There seems to be an issue restoring   : " + " " +
+                    "framework_main_theme_color_dark");
             error_counter += 1;
         }
 
         try {
             String[] commands = {"framework_notifications_primary", location};
             String savedColor = ReadProfile.main(commands);
-            if (Color.parseColor(savedColor) != current_selected_system_notifications_primary_color) {
+            if (Color.parseColor(savedColor) !=
+                    current_selected_system_notifications_primary_color) {
                 current_selected_system_notifications_primary_color = Color.parseColor(savedColor);
-                notifications_primary.setColorFilter(current_selected_system_notifications_primary_color, PorterDuff.Mode.SRC_ATOP);
+                notifications_primary.setColorFilter
+                        (current_selected_system_notifications_primary_color, PorterDuff.Mode
+                                .SRC_ATOP);
                 notifications_primary_text.setTextColor(mContext.getColor(android.R.color.white));
                 is_framework_notifications_primary_changed = true;
             } else {
-                Log.d("RestoreBackup", "There is no need to restore this color : " + " framework_notifications_primary");
+                Log.d("RestoreBackup", "There is no need to restore this color : " + " " +
+                        "framework_notifications_primary");
             }
         } catch (Exception e) {
-            Log.e("RestoreBackup", "There seems to be an issue restoring   : " + " framework_notifications_primary");
+            Log.e("RestoreBackup", "There seems to be an issue restoring   : " + " " +
+                    "framework_notifications_primary");
             error_counter += 1;
         }
 
         try {
             String[] commands = {"framework_notifications_secondary", location};
             String savedColor = ReadProfile.main(commands);
-            if (Color.parseColor(savedColor) != current_selected_system_notifications_secondary_color) {
-                current_selected_system_notifications_secondary_color = Color.parseColor(savedColor);
-                notifications_secondary.setColorFilter(current_selected_system_notifications_secondary_color, PorterDuff.Mode.SRC_ATOP);
+            if (Color.parseColor(savedColor) !=
+                    current_selected_system_notifications_secondary_color) {
+                current_selected_system_notifications_secondary_color = Color.parseColor
+                        (savedColor);
+                notifications_secondary.setColorFilter
+                        (current_selected_system_notifications_secondary_color, PorterDuff.Mode
+                                .SRC_ATOP);
                 notifications_secondary_text.setTextColor(mContext.getColor(android.R.color.white));
                 is_framework_notifications_secondary_changed = true;
             } else {
-                Log.d("RestoreBackup", "There is no need to restore this color : " + " framework_notifications_secondary");
+                Log.d("RestoreBackup", "There is no need to restore this color : " + " " +
+                        "framework_notifications_secondary");
             }
         } catch (Exception e) {
-            Log.e("RestoreBackup", "There seems to be an issue restoring   : " + " framework_notifications_secondary");
+            Log.e("RestoreBackup", "There seems to be an issue restoring   : " + " " +
+                    "framework_notifications_secondary");
             error_counter += 1;
         }
 
@@ -1626,14 +1717,17 @@ public class CreativeMode extends CardStackAdapter implements
             String savedColor = ReadProfile.main(commands);
             if (Color.parseColor(savedColor) != current_selected_system_ripple_color) {
                 current_selected_system_ripple_color = Color.parseColor(savedColor);
-                ripples.setColorFilter(current_selected_system_ripple_color, PorterDuff.Mode.SRC_ATOP);
+                ripples.setColorFilter(current_selected_system_ripple_color, PorterDuff.Mode
+                        .SRC_ATOP);
                 ripples_text.setTextColor(mContext.getColor(android.R.color.white));
                 is_framework_system_ripple_changed = true;
             } else {
-                Log.d("RestoreBackup", "There is no need to restore this color : " + " framework_system_ripple");
+                Log.d("RestoreBackup", "There is no need to restore this color : " + " " +
+                        "framework_system_ripple");
             }
         } catch (Exception e) {
-            Log.e("RestoreBackup", "There seems to be an issue restoring   : " + " framework_system_ripple");
+            Log.e("RestoreBackup", "There seems to be an issue restoring   : " + " " +
+                    "framework_system_ripple");
             error_counter += 1;
         }
 
@@ -1652,10 +1746,12 @@ public class CreativeMode extends CardStackAdapter implements
                 colorful_icon_switch.setTextColor(mContext.getColor(android.R.color.white));
                 is_settings_colorful_icon_color_changed = true;
             } else {
-                Log.d("RestoreBackup", "There is no need to restore this bool  : " + " settings_colorful_icon");
+                Log.d("RestoreBackup", "There is no need to restore this bool  : " + " " +
+                        "settings_colorful_icon");
             }
         } catch (Exception e) {
-            Log.e("RestoreBackup", "There seems to be an issue restoring   : " + " settings_colorful_icon");
+            Log.e("RestoreBackup", "There seems to be an issue restoring   : " + " " +
+                    "settings_colorful_icon");
             error_counter += 1;
         }
 
@@ -1664,31 +1760,42 @@ public class CreativeMode extends CardStackAdapter implements
             String savedColor = ReadProfile.main(commands);
             if (Color.parseColor(savedColor) != current_selected_dashboard_background_color) {
                 current_selected_dashboard_background_color = Color.parseColor(savedColor);
-                settings_dashboard_background_color.setColorFilter(current_selected_dashboard_background_color, PorterDuff.Mode.SRC_ATOP);
-                settings_dashboard_background_color_text.setTextColor(mContext.getColor(android.R.color.white));
+                settings_dashboard_background_color.setColorFilter
+                        (current_selected_dashboard_background_color, PorterDuff.Mode.SRC_ATOP);
+                settings_dashboard_background_color_text.setTextColor(mContext.getColor(android.R
+                        .color.white));
                 is_settings_dashboard_background_color_changed = true;
             } else {
-                Log.d("RestoreBackup", "There is no need to restore this color : " + " settings_dashboard_background_color");
+                Log.d("RestoreBackup", "There is no need to restore this color : " + " " +
+                        "settings_dashboard_background_color");
             }
         } catch (Exception e) {
-            Log.e("RestoreBackup", "There seems to be an issue restoring   : " + " settings_dashboard_background_color");
+            Log.e("RestoreBackup", "There seems to be an issue restoring   : " + " " +
+                    "settings_dashboard_background_color");
             error_counter += 1;
         }
 
         try {
             String[] commands = {"settings_dashboard_category_background_color", location};
             String savedColor = ReadProfile.main(commands);
-            if (Color.parseColor(savedColor) != current_selected_dashboard_category_background_color) {
+            if (Color.parseColor(savedColor) !=
+                    current_selected_dashboard_category_background_color) {
                 current_selected_dashboard_category_background_color = Color.parseColor(savedColor);
-                settings_preview.setBackgroundColor(current_selected_dashboard_category_background_color);
-                settings_dashboard_category_background_color.setColorFilter(current_selected_dashboard_category_background_color, PorterDuff.Mode.SRC_ATOP);
-                settings_dashboard_category_background_color_text.setTextColor(mContext.getColor(android.R.color.white));
+                settings_preview.setBackgroundColor
+                        (current_selected_dashboard_category_background_color);
+                settings_dashboard_category_background_color.setColorFilter
+                        (current_selected_dashboard_category_background_color, PorterDuff.Mode
+                                .SRC_ATOP);
+                settings_dashboard_category_background_color_text.setTextColor(mContext.getColor
+                        (android.R.color.white));
                 is_settings_dashboard_category_background_color_changed = true;
             } else {
-                Log.d("RestoreBackup", "There is no need to restore this color : " + " settings_dashboard_category_background_color");
+                Log.d("RestoreBackup", "There is no need to restore this color : " + " " +
+                        "settings_dashboard_category_background_color");
             }
         } catch (Exception e) {
-            Log.e("RestoreBackup", "There seems to be an issue restoring   : " + " settings_dashboard_category_background_color");
+            Log.e("RestoreBackup", "There seems to be an issue restoring   : " + " " +
+                    "settings_dashboard_category_background_color");
             error_counter += 1;
         }
 
@@ -1704,10 +1811,12 @@ public class CreativeMode extends CardStackAdapter implements
                 categories_title_caps.setTextColor(mContext.getColor(android.R.color.white));
                 is_settings_dashboard_category_title_caps_changed = true;
             } else {
-                Log.d("RestoreBackup", "There is no need to restore this bool  : " + " settings_category_title_caps");
+                Log.d("RestoreBackup", "There is no need to restore this bool  : " + " " +
+                        "settings_category_title_caps");
             }
         } catch (Exception e) {
-            Log.e("RestoreBackup", "There seems to be an issue restoring   : " + " settings_category_title_caps");
+            Log.e("RestoreBackup", "There seems to be an issue restoring   : " + " " +
+                    "settings_category_title_caps");
             error_counter += 1;
         }
 
@@ -1723,10 +1832,12 @@ public class CreativeMode extends CardStackAdapter implements
                 categories_title_bold.setTextColor(mContext.getColor(android.R.color.white));
                 is_settings_dashboard_category_title_bold_changed = true;
             } else {
-                Log.d("RestoreBackup", "There is no need to restore this bool  : " + " settings_category_title_bold");
+                Log.d("RestoreBackup", "There is no need to restore this bool  : " + " " +
+                        "settings_category_title_bold");
             }
         } catch (Exception e) {
-            Log.e("RestoreBackup", "There seems to be an issue restoring   : " + " settings_category_title_bold");
+            Log.e("RestoreBackup", "There seems to be an issue restoring   : " + " " +
+                    "settings_category_title_bold");
             error_counter += 1;
         }
 
@@ -1742,10 +1853,12 @@ public class CreativeMode extends CardStackAdapter implements
                 categories_title_italics.setTextColor(mContext.getColor(android.R.color.white));
                 is_settings_dashboard_category_title_italics_changed = true;
             } else {
-                Log.d("RestoreBackup", "There is no need to restore this bool  : " + " settings_category_title_italics");
+                Log.d("RestoreBackup", "There is no need to restore this bool  : " + " " +
+                        "settings_category_title_italics");
             }
         } catch (Exception e) {
-            Log.e("RestoreBackup", "There seems to be an issue restoring   : " + " settings_category_title_italics");
+            Log.e("RestoreBackup", "There seems to be an issue restoring   : " + " " +
+                    "settings_category_title_italics");
             error_counter += 1;
         }
 
@@ -1761,10 +1874,12 @@ public class CreativeMode extends CardStackAdapter implements
                 dashboard_divider.setTextColor(mContext.getColor(android.R.color.white));
                 is_settings_dashboard_dividers_changed = true;
             } else {
-                Log.d("RestoreBackup", "There is no need to restore this bool  : " + " settings_dashboard_dividers");
+                Log.d("RestoreBackup", "There is no need to restore this bool  : " + " " +
+                        "settings_dashboard_dividers");
             }
         } catch (Exception e) {
-            Log.e("RestoreBackup", "There seems to be an issue restoring   : " + " settings_dashboard_dividers");
+            Log.e("RestoreBackup", "There seems to be an issue restoring   : " + " " +
+                    "settings_dashboard_dividers");
             error_counter += 1;
         }
 
@@ -1780,10 +1895,12 @@ public class CreativeMode extends CardStackAdapter implements
                 dutweaks_icons.setTextColor(mContext.getColor(android.R.color.white));
                 is_settings_dashboard_dirty_tweaks_icon_presence_changed = true;
             } else {
-                Log.d("RestoreBackup", "There is no need to restore this bool  : " + " settings_dirty_tweaks_icon_presence");
+                Log.d("RestoreBackup", "There is no need to restore this bool  : " + " " +
+                        "settings_dirty_tweaks_icon_presence");
             }
         } catch (Exception e) {
-            Log.e("RestoreBackup", "There seems to be an issue restoring   : " + " settings_dirty_tweaks_icon_presence");
+            Log.e("RestoreBackup", "There seems to be an issue restoring   : " + " " +
+                    "settings_dirty_tweaks_icon_presence");
             error_counter += 1;
         }
 
@@ -1792,15 +1909,19 @@ public class CreativeMode extends CardStackAdapter implements
             String savedColor = ReadProfile.main(commands);
             if (Color.parseColor(savedColor) != current_selected_settings_icon_color) {
                 current_selected_settings_icon_color = Color.parseColor(savedColor);
-                wifiIcon.setColorFilter(current_selected_settings_icon_color, PorterDuff.Mode.SRC_ATOP);
-                settings_icon_colors.setColorFilter(current_selected_settings_icon_color, PorterDuff.Mode.SRC_ATOP);
+                wifiIcon.setColorFilter(current_selected_settings_icon_color, PorterDuff.Mode
+                        .SRC_ATOP);
+                settings_icon_colors.setColorFilter(current_selected_settings_icon_color,
+                        PorterDuff.Mode.SRC_ATOP);
                 settings_icon_colors_text.setTextColor(mContext.getColor(android.R.color.white));
                 is_settings_icon_color_changed = true;
             } else {
-                Log.d("RestoreBackup", "There is no need to restore this color : " + " settings_icon_colors");
+                Log.d("RestoreBackup", "There is no need to restore this color : " + " " +
+                        "settings_icon_colors");
             }
         } catch (Exception e) {
-            Log.e("RestoreBackup", "There seems to be an issue restoring   : " + " settings_icon_colors");
+            Log.e("RestoreBackup", "There seems to be an issue restoring   : " + " " +
+                    "settings_icon_colors");
             error_counter += 1;
         }
 
@@ -1810,14 +1931,17 @@ public class CreativeMode extends CardStackAdapter implements
             if (Color.parseColor(savedColor) != current_selected_settings_title_color) {
                 current_selected_settings_title_color = Color.parseColor(savedColor);
                 categoryHeader.setTextColor(current_selected_settings_title_color);
-                settings_title_colors.setColorFilter(current_selected_settings_title_color, PorterDuff.Mode.SRC_ATOP);
+                settings_title_colors.setColorFilter(current_selected_settings_title_color,
+                        PorterDuff.Mode.SRC_ATOP);
                 settings_title_colors_text.setTextColor(mContext.getColor(android.R.color.white));
                 is_settings_title_color_changed = true;
             } else {
-                Log.d("RestoreBackup", "There is no need to restore this color : " + " settings_title_colors");
+                Log.d("RestoreBackup", "There is no need to restore this color : " + " " +
+                        "settings_title_colors");
             }
         } catch (Exception e) {
-            Log.e("RestoreBackup", "There seems to be an issue restoring   : " + " settings_title_colors");
+            Log.e("RestoreBackup", "There seems to be an issue restoring   : " + " " +
+                    "settings_title_colors");
             error_counter += 1;
         }
 
@@ -1826,14 +1950,18 @@ public class CreativeMode extends CardStackAdapter implements
             String savedColor = ReadProfile.main(commands);
             if (Color.parseColor(savedColor) != current_selected_settings_switchbar_color) {
                 current_selected_settings_switchbar_color = Color.parseColor(savedColor);
-                settings_switchbar_background_color.setColorFilter(current_selected_settings_switchbar_color, PorterDuff.Mode.SRC_ATOP);
-                settings_switchbar_background_color_text.setTextColor(mContext.getColor(android.R.color.white));
+                settings_switchbar_background_color.setColorFilter
+                        (current_selected_settings_switchbar_color, PorterDuff.Mode.SRC_ATOP);
+                settings_switchbar_background_color_text.setTextColor(mContext.getColor(android.R
+                        .color.white));
                 is_settings_switchbar_background_color_changed = true;
             } else {
-                Log.d("RestoreBackup", "There is no need to restore this color : " + " settings_switchbar_background_color");
+                Log.d("RestoreBackup", "There is no need to restore this color : " + " " +
+                        "settings_switchbar_background_color");
             }
         } catch (Exception e) {
-            Log.e("RestoreBackup", "There seems to be an issue restoring   : " + " settings_switchbar_background_color");
+            Log.e("RestoreBackup", "There seems to be an issue restoring   : " + " " +
+                    "settings_switchbar_background_color");
             error_counter += 1;
         }
 
@@ -1851,19 +1979,24 @@ public class CreativeMode extends CardStackAdapter implements
                                 new int[]{}
                         },
                         new int[]{
-                                current_selected_system_accent_color, current_selected_system_accent_color, current_selected_system_accent_color
+                                current_selected_system_accent_color,
+                                current_selected_system_accent_color,
+                                current_selected_system_accent_color
                         }
                 );
                 brightness.setProgressTintList(csl);
                 brightness.setThumbTintList(csl);
-                qs_accents.setColorFilter(current_selected_system_accent_color, PorterDuff.Mode.SRC_ATOP);
+                qs_accents.setColorFilter(current_selected_system_accent_color, PorterDuff.Mode
+                        .SRC_ATOP);
                 qs_accents_text.setTextColor(mContext.getColor(android.R.color.white));
                 is_systemui_accent_color_changed = true;
             } else {
-                Log.d("RestoreBackup", "There is no need to restore this color : " + " systemui_accent");
+                Log.d("RestoreBackup", "There is no need to restore this color : " + " " +
+                        "systemui_accent");
             }
         } catch (Exception e) {
-            Log.e("RestoreBackup", "There seems to be an issue restoring   : " + " systemui_accent");
+            Log.e("RestoreBackup", "There seems to be an issue restoring   : " + " " +
+                    "systemui_accent");
             error_counter += 1;
         }
 
@@ -1872,14 +2005,17 @@ public class CreativeMode extends CardStackAdapter implements
             String savedColor = ReadProfile.main(commands);
             if (Color.parseColor(savedColor) != current_selected_header_background_color) {
                 current_selected_header_background_color = Color.parseColor(savedColor);
-                qs_header.setColorFilter(current_selected_header_background_color, PorterDuff.Mode.SRC_ATOP);
+                qs_header.setColorFilter(current_selected_header_background_color, PorterDuff
+                        .Mode.SRC_ATOP);
                 qs_header_color.setTextColor(mContext.getColor(android.R.color.white));
                 is_systemui_header_color_changed = true;
             } else {
-                Log.d("RestoreBackup", "There is no need to restore this color : " + " systemui_header_background_color");
+                Log.d("RestoreBackup", "There is no need to restore this color : " + " " +
+                        "systemui_header_background_color");
             }
         } catch (Exception e) {
-            Log.e("RestoreBackup", "There seems to be an issue restoring   : " + " systemui_header_background_color");
+            Log.e("RestoreBackup", "There seems to be an issue restoring   : " + " " +
+                    "systemui_header_background_color");
             error_counter += 1;
         }
 
@@ -1888,14 +2024,17 @@ public class CreativeMode extends CardStackAdapter implements
             String savedColor = ReadProfile.main(commands);
             if (Color.parseColor(savedColor) != current_selected_notification_background_color) {
                 current_selected_notification_background_color = Color.parseColor(savedColor);
-                qs_notification.setColorFilter(current_selected_notification_background_color, PorterDuff.Mode.SRC_ATOP);
+                qs_notification.setColorFilter(current_selected_notification_background_color,
+                        PorterDuff.Mode.SRC_ATOP);
                 qs_notification_color.setTextColor(mContext.getColor(android.R.color.white));
                 is_systemui_notification_background_color_changed = true;
             } else {
-                Log.d("RestoreBackup", "There is no need to restore this color : " + " systemui_notification_background_color");
+                Log.d("RestoreBackup", "There is no need to restore this color : " + " " +
+                        "systemui_notification_background_color");
             }
         } catch (Exception e) {
-            Log.e("RestoreBackup", "There seems to be an issue restoring   : " + " systemui_notification_background_color");
+            Log.e("RestoreBackup", "There seems to be an issue restoring   : " + " " +
+                    "systemui_notification_background_color");
             error_counter += 1;
         }
 
@@ -1905,14 +2044,17 @@ public class CreativeMode extends CardStackAdapter implements
             if (Color.parseColor(savedColor) != current_selected_qs_panel_background_color) {
                 current_selected_qs_panel_background_color = Color.parseColor(savedColor);
                 qs_panel_bg_preview.setBackgroundColor(current_selected_qs_panel_background_color);
-                qs_panel_bg.setColorFilter(current_selected_qs_panel_background_color, PorterDuff.Mode.SRC_ATOP);
+                qs_panel_bg.setColorFilter(current_selected_qs_panel_background_color, PorterDuff
+                        .Mode.SRC_ATOP);
                 qs_panel_bg_color.setTextColor(mContext.getColor(android.R.color.white));
                 is_systemui_qs_panel_background_color_changed = true;
             } else {
-                Log.d("RestoreBackup", "There is no need to restore this color : " + " systemui_qs_panel_background_color");
+                Log.d("RestoreBackup", "There is no need to restore this color : " + " " +
+                        "systemui_qs_panel_background_color");
             }
         } catch (Exception e) {
-            Log.e("RestoreBackup", "There seems to be an issue restoring   : " + " systemui_qs_panel_background_color");
+            Log.e("RestoreBackup", "There seems to be an issue restoring   : " + " " +
+                    "systemui_qs_panel_background_color");
             error_counter += 1;
         }
 
@@ -1928,7 +2070,8 @@ public class CreativeMode extends CardStackAdapter implements
                                 new int[]{}
                         },
                         new int[]{
-                                current_selected_qs_tile_color, current_selected_qs_tile_color, current_selected_qs_tile_color
+                                current_selected_qs_tile_color, current_selected_qs_tile_color,
+                                current_selected_qs_tile_color
                         }
                 );
                 bluetoothLabel.setCompoundDrawableTintList(csl);
@@ -1937,10 +2080,12 @@ public class CreativeMode extends CardStackAdapter implements
                 qs_tile_text.setTextColor(mContext.getColor(android.R.color.white));
                 is_systemui_qs_tile_color_changed = true;
             } else {
-                Log.d("RestoreBackup", "There is no need to restore this color : " + " systemui_qs_tile_color");
+                Log.d("RestoreBackup", "There is no need to restore this color : " + " " +
+                        "systemui_qs_tile_color");
             }
         } catch (Exception e) {
-            Log.e("RestoreBackup", "There seems to be an issue restoring   : " + " systemui_qs_tile_color");
+            Log.e("RestoreBackup", "There seems to be an issue restoring   : " + " " +
+                    "systemui_qs_tile_color");
             error_counter += 1;
         }
 
@@ -1955,10 +2100,12 @@ public class CreativeMode extends CardStackAdapter implements
                 qs_text_text.setTextColor(mContext.getColor(android.R.color.white));
                 is_systemui_qs_text_color_changed = true;
             } else {
-                Log.d("RestoreBackup", "There is no need to restore this color : " + " systemui_qs_text_color");
+                Log.d("RestoreBackup", "There is no need to restore this color : " + " " +
+                        "systemui_qs_text_color");
             }
         } catch (Exception e) {
-            Log.e("RestoreBackup", "There seems to be an issue restoring   : " + " systemui_qs_text_color");
+            Log.e("RestoreBackup", "There seems to be an issue restoring   : " + " " +
+                    "systemui_qs_text_color");
             error_counter += 1;
         }
 
@@ -1967,14 +2114,17 @@ public class CreativeMode extends CardStackAdapter implements
             String savedColor = ReadProfile.main(commands);
             if (Color.parseColor(savedColor) != current_selected_recents_clear_all_icon_color) {
                 current_selected_recents_clear_all_icon_color = Color.parseColor(savedColor);
-                qs_recents.setColorFilter(current_selected_recents_clear_all_icon_color, PorterDuff.Mode.SRC_ATOP);
+                qs_recents.setColorFilter(current_selected_recents_clear_all_icon_color,
+                        PorterDuff.Mode.SRC_ATOP);
                 qs_recents_text.setTextColor(mContext.getColor(android.R.color.white));
                 is_systemui_recents_clear_all_icon_color_changed = true;
             } else {
-                Log.d("RestoreBackup", "There is no need to restore this color : " + " systemui_recents_clear_all_fab_icon_color");
+                Log.d("RestoreBackup", "There is no need to restore this color : " + " " +
+                        "systemui_recents_clear_all_fab_icon_color");
             }
         } catch (Exception e) {
-            Log.e("RestoreBackup", "There seems to be an issue restoring   : " + " systemui_recents_clear_all_fab_icon_color");
+            Log.e("RestoreBackup", "There seems to be an issue restoring   : " + " " +
+                    "systemui_recents_clear_all_fab_icon_color");
             error_counter += 1;
         }
 
@@ -2006,7 +2156,8 @@ public class CreativeMode extends CardStackAdapter implements
                 Log.d("RestoreBackup", "You made me, master!");
             }
         } catch (Exception e) {
-            Log.e("RestoreBackup", "There seems to be an issue restoring   : " + " dashboard_username");
+            Log.e("RestoreBackup", "There seems to be an issue restoring   : " + " " +
+                    "dashboard_username");
             error_counter += 1;
         }
 
@@ -2017,7 +2168,8 @@ public class CreativeMode extends CardStackAdapter implements
                 boolean installed = checkIfPackageInstalled(theme_identifier, mContext);
                 if (installed) {
                     if (theme_identifier.contains("com.chummy")) {
-                        Toast toast = Toast.makeText(mContext.getApplicationContext(), mContext.getString(R.string.restore_package_installed_cdt),
+                        Toast toast = Toast.makeText(mContext.getApplicationContext(), mContext
+                                        .getString(R.string.restore_package_installed_cdt),
                                 Toast.LENGTH_LONG);
                         toast.show();
                     } else {
@@ -2029,7 +2181,9 @@ public class CreativeMode extends CardStackAdapter implements
                     }
                 } else {
                     if (theme_identifier.contains("com.chummy")) {
-                        Toast toast = Toast.makeText(mContext.getApplicationContext(), mContext.getString(R.string.restore_package_installed_cdt_not_installed),
+                        Toast toast = Toast.makeText(mContext.getApplicationContext(), mContext
+                                        .getString(R.string
+                                                .restore_package_installed_cdt_not_installed),
                                 Toast.LENGTH_LONG);
                         toast.show();
                     } else {
@@ -2044,30 +2198,36 @@ public class CreativeMode extends CardStackAdapter implements
                 throw new Exception();
             }
         } catch (Exception e) {
-            Log.e("RestoreBackup", "There seems to be an issue restoring   : " + " theme_identifier");
+            Log.e("RestoreBackup", "There seems to be an issue restoring   : " + " " +
+                    "theme_identifier");
             error_counter += 1;
         }
 
         if (error_counter > 0) {
             Log.e("RestoreBackup", "Restoring of profile finished successfully with some errors!");
-            Toast toast = Toast.makeText(mContext.getApplicationContext(), mContext.getString(R.string.restore_profile_failure),
+            Toast toast = Toast.makeText(mContext.getApplicationContext(), mContext.getString(R
+                            .string.restore_profile_failure),
                     Toast.LENGTH_LONG);
             toast.show();
         } else {
             Log.d("RestoreBackup", "Restoring of profile finished successfully!");
-            Toast toast = Toast.makeText(mContext.getApplicationContext(), mContext.getString(R.string.restore_profile_success),
+            Toast toast = Toast.makeText(mContext.getApplicationContext(), mContext.getString(R
+                            .string.restore_profile_success),
                     Toast.LENGTH_LONG);
             toast.show();
         }
     }
 
     public void backupProfile(String filename, String theme_name) {
-        File myDir = new File(Environment.getExternalStorageDirectory(), mContext.getString(R.string.dashboard_profile_directory));
+        File myDir = new File(Environment.getExternalStorageDirectory(), mContext.getString(R
+                .string.dashboard_profile_directory));
         if (!myDir.exists()) {
             myDir.mkdirs();
         }
         File root = new File(
-                Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + mContext.getString(R.string.dashboard_profile_directory) + "/" + filename + ".dashboard");
+                Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + mContext
+                        .getString(R.string.dashboard_profile_directory) + "/" + filename + "" +
+                        ".dashboard");
         try {
             root.createNewFile();
             FileWriter fw = new FileWriter(root);
@@ -2077,41 +2237,87 @@ public class CreativeMode extends CardStackAdapter implements
                     "<?xml version=\"1.0\"?>\n" +
                     "<dashboard>\n" +
                     "    <profile id=\"" + theme_name + "\">\n" +
-                    "        <dashboard_username>" + prefs.getString("dashboard_username", mContext.getString(R.string.default_username)) + "</dashboard_username>\n" +
-                    "        <theme_identifier>" + current_selected_theme + "</theme_identifier>\n" +
+                    "        <dashboard_username>" + prefs.getString("dashboard_username",
+                    mContext.getString(R.string.default_username)) + "</dashboard_username>\n" +
+                    "        <theme_identifier>" + current_selected_theme +
+                    "</theme_identifier>\n" +
                     "\n" +
-                    "        <framework_accent_dark>#" + Integer.toHexString(current_selected_system_accent_color) + "</framework_accent_dark>\n" +
-                    "        <framework_accent_secondary>#" + Integer.toHexString(current_selected_system_accent_dual_color) + "</framework_accent_secondary>\n" +
-                    "        <framework_accent_light>#" + Integer.toHexString(current_selected_system_accent_light_color) + "</framework_accent_light>\n" +
-                    "        <framework_app_background_dark>#" + Integer.toHexString(current_selected_system_appbg_color) + "</framework_app_background_dark>\n" +
-                    "        <framework_app_background_light>#" + Integer.toHexString(current_selected_system_appbg_light_color) + "</framework_app_background_light>\n" +
-                    "        <framework_dialog_background_dark>#" + Integer.toHexString(current_selected_system_dialog_color) + "</framework_dialog_background_dark>\n" +
-                    "        <framework_dialog_background_light>#" + Integer.toHexString(current_selected_system_dialog_light_color) + "</framework_dialog_background_light>\n" +
-                    "        <framework_main_theme_color>#" + Integer.toHexString(current_selected_system_main_color) + "</framework_main_theme_color>\n" +
-                    "        <framework_main_theme_color_dark>#" + Integer.toHexString(current_selected_system_main_dark_color) + "</framework_main_theme_color_dark>\n" +
-                    "        <framework_notifications_primary>#" + Integer.toHexString(current_selected_system_notifications_primary_color) + "</framework_notifications_primary>\n" +
-                    "        <framework_notifications_secondary>#" + Integer.toHexString(current_selected_system_notifications_secondary_color) + "</framework_notifications_secondary>\n" +
-                    "        <framework_system_ripple>#" + Integer.toHexString(current_selected_system_ripple_color) + "</framework_system_ripple>\n" +
+                    "        <framework_accent_dark>#" + Integer.toHexString
+                    (current_selected_system_accent_color) + "</framework_accent_dark>\n" +
+                    "        <framework_accent_secondary>#" + Integer.toHexString
+                    (current_selected_system_accent_dual_color) +
+                    "</framework_accent_secondary>\n" +
+                    "        <framework_accent_light>#" + Integer.toHexString
+                    (current_selected_system_accent_light_color) + "</framework_accent_light>\n" +
+                    "        <framework_app_background_dark>#" + Integer.toHexString
+                    (current_selected_system_appbg_color) + "</framework_app_background_dark>\n" +
+                    "        <framework_app_background_light>#" + Integer.toHexString
+                    (current_selected_system_appbg_light_color) +
+                    "</framework_app_background_light>\n" +
+                    "        <framework_dialog_background_dark>#" + Integer.toHexString
+                    (current_selected_system_dialog_color) +
+                    "</framework_dialog_background_dark>\n" +
+                    "        <framework_dialog_background_light>#" + Integer.toHexString
+                    (current_selected_system_dialog_light_color) +
+                    "</framework_dialog_background_light>\n" +
+                    "        <framework_main_theme_color>#" + Integer.toHexString
+                    (current_selected_system_main_color) + "</framework_main_theme_color>\n" +
+                    "        <framework_main_theme_color_dark>#" + Integer.toHexString
+                    (current_selected_system_main_dark_color) +
+                    "</framework_main_theme_color_dark>\n" +
+                    "        <framework_notifications_primary>#" + Integer.toHexString
+                    (current_selected_system_notifications_primary_color) +
+                    "</framework_notifications_primary>\n" +
+                    "        <framework_notifications_secondary>#" + Integer.toHexString
+                    (current_selected_system_notifications_secondary_color) +
+                    "</framework_notifications_secondary>\n" +
+                    "        <framework_system_ripple>#" + Integer.toHexString
+                    (current_selected_system_ripple_color) + "</framework_system_ripple>\n" +
                     "\n" +
-                    "        <settings_colorful_icon>" + Boolean.toString(colorful_icon) + "</settings_colorful_icon>\n" +
-                    "        <settings_dashboard_background_color>#" + Integer.toHexString(current_selected_dashboard_background_color) + "</settings_dashboard_background_color>\n" +
-                    "        <settings_dashboard_category_background_color>#" + Integer.toHexString(current_selected_dashboard_category_background_color) + "</settings_dashboard_category_background_color>\n" +
-                    "        <settings_category_title_caps>" + Boolean.toString(category_title_caps) + "</settings_category_title_caps>\n" +
-                    "        <settings_category_title_bold>" + Boolean.toString(category_title_bold) + "</settings_category_title_bold>\n" +
-                    "        <settings_category_title_italics>" + Boolean.toString(category_title_italics) + "</settings_category_title_italics>\n" +
-                    "        <settings_dashboard_dividers>" + Boolean.toString(dashboard_dividers) + "</settings_dashboard_dividers>\n" +
-                    "        <settings_dirty_tweaks_icon_presence>" + Boolean.toString(dirtytweaks_icon_presence) + "</settings_dirty_tweaks_icon_presence>\n" +
-                    "        <settings_icon_colors>#" + Integer.toHexString(current_selected_settings_icon_color) + "</settings_icon_colors>\n" +
-                    "        <settings_title_colors>#" + Integer.toHexString(current_selected_settings_title_color) + "</settings_title_colors>\n" +
-                    "        <settings_switchbar_background_color>#" + Integer.toHexString(current_selected_settings_switchbar_color) + "</settings_switchbar_background_color>\n" +
+                    "        <settings_colorful_icon>" + Boolean.toString(colorful_icon) +
+                    "</settings_colorful_icon>\n" +
+                    "        <settings_dashboard_background_color>#" + Integer.toHexString
+                    (current_selected_dashboard_background_color) +
+                    "</settings_dashboard_background_color>\n" +
+                    "        <settings_dashboard_category_background_color>#" + Integer
+                    .toHexString(current_selected_dashboard_category_background_color) +
+                    "</settings_dashboard_category_background_color>\n" +
+                    "        <settings_category_title_caps>" + Boolean.toString
+                    (category_title_caps) + "</settings_category_title_caps>\n" +
+                    "        <settings_category_title_bold>" + Boolean.toString
+                    (category_title_bold) + "</settings_category_title_bold>\n" +
+                    "        <settings_category_title_italics>" + Boolean.toString
+                    (category_title_italics) + "</settings_category_title_italics>\n" +
+                    "        <settings_dashboard_dividers>" + Boolean.toString
+                    (dashboard_dividers) + "</settings_dashboard_dividers>\n" +
+                    "        <settings_dirty_tweaks_icon_presence>" + Boolean.toString
+                    (dirtytweaks_icon_presence) + "</settings_dirty_tweaks_icon_presence>\n" +
+                    "        <settings_icon_colors>#" + Integer.toHexString
+                    (current_selected_settings_icon_color) + "</settings_icon_colors>\n" +
+                    "        <settings_title_colors>#" + Integer.toHexString
+                    (current_selected_settings_title_color) + "</settings_title_colors>\n" +
+                    "        <settings_switchbar_background_color>#" + Integer.toHexString
+                    (current_selected_settings_switchbar_color) +
+                    "</settings_switchbar_background_color>\n" +
                     "\n" +
-                    "        <systemui_accent>#" + Integer.toHexString(current_selected_qs_accent_color) + "</systemui_accent>\n" +
-                    "        <systemui_header_background_color>#" + Integer.toHexString(current_selected_header_background_color) + "</systemui_header_background_color>\n" +
-                    "        <systemui_notification_background_color>#" + Integer.toHexString(current_selected_notification_background_color) + "</systemui_notification_background_color>\n" +
-                    "        <systemui_qs_panel_background_color>#" + Integer.toHexString(current_selected_qs_panel_background_color) + "</systemui_qs_panel_background_color>\n" +
-                    "        <systemui_qs_tile_color>#" + Integer.toHexString(current_selected_qs_tile_color) + "</systemui_qs_tile_color>\n" +
-                    "        <systemui_qs_text_color>#" + Integer.toHexString(current_selected_qs_text_color) + "</systemui_qs_text_color>\n" +
-                    "        <systemui_recents_clear_all_fab_icon_color>#" + Integer.toHexString(current_selected_recents_clear_all_icon_color) + "</systemui_recents_clear_all_fab_icon_color>\n" +
+                    "        <systemui_accent>#" + Integer.toHexString
+                    (current_selected_qs_accent_color) + "</systemui_accent>\n" +
+                    "        <systemui_header_background_color>#" + Integer.toHexString
+                    (current_selected_header_background_color) +
+                    "</systemui_header_background_color>\n" +
+                    "        <systemui_notification_background_color>#" + Integer.toHexString
+                    (current_selected_notification_background_color) +
+                    "</systemui_notification_background_color>\n" +
+                    "        <systemui_qs_panel_background_color>#" + Integer.toHexString
+                    (current_selected_qs_panel_background_color) +
+                    "</systemui_qs_panel_background_color>\n" +
+                    "        <systemui_qs_tile_color>#" + Integer.toHexString
+                    (current_selected_qs_tile_color) + "</systemui_qs_tile_color>\n" +
+                    "        <systemui_qs_text_color>#" + Integer.toHexString
+                    (current_selected_qs_text_color) + "</systemui_qs_text_color>\n" +
+                    "        <systemui_recents_clear_all_fab_icon_color>#" + Integer.toHexString
+                    (current_selected_recents_clear_all_icon_color) +
+                    "</systemui_recents_clear_all_fab_icon_color>\n" +
                     "    </profile>\n" +
                     "</dashboard>");
 
@@ -2120,7 +2326,9 @@ public class CreativeMode extends CardStackAdapter implements
             bw.close();
             fw.close();
             String formatted = String.format(mContext.getResources().getString(
-                    R.string.restore_profile_spinner_saved_toast), "/storage/emulated/0/" + mContext.getString(R.string.dashboard_profile_directory) + "/" + filename + ".dashboard");
+                    R.string.restore_profile_spinner_saved_toast), "/storage/emulated/0/" +
+                    mContext.getString(R.string.dashboard_profile_directory) + "/" + filename + "" +
+                    ".dashboard");
             Toast toast = Toast.makeText(mContext.getApplicationContext(), formatted,
                     Toast.LENGTH_LONG);
             toast.show();
@@ -2139,11 +2347,14 @@ public class CreativeMode extends CardStackAdapter implements
 
         list2.add(mContext.getString(R.string.restore_profile_spinner_default));
 
-        File f2 = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + mContext.getString(R.string.dashboard_profile_directory) + "/");
+        File f2 = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/" +
+                mContext.getString(R.string.dashboard_profile_directory) + "/");
         File[] files2 = f2.listFiles();
         if (files2 != null) {
             for (File inFile2 : files2) {
-                if (!inFile2.isDirectory() && inFile2.toString().contains(".dashboard") && inFile2.toString().substring(inFile2.toString().length() - 10).equals(".dashboard")) {
+                if (!inFile2.isDirectory() && inFile2.toString().contains(".dashboard") &&
+                        inFile2.toString().substring(inFile2.toString().length() - 10).equals("" +
+                                ".dashboard")) {
                     list2.add(inFile2.getAbsolutePath().substring(40));
                 }
             }
@@ -2162,7 +2373,8 @@ public class CreativeMode extends CardStackAdapter implements
         // filter.
 
         File f2 = new File(
-                Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + mContext.getString(R.string.dashboard_header_directory) + "/");
+                Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + mContext
+                        .getString(R.string.dashboard_header_directory) + "/");
         File[] files2 = f2.listFiles();
         if (files2 != null) {
             for (File inFile2 : files2) {
@@ -2176,7 +2388,8 @@ public class CreativeMode extends CardStackAdapter implements
 
                             ZipFile zipFile = new ZipFile(
                                     Environment.getExternalStorageDirectory().
-                                            getAbsolutePath() + "/" + mContext.getString(R.string.dashboard_header_directory) + "/" + filename);
+                                            getAbsolutePath() + "/" + mContext.getString(R.string
+                                            .dashboard_header_directory) + "/" + filename);
                             ZipEntry entry = zipFile.getEntry("headers.xml");
                             if (entry != null) {
                                 // headers.xml was found in the file, so add it into the spinner
@@ -2221,7 +2434,8 @@ public class CreativeMode extends CardStackAdapter implements
                             use_themable_gapps = false;
                             Log.d("Use Themable Gapps", "false");
                             use_themable_gapps_changed = false;
-                            themable_gapps.setTextColor(mContext.getColor(R.color.creative_mode_text_disabled));
+                            themable_gapps.setTextColor(mContext.getColor(R.color
+                                    .creative_mode_text_disabled));
                         }
 
                     }
@@ -2244,8 +2458,10 @@ public class CreativeMode extends CardStackAdapter implements
                         if (!inFile.getAbsolutePath().substring(21).equals(
                                 "com.chummy.jezebel.materialdark.donate")) {
                             if (!inFile.getAbsolutePath().substring(21).equals("projekt.klar")) {
-                                if (!inFile.getAbsolutePath().substring(21).contains("chummy.dashboard")) {
-                                    if (checkIfPackageInstalled(inFile.getAbsolutePath().substring(21), mContext)) {
+                                if (!inFile.getAbsolutePath().substring(21).contains("chummy" +
+                                        ".dashboard")) {
+                                    if (checkIfPackageInstalled(inFile.getAbsolutePath()
+                                            .substring(21), mContext)) {
                                         list.add(inFile.getAbsolutePath().substring(21));
                                         counter += 1;
                                     }
@@ -2294,7 +2510,8 @@ public class CreativeMode extends CardStackAdapter implements
                     if (framework_toolbar_dark.getVisibility() == View.VISIBLE) {
                         framework_toolbar_dark.setVisibility(View.GONE);
                     }
-                    Log.d("getFinalizedViewSpinner", "header pack creation activated, all options have been disabled!");
+                    Log.d("getFinalizedViewSpinner", "header pack creation activated, all options" +
+                            " have been disabled!");
                     header_creative_mode_activated = true;
 
                     if (!aet1.getText().equals("")) {
@@ -2310,37 +2527,48 @@ public class CreativeMode extends CardStackAdapter implements
                     handler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            systemui_card.setCardBackgroundColor(ContextCompat.getColor(mContext, bgColorIds[2]));
+                            systemui_card.setCardBackgroundColor(ContextCompat.getColor(mContext,
+                                    bgColorIds[2]));
                             final Handler handler = new Handler();
                             handler.postDelayed(new Runnable() {
                                 @Override
                                 public void run() {
-                                    systemui_card.setCardBackgroundColor(ContextCompat.getColor(mContext, R.color.card_highlight));
+                                    systemui_card.setCardBackgroundColor(ContextCompat.getColor
+                                            (mContext, R.color.card_highlight));
                                     final Handler handler = new Handler();
                                     handler.postDelayed(new Runnable() {
                                         @Override
                                         public void run() {
-                                            systemui_card.setCardBackgroundColor(ContextCompat.getColor(mContext, bgColorIds[2]));
+                                            systemui_card.setCardBackgroundColor(ContextCompat
+                                                    .getColor(mContext, bgColorIds[2]));
                                             final Handler handler = new Handler();
                                             handler.postDelayed(new Runnable() {
                                                 @Override
                                                 public void run() {
-                                                    systemui_card.setCardBackgroundColor(ContextCompat.getColor(mContext, R.color.card_highlight));
+                                                    systemui_card.setCardBackgroundColor
+                                                            (ContextCompat.getColor(mContext, R
+                                                                    .color.card_highlight));
                                                     final Handler handler = new Handler();
                                                     handler.postDelayed(new Runnable() {
                                                         @Override
                                                         public void run() {
-                                                            systemui_card.setCardBackgroundColor(ContextCompat.getColor(mContext, bgColorIds[2]));
+                                                            systemui_card.setCardBackgroundColor
+                                                                    (ContextCompat.getColor
+                                                                            (mContext,
+                                                                                    bgColorIds[2]));
                                                             final Handler handler = new Handler();
                                                             handler.postDelayed(new Runnable() {
                                                                 @Override
                                                                 public void run() {
-                                                                    systemui_card.setCardBackgroundColor(ContextCompat.getColor(mContext, R.color.card_highlight));
-                                                                    final Handler handler = new Handler();
+                                                                    systemui_card
+                                                                            .setCardBackgroundColor(ContextCompat.getColor(mContext, R.color.card_highlight));
+                                                                    final Handler handler = new
+                                                                            Handler();
                                                                     handler.postDelayed(new Runnable() {
                                                                         @Override
                                                                         public void run() {
-                                                                            systemui_card.setCardBackgroundColor(ContextCompat.getColor(mContext, bgColorIds[2]));
+                                                                            systemui_card
+                                                                                    .setCardBackgroundColor(ContextCompat.getColor(mContext, bgColorIds[2]));
                                                                         }
                                                                     }, 100);
                                                                 }
@@ -2368,14 +2596,16 @@ public class CreativeMode extends CardStackAdapter implements
                                 Toast.LENGTH_LONG);
                         toast.show();
                     } else {
-                        Log.d("getFinalizedViewSpinner", "akZent has been selected, all options have been swapped!");
+                        Log.d("getFinalizedViewSpinner", "akZent has been selected, all options " +
+                                "have been swapped!");
                         colorful_icon_switch.setVisibility(View.VISIBLE);
                         main_color_dark_view.setVisibility(View.GONE);
                         is_framework_main_theme_color_dark_changed = false;
                         if (current_selected_system_main_color == Color.argb(255, 0, 0, 0)) {
                             current_selected_system_main_color = Color.argb(255, 33, 32, 33);
                             main_color.setColorFilter(current_selected_system_main_color);
-                            framework_toolbar.setBackgroundColor(current_selected_system_main_color);
+                            framework_toolbar.setBackgroundColor
+                                    (current_selected_system_main_color);
                             settings_toolbar.setBackgroundColor(current_selected_system_main_color);
                         }
                         if (current_selected_system_main_dark_color == Color.argb(255, 0, 0, 0)) {
@@ -2385,11 +2615,15 @@ public class CreativeMode extends CardStackAdapter implements
                             current_selected_header_background_color = Color.argb(255, 31, 31, 31);
                             qs_header.setColorFilter(current_selected_header_background_color);
                         }
-                        if (current_selected_notification_background_color == Color.argb(255, 0, 0, 0)) {
-                            current_selected_notification_background_color = Color.argb(229, 33, 32, 33);
-                            qs_notification.setColorFilter(current_selected_notification_background_color);
+                        if (current_selected_notification_background_color == Color.argb(255, 0,
+                                0, 0)) {
+                            current_selected_notification_background_color = Color.argb(229, 33,
+                                    32, 33);
+                            qs_notification.setColorFilter
+                                    (current_selected_notification_background_color);
                         }
-                        if (current_selected_qs_panel_background_color == Color.argb(255, 0, 0, 0)) {
+                        if (current_selected_qs_panel_background_color == Color.argb(255, 0, 0,
+                                0)) {
                             current_selected_qs_panel_background_color = Color.argb(204, 0, 0, 0);
                             qs_panel_bg.setColorFilter(current_selected_qs_panel_background_color);
                         }
@@ -2411,28 +2645,36 @@ public class CreativeMode extends CardStackAdapter implements
                         toast.show();
                         spinner1.setSelection(0);
                     } else {
-                        Log.d("getFinalizedViewSpinner", "blakZent has been selected, all options have been swapped!");
+                        Log.d("getFinalizedViewSpinner", "blakZent has been selected, all options" +
+                                " have been swapped!");
                         colorful_icon_switch.setVisibility(View.VISIBLE);
                         main_color_dark_view.setVisibility(View.GONE);
                         is_framework_main_theme_color_dark_changed = false;
                         if (current_selected_system_main_color == Color.argb(255, 33, 32, 33)) {
                             current_selected_system_main_color = Color.argb(255, 0, 0, 0);
                             main_color.setColorFilter(current_selected_system_main_color);
-                            framework_toolbar.setBackgroundColor(current_selected_system_main_color);
+                            framework_toolbar.setBackgroundColor
+                                    (current_selected_system_main_color);
                             settings_toolbar.setBackgroundColor(current_selected_system_main_color);
                         }
-                        if (current_selected_system_main_dark_color == Color.argb(255, 33, 32, 33)) {
+                        if (current_selected_system_main_dark_color == Color.argb(255, 33, 32,
+                                33)) {
                             current_selected_system_main_dark_color = Color.argb(255, 0, 0, 0);
                         }
-                        if (current_selected_header_background_color == Color.argb(255, 31, 31, 31)) {
+                        if (current_selected_header_background_color == Color.argb(255, 31, 31,
+                                31)) {
                             current_selected_header_background_color = Color.argb(255, 0, 0, 0);
                             qs_header.setColorFilter(current_selected_header_background_color);
                         }
-                        if (current_selected_notification_background_color == Color.argb(229, 33, 32, 33)) {
-                            current_selected_notification_background_color = Color.argb(255, 0, 0, 0);
-                            qs_notification.setColorFilter(current_selected_notification_background_color);
+                        if (current_selected_notification_background_color == Color.argb(229, 33,
+                                32, 33)) {
+                            current_selected_notification_background_color = Color.argb(255, 0,
+                                    0, 0);
+                            qs_notification.setColorFilter
+                                    (current_selected_notification_background_color);
                         }
-                        if (current_selected_qs_panel_background_color == Color.argb(204, 0, 0, 0)) {
+                        if (current_selected_qs_panel_background_color == Color.argb(204, 0, 0,
+                                0)) {
                             current_selected_qs_panel_background_color = Color.argb(255, 0, 0, 0);
                             qs_panel_bg.setColorFilter(current_selected_qs_panel_background_color);
                         }
@@ -2450,14 +2692,17 @@ public class CreativeMode extends CardStackAdapter implements
                     header_creative_mode_activated = false;
                     activateAllOptions(true);
                     if (spinner1.getSelectedItem().toString().substring(0, 10).equals("com.chummy")
-                            || spinner1.getSelectedItem().toString().substring(0, 13).equals("projekt.klar")) {
-                        Log.d("getFinalizedViewSpinner", "a cdt theme derivative has been selected, several options have been changed!");
+                            || spinner1.getSelectedItem().toString().substring(0, 13).equals
+                            ("projekt.klar")) {
+                        Log.d("getFinalizedViewSpinner", "a cdt theme derivative has been " +
+                                "selected, several options have been changed!");
                         main_color_dark_view.setVisibility(View.GONE);
                         is_framework_main_theme_color_dark_changed = false;
                         current_selected_theme = spinner1.getSelectedItem().toString();
                         colorful_icon_switch.setVisibility(View.VISIBLE);
                     } else {
-                        Log.d("getFinalizedViewSpinner", "header pack creation deactivated, all options have been re-enabled!");
+                        Log.d("getFinalizedViewSpinner", "header pack creation deactivated, all " +
+                                "options have been re-enabled!");
                         if (!main_color_dark_view.isShown()) {
                             main_color_dark_view.setVisibility(View.VISIBLE);
                         }
@@ -2546,11 +2791,14 @@ public class CreativeMode extends CardStackAdapter implements
 
         list2.add(mContext.getString(R.string.restore_profile_spinner_default));
 
-        File f2 = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + mContext.getString(R.string.dashboard_profile_directory) + "/");
+        File f2 = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/" +
+                mContext.getString(R.string.dashboard_profile_directory) + "/");
         File[] files2 = f2.listFiles();
         if (files2 != null) {
             for (File inFile2 : files2) {
-                if (!inFile2.isDirectory() && inFile2.toString().contains(".dashboard") && inFile2.toString().substring(inFile2.toString().length() - 10).equals(".dashboard")) {
+                if (!inFile2.isDirectory() && inFile2.toString().contains(".dashboard") &&
+                        inFile2.toString().substring(inFile2.toString().length() - 10).equals("" +
+                                ".dashboard")) {
                     list2.add(inFile2.getAbsolutePath().substring(40));
                 }
             }
@@ -2584,7 +2832,8 @@ public class CreativeMode extends CardStackAdapter implements
             public void onClick(View v) {
                 if (loadProfile.getSelectedItemPosition() != 0) {
                     String location = Environment.getExternalStorageDirectory().getAbsolutePath() +
-                            "/" + mContext.getString(R.string.dashboard_profile_directory) + "/" + loadProfile.getSelectedItem();
+                            "/" + mContext.getString(R.string.dashboard_profile_directory) + "/"
+                            + loadProfile.getSelectedItem();
                     restoreProfile(location);
                 } else {
                     Toast toast = Toast.makeText(mContext.getApplicationContext(),
@@ -2664,7 +2913,8 @@ public class CreativeMode extends CardStackAdapter implements
 
                 if (is_framework_accent_changed) {
                     Phase2_InjectAndMove accent = new Phase2_InjectAndMove();
-                    String accent_color = "#" + Integer.toHexString(current_selected_system_accent_color);
+                    String accent_color = "#" + Integer.toHexString
+                            (current_selected_system_accent_color);
                     accent.execute("creative_mode_accent", accent_color, "creative_mode_accent",
                             mContext.getCacheDir().getAbsolutePath() +
                                     "/creative_mode/assets/overlays/common/res/values-v10/");
@@ -2674,8 +2924,10 @@ public class CreativeMode extends CardStackAdapter implements
                     Phase2_InjectAndMove accent_secondary = new Phase2_InjectAndMove();
                     String accent_secondary_color = "#" + Integer.toHexString(
                             current_selected_system_accent_dual_color);
-                    accent_secondary.execute("creative_mode_accent_secondary", accent_secondary_color,
-                            "creative_mode_accent_secondary", mContext.getCacheDir().getAbsolutePath() +
+                    accent_secondary.execute("creative_mode_accent_secondary",
+                            accent_secondary_color,
+                            "creative_mode_accent_secondary", mContext.getCacheDir()
+                                    .getAbsolutePath() +
                                     "/creative_mode/assets/overlays/common/res/values-v10/");
                 }
 
@@ -2691,8 +2943,10 @@ public class CreativeMode extends CardStackAdapter implements
 
                 if (is_framework_app_background_changed) {
                     Phase2_InjectAndMove app_bg = new Phase2_InjectAndMove();
-                    String app_bg_color = "#" + Integer.toHexString(current_selected_system_appbg_color);
-                    app_bg.execute("creative_mode_app_background", app_bg_color, "creative_mode_app_background",
+                    String app_bg_color = "#" + Integer.toHexString
+                            (current_selected_system_appbg_color);
+                    app_bg.execute("creative_mode_app_background", app_bg_color,
+                            "creative_mode_app_background",
                             mContext.getCacheDir().getAbsolutePath() +
                                     "/creative_mode/assets/overlays/common/res/values-v10/");
                 }
@@ -2711,7 +2965,8 @@ public class CreativeMode extends CardStackAdapter implements
                     Phase2_InjectAndMove dialog_dark = new Phase2_InjectAndMove();
                     String dialog_dark_color = "#" + Integer.toHexString(
                             current_selected_system_dialog_color);
-                    dialog_dark.execute("creative_mode_dialog_color_dark", dialog_dark_color, "creative_mode_dialog_color_dark",
+                    dialog_dark.execute("creative_mode_dialog_color_dark", dialog_dark_color,
+                            "creative_mode_dialog_color_dark",
                             mContext.getCacheDir().getAbsolutePath() +
                                     "/creative_mode/assets/overlays/common/res/values-v10/");
                 }
@@ -2721,22 +2976,27 @@ public class CreativeMode extends CardStackAdapter implements
                     String dialog_light_color = "#" + Integer.toHexString(
                             current_selected_system_dialog_light_color);
                     dialog_light.execute("creative_mode_dialog_color_light", dialog_light_color,
-                            "creative_mode_dialog_color_light", mContext.getCacheDir().getAbsolutePath() +
+                            "creative_mode_dialog_color_light", mContext.getCacheDir()
+                                    .getAbsolutePath() +
                                     "/creative_mode/assets/overlays/common/res/values-v10/");
                 }
 
                 if (is_framework_main_theme_color_changed) {
                     Phase2_InjectAndMove theme_color = new Phase2_InjectAndMove();
-                    String theme_color_ = "#" + Integer.toHexString(current_selected_system_main_color);
-                    theme_color.execute("creative_mode_main_color", theme_color_, "creative_mode_main_color",
+                    String theme_color_ = "#" + Integer.toHexString
+                            (current_selected_system_main_color);
+                    theme_color.execute("creative_mode_main_color", theme_color_,
+                            "creative_mode_main_color",
                             mContext.getCacheDir().getAbsolutePath() +
                                     "/creative_mode/assets/overlays/common/res/values-v10/");
                 }
 
                 if (is_framework_main_theme_color_dark_changed) {
                     Phase2_InjectAndMove theme_color_dark = new Phase2_InjectAndMove();
-                    String theme_color_dark_ = "#" + Integer.toHexString(current_selected_system_main_dark_color);
-                    theme_color_dark.execute("creative_mode_main_color_dark", theme_color_dark_, "creative_mode_main_color_dark",
+                    String theme_color_dark_ = "#" + Integer.toHexString
+                            (current_selected_system_main_dark_color);
+                    theme_color_dark.execute("creative_mode_main_color_dark", theme_color_dark_,
+                            "creative_mode_main_color_dark",
                             mContext.getCacheDir().getAbsolutePath() +
                                     "/creative_mode/assets/overlays/common/res/values-v10/");
                 }
@@ -2745,8 +3005,10 @@ public class CreativeMode extends CardStackAdapter implements
                     Phase2_InjectAndMove notification_primary = new Phase2_InjectAndMove();
                     String notification_primary_color = "#" + Integer.toHexString(
                             current_selected_system_notifications_primary_color);
-                    notification_primary.execute("creative_mode_notification_primary", notification_primary_color,
-                            "creative_mode_notification_primary", mContext.getCacheDir().getAbsolutePath() +
+                    notification_primary.execute("creative_mode_notification_primary",
+                            notification_primary_color,
+                            "creative_mode_notification_primary", mContext.getCacheDir()
+                                    .getAbsolutePath() +
                                     "/creative_mode/assets/overlays/common/res/values-v10/");
                 }
 
@@ -2754,8 +3016,10 @@ public class CreativeMode extends CardStackAdapter implements
                     Phase2_InjectAndMove notification_secondary = new Phase2_InjectAndMove();
                     String notification_secondary_color = "#" + Integer.toHexString(
                             current_selected_system_notifications_secondary_color);
-                    notification_secondary.execute("creative_mode_notification_secondary", notification_secondary_color,
-                            "creative_mode_notification_secondary", mContext.getCacheDir().getAbsolutePath() +
+                    notification_secondary.execute("creative_mode_notification_secondary",
+                            notification_secondary_color,
+                            "creative_mode_notification_secondary", mContext.getCacheDir()
+                                    .getAbsolutePath() +
                                     "/creative_mode/assets/overlays/common/res/values-v10/");
                 }
 
@@ -2774,7 +3038,8 @@ public class CreativeMode extends CardStackAdapter implements
                     Phase2_InjectAndMove settings_dashboard = new Phase2_InjectAndMove();
                     String settings_dashboard_color = "#" + Integer.toHexString(
                             current_selected_dashboard_background_color);
-                    settings_dashboard.execute("dashboard_background_color", settings_dashboard_color,
+                    settings_dashboard.execute("dashboard_background_color",
+                            settings_dashboard_color,
                             "creative_mode_settings_dashboard_background",
                             mContext.getCacheDir().getAbsolutePath() +
                                     "/creative_mode/assets/overlays/com.android.settings/" +
@@ -2853,7 +3118,8 @@ public class CreativeMode extends CardStackAdapter implements
                     Phase2_InjectAndMove sysui_notif_bg = new Phase2_InjectAndMove();
                     String sysui_header_color = "#" + Integer.toHexString(
                             current_selected_notification_background_color);
-                    sysui_notif_bg.execute("creative_mode_notification_background", sysui_header_color,
+                    sysui_notif_bg.execute("creative_mode_notification_background",
+                            sysui_header_color,
                             "creative_mode_notification_background",
                             mContext.getCacheDir().getAbsolutePath() +
                                     "/creative_mode/assets/overlays/common/res/values-v12/");
@@ -2894,7 +3160,8 @@ public class CreativeMode extends CardStackAdapter implements
                     Phase2_InjectAndMove sysui_qs_tile_text = new Phase2_InjectAndMove();
                     String sysui_qs_tile_text_color = "#" + Integer.toHexString(
                             current_selected_qs_text_color);
-                    sysui_qs_tile_text.execute("creative_mode_qs_tile_text", sysui_qs_tile_text_color,
+                    sysui_qs_tile_text.execute("creative_mode_qs_tile_text",
+                            sysui_qs_tile_text_color,
                             "creative_mode_qs_tile_text",
                             mContext.getCacheDir().getAbsolutePath() +
                                     "/creative_mode/assets/overlays/common/res/values-v12/");
@@ -2941,7 +3208,8 @@ public class CreativeMode extends CardStackAdapter implements
 
                 // After checking package identifier validity, check for exact folder number
                 if (is_valid) {
-                    int folder_abbreviation = checkCurrentThemeSelectionLocation(package_identifier);
+                    int folder_abbreviation = checkCurrentThemeSelectionLocation
+                            (package_identifier);
                     if (folder_abbreviation != 0) {
                         String source = "/data/app/" + package_identifier + "-" +
                                 folder_abbreviation + "/base.apk";
@@ -2950,8 +3218,10 @@ public class CreativeMode extends CardStackAdapter implements
 
                         File checkFile = new File(source);
                         long fileSize = checkFile.length();
-                        if (fileSize > 50000000) { // Picking 50mb to be the threshold of large themes
-                            loader_string.setText(mContext.getResources().getString(R.string.unzipping_assets_big));
+                        if (fileSize > 50000000) { // Picking 50mb to be the threshold of large
+                            // themes
+                            loader_string.setText(mContext.getResources().getString(R.string
+                                    .unzipping_assets_big));
                         }
                         File myDir = new File(mContext.getCacheDir(), "creative_mode");
                         if (!myDir.exists()) {
@@ -2985,7 +3255,8 @@ public class CreativeMode extends CardStackAdapter implements
                         }
                     } else {
                         Log.d("Unzip",
-                                "There is no valid package name under this abbreviated folder count.");
+                                "There is no valid package name under this abbreviated folder " +
+                                        "count.");
                     }
                 } else {
                     Log.d("Unzip", "Package name chosen is invalid.");
@@ -2997,7 +3268,8 @@ public class CreativeMode extends CardStackAdapter implements
 
                 if (is_png_enabled) {
                     destination = mContext.getCacheDir().getAbsolutePath() +
-                            "/creative_mode/assets/overlays/com.android.systemui/res/drawable-xxhdpi";
+                            "/creative_mode/assets/overlays/com.android" +
+                            ".systemui/res/drawable-xxhdpi";
                 } else {
                     destination = mContext.getCacheDir().getAbsolutePath() +
                             "/creative_mode/assets/overlays/com.android.systemui/res/drawable";
@@ -3006,7 +3278,8 @@ public class CreativeMode extends CardStackAdapter implements
                 File checkFile = new File(source);
                 long fileSize = checkFile.length();
                 if (fileSize > 50000000) { // Picking 50mb to be the threshold of large themes
-                    loader_string.setText(mContext.getResources().getString(R.string.unzipping_assets_big));
+                    loader_string.setText(mContext.getResources().getString(R.string
+                            .unzipping_assets_big));
                 }
                 File myDir = new File(mContext.getCacheDir(), "creative_mode");
                 if (!myDir.exists()) {
@@ -3258,7 +3531,8 @@ public class CreativeMode extends CardStackAdapter implements
                             "/creative_mode/assets/overlays/com.android.settings/res/drawable-v11/";
 
                     moveFile(source_colorful_du, "ic_dirtytweaks.xml", destination_colorful_du);
-                    moveFile(source_colorful_pn, "ic_settings_purenexus.xml", destination_colorful_pn);
+                    moveFile(source_colorful_pn, "ic_settings_purenexus.xml",
+                            destination_colorful_pn);
                 }
                 if (is_settings_dashboard_category_title_caps_changed ||
                         is_settings_dashboard_category_title_bold_changed ||
@@ -3286,14 +3560,16 @@ public class CreativeMode extends CardStackAdapter implements
                             "/creative_mode/assets/overlays/com.android.settings/res/values-v12/";
                     moveFile(source, "dashboard_dividers_deactivated.xml", destination);
                 }
-                if (dirtytweaks_icon_presence && is_settings_dashboard_dirty_tweaks_icon_presence_changed) {
+                if (dirtytweaks_icon_presence &&
+                        is_settings_dashboard_dirty_tweaks_icon_presence_changed) {
                     String source = mContext.getCacheDir().getAbsolutePath() +
                             "/creative_files/";
                     String destination = mContext.getCacheDir().getAbsolutePath() +
                             "/creative_mode/assets/overlays/com.android.settings/res/values-v11/";
                     moveFile(source, "dirty_tweaks_icon_presence_activated.xml", destination);
                 }
-                if (!dirtytweaks_icon_presence && is_settings_dashboard_dirty_tweaks_icon_presence_changed) {
+                if (!dirtytweaks_icon_presence &&
+                        is_settings_dashboard_dirty_tweaks_icon_presence_changed) {
                     String source = mContext.getCacheDir().getAbsolutePath() +
                             "/creative_files/";
                     String destination = mContext.getCacheDir().getAbsolutePath() +
@@ -3306,29 +3582,37 @@ public class CreativeMode extends CardStackAdapter implements
                         Boolean themable_gmail = new File(mContext.getCacheDir().getAbsolutePath() +
                                 "/creative_mode/assets/overlays/themable.gmail").exists();
 
-                        Boolean themable_google_app = new File(mContext.getCacheDir().getAbsolutePath() +
+                        Boolean themable_google_app = new File(mContext.getCacheDir()
+                                .getAbsolutePath() +
                                 "/creative_mode/assets/overlays/themable.google.app").exists();
 
-                        Boolean themable_contacts = new File(mContext.getCacheDir().getAbsolutePath() +
+                        Boolean themable_contacts = new File(mContext.getCacheDir()
+                                .getAbsolutePath() +
                                 "/creative_mode/assets/overlays/themable.google.contacts").exists();
 
-                        Boolean themable_dialer = new File(mContext.getCacheDir().getAbsolutePath() +
+                        Boolean themable_dialer = new File(mContext.getCacheDir().getAbsolutePath
+                                () +
                                 "/creative_mode/assets/overlays/themable.google.dialer").exists();
 
-                        Boolean themable_plusOne = new File(mContext.getCacheDir().getAbsolutePath() +
+                        Boolean themable_plusOne = new File(mContext.getCacheDir()
+                                .getAbsolutePath() +
                                 "/creative_mode/assets/overlays/themable.google.plus").exists();
 
-                        Boolean themable_hangouts = new File(mContext.getCacheDir().getAbsolutePath() +
+                        Boolean themable_hangouts = new File(mContext.getCacheDir()
+                                .getAbsolutePath() +
                                 "/creative_mode/assets/overlays/themable.hangouts").exists();
 
-                        Boolean themable_vending = new File(mContext.getCacheDir().getAbsolutePath() +
+                        Boolean themable_vending = new File(mContext.getCacheDir()
+                                .getAbsolutePath() +
                                 "/creative_mode/assets/overlays/themable.vending").exists();
 
-                        Boolean themable_youtube = new File(mContext.getCacheDir().getAbsolutePath() +
+                        Boolean themable_youtube = new File(mContext.getCacheDir()
+                                .getAbsolutePath() +
                                 "/creative_mode/assets/overlays/themable.youtube").exists();
 
                         if (themable_gmail) {
-                            Log.d("MoveWhateverIsActivated", "Themable Gmail Overlay found! Hotswapping...");
+                            Log.d("MoveWhateverIsActivated", "Themable Gmail Overlay found! " +
+                                    "Hotswapping...");
 
                             eu.chainfire.libsuperuser.Shell.SU.run(
                                     "rm -r " + mContext.getCacheDir().getAbsolutePath() +
@@ -3342,25 +3626,30 @@ public class CreativeMode extends CardStackAdapter implements
                         }
 
                         if (themable_google_app) {
-                            Log.d("MoveWhateverIsActivated", "Themable Google App Overlay found! Hotswapping...");
+                            Log.d("MoveWhateverIsActivated", "Themable Google App Overlay found! " +
+                                    "Hotswapping...");
 
                             eu.chainfire.libsuperuser.Shell.SU.run(
                                     "rm -r " + mContext.getCacheDir().getAbsolutePath() +
-                                            "/creative_mode/assets/overlays/com.google.android.googlequicksearchbox");
+                                            "/creative_mode/assets/overlays/com.google.android" +
+                                            ".googlequicksearchbox");
 
                             File oldFolder = new File(mContext.getCacheDir().getAbsolutePath() +
                                     "/creative_mode/assets/overlays/themable.google.app");
                             File newFolder = new File(mContext.getCacheDir().getAbsolutePath() +
-                                    "/creative_mode/assets/overlays/com.google.android.googlequicksearchbox");
+                                    "/creative_mode/assets/overlays/com.google.android" +
+                                    ".googlequicksearchbox");
                             boolean success = oldFolder.renameTo(newFolder);
                         }
 
                         if (themable_contacts) {
-                            Log.d("MoveWhateverIsActivated", "Themable Google Contacts Overlay found! Hotswapping...");
+                            Log.d("MoveWhateverIsActivated", "Themable Google Contacts Overlay " +
+                                    "found! Hotswapping...");
 
                             eu.chainfire.libsuperuser.Shell.SU.run(
                                     "rm -r " + mContext.getCacheDir().getAbsolutePath() +
-                                            "/creative_mode/assets/overlays/com.google.android.contacts");
+                                            "/creative_mode/assets/overlays/com.google.android" +
+                                            ".contacts");
 
                             File oldFolder = new File(mContext.getCacheDir().getAbsolutePath() +
                                     "/creative_mode/assets/overlays/themable.google.contacts");
@@ -3370,11 +3659,13 @@ public class CreativeMode extends CardStackAdapter implements
                         }
 
                         if (themable_dialer) {
-                            Log.d("MoveWhateverIsActivated", "Themable Google Dialer Overlay found! Hotswapping...");
+                            Log.d("MoveWhateverIsActivated", "Themable Google Dialer Overlay " +
+                                    "found! Hotswapping...");
 
                             eu.chainfire.libsuperuser.Shell.SU.run(
                                     "rm -r " + mContext.getCacheDir().getAbsolutePath() +
-                                            "/creative_mode/assets/overlays/com.google.android.dialer");
+                                            "/creative_mode/assets/overlays/com.google.android" +
+                                            ".dialer");
 
                             File oldFolder = new File(mContext.getCacheDir().getAbsolutePath() +
                                     "/creative_mode/assets/overlays/themable.google.dialer");
@@ -3384,11 +3675,13 @@ public class CreativeMode extends CardStackAdapter implements
                         }
 
                         if (themable_plusOne) {
-                            Log.d("MoveWhateverIsActivated", "Themable Google+ Overlay found! Hotswapping...");
+                            Log.d("MoveWhateverIsActivated", "Themable Google+ Overlay found! " +
+                                    "Hotswapping...");
 
                             eu.chainfire.libsuperuser.Shell.SU.run(
                                     "rm -r " + mContext.getCacheDir().getAbsolutePath() +
-                                            "/creative_mode/assets/overlays/com.google.android.apps.plus");
+                                            "/creative_mode/assets/overlays/com.google.android" +
+                                            ".apps.plus");
 
                             File oldFolder = new File(mContext.getCacheDir().getAbsolutePath() +
                                     "/creative_mode/assets/overlays/themable.google.plus");
@@ -3398,11 +3691,13 @@ public class CreativeMode extends CardStackAdapter implements
                         }
 
                         if (themable_hangouts) {
-                            Log.d("MoveWhateverIsActivated", "Themable Hangouts Overlay found! Hotswapping...");
+                            Log.d("MoveWhateverIsActivated", "Themable Hangouts Overlay found! " +
+                                    "Hotswapping...");
 
                             eu.chainfire.libsuperuser.Shell.SU.run(
                                     "rm -r " + mContext.getCacheDir().getAbsolutePath() +
-                                            "/creative_mode/assets/overlays/com.google.android.talk");
+                                            "/creative_mode/assets/overlays/com.google.android" +
+                                            ".talk");
 
                             File oldFolder = new File(mContext.getCacheDir().getAbsolutePath() +
                                     "/creative_mode/assets/overlays/themable.hangouts");
@@ -3412,7 +3707,8 @@ public class CreativeMode extends CardStackAdapter implements
                         }
 
                         if (themable_vending) {
-                            Log.d("MoveWhateverIsActivated", "Themable Play Store Overlay found! Hotswapping...");
+                            Log.d("MoveWhateverIsActivated", "Themable Play Store Overlay found! " +
+                                    "Hotswapping...");
 
                             eu.chainfire.libsuperuser.Shell.SU.run(
                                     "rm -r " + mContext.getCacheDir().getAbsolutePath() +
@@ -3426,11 +3722,13 @@ public class CreativeMode extends CardStackAdapter implements
                         }
 
                         if (themable_youtube) {
-                            Log.d("MoveWhateverIsActivated", "Themable Youtube Overlay found! Hotswapping...");
+                            Log.d("MoveWhateverIsActivated", "Themable Youtube Overlay found! " +
+                                    "Hotswapping...");
 
                             eu.chainfire.libsuperuser.Shell.SU.run(
                                     "rm -r " + mContext.getCacheDir().getAbsolutePath() +
-                                            "/creative_mode/assets/overlays/com.google.android.youtube");
+                                            "/creative_mode/assets/overlays/com.google.android" +
+                                            ".youtube");
 
                             File oldFolder = new File(mContext.getCacheDir().getAbsolutePath() +
                                     "/creative_mode/assets/overlays/themable.vending");
@@ -3618,7 +3916,8 @@ public class CreativeMode extends CardStackAdapter implements
 
                 if (parse2_themeName.equals("")) {
                     int inputNumber = 1;
-                    while (checkIfPackageInstalled(packageName + "." + "dashboard" + inputNumber, mContext)) {
+                    while (checkIfPackageInstalled(packageName + "." + "dashboard" + inputNumber,
+                            mContext)) {
                         inputNumber += 1;
                     }
                     packageName = packageName + "." + "dashboard" + inputNumber;
@@ -3661,7 +3960,8 @@ public class CreativeMode extends CardStackAdapter implements
 
                 if (parse2_themeName.equals("")) {
                     int inputNumber = 1;
-                    while (checkIfPackageInstalled(packageName + "." + author + "." + "headerpack" + inputNumber, mContext)) {
+                    while (checkIfPackageInstalled(packageName + "." + author + "." +
+                            "headerpack" + inputNumber, mContext)) {
                         inputNumber += 1;
                     }
                     packageName = packageName + "." + author + "." + "headerpack" + inputNumber;
@@ -3850,18 +4150,22 @@ public class CreativeMode extends CardStackAdapter implements
                     String xmlRes1 = ("<manifest xmlns:android=\"http://schemas.android.com/" +
                             "apk/res/android\"" + "\n");
                     String xmlRes2 = ("    package=\"" + packageName + "\"" + "\n");
-                    String xmlRes3 = ("    android:versionCode=\"" + BuildConfig.VERSION_CODE + "\"");
+                    String xmlRes3 = ("    android:versionCode=\"" + BuildConfig.VERSION_CODE +
+                            "\"");
                     String xmlRes4 = ("    android:versionName=\"" + "dashboard. - " +
-                            BuildConfig.VERSION_NAME + " (" + dateFormat.format(date) + ")" + "\">");
+                            BuildConfig.VERSION_NAME + " (" + dateFormat.format(date) + ")" +
+                            "\">");
                     String xmlRes5 = ("    <uses-sdk android:minSdkVersion=\"23\"/>" + "\n");
                     String xmlRes6 = ("    <uses-feature" + "\n");
                     String xmlRes7 = ("        android:name=\"org.cyanogenmod.theme\"" + "\n");
                     String xmlRes8 = ("        android:required=\"true\" />" + "\n");
                     String xmlRes9 = ("    <meta-data" + "\n");
-                    String xmlRes10 = ("        android:name=\"org.cyanogenmod.theme.name\"" + "\n");
+                    String xmlRes10 = ("        android:name=\"org.cyanogenmod.theme.name\"" +
+                            "\n");
                     String xmlRes11 = ("        android:value=\"" + theme_name + "\" />" + "\n");
                     String xmlRes12 = ("    <meta-data" + "\n");
-                    String xmlRes13 = ("        android:name=\"org.cyanogenmod.theme.author\"" + "\n");
+                    String xmlRes13 = ("        android:name=\"org.cyanogenmod.theme.author\"" +
+                            "\n");
                     String xmlRes14 = ("        android:value=\"" + theme_author + "\" />" + "\n");
                     String xmlRes15 = ("    <application android:hasCode=\"false\"" + "\n");
                     String xmlRes16 = ("        android:icon=\"" + icon_location + "\"" + "\n");
@@ -3915,21 +4219,27 @@ public class CreativeMode extends CardStackAdapter implements
                     String xmlRes1 = ("<manifest xmlns:android=\"http://schemas.android.com/" +
                             "apk/res/android\"" + "\n");
                     String xmlRes2 = ("    package=\"" + packageName + "\"" + "\n");
-                    String xmlRes3 = ("    android:versionCode=\"" + BuildConfig.VERSION_CODE + "\"");
+                    String xmlRes3 = ("    android:versionCode=\"" + BuildConfig.VERSION_CODE +
+                            "\"");
                     String xmlRes4 = ("    android:versionName=\"" + "dashboard. - " +
-                            BuildConfig.VERSION_NAME + " (" + dateFormat.format(date) + ")" + "\">");
+                            BuildConfig.VERSION_NAME + " (" + dateFormat.format(date) + ")" +
+                            "\">");
                     String xmlRes5 = ("    <uses-sdk android:minSdkVersion=\"23\"/>" + "\n");
                     String xmlRes6 = ("    <uses-feature" + "\n");
-                    String xmlRes7 = ("        android:name=\"org.cyanogenmod.theme.extensions\"" + "\n");
+                    String xmlRes7 = ("        android:name=\"org.cyanogenmod.theme.extensions\""
+                            + "\n");
                     String xmlRes8 = ("        android:required=\"true\" />" + "\n");
                     String xmlRes9 = ("    <meta-data" + "\n");
-                    String xmlRes10 = ("        android:name=\"org.cyanogenmod.theme.name\"" + "\n");
+                    String xmlRes10 = ("        android:name=\"org.cyanogenmod.theme.name\"" +
+                            "\n");
                     String xmlRes11 = ("        android:value=\"" + theme_name + "\" />" + "\n");
                     String xmlRes12 = ("    <meta-data" + "\n");
-                    String xmlRes13 = ("        android:name=\"org.cyanogenmod.theme.author\"" + "\n");
+                    String xmlRes13 = ("        android:name=\"org.cyanogenmod.theme.author\"" +
+                            "\n");
                     String xmlRes14 = ("        android:value=\"" + theme_author + "\" />" + "\n");
                     String xmlRes15 = ("    <application android:hasCode=\"false\"" + "\n");
-                    String xmlRes16 = ("        android:icon=\"" + "@drawable/dashboard_default" + "\"" + "\n");
+                    String xmlRes16 = ("        android:icon=\"" + "@drawable/dashboard_default"
+                            + "\"" + "\n");
                     String xmlRes17 = ("        android:label=\"" + theme_name + "\"/>" + "\n");
                     String xmlRes18 = ("</manifest>");
                     pw.write(xmlTags);
@@ -3973,9 +4283,11 @@ public class CreativeMode extends CardStackAdapter implements
             Log.d("Phase 5", "This phase has started it's asynchronous task.");
             loader.setProgress(50);
             if (!header_creative_mode_activated) {
-                loader_string.setText(mContext.getResources().getString(R.string.phase5_dialog_title));
+                loader_string.setText(mContext.getResources().getString(R.string
+                        .phase5_dialog_title));
             } else {
-                loader_string.setText(mContext.getResources().getString(R.string.phase5_hp_dialog_title));
+                loader_string.setText(mContext.getResources().getString(R.string
+                        .phase5_hp_dialog_title));
             }
             super.onPreExecute();
         }
@@ -4052,7 +4364,8 @@ public class CreativeMode extends CardStackAdapter implements
                             boolean deleted = drawable_file.delete();
                             eu.chainfire.libsuperuser.Shell.SU.run(
                                     "rm -r " + mContext.getCacheDir().getAbsolutePath() +
-                                            "/creative_mode/res/drawable-xhdpi/" + fileList3[i].getName());
+                                            "/creative_mode/res/drawable-xhdpi/" + fileList3[i]
+                                            .getName());
                             Log.d("FileDeletion", "Deleted file/folder: " + fileList3[i].getName());
                         }
                     }
@@ -4068,11 +4381,13 @@ public class CreativeMode extends CardStackAdapter implements
                                 !fileList4[i].getName().equals("dashboard_default.png") &&
                                 !fileList4[i].getName().equals("ic_launcher.png")) {
                             File drawable_file = new File(mContext.getCacheDir().getAbsolutePath() +
-                                    "/creative_mode/res/drawable-xhdpi-v4/" + fileList4[i].getName());
+                                    "/creative_mode/res/drawable-xhdpi-v4/" + fileList4[i]
+                                    .getName());
                             boolean deleted = drawable_file.delete();
                             eu.chainfire.libsuperuser.Shell.SU.run(
                                     "rm -r " + mContext.getCacheDir().getAbsolutePath() +
-                                            "/creative_mode/res/drawable-xhdpi-v4/" + fileList4[i].getName());
+                                            "/creative_mode/res/drawable-xhdpi-v4/" +
+                                            fileList4[i].getName());
                             Log.d("FileDeletion", "Deleted file/folder: " + fileList4[i].getName());
                         }
                     }
@@ -4092,7 +4407,8 @@ public class CreativeMode extends CardStackAdapter implements
                             boolean deleted = drawable_file.delete();
                             eu.chainfire.libsuperuser.Shell.SU.run(
                                     "rm -r " + mContext.getCacheDir().getAbsolutePath() +
-                                            "/creative_mode/res/drawable-xxhdpi/" + fileList5[i].getName());
+                                            "/creative_mode/res/drawable-xxhdpi/" + fileList5[i]
+                                            .getName());
                             Log.d("FileDeletion", "Deleted file/folder: " + fileList5[i].getName());
                         }
                     }
@@ -4108,11 +4424,13 @@ public class CreativeMode extends CardStackAdapter implements
                                 !fileList6[i].getName().equals("dashboard_default.png") &&
                                 !fileList6[i].getName().equals("ic_launcher.png")) {
                             File drawable_file = new File(mContext.getCacheDir().getAbsolutePath() +
-                                    "/creative_mode/res/drawable-xxhdpi-v4/" + fileList6[i].getName());
+                                    "/creative_mode/res/drawable-xxhdpi-v4/" + fileList6[i]
+                                    .getName());
                             boolean deleted = drawable_file.delete();
                             eu.chainfire.libsuperuser.Shell.SU.run(
                                     "rm -r " + mContext.getCacheDir().getAbsolutePath() +
-                                            "/creative_mode/res/drawable-xxhdpi-v4/" + fileList6[i].getName());
+                                            "/creative_mode/res/drawable-xxhdpi-v4/" +
+                                            fileList6[i].getName());
                             Log.d("FileDeletion", "Deleted file/folder: " + fileList6[i].getName());
                         }
                     }
@@ -4128,11 +4446,13 @@ public class CreativeMode extends CardStackAdapter implements
                                 !fileList7[i].getName().equals("dashboard_default.png") &&
                                 !fileList7[i].getName().equals("ic_launcher.png")) {
                             File drawable_file = new File(mContext.getCacheDir().getAbsolutePath() +
-                                    "/creative_mode/res/drawable-xxxhdpi/" + fileList7[i].getName());
+                                    "/creative_mode/res/drawable-xxxhdpi/" + fileList7[i].getName
+                                    ());
                             boolean deleted = drawable_file.delete();
                             eu.chainfire.libsuperuser.Shell.SU.run(
                                     "rm -r " + mContext.getCacheDir().getAbsolutePath() +
-                                            "/creative_mode/res/drawable-xxxhdpi/" + fileList7[i].getName());
+                                            "/creative_mode/res/drawable-xxxhdpi/" + fileList7[i]
+                                            .getName());
                             Log.d("FileDeletion", "Deleted file/folder: " + fileList7[i].getName());
                         }
                     }
@@ -4148,11 +4468,13 @@ public class CreativeMode extends CardStackAdapter implements
                                 !fileList8[i].getName().equals("dashboard_default.png") &&
                                 !fileList8[i].getName().equals("ic_launcher.png")) {
                             File drawable_file = new File(mContext.getCacheDir().getAbsolutePath() +
-                                    "/creative_mode/res/drawable-xxxhdpi-v4/" + fileList8[i].getName());
+                                    "/creative_mode/res/drawable-xxxhdpi-v4/" + fileList8[i]
+                                    .getName());
                             boolean deleted = drawable_file.delete();
                             eu.chainfire.libsuperuser.Shell.SU.run(
                                     "rm -r " + mContext.getCacheDir().getAbsolutePath() +
-                                            "/creative_mode/res/drawable-xxxhdpi-v4/" + fileList8[i].getName());
+                                            "/creative_mode/res/drawable-xxxhdpi-v4/" +
+                                            fileList8[i].getName());
                             Log.d("FileDeletion", "Deleted file/folder: " + fileList8[i].getName());
                         }
                     }
@@ -4330,9 +4652,11 @@ public class CreativeMode extends CardStackAdapter implements
             Log.d("Phase 6", "This phase has started it's asynchronous task.");
             loader.setProgress(10);
             if (!header_creative_mode_activated) {
-                loader_string.setText(mContext.getResources().getString(R.string.phase6_dialog_title));
+                loader_string.setText(mContext.getResources().getString(R.string
+                        .phase6_dialog_title));
             } else {
-                loader_string.setText(mContext.getResources().getString(R.string.phase6_hp_dialog_title));
+                loader_string.setText(mContext.getResources().getString(R.string
+                        .phase6_hp_dialog_title));
             }
             super.onPreExecute();
         }

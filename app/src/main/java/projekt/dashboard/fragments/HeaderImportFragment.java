@@ -280,7 +280,8 @@ public class HeaderImportFragment extends BasePageFragment {
 
         prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
 
-        ImageButton refreshSpinner = (ImageButton) inflation.findViewById(R.id.restartHeaderSpinner);
+        ImageButton refreshSpinner = (ImageButton) inflation.findViewById(R.id
+                .restartHeaderSpinner);
         refreshSpinner.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 RefreshHeaderSpinner();
@@ -312,7 +313,8 @@ public class HeaderImportFragment extends BasePageFragment {
                 String[] secondPhaseCommands = {
                         theme_dir,
                         Environment.getExternalStorageDirectory().getAbsolutePath()
-                                + "/" + getString(R.string.dashboard_header_directory) + "/" + spinner2.getSelectedItem().toString()};
+                                + "/" + getString(R.string.dashboard_header_directory) + "/" +
+                                spinner2.getSelectedItem().toString()};
                 new secondPhaseAsyncTasks().execute(secondPhaseCommands);
             }
         });
@@ -337,8 +339,10 @@ public class HeaderImportFragment extends BasePageFragment {
                         if (!inFile.getAbsolutePath().substring(21).equals(
                                 "com.chummy.jezebel.materialdark.donate")) {
                             if (!inFile.getAbsolutePath().substring(21).equals("projekt.klar")) {
-                                if (!inFile.getAbsolutePath().substring(21).contains("chummy.dashboard")) {
-                                    if (checkIfPackageInstalled(inFile.getAbsolutePath().substring(21), getContext())) {
+                                if (!inFile.getAbsolutePath().substring(21).contains("chummy" +
+                                        ".dashboard")) {
+                                    if (checkIfPackageInstalled(inFile.getAbsolutePath()
+                                            .substring(21), getContext())) {
                                         list.add(inFile.getAbsolutePath().substring(21));
                                         counter += 1;
                                     }
@@ -465,12 +469,14 @@ public class HeaderImportFragment extends BasePageFragment {
         zipsFound = new ArrayList<String>();
         zipsFound.add(getResources().getString(R.string.contextualheaderswapper_select_zip));
 
-        // Function that filters out all zip files within /storage/0/dashboard./headers, but not only that,
+        // Function that filters out all zip files within /storage/0/dashboard./headers, but not
+        // only that,
         // it checks the zip file and sees if there is headers.xml found inside so that it's a
         // filter.
 
         File f2 = new File(
-                Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + getString(R.string.dashboard_header_directory) + "/");
+                Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + getString(R
+                        .string.dashboard_header_directory) + "/");
         File[] files2 = f2.listFiles();
         if (files2 != null) {
             for (File inFile2 : files2) {
@@ -484,7 +490,8 @@ public class HeaderImportFragment extends BasePageFragment {
 
                             ZipFile zipFile = new ZipFile(
                                     Environment.getExternalStorageDirectory().
-                                            getAbsolutePath() + "/" + getString(R.string.dashboard_header_directory) + "/" + filename);
+                                            getAbsolutePath() + "/" + getString(R.string
+                                            .dashboard_header_directory) + "/" + filename);
                             ZipEntry entry = zipFile.getEntry("headers.xml");
                             if (entry != null) {
                                 // headers.xml was found in the file, so add it into the spinner
@@ -510,7 +517,8 @@ public class HeaderImportFragment extends BasePageFragment {
                 if (pos != 0) {
                     checkWhetherZIPisValid(Environment.getExternalStorageDirectory().
                                     getAbsolutePath() +
-                                    "/" + getString(R.string.dashboard_header_directory) + "/" + spinner2.getSelectedItem(),
+                                    "/" + getString(R.string.dashboard_header_directory) + "/" +
+                            spinner2.getSelectedItem(),
                             getActivity().getCacheDir().getAbsolutePath() + "/headers");
                 } else {
                     TextView headerPackName = (TextView)
@@ -592,7 +600,8 @@ public class HeaderImportFragment extends BasePageFragment {
         // filter.
 
         File f2 = new File(
-                Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + getString(R.string.dashboard_header_directory) + "/");
+                Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + getString(R
+                        .string.dashboard_header_directory) + "/");
         File[] files2 = f2.listFiles();
         if (files2 != null) {
             for (File inFile2 : files2) {
@@ -606,7 +615,8 @@ public class HeaderImportFragment extends BasePageFragment {
 
                             ZipFile zipFile = new ZipFile(
                                     Environment.getExternalStorageDirectory().
-                                            getAbsolutePath() + "/" + getString(R.string.dashboard_header_directory) + "/" + filename);
+                                            getAbsolutePath() + "/" + getString(R.string
+                                            .dashboard_header_directory) + "/" + filename);
                             ZipEntry entry = zipFile.getEntry("headers.xml");
                             if (entry != null) {
                                 // headers.xml was found in the file, so add it into the spinner
@@ -722,7 +732,8 @@ public class HeaderImportFragment extends BasePageFragment {
         public List processor() {
             if (is_png_enabled) {
                 List<String> filenamePNGs = Arrays.asList(
-                        "notifhead_afternoon.png", "notifhead_christmas.png", "notifhead_morning.png",
+                        "notifhead_afternoon.png", "notifhead_christmas.png", "notifhead_morning" +
+                                ".png",
                         "notifhead_newyearseve.png", "notifhead_night.png", "notifhead_noon.png",
                         "notifhead_sunrise.png", "notifhead_sunset_hdpi.png",
                         "notifhead_sunset_xhdpi.png", "notifhead_sunset.png");
@@ -752,7 +763,8 @@ public class HeaderImportFragment extends BasePageFragment {
             }
             if (is_vector_enabled) {
                 List<String> filenameVectors = Arrays.asList(
-                        "notifhead_afternoon.xml", "notifhead_christmas.xml", "notifhead_morning.xml",
+                        "notifhead_afternoon.xml", "notifhead_christmas.xml", "notifhead_morning" +
+                                ".xml",
                         "notifhead_newyearseve.xml", "notifhead_night.xml", "notifhead_noon.xml",
                         "notifhead_sunrise.xml", "notifhead_sunset_hdpi.xml",
                         "notifhead_sunset_xhdpi.xml", "notifhead_sunset.xml");

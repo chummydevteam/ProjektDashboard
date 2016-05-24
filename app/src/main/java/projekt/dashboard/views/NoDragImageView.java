@@ -8,7 +8,8 @@ import android.view.MotionEvent;
 import android.widget.ImageView;
 
 /**
- * Prevents the click listener from being called when the user drags on the image view, and doesn't immediately let go.
+ * Prevents the click listener from being called when the user drags on the image view, and
+ * doesn't immediately let go.
  *
  * @author Aidan Follestad (afollestad)
  */
@@ -56,7 +57,8 @@ public class NoDragImageView extends ImageView {
                 break;
             case MotionEvent.ACTION_MOVE:
                 final float SCROLL_THRESHOLD = 10;
-                if (isOnClick && (Math.abs(mDownX - ev.getX()) > SCROLL_THRESHOLD || Math.abs(mDownY - ev.getY()) > SCROLL_THRESHOLD))
+                if (isOnClick && (Math.abs(mDownX - ev.getX()) > SCROLL_THRESHOLD || Math.abs
+                        (mDownY - ev.getY()) > SCROLL_THRESHOLD))
                     isOnClick = false;
                 break;
             default:

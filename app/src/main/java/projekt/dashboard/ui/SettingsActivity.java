@@ -242,7 +242,8 @@ public class SettingsActivity extends AppCompatActivity {
         } else {
             header_low_power_mode.setChecked(false);
         }
-        header_low_power_mode.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        header_low_power_mode.setOnCheckedChangeListener(new CompoundButton
+                .OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
@@ -254,39 +255,45 @@ public class SettingsActivity extends AppCompatActivity {
             }
         });
 
-        LinearLayout linearLayout = (LinearLayout) findViewById(R.id.clear_dashboard_headers_folder);
+        LinearLayout linearLayout = (LinearLayout) findViewById(R.id
+                .clear_dashboard_headers_folder);
         linearLayout.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 File f = new File(Environment.getExternalStorageDirectory().getAbsolutePath() +
                         "/" + getString(R.string.dashboard_header_directory) + "/");
                 DeleteRecursive(f);
                 has_modified_anything = true;
-                Toast toast = Toast.makeText(getApplicationContext().getApplicationContext(), getString(R.string.settings_clear_dashboard_headers_toast),
+                Toast toast = Toast.makeText(getApplicationContext().getApplicationContext(),
+                        getString(R.string.settings_clear_dashboard_headers_toast),
                         Toast.LENGTH_LONG);
                 toast.show();
             }
         });
 
-        LinearLayout linearLayout2 = (LinearLayout) findViewById(R.id.clear_dashboard_profiles_folder);
+        LinearLayout linearLayout2 = (LinearLayout) findViewById(R.id
+                .clear_dashboard_profiles_folder);
         linearLayout2.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 File f = new File(Environment.getExternalStorageDirectory().getAbsolutePath() +
                         "/" + getString(R.string.dashboard_profile_directory) + "/");
                 DeleteRecursive(f);
                 has_modified_anything = true;
-                Toast toast = Toast.makeText(getApplicationContext().getApplicationContext(), getString(R.string.settings_clear_dashboard_profiles_toast),
+                Toast toast = Toast.makeText(getApplicationContext().getApplicationContext(),
+                        getString(R.string.settings_clear_dashboard_profiles_toast),
                         Toast.LENGTH_LONG);
                 toast.show();
             }
         });
 
-        LinearLayout linearLayout3 = (LinearLayout) findViewById(R.id.clear_dashboard_wallpapers_folder);
+        LinearLayout linearLayout3 = (LinearLayout) findViewById(R.id
+                .clear_dashboard_wallpapers_folder);
         linearLayout3.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 File f = new File(Environment.getExternalStorageDirectory().getAbsolutePath() +
                         "/" + getString(R.string.dashboard_wallpaper_directory) + "/");
                 DeleteRecursive(f);
-                Toast toast = Toast.makeText(getApplicationContext().getApplicationContext(), getString(R.string.settings_clear_dashboard_wallpapers_toast),
+                Toast toast = Toast.makeText(getApplicationContext().getApplicationContext(),
+                        getString(R.string.settings_clear_dashboard_wallpapers_toast),
                         Toast.LENGTH_LONG);
                 toast.show();
             }

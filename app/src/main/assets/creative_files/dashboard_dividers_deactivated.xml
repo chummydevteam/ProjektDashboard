@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--You are editing Settings' Colors-->
 
 <resources>
-	<!-- Edits the background in settings-->
-		<color name="dashboard_background_color">@color/dashboard_category_background_color</color>
-		<dimen name="dashboard_category_elevation">0dp</dimen>
+    <color name="dashboard_background_color">@color/dashboard_category_background_color</color>
+    <dimen name="dashboard_category_elevation">0dp</dimen>
 </resources>

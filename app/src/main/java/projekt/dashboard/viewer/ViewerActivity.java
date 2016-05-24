@@ -44,7 +44,8 @@ public class ViewerActivity extends AssentActivity {
 
     public int getNavigationBarHeight(boolean portraitOnly, boolean landscapeOnly) {
         final Configuration config = getResources().getConfiguration();
-        if ((config.screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) >= Configuration.SCREENLAYOUT_SIZE_LARGE) {
+        if ((config.screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) >= Configuration
+                .SCREENLAYOUT_SIZE_LARGE) {
             // Cancel out for tablets~
             return 0;
         }
@@ -89,7 +90,8 @@ public class ViewerActivity extends AssentActivity {
         }
 
         if (getIntent() != null) {
-            mWallpapers = (WallpaperUtils.WallpapersHolder) getIntent().getSerializableExtra("wallpapers");
+            mWallpapers = (WallpaperUtils.WallpapersHolder) getIntent().getSerializableExtra
+                    ("wallpapers");
         }
 
         mAdapter = new ViewerPageAdapter(this, mCurrentPosition, mWallpapers);
@@ -106,16 +108,19 @@ public class ViewerActivity extends AssentActivity {
             boolean userScrollChange;
 
             @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+            public void onPageScrolled(int position, float positionOffset, int
+                    positionOffsetPixels) {
             }
 
             @Override
             public void onPageSelected(int position) {
-                ViewerPageFragment noActive = (ViewerPageFragment) getFragmentManager().findFragmentByTag("page:" + mCurrentPosition);
+                ViewerPageFragment noActive = (ViewerPageFragment) getFragmentManager()
+                        .findFragmentByTag("page:" + mCurrentPosition);
                 if (noActive != null)
                     noActive.setIsActive(false);
                 mCurrentPosition = position;
-                ViewerPageFragment active = (ViewerPageFragment) getFragmentManager().findFragmentByTag("page:" + mCurrentPosition);
+                ViewerPageFragment active = (ViewerPageFragment) getFragmentManager()
+                        .findFragmentByTag("page:" + mCurrentPosition);
                 if (active != null) {
                     active.setIsActive(true);
                 }
@@ -169,7 +174,8 @@ public class ViewerActivity extends AssentActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        ViewerPageFragment active = (ViewerPageFragment) getFragmentManager().findFragmentByTag("page:" + mCurrentPosition);
+        ViewerPageFragment active = (ViewerPageFragment) getFragmentManager().findFragmentByTag
+                ("page:" + mCurrentPosition);
         if (active != null) {
             active.onOptionsItemSelected(item);
         }

@@ -104,15 +104,19 @@ public class WallpapersFragment extends BasePageFragment implements
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle
+            savedInstanceState) {
         View inflation = inflater.inflate(R.layout.fragment_recyclerview, container, false);
 
         final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(
                 getActivity());
 
         final Spinner wallpaperSourcePicker = (Spinner) inflation.findViewById(R.id.sourcePicker);
-        final String[] wallpaperSourcePickerURLs = getResources().getStringArray(R.array.wallpaper_sources_urls);
-        ArrayAdapter<String> spinnerCountShoesArrayAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item, getResources().getStringArray(R.array.wallpaper_sources));
+        final String[] wallpaperSourcePickerURLs = getResources().getStringArray(R.array
+                .wallpaper_sources_urls);
+        ArrayAdapter<String> spinnerCountShoesArrayAdapter = new ArrayAdapter<String>(getActivity
+                (), android.R.layout.simple_spinner_dropdown_item, getResources().getStringArray
+                (R.array.wallpaper_sources));
         wallpaperSourcePicker.setAdapter(spinnerCountShoesArrayAdapter);
         wallpaperSourcePicker.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -174,19 +178,22 @@ public class WallpapersFragment extends BasePageFragment implements
             //to avoid image glitching through on when ViewActivity is first created.
             getActivity().getWindow().setStatusBarColor(
                     DialogUtils.resolveColor(getActivity(), R.attr.colorPrimaryDark));
-            View statusBar = getActivity().getWindow().getDecorView().findViewById(android.R.id.statusBarBackground);
+            View statusBar = getActivity().getWindow().getDecorView().findViewById(android.R.id
+                    .statusBarBackground);
             if (statusBar != null) {
                 statusBar.post(new Runnable() {
                     @Override
                     public void run() {
-                        ActivityCompat.startActivityForResult(getActivity(), intent, RQ_VIEWWALLPAPER, options.toBundle());
+                        ActivityCompat.startActivityForResult(getActivity(), intent,
+                                RQ_VIEWWALLPAPER, options.toBundle());
                     }
                 });
                 return;
             }
         }
 
-        ActivityCompat.startActivityForResult(getActivity(), intent, RQ_VIEWWALLPAPER, options.toBundle());
+        ActivityCompat.startActivityForResult(getActivity(), intent, RQ_VIEWWALLPAPER, options
+                .toBundle());
     }
 
     private void showOptions(final int imageIndex) {
@@ -195,7 +202,8 @@ public class WallpapersFragment extends BasePageFragment implements
                 .items(R.array.wallpaper_options)
                 .itemsCallback(new MaterialDialog.ListCallback() {
                     @Override
-                    public void onSelection(MaterialDialog materialDialog, View view, final int i, CharSequence charSequence) {
+                    public void onSelection(MaterialDialog materialDialog, View view, final int
+                            i, CharSequence charSequence) {
                         final WallpaperUtils.Wallpaper wallpaper = mWallpapers.get(imageIndex);
                         WallpaperUtils.download(getActivity(), wallpaper, i == 0);
                     }
@@ -236,7 +244,8 @@ public class WallpapersFragment extends BasePageFragment implements
         mRecyclerView.setAdapter(mAdapter);
 
         if (savedInstanceState != null)
-            mWallpapers = (WallpaperUtils.WallpapersHolder) savedInstanceState.getSerializable("wallpapers");
+            mWallpapers = (WallpaperUtils.WallpapersHolder) savedInstanceState.getSerializable
+                    ("wallpapers");
         if (getActivity() != null) load();
     }
 
@@ -262,21 +271,24 @@ public class WallpapersFragment extends BasePageFragment implements
         Bridge.config().logging(true);
         WallpaperUtils.getAll(getActivity(), allowCached, new WallpaperUtils.WallpapersCallback() {
             @Override
-            public void onRetrievedWallpapers(WallpaperUtils.WallpapersHolder wallpapers, Exception error, boolean cancelled) {
+            public void onRetrievedWallpapers(WallpaperUtils.WallpapersHolder wallpapers,
+                                              Exception error, boolean cancelled) {
                 if (error != null) {
                     if (error instanceof BridgeException) {
                         BridgeException e = (BridgeException) error;
                         if (e.reason() == BridgeException.REASON_REQUEST_FAILED)
                             mEmpty.setText(R.string.unable_to_contact_server);
                         else if (e.reason() == BridgeException.REASON_REQUEST_TIMEOUT ||
-                                (e.underlyingException() != null && e.underlyingException() instanceof SocketTimeoutException))
+                                (e.underlyingException() != null && e.underlyingException()
+                                        instanceof SocketTimeoutException))
                             mEmpty.setText(R.string.unable_to_contact_server);
                         else mEmpty.setText(e.getMessage());
                     } else {
                         mEmpty.setText(error.getMessage());
                     }
                 } else {
-                    mEmpty.setText(cancelled ? R.string.request_cancelled : R.string.intro_wallpapers);
+                    mEmpty.setText(cancelled ? R.string.request_cancelled : R.string
+                            .intro_wallpapers);
                     mWallpapers = wallpapers;
                     mAdapter.set(mWallpapers);
                 }

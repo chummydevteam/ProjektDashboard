@@ -15,7 +15,8 @@ public class ViewerPageAdapter extends FragmentStatePagerAdapter {
     private final WallpaperUtils.WallpapersHolder mWallpapers;
     public int mCurrentPage;
 
-    public ViewerPageAdapter(AppCompatActivity context, int initialOffset, WallpaperUtils.WallpapersHolder wallpapers) {
+    public ViewerPageAdapter(AppCompatActivity context, int initialOffset, WallpaperUtils
+            .WallpapersHolder wallpapers) {
         super(context.getFragmentManager());
         mCurrentPage = initialOffset;
         mWallpapers = wallpapers;
