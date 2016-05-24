@@ -1,11 +1,10 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--You are editing SystemUI's CM Specific Colors-->
+<?xml version="1.0" encoding="utf-8"?><!--You are editing SystemUI's CM Specific Colors-->
 
 <resources>
     <color name="qs_category_text_color">@*common:color/theme_color_accent_dark</color>
     <color name="qs_title_text_color">@*common:color/theme_color_dialer_button_bar</color>
 
-	<color name="speedbump_line_divider">@android:color/transparent</color>
-	
-    <color name="tuner_icon_tint">@android:color/white</color>	
+    <color name="speedbump_line_divider">@android:color/transparent</color>
+
+    <color name="tuner_icon_tint">@android:color/white</color>
 </resources>

@@ -1,21 +1,28 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--You are editing Settings' CM Specific Colors-->
+<?xml version="1.0" encoding="utf-8"?><!--You are editing Settings' CM Specific Colors-->
 
 <resources>
-	<!--Storage Summary Text Colors-->
-		<color name="storage_summary_text_color">@*common:color/theme_color_primary_text_material_dark</color>
-		<color name="storage_summary_title_color">@*common:color/theme_color_primary_text_material_dark</color>
-		<color name="storage_summary_used_text_color">@*common:color/theme_color_secondary_text_material_dark</color>
-	<!--Fingerprint Checkmark Tint-->
-		<color name="fingerprint_enrollment_checkmark_tint">@*common:color/theme_color_accent</color>
-	<!--Dashboard External Tile Tint-->
-		<color name="external_tile_icon_tint_color">@*common:color/theme_color_settings_icon_tint</color>
+    <!--Storage Summary Text Colors-->
+    <color name="storage_summary_text_color">@*common:color/theme_color_primary_text_material_dark
+    </color>
+    <color name="storage_summary_title_color">
+        @*common:color/theme_color_primary_text_material_dark
+    </color>
+    <color name="storage_summary_used_text_color">
+        @*common:color/theme_color_secondary_text_material_dark
+    </color>
+    <!--Fingerprint Checkmark Tint-->
+    <color name="fingerprint_enrollment_checkmark_tint">@*common:color/theme_color_accent</color>
+    <!--Dashboard External Tile Tint-->
+    <color name="external_tile_icon_tint_color">@*common:color/theme_color_settings_icon_tint
+    </color>
     <!--Single Button Panel Background Tint-->
-		<color name="single_button_panel_background_tint">@*common:color/theme_color_hardcoded_color</color>
+    <color name="single_button_panel_background_tint">@*common:color/theme_color_hardcoded_color
+    </color>
 
-		<!-- Storage Summary Hard colors-->
-		<color name="storage_volume_color_public">@*common:color/theme_color_accent</color>
-		<color name="storage_volume_color_private1">@*common:color/theme_color_accent</color>
-		<color name="storage_volume_color_private5">@*common:color/theme_color_settings_icon_tint</color> <!-- green -->
-		<color name="eject_icon_tint_color">@*common:color/theme_color_settings_icon_tint</color>
+    <!-- Storage Summary Hard colors-->
+    <color name="storage_volume_color_public">@*common:color/theme_color_accent</color>
+    <color name="storage_volume_color_private1">@*common:color/theme_color_accent</color>
+    <color name="storage_volume_color_private5">@*common:color/theme_color_settings_icon_tint
+    </color> <!-- green -->
+    <color name="eject_icon_tint_color">@*common:color/theme_color_settings_icon_tint</color>
 </resources>

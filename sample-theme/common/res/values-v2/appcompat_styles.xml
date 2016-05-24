@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
 /* CDT Theme Base Styles Activator (ActionBarCompat {AppCompat})
  *
  * Copyright 2015, chummy development team
@@ -23,128 +22,148 @@
 -->
 
 <resources>
-	<!--Base AppCompat Styles (Dark)-->
-		<style name="Base.Theme.AppCompat" parent="@style/Base.V7.Theme.AppCompat" />
-		<style name="Base.Theme.AppCompat.CompactMenu" parent="" />
-		<style name="Base.Theme.AppCompat.Dialog" parent="@android:style/Theme.Material.Dialog" />
-		<style name="Base.Theme.AppCompat.Dialog.Alert" parent="@style/Base.Theme.AppCompat.Dialog">
-			<item name="android:windowMinWidthMajor">@dimen/abc_dialog_min_width_major</item>
-			<item name="android:windowMinWidthMinor">@dimen/abc_dialog_min_width_minor</item>
-			<item name="windowMinWidthMajor">@dimen/abc_dialog_min_width_major</item>
-			<item name="windowMinWidthMinor">@dimen/abc_dialog_min_width_minor</item>
-		</style>
-		<style name="Base.Theme.AppCompat.Dialog.MinWidth" parent="@style/Base.Theme.AppCompat.Dialog">
-			<item name="android:windowMinWidthMajor">@dimen/abc_dialog_min_width_major</item>
-			<item name="android:windowMinWidthMinor">@dimen/abc_dialog_min_width_minor</item>
-			<item name="windowMinWidthMajor">@dimen/abc_dialog_min_width_major</item>
-			<item name="windowMinWidthMinor">@dimen/abc_dialog_min_width_minor</item>
-		</style>
-		<style name="Base.Theme.AppCompat.DialogWhenLarge" parent="@style/Theme.AppCompat" />
-		<style name="Base.Theme.AppCompat.Wallpaper" parent="@style/Platform.AppCompat.Wallpaper" />
-		<style name="Theme.AppCompat" parent="@style/Base.Theme.AppCompat" /> 
-		<style name="Theme.AppCompat.CompactMenu" parent="@style/Base.Theme.AppCompat.CompactMenu" />
-		<style name="Theme.AppCompat.Dialog" parent="@style/Base.Theme.AppCompat.Dialog" />
-		<style name="Theme.AppCompat.Dialog.Alert" parent="@style/Base.Theme.AppCompat.Dialog.Alert" />
-		<style name="Theme.AppCompat.Dialog.MinWidth" parent="@style/Base.Theme.AppCompat.Dialog.MinWidth" />
-		<style name="Theme.AppCompat.DialogWhenLarge" parent="@style/Base.Theme.AppCompat.DialogWhenLarge" />
-		<style name="Theme.AppCompat.NoActionBar" parent="@style/Theme.AppCompat">
-			<item name="android:windowActionBar">false</item>
-			<item name="android:windowNoTitle">true</item>
-			<item name="windowActionBar">false</item>
-			<item name="windowNoTitle">true</item>
-		</style>
-		<style name="Theme.AppCompat.Wallpaper" parent="@style/Base.Theme.AppCompat.Wallpaper" />
-	
-	<!--Base AppCompat Styles (Light)-->
-		<style name="Base.Theme.AppCompat.Light" parent="@style/Base.V7.Theme.AppCompat.Light" />
-		<style name="Base.Theme.AppCompat.Light.DarkActionBar" parent="@style/Base.Theme.AppCompat.Light" />
-		<style name="Base.Theme.AppCompat.Light.Dialog" parent="@android:style/Theme.Material.Dialog" />
-		<style name="Base.Theme.AppCompat.Light.Dialog.Alert" parent="@style/Base.Theme.AppCompat.Dialog">
-			<item name="android:windowMinWidthMajor">@dimen/abc_dialog_min_width_major</item>
-			<item name="android:windowMinWidthMinor">@dimen/abc_dialog_min_width_minor</item>
-			<item name="windowMinWidthMajor">@dimen/abc_dialog_min_width_major</item>
-			<item name="windowMinWidthMinor">@dimen/abc_dialog_min_width_minor</item>
-		</style>
-		<style name="Base.Theme.AppCompat.Light.Dialog.MinWidth" parent="@style/Base.Theme.AppCompat.Light.Dialog">
-			<item name="android:windowMinWidthMajor">@dimen/abc_dialog_min_width_major</item>
-			<item name="android:windowMinWidthMinor">@dimen/abc_dialog_min_width_minor</item>
-			<item name="windowMinWidthMajor">@dimen/abc_dialog_min_width_major</item>
-			<item name="windowMinWidthMinor">@dimen/abc_dialog_min_width_minor</item>
-		</style>
-		<style name="Base.Theme.AppCompat.Light.DialogWhenLarge" parent="@style/Theme.AppCompat.Light" />
-		<style name="Theme.AppCompat.Light" parent="@style/Base.Theme.AppCompat.Light" />
-		<style name="Theme.AppCompat.Light.DarkActionBar" parent="@style/Base.Theme.AppCompat.Light.DarkActionBar" />
-		<style name="Theme.AppCompat.Light.Dialog" parent="@style/Base.Theme.AppCompat.Light.Dialog" />
-		<style name="Theme.AppCompat.Light.Dialog.Alert" parent="@style/Base.Theme.AppCompat.Light.Dialog.Alert" />
-		<style name="Theme.AppCompat.Light.Dialog.MinWidth" parent="@style/Base.Theme.AppCompat.Light.Dialog.MinWidth" />
-		<style name="Theme.AppCompat.Light.DialogWhenLarge" parent="@style/Base.Theme.AppCompat.Light.DialogWhenLarge" />
-		<style name="Theme.AppCompat.Light.NoActionBar" parent="@style/Theme.AppCompat.Light">
-			<item name="android:windowActionBar">false</item>
-			<item name="android:windowNoTitle">true</item>
-			<item name="windowActionBar">false</item>
-			<item name="windowNoTitle">true</item>
-		</style>
+    <!--Base AppCompat Styles (Dark)-->
+    <style name="Base.Theme.AppCompat" parent="@style/Base.V7.Theme.AppCompat" />
+    <style name="Base.Theme.AppCompat.CompactMenu" parent="" />
+    <style name="Base.Theme.AppCompat.Dialog" parent="@android:style/Theme.Material.Dialog" />
+    <style name="Base.Theme.AppCompat.Dialog.Alert" parent="@style/Base.Theme.AppCompat.Dialog">
+        <item name="android:windowMinWidthMajor">@dimen/abc_dialog_min_width_major</item>
+        <item name="android:windowMinWidthMinor">@dimen/abc_dialog_min_width_minor</item>
+        <item name="windowMinWidthMajor">@dimen/abc_dialog_min_width_major</item>
+        <item name="windowMinWidthMinor">@dimen/abc_dialog_min_width_minor</item>
+    </style>
+    <style name="Base.Theme.AppCompat.Dialog.MinWidth" parent="@style/Base.Theme.AppCompat.Dialog">
+        <item name="android:windowMinWidthMajor">@dimen/abc_dialog_min_width_major</item>
+        <item name="android:windowMinWidthMinor">@dimen/abc_dialog_min_width_minor</item>
+        <item name="windowMinWidthMajor">@dimen/abc_dialog_min_width_major</item>
+        <item name="windowMinWidthMinor">@dimen/abc_dialog_min_width_minor</item>
+    </style>
+    <style name="Base.Theme.AppCompat.DialogWhenLarge" parent="@style/Theme.AppCompat" />
+    <style name="Base.Theme.AppCompat.Wallpaper" parent="@style/Platform.AppCompat.Wallpaper" />
+    <style name="Theme.AppCompat" parent="@style/Base.Theme.AppCompat" />
+    <style name="Theme.AppCompat.CompactMenu" parent="@style/Base.Theme.AppCompat.CompactMenu" />
+    <style name="Theme.AppCompat.Dialog" parent="@style/Base.Theme.AppCompat.Dialog" />
+    <style name="Theme.AppCompat.Dialog.Alert" parent="@style/Base.Theme.AppCompat.Dialog.Alert" />
+    <style name="Theme.AppCompat.Dialog.MinWidth"
+        parent="@style/Base.Theme.AppCompat.Dialog.MinWidth" />
+    <style name="Theme.AppCompat.DialogWhenLarge"
+        parent="@style/Base.Theme.AppCompat.DialogWhenLarge" />
+    <style name="Theme.AppCompat.NoActionBar" parent="@style/Theme.AppCompat">
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+    <style name="Theme.AppCompat.Wallpaper" parent="@style/Base.Theme.AppCompat.Wallpaper" />
 
-	<!--Base V7 AppCompat Styles-->
-		<style name="Base.V7.Theme.AppCompat" parent="@style/Platform.AppCompat" />
-		<style name="Base.V7.Theme.AppCompat.Light" parent="@style/Platform.AppCompat.Light" />
-		<style name="Base.V7.Theme.AppCompat.Dialog" parent="@style/Base.Theme.AppCompat" />
-		<style name="Base.V7.Theme.AppCompat.Light.Dialog" parent="@style/Base.Theme.AppCompat.Light" />
+    <!--Base AppCompat Styles (Light)-->
+    <style name="Base.Theme.AppCompat.Light" parent="@style/Base.V7.Theme.AppCompat.Light" />
+    <style name="Base.Theme.AppCompat.Light.DarkActionBar"
+        parent="@style/Base.Theme.AppCompat.Light" />
+    <style name="Base.Theme.AppCompat.Light.Dialog" parent="@android:style/Theme.Material.Dialog" />
+    <style name="Base.Theme.AppCompat.Light.Dialog.Alert"
+        parent="@style/Base.Theme.AppCompat.Dialog">
+        <item name="android:windowMinWidthMajor">@dimen/abc_dialog_min_width_major</item>
+        <item name="android:windowMinWidthMinor">@dimen/abc_dialog_min_width_minor</item>
+        <item name="windowMinWidthMajor">@dimen/abc_dialog_min_width_major</item>
+        <item name="windowMinWidthMinor">@dimen/abc_dialog_min_width_minor</item>
+    </style>
+    <style name="Base.Theme.AppCompat.Light.Dialog.MinWidth"
+        parent="@style/Base.Theme.AppCompat.Light.Dialog">
+        <item name="android:windowMinWidthMajor">@dimen/abc_dialog_min_width_major</item>
+        <item name="android:windowMinWidthMinor">@dimen/abc_dialog_min_width_minor</item>
+        <item name="windowMinWidthMajor">@dimen/abc_dialog_min_width_major</item>
+        <item name="windowMinWidthMinor">@dimen/abc_dialog_min_width_minor</item>
+    </style>
+    <style name="Base.Theme.AppCompat.Light.DialogWhenLarge"
+        parent="@style/Theme.AppCompat.Light" />
+    <style name="Theme.AppCompat.Light" parent="@style/Base.Theme.AppCompat.Light" />
+    <style name="Theme.AppCompat.Light.DarkActionBar"
+        parent="@style/Base.Theme.AppCompat.Light.DarkActionBar" />
+    <style name="Theme.AppCompat.Light.Dialog" parent="@style/Base.Theme.AppCompat.Light.Dialog" />
+    <style name="Theme.AppCompat.Light.Dialog.Alert"
+        parent="@style/Base.Theme.AppCompat.Light.Dialog.Alert" />
+    <style name="Theme.AppCompat.Light.Dialog.MinWidth"
+        parent="@style/Base.Theme.AppCompat.Light.Dialog.MinWidth" />
+    <style name="Theme.AppCompat.Light.DialogWhenLarge"
+        parent="@style/Base.Theme.AppCompat.Light.DialogWhenLarge" />
+    <style name="Theme.AppCompat.Light.NoActionBar" parent="@style/Theme.AppCompat.Light">
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
 
-	<!--Base V21 AppCompat Styles-->
-		<style name="Platform.AppCompat" parent="@android:style/Theme.Material">
-			<item name="android:windowNoTitle">true</item>
-			<item name="android:windowActionBar">false</item>
-		</style>
-		<style name="Platform.AppCompat.Dialog" parent="@android:style/Theme.Material.Dialog">
-			<item name="android:windowNoTitle">true</item>
-			<item name="android:windowActionBar">false</item>
-		</style>
-		<style name="Platform.AppCompat.Light" parent="@android:style/Theme.Material">
-			<item name="android:windowNoTitle">true</item>
-			<item name="android:windowActionBar">false</item>
-		</style>
-		<style name="Platform.AppCompat.Light.Dialog" parent="@android:style/Theme.Material.Dialog">
-			<item name="android:windowNoTitle">true</item>
-			<item name="android:windowActionBar">false</item>
-		</style>
-		
-	<!--Custom V21 AppCompat Styles-->
-		<style name="Platform.AppCompat.Wallpaper" parent="@android:style/Theme.Material.Wallpaper">
-			<item name="android:windowNoTitle">true</item>
-			<item name="android:windowActionBar">false</item>
-		</style>
-	
-	<!--Widget AppCompat Styles-->
-		<style name="Base.Widget.AppCompat.ActionBar" parent="@android:style/Widget.Material.ActionBar" />
-		<style name="Base.Widget.AppCompat.Spinner" parent="@style/Platform.Widget.AppCompat.Spinner" />
-		<style name="Platform.Widget.AppCompat.Spinner" parent="@android:style/Widget.Material.Spinner" />
-	    <style name="Widget.AppCompat.ActionBar" parent="@style/Base.Widget.AppCompat.ActionBar" />
-		<style name="Widget.AppCompat.Spinner" parent="@style/Base.Widget.AppCompat.Spinner" />
-		
-	<!--ThemeOverlay AppCompat Styles-->
-		<style name="Platform.ThemeOverlay.AppCompat" parent="@android:style/ThemeOverlay.Material.Dark" />
-		<style name="Platform.ThemeOverlay.AppCompat.Dark" parent="@style/Platform.ThemeOverlay.AppCompat" />
-		<style name="Platform.ThemeOverlay.AppCompat.Light" parent="@style/Platform.ThemeOverlay.AppCompat" />
-		
-	<!--TextAppearance AppCompat Styles-->
-		<style name="Base.TextAppearance.AppCompat" parent="@android:style/TextAppearance">
-			<item name="android:textSize">@dimen/abc_text_size_body_1_material</item>
-			<item name="android:textColor">?android:textColorPrimary</item>
-			<item name="android:textColorHighlight">?android:textColorHighlight</item>
-			<item name="android:textColorHint">?android:textColorHint</item>
-			<item name="android:textColorLink">?android:textColorLink</item>
-		</style>
-		<style name="Base.TextAppearance.AppCompat.Title" parent="@style/Base.TextAppearance.AppCompat">
-			<item name="android:textSize">@dimen/abc_text_size_title_material</item>
-			<item name="android:textColor">?android:textColorPrimary</item>
-		</style>
-		<style name="Base.TextAppearance.AppCompat.Widget.ActionBar.Title" parent="@style/TextAppearance.AppCompat.Title">
-			<item name="android:textSize">@dimen/abc_text_size_title_material_toolbar</item>
-			<item name="android:textColor">?android:textColorPrimary</item>
-		</style>
-		<style name="Base.TextAppearance.Widget.AppCompat.Toolbar.Title" parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Title" />
-		<style name="TextAppearance.AppCompat.Title" parent="@style/Base.TextAppearance.AppCompat.Title" />
-		<style name="TextAppearance.AppCompat.Widget.ActionBar.Title" parent="@style/Base.TextAppearance.AppCompat.Widget.ActionBar.Title" />
-		<style name="TextAppearance.Widget.AppCompat.Toolbar.Title" parent="@style/Base.TextAppearance.Widget.AppCompat.Toolbar.Title" />
+    <!--Base V7 AppCompat Styles-->
+    <style name="Base.V7.Theme.AppCompat" parent="@style/Platform.AppCompat" />
+    <style name="Base.V7.Theme.AppCompat.Light" parent="@style/Platform.AppCompat.Light" />
+    <style name="Base.V7.Theme.AppCompat.Dialog" parent="@style/Base.Theme.AppCompat" />
+    <style name="Base.V7.Theme.AppCompat.Light.Dialog" parent="@style/Base.Theme.AppCompat.Light" />
+
+    <!--Base V21 AppCompat Styles-->
+    <style name="Platform.AppCompat" parent="@android:style/Theme.Material">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowActionBar">false</item>
+    </style>
+    <style name="Platform.AppCompat.Dialog" parent="@android:style/Theme.Material.Dialog">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowActionBar">false</item>
+    </style>
+    <style name="Platform.AppCompat.Light" parent="@android:style/Theme.Material">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowActionBar">false</item>
+    </style>
+    <style name="Platform.AppCompat.Light.Dialog" parent="@android:style/Theme.Material.Dialog">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowActionBar">false</item>
+    </style>
+
+    <!--Custom V21 AppCompat Styles-->
+    <style name="Platform.AppCompat.Wallpaper" parent="@android:style/Theme.Material.Wallpaper">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowActionBar">false</item>
+    </style>
+
+    <!--Widget AppCompat Styles-->
+    <style name="Base.Widget.AppCompat.ActionBar"
+        parent="@android:style/Widget.Material.ActionBar" />
+    <style name="Base.Widget.AppCompat.Spinner" parent="@style/Platform.Widget.AppCompat.Spinner" />
+    <style name="Platform.Widget.AppCompat.Spinner"
+        parent="@android:style/Widget.Material.Spinner" />
+    <style name="Widget.AppCompat.ActionBar" parent="@style/Base.Widget.AppCompat.ActionBar" />
+    <style name="Widget.AppCompat.Spinner" parent="@style/Base.Widget.AppCompat.Spinner" />
+
+    <!--ThemeOverlay AppCompat Styles-->
+    <style name="Platform.ThemeOverlay.AppCompat"
+        parent="@android:style/ThemeOverlay.Material.Dark" />
+    <style name="Platform.ThemeOverlay.AppCompat.Dark"
+        parent="@style/Platform.ThemeOverlay.AppCompat" />
+    <style name="Platform.ThemeOverlay.AppCompat.Light"
+        parent="@style/Platform.ThemeOverlay.AppCompat" />
+
+    <!--TextAppearance AppCompat Styles-->
+    <style name="Base.TextAppearance.AppCompat" parent="@android:style/TextAppearance">
+        <item name="android:textSize">@dimen/abc_text_size_body_1_material</item>
+        <item name="android:textColor">?android:textColorPrimary</item>
+        <item name="android:textColorHighlight">?android:textColorHighlight</item>
+        <item name="android:textColorHint">?android:textColorHint</item>
+        <item name="android:textColorLink">?android:textColorLink</item>
+    </style>
+    <style name="Base.TextAppearance.AppCompat.Title" parent="@style/Base.TextAppearance.AppCompat">
+        <item name="android:textSize">@dimen/abc_text_size_title_material</item>
+        <item name="android:textColor">?android:textColorPrimary</item>
+    </style>
+    <style name="Base.TextAppearance.AppCompat.Widget.ActionBar.Title"
+        parent="@style/TextAppearance.AppCompat.Title">
+        <item name="android:textSize">@dimen/abc_text_size_title_material_toolbar</item>
+        <item name="android:textColor">?android:textColorPrimary</item>
+    </style>
+    <style name="Base.TextAppearance.Widget.AppCompat.Toolbar.Title"
+        parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Title" />
+    <style name="TextAppearance.AppCompat.Title"
+        parent="@style/Base.TextAppearance.AppCompat.Title" />
+    <style name="TextAppearance.AppCompat.Widget.ActionBar.Title"
+        parent="@style/Base.TextAppearance.AppCompat.Widget.ActionBar.Title" />
+    <style name="TextAppearance.Widget.AppCompat.Toolbar.Title"
+        parent="@style/Base.TextAppearance.Widget.AppCompat.Toolbar.Title" />
 </resources>

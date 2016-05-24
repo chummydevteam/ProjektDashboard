@@ -1,6 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--You are editing Settings' Validus Specific Colors-->
+<?xml version="1.0" encoding="utf-8"?><!--You are editing Settings' Validus Specific Colors-->
 
 <resources>
-	<color name="sim_noitification">@android:color/white</color>
+    <color name="sim_noitification">@android:color/white</color>
 </resources>

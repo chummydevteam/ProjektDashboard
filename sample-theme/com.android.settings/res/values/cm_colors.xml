@@ -1,34 +1,38 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--You are editing Settings' CM Specific Colors-->
+<?xml version="1.0" encoding="utf-8"?><!--You are editing Settings' CM Specific Colors-->
 
 <resources>
-	<!--Commit ID: I81254f72cd2d47bc05a7f15c8e3a9fb4c89c8be8-->
-		<!--Layouts overwrite for Settings Background, overriding res/layouts/dashboard_category.xml-->
-			<color name="dashboard_category_background_color">@*common:color/theme_color_app_background</color> <!--CM, Bliss, Euphoria, Candy5, Temasek-->
+    <!--Commit ID: I81254f72cd2d47bc05a7f15c8e3a9fb4c89c8be8-->
+    <!--Layouts overwrite for Settings Background, overriding res/layouts/dashboard_category.xml-->
+    <color name="dashboard_category_background_color">@*common:color/theme_color_app_background
+    </color> <!--CM, Bliss, Euphoria, Candy5, Temasek-->
 
-		<!--Battery history chart text, overriding res/layouts/battery_history_chart.xml-->
-			<color name="text_color_black">@*common:color/theme_color_light_color</color> <!--CM, Bliss, Candy5, Temasek-->
-			<color name="battery_history_chart_textcolor">@*common:color/theme_color_light_color</color> <!--Euphoria-->
+    <!--Battery history chart text, overriding res/layouts/battery_history_chart.xml-->
+    <color name="text_color_black">@*common:color/theme_color_light_color
+    </color> <!--CM, Bliss, Candy5, Temasek-->
+    <color name="battery_history_chart_textcolor">@*common:color/theme_color_light_color
+    </color> <!--Euphoria-->
 
-		<!--Data usage chart text, overriding res/layouts/data_usage_chart.xml-->
-			<color name="data_usage_label_color">@android:color/white</color>
-			<color name="data_usage_secondary_label_color">#ffb30000</color>
+    <!--Data usage chart text, overriding res/layouts/data_usage_chart.xml-->
+    <color name="data_usage_label_color">@android:color/white</color>
+    <color name="data_usage_secondary_label_color">#ffb30000</color>
 
-		<!--Data usage chart color, overriding res/layouts/data_usage_chart.xml-->
-			<color name="data_usage_fill_color">#ffc3bec3</color>
-			<color name="data_usage_secondary_fill_color">@android:color/white</color>
+    <!--Data usage chart color, overriding res/layouts/data_usage_chart.xml-->
+    <color name="data_usage_fill_color">#ffc3bec3</color>
+    <color name="data_usage_secondary_fill_color">@android:color/white</color>
 
     <!--Multi-sim Color Picker Text Color-->
-		<color name="msim_color_picker_text_color">@android:color/white</color>
+    <color name="msim_color_picker_text_color">@android:color/white</color>
 
     <!--Multi-sim Edit Name Text Color-->
-		<color name="msim_edit_name_text_color">@android:color/white</color>
+    <color name="msim_edit_name_text_color">@android:color/white</color>
 
-		<!--Misc. Exposed Text Colors-->
-		<color name="text_color_secondary_text_material_light">@*common:color/theme_color_secondary_text_material_dark</color>
+    <!--Misc. Exposed Text Colors-->
+    <color name="text_color_secondary_text_material_light">
+        @*common:color/theme_color_secondary_text_material_dark
+    </color>
 
-	<!--CM Tweaks Submenu Background Colors-->
-		<color name="screencolor_background">@*common:color/theme_color_app_background</color>
-		<color name="background_color_gray">@*common:color/theme_color_app_background</color>
-		<color name="background_color_white">@*common:color/theme_color_app_background</color>
+    <!--CM Tweaks Submenu Background Colors-->
+    <color name="screencolor_background">@*common:color/theme_color_app_background</color>
+    <color name="background_color_gray">@*common:color/theme_color_app_background</color>
+    <color name="background_color_white">@*common:color/theme_color_app_background</color>
 </resources>

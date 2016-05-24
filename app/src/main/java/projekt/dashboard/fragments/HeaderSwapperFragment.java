@@ -223,7 +223,8 @@ public class HeaderSwapperFragment extends BasePageFragment {
         }
         if (counter == 0) {
             Toast toast = Toast.makeText(getActivity().getApplicationContext(), getResources()
-                    .getString(R.string.contextualheaderswapper_toast_cache_empty_reboot_first),
+                            .getString(R.string
+                                    .contextualheaderswapper_toast_cache_empty_reboot_first),
                     Toast.LENGTH_LONG);
             toast.show();
         }

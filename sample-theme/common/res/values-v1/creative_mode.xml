@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
 /* CDT Theme Base Colors Changer (Dashboard Creative Mode)
  *
  * Copyright 2015-2016, chummy development team
@@ -23,25 +22,25 @@
 -->
 
 <resources>
-	<!--Framework Modifications-->
-		<color name="creative_mode_accent">@android:color/white</color>
-		<color name="creative_mode_accent_secondary">@color/common_color</color>
-		<color name="creative_mode_accent_light">@color/common_color</color>
-		<color name="creative_mode_app_background">#ff000000</color>
-		<color name="creative_mode_light_background">#ffd7d7d7</color>
-		<color name="creative_mode_dialog_color_dark">#bf000000</color>
-		<color name="creative_mode_dialog_color_light">#bfeeeeee</color>
-		<color name="creative_mode_main_color">#ff212021</color>
-		<color name="creative_mode_notification_primary">@color/primary_text_material_dark</color>
-		<color name="creative_mode_notification_secondary">@color/secondary_text_material_dark</color>
-		<color name="creative_mode_ripple">#4a777777</color>
-	<!--Settings Modifications-->
-		<color name="creative_mode_settings_icon_tint">@color/accent_color</color>
-	<!--SystemUI modifications-->
-		<color name="creative_mode_qs_background_color">#cc000000</color>
-		<color name="creative_mode_qs_header_color">#ff1f1f1f</color>
-		<color name="creative_mode_qs_icon_color">#ffffffff</color>
-		<color name="creative_mode_qs_icon_color_disabled">#4dffffff</color>
-		<color name="creative_mode_qs_tile_text">@color/accent_color</color>
-		<color name="creative_mode_notification_background">#e6212021</color>
+    <!--Framework Modifications-->
+    <color name="creative_mode_accent">@android:color/white</color>
+    <color name="creative_mode_accent_secondary">@color/common_color</color>
+    <color name="creative_mode_accent_light">@color/common_color</color>
+    <color name="creative_mode_app_background">#ff000000</color>
+    <color name="creative_mode_light_background">#ffd7d7d7</color>
+    <color name="creative_mode_dialog_color_dark">#bf000000</color>
+    <color name="creative_mode_dialog_color_light">#bfeeeeee</color>
+    <color name="creative_mode_main_color">#ff212021</color>
+    <color name="creative_mode_notification_primary">@color/primary_text_material_dark</color>
+    <color name="creative_mode_notification_secondary">@color/secondary_text_material_dark</color>
+    <color name="creative_mode_ripple">#4a777777</color>
+    <!--Settings Modifications-->
+    <color name="creative_mode_settings_icon_tint">@color/accent_color</color>
+    <!--SystemUI modifications-->
+    <color name="creative_mode_qs_background_color">#cc000000</color>
+    <color name="creative_mode_qs_header_color">#ff1f1f1f</color>
+    <color name="creative_mode_qs_icon_color">#ffffffff</color>
+    <color name="creative_mode_qs_icon_color_disabled">#4dffffff</color>
+    <color name="creative_mode_qs_tile_text">@color/accent_color</color>
+    <color name="creative_mode_notification_background">#e6212021</color>
 </resources>

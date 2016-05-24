@@ -1,8 +1,7 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--You are editing Settings' Attributes-->
+<?xml version="1.0" encoding="utf-8"?><!--You are editing Settings' Attributes-->
 
 <resources>
     <attr name="suwBackground" format="reference|color" />
-	<attr name="suwIllustrationAspectRatio" format="reference|float" />
+    <attr name="suwIllustrationAspectRatio" format="reference|float" />
     <attr name="suwDecorPaddingTop" format="reference|dimension" />
 </resources>

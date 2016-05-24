@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--You are editing Settings' CM Specific Styles-->
+<?xml version="1.0" encoding="utf-8"?><!--You are editing Settings' CM Specific Styles-->
 
 <resources>
-    <style name="Theme.DateTimeSettingsSetupWizard" parent="@android:style/Theme.Material.NoActionBar" />
+    <style name="Theme.DateTimeSettingsSetupWizard"
+        parent="@android:style/Theme.Material.NoActionBar" />
     <style name="Theme.SettingsLicenseActivity" parent="@android:style/Theme.Material.Panel" />
     <style name="Theme.AppPicker" parent="@android:style/Theme.Material.Dialog" />
     <style name="Theme.SettingsDialog" parent="@android:style/Theme.Material.Dialog.NoActionBar" />

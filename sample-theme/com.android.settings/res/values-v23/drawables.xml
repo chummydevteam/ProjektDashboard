@@ -1,11 +1,10 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--You are editing Settings' Drawables-->
+<?xml version="1.0" encoding="utf-8"?><!--You are editing Settings' Drawables-->
 
 <resources>
-	<item type="drawable" name="fp_enrollment_header_landscape">@*common:color/theme_color</item>
-	<item type="drawable" name="ic_wifi_signal_1">@drawable/ic_wifi_signal_1_teal</item>
-	<item type="drawable" name="ic_wifi_signal_2">@drawable/ic_wifi_signal_2_teal</item>
-	<item type="drawable" name="ic_wifi_signal_3">@drawable/ic_wifi_signal_3_teal</item>
-	<item type="drawable" name="ic_wifi_signal_4">@drawable/ic_wifi_signal_4_teal</item>
-	<item type="drawable" name="ic_wifi_signal_lock">@drawable/ic_wifi_lock_signal_0_teal</item>
+    <item name="fp_enrollment_header_landscape" type="drawable">@*common:color/theme_color</item>
+    <item name="ic_wifi_signal_1" type="drawable">@drawable/ic_wifi_signal_1_teal</item>
+    <item name="ic_wifi_signal_2" type="drawable">@drawable/ic_wifi_signal_2_teal</item>
+    <item name="ic_wifi_signal_3" type="drawable">@drawable/ic_wifi_signal_3_teal</item>
+    <item name="ic_wifi_signal_4" type="drawable">@drawable/ic_wifi_signal_4_teal</item>
+    <item name="ic_wifi_signal_lock" type="drawable">@drawable/ic_wifi_lock_signal_0_teal</item>
 </resources>

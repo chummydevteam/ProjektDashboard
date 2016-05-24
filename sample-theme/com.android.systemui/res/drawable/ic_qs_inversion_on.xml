@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<bitmap
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<bitmap xmlns:android="http://schemas.android.com/apk/res/android"
     android:src="@drawable/ic_qs_inversion_on_cdt"
     android:tint="@*common:color/theme_color_qs_icon_color" />

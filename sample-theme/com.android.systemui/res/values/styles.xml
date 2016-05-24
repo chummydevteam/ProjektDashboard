@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--You are editing SystemUI's Styles-->
+<?xml version="1.0" encoding="utf-8"?><!--You are editing SystemUI's Styles-->
 
 <resources>
     <style name="systemui_theme" parent="@android:style/Theme.Material">
@@ -10,11 +9,12 @@
         <item name="android:colorControlActivated">@color/system_accent_color</item>
         <item name="android:colorPrimary">@color/system_primary_color</item>
     </style>
-    <style name="TextAppearance.Material.Notification.Parenthetical" parent="@android:style/TextAppearance.Material.Notification">
+    <style name="TextAppearance.Material.Notification.Parenthetical"
+        parent="@android:style/TextAppearance.Material.Notification">
         <item name="android:textStyle">italic</item>
         <item name="android:textColor">@*common:color/theme_color_notification_primary</item>
     </style>
-	<style name="Theme.SystemUI.Dialog" parent="@android:style/Theme.Material.Dialog">
+    <style name="Theme.SystemUI.Dialog" parent="@android:style/Theme.Material.Dialog">
         <item name="android:colorControlActivated">@color/system_accent_color</item>
         <item name="android:colorPrimary">@color/system_primary_color</item>
     </style>

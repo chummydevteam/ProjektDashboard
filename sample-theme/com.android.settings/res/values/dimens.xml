@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--You are editing Settings' Dimensions-->
+<?xml version="1.0" encoding="utf-8"?><!--You are editing Settings' Dimensions-->
 
 <resources>
     <dimen name="actionbar_contentInsetStart">16.0dip</dimen>

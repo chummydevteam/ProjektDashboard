@@ -1,14 +1,13 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--You are editing SystemUI's Dimensions-->
+<?xml version="1.0" encoding="utf-8"?><!--You are editing SystemUI's Dimensions-->
 
 <resources>
-	<dimen name="notification_divider_height">0.0dip</dimen>
-	<dimen name="notification_padding">0.0dip</dimen>
+    <dimen name="notification_divider_height">0.0dip</dimen>
+    <dimen name="notification_padding">0.0dip</dimen>
 
-	<dimen name="notification_material_rounded_rect_radius">0.0dp</dimen>
-	<dimen name="notification_material_rounded_rect_radius_negative">-0.0dip</dimen>
-	<dimen name="notifications_top_padding">0.0dip</dimen>
-	<dimen name="notifications_bottom_padding">0.0dip</dimen>
+    <dimen name="notification_material_rounded_rect_radius">0.0dp</dimen>
+    <dimen name="notification_material_rounded_rect_radius_negative">-0.0dip</dimen>
+    <dimen name="notifications_top_padding">0.0dip</dimen>
+    <dimen name="notifications_bottom_padding">0.0dip</dimen>
 
-	<dimen name="status_bar_expanded_header_elevation">0.0dip</dimen>
+    <dimen name="status_bar_expanded_header_elevation">0.0dip</dimen>
 </resources>

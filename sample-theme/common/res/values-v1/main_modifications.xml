@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
 /* CDT Theme Base Colors Changer
  *
  * Copyright 2015-2016, chummy development team
@@ -23,31 +22,31 @@
 -->
 
 <resources>
-	<!--Main app theme accents-->
-		<color name="common_color">#ff777777</color>
-		<color name="accent_color">@color/creative_mode_accent</color>
-		<color name="accent_color_dark">@color/creative_mode_accent</color>
-		<color name="accent_color_light">@color/creative_mode_accent_light</color>
-		<color name="light_color">#ffeeeeee</color>
-	<!--Framework modifications-->
-		<color name="app_background">@color/creative_mode_app_background</color>
-		<color name="light_background">@color/creative_mode_light_background</color>
-		<color name="ripple_dark">@color/creative_mode_ripple</color>
-		<color name="ripple_light">@color/ripple_dark</color>
-		<color name="primary_text_material_dark">#ffffffff</color>
-		<color name="secondary_text_material_dark">#ffaeaeae</color>
-		<color name="notification_primary">@color/creative_mode_notification_primary</color>
-		<color name="notification_secondary">@color/creative_mode_notification_secondary</color>
-		<color name="dialog_color_dark">@color/creative_mode_dialog_color_dark</color>
-		<color name="dialog_color_light">@color/creative_mode_dialog_color_light</color>
-	<!--SystemUI modifications-->
-		<color name="qs_background_color">@color/creative_mode_qs_background_color</color>
-		<color name="qs_header_color">@color/creative_mode_qs_header_color</color>
-		<color name="qs_icon_color">@color/creative_mode_qs_icon_color</color>
-		<color name="qs_icon_color_disabled">@color/creative_mode_qs_icon_color_disabled</color>
-		<color name="qs_tile_text">@color/creative_mode_qs_tile_text</color>
-		<color name="notification_background">@color/creative_mode_notification_background</color>
-	<!--Settings modifications-->
-		<color name="settings_icon_tint">@color/creative_mode_settings_icon_tint</color>
-		<color name="settings_switchbar_background">#ff373737</color>
+    <!--Main app theme accents-->
+    <color name="common_color">#ff777777</color>
+    <color name="accent_color">@color/creative_mode_accent</color>
+    <color name="accent_color_dark">@color/creative_mode_accent</color>
+    <color name="accent_color_light">@color/creative_mode_accent_light</color>
+    <color name="light_color">#ffeeeeee</color>
+    <!--Framework modifications-->
+    <color name="app_background">@color/creative_mode_app_background</color>
+    <color name="light_background">@color/creative_mode_light_background</color>
+    <color name="ripple_dark">@color/creative_mode_ripple</color>
+    <color name="ripple_light">@color/ripple_dark</color>
+    <color name="primary_text_material_dark">#ffffffff</color>
+    <color name="secondary_text_material_dark">#ffaeaeae</color>
+    <color name="notification_primary">@color/creative_mode_notification_primary</color>
+    <color name="notification_secondary">@color/creative_mode_notification_secondary</color>
+    <color name="dialog_color_dark">@color/creative_mode_dialog_color_dark</color>
+    <color name="dialog_color_light">@color/creative_mode_dialog_color_light</color>
+    <!--SystemUI modifications-->
+    <color name="qs_background_color">@color/creative_mode_qs_background_color</color>
+    <color name="qs_header_color">@color/creative_mode_qs_header_color</color>
+    <color name="qs_icon_color">@color/creative_mode_qs_icon_color</color>
+    <color name="qs_icon_color_disabled">@color/creative_mode_qs_icon_color_disabled</color>
+    <color name="qs_tile_text">@color/creative_mode_qs_tile_text</color>
+    <color name="notification_background">@color/creative_mode_notification_background</color>
+    <!--Settings modifications-->
+    <color name="settings_icon_tint">@color/creative_mode_settings_icon_tint</color>
+    <color name="settings_switchbar_background">#ff373737</color>
 </resources>

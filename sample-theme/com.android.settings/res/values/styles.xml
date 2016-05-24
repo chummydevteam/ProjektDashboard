@@ -1,76 +1,80 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--You are editing Settings' Styles-->
+<?xml version="1.0" encoding="utf-8"?><!--You are editing Settings' Styles-->
 
 <resources>
-	<!--Custom Category Title Text Style-->
-		<style name="TextAppearance.CategoryTitle" parent="@android:style/TextAppearance.Material.Body2">
-			<item name="android:textColor">?android:attr/colorAccent</item>
-			<item name="android:textAllCaps">true</item>
-			<item name="android:textStyle">italic</item>
-		</style>
+    <!--Custom Category Title Text Style-->
+    <style name="TextAppearance.CategoryTitle"
+        parent="@android:style/TextAppearance.Material.Body2">
+        <item name="android:textColor">?android:attr/colorAccent</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textStyle">italic</item>
+    </style>
 
-	<!--ActionBar Theme, add background attr here to add a drawable bg to use as header-->
-		<style name="Theme.ActionBar" parent="@android:style/Widget.Material.ActionBar.Solid">
-			<item name="android:contentInsetStart">@dimen/actionbar_contentInsetStart</item>
-		</style>
+    <!--ActionBar Theme, add background attr here to add a drawable bg to use as header-->
+    <style name="Theme.ActionBar" parent="@android:style/Widget.Material.ActionBar.Solid">
+        <item name="android:contentInsetStart">@dimen/actionbar_contentInsetStart</item>
+    </style>
 
-	<!--Style of main settings, do not replace with Theme.Settings as this prevents Settings FC-->
-		<style name="AppBaseTheme" parent="@android:style/Theme.Material">
-			<item name="android:colorAccent">@color/theme_accent</item>
-		</style>
-		<style name="AppTheme" parent="@style/AppBaseTheme">
-			<item name="android:colorAccent">@color/theme_accent</item>
-		</style>
-		<style name="Theme.SettingsBase" parent="@android:style/Theme.Material">
-			<item name="android:colorAccent">@color/theme_accent</item>
-		</style>
+    <!--Style of main settings, do not replace with Theme.Settings as this prevents Settings FC-->
+    <style name="AppBaseTheme" parent="@android:style/Theme.Material">
+        <item name="android:colorAccent">@color/theme_accent</item>
+    </style>
+    <style name="AppTheme" parent="@style/AppBaseTheme">
+        <item name="android:colorAccent">@color/theme_accent</item>
+    </style>
+    <style name="Theme.SettingsBase" parent="@android:style/Theme.Material">
+        <item name="android:colorAccent">@color/theme_accent</item>
+    </style>
 
-	<!--About phone and Status windows, do not remove SubSettingsDialogWhenLarge as parent has been changed-->
-		<style name="Theme.AlertDialog" parent="@android:style/Theme.Material.Dialog.Alert" />
-		<style name="Theme.SubSettingsDialogWhenLarge" parent="@style/Theme.SettingsBase" />
-		<style name="Theme.DialogWhenLarge" parent="@android:style/Theme.Material.DialogWhenLarge" />
-		<style name="Theme.DateTimeSettingsSetupWizard" parent="@android:style/Theme.Material.NoActionBar" />
-		<style name="Theme.SettingsLicenseActivity" parent="@android:style/Theme.Material.Panel" />
-		<style name="Theme.AppPicker" parent="@android:style/Theme.Material.Dialog" />
-		<style name="Theme.SettingsDialog" parent="@android:style/Theme.Material.Dialog.NoActionBar" />
-		<style name="Theme.SettingsAlertDialog" parent="@android:style/Theme.Material.Dialog.Alert" />
-		<style name="Theme.Material.Light.Dialog.NoActionBar.MinWidth" parent="@android:style/Theme.Material.Dialog.NoActionBar">
-				<item name="android:windowMinWidthMajor">@android:dimen/dialog_min_width_major</item>
-				<item name="android:windowMinWidthMinor">@android:dimen/dialog_min_width_minor</item>
-		</style>
+    <!--About phone and Status windows, do not remove SubSettingsDialogWhenLarge as parent has been changed-->
+    <style name="Theme.AlertDialog" parent="@android:style/Theme.Material.Dialog.Alert" />
+    <style name="Theme.SubSettingsDialogWhenLarge" parent="@style/Theme.SettingsBase" />
+    <style name="Theme.DialogWhenLarge" parent="@android:style/Theme.Material.DialogWhenLarge" />
+    <style name="Theme.DateTimeSettingsSetupWizard"
+        parent="@android:style/Theme.Material.NoActionBar" />
+    <style name="Theme.SettingsLicenseActivity" parent="@android:style/Theme.Material.Panel" />
+    <style name="Theme.AppPicker" parent="@android:style/Theme.Material.Dialog" />
+    <style name="Theme.SettingsDialog" parent="@android:style/Theme.Material.Dialog.NoActionBar" />
+    <style name="Theme.SettingsAlertDialog" parent="@android:style/Theme.Material.Dialog.Alert" />
+    <style name="Theme.Material.Light.Dialog.NoActionBar.MinWidth"
+        parent="@android:style/Theme.Material.Dialog.NoActionBar">
+        <item name="android:windowMinWidthMajor">@android:dimen/dialog_min_width_major</item>
+        <item name="android:windowMinWidthMinor">@android:dimen/dialog_min_width_minor</item>
+    </style>
 
-	<!--Wifi dialog and popup texts-->
-    <style name="Theme.Light.WifiDialog" parent="@android:style/Theme.Material.Light.Dialog.Alert" />
-		<style name="wifi_item_label">
-			<item name="android:textColor">@android:color/white</item>
-		</style>
-		<style name="wifi_item_content">
-			<item name="android:textColor">@android:color/white</item>
-		</style>
-		<style name="wifi_item_edit_content">
-			<item name="android:textColor">@android:color/white</item>
-		</style>
+    <!--Wifi dialog and popup texts-->
+    <style name="Theme.Light.WifiDialog"
+        parent="@android:style/Theme.Material.Light.Dialog.Alert" />
+    <style name="wifi_item_label">
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+    <style name="wifi_item_content">
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+    <style name="wifi_item_edit_content">
+        <item name="android:textColor">@android:color/white</item>
+    </style>
 
-	<!--Bluetooth dialog and popup texts-->
-		<style name="bt_item">
-			<item name="android:textColor">@android:color/white</item>
-		</style>
-		<style name="bt_item_label">
-			<item name="android:textColor">@android:color/white</item>
-		</style>
-		<style name="bt_item_edit_content">
-			<item name="android:textColor">@android:color/white</item>
-		</style>
+    <!--Bluetooth dialog and popup texts-->
+    <style name="bt_item">
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+    <style name="bt_item_label">
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+    <style name="bt_item_edit_content">
+        <item name="android:textColor">@android:color/white</item>
+    </style>
 
-	<!--Setup Wizards-->
-		<style name="SetupWizardTheme.Light" parent="android:style/Theme.Material.NoActionBar" />
+    <!--Setup Wizards-->
+    <style name="SetupWizardTheme.Light" parent="android:style/Theme.Material.NoActionBar" />
 
-	<!--Security Button Background-->
-		<style name="SecurityPreferenceButtonContainer" parent="@android:style/Widget.Material.SegmentedButton">
-			<item name="android:background">@*common:color/theme_color</item>
-			<item name="android:layout_width">fill_parent</item>
-			<item name="android:layout_height">wrap_content</item>
-			<item name="android:weightSum">2.0</item>
-			<item name="android:dividerPadding">8.0dip</item>
-		</style>
+    <!--Security Button Background-->
+    <style name="SecurityPreferenceButtonContainer"
+        parent="@android:style/Widget.Material.SegmentedButton">
+        <item name="android:background">@*common:color/theme_color</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:weightSum">2.0</item>
+        <item name="android:dividerPadding">8.0dip</item>
+    </style>
 </resources>

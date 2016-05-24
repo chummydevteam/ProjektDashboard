@@ -518,7 +518,7 @@ public class HeaderImportFragment extends BasePageFragment {
                     checkWhetherZIPisValid(Environment.getExternalStorageDirectory().
                                     getAbsolutePath() +
                                     "/" + getString(R.string.dashboard_header_directory) + "/" +
-                            spinner2.getSelectedItem(),
+                                    spinner2.getSelectedItem(),
                             getActivity().getCacheDir().getAbsolutePath() + "/headers");
                 } else {
                     TextView headerPackName = (TextView)

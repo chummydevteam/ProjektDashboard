@@ -125,8 +125,9 @@ public class HeaderPackDownloadActivity extends AppCompatActivity {
         final Spinner headerPackSourcePicker = (Spinner) findViewById(R.id.sourcePickerHeaderPacks);
         ArrayAdapter<String> spinnerCountShoesArrayAdapter = new ArrayAdapter<String>
                 (getApplicationContext(),
-                android.R.layout.simple_spinner_dropdown_item, getResources().getStringArray(R
-                        .array.header_pack_sources));
+                        android.R.layout.simple_spinner_dropdown_item, getResources()
+                        .getStringArray(R
+                                .array.header_pack_sources));
         headerPackSourcePicker.setAdapter(spinnerCountShoesArrayAdapter);
         headerPackSourcePicker.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override

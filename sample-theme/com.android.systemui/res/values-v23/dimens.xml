@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--You are editing SystemUI's Dimensions-->
+<?xml version="1.0" encoding="utf-8"?><!--You are editing SystemUI's Dimensions-->
 
 <resources>
     <dimen name="speed_bump_height">0dp</dimen>

@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--You are editing Settings' Drawables-->
+<?xml version="1.0" encoding="utf-8"?><!--You are editing Settings' Drawables-->
 
 <resources>
-    <item type="drawable" name="expanded_item_bg">@*common:color/theme_color_app_background</item>
-    <item type="drawable" name="expanded_item_bg_activated">@*common:color/theme_color_app_background</item>
+    <item name="expanded_item_bg" type="drawable">@*common:color/theme_color_app_background</item>
+    <item name="expanded_item_bg_activated" type="drawable">
+        @*common:color/theme_color_app_background
+    </item>
 </resources>

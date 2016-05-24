@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
 /* CDT Theme Base Colors Changer
  *
  * Copyright 2015-2016, chummy development team
@@ -22,7 +21,7 @@
  */
 -->
 
-<resources>	
-	<!--SystemUI modifications-->
-		<color name="notification_background">@color/black_color_alpha_65</color>
+<resources>
+    <!--SystemUI modifications-->
+    <color name="notification_background">@color/black_color_alpha_65</color>
 </resources>
