@@ -339,7 +339,7 @@
 
     <string name="write_storage_permission_denied">Write external storage permission
         denied!</string>
-    <string name="intro_wallpapers">select a wallpaper source above and click the restart icon to begin loading wallpapers at launch of dashboard!</string>
+    <string name="intro_wallpapers">select a wallpaper source above to begin loading wallpapers at launch of dashboard!</string>
     <string name="search_wallpapers">Search wallpapers…</string>
     <string name="reload_from_web">Reload from Web</string>
     <string name="downloading_wallpaper">Downloading wallpaper…</string>
