@@ -5,13 +5,12 @@
         <item>Beltz_Framework</item>
     </string-array>
 
-
     <string name="contextualheaderswapper_supportcontextual">swap contextual headers too</string>
     <string name="xhdpi">xhdpi</string>
     <string name="xxhdpi">xxhdpi</string>
     <string name="xxxhdpi">xxxhdpi</string>
     <string name="selectyourdeviceconfiguration">select your device dpi</string>
     <string name="themeutilities_more_theme_utilities">more theme utilities</string>
-    <string name="themeutilities_open_layers_manager">open layers manager</string>
-    <string name="themeutilities_clear_allthemes">clear overlay folder</string>
+    <string name="themeutilities_open_layers_manager">launch layers manager</string>
+    <string name="themeutilities_clear_allthemes">clear overlays folder</string>
 </resources>

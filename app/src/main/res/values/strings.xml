@@ -294,17 +294,17 @@
     <string name="contextualheaderswapper_save_set_image">Save and Set Image</string>
     <string name="contextualheaderswapper_select_zip">please select a premade zip...</string>
 
-    <string name="homepage_description">Welcome to CDT dashboard.layers</string>
-    <string name="homepage_description_secondary">ever wondered how far devs could go with the Layers Theming ? we challenged ourselves to reinvent the wheel, so we created an app to house all our tweaks in an all-in-one package.\n\nhowever this app may not work on all devices, so if you see an unsupported message above in red, do not attempt to run this app unless you are ready to be a guinea pig :)</string>
+    <string name="homepage_description">welcome to dashboard.layers</string>
+    <string name="homepage_description_secondary">ever wondered how far devs could go with layers theming? we challenged ourselves to reinvent the wheel, so we created an app to house all our tweaks in an all-in-one package.\n\nhowever this app may not work on all devices, so if you see an unsupported message above in red, do not attempt to run this app unless you are ready to be a guinea pig :)</string>
     <string name="homepage_rom_supported">SUPPORTED √</string>
     <string name="homepage_rom_not_supported">NOT SUPPORTED ✘</string>
     <string name="homepage_dashboard_app_development_status">, welcome back to the dashboard beta program! </string>
     <string name="homepage_dashboard_app_development_status_default_username">Hey there</string>
 
     <string name="homepage_theme_full_supported">You are good to go</string>
-    <string name="homepage_theme_half_supported">theme is not completely installed,please reinstall</string>
+    <string name="homepage_theme_half_supported">theme is not completely installed</string>
     <string name="homepage_theme_not_supported">theme is not installed</string>
-    <string name="theme_full_snack">You have not installed the theme correctly yet,click here to get yourself redirected to the main theme page</string>
-    <string name="theme_half_snack">It seems you missed some overlays while installing the overlay,click here to complete the installation</string>
-    <string name="theme_not_snack">Theme is not Installed , Please Click to install it</string>
+    <string name="theme_full_snack">you have not installed the theme correctly, click here to be redirected to the main theme page.</string>
+    <string name="theme_half_snack">it seems you have missed several overlays, click here to complete the installation.</string>
+    <string name="theme_not_snack">no dashboard themes installed, click here to install!</string>
 </resources>
