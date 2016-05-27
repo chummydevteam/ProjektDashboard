@@ -5,11 +5,11 @@
     <item
         android:id="@+id/share"
         android:orderInCategory="100"
-        android:title="Share"
+        android:title="@string/share"
         app:showAsAction="never"/>
     <item
         android:id="@+id/contact"
         android:orderInCategory="300"
-        android:title="Contact Developer !!"
+        android:title="@string/contact_layers_dev"
         app:showAsAction="never"/>
 </menu>

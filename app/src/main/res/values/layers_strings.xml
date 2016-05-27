@@ -5,6 +5,8 @@
         <item>Beltz_Framework</item>
     </string-array>
 
+    <string name="share">Share</string>
+    <string name="contact_layers_dev">Contact</string>
     <string name="contextualheaderswapper_supportcontextual">swap contextual headers too</string>
     <string name="xhdpi">xhdpi</string>
     <string name="xxhdpi">xxhdpi</string>
