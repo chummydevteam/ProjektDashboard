@@ -594,7 +594,7 @@ public class HeaderImportFragment extends BasePageFragment {
             eu.chainfire.libsuperuser.Shell.SU.run("rm -r /res/drawable-xhdpi-v4/");
 
             eu.chainfire.libsuperuser.Shell.SU.run("mount -o remount,ro /");
-            if (LayersFunc.checkbitphone()) {
+            if (LayersFunc.checkBitPhone()) {
                 LayersFunc.copyFABFinalizedAPK(getActivity(), LayersFunc.themesystemui, false);
             } else {
                 LayersFunc.copyFinalizedAPK(getActivity(), LayersFunc.themesystemui, false);

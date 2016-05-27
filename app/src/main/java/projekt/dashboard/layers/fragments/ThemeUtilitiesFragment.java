@@ -131,7 +131,7 @@ public class ThemeUtilitiesFragment extends BasePageFragment {
     }
 
     public void cleanTempFolder() {
-        if (LayersFunc.checkbitphone()) {
+        if (LayersFunc.checkBitPhone()) {
             vendor = "/vendor/overlay/";
             mount = "/vendor";
         }

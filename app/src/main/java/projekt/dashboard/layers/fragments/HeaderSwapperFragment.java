@@ -682,7 +682,7 @@ public class HeaderSwapperFragment extends BasePageFragment {
                 eu.chainfire.libsuperuser.Shell.SU.run("mount -o remount,ro /");
                 Log.e("performAAPTonCommonsAPK",
                         "Cleaned up root directory and remounted system as read-only.");
-                if (LayersFunc.checkbitphone()) {
+                if (LayersFunc.checkBitPhone()) {
                     LayersFunc.copyFABFinalizedAPK(getActivity(), LayersFunc.themeframework, true);
                     if (swap_contextual_header) {
                         LayersFunc.copyFABFinalizedAPK(getActivity(), LayersFunc.themesystemui,

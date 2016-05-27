@@ -61,8 +61,6 @@ public class LayersFunc {
         findFrameworkFile();
         findSystemUIFile();
         checkThemeMainSupported(context);
-        Log.e("Final Framework", themeframework);
-        Log.e("Final SystemUI", themesystemui);
         File aa = new File("/system/bin/aapt");
         if (aa.exists()) {
 
@@ -106,18 +104,14 @@ public class LayersFunc {
     }
 
     private static void changeVendorAndMount() {
-        if (checkbitphone()) {
-            Log.e("Checking", "64 Bit Active");
-            Log.e("64 bit Device ", Build.DEVICE + " Found,now changing the vendor and mount");
+        if (checkBitPhone()) {
+            Log.e("PhoneBitCheck", Build.DEVICE + " found, now changing the vendor and mount");
             vendor = "/vendor/overlay";
             mount = "/vendor";
-            Log.e("64 bit Device ", Build.DEVICE + " changed the vendor and mount");
         } else {
-            Log.e("Checking", "32 Bit Active");
-            Log.e("32 bit Device ", Build.DEVICE + " Found,now changing the vendor and mount");
+            Log.e("PhoneBitCheck", Build.DEVICE + " found, now changing the vendor and mount");
             vendor = "/system/vendor/overlay";
             mount = "/system";
-            Log.e("32 bit Device ", Build.DEVICE + " changed the vendor and mount");
         }
     }
 
@@ -129,20 +123,15 @@ public class LayersFunc {
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 
-    public static boolean checkbitphone() {
-        Log.e("Checkbitphone", "Function Called");
-        Log.e("Checkbitphone", "Function Started");
+    public static boolean checkBitPhone() {
         String[] bit = Build.SUPPORTED_32_BIT_ABIS;
         String[] bit64 = Build.SUPPORTED_64_BIT_ABIS;
         int flag = 0;
         try {
             if (bit64[0] != null) {
-                Log.e("Checkbitphone", "64 Found");
-                Log.e("Checkbitphone", "Checking if its one from FAB");
+                Log.e("PhoneBitCheck", "64 bit device detected");
                 if (Build.DEVICE.equals("flounder") || Build.DEVICE.equals("flounder_lte") ||
                         Build.DEVICE.equals("angler") || Build.DEVICE.equals("bullhead")) {
-                    Log.e("64 bit Device ", Build.DEVICE + " Found,now returning");
-                    Log.e("Checkbitphone", "Function Stopped");
                     return true;
                 }
             }
@@ -152,9 +141,8 @@ public class LayersFunc {
         try {
             if (flag == 0) {
                 if (bit[0] != null) {
-                    Log.e("Checkbitphone", "32 Bit Active");
-                    Log.e("Checkbitphone", "Normal Phone Overlay Folder found");
-                    Log.e("Checkbitphone", "Function Stopped");
+                    Log.e("PhoneBitCheck", "32 bit device detected");
+                    Log.e("PhoneBitCheck", "Default overlay folder found");
                     return false;
                 }
             }
@@ -165,26 +153,20 @@ public class LayersFunc {
     }
 
     public static void downloadAAPT(Context context) {
-        Log.e("DownloadAAPT", "Function Called");
-        Log.e("DownloadAAPT", "Function Started");
-        Log.e("Checkbitphone", "Calling Function");
-        if (checkbitphone()) {
-            Log.e("DownloadAAPT", "64 Bit Active");
-            Log.e("64 bit Device ", Build.DEVICE + " Found,now changing the vendor and mount");
-            Log.e("64 bit Device ", Build.DEVICE + " changed the vendor and mount");
+        if (checkBitPhone()) {
+            Log.e("downloadAAPT", "64 bit device detected");
+            Log.e("downloadAAPT", Build.DEVICE + " found, now changing vendor and mount zones");
             String[] downloadCommands = {link64,
                     "aapt"};
-            Log.e("DownloadindResources", "Calling Function");
             new downloadResources().execute(downloadCommands);
-            Log.e("DownloadAAPT", "Function Stopped");
+            Log.e("downloadAAPT", "Download complete");
         } else {
-            Log.e("DownloadAAPT", "32 Bit Active");
-            Log.e("32 bit Device ", Build.DEVICE + " Found,now changing the vendor and mount");
-            Log.e("32 bit Device ", Build.DEVICE + " changed the vendor and mount");
+            Log.e("downloadAAPT", "32 bit device detected");
+            Log.e("downloadAAPT", Build.DEVICE + " found, now changing vendor and mount zones");
             String[] downloadCommands = {link,
                     "aapt"};
             new downloadResources().execute(downloadCommands);
-            Log.e("DownloadAAPT", "Function Stopped");
+            Log.e("DownloadAAPT", "Download complete");
         }
     }
 
@@ -220,13 +202,13 @@ public class LayersFunc {
                 if (files2 != null) {
                     for (File inFile2 : files2) {
                         if (inFile2.isFile()) {
-                            Log.d("Processing overlay:", inFile2.toString());
+                            Log.d("Processing overlay", inFile2.toString());
                             String filenameParse[] = inFile2.getAbsolutePath().split("/");
                             String last = filenameParse[filenameParse.length - 1];
                             StringTokenizer stringTokenizer = new StringTokenizer(last, ".");
                             String finalname = stringTokenizer.nextToken();
                             if (finalname.equalsIgnoreCase(array[i])) {
-                                Log.d("Supported overlay:", finalname);
+                                Log.d("Supported overlay", finalname);
                                 framework = array[i];
                                 return true;
                             }
@@ -470,13 +452,13 @@ public class LayersFunc {
             if (files2 != null) {
                 for (File inFile2 : files2) {
                     if (inFile2.isFile()) {
-                        Log.d("Processing overlay:", inFile2.toString());
+                        Log.d("Processing overlay", inFile2.toString());
                         String filenameParse[] = inFile2.getAbsolutePath().split("/");
                         String last = filenameParse[filenameParse.length - 1];
                         StringTokenizer stringTokenizer = new StringTokenizer(last, ".");
                         String finalname = stringTokenizer.nextToken();
                         if (finalname.contains("HeaderSwapperFrame")) {
-                            Log.d("Supported overlay:", finalname);
+                            Log.d("Supported overlay", finalname);
                             themeframework = finalname;
                             break;
                         }
@@ -495,13 +477,13 @@ public class LayersFunc {
             if (files2 != null) {
                 for (File inFile2 : files2) {
                     if (inFile2.isFile()) {
-                        Log.d("Processing overlay:", inFile2.toString());
+                        Log.d("Processing overlay", inFile2.toString());
                         String filenameParse[] = inFile2.getAbsolutePath().split("/");
                         String last = filenameParse[filenameParse.length - 1];
                         StringTokenizer stringTokenizer = new StringTokenizer(last, ".");
                         String finalname = stringTokenizer.nextToken();
                         if (finalname.contains("HeaderSwapperSys")) {
-                            Log.d("Supported overlay:", finalname);
+                            Log.d("Supported overlay", finalname);
                             themesystemui = finalname;
                             break;
                         }

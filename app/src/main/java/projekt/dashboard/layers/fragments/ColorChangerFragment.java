@@ -223,7 +223,7 @@ public class ColorChangerFragment extends BasePageFragment {
         }
 
         protected void onPostExecute(Void result) {
-            if (LayersFunc.checkbitphone()) {
+            if (LayersFunc.checkBitPhone()) {
                 LayersFunc.copyFABFinalizedAPK(getActivity(), File, true);
             } else {
                 LayersFunc.copyFinalizedAPK(getActivity(), File, true);
