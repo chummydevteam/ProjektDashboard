@@ -176,7 +176,7 @@ public class HomeFragment extends BasePageFragment {
         iv2.startAnimation(anim2);
 
         final String[] myStrings = {
-                "dashboard." + " (" + BuildConfig.VERSION_NAME + ")",
+                "dashboard.layers" + " (" + BuildConfig.VERSION_NAME + ")",
                 current_rom + " " + getProp("ro.build.version.release") +
                         " (" + getProp("ro.build.id") + ")",
                 getProp("ro.product.manufacturer") + " " + getProp("ro.product.model") +
