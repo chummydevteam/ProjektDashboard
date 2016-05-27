@@ -31,9 +31,6 @@ public class AppIntroduction extends AppIntro {
         addSlide(AppIntroFragment.newInstance(getString(R.string.second_slide_title), getString(R
                 .string.second_slide_description), R.drawable.painbrush_palette, Color.parseColor
                 ("#212021")));
-        addSlide(AppIntroFragment.newInstance(getString(R.string.third_slide_title), getString(R
-                .string.third_slide_description), R.drawable.creative_mode, Color.parseColor
-                ("#212021")));
         addSlide(AppIntroFragment.newInstance(getString(R.string.fourth_slide_title), getString(R
                 .string.fourth_slide_description), R.drawable.phone_heart, Color.parseColor
                 ("#212021")));

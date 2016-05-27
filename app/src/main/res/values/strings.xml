@@ -21,20 +21,17 @@
     <string name="change_name_dialog_confirm">Much better!</string>
 
     <!-- AppIntroduction -->
-    <string name="first_slide_title">welcome to dashboard.</string>
-    <string name="first_slide_description">dashboard is a cm theme engine addon by chummy development team that allows you to expand the possibilities of all cdt themes, as well as extras for other themes as well.</string>
+    <string name="first_slide_title">welcome to dashboard.layers</string>
+    <string name="first_slide_description">dashboard.layers is a layers injection utility by chummy development team that allows you to expand the possibilities of all cdt themes, as well as extras for other themes as well.</string>
 
     <string name="second_slide_title">color picker</string>
-    <string name="second_slide_description">dashboard comes with a built in color picker for hotswapping of colors!\nplease allow it to automatically download a small patch file for itself before you leave your internet connection.</string>
-
-    <string name="third_slide_title">creative mode, activated!</string>
-    <string name="third_slide_description">with creative mode, you could theoretically modify any theme with color, style and drawable tweaks. these themes need dashboard-specific values for complete support.</string>
+    <string name="second_slide_description">dashboard.layers comes with a built in color picker for hotswapping of colors!\nplease allow it to automatically download a small patch file for itself before you leave your internet connection.</string>
 
     <string name="fourth_slide_title">contextual header swapping</string>
     <string name="fourth_slide_description">dashboard also comes with a built in contextual header swapper and importer to customize your phone further with dashboard certified packs or your own images!</string>
 
-    <string name="fifth_slide_title">theme engine in need of diagnosing?</string>
-    <string name="fifth_slide_description">dashboard also comes with built in theme utilities to offer you a plethora of options to help you fix your theme engine directly on your phone!\n\n</string>
+    <string name="fifth_slide_title">device in need of diagnosing?</string>
+    <string name="fifth_slide_description">dashboard.layers also comes with built in theme utilities to offer you a plethora of options to help you fix your theme engine directly on your phone!\n\n</string>
 
     <string name="sixth_slide_title">this app needs root!</string>
     <string name="sixth_slide_description">to use all the functions of the app, your phone must definitely have root enabled, as well as a custom rom flashed if you would like to have a contextual header!</string>
