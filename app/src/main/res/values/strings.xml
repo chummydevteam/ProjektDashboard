@@ -303,7 +303,7 @@
 
     <string name="homepage_theme_full_supported">You are good to go</string>
     <string name="homepage_theme_half_supported">theme is not completely installed</string>
-    <string name="homepage_theme_not_supported">theme is not installed</string>
+    <string name="homepage_theme_not_supported">no dashboard themes installed</string>
     <string name="theme_full_snack">you have not installed the theme correctly, click here to be redirected to the main theme page.</string>
     <string name="theme_half_snack">it seems you have missed several overlays, click here to complete the installation.</string>
     <string name="theme_not_snack">no dashboard themes installed, click here to install!</string>
