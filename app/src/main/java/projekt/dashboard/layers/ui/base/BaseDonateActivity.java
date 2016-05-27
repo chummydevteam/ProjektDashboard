@@ -13,7 +13,8 @@ import projekt.dashboard.layers.util.Utils;
 /**
  * @author Aidan Follestad (afollestad)
  */
-public abstract class BaseDonateActivity extends BaseThemedActivity implements BillingProcessor.IBillingHandler {
+public abstract class BaseDonateActivity extends BaseThemedActivity implements BillingProcessor
+        .IBillingHandler {
 
     private BillingProcessor bp;
 

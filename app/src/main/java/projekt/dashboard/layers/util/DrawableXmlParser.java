@@ -95,7 +95,8 @@ public class DrawableXmlParser {
         public int getDrawableId(Context context) {
             if (mDrawable == null)
                 return 0;
-            return context.getResources().getIdentifier(mDrawable, "drawable", BuildConfig.APPLICATION_ID);
+            return context.getResources().getIdentifier(mDrawable, "drawable", BuildConfig
+                    .APPLICATION_ID);
         }
 
         @Override

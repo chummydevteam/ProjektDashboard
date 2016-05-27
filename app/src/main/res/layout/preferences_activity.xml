@@ -1,13 +1,13 @@
 <com.pluscubed.insetsdispatcher.view.InsetsDispatcherFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+                                                                 android:layout_width="match_parent"
+                                                                 android:layout_height="match_parent">
 
     <android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/overlay_window_bg"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+                                       android:id="@+id/toolbar"
+                                       android:layout_width="match_parent"
+                                       android:layout_height="wrap_content"
+                                       android:background="@color/overlay_window_bg"
+                                       android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
         <TextView
             android:layout_width="wrap_content"
@@ -16,7 +16,7 @@
             android:text="@string/settings_title"
             android:textColor="@android:color/white"
             android:textSize="20dp"
-            android:textStyle="italic" />
+            android:textStyle="italic"/>
 
 
     </android.support.v7.widget.Toolbar>
@@ -40,7 +40,7 @@
             android:paddingBottom="10dp"
             android:text="@string/settings_subtitle1"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:textStyle="italic" />
+            android:textStyle="italic"/>
 
         <Switch
             android:id="@+id/enable_color_switcher"
@@ -50,7 +50,7 @@
             android:layout_below="@id/tab_title"
             android:checked="true"
             android:padding="16dp"
-            android:text="@string/settings_color_switcher_tab" />
+            android:text="@string/settings_color_switcher_tab"/>
 
         <Switch
             android:id="@+id/enable_header_swapper"
@@ -60,7 +60,7 @@
             android:layout_below="@id/enable_color_switcher"
             android:checked="true"
             android:padding="16dp"
-            android:text="@string/settings_header_swapper_tab" />
+            android:text="@string/settings_header_swapper_tab"/>
 
         <Switch
             android:id="@+id/enable_header_importer"
@@ -70,7 +70,7 @@
             android:layout_below="@id/enable_header_swapper"
             android:checked="true"
             android:padding="16dp"
-            android:text="@string/settings_header_importer_tab" />
+            android:text="@string/settings_header_importer_tab"/>
 
         <Switch
             android:id="@+id/enable_theme_utilities"
@@ -80,7 +80,7 @@
             android:layout_below="@id/enable_header_importer"
             android:checked="true"
             android:padding="16dp"
-            android:text="@string/settings_theme_debugging_tab" />
+            android:text="@string/settings_theme_debugging_tab"/>
 
 
         <Switch
@@ -91,7 +91,7 @@
             android:layout_below="@id/enable_theme_utilities"
             android:checked="true"
             android:padding="16dp"
-            android:text="@string/settings_wallpaper_tab" />
+            android:text="@string/settings_wallpaper_tab"/>
 
         <TextView
             android:id="@+id/app_theme_title"
@@ -104,7 +104,7 @@
             android:paddingTop="20dp"
             android:text="@string/settings_subtitle2"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:textStyle="italic" />
+            android:textStyle="italic"/>
 
         <Switch
             android:id="@+id/enable_blacked_out"
@@ -114,7 +114,7 @@
             android:layout_below="@id/app_theme_title"
             android:checked="false"
             android:padding="16dp"
-            android:text="@string/settings_blacked_out_mode" />
+            android:text="@string/settings_blacked_out_mode"/>
         <!--
                 <Switch
                     android:id="@+id/enable_creative_mode"
@@ -134,7 +134,7 @@
             android:layout_below="@id/enable_blacked_out"
             android:checked="false"
             android:padding="16dp"
-            android:text="@string/settings_extended_actionbar" />
+            android:text="@string/settings_extended_actionbar"/>
 
         <Switch
             android:id="@+id/enable_low_power_mode"
@@ -144,7 +144,7 @@
             android:layout_below="@id/enable_extended_actionbar"
             android:checked="false"
             android:padding="16dp"
-            android:text="@string/settings_header_low_power_mode" />
+            android:text="@string/settings_header_low_power_mode"/>
 
         <LinearLayout
             android:id="@+id/clear_dashboard_folder"

@@ -71,13 +71,15 @@ public class WallpaperAdapter extends RecyclerView.Adapter<WallpaperAdapter.Wall
 
     @Override
     public WallpaperViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_wallpaper, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_wallpaper,
+                parent, false);
         return new WallpaperViewHolder(v, mListener);
     }
 
     @Override
     public void onBindViewHolder(WallpaperViewHolder holder, int index) {
-        final WallpaperUtils.Wallpaper wallpaper = mFiltered != null ? mFiltered.get(index) : mWallpapers.get(index);
+        final WallpaperUtils.Wallpaper wallpaper = mFiltered != null ? mFiltered.get(index) :
+                mWallpapers.get(index);
         holder.name.setText(wallpaper.name);
         holder.author.setText(wallpaper.author);
 
@@ -99,7 +101,8 @@ public class WallpaperAdapter extends RecyclerView.Adapter<WallpaperAdapter.Wall
                     .load(wallpaper.getListingImageUrl())
                     .into(holder.image);
         } else {
-            /*Log.d("WallpaperAdapter", String.format("Wallpaper %d (%s) palette is not complete...",
+            /*Log.d("WallpaperAdapter", String.format("Wallpaper %d (%s) palette is not
+            complete...",
                     index, wallpaper.getListingImageUrl()));*/
             holder.name.setTextColor(Color.WHITE, false);
             holder.author.setTextColor(Color.WHITE, false);

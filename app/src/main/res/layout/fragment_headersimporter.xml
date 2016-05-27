@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.pluscubed.insetsdispatcher.view.InsetsDispatcherFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:clipToPadding="false">
+                                                                 xmlns:app="http://schemas.android.com/apk/res-auto"
+                                                                 android:layout_width="match_parent"
+                                                                 android:layout_height="match_parent"
+                                                                 android:clipToPadding="false">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -32,7 +32,7 @@
                 android:text="@string/contextualheaderimporter_description"
                 android:textColor="?android:textColorPrimary"
                 android:textSize="@dimen/title_text_size"
-                android:textStyle="bold|italic" />
+                android:textStyle="bold|italic"/>
 
             <TextView
                 android:id="@+id/landingMessageSecondary"
@@ -47,7 +47,7 @@
                 android:lineSpacingMultiplier="1.2"
                 android:text="@string/contextualheaderimporter_description_secondary"
                 android:textColor="?android:textColorPrimary"
-                android:textSize="@dimen/content_text_size" />
+                android:textSize="@dimen/content_text_size"/>
 
             <Button
                 android:id="@+id/downloadButton"
@@ -60,7 +60,7 @@
                 android:background="?attr/card_background"
                 android:clickable="true"
                 android:foreground="?android:selectableItemBackground"
-                android:text="@string/downloader_button" />
+                android:text="@string/downloader_button"/>
 
             <TextView
                 android:id="@+id/themeInformation"
@@ -72,7 +72,7 @@
                 android:layout_marginTop="8dp"
                 android:text="@string/contextualheaderimporter_information_header"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:textStyle="italic" />
+                android:textStyle="italic"/>
 
             <TextView
                 android:id="@+id/themeNameTitle"
@@ -83,7 +83,7 @@
                 android:layout_marginLeft="8dp"
                 android:text="@string/contextualheaderimporter_header_pack_name"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:textStyle="italic" />
+                android:textStyle="italic"/>
 
             <TextView
                 android:id="@+id/themeName"
@@ -95,7 +95,7 @@
                 android:layout_toRightOf="@id/themeNameTitle"
                 android:text="@string/contextualheaderimporter_header_pack_na"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:textColor="@android:color/white" />
+                android:textColor="@android:color/white"/>
 
             <TextView
                 android:id="@+id/themeAuthorTitle"
@@ -106,7 +106,7 @@
                 android:layout_marginLeft="8dp"
                 android:text="@string/contextualheaderimporter_header_pack_author"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:textStyle="italic" />
+                android:textStyle="italic"/>
 
             <TextView
                 android:id="@+id/themeAuthor"
@@ -118,7 +118,7 @@
                 android:layout_toRightOf="@id/themeAuthorTitle"
                 android:text="@string/contextualheaderimporter_header_pack_na"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:textColor="@android:color/white" />
+                android:textColor="@android:color/white"/>
 
             <TextView
                 android:id="@+id/themeDevTeamTitle"
@@ -129,7 +129,7 @@
                 android:layout_marginLeft="8dp"
                 android:text="@string/contextualheaderimporter_header_pack_team"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:textStyle="italic" />
+                android:textStyle="italic"/>
 
             <TextView
                 android:id="@+id/themeDevTeam"
@@ -141,7 +141,7 @@
                 android:layout_toRightOf="@id/themeDevTeamTitle"
                 android:text="@string/contextualheaderimporter_header_pack_na"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:textColor="@android:color/white" />
+                android:textColor="@android:color/white"/>
 
             <TextView
                 android:id="@+id/themeVersionTitle"
@@ -152,7 +152,7 @@
                 android:layout_marginLeft="8dp"
                 android:text="@string/contextualheaderimporter_header_pack_version"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:textStyle="italic" />
+                android:textStyle="italic"/>
 
             <TextView
                 android:id="@+id/themeVersion"
@@ -164,7 +164,7 @@
                 android:layout_toRightOf="@id/themeVersionTitle"
                 android:text="@string/contextualheaderimporter_header_pack_na"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:textColor="@android:color/white" />
+                android:textColor="@android:color/white"/>
 
             <TextView
                 android:id="@+id/themeCountTitle"
@@ -175,7 +175,7 @@
                 android:layout_marginLeft="8dp"
                 android:text="@string/contextualheaderimporter_header_pack_theme_count"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:textStyle="italic" />
+                android:textStyle="italic"/>
 
             <TextView
                 android:id="@+id/themeCount"
@@ -187,7 +187,7 @@
                 android:layout_toRightOf="@id/themeCountTitle"
                 android:text="@string/contextualheaderimporter_header_pack_na"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:textColor="@android:color/white" />
+                android:textColor="@android:color/white"/>
 
             <TextView
                 android:id="@+id/textView"
@@ -199,7 +199,7 @@
                 android:layout_marginTop="16dp"
                 android:text="@string/contextualheaderimporter_select_downloaded_zip"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:textStyle="italic" />
+                android:textStyle="italic"/>
 
             <Spinner
                 android:id="@+id/zipSpinner"
@@ -208,12 +208,12 @@
                 android:layout_below="@id/textView"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="@dimen/content_inset"
-                android:visibility="visible" />
+                android:visibility="visible"/>
 
             <View
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_centerInParent="true" />
+                android:layout_centerInParent="true"/>
 
             <TextView
                 android:id="@+id/textView2"
@@ -224,7 +224,7 @@
                 android:layout_marginLeft="8dp"
                 android:text="@string/selectyourdeviceconfiguration"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:textStyle="italic" />
+                android:textStyle="italic"/>
 
             <RadioGroup
                 android:id="@+id/rg"
@@ -241,7 +241,7 @@
                     android:layout_marginLeft="7dp"
                     android:layout_marginRight="7dp"
                     android:layout_weight="1"
-                    android:text="@string/xhdpi" />
+                    android:text="@string/xhdpi"/>
 
                 <RadioButton
                     android:id="@+id/radio2"
@@ -251,7 +251,7 @@
                     android:layout_marginLeft="7dp"
                     android:layout_marginRight="7dp"
                     android:layout_weight="1"
-                    android:text="@string/xxhdpi" />
+                    android:text="@string/xxhdpi"/>
 
                 <RadioButton
                     android:id="@+id/radio3"
@@ -261,15 +261,15 @@
                     android:layout_marginLeft="7dp"
                     android:layout_marginRight="7dp"
                     android:layout_weight="1"
-                    android:text="@string/xxxhdpi" />
+                    android:text="@string/xxxhdpi"/>
             </RadioGroup>
         </RelativeLayout>
 
     </ScrollView>
 
     <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+                                                     android:layout_width="match_parent"
+                                                     android:layout_height="match_parent">
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/apply_fab"
@@ -281,7 +281,7 @@
             android:src="@drawable/ic_done_24dp"
             android:visibility="visible"
             app:layout_windowInsets="bottom"
-            app:layout_windowInsetsUseMargin="true" />
+            app:layout_windowInsetsUseMargin="true"/>
 
     </android.support.design.widget.CoordinatorLayout>
 

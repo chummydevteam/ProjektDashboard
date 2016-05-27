@@ -34,9 +34,11 @@ public abstract class Utils {
                 .show();
     }
 
-    public static void setOverflowButtonColor(@NonNull Activity activity, final @ColorInt int color) {
+    public static void setOverflowButtonColor(@NonNull Activity activity, final @ColorInt int
+            color) {
         @SuppressLint("PrivateResource")
-        final String overflowDescription = activity.getString(R.string.abc_action_menu_overflow_description);
+        final String overflowDescription = activity.getString(R.string
+                .abc_action_menu_overflow_description);
         final ViewGroup decorView = (ViewGroup) activity.getWindow().getDecorView();
         final ViewTreeObserver viewTreeObserver = decorView.getViewTreeObserver();
         viewTreeObserver.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
@@ -47,14 +49,16 @@ public abstract class Utils {
                         View.FIND_VIEWS_WITH_CONTENT_DESCRIPTION);
                 if (outViews.isEmpty()) return;
                 final AppCompatImageView overflow = (AppCompatImageView) outViews.get(0);
-                overflow.setImageDrawable(TintUtils.createTintedDrawable(overflow.getDrawable(), color));
+                overflow.setImageDrawable(TintUtils.createTintedDrawable(overflow.getDrawable(),
+                        color));
                 removeOnGlobalLayoutListener(decorView, this);
             }
         });
     }
 
     @SuppressWarnings("deprecation")
-    public static void removeOnGlobalLayoutListener(View v, ViewTreeObserver.OnGlobalLayoutListener listener) {
+    public static void removeOnGlobalLayoutListener(View v, ViewTreeObserver
+            .OnGlobalLayoutListener listener) {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
             v.getViewTreeObserver().removeGlobalOnLayoutListener(listener);
         } else {

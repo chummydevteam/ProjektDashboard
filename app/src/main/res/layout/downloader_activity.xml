@@ -1,13 +1,13 @@
 <com.pluscubed.insetsdispatcher.view.InsetsDispatcherFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+                                                                 android:layout_width="match_parent"
+                                                                 android:layout_height="match_parent">
 
     <android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/overlay_window_bg"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+                                       android:id="@+id/toolbar"
+                                       android:layout_width="match_parent"
+                                       android:layout_height="wrap_content"
+                                       android:background="@color/overlay_window_bg"
+                                       android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
         <TextView
             android:layout_width="wrap_content"
@@ -16,7 +16,7 @@
             android:text="@string/downloader_title"
             android:textColor="@android:color/white"
             android:textSize="20sp"
-            android:textStyle="italic" />
+            android:textStyle="italic"/>
 
 
     </android.support.v7.widget.Toolbar>
@@ -38,7 +38,7 @@
             android:layout_alignParentStart="true"
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="@dimen/content_inset"
-            android:layout_toStartOf="@+id/restartDownloadSources" />
+            android:layout_toStartOf="@+id/restartDownloadSources"/>
 
         <ImageButton
             android:id="@+id/restartDownloadSources"
@@ -49,13 +49,13 @@
             android:backgroundTint="@android:color/transparent"
             android:clickable="true"
             android:foreground="?android:selectableItemBackground"
-            android:src="@drawable/ic_cached_24dp" />
+            android:src="@drawable/ic_cached_24dp"/>
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/list_item"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/sourcePickerHeaderPacks" />
+            android:layout_below="@+id/sourcePickerHeaderPacks"/>
 
         <TextView
             android:id="@+id/NoDownloadsAvailable"
@@ -64,7 +64,7 @@
             android:layout_below="@+id/sourcePickerHeaderPacks"
             android:gravity="center"
             android:text="@string/downloader_empty"
-            android:visibility="gone" />
+            android:visibility="gone"/>
 
     </RelativeLayout>
 

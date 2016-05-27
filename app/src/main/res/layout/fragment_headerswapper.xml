@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.pluscubed.insetsdispatcher.view.InsetsDispatcherFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:clipToPadding="false">
+                                                                 xmlns:app="http://schemas.android.com/apk/res-auto"
+                                                                 android:layout_width="match_parent"
+                                                                 android:layout_height="match_parent"
+                                                                 android:clipToPadding="false">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -32,7 +32,7 @@
                 android:text="@string/contextualheaderswapper_description"
                 android:textColor="?android:textColorPrimary"
                 android:textSize="@dimen/title_text_size"
-                android:textStyle="bold|italic" />
+                android:textStyle="bold|italic"/>
 
             <TextView
                 android:id="@+id/landingMessageSecondary"
@@ -47,13 +47,13 @@
                 android:lineSpacingMultiplier="1.2"
                 android:text="@string/contextualheaderswapper_description_secondary"
                 android:textColor="?android:textColorPrimary"
-                android:textSize="@dimen/content_text_size" />
+                android:textSize="@dimen/content_text_size"/>
 
 
             <View
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_centerInParent="true" />
+                android:layout_centerInParent="true"/>
 
             <TextView
                 android:id="@+id/textView2"
@@ -65,7 +65,7 @@
                 android:layout_marginTop="20dp"
                 android:text="@string/contextualheaderswapper_options_before_choosing_picture"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:textStyle="italic" />
+                android:textStyle="italic"/>
 
             <CheckBox
                 android:id="@+id/checkBox2"
@@ -78,7 +78,7 @@
                 android:layout_marginRight="7dp"
                 android:button="@null"
                 android:drawableRight="?android:attr/listChoiceIndicatorMultiple"
-                android:text="@string/contextualheaderswapper_free_crop_mode" />
+                android:text="@string/contextualheaderswapper_free_crop_mode"/>
 
             <CheckBox
                 android:id="@+id/checkBox3"
@@ -91,7 +91,7 @@
                 android:layout_marginRight="7dp"
                 android:button="@null"
                 android:drawableRight="?android:attr/listChoiceIndicatorMultiple"
-                android:text="@string/contextualheaderswapper_supportcontextual" />
+                android:text="@string/contextualheaderswapper_supportcontextual"/>
 
             <Button
                 android:id="@+id/softreboot"
@@ -110,7 +110,7 @@
                 android:textColor="@color/attention_color"
                 android:textSize="@dimen/text_ultrasmall"
                 android:textStyle="bold|italic"
-                android:visibility="gone" />
+                android:visibility="gone"/>
 
             <Button
                 android:id="@+id/crop_button"
@@ -129,7 +129,7 @@
                 android:textColor="?android:textColorPrimary"
                 android:textSize="@dimen/text_ultrasmall"
                 android:textStyle="bold|italic"
-                android:visibility="gone" />
+                android:visibility="gone"/>
 
             <Button
                 android:id="@+id/save_button"
@@ -148,18 +148,18 @@
                 android:textColor="?android:textColorPrimary"
                 android:textSize="@dimen/text_ultrasmall"
                 android:textStyle="bold|italic"
-                android:visibility="gone" />
+                android:visibility="gone"/>
 
             <com.isseiaoki.simplecropview.CropImageView xmlns:custom="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/cropImageView"
-                android:layout_width="match_parent"
-                android:layout_height="250dp"
-                android:layout_below="@id/crop_button"
-                android:layout_marginTop="@dimen/content_inset_less"
-                android:padding="16dp"
-                android:visibility="gone"
-                custom:cropMode="ratio_free"
-                custom:overlayColor="#33000000" />
+                                                        android:id="@+id/cropImageView"
+                                                        android:layout_width="match_parent"
+                                                        android:layout_height="250dp"
+                                                        android:layout_below="@id/crop_button"
+                                                        android:layout_marginTop="@dimen/content_inset_less"
+                                                        android:padding="16dp"
+                                                        android:visibility="gone"
+                                                        custom:cropMode="ratio_free"
+                                                        custom:overlayColor="#33000000"/>
 
             <ImageView
                 android:id="@+id/croppedImageView"
@@ -169,7 +169,7 @@
                 android:layout_gravity="center"
                 android:layout_margin="16dp"
                 android:layout_marginTop="@dimen/content_inset_less"
-                android:visibility="gone" />
+                android:visibility="gone"/>
 
             <LinearLayout
                 android:id="@+id/dpi"
@@ -187,7 +187,7 @@
                     android:layout_marginLeft="8dp"
                     android:text="@string/selectyourdeviceconfiguration"
                     android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:textStyle="italic" />
+                    android:textStyle="italic"/>
 
                 <RadioGroup
                     android:id="@+id/rg"
@@ -204,7 +204,7 @@
                         android:layout_marginLeft="7dp"
                         android:layout_marginRight="7dp"
                         android:layout_weight="1"
-                        android:text="@string/xhdpi" />
+                        android:text="@string/xhdpi"/>
 
                     <RadioButton
                         android:id="@+id/radio2"
@@ -214,7 +214,7 @@
                         android:layout_marginLeft="7dp"
                         android:layout_marginRight="7dp"
                         android:layout_weight="1"
-                        android:text="@string/xxhdpi" />
+                        android:text="@string/xxhdpi"/>
 
                     <RadioButton
                         android:id="@+id/radio3"
@@ -224,7 +224,7 @@
                         android:layout_marginLeft="7dp"
                         android:layout_marginRight="7dp"
                         android:layout_weight="1"
-                        android:text="@string/xxxhdpi" />
+                        android:text="@string/xxxhdpi"/>
                 </RadioGroup>
             </LinearLayout>
         </RelativeLayout>
@@ -232,8 +232,8 @@
     </ScrollView>
 
     <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+                                                     android:layout_width="match_parent"
+                                                     android:layout_height="match_parent">
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/apply_fab"
@@ -245,7 +245,7 @@
             android:src="@drawable/ic_photo_library_24dp"
             android:visibility="visible"
             app:layout_windowInsets="bottom"
-            app:layout_windowInsetsUseMargin="true" />
+            app:layout_windowInsetsUseMargin="true"/>
 
     </android.support.design.widget.CoordinatorLayout>
 

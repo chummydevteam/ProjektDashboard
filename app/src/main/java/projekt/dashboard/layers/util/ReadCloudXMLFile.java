@@ -43,7 +43,8 @@ public class ReadCloudXMLFile {
                     String addon_preview_link = eElement.getElementsByTagName("preview").item(0).
                             getTextContent();
 
-                    String[] finalArray = {addon_download_name, addon_download_link, addon_preview_link};
+                    String[] finalArray = {addon_download_name, addon_download_link,
+                            addon_preview_link};
 
                     map.put(finalArray[0], finalArray[1]);
                     map.put(finalArray[0] + "-preview", finalArray[2]);

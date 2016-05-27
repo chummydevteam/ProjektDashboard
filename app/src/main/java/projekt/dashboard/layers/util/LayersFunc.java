@@ -81,7 +81,8 @@ public class LayersFunc {
                         .onPositive(new MaterialDialog.SingleButtonCallback() {
                             @Override
                             public void onClick(MaterialDialog dialog, DialogAction which) {
-                                Intent intent_rrolayers = context.getPackageManager().getLaunchIntentForPackage("com.android.settings");
+                                Intent intent_rrolayers = context.getPackageManager()
+                                        .getLaunchIntentForPackage("com.android.settings");
                                 context.startActivity(intent_rrolayers);
                                 downloaded = false;
                             }
@@ -138,7 +139,8 @@ public class LayersFunc {
             if (bit64[0] != null) {
                 Log.e("Checkbitphone", "64 Found");
                 Log.e("Checkbitphone", "Checking if its one from FAB");
-                if (Build.DEVICE.equals("flounder") || Build.DEVICE.equals("flounder_lte") || Build.DEVICE.equals("angler") || Build.DEVICE.equals("bullhead")) {
+                if (Build.DEVICE.equals("flounder") || Build.DEVICE.equals("flounder_lte") ||
+                        Build.DEVICE.equals("angler") || Build.DEVICE.equals("bullhead")) {
                     Log.e("64 bit Device ", Build.DEVICE + " Found,now returning");
                     Log.e("Checkbitphone", "Function Stopped");
                     return true;
@@ -289,13 +291,17 @@ public class LayersFunc {
             String xmlRes1 = ("<selector" + "\n");
             String xmlRes2 = ("  xmlns:android=\"http://schemas.android.com/apk/res/android\">"
                     + "\n");
-            String xmlRes3 = ("    <item android:state_enabled=\"false\" android:color=\"" + color_picked + "\" />"
+            String xmlRes3 = ("    <item android:state_enabled=\"false\" android:color=\"" +
+                    color_picked + "\" />"
                     + "\n");
-            String xmlRes4 = ("    <item android:state_window_focused=\"false\" android:color=\"" + color_picked + "\" />"
+            String xmlRes4 = ("    <item android:state_window_focused=\"false\" android:color=\""
+                    + color_picked + "\" />"
                     + "\n");
-            String xmlRes5 = ("    <item android:state_pressed=\"true\" android:color=\"" + color_picked + "\" />"
+            String xmlRes5 = ("    <item android:state_pressed=\"true\" android:color=\"" +
+                    color_picked + "\" />"
                     + "\n");
-            String xmlRes6 = ("    <item android:state_selected=\"true\" android:color=\"" + color_picked + "\" />"
+            String xmlRes6 = ("    <item android:state_selected=\"true\" android:color=\"" +
+                    color_picked + "\" />"
                     + "\n");
             String xmlRes7 = ("    <item android:color=\"" + color_picked + "\" />"
                     + "\n");
@@ -332,7 +338,8 @@ public class LayersFunc {
         String xmlRes1 = ("<manifest xmlns:android=\"http://schemas.android.com/" +
                 "apk/res/android\" package=\"common\" android:versionCode=\"1\"" +
                 " android:versionName=\"1.0\">" + "\n");
-        String xmlRes2 = ("<overlay android:targetPackage=\"android\" android:priority=\"100\"/>" + "\n");
+        String xmlRes2 = ("<overlay android:targetPackage=\"android\" android:priority=\"100\"/>"
+                + "\n");
         String xmlRes3 = ("</manifest>" + "\n");
         //  pw.write(xmlTags);
         pw.write(xmlRes1);
@@ -356,7 +363,8 @@ public class LayersFunc {
                             context.getFilesDir().getAbsolutePath() +
                             "/" + file + ".apk " + "/system/vendor/overlay/" + file + ".apk");
             Log.e("copyFinalizedAPK",
-                    "Successfully copied the modified resource APK from " + context.getFilesDir().getAbsolutePath() + " into " +
+                    "Successfully copied the modified resource APK from " + context.getFilesDir()
+                            .getAbsolutePath() + " into " +
                             "/system/vendor/overlay/ and modified the permissions!");
         } else {
             eu.chainfire.libsuperuser.Shell.SU.run(
@@ -364,16 +372,20 @@ public class LayersFunc {
                             context.getCacheDir().getAbsolutePath() +
                             "/" + file + ".apk " + "/system/vendor/overlay/" + file + ".apk");
             Log.e("copyFinalizedAPK",
-                    "Successfully copied the modified resource APK from " + context.getCacheDir().getAbsolutePath() + " into " +
+                    "Successfully copied the modified resource APK from " + context.getCacheDir()
+                            .getAbsolutePath() + " into " +
                             "/system/vendor/overlay/ and modified the permissions!");
         }
-        eu.chainfire.libsuperuser.Shell.SU.run("chmod 644 " + "/system/vendor/overlay/" + file + ".apk");
+        eu.chainfire.libsuperuser.Shell.SU.run("chmod 644 " + "/system/vendor/overlay/" + file +
+                ".apk");
         eu.chainfire.libsuperuser.Shell.SU.run(remount);
         eu.chainfire.libsuperuser.Shell.SU.run(remountsys);
         if (files) {
-            eu.chainfire.libsuperuser.Shell.SU.run("rm -r /data/data/projekt.dashboard.layers/files");
+            eu.chainfire.libsuperuser.Shell.SU.run("rm -r /data/data/projekt.dashboard" +
+                    ".layers/files");
         } else {
-            eu.chainfire.libsuperuser.Shell.SU.run("rm -r /data/data/projekt.dashboard.layers/cache");
+            eu.chainfire.libsuperuser.Shell.SU.run("rm -r /data/data/projekt.dashboard" +
+                    ".layers/cache");
         }
         Log.e("copyFinalizedAPK",
                 "Successfully Deleted Files ");
@@ -393,7 +405,8 @@ public class LayersFunc {
                             context.getFilesDir().getAbsolutePath() +
                             "/" + file + ".apk " + "/vendor/overlay/" + file + ".apk");
             Log.e("copyFinalizedAPK",
-                    "Successfully copied the modified resource APK from " + context.getFilesDir().getAbsolutePath() + " into " +
+                    "Successfully copied the modified resource APK from " + context.getFilesDir()
+                            .getAbsolutePath() + " into " +
                             "/vendor/overlay/ and modified the permissions!");
         } else {
             eu.chainfire.libsuperuser.Shell.SU.run(
@@ -401,7 +414,8 @@ public class LayersFunc {
                             context.getCacheDir().getAbsolutePath() +
                             "/" + file + ".apk " + "/vendor/overlay/" + file + ".apk");
             Log.e("copyFinalizedAPK",
-                    "Successfully copied the modified resource APK from " + context.getCacheDir().getAbsolutePath() + " into " +
+                    "Successfully copied the modified resource APK from " + context.getCacheDir()
+                            .getAbsolutePath() + " into " +
                             "/vendor/overlay/ and modified the permissions!");
         }
         eu.chainfire.libsuperuser.Shell.SU.run("chmod 644 " + "/vendor/overlay/" + file + ".apk");
@@ -411,16 +425,19 @@ public class LayersFunc {
                 "Successfully copied the modified resource APK into " +
                         "/vendor/overlay/ and modified the permissions!");
         if (files) {
-            eu.chainfire.libsuperuser.Shell.SU.run("rm -r /data/data/projekt.dashboard.layers/files");
+            eu.chainfire.libsuperuser.Shell.SU.run("rm -r /data/data/projekt.dashboard" +
+                    ".layers/files");
         } else {
-            eu.chainfire.libsuperuser.Shell.SU.run("rm -r /data/data/projekt.dashboard.layers/cache");
+            eu.chainfire.libsuperuser.Shell.SU.run("rm -r /data/data/projekt.dashboard" +
+                    ".layers/cache");
         }
         Log.e("copyFinalizedAPK",
                 "Successfully Deleted Files ");
 
     }
 
-    public static void LayersColorSwitch(Context context, String Name, String file, String resource) throws Exception {
+    public static void LayersColorSwitch(Context context, String Name, String file, String
+            resource) throws Exception {
         eu.chainfire.libsuperuser.Shell.SU.run(
                 "cp " + context.getFilesDir().getAbsolutePath() +
                         "/color-resources/res/" + resource + "/" + file + ".xml " +

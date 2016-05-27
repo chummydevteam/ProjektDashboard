@@ -92,7 +92,8 @@ public class MainActivity extends BaseDonateActivity {
         ButterKnife.bind(this);
 
         if (prefs.getBoolean("extended_actionbar_enabled", true)) {
-            LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) mToolbar.getLayoutParams();
+            LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) mToolbar
+                    .getLayoutParams();
             layoutParams.height = 150;
             mToolbar.setLayoutParams(layoutParams);
         }
@@ -145,7 +146,8 @@ public class MainActivity extends BaseDonateActivity {
 
         if (Shell.SU.available()) {
             if (new LayersFunc(this).checkThemeMainSupported(this)) {
-                mPages.add(new PagesBuilder.Page(R.id.color_changer_fragment, R.drawable.tab_palette,
+                mPages.add(new PagesBuilder.Page(R.id.color_changer_fragment, R.drawable
+                        .tab_palette,
                         R.string.home_tab_two, new ColorChangerFragment()));
             }
         }
@@ -154,11 +156,13 @@ public class MainActivity extends BaseDonateActivity {
                 Log.e("Adding Fragment", "Framework found");
                 if (LayersFunc.themeframework != "Nill") {
                     Log.e("Adding Fragment", "SystemUI found");
-                    mPages.add(new PagesBuilder.Page(R.id.header_swapper_fragment, R.drawable.tab_swapper,
+                    mPages.add(new PagesBuilder.Page(R.id.header_swapper_fragment, R.drawable
+                            .tab_swapper,
                             R.string.home_tab_three, new HeaderSwapperFragment()));
                     Log.e("Adding Fragment", "added");
                 }
-                mPages.add(new PagesBuilder.Page(R.id.header_swapper_fragment, R.drawable.tab_header_import,
+                mPages.add(new PagesBuilder.Page(R.id.header_swapper_fragment, R.drawable
+                        .tab_header_import,
                         R.string.home_tab_four, new HeaderImportFragment()));
             }
         }
@@ -168,7 +172,8 @@ public class MainActivity extends BaseDonateActivity {
         }
         if (isNetworkAvailable()) {
             if (prefs.getBoolean("wallpapers_enabled", true)) {
-                mPages.add(new PagesBuilder.Page(R.id.theme_utilities_fragment, R.drawable.tab_wallpapers,
+                mPages.add(new PagesBuilder.Page(R.id.theme_utilities_fragment, R.drawable
+                        .tab_wallpapers,
                         R.string.home_tab_six, new WallpapersFragment()));
             }
         }
@@ -186,18 +191,24 @@ public class MainActivity extends BaseDonateActivity {
         if (id == R.id.share) {
             Intent sharingIntent = new Intent(Intent.ACTION_SEND);
             sharingIntent.setType("text/plain");
-            String shareBody = "Check out Dashboard by Chummy Development Team !\n\nDownload it here!: " + "https://play.google.com/store/apps/details?id=projekt.dashboard.layers";
+            String shareBody = "Check out Dashboard by Chummy Development Team !\n\nDownload it " +
+                    "here!: " + "https://play.google.com/store/apps/details?id=projekt.dashboard" +
+                    ".layers";
             sharingIntent.putExtra(Intent.EXTRA_TEXT, shareBody);
             startActivity(Intent.createChooser(sharingIntent, "Share :-"));
         } else if (id == R.id.contact) {
             StringBuilder emailBuilder = new StringBuilder();
-            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("mailto:" + "ebizeraditya@gmail.com"));
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("mailto:" +
+                    "ebizeraditya@gmail.com"));
             intent.putExtra(Intent.EXTRA_SUBJECT, "Dashboard.Layers Talk");
-            emailBuilder.append("\n \n \nOS Version: " + System.getProperty("os.version") + "(" + Build.VERSION.INCREMENTAL + ")");
-            emailBuilder.append("\nOS API Level: " + Build.VERSION.SDK_INT + " (" + Build.VERSION.RELEASE + ") " + "[" + Build.ID + "]");
+            emailBuilder.append("\n \n \nOS Version: " + System.getProperty("os.version") + "(" +
+                    Build.VERSION.INCREMENTAL + ")");
+            emailBuilder.append("\nOS API Level: " + Build.VERSION.SDK_INT + " (" + Build.VERSION
+                    .RELEASE + ") " + "[" + Build.ID + "]");
             emailBuilder.append("\nDevice: " + Build.DEVICE);
             emailBuilder.append("\nManufacturer: " + Build.MANUFACTURER);
-            emailBuilder.append("\nModel (and Product): " + Build.MODEL + " (" + Build.PRODUCT + ")");
+            emailBuilder.append("\nModel (and Product): " + Build.MODEL + " (" + Build.PRODUCT +
+                    ")");
             PackageInfo appInfo = null;
             try {
                 appInfo = getPackageManager().getPackageInfo(getPackageName(), 0);

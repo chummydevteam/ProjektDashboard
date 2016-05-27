@@ -65,14 +65,22 @@ public class ColorChangerFragment extends BasePageFragment {
         if (prefs.getBoolean("dialog", true)) {
             AlertDialog.Builder ad = new AlertDialog.Builder(getActivity());
             ad.setTitle("ColorSwapper :)");
-            ad.setMessage("Lets get started with switching colors without reboot.So what you need to basically do is :-\n1.Click on the Accent Color and Change it to whatever color you want.\n2. Click on the fab and wait for the color to get applied.\n3.BOOM !! MAGIC !!\n\n\t\t\t\t\tHave Fun,Enjoy!!");
+            ad.setMessage("Lets get started with switching colors without reboot.So what you need" +
+                    " to basically do is :-\n1.Click on the Accent Color and Change it to " +
+                    "whatever color you want.\n2. Click on the fab and wait for the color to get " +
+                    "applied.\n3.BOOM !! MAGIC !!\n\n\t\t\t\t\tHave Fun,Enjoy!!");
             ad.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    if (LayersFunc.isAppInstalled(getActivity(), "com.chummy.aditya.materialdark.layers.donate")) {
-                        startActivity(new Intent().setComponent(new ComponentName("com.lovejoy777.rroandlayersmanager", "com.lovejoy777.rroandlayersmanager.MainActivity")));
+                    if (LayersFunc.isAppInstalled(getActivity(), "com.chummy.aditya.materialdark" +
+                            ".layers.donate")) {
+                        startActivity(new Intent().setComponent(new ComponentName("com.lovejoy777" +
+                                ".rroandlayersmanager", "com.lovejoy777.rroandlayersmanager" +
+                                ".MainActivity")));
                     } else {
-                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.chummy.aditya.materialdark.layers.donate")));
+                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play" +
+                                ".google.com/store/apps/details?id=com.chummy.aditya.materialdark" +
+                                ".layers.donate")));
                     }
                 }
             });

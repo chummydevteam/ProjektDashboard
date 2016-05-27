@@ -114,7 +114,8 @@ public class ThemeUtilitiesFragment extends BasePageFragment {
             @Override
             public void onClick(View v) {
                 Log.e("Changing Activity", "Layers Manager");
-                startActivity(new Intent(getActivity().getPackageManager().getLaunchIntentForPackage("com.lovejoy777.rroandlayersmanager")));
+                startActivity(new Intent(getActivity().getPackageManager()
+                        .getLaunchIntentForPackage("com.lovejoy777.rroandlayersmanager")));
             }
         });
 

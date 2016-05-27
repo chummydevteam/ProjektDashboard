@@ -1,8 +1,8 @@
 <com.pluscubed.insetsdispatcher.view.InsetsDispatcherFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+                                                                 xmlns:app="http://schemas.android.com/apk/res-auto"
+                                                                 xmlns:tools="http://schemas.android.com/tools"
+                                                                 android:layout_width="match_parent"
+                                                                 android:layout_height="match_parent">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -20,7 +20,7 @@
             android:layout_alignParentLeft="true"
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="@dimen/content_inset"
-            android:layout_toLeftOf="@+id/restart" />
+            android:layout_toLeftOf="@+id/restart"/>
 
         <ImageButton
             android:id="@+id/restart"
@@ -31,7 +31,7 @@
             android:backgroundTint="@android:color/transparent"
             android:clickable="true"
             android:foreground="?android:selectableItemBackground"
-            android:src="@drawable/ic_cached_24dp" />
+            android:src="@drawable/ic_cached_24dp"/>
 
         <android.support.v7.widget.RecyclerView
             android:id="@android:id/list"
@@ -42,7 +42,7 @@
             android:padding="@dimen/grid_margin"
             android:scrollbarStyle="outsideOverlay"
             android:scrollbars="vertical"
-            app:layout_windowInsets="bottom" />
+            app:layout_windowInsets="bottom"/>
 
         <LinearLayout
             android:id="@android:id/progress"
@@ -58,7 +58,7 @@
             <ProgressBar
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal" />
+                android:layout_gravity="center_horizontal"/>
 
             <!--suppress AndroidDomInspection -->
             <TextView
@@ -75,7 +75,7 @@
                 android:visibility="gone"
                 tools:ignore="UnusedAttribute"
                 tools:text="Loading apps…"
-                tools:visibility="visible" />
+                tools:visibility="visible"/>
 
         </LinearLayout>
 
@@ -98,7 +98,7 @@
             app:layout_windowInsets="bottom"
             tools:ignore="UnusedAttribute"
             tools:text="No results"
-            tools:visibility="gone" />
+            tools:visibility="gone"/>
     </RelativeLayout>
 
 </com.pluscubed.insetsdispatcher.view.InsetsDispatcherFrameLayout>

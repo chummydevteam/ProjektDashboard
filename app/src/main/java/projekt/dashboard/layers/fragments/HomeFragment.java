@@ -100,7 +100,8 @@ public class HomeFragment extends BasePageFragment {
                 break;
             case R.id.item2:
                 Intent xda = new Intent(Intent.ACTION_VIEW, Uri.parse(
-                        "http://forum.xda-developers.com/android/themes/cdt-projektdashboard-t3348297"));
+                        "http://forum.xda-developers" +
+                                ".com/android/themes/cdt-projektdashboard-t3348297"));
                 startActivity(xda);
                 break;
             case R.id.item3:
@@ -111,7 +112,8 @@ public class HomeFragment extends BasePageFragment {
                 LayoutInflater inflater = getActivity().getLayoutInflater();
                 final View dialogView = inflater.inflate(R.layout.name_picker_dialog, null);
                 alert.setView(dialogView);
-                final AnimatedEditText textBox = (AnimatedEditText) dialogView.findViewById(R.id.editText);
+                final AnimatedEditText textBox = (AnimatedEditText) dialogView.findViewById(R.id
+                        .editText);
 
                 alert.setMessage(getResources().getString(R.string.change_name_dialog_message));
                 alert.setTitle(getResources().getString(R.string.change_name_dialog_title));
@@ -253,11 +255,14 @@ public class HomeFragment extends BasePageFragment {
             status_message.setText(getResources().getString(R.string.homepage_rom_not_supported));
             AlertDialog.Builder ad = new AlertDialog.Builder(getActivity());
             ad.setTitle("Layers ROM missing");
-            ad.setMessage("you are missing one of the below prerequisites:-\n1. Layers Rom\n2. Layers Manager");
+            ad.setMessage("you are missing one of the below prerequisites:-\n1. Layers Rom\n2. " +
+                    "Layers Manager");
             ad.setPositiveButton("Download Layers Manager", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    Intent intent_rrolayers = new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.lovejoy777.rroandlayersmanager"));
+                    Intent intent_rrolayers = new Intent(Intent.ACTION_VIEW, Uri.parse
+                            ("https://play.google.com/store/apps/details?id=com.lovejoy777" +
+                                    ".rroandlayersmanager"));
                     startActivity(intent_rrolayers);
                 }
             });
@@ -269,10 +274,13 @@ public class HomeFragment extends BasePageFragment {
         }
 
         TextView theme_message = (TextView) inflation.findViewById(R.id.theme_message);
-        if (LayersFunc.themesystemui != "Nill" && LayersFunc.themeframework != "Nill" && LayersFunc.downloaded) {
-            if (new LayersFunc(getActivity()).checkThemeMainSupported(getActivity()) && new LayersFunc(getActivity()).checkThemeSysSupported(getActivity())) {
+        if (LayersFunc.themesystemui != "Nill" && LayersFunc.themeframework != "Nill" &&
+                LayersFunc.downloaded) {
+            if (new LayersFunc(getActivity()).checkThemeMainSupported(getActivity()) && new
+                    LayersFunc(getActivity()).checkThemeSysSupported(getActivity())) {
                 theme_message.setTextColor(getResources().getColor(R.color.attention_color_green));
-                theme_message.setText(getResources().getString(R.string.homepage_theme_full_supported));
+                theme_message.setText(getResources().getString(R.string
+                        .homepage_theme_full_supported));
                 Snackbar snack = Snackbar.make(inflation, prefs.getString("dashboard_username",
                         getResources().
                                 getString(R.string.
@@ -298,14 +306,20 @@ public class HomeFragment extends BasePageFragment {
                 snack.show();
                 AlertDialog.Builder ad = new AlertDialog.Builder(getActivity());
                 ad.setTitle("Theme other than Akzent is found");
-                ad.setMessage("Changing colors over the fly ,without reboot.Seems fictional right?But let me tell you something,its possible using akzent.");
+                ad.setMessage("Changing colors over the fly ,without reboot.Seems fictional " +
+                        "right?But let me tell you something,its possible using akzent.");
                 ad.setPositiveButton("Download Akzent", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        if (new LayersFunc(getActivity()).isAppInstalled(getActivity(), "com.chummy.aditya.materialdark.layers.donate")) {
-                            startActivity(new Intent().setComponent(new ComponentName("com.lovejoy777.rroandlayersmanager", "com.lovejoy777.rroandlayersmanager.MainActivity")));
+                        if (new LayersFunc(getActivity()).isAppInstalled(getActivity(), "com" +
+                                ".chummy.aditya.materialdark.layers.donate")) {
+                            startActivity(new Intent().setComponent(new ComponentName("com" +
+                                    ".lovejoy777.rroandlayersmanager", "com.lovejoy777" +
+                                    ".rroandlayersmanager.MainActivity")));
                         } else {
-                            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.chummy.aditya.materialdark.layers.donate")));
+                            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play" +
+                                    ".google.com/store/apps/details?id=com.chummy.aditya" +
+                                    ".materialdark.layers.donate")));
                         }
                     }
                 });
@@ -315,7 +329,8 @@ public class HomeFragment extends BasePageFragment {
                     }
                 });
             }
-        } else if (new LayersFunc(getActivity()).checkThemeMainSupported(getActivity()) && LayersFunc.downloaded) {
+        } else if (new LayersFunc(getActivity()).checkThemeMainSupported(getActivity()) &&
+                LayersFunc.downloaded) {
             theme_message.setTextColor(getResources().getColor(R.color.attention_color));
             theme_message.setText(getResources().getString(R.string.homepage_theme_half_supported));
             Snackbar snack = Snackbar.make(inflation, prefs.getString("dashboard_username",
@@ -331,19 +346,27 @@ public class HomeFragment extends BasePageFragment {
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    Snackbar.make(inflation, getResources().getString(R.string.theme_half_snack), Snackbar.LENGTH_INDEFINITE).setAction("Install", new View.OnClickListener() {
+                    Snackbar.make(inflation, getResources().getString(R.string.theme_half_snack),
+                            Snackbar.LENGTH_INDEFINITE).setAction("Install", new View
+                            .OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            if (new LayersFunc(getActivity()).isAppInstalled(getActivity(), "com.chummy.aditya.materialdark.layers.donate")) {
-                                startActivity(new Intent(getActivity().getPackageManager().getLaunchIntentForPackage("com.lovejoy777.rroandlayersmanager")));
+                            if (new LayersFunc(getActivity()).isAppInstalled(getActivity(), "com" +
+                                    ".chummy.aditya.materialdark.layers.donate")) {
+                                startActivity(new Intent(getActivity().getPackageManager()
+                                        .getLaunchIntentForPackage("com.lovejoy777" +
+                                                ".rroandlayersmanager")));
                             } else {
-                                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.chummy.aditya.materialdark.layers.donate")));
+                                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse
+                                        ("https://play.google.com/store/apps/details?id=com" +
+                                                ".chummy.aditya.materialdark.layers.donate")));
                             }
                         }
                     }).show();
                 }
             }, Snackbar.LENGTH_SHORT + 1000);
-        } else if (new LayersFunc(getActivity()).checkThemeSysSupported(getActivity()) && LayersFunc.downloaded) {
+        } else if (new LayersFunc(getActivity()).checkThemeSysSupported(getActivity()) &&
+                LayersFunc.downloaded) {
             theme_message.setTextColor(getResources().getColor(R.color.attention_color));
             theme_message.setText(getResources().getString(R.string.homepage_theme_half_supported));
             Snackbar snack = Snackbar.make(inflation, prefs.getString("dashboard_username",
@@ -359,13 +382,20 @@ public class HomeFragment extends BasePageFragment {
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    Snackbar.make(inflation, getResources().getString(R.string.theme_half_snack), Snackbar.LENGTH_INDEFINITE).setAction("Install", new View.OnClickListener() {
+                    Snackbar.make(inflation, getResources().getString(R.string.theme_half_snack),
+                            Snackbar.LENGTH_INDEFINITE).setAction("Install", new View
+                            .OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            if (new LayersFunc(getActivity()).isAppInstalled(getActivity(), "com.chummy.aditya.materialdark.layers.donate")) {
-                                startActivity(new Intent(getActivity().getPackageManager().getLaunchIntentForPackage("com.lovejoy777.rroandlayersmanager")));
+                            if (new LayersFunc(getActivity()).isAppInstalled(getActivity(), "com" +
+                                    ".chummy.aditya.materialdark.layers.donate")) {
+                                startActivity(new Intent(getActivity().getPackageManager()
+                                        .getLaunchIntentForPackage("com.lovejoy777" +
+                                                ".rroandlayersmanager")));
                             } else {
-                                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.chummy.aditya.materialdark.layers.donate")));
+                                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse
+                                        ("https://play.google.com/store/apps/details?id=com" +
+                                                ".chummy.aditya.materialdark.layers.donate")));
                             }
                         }
                     }).show();
@@ -387,13 +417,20 @@ public class HomeFragment extends BasePageFragment {
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    Snackbar.make(inflation, getResources().getString(R.string.theme_not_snack), Snackbar.LENGTH_INDEFINITE).setAction("Install", new View.OnClickListener() {
+                    Snackbar.make(inflation, getResources().getString(R.string.theme_not_snack),
+                            Snackbar.LENGTH_INDEFINITE).setAction("Install", new View
+                            .OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            if (new LayersFunc(getActivity()).isAppInstalled(getActivity(), "com.chummy.aditya.materialdark.layers.donate")) {
-                                startActivity(new Intent(getActivity().getPackageManager().getLaunchIntentForPackage("com.lovejoy777.rroandlayersmanager")));
+                            if (new LayersFunc(getActivity()).isAppInstalled(getActivity(), "com" +
+                                    ".chummy.aditya.materialdark.layers.donate")) {
+                                startActivity(new Intent(getActivity().getPackageManager()
+                                        .getLaunchIntentForPackage("com.lovejoy777" +
+                                                ".rroandlayersmanager")));
                             } else {
-                                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.chummy.aditya.materialdark.layers.donate")));
+                                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse
+                                        ("https://play.google.com/store/apps/details?id=com" +
+                                                ".chummy.aditya.materialdark.layers.donate")));
                             }
                         }
                     }).show();

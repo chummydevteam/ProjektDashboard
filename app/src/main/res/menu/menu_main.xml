@@ -1,15 +1,15 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:context="projekt.dashboard.layers.ui.MainActivity">
+      xmlns:app="http://schemas.android.com/apk/res-auto"
+      xmlns:tools="http://schemas.android.com/tools"
+      tools:context="projekt.dashboard.layers.ui.MainActivity">
     <item
         android:id="@+id/share"
         android:orderInCategory="100"
         android:title="Share"
-        app:showAsAction="never" />
+        app:showAsAction="never"/>
     <item
         android:id="@+id/contact"
         android:orderInCategory="300"
         android:title="Contact Developer !!"
-        app:showAsAction="never" />
+        app:showAsAction="never"/>
 </menu>

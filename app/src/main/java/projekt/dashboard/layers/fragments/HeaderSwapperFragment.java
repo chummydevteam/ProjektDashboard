@@ -87,14 +87,26 @@ public class HeaderSwapperFragment extends BasePageFragment {
         if (prefs.getBoolean("dialog", true)) {
             AlertDialog.Builder ad = new AlertDialog.Builder(getActivity());
             ad.setTitle("Header Swapper :)");
-            ad.setMessage("Woah Welcome to Header Swapper,a place where you can actually use your favourite moments,your memories, right next to your notifications.\nSo How to use it:-\n1. Lets Click on the Click on the Floating button\n2. And yes if your ROM supports contextual headers you can always click on swap contextual headers and swap them too.\n3. OK, So Now After clicking the Floating Button just choose and crop the image.\n4. Now click on Save Button and Let the Magic Begin.\n\nIMP :- The Phone Should Automatically Softreboot to make changes");
+            ad.setMessage("Woah Welcome to Header Swapper,a place where you can actually use your" +
+                    " favourite moments,your memories, right next to your notifications.\nSo How " +
+                    "to use it:-\n1. Lets Click on the Click on the Floating button\n2. And yes " +
+                    "if your ROM supports contextual headers you can always click on swap " +
+                    "contextual headers and swap them too.\n3. OK, So Now After clicking the " +
+                    "Floating Button just choose and crop the image.\n4. Now click on Save Button" +
+                    " and Let the Magic Begin.\n\nIMP :- The Phone Should Automatically " +
+                    "Softreboot to make changes");
             ad.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    if (new LayersFunc(getActivity()).isAppInstalled(getActivity(), "com.chummy.aditya.materialdark.layers.donate")) {
-                        startActivity(new Intent().setComponent(new ComponentName("com.lovejoy777.rroandlayersmanager", "com.lovejoy777.rroandlayersmanager.MainActivity")));
+                    if (new LayersFunc(getActivity()).isAppInstalled(getActivity(), "com.chummy" +
+                            ".aditya.materialdark.layers.donate")) {
+                        startActivity(new Intent().setComponent(new ComponentName("com.lovejoy777" +
+                                ".rroandlayersmanager", "com.lovejoy777.rroandlayersmanager" +
+                                ".MainActivity")));
                     } else {
-                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.chummy.aditya.materialdark.layers.donate")));
+                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play" +
+                                ".google.com/store/apps/details?id=com.chummy.aditya.materialdark" +
+                                ".layers.donate")));
                     }
                 }
             });
@@ -230,7 +242,8 @@ public class HeaderSwapperFragment extends BasePageFragment {
     }
 
     public void letsGetStarted() {
-        String[] secondPhaseCommands = {LayersFunc.vendor + "/" + LayersFunc.themeframework + ".apk"};
+        String[] secondPhaseCommands = {LayersFunc.vendor + "/" + LayersFunc.themeframework + "" +
+                ".apk"};
         Log.e("letsGetStarted", secondPhaseCommands[0]);
 
         new secondPhaseAsyncTasks().execute(secondPhaseCommands);
@@ -268,7 +281,8 @@ public class HeaderSwapperFragment extends BasePageFragment {
             Uri selectedImage = data.getData();
             Bitmap bitmap;
             try {
-                bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), selectedImage);
+                bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(),
+                        selectedImage);
             } catch (IOException e) {
                 e.printStackTrace();
                 return;
@@ -317,9 +331,11 @@ public class HeaderSwapperFragment extends BasePageFragment {
                             "/res/drawable/",
                             "menuitem_background.png");
                     if (swap_contextual_header) {
-                        String[] customheader = getResources().getStringArray(R.array.contextual_headers);
+                        String[] customheader = getResources().getStringArray(R.array
+                                .contextual_headers);
                         for (int loop = 0; loop < 10; loop++) {
-                            File file = new File(getActivity().getFilesDir() + "/res/drawable-xxhdpi-v4/",
+                            File file = new File(getActivity().getFilesDir() +
+                                    "/res/drawable-xxhdpi-v4/",
                                     customheader[loop]);
                             try {
                                 file.createNewFile();
@@ -548,28 +564,32 @@ public class HeaderSwapperFragment extends BasePageFragment {
                 Process nativeApp3 = Runtime.getRuntime().exec(
                         "aapt remove " +
                                 getActivity().getFilesDir().getAbsolutePath() +
-                                "/" + LayersFunc.themeframework + ".apk res/drawable/menuitem_background.png");
+                                "/" + LayersFunc.themeframework + ".apk " +
+                                "res/drawable/menuitem_background.png");
                 Log.e("performAAPTonCommonsAPK",
                         "Deleted main drawable file!");
                 nativeApp3.waitFor();
                 Process nativeAppx = Runtime.getRuntime().exec(
                         "aapt remove " +
                                 getActivity().getFilesDir().getAbsolutePath() +
-                                "/" + LayersFunc.themeframework + ".apk res/drawable-xhdpi-v4/menuitem_background.png");
+                                "/" + LayersFunc.themeframework + ".apk " +
+                                "res/drawable-xhdpi-v4/menuitem_background.png");
                 Log.e("performAAPTonCommonsAPK",
                         "Deleted main drawable file!");
                 nativeAppx.waitFor();
                 Process nativeAppxx = Runtime.getRuntime().exec(
                         "aapt remove " +
                                 getActivity().getFilesDir().getAbsolutePath() +
-                                "/" + LayersFunc.themeframework + ".apk res/drawable-xxhdpi-v4/menuitem_background.png");
+                                "/" + LayersFunc.themeframework + ".apk " +
+                                "res/drawable-xxhdpi-v4/menuitem_background.png");
                 Log.e("performAAPTonCommonsAPK",
                         "Deleted main drawable file!");
                 nativeAppxx.waitFor();
                 Process nativeAppxxx = Runtime.getRuntime().exec(
                         "aapt remove " +
                                 getActivity().getFilesDir().getAbsolutePath() +
-                                "/" + LayersFunc.themeframework + ".apk res/drawable-xxxhdpi-v4/menuitem_background.png");
+                                "/" + LayersFunc.themeframework + ".apk " +
+                                "res/drawable-xxxhdpi-v4/menuitem_background.png");
                 Log.e("performAAPTonCommonsAPK",
                         "Deleted main drawable file!");
                 nativeAppxxx.waitFor();
@@ -609,19 +629,23 @@ public class HeaderSwapperFragment extends BasePageFragment {
                 eu.chainfire.libsuperuser.Shell.SU.run(
                         "aapt add " +
                                 getActivity().getFilesDir().getAbsolutePath() +
-                                "/" + LayersFunc.themeframework + ".apk res/drawable/menuitem_background.png");
+                                "/" + LayersFunc.themeframework + ".apk " +
+                                "res/drawable/menuitem_background.png");
                 eu.chainfire.libsuperuser.Shell.SU.run(
                         "aapt add " +
                                 getActivity().getFilesDir().getAbsolutePath() +
-                                "/" + LayersFunc.themeframework + ".apk res/drawable-xhdpi-v4/menuitem_background.png");
+                                "/" + LayersFunc.themeframework + ".apk " +
+                                "res/drawable-xhdpi-v4/menuitem_background.png");
                 eu.chainfire.libsuperuser.Shell.SU.run(
                         "aapt add " +
                                 getActivity().getFilesDir().getAbsolutePath() +
-                                "/" + LayersFunc.themeframework + ".apk res/drawable-xxhdpi-v4/menuitem_background.png");
+                                "/" + LayersFunc.themeframework + ".apk " +
+                                "res/drawable-xxhdpi-v4/menuitem_background.png");
                 eu.chainfire.libsuperuser.Shell.SU.run(
                         "aapt add " +
                                 getActivity().getFilesDir().getAbsolutePath() +
-                                "/" + LayersFunc.themeframework + ".apk res/drawable-xxxhdpi-v4/menuitem_background.png");
+                                "/" + LayersFunc.themeframework + ".apk " +
+                                "res/drawable-xxxhdpi-v4/menuitem_background.png");
                 if (swap_contextual_header) {
                     List source = processor();
                     for (int i = 0; i < source.size(); i++) {
@@ -661,7 +685,8 @@ public class HeaderSwapperFragment extends BasePageFragment {
                 if (LayersFunc.checkbitphone()) {
                     LayersFunc.copyFABFinalizedAPK(getActivity(), LayersFunc.themeframework, true);
                     if (swap_contextual_header) {
-                        LayersFunc.copyFABFinalizedAPK(getActivity(), LayersFunc.themesystemui, true);
+                        LayersFunc.copyFABFinalizedAPK(getActivity(), LayersFunc.themesystemui,
+                                true);
                     }
                 } else {
                     LayersFunc.copyFinalizedAPK(getActivity(), LayersFunc.themeframework, true);

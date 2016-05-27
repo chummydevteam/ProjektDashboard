@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.pluscubed.insetsdispatcher.view.InsetsDispatcherFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:clipToPadding="false">
+                                                                 xmlns:app="http://schemas.android.com/apk/res-auto"
+                                                                 xmlns:tools="http://schemas.android.com/tools"
+                                                                 android:layout_width="match_parent"
+                                                                 android:layout_height="match_parent"
+                                                                 android:clipToPadding="false">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -29,7 +29,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="20dp"
                 android:layout_marginTop="10dp"
-                android:src="@drawable/splashscreen_logo_big" />
+                android:src="@drawable/splashscreen_logo_big"/>
 
             <ImageView
                 android:id="@+id/spinnerWheel"
@@ -38,7 +38,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="50dp"
-                android:src="@drawable/splashscreen_spinner_big" />
+                android:src="@drawable/splashscreen_spinner_big"/>
 
             <ImageView
                 android:id="@+id/landingIcon"
@@ -49,7 +49,7 @@
                 android:layout_marginBottom="@dimen/content_inset"
                 android:scaleType="fitXY"
                 android:src="@drawable/dashboard_logo"
-                tools:ignore="ContentDescription" />
+                tools:ignore="ContentDescription"/>
 
             <TextView
                 android:id="@+id/landingMessage"
@@ -63,7 +63,7 @@
                 android:text="@string/homepage_description"
                 android:textColor="?android:textColorPrimary"
                 android:textSize="@dimen/title_text_size"
-                android:textStyle="bold|italic" />
+                android:textStyle="bold|italic"/>
 
             <TextView
                 android:id="@+id/status_message"
@@ -80,7 +80,7 @@
                 android:textAllCaps="true"
                 android:textColor="?android:textColorPrimary"
                 android:textSize="@dimen/text_ultrasmall"
-                android:textStyle="bold" />
+                android:textStyle="bold"/>
 
             <TextView
                 android:id="@+id/theme_message"
@@ -96,7 +96,7 @@
                 android:textAllCaps="true"
                 android:textColor="?android:textColorPrimary"
                 android:textSize="17dp"
-                android:textStyle="bold" />
+                android:textStyle="bold"/>
 
             <TextView
                 android:id="@+id/MarqueeText"
@@ -113,7 +113,7 @@
                 android:paddingRight="15dip"
                 android:paddingTop="10dp"
                 android:scrollHorizontally="true"
-                android:singleLine="true" />
+                android:singleLine="true"/>
 
             <TextView
                 android:id="@+id/landingMessageSecondary"
@@ -126,15 +126,15 @@
                 android:lineSpacingMultiplier="1.2"
                 android:text="@string/homepage_description_secondary"
                 android:textColor="?android:textColorPrimary"
-                android:textSize="@dimen/content_text_size" />
+                android:textSize="@dimen/content_text_size"/>
 
         </RelativeLayout>
 
     </ScrollView>
 
     <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+                                                     android:layout_width="match_parent"
+                                                     android:layout_height="match_parent">
 
         <com.michaldrabik.tapbarmenulib.TapBarMenu
             android:id="@+id/tapBarMenu"
@@ -151,7 +151,7 @@
                 android:layout_weight="1"
                 android:paddingBottom="10dp"
                 android:paddingTop="10dp"
-                android:src="@drawable/tap_bar_googleplus" />
+                android:src="@drawable/tap_bar_googleplus"/>
 
             <ImageView
                 android:id="@+id/item2"
@@ -160,11 +160,11 @@
                 android:layout_weight="1"
                 android:paddingBottom="10dp"
                 android:paddingTop="10dp"
-                android:src="@drawable/tap_bar_xda" />
+                android:src="@drawable/tap_bar_xda"/>
 
             <Space
                 android:layout_width="100dp"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"/>
 
             <ImageView
                 android:id="@+id/item3"
@@ -173,7 +173,7 @@
                 android:layout_weight="1"
                 android:paddingBottom="10dp"
                 android:paddingTop="10dp"
-                android:src="@drawable/tap_bar_rename" />
+                android:src="@drawable/tap_bar_rename"/>
 
             <ImageView
                 android:id="@+id/item4"
@@ -182,7 +182,7 @@
                 android:layout_weight="1"
                 android:paddingBottom="10dp"
                 android:paddingTop="10dp"
-                android:src="@drawable/tap_bar_settings" />
+                android:src="@drawable/tap_bar_settings"/>
 
         </com.michaldrabik.tapbarmenulib.TapBarMenu>
 

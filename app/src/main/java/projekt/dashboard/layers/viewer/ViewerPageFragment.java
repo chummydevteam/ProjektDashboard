@@ -68,7 +68,8 @@ public class ViewerPageFragment extends AssentFragment {
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle
+            savedInstanceState) {
         return inflater.inflate(R.layout.fragment_viewer, container, false);
     }
 
@@ -93,13 +94,17 @@ public class ViewerPageFragment extends AssentFragment {
                 .load(mWallpaper.url)
                 .listener(new RequestListener<String, GlideDrawable>() {
                     @Override
-                    public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
+                    public boolean onException(Exception e, String model, Target<GlideDrawable>
+                            target, boolean isFirstResource) {
                         mProgress.setVisibility(View.GONE);
                         return false;
                     }
 
                     @Override
-                    public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
+                    public boolean onResourceReady(GlideDrawable resource, String model,
+                                                   Target<GlideDrawable> target, boolean
+                                                           isFromMemoryCache, boolean
+                                                           isFirstResource) {
                         mProgress.setVisibility(View.GONE);
                         return false;
                     }

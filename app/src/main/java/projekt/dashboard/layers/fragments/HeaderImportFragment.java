@@ -192,15 +192,23 @@ public class HeaderImportFragment extends BasePageFragment {
         if (prefs.getBoolean("dialog", true)) {
             AlertDialog.Builder ad = new AlertDialog.Builder(getActivity());
             ad.setTitle("Header Importer :)");
-            ad.setMessage("Woah Welcome to Header Importer,a place where you can actually use your favourite moments,your memories, right next to your notifications.\n" +
-                    "So How to use it:-\n1. Easy AF,Just Select and Download a Header Pack from the Online DataBase\n2. Select the zip \n3. Select a Device DPI\n4. Click The Floating Button and Wait for the Magic !!!");
+            ad.setMessage("Woah Welcome to Header Importer,a place where you can actually use " +
+                    "your favourite moments,your memories, right next to your notifications.\n" +
+                    "So How to use it:-\n1. Easy AF,Just Select and Download a Header Pack from " +
+                    "the Online DataBase\n2. Select the zip \n3. Select a Device DPI\n4. Click " +
+                    "The Floating Button and Wait for the Magic !!!");
             ad.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    if (new LayersFunc(getActivity()).isAppInstalled(getActivity(), "com.chummy.aditya.materialdark.layers.donate")) {
-                        startActivity(new Intent().setComponent(new ComponentName("com.lovejoy777.rroandlayersmanager", "com.lovejoy777.rroandlayersmanager.MainActivity")));
+                    if (new LayersFunc(getActivity()).isAppInstalled(getActivity(), "com.chummy" +
+                            ".aditya.materialdark.layers.donate")) {
+                        startActivity(new Intent().setComponent(new ComponentName("com.lovejoy777" +
+                                ".rroandlayersmanager", "com.lovejoy777.rroandlayersmanager" +
+                                ".MainActivity")));
                     } else {
-                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.chummy.aditya.materialdark.layers.donate")));
+                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play" +
+                                ".google.com/store/apps/details?id=com.chummy.aditya.materialdark" +
+                                ".layers.donate")));
                     }
                 }
             });
@@ -422,7 +430,8 @@ public class HeaderImportFragment extends BasePageFragment {
                 FileUtils.copyFile(source, destination);
                 unzip(header_zip);
                 Log.e("CopyAkzent_SystemUIFile",
-                        "Successfully copied " + LayersFunc.themesystemui + " apk from overlays folder to work directory");
+                        "Successfully copied " + LayersFunc.themesystemui + " apk from overlays " +
+                                "folder to work directory");
                 Log.e("CopyAkzent_SystemUIFile", "Function Stopped");
             } catch (IOException e) {
                 Log.e("CopyAkzent_SystemUIFile",

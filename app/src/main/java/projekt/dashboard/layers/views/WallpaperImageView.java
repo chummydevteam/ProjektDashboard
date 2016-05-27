@@ -31,7 +31,8 @@ public class WallpaperImageView extends SquareImageView {
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    public WallpaperImageView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public WallpaperImageView(Context context, AttributeSet attrs, int defStyleAttr, int
+            defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
     }
 

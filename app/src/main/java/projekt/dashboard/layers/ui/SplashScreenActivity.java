@@ -86,7 +86,8 @@ public class SplashScreenActivity extends Activity implements
                     new AlertDialog.Builder(this)
                             .setTitle(R.string.permission_not_granted_dialog_title)
                             .setMessage(R.string.permission_not_granted_dialog_message)
-                            .setPositiveButton(R.string.dialog_ok, new DialogInterface.OnClickListener() {
+                            .setPositiveButton(R.string.dialog_ok, new DialogInterface
+                                    .OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
                                     SplashScreenActivity.this.finish();

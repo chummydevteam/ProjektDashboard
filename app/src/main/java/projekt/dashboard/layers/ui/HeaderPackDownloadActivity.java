@@ -137,8 +137,10 @@ public class HeaderPackDownloadActivity extends AppCompatActivity {
 
         final String[] headerPackSources = getResources().getStringArray(R.array.header_pack_urls);
         final Spinner headerPackSourcePicker = (Spinner) findViewById(R.id.sourcePickerHeaderPacks);
-        ArrayAdapter<String> spinnerCountShoesArrayAdapter = new ArrayAdapter<String>(getApplicationContext(),
-                android.R.layout.simple_spinner_dropdown_item, getResources().getStringArray(R.array.header_pack_sources));
+        ArrayAdapter<String> spinnerCountShoesArrayAdapter = new ArrayAdapter<String>
+                (getApplicationContext(),
+                android.R.layout.simple_spinner_dropdown_item, getResources().getStringArray(R
+                        .array.header_pack_sources));
         headerPackSourcePicker.setAdapter(spinnerCountShoesArrayAdapter);
         headerPackSourcePicker.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -155,18 +157,22 @@ public class HeaderPackDownloadActivity extends AppCompatActivity {
         if (restartActivity != null) {
             restartActivity.setOnClickListener((new View.OnClickListener() {
                 public void onClick(View v) {
-                    if (!current_source_pack.equals(headerPackSources[headerPackSourcePicker.getSelectedItemPosition()])) {
-                        current_source_pack = headerPackSources[headerPackSourcePicker.getSelectedItemPosition()];
+                    if (!current_source_pack.equals(headerPackSources[headerPackSourcePicker
+                            .getSelectedItemPosition()])) {
+                        current_source_pack = headerPackSources[headerPackSourcePicker
+                                .getSelectedItemPosition()];
                         downloadResources downloadTask = new downloadResources();
                         downloadTask.execute(
                                 headerPackSources[headerPackSourcePicker.getSelectedItemPosition()],
                                 "addons.xml");
                         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.list_item);
-                        TextView noDownloadsAvailable = (TextView) findViewById(R.id.NoDownloadsAvailable);
+                        TextView noDownloadsAvailable = (TextView) findViewById(R.id
+                                .NoDownloadsAvailable);
                         noDownloadsAvailable.setVisibility(View.GONE);
                         recyclerView.setVisibility(View.VISIBLE);
                     } else {
-                        Log.d("DownloadActivity", "There is no need to restart the activity's sources!");
+                        Log.d("DownloadActivity", "There is no need to restart the activity's " +
+                                "sources!");
                     }
                 }
             }));
@@ -284,7 +290,8 @@ public class HeaderPackDownloadActivity extends AppCompatActivity {
                         AlertDialog.Builder builder = new AlertDialog.Builder(
                                 HeaderPackDownloadActivity.this);
                         builder.setPositiveButton(getResources().getString(
-                                R.string.downloader_dialog_accept), new DialogInterface.OnClickListener() {
+                                R.string.downloader_dialog_accept), new DialogInterface
+                                .OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 // execute this when the downloader must be fired

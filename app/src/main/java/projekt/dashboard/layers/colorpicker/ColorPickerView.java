@@ -133,19 +133,22 @@ public class ColorPickerView extends View {
     private void drawSatValPanel(Canvas canvas) {
         final RectF rect = mSatValRect;
         mBorderPaint.setColor(mBorderColor);
-        canvas.drawRect(mDrawingRect.left, mDrawingRect.top, rect.right + BORDER_WIDTH_PX, rect.bottom + BORDER_WIDTH_PX, mBorderPaint);
+        canvas.drawRect(mDrawingRect.left, mDrawingRect.top, rect.right + BORDER_WIDTH_PX, rect
+                .bottom + BORDER_WIDTH_PX, mBorderPaint);
         if (mValShader == null) {
             mValShader = new LinearGradient(rect.left, rect.top, rect.left, rect.bottom,
                     0xffffffff, 0xff000000, TileMode.CLAMP);
         }
         int rgb = Color.HSVToColor(new float[]{mHue, 1f, 1f});
-        mSatShader = new LinearGradient(rect.left, rect.top, rect.right, rect.top, 0xffffffff, rgb, TileMode.CLAMP);
+        mSatShader = new LinearGradient(rect.left, rect.top, rect.right, rect.top, 0xffffffff,
+                rgb, TileMode.CLAMP);
         ComposeShader mShader = new ComposeShader(mValShader, mSatShader, PorterDuff.Mode.MULTIPLY);
         mSatValPaint.setShader(mShader);
         canvas.drawRect(rect, mSatValPaint);
         Point p = satValToPoint(mSat, mVal);
         mSatValTrackerPaint.setColor(0xff000000);
-        canvas.drawCircle(p.x, p.y, PALETTE_CIRCLE_TRACKER_RADIUS - 1f * mDensity, mSatValTrackerPaint);
+        canvas.drawCircle(p.x, p.y, PALETTE_CIRCLE_TRACKER_RADIUS - 1f * mDensity,
+                mSatValTrackerPaint);
         mSatValTrackerPaint.setColor(0xffdddddd);
         canvas.drawCircle(p.x, p.y, PALETTE_CIRCLE_TRACKER_RADIUS, mSatValTrackerPaint);
     }
@@ -159,7 +162,8 @@ public class ColorPickerView extends View {
                 rect.bottom + BORDER_WIDTH_PX,
                 mBorderPaint);
         if (mHueShader == null) {
-            mHueShader = new LinearGradient(rect.left, rect.top, rect.left, rect.bottom, buildHueColorArray(), null, TileMode.CLAMP);
+            mHueShader = new LinearGradient(rect.left, rect.top, rect.left, rect.bottom,
+                    buildHueColorArray(), null, TileMode.CLAMP);
             mHuePaint.setShader(mHueShader);
         }
         canvas.drawRect(rect, mHuePaint);
@@ -186,11 +190,13 @@ public class ColorPickerView extends View {
         float[] hsv = new float[]{mHue, mSat, mVal};
         int color = Color.HSVToColor(hsv);
         int acolor = Color.HSVToColor(0, hsv);
-        mAlphaShader = new LinearGradient(rect.left, rect.top, rect.right, rect.top, color, acolor, TileMode.CLAMP);
+        mAlphaShader = new LinearGradient(rect.left, rect.top, rect.right, rect.top, color,
+                acolor, TileMode.CLAMP);
         mAlphaPaint.setShader(mAlphaShader);
         canvas.drawRect(rect, mAlphaPaint);
         if (mAlphaSliderText != null && !Objects.equals(mAlphaSliderText, "")) {
-            canvas.drawText(mAlphaSliderText, rect.centerX(), rect.centerY() + 4 * mDensity, mAlphaTextPaint);
+            canvas.drawText(mAlphaSliderText, rect.centerX(), rect.centerY() + 4 * mDensity,
+                    mAlphaTextPaint);
         }
         float rectWidth = 4 * mDensity / 2;
         Point p = alphaToPoint(mAlpha);
@@ -486,7 +492,8 @@ public class ColorPickerView extends View {
         final RectF dRect = mDrawingRect;
         float left = dRect.right - HUE_PANEL_WIDTH + BORDER_WIDTH_PX;
         float top = dRect.top + BORDER_WIDTH_PX;
-        float bottom = dRect.bottom - BORDER_WIDTH_PX - (mShowAlphaPanel ? (PANEL_SPACING + ALPHA_PANEL_HEIGHT) : 0);
+        float bottom = dRect.bottom - BORDER_WIDTH_PX - (mShowAlphaPanel ? (PANEL_SPACING +
+                ALPHA_PANEL_HEIGHT) : 0);
         float right = dRect.right - BORDER_WIDTH_PX;
         mHueRect = new RectF(left, top, right, bottom);
     }

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:layout_gravity="center"
-    android:background="@color/primary_1_blacked_out"
-    android:gravity="center"
-    android:orientation="vertical">
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_gravity="center"
+                android:background="@color/primary_1_blacked_out"
+                android:gravity="center"
+                android:orientation="vertical">
 
     <ImageView
         android:layout_width="wrap_content"
@@ -14,7 +14,7 @@
         android:layout_centerHorizontal="true"
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="30dp"
-        android:src="@drawable/splashscreen_logo" />
+        android:src="@drawable/splashscreen_logo"/>
 
     <ImageView
         android:id="@+id/spinnerWheel"
@@ -24,7 +24,7 @@
         android:layout_centerHorizontal="true"
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="37dp"
-        android:src="@drawable/splashscreen_spinner" />
+        android:src="@drawable/splashscreen_spinner"/>
 
     <TextView
         android:id="@+id/loadingText"
@@ -34,6 +34,6 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="120dp"
         android:text="@string/loadingText"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
+        android:textAppearance="?android:attr/textAppearanceSmall"/>
 
 </RelativeLayout>

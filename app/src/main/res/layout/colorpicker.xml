@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:paddingEnd="5dp"
-    android:paddingLeft="5dp"
-    android:paddingRight="5dp"
-    android:paddingStart="5dp">
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:orientation="vertical"
+              android:paddingEnd="5dp"
+              android:paddingLeft="5dp"
+              android:paddingRight="5dp"
+              android:paddingStart="5dp">
 
     <projekt.dashboard.layers.colorpicker.ColorPickerView
         android:id="@+id/color_picker_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layerType="software"
-        android:tag="portrait" />
+        android:tag="portrait"/>
 
     <LinearLayout
         android:id="@+id/text_hex_wrapper"
@@ -30,7 +30,7 @@
             android:layout_height="wrap_content"
             android:gravity="start"
             android:text="@string/press_color_to_apply"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
+            android:textAppearance="?android:attr/textAppearanceSmall"/>
 
         <EditText
             android:id="@+id/hex_val"
@@ -52,7 +52,7 @@
             android:id="@+id/old_color_panel"
             android:layout_width="0px"
             android:layout_height="fill_parent"
-            android:layout_weight="0.5" />
+            android:layout_weight="0.5"/>
 
         <ImageView
             android:layout_width="wrap_content"
@@ -62,12 +62,12 @@
             android:layout_marginRight="10dp"
             android:layout_marginStart="10dp"
             android:gravity="center"
-            android:src="@android:drawable/ic_media_ff" />
+            android:src="@android:drawable/ic_media_ff"/>
 
         <projekt.dashboard.layers.colorpicker.ColorPickerPanelView
             android:id="@+id/new_color_panel"
             android:layout_width="0px"
             android:layout_height="wrap_content"
-            android:layout_weight="0.5" />
+            android:layout_weight="0.5"/>
     </LinearLayout>
 </LinearLayout>

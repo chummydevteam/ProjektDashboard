@@ -16,7 +16,8 @@ import android.widget.LinearLayout;
 
 import projekt.dashboard.layers.R;
 
-public class ColorPickerDialog extends Dialog implements ColorPickerView.OnColorChangedListener, View.OnClickListener {
+public class ColorPickerDialog extends Dialog implements ColorPickerView.OnColorChangedListener,
+        View.OnClickListener {
     private ColorPickerView mColorPicker;
     private ColorPickerPanelView mOldColor;
     private ColorPickerPanelView mNewColor;
@@ -37,7 +38,8 @@ public class ColorPickerDialog extends Dialog implements ColorPickerView.OnColor
     }
 
     private void setUp(int color) {
-        LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context
+                .LAYOUT_INFLATER_SERVICE);
         View layout = inflater.inflate(R.layout.colorpicker, null);
         setContentView(layout);
         mColorPicker = (ColorPickerView) layout.findViewById(R.id.color_picker_view);

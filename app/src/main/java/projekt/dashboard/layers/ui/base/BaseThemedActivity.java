@@ -46,13 +46,16 @@ public abstract class BaseThemedActivity extends AssentActivity {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M &&
                 !DialogUtils.resolveBoolean(this, R.attr.disable_auto_light_status_bar)) {
             final View decorView = getWindow().getDecorView();
-            final boolean lightStatusEnabled = DialogUtils.resolveBoolean(this, R.attr.force_light_status_bar) ||
+            final boolean lightStatusEnabled = DialogUtils.resolveBoolean(this, R.attr
+                    .force_light_status_bar) ||
                     TintUtils.isColorLight(DialogUtils.resolveColor(this, R.attr.colorPrimaryDark));
             final int systemUiVisibility = decorView.getSystemUiVisibility();
             if (lightStatusEnabled) {
-                decorView.setSystemUiVisibility(systemUiVisibility | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+                decorView.setSystemUiVisibility(systemUiVisibility | View
+                        .SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
             } else {
-                decorView.setSystemUiVisibility(systemUiVisibility & ~View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+                decorView.setSystemUiVisibility(systemUiVisibility & ~View
+                        .SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
             }
         }
     }
