@@ -220,13 +220,13 @@ public class LayersFunc {
                 if (files2 != null) {
                     for (File inFile2 : files2) {
                         if (inFile2.isFile()) {
-                            Log.e("Bhadwa", "Mila " + inFile2);
+                            Log.d("Processing overlay:", inFile2.toString());
                             String filenameParse[] = inFile2.getAbsolutePath().split("/");
                             String last = filenameParse[filenameParse.length - 1];
                             StringTokenizer stringTokenizer = new StringTokenizer(last, ".");
                             String finalname = stringTokenizer.nextToken();
                             if (finalname.equalsIgnoreCase(array[i])) {
-                                Log.e("MILA", finalname);
+                                Log.d("Supported overlay:", finalname);
                                 framework = array[i];
                                 return true;
                             }
@@ -470,13 +470,13 @@ public class LayersFunc {
             if (files2 != null) {
                 for (File inFile2 : files2) {
                     if (inFile2.isFile()) {
-                        Log.e("Bhadwa", "Mila " + inFile2);
+                        Log.d("Processing overlay:", inFile2.toString());
                         String filenameParse[] = inFile2.getAbsolutePath().split("/");
                         String last = filenameParse[filenameParse.length - 1];
                         StringTokenizer stringTokenizer = new StringTokenizer(last, ".");
                         String finalname = stringTokenizer.nextToken();
                         if (finalname.contains("HeaderSwapperFrame")) {
-                            Log.e("MILA", finalname);
+                            Log.d("Supported overlay:", finalname);
                             themeframework = finalname;
                             break;
                         }
@@ -495,13 +495,13 @@ public class LayersFunc {
             if (files2 != null) {
                 for (File inFile2 : files2) {
                     if (inFile2.isFile()) {
-                        Log.e("Bhadwa", "Mila " + inFile2);
+                        Log.d("Processing overlay:", inFile2.toString());
                         String filenameParse[] = inFile2.getAbsolutePath().split("/");
                         String last = filenameParse[filenameParse.length - 1];
                         StringTokenizer stringTokenizer = new StringTokenizer(last, ".");
                         String finalname = stringTokenizer.nextToken();
                         if (finalname.contains("HeaderSwapperSys")) {
-                            Log.e("MILA", finalname);
+                            Log.d("Supported overlay:", finalname);
                             themesystemui = finalname;
                             break;
                         }
