@@ -244,6 +244,7 @@ public class HeaderSwapperFragment extends BasePageFragment {
     public void letsGetStarted() {
         String[] secondPhaseCommands = {LayersFunc.vendor + "/" + LayersFunc.themeframework + "" +
                 ".apk"};
+        new copyThemeFiles().execute(secondPhaseCommands);
         Log.e("letsGetStarted", secondPhaseCommands[0]);
 
         new secondPhaseAsyncTasks().execute(secondPhaseCommands);
@@ -382,18 +383,55 @@ public class HeaderSwapperFragment extends BasePageFragment {
         return R.string.contextualheaderswapper;
     }
 
+    public class copyThemeFiles extends AsyncTask<String, String, String> {
+        @Override
+        protected String doInBackground(String... params) {
+            Log.e("CopyFrameworkFile", "Function Called");
+            Log.e("CopyFrameworkFile", "Function Started");
+            String sourcePath = params[0];
+            File source = new File(sourcePath);
+            String destinationPath = getActivity().getFilesDir().getAbsolutePath() +
+                    "/" + LayersFunc.themeframework + ".apk";
+            File destination = new File(destinationPath);
+
+            String sourcePathsys = vendor + "/" + LayersFunc.themesystemui;
+            File sourcesys = new File(sourcePathsys);
+            String destinationPathsys = getActivity().getFilesDir().getAbsolutePath() +
+                    "/" + LayersFunc.themesystemui + ".apk";
+            File destinationsys = new File(destinationPathsys);
+
+            try {
+                FileUtils.copyFile(source, destination);
+                if (swap_contextual_header) {
+                    FileUtils.copyFile(sourcesys, destinationsys);
+                }
+                Log.e("Progress", "1");
+                Log.e("CopyFrameworkFile",
+                        "Successfully copied framework apk from overlays folder to work directory");
+                Log.e("CopyFrameworkFile", "Function Stopped");
+            } catch (IOException e) {
+                Log.e("CopyFrameworkFile",
+                        "Failed to copy framework apk from resource-Files to work directory");
+                Log.e("CopyFrameworkFile", "Function Stopped");
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+    }
+
     private class secondPhaseAsyncTasks extends AsyncTask<String, String, Void> {
 
         private ProgressDialog pd;
 
         @Override
         protected Void doInBackground(String... params) {
-            String theme_dir = params[0];
             try {
-                copyCommonsFile(theme_dir);
+                Log.e("Progress", "2");
+                performAAPTonCommonsAPK();
             } catch (Exception e) {
                 Log.e("performAAPTonCommonsAPK",
-                        "Caught the exception.");
+                        "Could not process file.");
             }
             return null;
         }
@@ -449,46 +487,7 @@ public class HeaderSwapperFragment extends BasePageFragment {
             }
             return null;
         }
-
-        private void copyCommonsFile(String theme_dir) {
-            Log.e("CopyFrameworkFile", "Function Called");
-            Log.e("CopyFrameworkFile", "Function Started");
-            String sourcePath = theme_dir;
-            File source = new File(sourcePath);
-            String destinationPath = getActivity().getFilesDir().getAbsolutePath() +
-                    "/" + LayersFunc.themeframework + ".apk";
-            File destination = new File(destinationPath);
-
-            String sourcePathsys = vendor + "/" + LayersFunc.themesystemui;
-            File sourcesys = new File(sourcePathsys);
-            String destinationPathsys = getActivity().getFilesDir().getAbsolutePath() +
-                    "/" + LayersFunc.themesystemui + ".apk";
-            File destinationsys = new File(destinationPathsys);
-
-            try {
-                FileUtils.copyFile(source, destination);
-                if (swap_contextual_header) {
-                    FileUtils.copyFile(sourcesys, destinationsys);
-                }
-                Log.e("CopyFrameworkFile",
-                        "Successfully copied framework apk from overlays folder to work directory");
-                Log.e("CopyFrameworkFile", "Function Stopped");
-            } catch (IOException e) {
-                Log.e("CopyFrameworkFile",
-                        "Failed to copy framework apk from resource-Files to work directory");
-                Log.e("CopyFrameworkFile", "Function Stopped");
-                e.printStackTrace();
-            }
-            try {
-                performAAPTonCommonsAPK();
-            } catch (Exception e) {
-                Log.e("performAAPTonCommonsAPK",
-                        "Could not process file.");
-            }
-
-
-        }
-
+        
         private void performAAPTonCommonsAPK() {
             Log.e("performAAPTonCommonsAPK",
                     "Mounting system as read-write as we prepare for some commands...");
@@ -503,6 +502,7 @@ public class HeaderSwapperFragment extends BasePageFragment {
                 if (xxxhdpi) {
                     eu.chainfire.libsuperuser.Shell.SU.run("mkdir /res/drawable-xxxhdpi-v4");
                 }
+                Log.e("Progress", "3");
                 Log.e("Made Directory", "Made");
                 eu.chainfire.libsuperuser.Shell.SU.run(
                         "cp " + getActivity().getFilesDir().getAbsolutePath() +
@@ -526,6 +526,7 @@ public class HeaderSwapperFragment extends BasePageFragment {
                                 "/res/drawable/menuitem_background.png " +
                                 "/res/drawable-xxxhdpi-v4/menuitem_background.png");
                 Log.e("drawable", "xxx");
+                Log.e("Progress", "4");
                 if (swap_contextual_header) {
                     List source = processor();
                     for (int i = 0; i < source.size(); i++) {
@@ -556,6 +557,8 @@ public class HeaderSwapperFragment extends BasePageFragment {
                     Log.e("performAAPTonCommonsAPK",
                             "Successfully copied all drawables into the root folder.");
                 }
+
+                Log.e("Progress", "5");
                 Log.e("performAAPTonCommonsAPK",
                         "Successfully copied drawable into the root folder.");
 
@@ -593,6 +596,7 @@ public class HeaderSwapperFragment extends BasePageFragment {
                 Log.e("performAAPTonCommonsAPK",
                         "Deleted main drawable file!");
                 nativeAppxxx.waitFor();
+                Log.e("Progress", "6");
                 if (swap_contextual_header) {
                     List source = processor();
                     for (int i = 0; i < source.size(); i++) {
@@ -626,6 +630,7 @@ public class HeaderSwapperFragment extends BasePageFragment {
                     Log.e("performAAPTonCommonsAPK",
                             "Deleted all drawable files!");
                 }
+                Log.e("Progress", "7");
                 eu.chainfire.libsuperuser.Shell.SU.run(
                         "aapt add " +
                                 getActivity().getFilesDir().getAbsolutePath() +
@@ -676,6 +681,7 @@ public class HeaderSwapperFragment extends BasePageFragment {
                     Log.e("performAAPTonCommonsAPK",
                             "Added freshly created photo files...ALL DONE!");
                 }
+                Log.e("Progress", "8");
                 Log.e("performAAPTonCommonsAPK",
                         "Added freshly created drawable file...ALL DONE!");
                 eu.chainfire.libsuperuser.Shell.SU.run("rm -r /res/drawable");
@@ -684,17 +690,22 @@ public class HeaderSwapperFragment extends BasePageFragment {
                         "Cleaned up root directory and remounted system as read-only.");
                 if (LayersFunc.checkBitPhone()) {
                     LayersFunc.copyFABFinalizedAPK(getActivity(), LayersFunc.themeframework, true);
+                    Log.e("Progress", "9");
                     if (swap_contextual_header) {
                         LayersFunc.copyFABFinalizedAPK(getActivity(), LayersFunc.themesystemui,
                                 true);
+                        Log.e("Progress", "9");
                     }
                 } else {
                     LayersFunc.copyFinalizedAPK(getActivity(), LayersFunc.themeframework, true);
+                    Log.e("Progress", "9");
                     if (swap_contextual_header) {
                         LayersFunc.copyFinalizedAPK(getActivity(), LayersFunc.themesystemui, true);
+                        Log.e("Progress", "9");
                     }
                 }
 
+                Log.e("Progress", "10");
                 eu.chainfire.libsuperuser.Shell.SU.run("killall zygote");
 
             } catch (Exception e) {
