@@ -172,6 +172,7 @@ public class ColorChangerFragment extends BasePageFragment {
             Log.e("copythemeFiles", theme_dir);
             Log.e("copythemeFiles", params[1]);
             LayersFunc.copyFileToApp(getActivity(), theme_dir, params[1]);
+            Log.e("Progress", "1");
             return null;
         }
 
@@ -229,13 +230,14 @@ public class ColorChangerFragment extends BasePageFragment {
                 LayersFunc.copyFinalizedAPK(getActivity(), File, true);
             }
             pd.dismiss();
+            Log.e("Progress", "10");
             eu.chainfire.libsuperuser.Shell.SU.run("busybox killall com.android.systemui");
-            Log.e("SecondPhaseTasks", "Function Stopped");
         }
 
         private void createXMLfile(String string, String theme_dir) {
 
             LayersFunc.createXML(string, getActivity(), color_picked);
+            Log.e("Progress", "2");
             if (string.equals("tertiary_text_dark.xml")) {
                 try {
                     compileDummyAPK();
@@ -267,6 +269,7 @@ public class ColorChangerFragment extends BasePageFragment {
             nativeApp.waitFor();
             Log.e("CompileDummyAPK",
                     "Successfully compiled dummy apk!");
+            Log.e("Progress", "3");
             unzip();
         }
 
@@ -279,6 +282,7 @@ public class ColorChangerFragment extends BasePageFragment {
             try {
                 ZipFile zipFile = new ZipFile(source);
                 Log.e("Unzip", "The ZIP has been located and will now be unzipped...");
+                Log.e("Progress", "4");
                 zipFile.extractAll(destination);
                 Log.e("Unzip",
                         "Successfully unzipped the file to the corresponding directory!");
@@ -300,13 +304,18 @@ public class ColorChangerFragment extends BasePageFragment {
                 Log.e("performAAPTonCommonsAPK",
                         "Mounting system as read-write as we prepare for some commands...");
                 eu.chainfire.libsuperuser.Shell.SU.run("mount -o remount,rw /");
+                Log.e("Progress", "5");
                 eu.chainfire.libsuperuser.Shell.SU.run("mkdir /res");
+                Log.e("Progress", "6");
                 eu.chainfire.libsuperuser.Shell.SU.run("mkdir /res/color");
+                Log.e("Progress", "7");
 
                 LayersFunc.LayersColorSwitch(getActivity(), File, "tertiary_text_dark", "color");
+                Log.e("Progress", "8");
 
                 eu.chainfire.libsuperuser.Shell.SU.run("rm -r /res/color");
                 eu.chainfire.libsuperuser.Shell.SU.run("mount -o remount,ro /");
+                Log.e("Progress", "9");
                 Log.e("performAAPTonCommonsAPK",
                         "Cleaned up root directory and remounted system as read-only.");
 
@@ -316,6 +325,23 @@ public class ColorChangerFragment extends BasePageFragment {
                 e.printStackTrace();
             }
         }
+    }
+    
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        ButterKnife.bind(this, view);
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        ButterKnife.unbind(this);
+    }
+
+    @Override
+    public int getTitle() {
+        return R.string.color_changer;
     }
 
 }
