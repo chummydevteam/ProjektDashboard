@@ -271,6 +271,7 @@ public class HomeFragment extends BasePageFragment {
                 public void onClick(DialogInterface dialog, int which) {
                 }
             });
+            ad.show();
         }
 
         TextView theme_message = (TextView) inflation.findViewById(R.id.theme_message);
