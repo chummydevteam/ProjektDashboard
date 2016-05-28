@@ -1,31 +1,49 @@
+/*
+ * Copyright (C) 2011 Sergey Margaritov
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package projekt.dashboard.layers.colorpicker;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.content.res.TypedArray;
+import android.graphics.Bitmap;
+import android.graphics.Bitmap.Config;
 import android.graphics.Color;
-import android.graphics.PorterDuff;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.preference.Preference;
 import android.util.AttributeSet;
 import android.view.View;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-import projekt.dashboard.layers.R;
+/**
+ * A preference type that allows a user to choose a time
+ *
+ * @author Sergey Margaritov
+ */
+public class ColorPickerPreference
+        extends
+        Preference
+        implements
+        Preference.OnPreferenceClickListener,
+        ColorPickerDialog.OnColorChangedListener {
 
-public class ColorPickerPreference extends Preference implements Preference
-        .OnPreferenceClickListener,
-        ColorPickerDialog.OnColorChangedListener, CompoundButton.OnCheckedChangeListener {
     View mView;
     ColorPickerDialog mDialog;
-    boolean mShowCheckBox = false;
-    boolean mPickerEnabled = false;
     private int mValue = Color.BLACK;
     private float mDensity = 0;
     private boolean mAlphaSliderEnabled = false;
@@ -46,72 +64,26 @@ public class ColorPickerPreference extends Preference implements Preference
         init(context, attrs);
     }
 
-    public static String convertToARGB(int color) {
-        String alpha = Integer.toHexString(Color.alpha(color));
-        String red = Integer.toHexString(Color.red(color));
-        String green = Integer.toHexString(Color.green(color));
-        String blue = Integer.toHexString(Color.blue(color));
-        if (alpha.length() == 1) {
-            alpha = "0" + alpha;
-        }
-        if (red.length() == 1) {
-            red = "0" + red;
-        }
-        if (green.length() == 1) {
-            green = "0" + green;
-        }
-        if (blue.length() == 1) {
-            blue = "0" + blue;
-        }
-        return "#" + alpha + red + green + blue; // DO NOT ALLOW ALPHAS
-    }
-
-    public static String convertToRGB(int color) {
-        String red = Integer.toHexString(Color.red(color));
-        String green = Integer.toHexString(Color.green(color));
-        String blue = Integer.toHexString(Color.blue(color));
-        if (red.length() == 1) {
-            red = "0" + red;
-        }
-        if (green.length() == 1) {
-            green = "0" + green;
-        }
-        if (blue.length() == 1) {
-            blue = "0" + blue;
-        }
-        return "#" + red + green + blue;
-    }
-
-    public static int convertToColorInt(String argb) throws NumberFormatException {
-        if (argb.startsWith("#")) {
-            argb = argb.replace("#", "");
-        }
-        int alpha = -1, red = -1, green = -1, blue = -1;
-        if (argb.length() == 8) {
-            alpha = Integer.parseInt(argb.substring(0, 2), 16);
-            red = Integer.parseInt(argb.substring(2, 4), 16);
-            green = Integer.parseInt(argb.substring(4, 6), 16);
-            blue = Integer.parseInt(argb.substring(6, 8), 16);
-        } else if (argb.length() == 6) {
-            alpha = 255;
-            red = Integer.parseInt(argb.substring(0, 2), 16);
-            green = Integer.parseInt(argb.substring(2, 4), 16);
-            blue = Integer.parseInt(argb.substring(4, 6), 16);
-        } else
-            throw new NumberFormatException("string " + argb + "did not meet length requirements");
-        return Color.argb(alpha, red, green, blue);
-    }
-
+    /**Method edited by
+     * @author Anna Berkovitch
+     * added functionality to accept hex string as defaultValue
+     * and to properly persist resources reference string, such as @color/someColor
+     * previously persisted 0*/
     @Override
     protected Object onGetDefaultValue(TypedArray a, int index) {
-        return a.getColor(index, Color.BLACK);
+        int colorInt;
+        String mHexDefaultValue = a.getString(index);
+        if (mHexDefaultValue != null && mHexDefaultValue.startsWith("#")) {
+            colorInt = convertToColorInt(mHexDefaultValue);
+            return colorInt;
+
+        } else {
+            return a.getColor(index, Color.BLACK);
+        }
     }
 
     @Override
     protected void onSetInitialValue(boolean restoreValue, Object defaultValue) {
-        if (restoreValue)
-            mPickerEnabled = !mShowCheckBox || getSharedPreferences().getBoolean(getKey() +
-                    "_chkbx", mPickerEnabled);
         onColorChanged(restoreValue ? getPersistedInt(mValue) : (Integer) defaultValue);
     }
 
@@ -120,9 +92,6 @@ public class ColorPickerPreference extends Preference implements Preference
         setOnPreferenceClickListener(this);
         if (attrs != null) {
             mAlphaSliderEnabled = attrs.getAttributeBooleanValue(null, "alphaSlider", false);
-            mShowCheckBox = attrs.getAttributeBooleanValue(null, "showCheckBox", false);
-            mPickerEnabled = !mShowCheckBox || attrs.getAttributeBooleanValue(null,
-                    "enabledByDefault", false);
             mHexValueEnabled = attrs.getAttributeBooleanValue(null, "hexValue", false);
         }
     }
@@ -136,21 +105,8 @@ public class ColorPickerPreference extends Preference implements Preference
 
     private void setPreviewColor() {
         if (mView == null) return;
-        CheckBox cbPickerEnabled = null;
-        if (mShowCheckBox) {
-            cbPickerEnabled = new CheckBox(getContext());
-            Drawable checkbg = getContext().getResources().getDrawable(R.drawable.checks);
-            int colorAccent = getContext().getResources().getColor(R.color.colorAccent);
-            checkbg.setColorFilter(colorAccent, PorterDuff.Mode.MULTIPLY);
-            cbPickerEnabled.setButtonDrawable(checkbg);
-            cbPickerEnabled.setFocusable(false);
-            cbPickerEnabled.setEnabled(super.isEnabled());
-            cbPickerEnabled.setChecked(mPickerEnabled);
-            cbPickerEnabled.setOnCheckedChangeListener(this);
-        }
         ImageView iView = new ImageView(getContext());
-        LinearLayout widgetFrameView = ((LinearLayout) mView.findViewById(android.R.id
-                .widget_frame));
+        LinearLayout widgetFrameView = ((LinearLayout) mView.findViewById(android.R.id.widget_frame));
         if (widgetFrameView == null) return;
         widgetFrameView.setVisibility(View.VISIBLE);
         widgetFrameView.setPadding(
@@ -159,24 +115,34 @@ public class ColorPickerPreference extends Preference implements Preference
                 (int) (mDensity * 8),
                 widgetFrameView.getPaddingBottom()
         );
+        // remove already create preview image
         int count = widgetFrameView.getChildCount();
         if (count > 0) {
             widgetFrameView.removeViews(0, count);
         }
-        if (mShowCheckBox) {
-            widgetFrameView.setOrientation(LinearLayout.HORIZONTAL);
-            widgetFrameView.addView(cbPickerEnabled);
-        }
         widgetFrameView.addView(iView);
         widgetFrameView.setMinimumWidth(0);
-        getPreviewDrawable(iView);
+        iView.setBackgroundDrawable(new AlphaPatternDrawable((int) (5 * mDensity)));
+        iView.setImageBitmap(getPreviewBitmap());
     }
 
-    private Drawable getPreviewDrawable(ImageView image) {
+    private Bitmap getPreviewBitmap() {
+        int d = (int) (mDensity * 31); //30dip
         int color = mValue;
-        Drawable bm = getContext().getResources().getDrawable(R.drawable.colorpicker);
-        bm.setColorFilter(color, PorterDuff.Mode.MULTIPLY);
-        image.setImageDrawable(bm);
+        Bitmap bm = Bitmap.createBitmap(d, d, Config.ARGB_8888);
+        int w = bm.getWidth();
+        int h = bm.getHeight();
+        int c = color;
+        for (int i = 0; i < w; i++) {
+            for (int j = i; j < h; j++) {
+                c = (i <= 1 || j <= 1 || i >= w - 2 || j >= h - 2) ? Color.GRAY : color;
+                bm.setPixel(i, j, c);
+                if (i != j) {
+                    bm.setPixel(j, i, c);
+                }
+            }
+        }
+
         return bm;
     }
 
@@ -186,51 +152,12 @@ public class ColorPickerPreference extends Preference implements Preference
             persistInt(color);
         }
         mValue = color;
-        persistBothValues();
         setPreviewColor();
-        notifyChanged();
         try {
             getOnPreferenceChangeListener().onPreferenceChange(this, color);
         } catch (NullPointerException e) {
 
         }
-    }
-
-    @Override
-    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-        mPickerEnabled = isChecked;
-        persistBothValues();
-        notifyDependencyChange(shouldDisableDependents());
-        notifyChanged();
-    }
-
-    protected void persistBothValues() {
-        if (shouldPersist()) {
-            SharedPreferences.Editor editor = getEditor();
-            editor.putInt(getKey(), mValue);
-            if (mShowCheckBox)
-                editor.putBoolean(getKey() + "_chkbx", mPickerEnabled);
-            if (shouldCommit()) {
-                try {
-                    editor.apply();
-                } catch (AbstractMethodError unused) {
-                    editor.commit();
-                }
-            }
-        }
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return super.isEnabled() && mPickerEnabled;
-    }
-
-    public void setValue(int color) {
-        if (isPersistent()) {
-            persistInt(color);
-        }
-        mValue = color;
-        setPreviewColor();
     }
 
     public boolean onPreferenceClick(Preference preference) {
@@ -253,12 +180,98 @@ public class ColorPickerPreference extends Preference implements Preference
         mDialog.show();
     }
 
+    /**
+     * Toggle Alpha Slider visibility (by default it's disabled)
+     *
+     * @param enable
+     */
     public void setAlphaSliderEnabled(boolean enable) {
         mAlphaSliderEnabled = enable;
     }
 
+    /**
+     * Toggle Hex Value visibility (by default it's disabled)
+     *
+     * @param enable
+     */
     public void setHexValueEnabled(boolean enable) {
         mHexValueEnabled = enable;
+    }
+
+    /**
+     * For custom purposes. Not used by ColorPickerPreferrence
+     *
+     * @param color
+     * @author Unknown
+     */
+    public static String convertToARGB(int color) {
+        String alpha = Integer.toHexString(Color.alpha(color));
+        String red = Integer.toHexString(Color.red(color));
+        String green = Integer.toHexString(Color.green(color));
+        String blue = Integer.toHexString(Color.blue(color));
+
+        if (alpha.length() == 1) {
+            alpha = "0" + alpha;
+        }
+
+        if (red.length() == 1) {
+            red = "0" + red;
+        }
+
+        if (green.length() == 1) {
+            green = "0" + green;
+        }
+
+        if (blue.length() == 1) {
+            blue = "0" + blue;
+        }
+
+        return "#" + alpha + red + green + blue;
+    }
+
+    /**
+     * Method currently used by onGetDefaultValue method to
+     * convert hex string provided in android:defaultValue to color integer.
+     *
+     * @param color
+     * @return A string representing the hex value of color,
+     * without the alpha value
+     * @author Charles Rosaaen
+     */
+    public static String convertToRGB(int color) {
+        String red = Integer.toHexString(Color.red(color));
+        String green = Integer.toHexString(Color.green(color));
+        String blue = Integer.toHexString(Color.blue(color));
+
+        if (red.length() == 1) {
+            red = "0" + red;
+        }
+
+        if (green.length() == 1) {
+            green = "0" + green;
+        }
+
+        if (blue.length() == 1) {
+            blue = "0" + blue;
+        }
+
+        return "#" + red + green + blue;
+    }
+
+    /**
+     * For custom purposes. Not used by ColorPickerPreferrence
+     *
+     * @param argb
+     * @throws NumberFormatException
+     * @author Unknown
+     */
+    public static int convertToColorInt(String argb) throws IllegalArgumentException {
+
+        if (!argb.startsWith("#")) {
+            argb = "#" + argb;
+        }
+
+        return Color.parseColor(argb);
     }
 
     @Override
@@ -267,55 +280,53 @@ public class ColorPickerPreference extends Preference implements Preference
         if (mDialog == null || !mDialog.isShowing()) {
             return superState;
         }
+
         final SavedState myState = new SavedState(superState);
         myState.dialogBundle = mDialog.onSaveInstanceState();
-        myState.pickerEnabled = mPickerEnabled;
         return myState;
     }
 
     @Override
     protected void onRestoreInstanceState(Parcelable state) {
         if (state == null || !(state instanceof SavedState)) {
+            // Didn't save state for us in onSaveInstanceState
             super.onRestoreInstanceState(state);
             return;
         }
+
         SavedState myState = (SavedState) state;
         super.onRestoreInstanceState(myState.getSuperState());
-        mPickerEnabled = myState.pickerEnabled;
-        if (myState.dialogBundle != null)
-            showDialog(myState.dialogBundle);
+        showDialog(myState.dialogBundle);
     }
 
     private static class SavedState extends BaseSavedState {
-        @SuppressWarnings("unused")
-        public static final Parcelable.Creator<SavedState> CREATOR = new Parcelable
-                .Creator<SavedState>() {
-            public SavedState createFromParcel(Parcel in) {
-                return new SavedState(in);
-            }
-
-            public SavedState[] newArray(int size) {
-                return new SavedState[size];
-            }
-        };
         Bundle dialogBundle;
-        boolean pickerEnabled;
 
         public SavedState(Parcel source) {
             super(source);
             dialogBundle = source.readBundle();
-            pickerEnabled = source.readInt() == 1;
-        }
-
-        public SavedState(Parcelable superState) {
-            super(superState);
         }
 
         @Override
         public void writeToParcel(Parcel dest, int flags) {
             super.writeToParcel(dest, flags);
             dest.writeBundle(dialogBundle);
-            dest.writeInt(pickerEnabled ? 1 : 0);
         }
+
+        public SavedState(Parcelable superState) {
+            super(superState);
+        }
+
+        @SuppressWarnings("unused")
+        public static final Parcelable.Creator<SavedState> CREATOR =
+                new Parcelable.Creator<SavedState>() {
+                    public SavedState createFromParcel(Parcel in) {
+                        return new SavedState(in);
+                    }
+
+                    public SavedState[] newArray(int size) {
+                        return new SavedState[size];
+                    }
+                };
     }
 }
