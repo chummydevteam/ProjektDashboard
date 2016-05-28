@@ -277,6 +277,25 @@ public class HeaderImportFragment extends BasePageFragment {
         }
         apply_fab.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                Log.e("Copy _SystemUIFile", "Function Called");
+                Log.e("Copy _SystemUIFile", "Function Started");
+                String sourcePath = LayersFunc.getvendor() + "/" + LayersFunc.themesystemui + ".apk";
+                File source = new File(sourcePath);
+                String destinationPath = getActivity().getCacheDir().getAbsolutePath() +
+                        "/" + LayersFunc.themesystemui + ".apk";
+                File destination = new File(destinationPath);
+                try {
+                    FileUtils.copyFile(source, destination);
+                    Log.e("Progress","1");
+                    Log.e("Copy _SystemUIFile",
+                            "Successfully copied " + LayersFunc.themesystemui + " apk from overlays folder to work directory");
+                    Log.e("Copy _SystemUIFile", "Function Stopped");
+                } catch (IOException e) {
+                    Log.e("Copy _SystemUIFile",
+                            "Failed to copy Akzent_SystemUI apk from resource-cache to work directory");
+                    Log.e("CopyAkzent_SystemUIFile", "Function Stopped");
+                    e.printStackTrace();
+                }
                 String[] secondPhaseCommands = {
                         LayersFunc.getvendor() + "/" + LayersFunc.themesystemui + ".apk",
                         Environment.getExternalStorageDirectory().getAbsolutePath()
@@ -407,10 +426,9 @@ public class HeaderImportFragment extends BasePageFragment {
 
         @Override
         protected Void doInBackground(String... params) {
-            String theme_dir = params[0];
-            String header_zip = params[1];
             try {
-                copyCommonsFile(theme_dir, header_zip);
+                Log.e("Progress","2");
+                unzip();
             } catch (Exception e) {
                 Log.e("performAAPTonCommonsAPK",
                         "Caught the exception.");
@@ -418,36 +436,13 @@ public class HeaderImportFragment extends BasePageFragment {
             return null;
         }
 
-        private void copyCommonsFile(String theme_dir, String header_zip) {
-            Log.e("CopyAkzent_SystemUIFile", "Function Called");
-            Log.e("CopyAkzent_SystemUIFile", "Function Started");
-            String sourcePath = theme_dir;
-            File source = new File(sourcePath);
-            String destinationPath = getActivity().getCacheDir().getAbsolutePath() +
-                    "/" + LayersFunc.themesystemui + ".apk";
-            File destination = new File(destinationPath);
+        public void unzip() {
             try {
-                FileUtils.copyFile(source, destination);
-                unzip(header_zip);
-                Log.e("CopyAkzent_SystemUIFile",
-                        "Successfully copied " + LayersFunc.themesystemui + " apk from overlays " +
-                                "folder to work directory");
-                Log.e("CopyAkzent_SystemUIFile", "Function Stopped");
-            } catch (IOException e) {
-                Log.e("CopyAkzent_SystemUIFile",
-                        "Failed to copy Akzent_SystemUI apk from resource-cache to work directory");
-                Log.e("CopyAkzent_SystemUIFile", "Function Stopped");
-                e.printStackTrace();
-            }
-        }
-
-        public void unzip(String source) {
-            try {
-                String destination = getActivity().getCacheDir().getAbsolutePath() + "/headers/";
-
-                net.lingala.zip4j.core.ZipFile zipFile = new net.lingala.zip4j.core.ZipFile(source);
+                net.lingala.zip4j.core.ZipFile zipFile = new net.lingala.zip4j.core.ZipFile(Environment.getExternalStorageDirectory().getAbsolutePath()
+                        + "/dashboard./" + spinner2.getSelectedItem().toString());
                 Log.e("Unzip", "The ZIP has been located and will now be unzipped...");
                 zipFile.extractAll(destination);
+                Log.e("Progress","3");
                 Log.e("Unzip",
                         "Successfully unzipped the file to the corresponding directory!");
                 performAAPTonCommonsAPK(processor());
@@ -497,9 +492,11 @@ public class HeaderImportFragment extends BasePageFragment {
             Log.e("postProcess",
                     "Mounting system as read-write as we prepare for some commands...");
             eu.chainfire.libsuperuser.Shell.SU.run("mount -o remount,rw /");
+            Log.d("Progress","4");
             eu.chainfire.libsuperuser.Shell.SU.run("mkdir /res/drawable-xxhdpi-v4/");
             eu.chainfire.libsuperuser.Shell.SU.run("mkdir /res/drawable-xhdpi-v4/");
             eu.chainfire.libsuperuser.Shell.SU.run("mkdir /res/drawable-xxxhdpi-v4/");
+            Log.d("Progress","5");
 
 
             // Copy the files over
@@ -585,6 +582,7 @@ public class HeaderImportFragment extends BasePageFragment {
                     }
                 }
             }
+            Log.e("Progress","6");
             Log.e("performAAPTonCommonsAPK",
                     "Successfully performed all AAPT commands.");
             eu.chainfire.libsuperuser.Shell.SU.run("rm -r /res/drawable-xxhdpi-v4/");
@@ -592,13 +590,17 @@ public class HeaderImportFragment extends BasePageFragment {
             eu.chainfire.libsuperuser.Shell.SU.run("rm -r /res/drawable-xxxhdpi-v4/");
 
             eu.chainfire.libsuperuser.Shell.SU.run("rm -r /res/drawable-xhdpi-v4/");
-
+            Log.e("Progress","7");
             eu.chainfire.libsuperuser.Shell.SU.run("mount -o remount,ro /");
+            Log.e("Progress","8");
             if (LayersFunc.checkBitPhone()) {
                 LayersFunc.copyFABFinalizedAPK(getActivity(), LayersFunc.themesystemui, false);
+                Log.e("Progress","9");
             } else {
                 LayersFunc.copyFinalizedAPK(getActivity(), LayersFunc.themesystemui, false);
+                Log.e("Progress","9");
             }
+            Log.e("Progress","10");
             eu.chainfire.libsuperuser.Shell.SU.run("killall zygote");
 
         }
