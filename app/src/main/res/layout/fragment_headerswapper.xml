@@ -94,29 +94,10 @@
                 android:text="@string/contextualheaderswapper_supportcontextual"/>
 
             <Button
-                android:id="@+id/softreboot"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/checkBox2"
-                android:layout_marginBottom="@dimen/content_inset_less"
-                android:layout_marginTop="@dimen/content_inset_less"
-                android:background="@android:color/transparent"
-                android:clickable="true"
-                android:fontFamily="sans-serif-light"
-                android:foreground="?android:selectableItemBackground"
-                android:gravity="center"
-                android:lineSpacingMultiplier="1.2"
-                android:text="@string/contextualheaderswapper_soft_reboot_after_modifications"
-                android:textColor="@color/attention_color"
-                android:textSize="@dimen/text_ultrasmall"
-                android:textStyle="bold|italic"
-                android:visibility="gone"/>
-
-            <Button
                 android:id="@+id/crop_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/softreboot"
+                android:layout_below="@id/checkBox3"
                 android:layout_marginBottom="@dimen/content_inset_less"
                 android:layout_marginTop="@dimen/content_inset_less"
                 android:background="?attr/card_background"
@@ -135,7 +116,7 @@
                 android:id="@+id/save_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/softreboot"
+                android:layout_below="@id/checkBox3"
                 android:layout_marginBottom="@dimen/content_inset_less"
                 android:layout_marginTop="@dimen/content_inset_less"
                 android:background="?attr/card_background"
