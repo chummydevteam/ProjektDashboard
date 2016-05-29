@@ -118,7 +118,6 @@ public class ColorChangerFragment extends BasePageFragment {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.e("colorswatch", "Calling Function");
                 fab.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(color_picked)));
                 colorswatch();
             }
@@ -128,22 +127,13 @@ public class ColorChangerFragment extends BasePageFragment {
     }
 
     public void colorswatch() {
-        Log.e("colorswatch", "Function Called");
-        Log.e("colorswatch", "Function Started");
         String[] location = {LayersFunc.getvendor(), File + ".apk"};
-        Log.e("FirstSyncTasks", "Calling Function");
         new copyThemeFiles().execute(location);
-        Log.e("PickColors", "Calling Function");
         pickColor(LayersFunc.getvendor() + "/" + File + ".apk");
-        Log.e("colorswatch", "Function Stopped");
     }
 
     public void pickColor(final String directory) {
-        Log.e("PickColors", "Function Called");
-        Log.e("PickColors", "Function Started");
-        Log.e("SecondPhaseTasks", "Calling Function");
         new secondPhaseAsyncTasks().execute(directory);
-        Log.e("PickColors", "Function Stopped");
 
     }
 
@@ -167,12 +157,11 @@ public class ColorChangerFragment extends BasePageFragment {
     public class copyThemeFiles extends AsyncTask<String, String, String> {
         @Override
         protected String doInBackground(String... params) {
-            Log.e("copythemeFiles", "Calling Function");
             String theme_dir = params[0] + "/" + params[1];
-            Log.e("copythemeFiles", theme_dir);
-            Log.e("copythemeFiles", params[1]);
+            Log.d("copythemeFiles", theme_dir);
+            Log.d("copythemeFiles", params[1]);
             LayersFunc.copyFileToApp(getActivity(), theme_dir, params[1]);
-            Log.e("Progress", "1");
+            Log.d("Progress", "1");
             return null;
         }
 
@@ -191,8 +180,6 @@ public class ColorChangerFragment extends BasePageFragment {
         }
 
         protected void onPreExecute() {
-            Log.e("SecondPhaseTasks", "Function Called");
-            Log.e("SecondPhaseTasks", "Function Started");
             String[] responses = {
                     "Please wait, while your phone gets beautified!",
                     "Injecting beautiful accents all over the place~",
@@ -230,19 +217,19 @@ public class ColorChangerFragment extends BasePageFragment {
                 LayersFunc.copyFinalizedAPK(getActivity(), File, true);
             }
             pd.dismiss();
-            Log.e("Progress", "10");
+            Log.d("Progress", "10");
             eu.chainfire.libsuperuser.Shell.SU.run("busybox killall com.android.systemui");
         }
 
         private void createXMLfile(String string, String theme_dir) {
 
             LayersFunc.createXML(string, getActivity(), color_picked);
-            Log.e("Progress", "2");
+            Log.d("Progress", "2");
             if (string.equals("tertiary_text_dark.xml")) {
                 try {
                     compileDummyAPK();
                 } catch (Exception e) {
-                    Log.e("CreateXMLFileException",
+                    Log.d("CreateXMLFileException",
                             "Could not create Dummy APK (EXCEPTION)");
                 }
             }
@@ -250,7 +237,7 @@ public class ColorChangerFragment extends BasePageFragment {
 
         private void compileDummyAPK() throws Exception {
 
-            Log.e("CompileDummyAPK", "Beginning to compile dummy APK...");
+            Log.d("CompileDummyAPK", "Beginning to compile dummy APK...");
 
             // Create AndroidManifest.xml first, cutting down the assets file transfer!
             LayersFunc.createManifest(getActivity());
@@ -267,9 +254,9 @@ public class ColorChangerFragment extends BasePageFragment {
             IOUtils.toString(nativeApp.getInputStream());
             IOUtils.toString(nativeApp.getErrorStream());
             nativeApp.waitFor();
-            Log.e("CompileDummyAPK",
+            Log.d("CompileDummyAPK",
                     "Successfully compiled dummy apk!");
-            Log.e("Progress", "3");
+            Log.d("Progress", "3");
             unzip();
         }
 
@@ -281,13 +268,13 @@ public class ColorChangerFragment extends BasePageFragment {
 
             try {
                 ZipFile zipFile = new ZipFile(source);
-                Log.e("Unzip", "The ZIP has been located and will now be unzipped...");
-                Log.e("Progress", "4");
+                Log.d("Unzip", "The ZIP has been located and will now be unzipped...");
+                Log.d("Progress", "4");
                 zipFile.extractAll(destination);
-                Log.e("Unzip",
+                Log.d("Unzip",
                         "Successfully unzipped the file to the corresponding directory!");
             } catch (ZipException e) {
-                Log.e("Unzip",
+                Log.d("Unzip",
                         "Failed to unzip the file the corresponding directory. (EXCEPTION)");
                 e.printStackTrace();
             } finally {
@@ -301,22 +288,22 @@ public class ColorChangerFragment extends BasePageFragment {
 
         private void performAAPTonCommonsAPK() {
             try {
-                Log.e("performAAPTonCommonsAPK",
+                Log.d("performAAPTonCommonsAPK",
                         "Mounting system as read-write as we prepare for some commands...");
                 eu.chainfire.libsuperuser.Shell.SU.run("mount -o remount,rw /");
-                Log.e("Progress", "5");
+                Log.d("Progress", "5");
                 eu.chainfire.libsuperuser.Shell.SU.run("mkdir /res");
-                Log.e("Progress", "6");
+                Log.d("Progress", "6");
                 eu.chainfire.libsuperuser.Shell.SU.run("mkdir /res/color");
-                Log.e("Progress", "7");
+                Log.d("Progress", "7");
 
                 LayersFunc.LayersColorSwitch(getActivity(), File, "tertiary_text_dark", "color");
-                Log.e("Progress", "8");
+                Log.d("Progress", "8");
 
                 eu.chainfire.libsuperuser.Shell.SU.run("rm -r /res/color");
                 eu.chainfire.libsuperuser.Shell.SU.run("mount -o remount,ro /");
-                Log.e("Progress", "9");
-                Log.e("performAAPTonCommonsAPK",
+                Log.d("Progress", "9");
+                Log.d("performAAPTonCommonsAPK",
                         "Cleaned up root directory and remounted system as read-only.");
 
                 // Finally, let's make sure the directories are pushed to the last command
@@ -326,22 +313,4 @@ public class ColorChangerFragment extends BasePageFragment {
             }
         }
     }
-    
-    @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        ButterKnife.bind(this, view);
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        ButterKnife.unbind(this);
-    }
-
-    @Override
-    public int getTitle() {
-        return R.string.color_changer;
-    }
-
 }

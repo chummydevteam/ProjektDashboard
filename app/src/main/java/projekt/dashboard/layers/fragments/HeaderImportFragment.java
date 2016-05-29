@@ -111,9 +111,9 @@ public class HeaderImportFragment extends BasePageFragment {
     public void checkWhetherZIPisValid(String source, String destination) {
         try {
             net.lingala.zip4j.core.ZipFile zipFile = new net.lingala.zip4j.core.ZipFile(source);
-            Log.e("Unzip", "The ZIP has been located and will now be unzipped...");
+            Log.d("Unzip", "The ZIP has been located and will now be unzipped...");
             zipFile.extractAll(destination);
-            Log.e("Unzip",
+            Log.d("Unzip",
                     "Successfully unzipped the file to the corresponding directory!");
 
             String[] checkerCommands = {destination + "/headers.xml"};
@@ -159,7 +159,7 @@ public class HeaderImportFragment extends BasePageFragment {
             }
 
         } catch (ZipException e) {
-            Log.e("Unzip",
+            Log.d("Unzip",
                     "Failed to unzip the file the corresponding directory. (EXCEPTION)");
             e.printStackTrace();
             is_zip_spinner_activated = false;
@@ -241,21 +241,21 @@ public class HeaderImportFragment extends BasePageFragment {
                         xhdpi = true;
                         xxhdpi = false;
                         xxxhdpi = false;
-                        Log.e("Devices Selected", xhdpi + " ," + xxhdpi + " ," + xxxhdpi);
+                        Log.d("Devices Selected", xhdpi + " ," + xxhdpi + " ," + xxxhdpi);
                         is_radio_selected = true;
                         break;
                     case R.id.radio2:
                         xhdpi = false;
                         xxhdpi = true;
                         xxxhdpi = false;
-                        Log.e("Devices Selected", xhdpi + " ," + xxhdpi + " ," + xxxhdpi);
+                        Log.d("Devices Selected", xhdpi + " ," + xxhdpi + " ," + xxxhdpi);
                         is_radio_selected = true;
                         break;
                     case R.id.radio3:
                         xhdpi = false;
                         xxhdpi = false;
                         xxxhdpi = true;
-                        Log.e("Devices Selected", xhdpi + " ," + xxhdpi + " ," + xxxhdpi);
+                        Log.d("Devices Selected", xhdpi + " ," + xxhdpi + " ," + xxxhdpi);
                         is_radio_selected = true;
                         break;
                 }
@@ -277,8 +277,6 @@ public class HeaderImportFragment extends BasePageFragment {
         }
         apply_fab.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Log.e("Copy _SystemUIFile", "Function Called");
-                Log.e("Copy _SystemUIFile", "Function Started");
                 String sourcePath = LayersFunc.getvendor() + "/" + LayersFunc.themesystemui + ".apk";
                 File source = new File(sourcePath);
                 String destinationPath = getActivity().getCacheDir().getAbsolutePath() +
@@ -286,14 +284,12 @@ public class HeaderImportFragment extends BasePageFragment {
                 File destination = new File(destinationPath);
                 try {
                     FileUtils.copyFile(source, destination);
-                    Log.e("Progress","1");
-                    Log.e("Copy _SystemUIFile",
+                    Log.d("Progress","1");
+                    Log.d("Copy _SystemUIFile",
                             "Successfully copied " + LayersFunc.themesystemui + " apk from overlays folder to work directory");
-                    Log.e("Copy _SystemUIFile", "Function Stopped");
                 } catch (IOException e) {
-                    Log.e("Copy _SystemUIFile",
+                    Log.d("Copy _SystemUIFile",
                             "Failed to copy Akzent_SystemUI apk from resource-cache to work directory");
-                    Log.e("CopyAkzent_SystemUIFile", "Function Stopped");
                     e.printStackTrace();
                 }
                 String[] secondPhaseCommands = {
@@ -427,10 +423,10 @@ public class HeaderImportFragment extends BasePageFragment {
         @Override
         protected Void doInBackground(String... params) {
             try {
-                Log.e("Progress","2");
+                Log.d("Progress","2");
                 unzip();
             } catch (Exception e) {
-                Log.e("performAAPTonCommonsAPK",
+                Log.d("performAAPTonCommonsAPK",
                         "Caught the exception.");
             }
             return null;
@@ -438,16 +434,18 @@ public class HeaderImportFragment extends BasePageFragment {
 
         public void unzip() {
             try {
+                String destination = getActivity().getCacheDir().getAbsolutePath() + "/headers/";
+
                 net.lingala.zip4j.core.ZipFile zipFile = new net.lingala.zip4j.core.ZipFile(Environment.getExternalStorageDirectory().getAbsolutePath()
                         + "/dashboard./" + spinner2.getSelectedItem().toString());
-                Log.e("Unzip", "The ZIP has been located and will now be unzipped...");
+                Log.d("Unzip", "The ZIP has been located and will now be unzipped...");
                 zipFile.extractAll(destination);
-                Log.e("Progress","3");
-                Log.e("Unzip",
+                Log.d("Progress","3");
+                Log.d("Unzip",
                         "Successfully unzipped the file to the corresponding directory!");
                 performAAPTonCommonsAPK(processor());
             } catch (ZipException e) {
-                Log.e("Unzip",
+                Log.d("Unzip",
                         "Failed to unzip the file the corresponding directory. (EXCEPTION)");
                 e.printStackTrace();
             }
@@ -489,7 +487,7 @@ public class HeaderImportFragment extends BasePageFragment {
 
             // Create the res/drawable-xxhdpi-v23 directory
 
-            Log.e("postProcess",
+            Log.d("postProcess",
                     "Mounting system as read-write as we prepare for some commands...");
             eu.chainfire.libsuperuser.Shell.SU.run("mount -o remount,rw /");
             Log.d("Progress","4");
@@ -506,21 +504,21 @@ public class HeaderImportFragment extends BasePageFragment {
                                 "/headers/" + source.get(i) +
                                 " res/drawable-xxhdpi-v4/" +
                                 source.get(i));
-                Log.e("xxhdpi cp", source.get(i) + "");
+                Log.d("xxhdpi cp", source.get(i) + "");
                 try {
                     Process nativeApp2 = Runtime.getRuntime().exec(
                             "aapt remove " + getActivity().getCacheDir().getAbsolutePath() +
                                     "/" + LayersFunc.themesystemui + ".apk " +
                                     "res/drawable-xxhdpi-v4/" +
                                     source.get(i) + "");
-                    Log.e("xxhdpi rm", source.get(i) + "");
+                    Log.d("xxhdpi rm", source.get(i) + "");
                     nativeApp2.waitFor();
                     eu.chainfire.libsuperuser.Shell.SU.run(
                             "aapt add " + getActivity().getCacheDir().getAbsolutePath() +
                                     "/" + LayersFunc.themesystemui + ".apk " +
                                     "res/drawable-xxhdpi-v4/" +
                                     source.get(i));
-                    Log.e("xxhdpi ad", source.get(i) + "");
+                    Log.d("xxhdpi ad", source.get(i) + "");
 
                 } catch (Exception e) {
                     //
@@ -533,21 +531,21 @@ public class HeaderImportFragment extends BasePageFragment {
                                     "/headers/" + source.get(i) +
                                     " res/drawable-xhdpi-v4/" +
                                     source.get(i));
-                    Log.e("xhdpi cp", source.get(i) + "");
+                    Log.d("xhdpi cp", source.get(i) + "");
                     try {
                         Process nativeApp2 = Runtime.getRuntime().exec(
                                 "aapt remove " + getActivity().getCacheDir().getAbsolutePath() +
                                         "/" + LayersFunc.themesystemui + ".apk " +
                                         "res/drawable-xhdpi-v4/" +
                                         source.get(i));
-                        Log.e("xhdpi rm", source.get(i) + "");
+                        Log.d("xhdpi rm", source.get(i) + "");
                         nativeApp2.waitFor();
                         eu.chainfire.libsuperuser.Shell.SU.run(
                                 "aapt add " + getActivity().getCacheDir().getAbsolutePath() +
                                         "/" + LayersFunc.themesystemui + ".apk " +
                                         "res/drawable-xhdpi-v4/" +
                                         source.get(i));
-                        Log.e("xhdpi ad", source.get(i) + "");
+                        Log.d("xhdpi ad", source.get(i) + "");
 
                     } catch (Exception e) {
                         //
@@ -561,46 +559,46 @@ public class HeaderImportFragment extends BasePageFragment {
                                     "/headers/" + source.get(i) +
                                     " res/drawable-xxxhdpi-v4/" +
                                     source.get(i));
-                    Log.e("xxxhdpi cp", source.get(i) + "");
+                    Log.d("xxxhdpi cp", source.get(i) + "");
                     try {
                         Process nativeApp2 = Runtime.getRuntime().exec(
                                 "aapt remove " + getActivity().getCacheDir().getAbsolutePath() +
                                         "/" + LayersFunc.themesystemui + ".apk " +
                                         "res/drawable-xxxhdpi-v4/" +
                                         source.get(i));
-                        Log.e("xxxhdpi rm", source.get(i) + "");
+                        Log.d("xxxhdpi rm", source.get(i) + "");
                         nativeApp2.waitFor();
                         eu.chainfire.libsuperuser.Shell.SU.run(
                                 "aapt add " + getActivity().getCacheDir().getAbsolutePath() +
                                         "/" + LayersFunc.themesystemui + ".apk " +
                                         "res/drawable-xxxhdpi-v4/" +
                                         source.get(i));
-                        Log.e("xxxhdpi ad", source.get(i) + "");
+                        Log.d("xxxhdpi ad", source.get(i) + "");
 
                     } catch (Exception e) {
                         //
                     }
                 }
             }
-            Log.e("Progress","6");
-            Log.e("performAAPTonCommonsAPK",
+            Log.d("Progress","6");
+            Log.d("performAAPTonCommonsAPK",
                     "Successfully performed all AAPT commands.");
             eu.chainfire.libsuperuser.Shell.SU.run("rm -r /res/drawable-xxhdpi-v4/");
 
             eu.chainfire.libsuperuser.Shell.SU.run("rm -r /res/drawable-xxxhdpi-v4/");
 
             eu.chainfire.libsuperuser.Shell.SU.run("rm -r /res/drawable-xhdpi-v4/");
-            Log.e("Progress","7");
+            Log.d("Progress","7");
             eu.chainfire.libsuperuser.Shell.SU.run("mount -o remount,ro /");
-            Log.e("Progress","8");
+            Log.d("Progress","8");
             if (LayersFunc.checkBitPhone()) {
                 LayersFunc.copyFABFinalizedAPK(getActivity(), LayersFunc.themesystemui, false);
-                Log.e("Progress","9");
+                Log.d("Progress","9");
             } else {
                 LayersFunc.copyFinalizedAPK(getActivity(), LayersFunc.themesystemui, false);
-                Log.e("Progress","9");
+                Log.d("Progress","9");
             }
-            Log.e("Progress","10");
+            Log.d("Progress","10");
             eu.chainfire.libsuperuser.Shell.SU.run("killall zygote");
 
         }

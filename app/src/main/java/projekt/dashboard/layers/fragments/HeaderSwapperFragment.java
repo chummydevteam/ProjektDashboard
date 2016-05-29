@@ -138,11 +138,11 @@ public class HeaderSwapperFragment extends BasePageFragment {
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                         if (isChecked) {
                             free_crop_mode = true;
-                            Log.e("CheckBox",
+                            Log.d("CheckBox",
                                     "Free crop mode for Image Cropper has been ENABLED.");
                         } else {
                             free_crop_mode = false;
-                            Log.e("CheckBox",
+                            Log.d("CheckBox",
                                     "Free crop mode for Image Cropper has been DISABLED.");
                         }
                     }
@@ -159,11 +159,11 @@ public class HeaderSwapperFragment extends BasePageFragment {
                         if (isChecked) {
                             swap_contextual_header = true;
                             ln.setVisibility(View.VISIBLE);
-                            Log.e("CheckBox", "Universal variable to advanced log ENABLED.");
+                            Log.d("CheckBox", "Universal variable to advanced log ENABLED.");
                         } else {
                             swap_contextual_header = false;
                             ln.setVisibility(View.GONE);
-                            Log.e("CheckBox", "Universal variable to advanced log DISABLED.");
+                            Log.d("CheckBox", "Universal variable to advanced log DISABLED.");
                         }
                     }
                 });
@@ -245,7 +245,7 @@ public class HeaderSwapperFragment extends BasePageFragment {
         String[] secondPhaseCommands = {LayersFunc.vendor + "/" + LayersFunc.themeframework + "" +
                 ".apk"};
         new copyThemeFiles().execute(secondPhaseCommands);
-        Log.e("letsGetStarted", secondPhaseCommands[0]);
+        Log.d("letsGetStarted", secondPhaseCommands[0]);
 
         new secondPhaseAsyncTasks().execute(secondPhaseCommands);
 
@@ -355,7 +355,7 @@ public class HeaderSwapperFragment extends BasePageFragment {
                         so.close();
 
                     } catch (IOException e) {
-                        Log.e("ImageSaver",
+                        Log.d("ImageSaver",
                                 "Unable to save new file");
                     }
                     resetImageViews();
@@ -386,8 +386,6 @@ public class HeaderSwapperFragment extends BasePageFragment {
     public class copyThemeFiles extends AsyncTask<String, String, String> {
         @Override
         protected String doInBackground(String... params) {
-            Log.e("CopyFrameworkFile", "Function Called");
-            Log.e("CopyFrameworkFile", "Function Started");
             String sourcePath = params[0];
             File source = new File(sourcePath);
             String destinationPath = getActivity().getFilesDir().getAbsolutePath() +
@@ -405,14 +403,12 @@ public class HeaderSwapperFragment extends BasePageFragment {
                 if (swap_contextual_header) {
                     FileUtils.copyFile(sourcesys, destinationsys);
                 }
-                Log.e("Progress", "1");
-                Log.e("CopyFrameworkFile",
+                Log.d("Progress", "1");
+                Log.d("CopyFrameworkFile",
                         "Successfully copied framework apk from overlays folder to work directory");
-                Log.e("CopyFrameworkFile", "Function Stopped");
             } catch (IOException e) {
-                Log.e("CopyFrameworkFile",
+                Log.d("CopyFrameworkFile",
                         "Failed to copy framework apk from resource-Files to work directory");
-                Log.e("CopyFrameworkFile", "Function Stopped");
                 e.printStackTrace();
             }
             return null;
@@ -427,10 +423,10 @@ public class HeaderSwapperFragment extends BasePageFragment {
         @Override
         protected Void doInBackground(String... params) {
             try {
-                Log.e("Progress", "2");
+                Log.d("Progress", "2");
                 performAAPTonCommonsAPK();
             } catch (Exception e) {
-                Log.e("performAAPTonCommonsAPK",
+                Log.d("performAAPTonCommonsAPK",
                         "Could not process file.");
             }
             return null;
@@ -489,7 +485,7 @@ public class HeaderSwapperFragment extends BasePageFragment {
         }
         
         private void performAAPTonCommonsAPK() {
-            Log.e("performAAPTonCommonsAPK",
+            Log.d("performAAPTonCommonsAPK",
                     "Mounting system as read-write as we prepare for some commands...");
             try {
                 eu.chainfire.libsuperuser.Shell.SU.run("mount -o remount,rw /");
@@ -502,31 +498,31 @@ public class HeaderSwapperFragment extends BasePageFragment {
                 if (xxxhdpi) {
                     eu.chainfire.libsuperuser.Shell.SU.run("mkdir /res/drawable-xxxhdpi-v4");
                 }
-                Log.e("Progress", "3");
-                Log.e("Made Directory", "Made");
+                Log.d("Progress", "3");
+                Log.d("Made Directory", "Made");
                 eu.chainfire.libsuperuser.Shell.SU.run(
                         "cp " + getActivity().getFilesDir().getAbsolutePath() +
                                 "/res/drawable/menuitem_background.png " +
                                 "/res/drawable/menuitem_background.png");
-                Log.e("drawable", "dr");
+                Log.d("drawable", "dr");
 
 
                 eu.chainfire.libsuperuser.Shell.SU.run(
                         "cp " + getActivity().getFilesDir().getAbsolutePath() +
                                 "/res/drawable/menuitem_background.png " +
                                 "/res/drawable-xhdpi-v4/menuitem_background.png");
-                Log.e("drawable", "x");
+                Log.d("drawable", "x");
                 eu.chainfire.libsuperuser.Shell.SU.run(
                         "cp " + getActivity().getFilesDir().getAbsolutePath() +
                                 "/res/drawable/menuitem_background.png " +
                                 "/res/drawable-xxhdpi-v4/menuitem_background.png");
-                Log.e("drawable", "xx");
+                Log.d("drawable", "xx");
                 eu.chainfire.libsuperuser.Shell.SU.run(
                         "cp " + getActivity().getFilesDir().getAbsolutePath() +
                                 "/res/drawable/menuitem_background.png " +
                                 "/res/drawable-xxxhdpi-v4/menuitem_background.png");
-                Log.e("drawable", "xxx");
-                Log.e("Progress", "4");
+                Log.d("drawable", "xxx");
+                Log.d("Progress", "4");
                 if (swap_contextual_header) {
                     List source = processor();
                     for (int i = 0; i < source.size(); i++) {
@@ -554,49 +550,40 @@ public class HeaderSwapperFragment extends BasePageFragment {
                                             source.get(i));
                         }
                     }
-                    Log.e("performAAPTonCommonsAPK",
+                    Log.d("performAAPTonCommonsAPK",
                             "Successfully copied all drawables into the root folder.");
                 }
 
-                Log.e("Progress", "5");
-                Log.e("performAAPTonCommonsAPK",
-                        "Successfully copied drawable into the root folder.");
-
-                Log.e("performAAPTonCommonsAPK",
+                Log.d("Progress", "5");
+                Log.d("performAAPTonCommonsAPK",
                         "Preparing for clean up on resources...");
                 Process nativeApp3 = Runtime.getRuntime().exec(
                         "aapt remove " +
                                 getActivity().getFilesDir().getAbsolutePath() +
                                 "/" + LayersFunc.themeframework + ".apk " +
                                 "res/drawable/menuitem_background.png");
-                Log.e("performAAPTonCommonsAPK",
-                        "Deleted main drawable file!");
                 nativeApp3.waitFor();
                 Process nativeAppx = Runtime.getRuntime().exec(
                         "aapt remove " +
                                 getActivity().getFilesDir().getAbsolutePath() +
                                 "/" + LayersFunc.themeframework + ".apk " +
                                 "res/drawable-xhdpi-v4/menuitem_background.png");
-                Log.e("performAAPTonCommonsAPK",
-                        "Deleted main drawable file!");
                 nativeAppx.waitFor();
                 Process nativeAppxx = Runtime.getRuntime().exec(
                         "aapt remove " +
                                 getActivity().getFilesDir().getAbsolutePath() +
                                 "/" + LayersFunc.themeframework + ".apk " +
                                 "res/drawable-xxhdpi-v4/menuitem_background.png");
-                Log.e("performAAPTonCommonsAPK",
-                        "Deleted main drawable file!");
                 nativeAppxx.waitFor();
                 Process nativeAppxxx = Runtime.getRuntime().exec(
                         "aapt remove " +
                                 getActivity().getFilesDir().getAbsolutePath() +
                                 "/" + LayersFunc.themeframework + ".apk " +
                                 "res/drawable-xxxhdpi-v4/menuitem_background.png");
-                Log.e("performAAPTonCommonsAPK",
+                Log.d("performAAPTonCommonsAPK",
                         "Deleted main drawable file!");
                 nativeAppxxx.waitFor();
-                Log.e("Progress", "6");
+                Log.d("Progress", "6");
                 if (swap_contextual_header) {
                     List source = processor();
                     for (int i = 0; i < source.size(); i++) {
@@ -627,10 +614,10 @@ public class HeaderSwapperFragment extends BasePageFragment {
                             nativeApp1.waitFor();
                         }
                     }
-                    Log.e("performAAPTonCommonsAPK",
+                    Log.d("performAAPTonCommonsAPK",
                             "Deleted all drawable files!");
                 }
-                Log.e("Progress", "7");
+                Log.d("Progress", "7");
                 eu.chainfire.libsuperuser.Shell.SU.run(
                         "aapt add " +
                                 getActivity().getFilesDir().getAbsolutePath() +
@@ -678,34 +665,32 @@ public class HeaderSwapperFragment extends BasePageFragment {
                                             source.get(i));
                         }
                     }
-                    Log.e("performAAPTonCommonsAPK",
+                    Log.d("performAAPTonCommonsAPK",
                             "Added freshly created photo files...ALL DONE!");
                 }
-                Log.e("Progress", "8");
-                Log.e("performAAPTonCommonsAPK",
-                        "Added freshly created drawable file...ALL DONE!");
+                Log.d("Progress", "8");
                 eu.chainfire.libsuperuser.Shell.SU.run("rm -r /res/drawable");
                 eu.chainfire.libsuperuser.Shell.SU.run("mount -o remount,ro /");
-                Log.e("performAAPTonCommonsAPK",
+                Log.d("performAAPTonCommonsAPK",
                         "Cleaned up root directory and remounted system as read-only.");
                 if (LayersFunc.checkBitPhone()) {
                     LayersFunc.copyFABFinalizedAPK(getActivity(), LayersFunc.themeframework, true);
-                    Log.e("Progress", "9");
+                    Log.d("Progress", "9");
                     if (swap_contextual_header) {
                         LayersFunc.copyFABFinalizedAPK(getActivity(), LayersFunc.themesystemui,
                                 true);
-                        Log.e("Progress", "9");
+                        Log.d("Progress", "9");
                     }
                 } else {
                     LayersFunc.copyFinalizedAPK(getActivity(), LayersFunc.themeframework, true);
-                    Log.e("Progress", "9");
+                    Log.d("Progress", "9");
                     if (swap_contextual_header) {
                         LayersFunc.copyFinalizedAPK(getActivity(), LayersFunc.themesystemui, true);
-                        Log.e("Progress", "9");
+                        Log.d("Progress", "9");
                     }
                 }
 
-                Log.e("Progress", "10");
+                Log.d("Progress", "10");
                 eu.chainfire.libsuperuser.Shell.SU.run("killall zygote");
 
             } catch (Exception e) {

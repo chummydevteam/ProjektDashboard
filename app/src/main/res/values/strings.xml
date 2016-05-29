@@ -1,4 +1,8 @@
 <resources>
+    <!-- Color Picker -->
+    <string name="dialog_color_picker">Color Picker</string>
+    <string name="press_color_to_apply">Pick your color!</string>
+
     <!-- Splash Screen -->
     <string name="loadingText">performing security verification&#8230;</string>
     <string name="root_verified">enabling all features&#8230;</string>
@@ -245,7 +249,6 @@
     <string name="apply">Apply</string>
     <string name="save_to_device">Save to Device</string>
 
-    <string name="press_color_to_apply">Pick your color!</string>
 
     <string name="error">Error</string>
 
