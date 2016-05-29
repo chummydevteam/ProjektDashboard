@@ -127,8 +127,8 @@ public class ColorChangerFragment extends BasePageFragment {
     }
 
     public void colorswatch() {
-        String[] location = {LayersFunc.getvendor(), File + ".apk"};
-        new copyThemeFiles().execute(location);
+        LayersFunc.copyFileToApp(getActivity(), LayersFunc.getvendor()+"/"+File+".apk", File+".apk");
+        Log.d("Progress", "1");
         pickColor(LayersFunc.getvendor() + "/" + File + ".apk");
     }
 
@@ -152,19 +152,6 @@ public class ColorChangerFragment extends BasePageFragment {
     @Override
     public int getTitle() {
         return R.string.color_changer;
-    }
-
-    public class copyThemeFiles extends AsyncTask<String, String, String> {
-        @Override
-        protected String doInBackground(String... params) {
-            String theme_dir = params[0] + "/" + params[1];
-            Log.d("copythemeFiles", theme_dir);
-            Log.d("copythemeFiles", params[1]);
-            LayersFunc.copyFileToApp(getActivity(), theme_dir, params[1]);
-            Log.d("Progress", "1");
-            return null;
-        }
-
     }
 
     private class secondPhaseAsyncTasks extends AsyncTask<String, String, Void> {
@@ -211,18 +198,19 @@ public class ColorChangerFragment extends BasePageFragment {
         }
 
         protected void onPostExecute(Void result) {
+            eu.chainfire.libsuperuser.Shell.SU.run("mv /data/resource-cache/vendor@overlay@"+File+".apk@idmap /data/resource-cache/vendor@overlay@"+File+".apk@idmap.bak");
             if (LayersFunc.checkBitPhone()) {
                 LayersFunc.copyFABFinalizedAPK(getActivity(), File, true);
             } else {
                 LayersFunc.copyFinalizedAPK(getActivity(), File, true);
             }
+            eu.chainfire.libsuperuser.Shell.SU.run("mv /data/resource-cache/vendor@overlay@"+File+".apk@idmap.bak /data/resource-cache/vendor@overlay@"+File+".apk@idmap");
             pd.dismiss();
             Log.d("Progress", "10");
             eu.chainfire.libsuperuser.Shell.SU.run("busybox killall com.android.systemui");
         }
 
         private void createXMLfile(String string, String theme_dir) {
-
             LayersFunc.createXML(string, getActivity(), color_picked);
             Log.d("Progress", "2");
             if (string.equals("tertiary_text_dark.xml")) {
