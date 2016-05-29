@@ -491,6 +491,7 @@ public class HeaderImportFragment extends BasePageFragment {
                     "Mounting system as read-write as we prepare for some commands...");
             eu.chainfire.libsuperuser.Shell.SU.run("mount -o remount,rw /");
             Log.d("Progress","4");
+            eu.chainfire.libsuperuser.Shell.SU.run("mkdir /res");
             eu.chainfire.libsuperuser.Shell.SU.run("mkdir /res/drawable-xxhdpi-v4/");
             eu.chainfire.libsuperuser.Shell.SU.run("mkdir /res/drawable-xhdpi-v4/");
             eu.chainfire.libsuperuser.Shell.SU.run("mkdir /res/drawable-xxxhdpi-v4/");
@@ -584,13 +585,12 @@ public class HeaderImportFragment extends BasePageFragment {
             Log.d("performAAPTonCommonsAPK",
                     "Successfully performed all AAPT commands.");
             eu.chainfire.libsuperuser.Shell.SU.run("rm -r /res/drawable-xxhdpi-v4/");
-
             eu.chainfire.libsuperuser.Shell.SU.run("rm -r /res/drawable-xxxhdpi-v4/");
-
             eu.chainfire.libsuperuser.Shell.SU.run("rm -r /res/drawable-xhdpi-v4/");
             Log.d("Progress","7");
             eu.chainfire.libsuperuser.Shell.SU.run("mount -o remount,ro /");
             Log.d("Progress","8");
+            eu.chainfire.libsuperuser.Shell.SU.run("mv /data/resource-cache/vendor@overlay@"+LayersFunc.themesystemui+".apk@idmap /data/resource-cache/vendor@overlay@"+LayersFunc.themesystemui+".apk@idmap.bak");
             if (LayersFunc.checkBitPhone()) {
                 LayersFunc.copyFABFinalizedAPK(getActivity(), LayersFunc.themesystemui, false);
                 Log.d("Progress","9");
@@ -598,8 +598,8 @@ public class HeaderImportFragment extends BasePageFragment {
                 LayersFunc.copyFinalizedAPK(getActivity(), LayersFunc.themesystemui, false);
                 Log.d("Progress","9");
             }
+            eu.chainfire.libsuperuser.Shell.SU.run("mv /data/resource-cache/vendor@overlay@"+LayersFunc.themesystemui+".apk@idmap.bak /data/resource-cache/vendor@overlay@"+LayersFunc.themesystemui+".apk@idmap");
             Log.d("Progress","10");
-            eu.chainfire.libsuperuser.Shell.SU.run("killall zygote");
 
         }
 
