@@ -495,7 +495,6 @@ public class HeaderSwapperFragment extends BasePageFragment {
         }
 
         protected void onPostExecute(Void result) {
-            pd.dismiss();
             eu.chainfire.libsuperuser.Shell.SU.run("busybox killall com.android.systemui");
 
         }
@@ -746,22 +745,23 @@ public class HeaderSwapperFragment extends BasePageFragment {
                 eu.chainfire.libsuperuser.Shell.SU.run("mount -o remount,ro /");
                 Log.d("performAAPTonCommonsAPK",
                         "Cleaned up root directory and remounted system as read-only.");
+
                 eu.chainfire.libsuperuser.Shell.SU.run("mv /data/resource-cache/vendor@overlay@" + LayersFunc.themeframework + ".apk@idmap /data/resource-cache/vendor@overlay@" + LayersFunc.themeframework + ".apk@idmap.bak");
                 if (LayersFunc.checkBitPhone()) {
                     if (swap_contextual_header) {
                         LayersFunc.copyFABFinalizedAPK(getActivity(), LayersFunc.themesystemui,
-                                true);
+                                true,pd);
                         Log.d("Progress", "9");
                     } else {
-                        LayersFunc.copyFABFinalizedAPK(getActivity(), LayersFunc.themeframework, true);
+                        LayersFunc.copyFABFinalizedAPK(getActivity(), LayersFunc.themeframework, true,pd);
                         Log.d("Progress", "9");
                     }
                 } else {
                     if (swap_contextual_header) {
-                        LayersFunc.copyFinalizedAPK(getActivity(), LayersFunc.themesystemui, true);
+                        LayersFunc.copyFinalizedAPK(getActivity(), LayersFunc.themesystemui, true,pd);
                         Log.d("Progress", "9");
                     } else {
-                        LayersFunc.copyFinalizedAPK(getActivity(), LayersFunc.themeframework, true);
+                        LayersFunc.copyFinalizedAPK(getActivity(), LayersFunc.themeframework, true,pd);
                         Log.d("Progress", "9");
                     }
                 }
