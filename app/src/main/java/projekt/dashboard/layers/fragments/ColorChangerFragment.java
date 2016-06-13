@@ -2,6 +2,7 @@ package projekt.dashboard.layers.fragments;
 
 import android.app.ProgressDialog;
 import android.content.ComponentName;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -10,6 +11,7 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -24,20 +26,41 @@ import android.widget.TextView;
 import net.lingala.zip4j.core.ZipFile;
 import net.lingala.zip4j.exception.ZipException;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
 
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.Random;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipInputStream;
 
 import butterknife.ButterKnife;
 import projekt.dashboard.layers.R;
 import projekt.dashboard.layers.colorpicker.ColorPickerDialog;
 import projekt.dashboard.layers.colorpicker.ColorPickerPreference;
 import projekt.dashboard.layers.fragments.base.BasePageFragment;
+import projekt.dashboard.layers.ui.MainActivity;
 import projekt.dashboard.layers.util.LayersFunc;
+
+import static projekt.dashboard.layers.util.LayersFunc.LayersColorSwitch;
+import static projekt.dashboard.layers.util.LayersFunc.isNetworkAvailable;
 
 
 /**
- * @author Nicholas Chum (nicholaschum)
+ * @author Nicholas Chum (nicholaschum) feat. Aditya Gupta
  */
 
 public class ColorChangerFragment extends BasePageFragment {
@@ -49,6 +72,8 @@ public class ColorChangerFragment extends BasePageFragment {
     FloatingActionButton fab;
     ImageButton imageButton;
     TextView accentcolor;
+    String SettLink = "https://github.com/adityaakadynamo/GG/raw/master/res.zip";
+    static Context context;
 
     public static String getFile() {
         return File;
@@ -59,9 +84,26 @@ public class ColorChangerFragment extends BasePageFragment {
     public View onCreateView(
             LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
+        context = getActivity();
         inflation = (ViewGroup) inflater.inflate(
                 R.layout.fragment_colorpicker, container, false);
         prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        File aa = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), "/dashboard./settings/res.zip");
+        if (aa.exists()) {
+
+        } else {
+            if (isNetworkAvailable(getActivity())) {
+                String[] downloadCommands = {SettLink,
+                        "res.zip"};
+                new downloadResources().execute(downloadCommands);
+            }
+        }
+        try {
+            LayersFunc.createSettManifest(getActivity());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         if (prefs.getBoolean("dialog", true)) {
             AlertDialog.Builder ad = new AlertDialog.Builder(getActivity());
             ad.setTitle("ColorSwapper :)");
@@ -126,9 +168,106 @@ public class ColorChangerFragment extends BasePageFragment {
         return inflation;
     }
 
+    private static class downloadResources extends AsyncTask<String, Integer, String> {
+
+        private ProgressDialog pd = new ProgressDialog(context);
+
+        @Override
+        protected void onPreExecute() {
+            Log.e("Downloadind Resources", "Function Called");
+            Log.e("Downloadind Resources", "Function Started");
+            pd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            pd.setMessage("Downloading Resources");
+            pd.setIndeterminate(true);
+            pd.setCancelable(false);
+            pd.show();
+        }
+
+        @Override
+        protected void onProgressUpdate(Integer... progress) {
+            super.onProgressUpdate(progress);
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            pd.setMessage("Download Complete,Getting Things Finalised");
+            Log.e("File Downloaded Found", "Copying File");
+            Log.e("copyAAPT", "Calling Function");
+            copyAAPT();
+            pd.dismiss();
+            Log.e("Downloadind Resources", "Function Stoppped");
+        }
+
+        public void copyAAPT() {
+
+        }
+
+
+        @Override
+        protected String doInBackground(String... sUrl) {
+            try {
+                Log.e("File download", "Started from :" + sUrl[0]);
+                URL url = new URL(sUrl[0]);
+                //URLConnection connection = url.openConnection();
+                File myDir = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/dashboard./settings/");
+                HttpClient client = new DefaultHttpClient();
+                HttpPost request = new HttpPost(sUrl[0]);
+                request.setHeader("User-Agent", sUrl[0]);
+
+                HttpResponse response = client.execute(request);
+                // create the directory if it doesnt exist
+                if (!myDir.exists()) myDir.mkdirs();
+
+                File outputFile = new File(myDir, sUrl[1]);
+
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                int fileLength = connection.getContentLength();
+                // download the file
+                InputStream input = new BufferedInputStream(url.openStream());
+                OutputStream output = new FileOutputStream(outputFile);
+
+                byte data[] = new byte[1024];
+                long total = 0;
+                int count;
+
+                while ((count = input.read(data)) != -1) {
+                    total += count;
+                    // publishing the progress....
+                    publishProgress((int) (total * 100 / fileLength));
+                    output.write(data, 0, count);
+                }
+                output.flush();
+                output.close();
+                input.close();
+
+                Log.e("File download", "complete");
+            } catch (Exception e) {
+                Log.e("File download", "error: " + e.getMessage());
+            }
+            return null;
+        }
+    }
+
     public void colorswatch() {
-        LayersFunc.copyFileToApp(getActivity(), LayersFunc.getvendor()+"/"+File+".apk", File+".apk");
+        LayersFunc.copyFileToApp(getActivity(), LayersFunc.getvendor() + "/" + File + ".apk", File + ".apk");
+        File source = new File(LayersFunc.getvendor() + "/Akzent_Settings.apk");
+        String destinationPath = getActivity().getFilesDir().getAbsolutePath() + "/settings/Akzent_Settings.apk";
+        File destination = new File(destinationPath);
+        try {
+            FileUtils.copyFile(source, destination);
+        } catch (IOException e) {
+            Log.e("Settings",
+                    "Failed to copy settings apk to work directory");
+            Log.e("Settings", "Function Stopped");
+            e.printStackTrace();
+        }
         Log.d("Progress", "1");
+        LayersFunc.createSettColXML("colors.xml", color_picked);
+        Log.d("Settings", "Colors-Y");
+        LayersFunc.createSettDimXML("dimens.xml");
+        Log.d("Settings", "Dimens-Y");
+        LayersFunc.createSettStyXML("styles.xml", color_picked);
+        Log.d("Settings", "Styles-Y");
         pickColor(LayersFunc.getvendor() + "/" + File + ".apk");
     }
 
@@ -198,13 +337,57 @@ public class ColorChangerFragment extends BasePageFragment {
         }
 
         protected void onPostExecute(Void result) {
-            eu.chainfire.libsuperuser.Shell.SU.run("mv /data/resource-cache/vendor@overlay@"+File+".apk@idmap /data/resource-cache/vendor@overlay@"+File+".apk@idmap.bak");
+            eu.chainfire.libsuperuser.Shell.SU.run("mv /data/resource-cache/vendor@overlay@" + File + ".apk@idmap /data/resource-cache/vendor@overlay@" + File + ".apk@idmap.bak");
             if (LayersFunc.checkBitPhone()) {
-                LayersFunc.copyFABFinalizedAPK(getActivity(), File, true);
+                String mount = "mount -o remount,rw /";
+                String mountsys = "mount -o remount,rw /vendor";
+                String remount = "mount -o remount,ro /";
+                String remountsys = "mount -o remount,ro /vendor";
+                eu.chainfire.libsuperuser.Shell.SU.run(mount);
+                eu.chainfire.libsuperuser.Shell.SU.run(mountsys);
+                eu.chainfire.libsuperuser.Shell.SU.run(
+                        "cp " +
+                                context.getFilesDir().getAbsolutePath() +
+                                "/" + File + ".apk " + "/vendor/overlay/" + File + ".apk");
+                Log.e("copyFinalizedAPK",
+                        "Successfully copied the modified resource APK from " + context.getFilesDir()
+                                .getAbsolutePath() + " into " +
+                                "/vendor/overlay/ and modified the permissions!");
+                eu.chainfire.libsuperuser.Shell.SU.run("chmod 644 " + "/vendor/overlay/" + File + ".apk");
+                eu.chainfire.libsuperuser.Shell.SU.run(remount);
+                eu.chainfire.libsuperuser.Shell.SU.run(remountsys);
+                Log.e("copyFinalizedAPK",
+                        "Successfully copied the modified resource APK into " +
+                                "/vendor/overlay/ and modified the permissions!");
+                eu.chainfire.libsuperuser.Shell.SU.run("rm -r /data/data/projekt.dashboard" +
+                        ".layers/files");
+                Log.e("copyFinalizedAPK",
+                        "Successfully Deleted Files ");
             } else {
-                LayersFunc.copyFinalizedAPK(getActivity(), File, true);
+                String mount = "mount -o remount,rw /";
+                String mountsys = "mount -o remount,rw /system";
+                String remount = "mount -o remount,ro /";
+                String remountsys = "mount -o remount,ro /system";
+                eu.chainfire.libsuperuser.Shell.SU.run(mount);
+                eu.chainfire.libsuperuser.Shell.SU.run(mountsys);
+                eu.chainfire.libsuperuser.Shell.SU.run(
+                        "cp " +
+                                context.getFilesDir().getAbsolutePath() +
+                                "/" + File + ".apk " + "/system/vendor/overlay/" + File + ".apk");
+                Log.e("copyFinalizedAPK",
+                        "Successfully copied the modified resource APK from " + context.getFilesDir()
+                                .getAbsolutePath() + " into " +
+                                "/system/vendor/overlay/ and modified the permissions!");
+                eu.chainfire.libsuperuser.Shell.SU.run("chmod 644 " + "/system/vendor/overlay/" + File +
+                        ".apk");
+                eu.chainfire.libsuperuser.Shell.SU.run(remount);
+                eu.chainfire.libsuperuser.Shell.SU.run(remountsys);
+                eu.chainfire.libsuperuser.Shell.SU.run("rm -r /data/data/projekt.dashboard" +
+                        ".layers/files");
+                Log.e("copyFinalizedAPK",
+                        "Successfully Deleted Files ");
             }
-            eu.chainfire.libsuperuser.Shell.SU.run("mv /data/resource-cache/vendor@overlay@"+File+".apk@idmap.bak /data/resource-cache/vendor@overlay@"+File+".apk@idmap");
+            eu.chainfire.libsuperuser.Shell.SU.run("mv /data/resource-cache/vendor@overlay@" + File + ".apk@idmap.bak /data/resource-cache/vendor@overlay@" + File + ".apk@idmap");
             pd.dismiss();
             Log.d("Progress", "10");
             eu.chainfire.libsuperuser.Shell.SU.run("busybox killall com.android.systemui");
@@ -212,6 +395,7 @@ public class ColorChangerFragment extends BasePageFragment {
 
         private void createXMLfile(String string, String theme_dir) {
             LayersFunc.createXML(string, getActivity(), color_picked);
+
             Log.d("Progress", "2");
             if (string.equals("tertiary_text_dark.xml")) {
                 try {
@@ -253,18 +437,22 @@ public class ColorChangerFragment extends BasePageFragment {
                     getActivity().getFilesDir().getAbsolutePath() + "/color-resources.apk";
             String destination =
                     getActivity().getFilesDir().getAbsolutePath() + "/color-resources/";
-
+            String sourcesett =
+                    Environment.getExternalStorageDirectory().getAbsolutePath() + "/dashboard./settings/res.zip";
+            String destinationsett =
+                    Environment.getExternalStorageDirectory().getAbsolutePath() + "/dashboard./settings/res";
             try {
                 ZipFile zipFile = new ZipFile(source);
+                ZipFile zipFilesett = new ZipFile(sourcesett);
                 Log.d("Unzip", "The ZIP has been located and will now be unzipped...");
                 Log.d("Progress", "4");
                 zipFile.extractAll(destination);
+                zipFilesett.extractAll(destinationsett);
                 Log.d("Unzip",
                         "Successfully unzipped the file to the corresponding directory!");
-            } catch (ZipException e) {
-                Log.d("Unzip",
-                        "Failed to unzip the file the corresponding directory. (EXCEPTION)");
+            } catch (Exception e) {
                 e.printStackTrace();
+
             } finally {
                 try {
                     performAAPTonCommonsAPK();
@@ -272,6 +460,7 @@ public class ColorChangerFragment extends BasePageFragment {
                     //
                 }
             }
+
         }
 
         private void performAAPTonCommonsAPK() {
@@ -286,6 +475,11 @@ public class ColorChangerFragment extends BasePageFragment {
                 Log.d("Progress", "7");
 
                 LayersFunc.LayersColorSwitch(getActivity(), File, "tertiary_text_dark", "color");
+                LayersFunc.LayersSettingsSwitch(getActivity());
+                LayersFunc.signApk(Environment.getExternalStorageDirectory().getAbsolutePath() +
+                                "/dashboard./settings/Akzent_Settings.apk",
+                        Environment.getExternalStorageDirectory().getAbsolutePath() +
+                                "/dashboard./settings/Akzent_Settings_signed.apk");
                 Log.d("Progress", "8");
 
                 eu.chainfire.libsuperuser.Shell.SU.run("rm -r /res/color");
