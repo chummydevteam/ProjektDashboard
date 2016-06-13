@@ -5,10 +5,14 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.res.AssetManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Build;
+import android.os.Environment;
+import android.os.StatFs;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 
 import com.afollestad.materialdialogs.DialogAction;
@@ -31,8 +35,10 @@ import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.text.DecimalFormat;
 import java.util.StringTokenizer;
 
+import kellinwood.security.zipsigner.ZipSigner;
 import projekt.dashboard.layers.R;
 
 
@@ -49,8 +55,10 @@ public class LayersFunc {
     public static String themesystemui = "Nill";
     public static String framework = "Akzent_Framework";
     static Context context;
-    static String link64 = "https://github.com/nicholaschum/ProjektDashboard/raw/resources/aapt-64";
-    static String link = "https://github.com/nicholaschum/ProjektDashboard/raw/resources/aapt";
+    static String link = "https://github.com/adityaakadynamo/GG/raw/master/aapt";
+    static long vendorspace = 0;
+    static String vendorspaceString = "0.00";
+    static boolean failed;
 
     public LayersFunc(Context contextxyz) {
         context = contextxyz;
@@ -60,9 +68,13 @@ public class LayersFunc {
         changeVendorAndMount();
         findFrameworkFile();
         findSystemUIFile();
+        StatFs st = new StatFs(getvendor());
+        long vendorspace = (st.getAvailableBlocksLong() * st.getBlockSizeLong());
+        vendorspaceString = calculatevendorspace(vendorspace);
         checkThemeMainSupported(context);
         File aa = new File("/system/bin/aapt");
-        if (aa.exists()) {
+        Log.e("AAPT Size",aa.length()+"");
+        if (aa.exists()&&aa.length()==709092) {
 
         } else {
             if (isNetworkAvailable(context)) {
@@ -103,6 +115,35 @@ public class LayersFunc {
         }
     }
 
+    private static String calculatevendorspace(long total) {
+        Log.e("Size", "Total" + total);
+        return bytesToHuman(total);
+    }
+
+    public static String bytesToHuman(long size) {
+        long Kb = 1 * 1024;
+        long Mb = Kb * 1024;
+        long Gb = Mb * 1024;
+        long Tb = Gb * 1024;
+        long Pb = Tb * 1024;
+        long Eb = Pb * 1024;
+
+        if (size < Kb) return floatForm(size) + " byte";
+        if (size >= Kb && size < Mb) return floatForm((double) size / Kb) + " Kb";
+        if (size >= Mb && size < Gb) return floatForm((double) size / Mb) + " Mb";
+        if (size >= Gb && size < Tb) return floatForm((double) size / Gb) + " Gb";
+        if (size >= Tb && size < Pb) return floatForm((double) size / Tb) + " Tb";
+        if (size >= Pb && size < Eb) return floatForm((double) size / Pb) + " Pb";
+        if (size >= Eb) return floatForm((double) size / Eb) + " Eb";
+
+        return "???";
+    }
+
+    public static String floatForm(double d) {
+        return new DecimalFormat("#.##").format(d);
+    }
+
+
     private static void changeVendorAndMount() {
         if (checkBitPhone()) {
             Log.e("PhoneBitCheck", Build.DEVICE + " found, now changing the vendor and mount");
@@ -115,7 +156,7 @@ public class LayersFunc {
         }
     }
 
-    private static boolean isNetworkAvailable(Context context) {
+    public static boolean isNetworkAvailable(Context context) {
         ConnectivityManager connectivityManager
                 = (ConnectivityManager) context.getSystemService(
                 Context.CONNECTIVITY_SERVICE);
@@ -156,7 +197,7 @@ public class LayersFunc {
         if (checkBitPhone()) {
             Log.e("downloadAAPT", "64 bit device detected");
             Log.e("downloadAAPT", Build.DEVICE + " found, now changing vendor and mount zones");
-            String[] downloadCommands = {link64,
+            String[] downloadCommands = {link,
                     "aapt"};
             new downloadResources().execute(downloadCommands);
             Log.e("downloadAAPT", "Download complete");
@@ -307,6 +348,174 @@ public class LayersFunc {
         }
     }
 
+    public static void createSettColXML(String string, String color_picked) {
+        try {
+            // Create the working directory
+            File directory = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/dashboard./settings/res/values/");
+            if (!directory.exists()) {
+                directory.mkdirs();
+            }
+            // Create the files
+            File root = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/dashboard./settings/res/values/" + string);
+            if (!root.exists()) {
+                root.createNewFile();
+            }
+            FileWriter fw = new FileWriter(root);
+            BufferedWriter bw = new BufferedWriter(fw);
+            PrintWriter pw = new PrintWriter(bw);
+            String xmlRes1 = ("<?xml version=\"1.0\" encoding=\"utf-8\"?>\n" +
+                    "<!--You are editing Settings' Colors-->\n" +
+                    "\n" +
+                    "<resources>\n" +
+                    "    <!-- Edits the background in settings-->\n" +
+                    "    <color name=\"dashboard_background_color\">@android:color/black</color>\n" +
+                    "    <color name=\"dashboard_category_background_color\">@android:color/black</color>\n" +
+                    "\n" +
+                    "    <!--Toggle background color-->\n" +
+                    "    <color name=\"switchbar_background_color\">@android:color/transparent</color>\n" +
+                    "    <color name=\"switch_accent_color\">" + color_picked + "</color>\n" +
+                    "\n" +
+                    "    <!--Action Bar Colors-->\n" +
+                    "    <color name=\"theme_primary\">#212121</color>\n" +
+                    "    <color name=\"theme_primary_dark\">#212121</color>\n" +
+                    "\n" +
+                    "    <!--Title text color and toggle colors-->\n" +
+                    "    <color name=\"theme_accent\">" + color_picked + "</color>\n" +
+                    "\n" +
+                    "    <!--QS Tile Cards inside Select and Order Tiles and Icon Color-->\n" +
+                    "    <color name=\"cardview_light_background\">@android:color/black</color>\n" +
+                    "    <color name=\"qs_tile_tint_color\">" + color_picked + "</color>\n" +
+                    "\n" +
+                    "    <!--Remainder coloring for Data Usage and Battery Usage-->\n" +
+                    "    <color name=\"material_empty_color_light\">#80777777</color>\n" +
+                    "\n" +
+                    "    <!--Running Apps Percentage Bar-->\n" +
+                    "    <color name=\"running_processes_system_ram\">#ffaba3ab</color>\n" +
+                    "    <color name=\"running_processes_apps_ram\">@android:color/white</color>\n" +
+                    "    <color name=\"running_processes_free_ram\">@android:color/transparent</color>\n" +
+                    "\n" +
+                    "    <!--Pattern Lock Color-->\n" +
+                    "    <color name=\"lock_pattern_view_regular_color\">#ff777777</color>\n" +
+                    "\n" +
+                    "    <!--Increasing Ring Icon Disabled Color-->\n" +
+                    "    <color name=\"audio_ringer_disabled_tint\">#4a777777</color>\n" +
+                    "\n" +
+                    "    <color name=\"card_background\">@android:color/black</color>\n" +
+                    "</resources>\n");
+            pw.write(xmlRes1);
+            pw.close();
+            bw.close();
+            fw.close();
+            Log.e("CreateXMLFile",
+                    string + " Created");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void createSettStyXML(String string, String color_picked) {
+        try {
+            // Create the working directory
+            File directory = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/dashboard./settings/res/values/");
+            if (!directory.exists()) {
+                directory.mkdirs();
+            }
+            // Create the files
+            File root = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/dashboard./settings/res/values/" + string);
+            if (!root.exists()) {
+                root.createNewFile();
+            }
+            FileWriter fw = new FileWriter(root);
+            BufferedWriter bw = new BufferedWriter(fw);
+            PrintWriter pw = new PrintWriter(bw);
+            String xmlRes1 = ("<?xml version=\"1.0\" encoding=\"utf-8\"?>\n" +
+                    "<resources>\n" +
+                    "\n" +
+                    "    <style name=\"TextAppearance.CategoryTitle\" parent=\"@android:style/TextAppearance.Material.Body2\">\n" +
+                    "        <item name=\"android:textStyle\">bold</item>\n" +
+                    "        <item name=\"android:textColor\">" + color_picked + "</item>\n" +
+                    "        <item name=\"android:textAllCaps\">true</item>\n" +
+                    "    </style>\n" +
+                    "\n" +
+                    "    <style name=\"Theme.ActionBar\" parent=\"@android:style/Widget.Material.ActionBar.Solid\">\n" +
+                    "        <item name=\"android:background\">#212121</item>\n" +
+                    "        <item name=\"android:elevation\">0.0dp</item>\n" +
+                    "    </style>\n" +
+                    "\n" +
+                    "    <style name=\"Theme.AlertDialog\" parent=\"@android:style/Theme.Material.Dialog.Alert\" />\n" +
+                    "\n" +
+                    "    <style name=\"Theme.Light.WifiDialog\" parent=\"@android:style/Theme.Material.Dialog.Alert\" />\n" +
+                    "\n" +
+                    "\n" +
+                    "\n" +
+                    "    <style name=\"Theme.SubSettings\" parent=\"@style/Theme.SettingsBase\">\n" +
+                    "        <item name=\"android:windowBackground\">@android:color/black</item>\n" +
+                    "        <!--- <item name=\"android:popupBackground\">@android:color/background_dark</item>\n" +
+                    "         <item name=\"android:statusBarColor\">@android:color/holo_blue_light</item>\n" +
+                    "         <item name=\"android:colorAccent\">@android:color/white</item>\n" +
+                    "         <item name=\"android:colorPrimary\">@android:color/holo_blue_light</item>-->\n" +
+                    "        <item name=\"android:navigationBarColor\">@android:color/black</item>\n" +
+                    "    </style>\n" +
+                    "\n" +
+                    "    <style name=\"Theme.SettingsBase\" parent=\"@android:style/Theme.Material\">\n" +
+                    "        <!---<item name=\"android:colorBackground\">@android:color/background_dark</item>\n" +
+                    "        <item name=\"android:textColorPrimary\">@android:color/white</item>\n" +
+                    "        <item name=\"android:textColorSecondary\">#ffe1e1e1</item> -->\n" +
+                    "        <item name=\"android:windowBackground\">@android:color/background_dark</item>\n" +
+                    "        <item name=\"android:navigationBarColor\">@android:color/black</item>\n" +
+                    "        <item name=\"android:statusBarColor\">#212121</item>\n" +
+                    "        <item name=\"android:colorAccent\">" + color_picked + "</item>\n" +
+                    "    </style>\n" +
+                    "\n" +
+                    "    <style name=\"Theme.DialogWhenLarge\" parent=\"@android:style/Theme.Material.DialogWhenLarge\">\n" +
+                    "        <item name=\"android:colorPrimary\">#212121</item>\n" +
+                    "        <item name=\"android:colorPrimaryDark\">#212121</item>\n" +
+                    "        <item name=\"android:colorAccent\">" + color_picked + "</item>\n" +
+                    "    </style>\n" +
+                    "</resources>");
+            pw.write(xmlRes1);
+            pw.close();
+            bw.close();
+            fw.close();
+            Log.e("CreateXMLFile",
+                    string + " Created");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void createSettDimXML(String string) {
+        try {
+            // Create the working directory
+            File directory = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/dashboard./settings/res/values/");
+            if (!directory.exists()) {
+                directory.mkdirs();
+            }
+            // Create the files
+            File root = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/dashboard./settings/res/values/" + string);
+            if (!root.exists()) {
+                root.createNewFile();
+            }
+            FileWriter fw = new FileWriter(root);
+            BufferedWriter bw = new BufferedWriter(fw);
+            PrintWriter pw = new PrintWriter(bw);
+            String xmlRes1 = ("<?xml version=\"1.0\" encoding=\"utf-8\"?>\n" +
+                    "<!--You are editing Settings' Dimensions-->\n" +
+                    "\n" +
+                    "<resources>\n" +
+                    "    <dimen name=\"actionbar_contentInsetStart\">16.0dip</dimen>\n" +
+                    "</resources>");
+            pw.write(xmlRes1);
+            pw.close();
+            bw.close();
+            fw.close();
+            Log.e("CreateXMLFile",
+                    string + " Created");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void createManifest(Context context) throws Exception {
         File manifest = new File(context.getFilesDir(), "AndroidManifest.xml");
         if (!manifest.exists()) {
@@ -332,73 +541,170 @@ public class LayersFunc {
         fw.close();
     }
 
-    public static void copyFinalizedAPK(Context context, String file, boolean files) {
+    public static void createSettManifest(Context context) throws Exception {
+        File manifest = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/dashboard./settings/AndroidManifest.xml");
+        if (!manifest.exists()) {
+            manifest.createNewFile();
+        }
+        FileWriter fw = new FileWriter(manifest);
+        BufferedWriter bw = new BufferedWriter(fw);
+        PrintWriter pw = new PrintWriter(bw);
+        //String xmlTags = ("<?xml version=\"1.0\" encoding=\"utf-8\" " +
+        //          "standalone=\"no\"?>" + "\n");
+        String xmlRes1 = ("<manifest xmlns:android=\"http://schemas.android.com/apk/res/android\"\n" +
+                "    package=\"azkzent.com.android.settings\"\n" +
+                "    android:versionCode=\"1\"\n" +
+                "    android:versionName=\"1.0\" >\n" +
+                "    <uses-sdk android:minSdkVersion=\"21\"></uses-sdk>\n" +
+                "<!--\n" +
+                "Targeting the right packageName of the 'target.apk' here!  \n" +
+                "We can find the real packageName in the AndroidManifest.xml of original target.apk!\n" +
+                "So the matching resources id can be set in accordance.\n" +
+                "-->\n" +
+                "<overlay android:targetPackage=\"com.android.settings\" android:priority=\"30\"/>\n" +
+                "\n" +
+                "    <meta-data android:name=\"rom\" android:value=\"All\" />\n" +
+                "    <meta-data android:name=\"infoShort\" android:value=\"Settings\" />\n" +
+                "    <meta-data android:name=\"infoLong\" android:value=\"Settings to KLAR\" />\n" +
+                "    <meta-data android:name=\"author\" android:value=\"adityagupta\" />\n" +
+                "  \n" +
+                "</manifest>");
+        //  pw.write(xmlTags);
+        pw.write(xmlRes1);
+        pw.close();
+        bw.close();
+        fw.close();
+    }
+
+    public static void copyFinalizedAPK(Context context, String file, boolean files, ProgressDialog pd) {
         String mount = "mount -o remount,rw /";
         String mountsys = "mount -o remount,rw /system";
         String remount = "mount -o remount,ro /";
         String remountsys = "mount -o remount,ro /system";
         eu.chainfire.libsuperuser.Shell.SU.run(mount);
         eu.chainfire.libsuperuser.Shell.SU.run(mountsys);
+        File f;
         if (files) {
-            eu.chainfire.libsuperuser.Shell.SU.run(
-                    "cp " +
-                            context.getFilesDir().getAbsolutePath() +
-                            "/" + file + ".apk " + "/system/vendor/overlay/" + file + ".apk");
-            Log.e("copyFinalizedAPK",
-                    "Successfully copied the modified resource APK from " + context.getFilesDir()
-                            .getAbsolutePath() + " into " +
-                            "/system/vendor/overlay/ and modified the permissions!");
+            f = new File(context.getFilesDir().getAbsolutePath(), file + ".apk");
         } else {
-            eu.chainfire.libsuperuser.Shell.SU.run(
-                    "cp " +
-                            context.getCacheDir().getAbsolutePath() +
-                            "/" + file + ".apk " + "/system/vendor/overlay/" + file + ".apk");
-            Log.e("copyFinalizedAPK",
-                    "Successfully copied the modified resource APK from " + context.getCacheDir()
-                            .getAbsolutePath() + " into " +
-                            "/system/vendor/overlay/ and modified the permissions!");
+            f = new File(context.getCacheDir().getAbsolutePath(), file + ".apk");
         }
+        Log.e("Size", bytesToHuman(f.length()));
+        if (vendorspace >= f.length())
+
+        {
+            if (files) {
+                eu.chainfire.libsuperuser.Shell.SU.run(
+                        "cp " +
+                                context.getFilesDir().getAbsolutePath() +
+                                "/" + file + ".apk " + "/system/vendor/overlay/" + file + ".apk");
+                Log.e("copyFinalizedAPK",
+                        "Successfully copied the modified resource APK from " + context.getFilesDir()
+                                .getAbsolutePath() + " into " +
+                                "/system/vendor/overlay/ and modified the permissions!");
+            } else {
+                eu.chainfire.libsuperuser.Shell.SU.run(
+                        "cp " +
+                                context.getCacheDir().getAbsolutePath() +
+                                "/" + file + ".apk " + "/system/vendor/overlay/" + file + ".apk");
+                Log.e("copyFinalizedAPK",
+                        "Successfully copied the modified resource APK from " + context.getCacheDir()
+                                .getAbsolutePath() + " into " +
+                                "/system/vendor/overlay/ and modified the permissions!");
+            }
+        } else
+
+        {
+            failed = true;
+            pd.dismiss();
+            AlertDialog.Builder ad = new AlertDialog.Builder(context);
+            ad.setTitle("Insufficient Space");
+            ad.setMessage("Your Vendor does not has enough space to copy the overlay \nFree:- " +
+                    vendorspaceString + "\nRequired:- " + bytesToHuman(f.length()));
+            ad.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+
+                }
+            });
+            ad.show();
+        }
+
         eu.chainfire.libsuperuser.Shell.SU.run("chmod 644 " + "/system/vendor/overlay/" + file +
                 ".apk");
         eu.chainfire.libsuperuser.Shell.SU.run(remount);
         eu.chainfire.libsuperuser.Shell.SU.run(remountsys);
-        if (files) {
+        if (files)
+
+        {
             eu.chainfire.libsuperuser.Shell.SU.run("rm -r /data/data/projekt.dashboard" +
                     ".layers/files");
-        } else {
+        } else
+
+        {
             eu.chainfire.libsuperuser.Shell.SU.run("rm -r /data/data/projekt.dashboard" +
                     ".layers/cache");
+        }
+        if (!failed) {
+            pd.dismiss();
+        }else{
+            failed=false;
         }
         Log.e("copyFinalizedAPK",
                 "Successfully Deleted Files ");
 
     }
 
-    public static void copyFABFinalizedAPK(Context context, String file, boolean files) {
+    public static void copyFABFinalizedAPK(Context context, String file, boolean files, ProgressDialog pd) {
         String mount = "mount -o remount,rw /";
         String mountsys = "mount -o remount,rw /vendor";
         String remount = "mount -o remount,ro /";
         String remountsys = "mount -o remount,ro /vendor";
         eu.chainfire.libsuperuser.Shell.SU.run(mount);
         eu.chainfire.libsuperuser.Shell.SU.run(mountsys);
+        File f;
         if (files) {
-            eu.chainfire.libsuperuser.Shell.SU.run(
-                    "cp " +
-                            context.getFilesDir().getAbsolutePath() +
-                            "/" + file + ".apk " + "/vendor/overlay/" + file + ".apk");
-            Log.e("copyFinalizedAPK",
-                    "Successfully copied the modified resource APK from " + context.getFilesDir()
-                            .getAbsolutePath() + " into " +
-                            "/vendor/overlay/ and modified the permissions!");
+            f = new File(context.getFilesDir().getAbsolutePath(), file + ".apk");
         } else {
-            eu.chainfire.libsuperuser.Shell.SU.run(
-                    "cp " +
-                            context.getCacheDir().getAbsolutePath() +
-                            "/" + file + ".apk " + "/vendor/overlay/" + file + ".apk");
-            Log.e("copyFinalizedAPK",
-                    "Successfully copied the modified resource APK from " + context.getCacheDir()
-                            .getAbsolutePath() + " into " +
-                            "/vendor/overlay/ and modified the permissions!");
+            f = new File(context.getCacheDir().getAbsolutePath(), file + ".apk");
+        }
+        Log.e("Size", bytesToHuman(f.length()));
+        if (vendorspace >= f.length()) {
+            if (files) {
+                eu.chainfire.libsuperuser.Shell.SU.run(
+                        "cp " +
+                                context.getFilesDir().getAbsolutePath() +
+                                "/" + file + ".apk " + "/vendor/overlay/" + file + ".apk");
+                Log.e("copyFinalizedAPK",
+                        "Successfully copied the modified resource APK from " + context.getFilesDir()
+                                .getAbsolutePath() + " into " +
+                                "/vendor/overlay/ and modified the permissions!");
+            } else {
+                eu.chainfire.libsuperuser.Shell.SU.run(
+                        "cp " +
+                                context.getCacheDir().getAbsolutePath() +
+                                "/" + file + ".apk " + "/vendor/overlay/" + file + ".apk");
+                Log.e("copyFinalizedAPK",
+                        "Successfully copied the modified resource APK from " + context.getCacheDir()
+                                .getAbsolutePath() + " into " +
+                                "/vendor/overlay/ and modified the permissions!");
+            }
+        } else
+
+        {
+            failed = true;
+            pd.dismiss();
+            AlertDialog.Builder ad = new AlertDialog.Builder(context);
+            ad.setTitle("Insufficient Space");
+            ad.setMessage("Your Vendor does not has enough space to copy the overlay \nFree:- " +
+                    vendorspaceString + "\nRequired:- " + bytesToHuman(f.length()));
+            ad.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+
+                }
+            });
+            ad.show();
         }
         eu.chainfire.libsuperuser.Shell.SU.run("chmod 644 " + "/vendor/overlay/" + file + ".apk");
         eu.chainfire.libsuperuser.Shell.SU.run(remount);
@@ -412,6 +718,11 @@ public class LayersFunc {
         } else {
             eu.chainfire.libsuperuser.Shell.SU.run("rm -r /data/data/projekt.dashboard" +
                     ".layers/cache");
+        }
+        if (!failed) {
+            pd.dismiss();
+        }else{
+            failed=false;
         }
         Log.e("copyFinalizedAPK",
                 "Successfully Deleted Files ");
@@ -443,6 +754,13 @@ public class LayersFunc {
 
         Log.e("performAAPTonCommonsAPK",
                 "Added freshly created main " + file + " file...ALL DONE!");
+    }
+
+    public static void LayersSettingsSwitch(Context context) {
+        eu.chainfire.libsuperuser.Shell.SU.run("aapt p -M " +
+                Environment.getExternalStorageDirectory().getAbsolutePath() + "/dashboard./settings/AndroidManifest.xml" +
+                " -S " + Environment.getExternalStorageDirectory().getAbsolutePath() + "/dashboard./settings/res -I /system/framework/framework-res.apk -F " +
+                Environment.getExternalStorageDirectory().getAbsolutePath() + "/dashboard./settings/Akzent_Settings.apk");
     }
 
     public static void findFrameworkFile() {
@@ -603,6 +921,41 @@ public class LayersFunc {
                 Log.e("File download", "error: " + e.getMessage());
             }
             return null;
+        }
+
+    }
+
+    public static void signApk(String unsigned, String signed) {
+        try {
+            ZipSigner zipSigner = new ZipSigner();
+            zipSigner.setKeymode("testkey");
+            zipSigner.signZip(unsigned, signed);
+            eu.chainfire.libsuperuser.Shell.SU.run("mv /data/resource-cache/vendor@overlay@Akzent_Settings.apk@idmap /data/resource-cache/vendor@overlay@Akzent_Settings.apk@idmap.bak");
+            if (LayersFunc.checkBitPhone()) {
+                String mountsys = "mount -o remount,rw /vendor";
+                String remountsys = "mount -o remount,ro /vendor";
+                eu.chainfire.libsuperuser.Shell.SU.run(mountsys);
+                eu.chainfire.libsuperuser.Shell.SU.run("cp " + signed + " /vendor/overlay/Akzent_Settings.apk");
+                eu.chainfire.libsuperuser.Shell.SU.run("chmod 644 " + "/vendor/overlay/Akzent_Settings.apk");
+                eu.chainfire.libsuperuser.Shell.SU.run(remountsys);
+            } else {
+                String mountsys = "mount -o remount,rw /system";
+                String remountsys = "mount -o remount,ro /system";
+                eu.chainfire.libsuperuser.Shell.SU.run(mountsys);
+                eu.chainfire.libsuperuser.Shell.SU.run("cp " + signed + " /system/vendor/overlay/Akzent_Settings.apk");
+                eu.chainfire.libsuperuser.Shell.SU.run("chmod 644 " + "/system/vendor/overlay/Akzent_Settings.apk");
+                eu.chainfire.libsuperuser.Shell.SU.run(remountsys);
+            }
+            eu.chainfire.libsuperuser.Shell.SU.run("mv /data/resource-cache/vendor@overlay@Akzent_Settings.apk@idmap.bak /data/resource-cache/vendor@overlay@Akzent_Settings.apk@idmap");
+            eu.chainfire.libsuperuser.Shell.SU.run("rm -r " + Environment.getExternalStorageDirectory().getAbsolutePath() +
+                    "/dashboard./settings/Akzent_Settings_signed.apk");
+            eu.chainfire.libsuperuser.Shell.SU.run("rm -r " + Environment.getExternalStorageDirectory().getAbsolutePath() +
+                    "/dashboard./settings/Akzent_Settings.apk");
+            eu.chainfire.libsuperuser.Shell.SU.run("rm -r " + Environment.getExternalStorageDirectory().getAbsolutePath() +
+                    "/dashboard./settings/res");
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }
