@@ -49,7 +49,7 @@ import projekt.dashboard.layers.util.LayersFunc;
 import projekt.dashboard.layers.util.ReadXMLFile;
 
 /**
- * @author Nicholas Chum (nicholaschum)
+ * @author Nicholas Chum (nicholaschum) feat. Aditya Gupta
  */
 public class HeaderImportFragment extends BasePageFragment {
 
@@ -592,10 +592,10 @@ public class HeaderImportFragment extends BasePageFragment {
             Log.d("Progress","8");
             eu.chainfire.libsuperuser.Shell.SU.run("mv /data/resource-cache/vendor@overlay@"+LayersFunc.themesystemui+".apk@idmap /data/resource-cache/vendor@overlay@"+LayersFunc.themesystemui+".apk@idmap.bak");
             if (LayersFunc.checkBitPhone()) {
-                LayersFunc.copyFABFinalizedAPK(getActivity(), LayersFunc.themesystemui, false);
+                LayersFunc.copyFABFinalizedAPK(getActivity(), LayersFunc.themesystemui, false,pd);
                 Log.d("Progress","9");
             } else {
-                LayersFunc.copyFinalizedAPK(getActivity(), LayersFunc.themesystemui, false);
+                LayersFunc.copyFinalizedAPK(getActivity(), LayersFunc.themesystemui, false,pd);
                 Log.d("Progress","9");
             }
             eu.chainfire.libsuperuser.Shell.SU.run("mv /data/resource-cache/vendor@overlay@"+LayersFunc.themesystemui+".apk@idmap.bak /data/resource-cache/vendor@overlay@"+LayersFunc.themesystemui+".apk@idmap");
@@ -618,7 +618,6 @@ public class HeaderImportFragment extends BasePageFragment {
         }
 
         protected void onPostExecute(Void result) {
-            pd.dismiss();
             eu.chainfire.libsuperuser.Shell.SU.run("busybox killall com.android.systemui");
         }
     }
