@@ -49,7 +49,7 @@ import projekt.dashboard.layers.ui.SplashScreenActivity;
 import projekt.dashboard.layers.util.LayersFunc;
 
 /**
- * @author Nicholas Chum (nicholaschum)
+ * @author Nicholas Chum (nicholaschum) feat. Aditya Gupta
  */
 public class HomeFragment extends BasePageFragment {
 
