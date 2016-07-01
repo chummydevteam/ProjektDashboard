@@ -3190,11 +3190,7 @@ public class CreativeMode extends CardStackAdapter implements
                 unzip(package_identifier);
             } catch (IOException e) {
                 did_it_compile = false;
-                Toast toast = Toast.makeText(mContext.getApplicationContext(),
-                        mContext.getResources().getString(
-                                R.string.unzip_exception_toast),
-                        Toast.LENGTH_LONG);
-                toast.show();
+                e.printStackTrace();
             }
             return null;
         }
@@ -4508,30 +4504,18 @@ public class CreativeMode extends CardStackAdapter implements
                     did_it_compile = false;
                     Log.e("unzipNewAPK", "There has been an exception while trying to unzip the " +
                             "new dummy APK.");
-                    Toast toast = Toast.makeText(mContext.getApplicationContext(),
-                            mContext.getResources().getString(
-                                    R.string.unzipNewAPK_exception_toast),
-                            Toast.LENGTH_LONG);
-                    toast.show();
+                    e.printStackTrace();
                 }
             } catch (IOException e) {
                 did_it_compile = false;
                 Log.e("ProcessBuilder", "There has been an exception while trying to create the " +
                         "new dummy APK.");
-                Toast toast = Toast.makeText(mContext.getApplicationContext(),
-                        mContext.getResources().getString(
-                                R.string.process_IO_exception_toast),
-                        Toast.LENGTH_LONG);
-                toast.show();
+                e.printStackTrace();
             } catch (InterruptedException f) {
                 did_it_compile = false;
                 Log.e("ProcessBuilder", "There has been an exception while trying to create the " +
                         "new dummy APK.");
-                Toast toast = Toast.makeText(mContext.getApplicationContext(),
-                        mContext.getResources().getString(
-                                R.string.process_Interrupted_exception_toast),
-                        Toast.LENGTH_LONG);
-                toast.show();
+                f.printStackTrace();
             }
             return null;
         }
@@ -4580,21 +4564,13 @@ public class CreativeMode extends CardStackAdapter implements
                     did_it_compile = false;
                     Log.e("UnsignedAPKCreator", "There has been an exception while trying to " +
                             "create the unsigned APK.");
-                    Toast toast = Toast.makeText(mContext.getApplicationContext(),
-                            mContext.getResources().getString(
-                                    R.string.UnsignedAPKCreator_exception_toast),
-                            Toast.LENGTH_LONG);
-                    toast.show();
+                    e.printStackTrace();
                 }
             } catch (Exception e) {
                 did_it_compile = false;
                 Log.e("unzipNewAPK", "There has been an exception while trying to decompress " +
                         "the APK.");
-                Toast toast = Toast.makeText(mContext.getApplicationContext(),
-                        mContext.getResources().getString(
-                                R.string.unzipNewAPK_exception_toast),
-                        Toast.LENGTH_LONG);
-                toast.show();
+                e.printStackTrace();
             }
         }
 
