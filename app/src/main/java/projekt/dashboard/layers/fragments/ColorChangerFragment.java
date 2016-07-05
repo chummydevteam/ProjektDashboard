@@ -65,7 +65,7 @@ import static projekt.dashboard.layers.util.LayersFunc.isNetworkAvailable;
 
 public class ColorChangerFragment extends BasePageFragment {
 
-    static String File = "Akzent_Framework";
+    static String File;
     public String color_picked = "#ff0000";
     public ViewGroup inflation;
     SharedPreferences prefs;
@@ -74,6 +74,7 @@ public class ColorChangerFragment extends BasePageFragment {
     TextView accentcolor;
     String SettLink = "https://github.com/adityaakadynamo/GG/raw/master/res.zip";
     static Context context;
+    static boolean isblakzent=false;
 
     public static String getFile() {
         return File;
@@ -84,6 +85,9 @@ public class ColorChangerFragment extends BasePageFragment {
     public View onCreateView(
             LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
+        File = LayersFunc.framework;
+        if (File.toString().equals("BlakZent_Framework"))
+            isblakzent = true;
         context = getActivity();
         inflation = (ViewGroup) inflater.inflate(
                 R.layout.fragment_colorpicker, container, false);
@@ -250,24 +254,47 @@ public class ColorChangerFragment extends BasePageFragment {
 
     public void colorswatch() {
         LayersFunc.copyFileToApp(getActivity(), LayersFunc.getvendor() + "/" + File + ".apk", File + ".apk");
-        File source = new File(LayersFunc.getvendor() + "/Akzent_Settings.apk");
-        String destinationPath = getActivity().getFilesDir().getAbsolutePath() + "/settings/Akzent_Settings.apk";
+        File source;
+        if (isblakzent)
+            source = new File(LayersFunc.getvendor() + "/BlakZent_Settings.apk");
+        else
+            source = new File(LayersFunc.getvendor() + "/Akzent_Settings.apk");
+
+        String destinationPath;
+        if (isblakzent) {
+            destinationPath = Environment.getExternalStorageDirectory().getAbsolutePath()+
+                    "/dashboard./settings/BlakZent_Settings.apk";
+        } else {
+            destinationPath = Environment.getExternalStorageDirectory().getAbsolutePath() +
+                    "/dashboard./settings/Akzent_Settings.apk";
+        }
         File destination = new File(destinationPath);
         try {
             FileUtils.copyFile(source, destination);
+            Log.e("Settings",
+                    "Copied "+source+" to "+destinationPath);
         } catch (IOException e) {
             Log.e("Settings",
                     "Failed to copy settings apk to work directory");
-            Log.e("Settings", "Function Stopped");
             e.printStackTrace();
         }
         Log.d("Progress", "1");
-        LayersFunc.createSettColXML("colors.xml", color_picked);
-        Log.d("Settings", "Colors-Y");
+        if (isblakzent) {
+            LayersFunc.createBlakSettColXML("colors.xml", color_picked);
+            Log.d("Settings", "Colors-Y-Blak");
+        } else {
+            LayersFunc.createSettColXML("colors.xml", color_picked);
+            Log.d("Settings", "Colors-Y-Akz");
+        }
         LayersFunc.createSettDimXML("dimens.xml");
         Log.d("Settings", "Dimens-Y");
-        LayersFunc.createSettStyXML("styles.xml", color_picked);
-        Log.d("Settings", "Styles-Y");
+        if (isblakzent) {
+            LayersFunc.createBlakSettStyXML("styles.xml", color_picked);
+            Log.d("Settings", "Styles-Y-Blak");
+        } else {
+            LayersFunc.createSettStyXML("styles.xml", color_picked);
+            Log.d("Settings", "Styles-Y-Akz");
+        }
         pickColor(LayersFunc.getvendor() + "/" + File + ".apk");
     }
 
@@ -475,11 +502,22 @@ public class ColorChangerFragment extends BasePageFragment {
                 Log.d("Progress", "7");
 
                 LayersFunc.LayersColorSwitch(getActivity(), File, "tertiary_text_dark", "color");
-                LayersFunc.LayersSettingsSwitch(getActivity());
+                if(isblakzent) {
+                    LayersFunc.LayersSettingsSwitch("BlakZent_Settings");
+                }else{
+                    LayersFunc.LayersSettingsSwitch("Akzent_Settings");
+                }
+                if(isblakzent){
                 LayersFunc.signApk(Environment.getExternalStorageDirectory().getAbsolutePath() +
-                                "/dashboard./settings/Akzent_Settings.apk",
+                                "/dashboard./settings/BlakZent_Settings.apk",
                         Environment.getExternalStorageDirectory().getAbsolutePath() +
-                                "/dashboard./settings/Akzent_Settings_signed.apk");
+                                "/dashboard./settings/BlakZent_Settings_signed.apk","BlakZent_Settings");
+                }else{
+                    LayersFunc.signApk(Environment.getExternalStorageDirectory().getAbsolutePath() +
+                                    "/dashboard./settings/Akzent_Settings.apk",
+                            Environment.getExternalStorageDirectory().getAbsolutePath() +
+                                    "/dashboard./settings/Akzent_Settings_signed.apk","Akzent_Settings");
+                }
                 Log.d("Progress", "8");
 
                 eu.chainfire.libsuperuser.Shell.SU.run("rm -r /res/color");

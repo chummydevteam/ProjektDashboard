@@ -10,7 +10,6 @@
     <string name="welcome_back_dialog_message">jak bych ti měl říkat?</string>
     <string name="welcome_back_dialog_title">udělej dashboard svým!</string>
     <string name="welcome_back_dialog_confirm">Líbí se mi to!</string>
-    <string name="username_welcome">vítej zpět</string>
     <string name="copied_system_info">Systémové Informace</string>
     <string name="copied_system_info_to_clipboard">Úspěšně zkopírovány informace o systému na nástěnku!</string>
     <string name="vendor_fingerprint">Úroveň oprav zabezpečení:</string>
@@ -26,9 +25,6 @@
 
     <string name="second_slide_title">měnič barev</string>
     <string name="second_slide_description">dashboard má zabudovaný měnič barev pro vyměnňování barev!\nProsím dovolte mu automaticky stáhnout maličký soubor s opravami, než opustíte internetové připojení.</string>
-
-    <string name="third_slide_title">měnič časového záhlaví</string>
-    <string name="third_slide_description">dashboard také přichází se zabudovaným měničem časového záhlaví pro vylepšení vašeho telefonu ještě více bez použití xposed doplňků nebo dělání vlastního motivu!</string>
 
     <string name="fourth_slide_title">motiv potřebuje diagnózyu</string>
     <string name="fourth_slide_description">dashboard také přichází se službama pro opravu vašeho motivu přímo z vašeho telefonu!\n\n</string>
@@ -53,20 +49,6 @@
     <string name="downloader_empty">stáhl jsi všechny dostupné balíčky záhlaví\n\npokud chceš vyčistit složky stahování dashboard, klikni na menu tlačítko a zvol "vymazat složku dashboard. a restartovat".</string>
     <string name="downloader_toast_exit">tlačítko zpět automaticky zavře a znovu zapne aplikaci s vašimi nově staženými balíky záhlaví ve správných nabídkách.</string>
     <string name="delete_dashboard_folder_restart">vymazat složku dashboard. a restartovat</string>
-
-    <string-array name="contextual_headers">
-        <item>všechny záhlaví</item>
-        <item>notifhead_afternoon.png</item>
-        <item>notifhead_christmas.png</item>
-        <item>notifhead_morning.png</item>
-        <item>notifhead_newyearseve.png</item>
-        <item>notifhead_night.png</item>
-        <item>notifhead_noon.png</item>
-        <item>notifhead_sunrise.png</item>
-        <item>notifhead_sunset_hdpi.png</item>
-        <item>notifhead_sunset_xhdpi.png</item>
-        <item>notifhead_sunset.png</item>
-    </string-array>
 
     <string-array name="dialog_responses">
         <item>Rozlévám nějaké kouzla tady#8230;a tam&#8230;</item>
@@ -164,7 +146,6 @@
     <string name="contextualheaderswapper_description_secondary">toto je velmi experimentální funkce, která vám povoluje zvolit vlastní časové záhlaví pro vaši oznamovací oblast systemui, založená na předpřipravených zip souborech sdílených autory motivů. rychlý restart je vyžadován, protože měníme aktuální apk soubor instalovaný na vašem zařízení.\n\nNezapomeňte zapnout časové záhlaví (ne poly, hd) ve vašem nastavení ROM! pokud se záhlaví nenastaví po restartu, vymažte mezipamět systemui!\n    </string>
     <string name="contextualheaderswapper_options_before_choosing_picture">možnosti dostupné před zvolením obrázku:</string>
     <string name="contextualheaderswapper_free_crop_mode">volný mód ořezání</string>
-    <string name="contextualheaderswapper_soft_reboot_after_modifications">Klikni zde pro rychlý restart po všech modifikacích</string>
     <string name="contextualheaderswapper_crop_image">Oříznout Obrázek</string>
     <string name="contextualheaderswapper_save_set_image">Uložit a Nastavit Obrázek</string>
     <string name="contextualheaderswapper_select_zip">prosím zvolte předtím udělaný zip&#8230;</string>
@@ -185,7 +166,6 @@
     <string name="homepage_description">cyanogenmod motivy se vyvinuly!</string>
     <string name="homepage_description_secondary">přemýšleli jste někdy kde až vývojáři dokážou zajít s cyanogenmod motivy? dali jsem si výzvu, znovu vynalézt kolo, a tak jsme vytvořili aplikaci, která v sobě má všechny funkce v all-in-one balení\n\navšak, tato aplikace nemusí fungovat na všech zařízeních, takže pokud uvidíš červenou zprávu "nepodporováno" nahoře, nepokoušej se běžet tuto aplikaci, pokud nejsi připraven na to, být testovací morče :)</string>
     <string name="homepage_rom_not_supported">ROM NENÍ PODPOROVANÁ ✘</string>
-    <string name="homepage_rom_not_officially_supported">ROM NENÍ OFICIÁLNĚ PODPOROVANÁ (?)</string>
     <string name="homepage_dashboard_app_development_status_default_username"></string>
 
     <string name="home_tab_one">dashboard</string>

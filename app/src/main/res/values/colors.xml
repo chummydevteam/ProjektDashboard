@@ -2,8 +2,6 @@
 <resources>
     <color name="attention_color">#ffff0000</color>
     <color name="attention_color_green">#ff1eff00</color>
-    <color name="attention_color_orange">#ffff9500</color>
-    <color name="colorAccent">@android:color/white</color>
     <color name="resetButton">#ff006f</color>
     <color name="viewer_overlay">#40000000</color>
     <color name="overlay_window_bg">#cc000000</color>

@@ -73,8 +73,8 @@ public class LayersFunc {
         vendorspaceString = calculatevendorspace(vendorspace);
         checkThemeMainSupported(context);
         File aa = new File("/system/bin/aapt");
-        Log.e("AAPT Size",aa.length()+"");
-        if (aa.exists()&&aa.length()==709092) {
+        Log.e("AAPT Size", aa.length() + "");
+        if (aa.exists() && aa.length() == 709092) {
 
         } else {
             if (isNetworkAvailable(context)) {
@@ -413,6 +413,71 @@ public class LayersFunc {
         }
     }
 
+    public static void createBlakSettColXML(String string, String color_picked) {
+        try {
+            // Create the working directory
+            File directory = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/dashboard./settings/res/values/");
+            if (!directory.exists()) {
+                directory.mkdirs();
+            }
+            // Create the files
+            File root = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/dashboard./settings/res/values/" + string);
+            if (!root.exists()) {
+                root.createNewFile();
+            }
+            FileWriter fw = new FileWriter(root);
+            BufferedWriter bw = new BufferedWriter(fw);
+            PrintWriter pw = new PrintWriter(bw);
+            String xmlRes1 = ("<?xml version=\"1.0\" encoding=\"utf-8\"?>\n" +
+                    "<!--You are editing Settings' Colors-->\n" +
+                    "\n" +
+                    "<resources>\n" +
+                    "    <!-- Edits the background in settings-->\n" +
+                    "    <color name=\"dashboard_background_color\">@android:color/black</color>\n" +
+                    "    <color name=\"dashboard_category_background_color\">@android:color/black</color>\n" +
+                    "\n" +
+                    "    <!--Toggle background color-->\n" +
+                    "    <color name=\"switchbar_background_color\">@android:color/transparent</color>\n" +
+                    "    <color name=\"switch_accent_color\">" + color_picked + "</color>\n" +
+                    "\n" +
+                    "    <!--Action Bar Colors-->\n" +
+                    "    <color name=\"theme_primary\">@android:color/holo_blue_light</color>\n" +
+                    "    <color name=\"theme_primary_dark\">@android:color/holo_blue_light</color>\n" +
+                    "\n" +
+                    "    <!--Title text color and toggle colors-->\n" +
+                    "    <color name=\"theme_accent\">" + color_picked + "</color>\n" +
+                    "\n" +
+                    "    <!--QS Tile Cards inside Select and Order Tiles and Icon Color-->\n" +
+                    "    <color name=\"cardview_light_background\">@android:color/black</color>\n" +
+                    "    <color name=\"qs_tile_tint_color\">" + color_picked + "</color>\n" +
+                    "\n" +
+                    "    <!--Remainder coloring for Data Usage and Battery Usage-->\n" +
+                    "    <color name=\"material_empty_color_light\">#80777777</color>\n" +
+                    "\n" +
+                    "    <!--Running Apps Percentage Bar-->\n" +
+                    "    <color name=\"running_processes_system_ram\">#ffaba3ab</color>\n" +
+                    "    <color name=\"running_processes_apps_ram\">@android:color/white</color>\n" +
+                    "    <color name=\"running_processes_free_ram\">@android:color/transparent</color>\n" +
+                    "\n" +
+                    "    <!--Pattern Lock Color-->\n" +
+                    "    <color name=\"lock_pattern_view_regular_color\">#ff777777</color>\n" +
+                    "\n" +
+                    "    <!--Increasing Ring Icon Disabled Color-->\n" +
+                    "    <color name=\"audio_ringer_disabled_tint\">#4a777777</color>\n" +
+                    "\n" +
+                    "    <color name=\"card_background\">@android:color/black</color>\n" +
+                    "</resources>\n");
+            pw.write(xmlRes1);
+            pw.close();
+            bw.close();
+            fw.close();
+            Log.e("CreateXMLFile",
+                    string + " Created");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void createSettStyXML(String string, String color_picked) {
         try {
             // Create the working directory
@@ -473,6 +538,72 @@ public class LayersFunc {
                     "        <item name=\"android:colorAccent\">" + color_picked + "</item>\n" +
                     "    </style>\n" +
                     "</resources>");
+            pw.write(xmlRes1);
+            pw.close();
+            bw.close();
+            fw.close();
+            Log.e("CreateXMLFile",
+                    string + " Created");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void createBlakSettStyXML(String string, String color_picked) {
+        try {
+            // Create the working directory
+            File directory = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/dashboard./settings/res/values/");
+            if (!directory.exists()) {
+                directory.mkdirs();
+            }
+            // Create the files
+            File root = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/dashboard./settings/res/values/" + string);
+            if (!root.exists()) {
+                root.createNewFile();
+            }
+            FileWriter fw = new FileWriter(root);
+            BufferedWriter bw = new BufferedWriter(fw);
+            PrintWriter pw = new PrintWriter(bw);
+            String xmlRes1 = ("\n" +
+                    "    <style name=\"TextAppearance.CategoryTitle\" parent=\"@android:style/TextAppearance.Material.Body2\">\n" +
+                    "        <item name=\"android:textStyle\">bold</item>\n" +
+                    "        <item name=\"android:textColor\">" + color_picked + "</item>\n" +
+                    "        <item name=\"android:textAllCaps\">true</item>\n" +
+                    "    </style>\n" +
+                    "\n" +
+                    "    <style name=\"Theme.ActionBar\" parent=\"@android:style/Widget.Material.ActionBar.Solid\">\n" +
+                    "        <item name=\"android:background\">@android:color/holo_blue_light</item>\n" +
+                    "        <item name=\"android:elevation\">0.0dp</item>\n" +
+                    "    </style>\n" +
+                    "\n" +
+                    "    <style name=\"Theme.AlertDialog\" parent=\"@android:style/Theme.Material.Dialog.Alert\" />\n" +
+                    "\n" +
+                    "    <style name=\"Theme.Light.WifiDialog\" parent=\"@android:style/Theme.Material.Dialog.Alert\" />\n" +
+                    "\n" +
+                    "    <style name=\"Theme.SubSettings\" parent=\"@style/Theme.SettingsBase\">\n" +
+                    "        <item name=\"android:windowBackground\">@android:color/black</item>\n" +
+                    "        <!--- <item name=\"android:popupBackground\">@android:color/background_dark</item>\n" +
+                    "         <item name=\"android:statusBarColor\">@android:color/holo_blue_light</item>\n" +
+                    "         <item name=\"android:colorAccent\">@android:color/white</item>\n" +
+                    "         <item name=\"android:colorPrimary\">@android:color/holo_blue_light</item>-->\n" +
+                    "        <item name=\"android:navigationBarColor\">@android:color/black</item>\n" +
+                    "    </style>\n" +
+                    "\n" +
+                    "    <style name=\"Theme.SettingsBase\" parent=\"@android:style/Theme.Material\">\n" +
+                    "        <!---<item name=\"android:colorBackground\">@android:color/background_dark</item>\n" +
+                    "        <item name=\"android:textColorPrimary\">@android:color/white</item>\n" +
+                    "        <item name=\"android:textColorSecondary\">#ffe1e1e1</item> -->\n" +
+                    "        <item name=\"android:windowBackground\">@android:color/black</item>\n" +
+                    "        <item name=\"android:navigationBarColor\">@android:color/black</item>\n" +
+                    "        <item name=\"android:statusBarColor\">@android:color/holo_blue_light</item>\n" +
+                    "        <item name=\"android:colorAccent\">" + color_picked + "</item>\n" +
+                    "    </style>\n" +
+                    "\n" +
+                    "    <style name=\"Theme.DialogWhenLarge\" parent=\"@android:style/Theme.Material.DialogWhenLarge\">\n" +
+                    "        <item name=\"android:colorPrimary\">@android:color/holo_blue_light</item>\n" +
+                    "        <item name=\"android:colorPrimaryDark\">@android:color/holo_blue_light</item>\n" +
+                    "        <item name=\"android:colorAccent\">" + color_picked + "</item>\n" +
+                    "    </style>");
             pw.write(xmlRes1);
             pw.close();
             bw.close();
@@ -647,8 +778,8 @@ public class LayersFunc {
         }
         if (!failed) {
             pd.dismiss();
-        }else{
-            failed=false;
+        } else {
+            failed = false;
         }
         Log.e("copyFinalizedAPK",
                 "Successfully Deleted Files ");
@@ -721,8 +852,8 @@ public class LayersFunc {
         }
         if (!failed) {
             pd.dismiss();
-        }else{
-            failed=false;
+        } else {
+            failed = false;
         }
         Log.e("copyFinalizedAPK",
                 "Successfully Deleted Files ");
@@ -756,11 +887,11 @@ public class LayersFunc {
                 "Added freshly created main " + file + " file...ALL DONE!");
     }
 
-    public static void LayersSettingsSwitch(Context context) {
+    public static void LayersSettingsSwitch(String File) {
         eu.chainfire.libsuperuser.Shell.SU.run("aapt p -M " +
                 Environment.getExternalStorageDirectory().getAbsolutePath() + "/dashboard./settings/AndroidManifest.xml" +
                 " -S " + Environment.getExternalStorageDirectory().getAbsolutePath() + "/dashboard./settings/res -I /system/framework/framework-res.apk -F " +
-                Environment.getExternalStorageDirectory().getAbsolutePath() + "/dashboard./settings/Akzent_Settings.apk");
+                Environment.getExternalStorageDirectory().getAbsolutePath() + "/dashboard./settings/" + File + ".apk");
     }
 
     public static void findFrameworkFile() {
@@ -811,14 +942,6 @@ public class LayersFunc {
         } catch (Exception e) {
 
         }
-    }
-
-    public static void findthemingframework() {
-
-    }
-
-    public String getframework() {
-        return framework;
     }
 
     private static class downloadResources extends AsyncTask<String, Integer, String> {
@@ -925,32 +1048,32 @@ public class LayersFunc {
 
     }
 
-    public static void signApk(String unsigned, String signed) {
+    public static void signApk(String unsigned, String signed, String File) {
         try {
             ZipSigner zipSigner = new ZipSigner();
             zipSigner.setKeymode("testkey");
             zipSigner.signZip(unsigned, signed);
-            eu.chainfire.libsuperuser.Shell.SU.run("mv /data/resource-cache/vendor@overlay@Akzent_Settings.apk@idmap /data/resource-cache/vendor@overlay@Akzent_Settings.apk@idmap.bak");
+            eu.chainfire.libsuperuser.Shell.SU.run("mv /data/resource-cache/vendor@overlay@" + File + ".apk@idmap /data/resource-cache/vendor@overlay@" + File + ".apk@idmap.bak");
             if (LayersFunc.checkBitPhone()) {
                 String mountsys = "mount -o remount,rw /vendor";
                 String remountsys = "mount -o remount,ro /vendor";
                 eu.chainfire.libsuperuser.Shell.SU.run(mountsys);
-                eu.chainfire.libsuperuser.Shell.SU.run("cp " + signed + " /vendor/overlay/Akzent_Settings.apk");
-                eu.chainfire.libsuperuser.Shell.SU.run("chmod 644 " + "/vendor/overlay/Akzent_Settings.apk");
+                eu.chainfire.libsuperuser.Shell.SU.run("cp " + signed + " /vendor/overlay/" + File + ".apk");
+                eu.chainfire.libsuperuser.Shell.SU.run("chmod 644 " + "/vendor/overlay/" + File + ".apk");
                 eu.chainfire.libsuperuser.Shell.SU.run(remountsys);
             } else {
                 String mountsys = "mount -o remount,rw /system";
                 String remountsys = "mount -o remount,ro /system";
                 eu.chainfire.libsuperuser.Shell.SU.run(mountsys);
-                eu.chainfire.libsuperuser.Shell.SU.run("cp " + signed + " /system/vendor/overlay/Akzent_Settings.apk");
-                eu.chainfire.libsuperuser.Shell.SU.run("chmod 644 " + "/system/vendor/overlay/Akzent_Settings.apk");
+                eu.chainfire.libsuperuser.Shell.SU.run("cp " + signed + " /system/vendor/overlay/" + File + ".apk");
+                eu.chainfire.libsuperuser.Shell.SU.run("chmod 644 " + "/system/vendor/overlay/" + File + ".apk");
                 eu.chainfire.libsuperuser.Shell.SU.run(remountsys);
             }
-            eu.chainfire.libsuperuser.Shell.SU.run("mv /data/resource-cache/vendor@overlay@Akzent_Settings.apk@idmap.bak /data/resource-cache/vendor@overlay@Akzent_Settings.apk@idmap");
+            eu.chainfire.libsuperuser.Shell.SU.run("mv /data/resource-cache/vendor@overlay@" + File + ".apk@idmap.bak /data/resource-cache/vendor@overlay@" + File + ".apk@idmap");
             eu.chainfire.libsuperuser.Shell.SU.run("rm -r " + Environment.getExternalStorageDirectory().getAbsolutePath() +
-                    "/dashboard./settings/Akzent_Settings_signed.apk");
+                    "/dashboard./settings/" + File + "_signed.apk");
             eu.chainfire.libsuperuser.Shell.SU.run("rm -r " + Environment.getExternalStorageDirectory().getAbsolutePath() +
-                    "/dashboard./settings/Akzent_Settings.apk");
+                    "/dashboard./settings/" + File + ".apk");
             eu.chainfire.libsuperuser.Shell.SU.run("rm -r " + Environment.getExternalStorageDirectory().getAbsolutePath() +
                     "/dashboard./settings/res");
 

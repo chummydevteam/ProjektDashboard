@@ -2,6 +2,7 @@
 <resources>
     <string-array name="themes_supported">
         <item>Akzent_Framework</item>
+        <item>BlakZent_Framework</item>
         <item>Beltz_Framework</item>
     </string-array>
 

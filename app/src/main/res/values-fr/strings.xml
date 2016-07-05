@@ -7,9 +7,6 @@
     <string name="second_slide_title">Modifier les couleurs</string>
     <string name="second_slide_description">Dashboard est livré avec un sélecteur de couleur permettant le remplacement à chaud des couleurs !\nVeuillez l\'autoriser à télécharger automatiquement un fichier correctif avant d\'interrompre votre connexion Internet.</string>
 
-    <string name="third_slide_title">Modifier l\'en-tête contextuel</string>
-    <string name="third_slide_description">Dashboard est également livré avec un outil vous permettant de définir vos propres en-têtes contextuels pour personnaliser davantage votre appareil sans passer par l\'utilisation d\'extensions Xposed inutiles ou par la création de thème !</string>
-
     <string name="fourth_slide_title">Le moteur de thème a besoin d\'être diagnostiqué ?</string>
     <string name="fourth_slide_description">Dashboard est également livré avec des outils vous offrant une grande quantité d\'options pour vous aider à réparer votre moteur de thème directement depuis votre appareil !\n\n</string>
 
@@ -34,7 +31,6 @@
     <string name="welcome_back_dialog_message">Comment dois-je vous appeler à partir de maintenant ?</string>
     <string name="welcome_back_dialog_title">Personnalisez dashboard !</string>
     <string name="welcome_back_dialog_confirm">Ça me plaît !</string>
-    <string name="username_welcome">Bon retour</string>
     <string name="copied_system_info">Informations système</string>
     <string name="copied_system_info_to_clipboard">Les informations système ont correctement été copiées dans le presse-papiers !</string>
     <string name="vendor_fingerprint">Niveau du correctif de sécurité :</string>
@@ -48,7 +44,6 @@
     <string name="homepage_description">Le moteur de thème Cyanogenmod amélioré !</string>
     <string name="homepage_description_secondary">Vous êtes-vous déjà demandé jusqu\'où les développeurs pourraient aller avec le moteur de thème de Cyanogenmod ? Nous nous mettons au défi de réinventer la roue, en créant une application tout-en-un regroupant tous nos réglages.\n\nToute fois, cette application peut ne pas fonctionner sur tous les appareils, donc si vous voyez un message en rouge de non prise en charge ci-dessous, ne tentez pas d\'exécuter cette application sauf si vous êtes prêt à vous transformer en cochon d\'Inde :)</string>
     <string name="homepage_rom_not_supported">ROM NON PRISE EN CHARGE ✘</string>
-    <string name="homepage_rom_not_officially_supported">ROM PAS OFFICIELLEMENT PRISE EN CHARGE</string>
     <string name="homepage_dashboard_app_development_status_default_username">Salut</string>
 
     <!-- App Color Switcher -->
@@ -58,19 +53,6 @@
     <string name="layout_fragment_colorpicker_installed_color_switchable_themes">Thèmes installés permettant le changement de couleur :</string>
 
     <!-- App Contextual Header Swapper -->
-    <string-array name="contextual_headers">
-        <item>Tous les en-têtes</item>
-        <item>notifhead_afternoon.png</item>
-        <item>notifhead_christmas.png</item>
-        <item>notifhead_morning.png</item>
-        <item>notifhead_newyearseve.png</item>
-        <item>notifhead_night.png</item>
-        <item>notifhead_noon.png</item>
-        <item>notifhead_sunrise.png</item>
-        <item>notifhead_sunset_hdpi.png</item>
-        <item>notifhead_sunset_xhdpi.png</item>
-        <item>notifhead_sunset.png</item>
-    </string-array>
 
     <string name="contextualheaderswapper">En-tête contextuel</string>
     <string name="contextualheaderswapper_description">Modifier l\'en-tête contextuel</string>
@@ -78,7 +60,6 @@
 
     <string name="contextualheaderswapper_options_before_choosing_picture">Options disponibles avant de choisir une image :</string>
     <string name="contextualheaderswapper_free_crop_mode">Rognage de l\'image libre</string>
-    <string name="contextualheaderswapper_soft_reboot_after_modifications">Appuyez ici pour effectuer un redémarrage logiciel après toutes les modifications</string>
 
     <string name="contextualheaderswapper_crop_image">Rogner l\'image</string>
     <string name="contextualheaderswapper_save_set_image">Enregistrer et définir l\'image</string>

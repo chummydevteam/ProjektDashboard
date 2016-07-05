@@ -13,7 +13,6 @@
     <string name="welcome_back_dialog_message">what shall I call you from now on?</string>
     <string name="welcome_back_dialog_title">make dashboard yours!</string>
     <string name="welcome_back_dialog_confirm">I like it!</string>
-    <string name="username_welcome">welcome back</string>
     <string name="copied_system_info">System Information</string>
     <string name="copied_system_info_to_clipboard">Successfully copied system information to clipboard!</string>
     <string name="vendor_fingerprint">Security Patch Level:</string>
@@ -58,20 +57,6 @@
     <string name="downloader_empty">you have downloaded all available header packs from this source!\n\nif you would like to clear your dashboard downloads folder, click the overflow menu and select "delete dashboard. folder and restart".</string>
     <string name="downloader_toast_exit">the back button will relaunch dashboard with your newly downloaded packs added to all spinners!</string>
     <string name="delete_dashboard_folder_restart">delete dashboard. folder and restart</string>
-
-    <string-array name="contextual_headers">
-        <item>all headers</item>
-        <item>notifhead_afternoon.png</item>
-        <item>notifhead_christmas.png</item>
-        <item>notifhead_morning.png</item>
-        <item>notifhead_newyearseve.png</item>
-        <item>notifhead_night.png</item>
-        <item>notifhead_noon.png</item>
-        <item>notifhead_sunrise.png</item>
-        <item>notifhead_sunset_hdpi.png</item>
-        <item>notifhead_sunset_xhdpi.png</item>
-        <item>notifhead_sunset.png</item>
-    </string-array>
 
     <string-array name="dialog_responses">
         <item>Sprinkling some magic over here&#8230;and over there&#8230;</item>
@@ -289,7 +274,6 @@
     <string name="contextualheaderswapper_description_secondary">this is a highly experimental feature to allow you to set your own custom notification headers for your systemui notification shade.</string>
     <string name="contextualheaderswapper_options_before_choosing_picture">options available before choosing a picture:</string>
     <string name="contextualheaderswapper_free_crop_mode">free crop mode</string>
-    <string name="contextualheaderswapper_soft_reboot_after_modifications">Click here to soft reboot after all modifications</string>
     <string name="contextualheaderswapper_crop_image">Crop Image</string>
     <string name="contextualheaderswapper_save_set_image">Save and Set Image</string>
     <string name="contextualheaderswapper_select_zip">please select a premade zip...</string>
@@ -304,7 +288,6 @@
     <string name="homepage_theme_full_supported">You are good to go</string>
     <string name="homepage_theme_half_supported">theme is not completely installed</string>
     <string name="homepage_theme_not_supported">no dashboard themes installed</string>
-    <string name="theme_full_snack">you have not installed the theme correctly, click here to be redirected to the main theme page.</string>
     <string name="theme_half_snack">it seems you have missed several overlays, click here to complete the installation.</string>
     <string name="theme_not_snack">no dashboard themes installed, click here to install!</string>
 </resources>
