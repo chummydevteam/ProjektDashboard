@@ -517,7 +517,7 @@ public class LayersFunc {
                     "        <item name=\"android:windowBackground\">@android:color/black</item>\n" +
                     "        <!--- <item name=\"android:popupBackground\">@android:color/background_dark</item>\n" +
                     "         <item name=\"android:statusBarColor\">@android:color/holo_blue_light</item>\n" +
-                    "         <item name=\"android:colorAccent\">@android:color/white</item>\n" +
+                    "         <item name=\"android:colorAccent\">@android:color/holo_blue_bright</item>\n" +
                     "         <item name=\"android:colorPrimary\">@android:color/holo_blue_light</item>-->\n" +
                     "        <item name=\"android:navigationBarColor\">@android:color/black</item>\n" +
                     "    </style>\n" +
@@ -564,7 +564,9 @@ public class LayersFunc {
             FileWriter fw = new FileWriter(root);
             BufferedWriter bw = new BufferedWriter(fw);
             PrintWriter pw = new PrintWriter(bw);
-            String xmlRes1 = ("\n" +
+            String xmlRes1 = ("<?xml version=\"1.0\" encoding=\"utf-8\"?>\n" +
+                    "<resources>\n" +
+                    "\n" +
                     "    <style name=\"TextAppearance.CategoryTitle\" parent=\"@android:style/TextAppearance.Material.Body2\">\n" +
                     "        <item name=\"android:textStyle\">bold</item>\n" +
                     "        <item name=\"android:textColor\">" + color_picked + "</item>\n" +
@@ -580,20 +582,22 @@ public class LayersFunc {
                     "\n" +
                     "    <style name=\"Theme.Light.WifiDialog\" parent=\"@android:style/Theme.Material.Dialog.Alert\" />\n" +
                     "\n" +
+                    "\n" +
+                    "\n" +
                     "    <style name=\"Theme.SubSettings\" parent=\"@style/Theme.SettingsBase\">\n" +
                     "        <item name=\"android:windowBackground\">@android:color/black</item>\n" +
                     "        <!--- <item name=\"android:popupBackground\">@android:color/background_dark</item>\n" +
                     "         <item name=\"android:statusBarColor\">@android:color/holo_blue_light</item>\n" +
-                    "         <item name=\"android:colorAccent\">@android:color/white</item>\n" +
+                    "         <item name=\"android:colorAccent\">@android:color/holo_blue_bright</item>\n" +
                     "         <item name=\"android:colorPrimary\">@android:color/holo_blue_light</item>-->\n" +
                     "        <item name=\"android:navigationBarColor\">@android:color/black</item>\n" +
                     "    </style>\n" +
                     "\n" +
                     "    <style name=\"Theme.SettingsBase\" parent=\"@android:style/Theme.Material\">\n" +
-                    "        <!---<item name=\"android:colorBackground\">@android:color/background_dark</item>\n" +
+                    "        <!---<item name=\"android:colorBackground\">@android:color/black</item>\n" +
                     "        <item name=\"android:textColorPrimary\">@android:color/white</item>\n" +
                     "        <item name=\"android:textColorSecondary\">#ffe1e1e1</item> -->\n" +
-                    "        <item name=\"android:windowBackground\">@android:color/black</item>\n" +
+                    "        <item name=\"android:windowBackground\">@android:color/background_dark</item>\n" +
                     "        <item name=\"android:navigationBarColor\">@android:color/black</item>\n" +
                     "        <item name=\"android:statusBarColor\">@android:color/holo_blue_light</item>\n" +
                     "        <item name=\"android:colorAccent\">" + color_picked + "</item>\n" +
@@ -603,7 +607,8 @@ public class LayersFunc {
                     "        <item name=\"android:colorPrimary\">@android:color/holo_blue_light</item>\n" +
                     "        <item name=\"android:colorPrimaryDark\">@android:color/holo_blue_light</item>\n" +
                     "        <item name=\"android:colorAccent\">" + color_picked + "</item>\n" +
-                    "    </style>");
+                    "    </style>\n" +
+                    "</resources>");
             pw.write(xmlRes1);
             pw.close();
             bw.close();
