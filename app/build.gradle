@@ -72,7 +72,7 @@ dependencies {
         transitive = true
     }
 
-    compile 'com.github.nicholaschum:bridge:3.2.3'
+    compile 'com.github.chummydevteam:bridge:3.2.3'
     compile 'com.github.afollestad:sectioned-recyclerview:0.2.1'
     compile 'com.github.afollestad:assent:0.2.1'
     compile 'com.github.afollestad:inquiry:2.0.1'
